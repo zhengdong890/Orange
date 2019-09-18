@@ -1,0 +1,62 @@
+ajax提交发布的共享商品信息
+地址 : http://www.orangesha.com/index.php/Home/Member_goods/goodsAdd
+请求参数 : {
+    goods_name   : 商品标题(既商品名称),必填
+    goods_number : 商品数量(既库存),必填
+    brand_id     : 商品品牌,数字类型的非0值,必选
+    sbcj         : 设备厂家 必填
+    phone        : 联系电话 必填
+    provice      : 地址中的省级 必填 数字类型
+    city         : 地址中的市级 必填 数字类型
+    area         : 地址中的区域
+    goods_model  : 型号
+    buy_time     : 购置年份
+    goods_img    : 商品主图
+    gallery_img1 : 商品相册图片1
+    gallery_img2 : 商品相册图片2...
+    ...............................
+    gallery_imgN : 商品相册图片N
+    number       : 商品相册图片的数量
+    rent_dw      : 出租单位 1表示每月 2表示每天 3表示每时 4表示为委托项目
+    goods_price  : 租凭价格|委托加工费每件的价格
+    min_rent     : 最小出租月数
+    max_rent     : 最大出租月数
+    safest       : 保险费 (1表示购买,0表示不购买)
+    deposit      : 押金 (0表示无,1表示月租金x3 ,2表示月租金x6)
+    goods_content: 商品描述
+    /*商品租期区间段属性设置*/
+    start_1      : 区间段开始时间
+    end_1        : 区间段结束...
+    goods_rent_price1 : 该区间段设置的价格
+    ...............................
+    start_N      : 区间段开始时间
+    end_N        : 区间段结束
+    goods_rent_priceN : 该区间段设置的价格
+    区间段最小的时间不得小于最小租期
+    区间段最大的时间不得大于最大租期
+    
+    如:最小租期为2个月 最大租期为10个月
+    区间段可以设置为
+    2个月(start_1)-4个月(start_1) 价格1100(goods_rent_price1)
+    5个月(start_2)-7个月(start_2) 价格1100(goods_rent_price2)
+    8个月(start_3)-10个月(start_3) 价格1100(goods_rent_price3)
+}
+
+
+获取共享商品数据
+地址 : http://www.orangesha.com/index.php/Home/Member_goods/goodsList
+返回 : {"status":'' , 'msg':'' ,data:[]}
+data : [
+    {
+      "id":"商品id","goods_name":'商品名称',"goods_price":"商品价格",
+      "goods_thumb":"商品图片","status":"上下架状态 1表示上架 0表示下架","goods_number":"库存","create_time":'发布时间',
+      "is_check":"0表示审核中 1表示已经审核","check_status":"审核结果 1表示通过 0表示未通过"
+    },....{}
+]
+
+
+更改商品上下架状态
+地址 : http://www.orangesha.com/index.php/Home/Member_goods/statusChange
+参数 : {id的值1:'上下架值',id的值3:'上下架值',.....,id的值N:'上下架值',}
+说明 : 上下架值 1表示上架 0表示下架     
+返回 : {"status":'' , 'msg':''}

@@ -1,0 +1,224 @@
+﻿ajax获取运费模板
+地址 : http://www.orangesha.com/index.php/Home/ShippingTemplet/getShippingTempletList
+请求json参数 : {
+    'firstRow' : ,//从第	几条数据开始获取
+    'listRows' : ,// 需要获取的数据条数
+}
+返回 {status : 0或者1 , msg : '' , data{
+	
+
+}}
+
+ajax添加运费模板 增加页
+地址 : http://www.orangesha.com/index.php/Home/ShippingTemplet/templetAdd
+请求json参数 : {
+    //运费模板
+    new_templet : {
+    	'name'             : '', //模板名称
+    	'province'         : '',//省
+    	'city'             : '',//市
+    	'free_status'      : '',//是否包邮 1自定义邮费 2卖家承担运费
+    	'start_number'     : '',//首件数(重量,体积)
+    	'start_price'      : '',//首件价格(重量,体积)
+    	'add_number'       : '', //加价数量(重量,体积)
+    	'add_price'        : '',//加价价格
+    	'unit'             : 1 //计价方式 1按件 2按重量 3按体积
+    },
+    //运费模板下的 运送地址
+    new_templet_data : {
+        '1' : {
+			'province'     : '',//省
+	    	'city'         : '',//市
+	    	'start_number' : '',//首件数
+	    	'start_price'  : '',//首件价格
+	    	'add_number'   : '', //加价数量
+	    	'add_price'    : ''//加价价格
+	    }, 
+	    '2' : {
+			'province'     : '',//省
+	    	'city'         : '',//市
+	    	'start_number' : '',//首件数
+	    	'start_price'  : '',//首件价格
+	    	'add_number'   : '', //加价数量
+	    	'add_price'    : ''//加价价格
+	    }, ...................
+    },
+    //指定包邮条件 数据
+    new_free_condition : {
+        '1' : {
+			'province'         : '',//省
+	    	'city'             : '',//市
+	    	'send_type'        : '',//运送方式 1快递 2EMS 3平邮
+        	'free_status'      : '',//是否包邮 1自定义邮费 2卖家承担运费
+	    	'free_condition'   : '',//指定包邮条件 1按件数 2按金额
+	        'free_condition_c' : '',//指定包邮值 1(1件)  1(1元)
+	    }, 
+	    '2' : {
+			'province'         : '',//省
+	    	'city'             : '',//市
+	    	'send_type'        : '',//运送方式 1快递 2EMS 3平邮
+        	'free_status'      : '',//是否包邮 1自定义邮费 2卖家承担运费
+	    	'free_condition'   : '',//指定包邮条件 1按件数 2按金额
+	        'free_condition_c' : '',//指定包邮值 1(1件)  1(1元)
+	    }, ...................
+    }
+}
+返回 {status : 0或者1 , msg : ''}
+
+ajax修改运费模板 修改页
+地址 : http://www.orangesha.com/index.php/Home/ShippingTemplet/templetUpdate
+请求json参数 : {
+    //运费模板 修改
+    old_templet : {
+        'id'               : '', //运费模板id
+    	'name'             : '', //模板名称
+    	'province'         : '',//省
+    	'city'             : '',//市
+    	'free_status'      : '',//是否包邮 1自定义邮费 2卖家承担运费
+    	'start_number'     : '',//首件(重量,体积)数
+    	'start_price'      : '',//首件(重量,体积)价格
+    	'add_number'       : '', //加价数量(重量,体积)
+    	'add_price'        : '',//加价价格
+    	'unit'             : 1//,计价方式 1按件 2按重量 3按体积
+    },
+    templet_id       : 运费模板的id,
+    //运费模板下的 运送地址 添加   
+    new_templet_data : {
+        '1' : {
+			'province'     : '',//省
+	    	'city'         : '',//市
+	    	'start_number' : '',//首件数
+	    	'start_price'  : '',//首件价格
+	    	'add_number'   : '', //加价数量
+	    	'add_price'    : ''//加价价格
+	    }, 
+	    '2' : {
+			'province'     : '',//省
+	    	'city'         : '',//市
+	    	'start_number' : '',//首件数
+	    	'start_price'  : '',//首件价格
+	    	'add_number'   : '', //加价数量
+	    	'add_price'    : ''//加价价格
+	    }, ...................
+    },
+    //运费模板下的 运送地址 修改
+    old_templet_data : {
+        '1' : {
+	        'id'           : '',//运费模板下的运送地址的id
+			'province'     : '',//省
+	    	'city'         : '',//市
+	    	'start_number' : '',//首件数
+	    	'start_price'  : '',//首件价格
+	    	'add_number'   : '', //加价数量
+	    	'add_price'    : ''//加价价格  
+	    }	    
+	    '2' : {
+	        'id'           : '',//运费模板下的运送地址的id
+			'province'     : '',//省
+	    	'city'         : '',//市
+	    	'start_number' : '',//首件数
+	    	'start_price'  : '',//首件价格
+	    	'add_number'   : '', //加价数量
+	    	'add_price'    : ''//加价价格
+	    }, ...................
+    },
+    //指定包邮条件 数据 增加
+    new_free_condition : {
+        '1' : {
+			'province'         : '',//省
+	    	'city'             : '',//市
+	    	'send_type'        : '',//运送方式 1快递 2EMS 3平邮
+        	'free_status'      : '',//是否包邮 1自定义邮费 2卖家承担运费
+	    	'free_condition'   : '',//指定包邮条件 1按件数 2按金额
+	        'free_condition_c' : '',//指定包邮值 1(1件)  1(1元)
+	    }, 
+	    '2' : {
+			'province'         : '',//省
+	    	'city'             : '',//市
+	    	'send_type'        : '',//运送方式 1快递 2EMS 3平邮
+        	'free_status'      : '',//是否包邮 1自定义邮费 2卖家承担运费
+	    	'free_condition'   : '',//指定包邮条件 1按件数 2按金额
+	        'free_condition_c' : '',//指定包邮值 1(1件)  1(1元)
+	    }, ...................
+    }
+    //指定包邮条件 数据 修改
+    old_free_condition : {
+        '1' : {
+            'id'               : '',//指定包邮条件id
+			'province'         : '',//省
+	    	'city'             : '',//市
+	    	'send_type'        : '',//运送方式 1快递 2EMS 3平邮
+        	'free_status'      : '',//是否包邮 1自定义邮费 2卖家承担运费
+	    	'free_condition'   : '',//指定包邮条件 1按件数 2按金额
+	        'free_condition_c' : '',//指定包邮值 1(1件)  1(1元)
+	    }, 
+	    '2' : {
+	        'id'               : '',//指定包邮条件id
+			'province'         : '',//省
+	    	'city'             : '',//市
+	    	'send_type'        : '',//运送方式 1快递 2EMS 3平邮
+        	'free_status'      : '',//是否包邮 1自定义邮费 2卖家承担运费
+	    	'free_condition'   : '',//指定包邮条件 1按件数 2按金额
+	        'free_condition_c' : '',//指定包邮值 1(1件)  1(1元)
+	    }, ...................
+    }
+}
+返回 {status : 0或者1 , msg : ''}
+
+ajax获取某个运费模板的数据
+地址 : http://www.orangesha.com/index.php/Home/ShippingTemplet/getShipping
+请求json参数 : {
+    id : 运费模板id
+}
+返回 {
+    status : 0或者1 ,
+    msg    : '',
+    data   : {
+        //包邮条件数据
+        free_data    : [
+            {
+	            'id'               : '',//指定包邮条件id
+				'province'         : '',//省
+		    	'city'             : '',//市
+		    	'send_type'        : '',//运送方式 1快递 2EMS 3平邮
+	        	'free_status'      : '',//是否包邮 1自定义邮费 2卖家承担运费
+		    	'free_condition'   : '',//指定包邮条件 1按件数 2按金额
+		        'free_condition_c' : '',//指定包邮值 1(1件)  1(1元)
+	        },.......
+
+        ],
+        //运送地址数据
+        templet_data : [
+            {
+		        'id'           : '',//运费模板下的运送地址的id
+				'province'     : '',//省
+		    	'city'         : '',//市
+		    	'start_number' : '',//首件数
+		    	'start_price'  : '',//首件价格
+		    	'add_number'   : '', //加价数量
+		    	'add_price'    : ''//加价价格  
+	        },........
+        ]
+    }
+}
+
+ajax删除运费模板
+地址 : http://www.orangesha.com/index.php/Home/ShippingTemplet/templetDelete
+请求json参数 : {
+    id : 运费模板id
+}
+返回 {status : 0或者1 , msg : ''}
+
+ajax删除运费模板下的每个运送地址
+地址 : http://www.orangesha.com/index.php/Home/ShippingTemplet/templetDataDelete
+请求json参数 : {
+    id : 运送地址id
+}
+返回 {status : 0或者1 , msg : ''}
+
+ajax删除运费模板下的删除指定包邮条件
+地址 : http://www.orangesha.com/index.php/Home/ShippingTemplet/templetFreeDelete
+请求json参数 : {
+    id : 指定包邮条件id
+}
+返回 {status : 0或者1 , msg : ''}

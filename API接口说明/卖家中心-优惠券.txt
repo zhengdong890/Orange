@@ -1,0 +1,24 @@
+获取卖家优惠券列表
+地址 : http://www.orangesha.com/index.php/Home/ShopCoupon/couponsList
+返回 : {
+         status:'' , 
+         msg:'' , 
+         data:{
+          [
+            {
+               max:'减免需要消费的金额',benefit_price:'优惠金额',start_time:'开始时间',end_time:'过期时间',
+               number:'发放的数量',sy_number:'剩余的数量',max_number:'每个会员领取的最大数量'，name:'优惠券标题'
+             }
+          ],............
+          [{}],[{}]
+         }
+}
+
+
+添加优惠券
+地址 : http://www.orangesha.com/index.php/Home/ShopCoupon/couponAdd
+参数 : {
+    max:'减免需要消费的金额',benefit_price:'优惠金额',start_time:'开始时间',end_time:'过期时间',
+    number:'发放的数量',max_number:'每个会员领取的最大数量'，name:'优惠券标题'
+}
+返回 : {"status":'' , 'msg':''}

@@ -1,0 +1,8 @@
+获取卖家商城申请结果
+地址 : http://www.orangesha.com/index.php/Home/Member_center/getMallData
+返回 : {"status":1 , 'msg':'','result':''}
+code:1 未申请商城 code:2 申请商城正在审核 code:3 商城已经开通
+
+申请商城
+地址 : http://www.orangesha.com/index.php/Home/Member_center/mallApplication
+返回 : {"status":1 , 'msg':''}

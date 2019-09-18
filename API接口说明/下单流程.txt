@@ -1,0 +1,44 @@
+动态选择收货地址 ajax获取运费
+地址 : http://www.orangesha.com/index.php/Home/Mall_order/setAddress
+请求json参数 : {
+    id : 地址id
+}
+返回
+{
+    status : 0失败 1成功, 
+    msg    : ,
+    //运费
+    data   : {
+        商家id : 商家所需的运费,
+        .....
+        商家id : 商家所需的运费,
+    }
+}
+
+微信扫码支付接口
+地址 : http://www.orangesha.com/WechatPay/createPayCode
+返回
+{
+    status : 0失败 1成功, 
+    msg    : ,
+    //运费
+    data   : 二维码图片路径,
+    id     : 订单id
+}
+
+支付选择公对公转账
+地址 : http://www.orangesha.com/MallOrder/offlinePay
+返回
+{
+    status : 0失败 1成功, 
+    msg    : ,
+}
+
+查询扫码支付订单是否支付成功
+地址 :http://www.orangesha.com/Home/MemberOrder/getOrderPayStatus
+请求参数 : {id : '订单id'}
+返回
+{
+    status : 0失败 1成功, 
+    pay_status : 0暂未支付 1支付成功,
+}

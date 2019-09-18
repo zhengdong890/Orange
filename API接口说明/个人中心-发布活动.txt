@@ -1,0 +1,38 @@
+获取商户商品 并且获取商品下的sku 采用分页
+地址 : http://www.orangesha.com/sellerGoods/getGoodsAndSku
+请求json参数 : {
+    'firstRow' : ,//从第几条数据开始获取
+    'listRows' : ,// 需要获取的数据条数
+}
+返回 {
+    status    : 0或者1 , 
+    msg       : '' , 
+    totalRows : 总数据条数
+    data      : {
+        //商品信息
+        goods_data : [
+            {
+                id : 商品id,
+                goods_price : 商品价格,
+                goods_thumb : 商品缩略图
+            },....  
+        ],
+        /商品下 添加的所有sku组合信息
+        sku : [
+            {
+                sku_id   : sku_id,
+                goods_id : 商品id,
+                price    : 价格,
+                sku_code : 订货号,
+                term     : 预计出货期
+            },....  
+        ],
+        //商品选择了的sku属性名称
+        attr : [
+            {
+                goods_id  : 商品id,
+                attr_name : sku属性名称
+            },....  
+        ],
+	}
+}

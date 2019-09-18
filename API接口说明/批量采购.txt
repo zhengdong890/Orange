@@ -1,0 +1,17 @@
+集成项目申请
+地址 : http://www.orangesha.com/index.php/Home/BulkPurchase/purchaseAdd
+参数 : {
+    'title'          : 项目命名
+    'kh_name'        : 客户名称
+    'area'           : 项目地址
+    'contact_people' : 联系人
+    'job'            : 职位
+    'phone'          : 联系电话
+    'chanzhi'        : 企业产值
+    'yusuan'         : 计划投入预算
+    'des'            : 产品描述
+    'case'           : 需求金额
+    'type'           : 需求类型
+    'modelnum'       : 项目编号  
+}
+返回 : {"status":'' , 'msg':''}

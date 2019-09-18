@@ -1,0 +1,36 @@
+团购申请
+地址 : http://www.orangesha.com/index.php/Home/SellerGroupBuy/groupBuyAdd
+参数 : {
+    title      : 团购标题
+    goods_id   : 商品id,
+    start_time : 开始时间, 日期格式 2016-07-08 12:12:12
+    time       : 持续时间, 7 15 30
+    group_price: 团购价格,
+    img        : 团购图片
+    img_1      : 首页图片
+    img_2      : 推荐位图片 
+    ad_1       : 是否推荐位或者首页  1上首页 2推荐位 0不上首页 不上推荐位
+}
+返回 : {"status":1 , 'msg':''}
+
+获取商品团购信息
+地址 : http://www.orangesha.com/index.php/Home/SellerGroupBuy/getGroupGoods
+参数 : {
+    group_id : 团购id
+}
+返回 : {
+           status : '' 
+           msg    : '' ,
+           data   : {
+               title      : 团购标题
+               goods_id     : 商品id,
+               start_time  : 团购开始时间 ,
+               time        : 团购持续时间，
+               ad_1        : 是否推荐位或者首页,
+               img         : 团购图片
+               img_1       : 首页图片
+               img_2       : 推荐位图片 
+               group_price : 团购价格,
+               now_time    : 当前时间                
+           }
+}

@@ -1,0 +1,59 @@
+1.选择找回的账号
+地址 : http://www.orangesha.com/index.php/Home/FindPassword/getTelNum
+参数 : {telnum:''}
+返回 : { status : '' ,'msg':'' ,'data':{is_security :'',is_email:''}}
+data : is_security为1表示账号设置了密保 0未设置 is_email为1表示账号设置了邮箱 0未设置
+
+
+/**************************************手机号码找回密码************************************************/
+1.生成手机短信验证码(找回密码)
+地址 : http://www.orangesha.com/index.php/Home/FindPassword/telnumReplacementPwdCode
+返回 : { status : '' ,'msg':''}
+
+1.验证手机短信验证码(找回密码)
+地址 : http://www.orangesha.com/index.php/Home/FindPassword/checkTelnumCode
+参数 : {phone_code:'用户收到的验证码'}
+返回 : { status : '' ,'msg':''}
+
+2.重置密码
+地址 : http://www.orangesha.com/index.php/Home/FindPassword/telnumReplacementPassword
+参数 : {password:'新密码' ， repeat_password : '重复密码'}
+返回 : { status : '' ,'msg':''}
+
+/****************************************邮箱找回密码************************************************/
+1.发送邮件验证码(找回密码)
+地址 : http://www.orangesha.com/index.php/Home/FindPassword/sendEmail
+返回 : { status : '' ,'msg':''}
+
+1.验证邮箱验证码(找回密码)
+地址 : http://www.orangesha.com/index.php/Home/FindPassword/emailCodeCheck
+参数 : {code:'邮箱收到的验证码'}
+返回 : { status : '' ,'msg':''}
+
+2.重置密码
+地址 : http://www.orangesha.com/index.php/Home/FindPassword/emailReplacementPassword
+参数 : {password:'新密码' ， repeat_password : '重复密码'}
+返回 : { status : '' ,'msg':''}
+
+/****************************************密保找回密码************************************************/
+1.获取已经设置的密保问题(找回密码)
+地址 : http://www.orangesha.com/index.php/Home/FindPassword/usernameGetSecurity
+返回 : { status : '' ,'msg':'','
+         data':{
+              [question_id:'问题id1',question:'问题1'],
+              [question_id:'问题id2',question:'问题2'],
+              [question_id:'问题id3',question:'问题3'],
+         }
+       }
+data : 已经设置的密保问题
+
+2.检测密保问题是否正确(找回密码)
+地址 : http://www.orangesha.com/index.php/Home/FindPassword/checkSecurity
+参数 : {'问题id1':'答案1','问题id2':'答案2','问题id3':'答案3'}
+返回 : { status : '' ,'msg':''}
+
+3.重置密码
+地址 : http://www.orangesha.com/index.php/Home/FindPassword/replacementPassword
+参数 : {password:'新密码' ， repeat_password : '重复密码'}
+返回 : { status : '' ,'msg':''}
+

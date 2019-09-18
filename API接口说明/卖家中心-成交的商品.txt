@@ -1,0 +1,53 @@
+﻿订单状态值
+status : 订单状态 0未审核 1已审核 2已完成 -1已取消
+send_status : 发货状态 0未发货 1已经发货
+pay_status  : 付款状态 0未付款 1已经付款
+is_comment  : 是否评价 0未评价 1已经评价
+
+service_status : 订单详情商品 售后状态
+0 暂无售后
+-11 商家不同意退款     11 申请退款     12 商家同意申请退款 13 已退款  
+-21 商家不同意换货     21 申请换货     22 商家同意申请换货 23 商家已重新发货  
+-31 商家不同意退款退货 31 申请退货退款 32 商家同意退款退货 33 已退款    
+
+status 1 pay_status 0 已审核 未付款
+status 1 pay_status 1 send_status 0 已审核 已付款 未发货
+status 1 pay_status 1 send_status 1 已审核 已付款 已发货
+status 1 pay_status 1 send_status 2 is_comment 0 已审核 已付款 已收货 未评价
+status 1 pay_status 1 send_status 2 is_comment 1 已审核 已付款 已收货 已评价   
+
+成交的商品页面
+获取订单接口说明
+请求地址 http://www.orangesha.com/SellerOrder/getOrderData
+请求参数 : {
+    type     : //请求类型,	可以为以下值
+	    getWaitPayOrder     //等待付款
+		getWaitSendOrder    //等待发货
+		getSendOrder        //已经发货
+		getWaitCommentOrder //等待评论
+		getSuccessOrder     //交易成功
+		getCloseOrder       //关闭的订单
+    firstRow : 开始条数,
+    listRows : 每页显示多少条
+}
+返回 : {
+    status    : 0 | 1 1表示成功 0失败,
+    msg       : 提示信息,
+    data      : 返回的订单数据,
+    totalRows : 数据总条数
+}
+
+
+
+批量发货地址
+地址 : http://www.orangesha.com/index.php/Home/Seller_order/sendGoods?id[]=123&id[]=456.........
+
+ajax发货
+地址 : http://www.orangesha.com/index.php/Home/Seller_order/sendGoods
+参数 : {
+    id1 : {air_way_code:'运单号'},//id为订单号
+    id2 : {air_way_code:'运单号'},
+    ..........................
+    idN : {air_way_code:'运单号'} 
+}
+返回 : {"status": , 'msg':''}

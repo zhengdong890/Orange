@@ -1,0 +1,29 @@
+
+获取共享商品的评价数据统计
+地址 : http://www.orangesha.com/index.php/Home/Goods/getGoodsCommentTotal
+请求参数 : {goods_id:'商品id'}
+返回 : {"status": , 'msg':'','code':'' ,data :[{},{},{}]}
+code:1 缺少参数商品id code:2成功 
+data: 统计数据 
+
+获取共享商品的评价数据
+地址 : http://www.orangesha.com/index.php/Home/Goods/getGoodsComment
+请求参数 : {goods_id:'商品id',firstRow:'开始第几条数据',listRows；'获取多少条数据'}
+返回 : {"status": , 'msg':'','code':'' ,data :{'comment_data': '','member_data':''} ,totalRows:''}
+code:1 暂无数据 code:2成功 
+comment_data: 评论数据 member_data:评论人的信息
+
+分享商品加入购物车
+地址 : http://www.orangesha.com/index.php/Home/Cart/cartAdd
+请求参数 : {goods_id:'商品id'}
+返回 : {"status":1 , 'msg':'','code':''}
+status:0 无法购买 status:1可以购买
+code:10 未登录 code:11 商家未认证
+msg:提示说明
+
+直接购买分享商品时 需要验证是否可以购买
+地址 : http://www.orangesha.com/index.php/Home/Cart/getSeller
+请求参数 : {goods_id:'商品id' , rent_number:'租用数量' , rent_time:'租用时间'}
+返回 : {"status":1 , 'msg':'','code':''}
+status:0 无法购买 status:0可以购买
+msg:提示说明

@@ -1,0 +1,21 @@
+/******************************************个人中心-企业认证******************************************************/
+
+获取企业认证信息
+地址 : http://www.orangesha.com/index.php/Home/Member_center/getQualification
+返回 : {"status": , 'msg':'', data :{}}
+data里面数据:
+renzheng_status:0 未申请 is_renzheng:1 申请正在审核 is_renzheng:2 认证申请审核未通过 is_renzheng:3 认证申请审核通过
+data 里面的content 表示审核未通过原因
+
+申请企业认证
+地址 : http://www.orangesha.com/index.php/Home/Member_center/businessQualification
+参数 : {
+          name:'企业名称',address:'地址','contact':联系方式,place_contact:联系人,contact_phone:联系电话,
+          bus_lice_type:营业执照类型,bus_lice:营业执照,permit:开户许可证,registration:税务登记证,code:组织机构代码证
+        }
+参数说明 : bus_lice_type:1 三证合一 2其他 
+           bus_lice_type=1时 不需要registration:税务登记证和code:组织机构代码证
+           bus_lice_type=2时 需要registration:税务登记证和code:组织机构代码证
+返回 : {"status": , 'msg':''}
+status:0申请失败 status:1申请成功
+msg:提示说明

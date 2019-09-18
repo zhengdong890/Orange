@@ -1,0 +1,5 @@
+快速下单 
+请求方式 get跳转
+地址 : http://www.orangesha.com/MallOrder/quickBuy.html
+参数 : data[]=JB18032867393_12 支持多个 JB18032867393表示sku_code 12表示数量
+示例 ：http://www.orangesha.com/MallOrder/quickBuy.html?data[]=JB18032867393_12&data[]=LF13026768237_12....
