@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>e橙优品-登录</title>
+<meta property="wb:webmaster" content="2eef69477f0eaa49" />
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="{:C('STATIC_URL')}/Home/css/login.css" rel="stylesheet">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/validate.js"></script>
+<script src="/Public/layer/layer.js"></script>
+ <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=1069584452" type="text/javascript" charset="utf-8"></script>
+<!-- www.orangesha.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?54f6f54d47704101dc27b337de5fd6c3";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<style>
+input:-webkit-autofill { box-shadow: 0 0 0px 1000px white inset;}
+</style>
+</head>
+<body>
+    <!-- 头部 -->
+    <div class="login public">
+        <div class="header-top">
+            <div>您好，欢迎您来到e橙优品工业商城<a href="http://www.orangesha.com/login.html" class="login">    请登录    </a><a href="http://www.orangesha.com/register.html"> 免费注册 </a></div>  
+        </div>
+        <!-- logo -->
+        <div class="header-logo">
+            <a href="http://www.orangesha.com/"><div class="logo"></div></a>
+            <div class="text">欢迎登录</div>
+        </div>
+        <div class="login-contain">
+            <div class="login-box">
+            <!-- 用户登录 -->
+                <form >
+                    <div class="title">
+                      e橙优品会员登录
+                    </div>
+                    <div class="error error-username"></div>
+                    <div class="row">
+                        <span>手机</span>
+                        <input type="text" name='username' id="user11" value placeholder="手机号" autocomplete="off" >
+                        <div class="icon icon1"></div>
+                    </div>
+                    <div class="error error-password"></div>
+                    <div class="row">
+                        <span>密码</span>
+                        <input type="password" id="password11" value name='password' placeholder="8-16位字母和数字组成的密码" autocomplete="off">
+                        <div class="icon icon2"></div>
+                    </div>
+                    <div class="remember">
+                      <a href="http://www.orangesha.com/wjmm.html">忘记密码？</a>
+                    </div>
+                    <a class="submit btn_submit" href='javascript:;'>立即登录</a>
+                    <div class="text">还不是e橙优品用户？<a href="http://www.orangesha.com/register.html">立即注册</a></div>
+					
+				<!--	
+                     <div class="other">
+                            <div class="other-title">其他方式：</div>
+							 
+                            
+				    	<img src="/Uploads/Picture/qq.png" alt="QQ登录" onclick="toQzoneLogin()" width="40">
+                    <img src="image/login_other_img2.jpg" alt="微信登录">
+                    </div> -->
+                </form>
+            </div>
+        </div>
+    </div>
+    <include file="Public:footer" />
+</body>
+
+<script type="text/javascript">
+var formSubmit = (function(){ 
+    var data = {};            
+    var validate = new formValidate({
+        rules:{
+            'username' : {
+                'require' : '请输入手机号',
+                'phone_number': '手机号码格式不正确'
+            },
+            'password':{
+                'require' : '请输入密码',
+                'regex'   : ["^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$",'密码为8-16位数字+字母组合']
+            }         
+        },
+        msg:{
+           'username' : '请输入手机号',
+           'password': '请输入密码'              
+        }
+    });
+    
+    //用户登录
+    $(".btn_submit").click(function(){   
+        check('username' , $("input[name='username']").val());
+        check('password' , $("input[name='password']").val());
+        if(!validate.checkSubmitStatus()){
+            
+        }else{
+            $.post("http://www.orangesha.com/login.html",data,function(res){   
+            	console.log(res)
+                if(res.status==1){                   
+                    //window.history.go(-1);
+                    location.replace(document.referrer);
+                }
+                if(res.status==0){                   
+                    $(".error:eq(0)").css("visibility","visible").text(res.msg)
+                }
+            })            
+        }    
+    }) 
+    
+    //失去焦点验证
+    /*<!--$("input").blur(function(){
+        var attr_name = $(this).attr('name'); 
+        if(attr_name){       
+           var val    = $(this).val(); 
+           check(attr_name , val);          
+        }                          
+    }) */
+    
+    function check(attr_name , val){
+        data[attr_name] = val;                 
+        var result = validate.checkField(attr_name,val);
+        var class_name = '.error-' + attr_name;
+        if(result){           
+            $(class_name).text(result);
+            $(class_name).css("visibility","visible")
+            $(class_name).removeClass('success');                                    
+        }else{
+            $(class_name).text('');     
+            $(class_name).css("visibility","hidden")
+            $(class_name).addClass('success');
+        }
+    }
+    
+    //绑定回车键
+     $("body").keydown(function() {    	    
+             if (event.keyCode == "13"){
+             	 $("input").blur();
+             	 //keyCode=13是回车键
+                 $('.btn_submit').click();
+             }
+       });
+})()
+
+
+		function toQzoneLogin()
+		
+		{
+			window.open("<?php echo U('Qqconnect/index'); ?>?type=qq","TencentLogin","width=450,height=320,menubar=0,scrollbars=1, resizable=1,status=1,titlebar=0,toolbar=0,location=1");
+			
+		} 
+        
+		$(function(){
+		  $.post("{:U('Member/qq_login_first')}",{},function(res){
+            	
+                if(res.status=='never'){        
+                  	$('.title').html('首次QQ登陆请先登陆一次以绑定账号！');	
+                }
+            })    
+		
+		
+		
+		})
+
+
+</script>
+</html>

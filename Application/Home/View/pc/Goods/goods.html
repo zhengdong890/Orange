@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>{$goods['goods_name']}-{$goods['goods_name']}交易-{$goods['goods_name']}租赁-e橙优品</title>
+<meta name="description" content="e橙优品{$goods['goods_name']}频道，出售和租赁各种功能的专业{$goods['goods_name']}，撮合供应方和需求方。你可以在这里买到{$goods['goods_name']}，也可以出租{$goods['goods_name']}获取收益，低成本租到{$goods['goods_name']}">
+<meta name="keywords" content="{$goods['goods_name']},{$goods['goods_name']}价格,{$goods['goods_name']}租赁,{$goods['goods_name']}采购,{$goods['goods_name']}多少钱">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="shortcut icon" href="/Public/Home/images/ee.ico" type="image/x-icon">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link href="{:C('STATIC_URL')}/Home/css/comment.css" rel="stylesheet">
+<link href="{:C('STATIC_URL')}/Home/css/service-guarantee.css" rel="stylesheet">
+<link href="{:C('STATIC_URL')}/Home/css/details.css" rel="stylesheet">
+<style>
+html{overflow-y:scroll;}
+body{margin:0; font:12px "\5B8B\4F53",san-serif;background:#ffffff;}
+div,ul,li{padding:0; margin:0;}
+li{list-style-type:none;}
+img{vertical-align:top;border:0;}
+option{ cursor: pointer;}
+/* box 图片放大镜样式*/
+.box{width:380px;height:460px;margin-bottom:10px; position: relative;}
+.fenxiang-shoucang{position: absolute;left: 8px; bottom: 8px; width: 360px;}
+.fenxiang-shoucang>a{color: #666;cursor: pointer;} .fenxiang-shoucang>a>img{ margin-right: 4px;}
+.fenxiang-shoucang>span{margin: 0px 24px; color: #999;}
+#fenxiang{ display: none; padding: 12px 20px;background-color: #fff; position: absolute;right: 16px;bottom: -50px; border: 1px solid #eee;}
+.tb-pic a{display:table-cell;text-align:center;vertical-align:middle;}
+.tb-pic a img{vertical-align:middle;}
+.tb-pic a{*display:block;*font-family:Arial;*line-height:1;}
+.tb-thumb{margin:12px 0 0;overflow:hidden;height:108px;}
+.tb-thumb li{background:none repeat scroll 0 0 transparent;float:left;height:56px;margin:0 17px 0 0;overflow:hidden;padding:1px;}
+.tb-thumb .last{margin-right:0;}
+.tb-s310, .tb-s310 a{height:350px;width:380px;}
+.tb-s310, .tb-s310 img{max-height:350px;max-width:380px;}
+.tb-s310 a{*font-size:271px;}
+.tb-s40 a{*font-size:35px;}
+.tb-s40, .tb-s40 a{height:55px;width:55px;}
+.tb-booth{border:1px solid #eee;position:relative;z-index:1;}
+.tb-thumb .tb-selected{background:none repeat scroll 0 0 #ff5400;height:55px;padding:2px;}
+.tb-thumb .tb-selected div{background-color:#FFFFFF;border:medium none;}
+.tb-thumb li div{border:1px solid #CDCDCD;}
+div.zoomDiv{z-index:999;position:absolute;top:0px;left:0px;width:200px;height:200px;background:#ffffff;border:1px solid #CCCCCC;display:none;text-align:center;overflow:hidden;}
+div.zoomMask{position:absolute;background:url("http://demo.lanrenzhijia.com/2015/jqzoom0225/images/mask.png") repeat scroll 0 0 transparent;cursor:move;z-index:1;}
+.nums{height:28px;line-height:28px;margin:0px 0px 10px 20px; display: inline-block; font-size: 14px;}
+.nums .minus{vertical-align: middle; border:1px solid #A7A7A7;cursor:pointer;font-size:16px;height: 23px;box-sizing: border-box;width: 25px;}
+.nums .plus{vertical-align: middle;border:1px solid #A7A7A7;cursor:pointer;font-size:16px; margin-left: -5px;height: 23px;box-sizing: border-box;width: 25px;}
+.nums>.num{text-align: center;vertical-align: middle;box-sizing: border-box; height: 23px; margin-left: -4px; border:1px solid #A7A7A7;border-left:none;border-right:none;cursor:default;width: 70px;}
+.month_number{ color: #ff6600;}
+.remain_num{ font-size: 14px; color: #666; border: none;}
+.rent_set{height:28px;line-height:28px;margin:0px 0px 10px 20px; display: inline-block; font-size: 14px;}
+.rent_set .minus{vertical-align: middle; box-sizing: border-box;width: 25px; height: 23px; border:1px solid #A7A7A7;cursor:pointer;font-size:16px;}
+.rent_set .plus{vertical-align: middle; border:1px solid #A7A7A7;cursor:pointer;font-size:16px;box-sizing: border-box;width: 25px; height: 23px; }
+.rent_set>.num{text-align: center; vertical-align: middle; width:70px;height: 23px;box-sizing: border-box; border:1px solid #A7A7A7;border-left:none;border-right:none;cursor:default;}
+.Total{display: none;float: right;margin-top: 8px;margin-right: 20px;font-size: 14px;}
+.Total span{ font-size: 16px; color: #FF6600;}
+</style>
+<script src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+<script src="{:C('STATIC_URL')}/Home/js/jquery.imagezoom.min.js"></script>
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+</head>
+<body>
+<include file="Public:header_top" />
+<include file="Public:header_search" />
+<div class="details">
+    <div class="nav-top">当前位置 : <a href="{:U('Index/index')}">首页 </a> >  <a href="{:U('Categorys/categoryList')}">分享</a>  >  {$goods['goods_name']}</div>
+    <div class="details-info">
+        <div class="info-left">
+            <div class="left-image">
+            <!--图片展示区域-->
+                <div class="box">
+                        <div class="tb-booth tb-pic tb-s310">
+                            <a><img src="__ROOT__{$goods_gallery[0]['gallery_img']|substr=1}" alt="" rel="__ROOT__{$goods_gallery[0]['gallery_img']|substr=1}" class="jqzoom" /></a>
+                        </div>
+                        <ul class="tb-thumb" id="thumblist">
+                            <volist name="goods_gallery" id="v">
+                            <li>
+                                <div class="tb-pic tb-s40">
+                                    <a style="cursor: pointer;"><img  src="__ROOT__{$v['gallery_img']|substr=1}" mid="__ROOT__{$v['gallery_img']|substr=1}" big="__ROOT__{$v['gallery_img']|substr=1}" style="max-width:100%"></a>
+                                </div>
+                            </li>
+                            </volist>
+                        </ul>
+                        <div class="fenxiang-shoucang">
+                        	<a><img src="{:C('STATIC_URL')}/Home/image/s.png">收藏宝贝(0人气)</a><span>|</span><a><img src="{:C('STATIC_URL')}/Home/image/sh.png">分享</a>
+                        	<div class="jiathis_style" id="fenxiang"> 
+								<a class="jiathis_button_cqq"></a>
+								<a class="jiathis_button_weixin"></a>
+								<a class="jiathis_button_qzone"></a>
+								<a class="jiathis_button_tqq"></a>
+								<a class="jiathis_button_renren"></a>
+								<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">更多</a>
+							</div>
+							<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=" charset="utf-8"></script>
+                        </div>
+                </div>
+            </div>
+            <!--信息展示-->
+            <div class="left-info">
+                 <div class="info-title">{$goods['goods_name']}</div>               
+                 <div class="price">价格：    
+                     <span><b>￥{$goods['goods_price']} 元/<if condition="$goods['rent_dw'] eq '1'">月</if><if condition="$goods['rent_dw'] eq '2'">天</if><if condition="$goods['rent_dw'] eq '3'">时</if><if condition="$goods['rent_dw'] eq '4'">件</if></b> 起</span>
+                 </div>   
+                 <!--<volist name="goods_extendattr" id="v">
+                     <div class="row"><div class="text">{$v['attr_name']} :</div> 
+                     <div>{$v['attr_value']}</div></div>                                   
+                 </volist>-->
+                <div class="row">
+                     <div class="text">设备厂家 :</div> 
+                     <div>{$goods['sbcj']}</div>
+                </div> 
+                <div class="row">
+                     <div class="text">设备品牌 :</div> 
+                     <div>{$goods['brand_name']}</div>
+                </div>                                   
+                <div class="row">
+                     <div class="text">设备型号 :</div> 
+                     <div>{$goods['goods_model']}</div>
+                </div> 
+                <div class="row">
+                     <div class="text">设备数量 :</div> 
+                     <div class="goods_number">{$goods['goods_number']}</div>
+                </div> 
+                <div class="row">
+                     <div class="text">设备地址 :</div> 
+                     <div>{$area[0]['area_name']} {$area[1]['area_name']} {$area[2]['area_name']}</div>
+                </div> 
+                <div class="row">
+                     <div class="text">联系方式 :</div> 
+                     <div>{$goods['phone']}</div>
+                </div> 
+                <div class="row">
+                     <div class="text">最短租约 :</div> 
+                     <div><span class="month_number">{$goods['min_rent']}个<if condition="$goods['rent_dw'] eq '1'">月</if><if condition="$goods['rent_dw'] eq '2'">天</if><if condition="$goods['rent_dw'] eq '3'">小时</if><if condition="$goods['rent_dw'] eq '4'">件</if></span></div>
+                </div> 
+                <div class="row">
+                     <div class="text">最长租约 :</div> 
+                     <div><span class="month_number">{$goods['max_rent']}个<if condition="$goods['rent_dw'] eq '1'">月</if><if condition="$goods['rent_dw'] eq '2'">天</if><if condition="$goods['rent_dw'] eq '3'">小时</if><if condition="$goods['rent_dw'] eq '4'">件</if></span></div>
+                </div> 
+                <div class="row">
+                     <div class="text">设备成色 :</div> 
+                     <div><span class="quality">{$goods['sbcs']}</span></div>
+                </div> 
+                <div class="row">
+                     <div class="text">购置年份 :</div> 
+                     <div>{$goods['buy_time']}</div>
+					 <div style="margin-left:40px;padding-bottom:10px; width: 100%;"><!-- JiaThis Button BEGIN -->
+               </div>                
+                </div>
+            </div>
+            
+            <!-- 用户租期 -->
+            <div class="details-input">
+                <div class="title">费用明细:</div>
+                <div class="pay_info">
+                    <div class='rent_set'>
+                	租期选择 :<button class="minus">-</button><input class="num" value="{$goods['min_rent']}"><button class="plus">+</button><if condition="$goods['rent_dw'] eq '1'">个月</if><if condition="$goods['rent_dw'] eq '2'">天</if><if condition="$goods['rent_dw'] eq '3'">个小时</if><if condition="$goods['rent_dw'] eq '4'">件</if><span id="pay_range">（可选范围：{$goods['min_rent']}至{$goods['max_rent']}<if condition="$goods['rent_dw'] eq '1'">个月</if><if condition="$goods['rent_dw'] eq '2'">天</if><if condition="$goods['rent_dw'] eq '3'">个小时</if><if condition="$goods['rent_dw'] eq '4'">件</if>）</span>
+                    </div>
+                	<div class="nums">数量：                    
+                       <button class="minus">-</button>
+                       <input class="num" value="1">
+                       <button class="plus">+</button>件 <span class="remain_num">( 库存 {$goods['goods_number']} 件 )</span>                
+                    </div>
+                    <div class='rent_set' style="display: none;">
+                	加工数量 :<button class="minus">-</button><input class="num" value="{$goods['min_rent']}"><button class="plus">+</button> 件
+                    </div>
+                    <div class="Total">         	
+                                                     总价： <span>￥0</span>                   
+                    </div>                    
+                </div>
+
+                <volist name="goods_rent" id="v">
+                <div class="row">
+                    第{$v['start']}至{$v['end']}<if condition="$goods['rent_dw'] eq '1'">个月</if><if condition="$goods['rent_dw'] eq '2'">天</if><if condition="$goods['rent_dw'] eq '3'">个小时</if><if condition="$goods['rent_dw'] eq '4'">件</if>每<if condition="$goods['rent_dw'] eq '1'">个月</if><if condition="$goods['rent_dw'] eq '2'">天</if><if condition="$goods['rent_dw'] eq '3'">个小时</if><if condition="$goods['rent_dw'] eq '4'">件</if>租金 :
+                    <div class="right">
+                        ￥{$v['goods_rent_price']}
+                    </div>
+                </div>
+                </volist>               
+                <div class="row color">
+                    第1至3<if condition="$goods['rent_dw'] eq '1'">个月</if><if condition="$goods['rent_dw'] eq '2'">天</if><if condition="$goods['rent_dw'] eq '3'">个小时</if><if condition="$goods['rent_dw'] eq '4'">件</if>每<if condition="$goods['rent_dw'] eq '1'">个月</if><if condition="$goods['rent_dw'] eq '2'">天</if><if condition="$goods['rent_dw'] eq '3'">个小时</if><if condition="$goods['rent_dw'] eq '4'">件</if>佣金 : 
+                    <div class="right rent_case">
+                        ￥10000.00
+                    </div>
+                </div>
+                <div class="row color">
+                    第4至6<if condition="$goods['rent_dw'] eq '1'">个月</if><if condition="$goods['rent_dw'] eq '2'">天</if><if condition="$goods['rent_dw'] eq '3'">个小时</if><if condition="$goods['rent_dw'] eq '4'">件</if>每<if condition="$goods['rent_dw'] eq '1'">个月</if><if condition="$goods['rent_dw'] eq '2'">天</if><if condition="$goods['rent_dw'] eq '3'">个小时</if><if condition="$goods['rent_dw'] eq '4'">件</if>佣金 : 
+                    <div class="right rent_case">
+                        ￥9250.00
+                    </div>
+                </div>
+                <div class="row color"> 
+                    第7<if condition="$goods['rent_dw'] eq '1'">个月</if><if condition="$goods['rent_dw'] eq '2'">天</if><if condition="$goods['rent_dw'] eq '3'">个小时</if><if condition="$goods['rent_dw'] eq '4'">件</if>及以后每<if condition="$goods['rent_dw'] eq '1'">个月</if><if condition="$goods['rent_dw'] eq '2'">天</if><if condition="$goods['rent_dw'] eq '3'">个小时</if><if condition="$goods['rent_dw'] eq '4'">件</if>佣金 : 
+                    <div class="right rent_case">
+                        ￥9250.00
+                    </div>
+                </div>
+                <div class="row color">         	
+                    租金总额 : <span class='rent_html'></span>
+                    <div class="right rent_case">
+                        ￥0
+                    </div>
+                </div>
+                <div class="row color">
+                    保险费 : {$goods['safest']}<span>(太平洋保险承保)</span>
+                    <div class="right">
+                        ￥{$goods['safest']}
+                    </div>
+                </div>
+                <div class="row color">
+                    押金 : <span class='deposit_html'>({$goods['deposit']}*0)</span>
+                    <div class="right deposit_case">
+                        ￥{$goods['deposit']}
+                    </div>
+                </div>
+                <div class="row color">
+                    首期付款 : <span>(押金+首月租金+保险总额)</span>
+                    <div class="right total">
+                        ￥0
+                    </div>
+                </div>
+                <div class="bottom">
+                    <a href="javascript:showsevice();"><div class="service">
+                    	联系客服
+                    </div></a>
+                    <div class="text">
+                        *安调费/拆装费/运输费按机型/路程计算，满12个月减半，满24个月全免。<br>
+                        *本设备鼓励租转买，租期所付租金转为预付款，设备依据残值折价销售
+                    </div>
+                    <div class="btn">
+                        <div class="btns now">立即购买</div>
+                        <div class="btns cat">加入购物车</div>
+                    </div>
+                </div>
+            </div>
+            <!-- 选项卡 -->
+            <div class="tab">
+                <div class="tab-nav">
+                    <div class="details-of active">详情介绍</div>
+                    <div>评价(<span class="number_comment"></span>)</div>
+                    <div>服务保障</div>
+                    <div class="hr"></div>
+                </div>               
+                <div class="details-of-list">
+                    <div>{$goods_data['goods_content']|html_entity_decode}</div>
+                    <div style="display: none;"><include file="Goods:comment" /></div>
+                    <div style="display: none;"><include file="Goods:service-guarantee" /></div>
+                </div>              
+            </div>
+        </div>
+        <!-- 广告栏 -->
+        <div class="info-right">
+            <div class="title">近期热租商品</div>
+            <volist name="goods_hot" id="v">
+            <div class="li">
+                <a class="aaaaaaa" href="{:U('Goods/goods',array('goods_id'=>$v['id']))}"><img src="__ROOT__{$v['goods_thumb']|substr=1}" alt=""></a>
+                <div class="text"><a href="{:U('Goods/goods',array('goods_id'=>$v['id']))}">{$v['goods_name']}</a></div>
+                <div class="price">￥{$v['goods_price']} /月起<div class="sales">销量：260</div></div>
+            </div> 
+            </volist>            
+        </div>       
+    </div>
+</div>
+<include file="Public:footer" />
+<script>
+//头部橙橙首页隐藏
+$(".homePage").css("display","none");
+
+$(".fenxiang-shoucang>a:eq(1)").mouseenter(function(){
+	$("#fenxiang").css("display","block")
+})
+$("#fenxiang").mouseleave(function(){
+	$("#fenxiang").css("display","none")
+})
+
+function showsevice(){
+  
+    layer.open({
+      type: 2,
+      title: '',
+      shadeClose: true,
+      shade: false,
+	  offset: 'rb', //右下角弹出
+      maxmin: true, //开启最大化最小化按钮
+      area: ['650px', '460px'],
+	  content: "http://p.qiao.baidu.com/cps/chat?siteId=9913952&userId=22347187"
+    });
+}
+
+
+/*
+ * 根据租期计算价格
+ * */
+var price_total = (function(){
+    var __goods_price = {$goods['goods_price']}, //商品价格     
+        __goods_number= {$goods['goods_number']}, //商品库存        
+        __min_time    = {$goods['min_rent']} ,//最短租期
+        __max_time    = {$goods['max_rent']} ,//最长租期
+        __safest      = {$goods['safest']}, //保险金额
+        __deposit     = {$goods['deposit']}, // 押金
+        __rent_dw     = {$goods['rent_dw']}, // 租期单位
+        __goods_rent  = {$goods_rent_json}, //商品租期段
+        __rent_time   = __min_time, //租期时间
+        __total_price = 0, //总计价格
+        __number      = 1;//购买数量
+    if(isEmptyObject(__goods_rent)){
+        __goods_rent = {'1':{'start':__min_time,'time':__max_time,'goods_rent_price':__goods_price}};
+    }
+    
+    if(__rent_dw==4){
+    	$(".color").css("display","none");
+    	$(".pay_info>.rent_set:eq(0)").css("display","none");    	
+    	$(".pay_info>.nums").css("display","none");
+    	$(".pay_info>.rent_set:eq(1)").css("display","inline-block");
+    	$(".Total").css("display","inline-block");
+    	$(".left-info>.row:eq(3)").css("display","none");
+    	$(".left-info>.row:eq(6)").css("display","none");
+    	$(".left-info>.row:eq(7)").css("display","none")
+    }
+   
+    function isEmptyObject(e) {  
+        var t;  
+        for (t in e)  
+            return !1;  
+        return !0  
+    }  
+
+    /*统计总价格*/
+    function getTotalPrice(){
+        var rent_case    = totalRent(), // 获取租金总额
+            deposit_case = getDeposit(); //获取押金金额
+        __total_price    = rent_case + deposit_case + __safest; //总计金额 租期总额 + 押金 +保险
+        $(".total").text('￥'+__total_price);  
+    }
+
+   /**
+    * 统计商品租金
+    */
+    function totalRent(){ 
+        var rent_case  = 0, //租金金额
+            times      = __rent_time,//出租时间
+            total_html = [];
+        for(var k in __goods_rent){          
+            if(__goods_rent[k].end < __rent_time){
+                var time = __goods_rent[k].end - __goods_rent[k].start + 1;  
+                rent_case += __goods_rent[k].goods_rent_price * time * __number; //租金金额累计
+                total_html.push(__goods_rent[k].goods_rent_price + '*' + time + '*' + __number);
+                times -= time;       
+            }else
+            if(__goods_rent[k].start <= __rent_time){
+                var time = __rent_time - __goods_rent[k].start + 1;
+                rent_case += __goods_rent[k].goods_rent_price * time * __number; //租金金额累计
+                total_html.push(__goods_rent[k].goods_rent_price + '*' + time + '*' + __number);
+                times -= time;                
+            }                       
+        }
+        rent_case += __goods_price * times * __number;//剩余未设置的区间段用原价计算
+        total_html = total_html.join('+');
+        changeRentHtml(total_html,rent_case);
+        return rent_case;
+    } 
+
+    /*获取押金*/
+    function getDeposit(){
+        var deposit_case = parseInt(__goods_price * 3),
+            deposit_html = __goods_price + '*' + 3;
+        changeDepositHtml(deposit_html,deposit_case);
+        return deposit_case;
+    }
+    
+    /*改变租金html*/
+    function changeRentHtml(total_html,rent_case){
+        $(".rent_html").text(total_html);  
+        $(".rent_case").text('￥'+ rent_case);  
+ 
+    }
+
+    /*改变押金html*/
+    function changeDepositHtml(deposit_html,deposit_case){
+        $(".deposit_html").text(deposit_html);  
+        $(".deposit_case").text('￥'+ deposit_case); 
+    }
+    
+    /*改变租期*/
+    function changeTimeHtml(){
+        $(".rent_set .num").val(__rent_time);
+    }
+
+    /*设置事件*/
+    function setEvents(){
+        /*增加租期*/
+        $(".rent_set .plus").click(function(){
+            var rent_time = __rent_time  < __max_time ? __rent_time + 1 : __max_time;
+            if(rent_time != __rent_time){
+                __rent_time = rent_time;
+                changeTimeHtml();
+                getTotalPrice();
+            }
+        })
+        
+        /*减少租期*/
+        $(".rent_set .minus").click(function(){
+            var rent_time = __rent_time > __min_time ? __rent_time - 1 : __min_time;
+            if(rent_time != __rent_time){
+                __rent_time = rent_time;
+                changeTimeHtml();
+                getTotalPrice();
+            }
+        })
+        
+        $(".rent_set .num").blur(function(){        	  
+            var rent_time = $(".rent_set .num").val();
+            if(rent_time != __rent_time && rent_time<=__max_time && rent_time>=0){
+                __rent_time = rent_time;
+                getTotalPrice();
+            }
+            if(rent_time>{$goods['max_rent']}){
+            	__rent_time = __max_time;
+            	$(".rent_set .num").val(__max_time);           	
+                getTotalPrice();
+            }
+            if(rent_time<=0){
+            	__rent_time = {$goods['min_rent']};
+            	$(".rent_set .num").val({$goods['min_rent']});            	
+                getTotalPrice();
+            }
+        })
+
+        /*减少数量*/
+        $(".nums .minus").click(function(){
+            var number = __number > 1 ? __number - 1 : 1;
+            if(number != __number){
+                __number = number;
+                $(".nums .num").val(__number);
+                changeTimeHtml();
+                getTotalPrice();
+            }
+        })  
+
+        /*增加数量*/
+        $(".nums .plus").click(function(){
+        	
+            var number = __number < __goods_number ? __number + 1 : __number;
+            if(number != __number){
+                __number = number;
+                $(".nums .num").val(__number);
+                changeTimeHtml();
+                getTotalPrice();
+            }
+        }) 
+        
+        $(".nums .num").blur(function(){        	
+            var number = $(".nums .num").val();
+            if(number != __number && number<=__goods_number && number>=0){
+                __number = number;
+                $(".nums .num").val(__number);
+                getTotalPrice();
+            }
+            if(number>{$goods['goods_number']}){
+            	__number = __goods_number;
+            	$(".nums .num").val(__goods_number);
+                getTotalPrice();
+            }
+            if(number<=0){
+            	__number = 1
+            	$(".nums .num").val(1);
+                getTotalPrice();
+            }
+        })  
+    }
+    
+    return {
+        'init':function(){
+             getTotalPrice();
+             setEvents();
+         },
+         'getData':function(){
+            return {
+            	'rent_time':__rent_time,
+            	'min_time':__min_time,
+            	'max_time':__max_time,
+            	'rent_number':__number,
+            };
+         }
+    } 
+})();
+price_total.init();
+
+
+  var cart = (function(){
+    var __goods_id = {$goods['id']};
+    $(".cat").click(function(){
+        var data = price_total.getData();
+        if(data.rent_time >= data.min_time && data.rent_time <= data.max_time){
+            cartAdd(data.rent_time,data.rent_number);
+        }else{
+            alert('租期不正确');
+        }
+    })   
+    
+    /*ajax加入购物车*/
+    function cartAdd(rent_time,rent_number){
+        var data = {'goods_id':__goods_id, 'rent_time':rent_time ,'rent_number' : rent_number};
+        var data2 = price_total.getData();
+        $.post("{:U('Cart/cartAdd')}",data,function(res){
+            if(res.code==10){
+        	   window.location.href = "{:U('Member/login')}";
+            }
+            if(data2.rent_time >= data2.min_time && data2.rent_time <= data2.max_time && res.code!=10){          
+               alert("成功加入购物车")
+            }
+        })
+    }
+    
+    
+    /*直接购买*/
+    $(".now").click(function(){
+        var data = price_total.getData();
+        if(data.rent_time >= data.min_time && data.rent_time <= data.max_time){
+            window.location.href = "{:U('Order/buy')}"+'&'+'goods_id='+__goods_id+'&rent_time='+data.rent_time+'&rent_number='+data.rent_number;
+           /*alert("请确认你购买的服务,稍后客服马上会联系你")*/
+        }else{
+            alert('租期不正确');
+        }
+    }) 
+
+    
+})();
+
+$(function(){
+    // 图放大镜
+    $(".jqzoom").imagezoom();
+    $("#thumblist li a").click(function(){
+        $(this).parents("li").addClass("tb-selected").siblings().removeClass("tb-selected");
+        $(".jqzoom").attr('src',$(this).find("img").attr("mid"));
+        $(".jqzoom").attr('rel',$(this).find("img").attr("big"));
+    });
+});
+
+//详情、评价、服务保障切换
+$(".tab-nav>div:eq(0)").click(function(){
+	  $(this).addClass("details-of active");
+	  $(this).siblings().removeClass("details-of active");
+    })
+$(".tab-nav>div:eq(1)").click(function(){
+	  $(this).addClass("details-of active");
+	  $(this).siblings().removeClass("details-of active");
+    })
+$(".tab-nav>div:eq(2)").click(function(){
+	  $(this).addClass("details-of active");
+	  $(this).siblings().removeClass("details-of active");
+    })
+    
+$(".tab-nav>div:eq(0)").click(function(){
+	$(".details-of-list>div:eq(0)").css("display","block");
+	$(".details-of-list>div:eq(1)").css("display","none");
+	$(".details-of-list>div:eq(2)").css("display","none");
+	$(".number_comment").css("color","#000");
+})
+$(".tab-nav>div:eq(1)").click(function(){
+	$(".details-of-list>div:eq(1)").css("display","block");
+	$(".details-of-list>div:eq(0)").css("display","none");
+	$(".details-of-list>div:eq(2)").css("display","none");
+	$(".number_comment").css("color","#FF6600");
+})
+$(".tab-nav>div:eq(2)").click(function(){
+	$(".details-of-list>div:eq(2)").css("display","block");
+	$(".details-of-list>div:eq(1)").css("display","none");
+	$(".details-of-list>div:eq(0)").css("display","none");
+	$(".number_comment").css("color","#000");
+})
+
+
+//获取用户评价
+function getdd(){
+	    var __goods_id = {$goods['id']};
+        var data = {'goods_id':__goods_id, 'firstRow':0, 'listRows':1000};
+        $.post("{:U('Goods/getGoodsComment')}",data,function(res){
+        	/*console.log(res.code);*/
+        	if(res.code==1){
+        	   $(".comment-list").text("暂无评价");
+        	   //评价数量
+	           $(".number_comment").text(0);
+	           //好评数量
+	           $(".comment_good").text(0);
+	           //中评数量
+	           $(".comment_nomal").text(0);
+	           //差评数量
+	           $(".comment_bad").text(0);
+	           //好评率
+	           $(".comment_goodrate").text("0%")
+	           //中评率
+	           $(".comment_nomalrate").text("0%")
+	           //差评率
+	           $(".comment_badrate").text("0%")
+        	}
+        	if(res.code==2){
+               //评论信息
+               $('.comment-txt').text(res.data.comment_data[0].content);
+               //用户名
+               $('.user-name').text(res.data.member_data[0].nickname); 
+               //用户头像
+               $(".user-img>img").attr("src",str);
+               //评论时间
+               $(".time").text(nDate.getFullYear()+"-"+check(nDate.getMonth()+1)+"-"+check(nDate.getDate())+" "+check(nDate.getHours())+":"+check(nDate.getMinutes())); 
+               //评价数量
+	           $(".number_comment").text(parseInt(res.data[1])+parseInt(res.data[2])+parseInt(res.data[3]));
+	           //好评数量
+	           $(".comment_good").text(res.data[3]);
+	           //中评数量
+	           $(".comment_nomal").text(res.data[2]);
+	           //差评数量
+	           $(".comment_bad").text(res.data[1]);
+	           //好评率
+	           $(".comment_goodrate").text(parseInt(res.data[3])/(parseInt(res.data[1])+parseInt(res.data[2])+parseInt(res.data[3]))*100+"%")
+	           //中评率
+	           $(".comment_nomalrate").text(parseInt(res.data[2])/(parseInt(res.data[1])+parseInt(res.data[2])+parseInt(res.data[3]))*100+"%")
+	           //差评率
+	           $(".comment_badrate").text(parseInt(res.data[1])/(parseInt(res.data[1])+parseInt(res.data[2])+parseInt(res.data[3]))*100+"%")
+            }
+        	/*//用户头像路径去.
+        	var str=res.data.member_data[0].headimg
+        	str=str.substring(1);
+        	//用户评论时间格式转换      	
+            var iM = res.data.comment_data[0].time*1000;   //得到毫秒数
+            var nDate = new Date(iM);   //直接将毫秒数当参数传进去。            
+            
+            function check(n){
+		    if(n<10){
+			 n="0"+n;
+			 }
+			 return n;
+		    }*/
+           
+            
+        })        
+    }
+getdd();
+
+</script>
+</body>
+</html>

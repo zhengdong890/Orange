@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<foreach name="goods" item="vo">
+	<a href="http://{$vo.domain}.orangesha.com/shangpin-{$vo.id}.html">{$vo.goods_name}</a>
+	<br/>
+	</foreach>
+</body>
+</html>

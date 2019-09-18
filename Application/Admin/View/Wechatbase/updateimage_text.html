@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="description" content="" />
+<style>    
+*{padding:0; margin:0;font-size:16px;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0} 
+#main #main_h{width:100%;height:40px;float:left;margin-top:20px;color:black;border-bottom:1px solid #dfdfdf}
+#main_h a{height:20px;float:right;margin-left:20px;padding:5px;border:1px solid #E6E7EC;background:#F4F5F9;border-radius:4px;color:black}
+#main_h span{line-height:40px;}
+#main table{float:left;margin-top:20px;}
+input{width:500px;height:24px;border-radius:3px;border:1px solid black;}
+textarea{width:500px;height:160px;border-radius:3px;border:1px solid black;}
+td img{max-width:250px}
+td{padding-right:30px;padding-top:10px}
+table button{border:0px;font-size:16px;background:#44B549;color:white;padding:5px;border-radius:2px;float:left}
+.btn{display:block;float:left;padding:6px;margin-left:10px;background:#D5D5D5;border-radius:2px;}
+</style>
+</head>
+    <body>
+    <div id="wraper">      
+          <div id="main"> 
+             <div id="main_h">
+              <span>编辑图文自定义内容 </span>
+               <a href="{:U('image-text')}">返回</a>                              
+             </div>         
+             <table cellspacing="10">
+                 <form action="{:U('updateimage_text')}" method="post" enctype="multipart/form-data"> 
+                              <input type='hidden' name='id' value="{$list['id']}"></input> 
+                              <input type='hidden' value="{$list['thumb']}" name="oldthumb"></input>                                                                   
+                              <tr>
+                                     <td><span>关键词:</span></td>
+                                     <td><input type="text" name="keyword" value="{$list['keyword']}"></input></td>
+                              </tr> 
+                              <tr>
+                                     <td valign="top"><span>关键词类型:</span></td>
+                                     <td>
+                                        <p style="height:26px;line-height:26px"><input type="radio" name="type" value="1" style="width:14px;float:left" <if condition="$list['type'] eq '1'">checked='checked'</if>/>包含匹配（当此关键词包含粉丝输入关键词时有效）</p>
+                                        <p style="height:26px;line-height:26px"><input type="radio" name="type" value="2" style="width:14px;float:left" <if condition="$list['type'] eq '2'">checked='checked'</if>/>完全匹配（当此关键词和粉丝输入关键词完全相同时有效）</p>
+                                     </td>
+                              </tr>
+                              <tr>
+                                     <td><span>标题:</span></td>
+                                     <td><input type="text" name="title" value="{$list['title']}"></input></td>
+                              </tr> 
+                               <tr>
+                                     <td valign="top"><span>当前封面图片</span></td>
+                                     <td>
+                                         <if condition="$list['ispiclocal'] eq 'n'">
+                                             <img src="{$list.thumb}" style="max-width:100px"></img>
+                                         <else/>
+                                             <img src="/{$path}{$list.thumb|substr=1}" style="max-width:100px"></img>
+                                         </if>
+                                     </td>
+                              </tr> 
+                              <tr>
+                                     <td><span>更改封面图片:</span></td>
+                                     <td>
+                                         <input type='text' name="thumb_1" style="width:300px">
+                                         <input type="file" name="thumb" style="width:200px;border:0;"/>
+                                     </td>
+                              </tr> 
+                              <tr>
+                                     <td><span>图文外链网址：</span></td>
+                                     <td><input type="text" name="url" value="{$list['url']}"></input></td>
+                              </tr> 
+                              <tr>
+                                     <td><span>是否开启OAuth授权模式：</span></td>
+                                     <td>
+							             <p style="float:left;margin-top:3px">开启:</p><input type="radio" name="isoauth" value="y" style="width:30px;float:left" <if condition="$list['isoauth'] eq 'y'">checked='checked'</if>></input>
+							             <p style="float:left;margin-top:3px;margin-left:10px">不开启:</p><input type="radio" name="isoauth" value="n" style="width:30px;float:left" <if condition="$list['isoauth'] eq 'n'">checked='checked'</if>></input>
+                                     </td>
+                              </tr>                         
+                               <tr>
+                                     <td valign="top"><span>图文详细页内容：</span></td>
+                                     <td><textarea name="content">{$list['content']}</textarea><p>请不要多于1000字否则无法发送!</p></td>   
+                              </tr>                                                                      		                                            
+                              <tr><td></td><td><button>保存</button><a href="{:U('image-text')}" class='btn'>取消</a></td></tr>
+                 </form>
+             </table>
+         </div>
+    </div>	
+    </body>
+    <script type="text/javascript">
+	   
+    </script>
+</html>

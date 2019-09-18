@@ -1,0 +1,299 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="keywords" content="{$seo['keywords']}">
+<meta name="description" content="{$seo['description']}"">
+<meta name="copyright" content="深圳市橙橙网络科技有限公司(www.orangesha.com)版权所有">
+<meta name="author" content="橙橙分享"> 
+<title>{$seo['title']}</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/Orange/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<script src="{:C('STATIC_URL')}/layer/layer.js"></script>
+<link href="{:C('STATIC_URL')}/Home/Financing/css/tender2.css" rel="stylesheet" >
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/Orange/css/home.css" type="text/css">
+<style>
+.section-bt{width:100%;height:auto;float:left;margin-top:20px}
+.section-bt .btns{line-height: 42px;}
+.section-bt .btns p,.section-bt .btns label,.section-bt .btns label input{display: inline-block;}
+.section-bt .btns label p{padding-left: 10px;}
+.section-bt .btns .btn{margin-left: 32px;border:1px #d5d5d5 solid;padding:0 10px;border-radius: 5px;cursor: pointer;}
+.section-bt .turn-page{width:auto;height:auto;float:left;margin-left:34%;}
+.section-bt .turn-page .omit{border:none;}
+.section-bt .turn-page .omit:hover{border:none;background-color: transparent;color:#d5d5d5;}
+.section-bt .turn-page div,.section-bt .to-page input{width: 32px;height:32px;border:1px #d5d5d5 solid;display: inline-block;margin-left: 12px;
+    cursor: pointer;vertical-align: top;line-height: 32px;text-align: center;}
+.section-bt .turn-page .active{background-color: #5FAEBF;color:#fff;}
+.section-bt .turn-page>div:hover{border-color: #ff8448;}
+.section-bt .turn-page .right-btn,.section-bt .turn-page .left-btn{ width:70px;}
+
+.section-bt .to-page{width:auto;float:right;}
+.section-bt .to-page input{margin:0 7px;vertical-align: middle;}
+.section-bt .to-page input[type="button"]{background-color: #fff;width: 54px;}
+
+</style>
+<!-- www.orangesha.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?54f6f54d47704101dc27b337de5fd6c3";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+ <body >
+ <!-- 头部 -->
+<include file="Public:header_top" />
+<div class="n-bCol3 bg">
+    <div class="header mar1200c posRel">
+        <div class="header-right fRi">            
+            <ul style="list-style:none;margin:6px 0px 0px 30px; width: 290px; height: 60px; background: url({:C('STATIC_URL')}/images/images/header-right_03.jpg) no-repeat;" >       
+                <a href="javascript:void(0);" onclick="Openwindow()"><li style="margin-left: -6px; float:left; height: 60px; line-height: 100px;">申请融资</li></a>
+                <a><li style="float:left;margin-left:71px; height: 60px; line-height: 100px;">提交审核</li></a> 
+                <a><li style="float:left;margin-left:75px; height: 60px; line-height: 100px;">免费发布</li></a>         
+            </ul>           
+        </div>     
+        <a class="logo" href="{:U('Index/index')}"></a>
+        <div class="clear"></div>
+    </div>
+</div>	
+<!-- /头部 -->
+<div class="body">
+    <div class="nav">
+        <ul>
+            <li class="active"><a href="{:U('Tender/index')}">首页</a></li>
+            <li><a href="{:U('Tender/financingRules')}">融资租赁规则</a></li>
+            <li><a href="{:U('Tender/tenancy')}">融资租赁公司</a></li>
+        </ul>
+    </div>         
+    <div class="banner" style="background:url('__ROOT__{$thumb|substr=1}'); background-repeat:no-repeat; background-size: 100% 100%;"></div>
+    <div class="list max-width">
+        <div class="left">
+            <div class="title">
+            <span class="icon"></span>
+            <span class="bold">进行中项目</span>  /  ONGOING PROJECTS
+            </div> 
+            <ul id="test">
+                <volist name="list" id="vo">
+                <li>
+                	<a href="javascript:void(0);" onclick="Openwindow2()">
+	                    <div class="list-title">
+		                    <span class="icon"></span>
+		                    {$vo.modelnum} {$vo.title}
+	                    </div>
+	                    <div class="content">项目概况：{$vo.des}</div>
+	                    <div class="releaseSite">{$vo.area}</div>
+	                    <div class="date">{$vo.update_time}</div>
+                    </a>
+                </li>
+                </volist>
+                <div class="clear" style="clear:both;"></div>
+            </ul>
+            <div class="section-bt">{$html}</div>
+        </div>          
+    </div>
+    <div class="max-width h-title">
+        <!-- <div class="h-title-top"><span class="icon"></span><i></i>Process</div> -->
+        <div class="h-title-bottom">合作流程</div>
+    </div>
+        <div class="max-width hzlc">
+            <ul>
+                <li>
+                    <div class="hzlc-icon">1</div>
+                    <div class="hzlc-text">
+                        <div class="hzlc-right-title">制定项目</div>
+                        <div class="hzlc-right-english">DEVELOP PROJECT</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="hzlc-icon">2</div>
+                    <div class="hzlc-text">
+                        <div class="hzlc-right-title">选择机型</div>
+                        <div class="hzlc-right-english">SELECTION MODEL</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="hzlc-icon">3</div>
+                    <div class="hzlc-text">
+                        <div class="hzlc-right-title">提交项目</div>
+                        <div class="hzlc-right-english">SUBMIT PROJECT</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="hzlc-icon">4</div>
+                    <div class="hzlc-text">
+                        <div class="hzlc-right-title">招标签约</div>
+                        <div class="hzlc-right-english">SELECTION SCHEME</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+      
+        <div class="Company max-width">
+            <div class="max-width h-title">
+                    <!-- <div class="h-title-top"><span class="icon"></span><i></i>Company</div> -->
+                    <div class="h-title-bottom">融资租赁公司<a href="{:U('Tender/tenancy')}" class="more">了解更多 +</a></div>
+
+            </div>
+            <ul class="lease">
+			<volist name="img" id="vo">
+                 <li class="lease-1"><a href="{$vo.url}" target="_blank"><img src="{$vo.tj_thumb}" /></a></li>
+            </volist> 
+            </ul>
+            <div class="winning">
+                <div class="winning-title">中标项目</div>
+               <div class="text-slider">
+                   <ul class="text-slider-wrap">
+				     <volist name="select" id="v">
+                       <li>
+                           <div class="winning-list-title"><span style="display: inline-block; width: 75%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{$v.title}</span> <span style="float: right; margin-right: 12px;display: inline-block; width: 18%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;text-align: right;">{$v.area}</span></div>
+                           <div class="winning-list-unit">项目概况：{$v.desc}</div>
+                           <div class="winning-list-date">{$v.update_time|substr=0,10}</div>
+                       </li>
+                     </volist> 
+					  
+                    </ul>
+               </div>
+            </div>
+           <!--  <ul class="icon">
+                <li class="icon-1"></li>
+                <li class="icon-2"></li>
+                <li class="icon-3"></li>
+                <li class="icon-4"></li>
+                <li class="icon-5"></li>
+                <li class="icon-6"></li>
+                <li class="icon-7"></li>
+                <li class="icon-8"></li>
+                <li class="icon-9"></li>
+                <li class="icon-10"></li>
+                <li class="icon-11"></li>
+                <li class="icon-12"></li>
+                <li class="icon-13"></li>
+                <li class="icon-14"></li>
+                <li class="icon-15"></li>
+                <li class="icon-16"></li>
+                <li class="icon-17"></li>
+                <li class="icon-18"></li>
+                <li class="icon-19"></li>
+                <li class="icon-20"></li>
+                <li class="icon-21"></li>
+                <li class="icon-22"></li>
+                <li class="icon-23"></li>
+                <li class="icon-24"></li>
+            </ul> -->
+        </div>
+    </div>
+    <div class="clear" style="clear:both;"></div>
+   <script type="text/javascript">
+    window.onload=function () {
+	
+	 
+	   $('.current').parent().attr('href',"javascript:void(0)");
+	
+	  
+	   
+	 
+	
+        /*融资租赁轮播*/
+        function scroll(){
+            $(".text-slider-wrap").animate({"margin-top":"-96px"},800,function(){
+                $(".text-slider-wrap li:eq(0)").appendTo($(".text-slider-wrap"));
+                $(".text-slider-wrap").css({"margin-top":0})
+            })
+        }
+        setInterval(scroll,3000);
+   
+  }
+    	 function test(id){    //user函数名 一定要和action中的第三个参数一致上面有
+        
+      
+        $.get('{:U('Public/test')}', {'p':id}, function(data){  //用get方法发送信息到test方法
+           //var info= eval('('+data+')') ;//将返回的json数据转换成js对象\
+           var data=JSON.parse(data); 
+		 //  alert(data);
+           //console.log(data.result[0].cpname);
+       
+            var s='';
+                s+='<ul id="test">';
+                for (var i = 0; i < data['result'].length; i++) {
+	                 s += '<li><div class="list-title"><span class="icon"></span><a href="{:U('Public/tenancy')}">'+data['result'][i].title+'</div>';
+	                 s += '<div class="content">项目需求：'+data['result'][i].des+'...</div>';
+	                 s += '<div class="date">'+data['result'][i].create_time;
+	                 s += '</div></li>';
+                }
+                   s += '<div class="clear" style="clear:both;"></div>';         
+                //
+                s+='</ul>';
+                pg=' <div class="pages-btn" id="pg">'+data['pg']+'</div>';
+ 
+                $('#test').html(s);
+                $('#pg').html(pg);
+
+        });
+		
+		
+		
+     
+    }
+	 
+function Openwindow(){
+	
+	layer.open({
+	  type: 2,
+	  title: '资金需求',
+	  maxmin: true,
+	  shadeClose: true, //点击遮罩关闭层
+	  area : ['76%' , '86%'],
+	  content: '{:U('Server/request')}'
+	 });
+}  	
+    
+var paramer_arr = GetRequest();
+    PATH_NAME   = window.location.pathname;
+paramer_arr['p'] = 1;
+
+function getUrl(paramer_arr){
+    var paramer = '';
+    for(var k in paramer_arr){
+        paramer+='&'+ k + '=' + paramer_arr[k];
+    }
+    paramer = paramer.substring(1);
+    return PATH_NAME + '?' + paramer;
+}
+
+function GetRequest() {   
+   var url = location.search; //获取url中"?"符后的字串   
+   var theRequest = new Object();   
+   if (url.indexOf("?") != -1) {   
+      var str = url.substr(1);   
+      strs = str.split("&");   
+      for(var i = 0; i < strs.length; i ++) {   
+         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);   
+      }   
+   }   
+   return theRequest;   
+}  
+  
+$(".go").click(function(){
+	var val = $(".go_number").val();
+	paramer_arr['p'] = parseInt(val) > 0 ? parseInt(val) : 1;
+	window.location.href = getUrl( paramer_arr);
+})
+</script>
+<!-- 头部 -->
+	<include file="Public:footer" />
+	<!-- /头部 -->
+</body>
+
+</html>

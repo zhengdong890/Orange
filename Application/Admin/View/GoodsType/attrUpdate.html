@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="description" content="" />
+<style>
+*{padding:0; margin:0;font-size:16px;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0}
+#content{width:98%;height:auto;float:left;margin-left:1%;}
+#content #content_h{width:100%;height:40px;border:1px solid #D7D7D7;line-height:40px;margin-top:15px}
+#content #content_h a{padding-left:10px}
+.btn{width:100px;height:30px;float:right;display:block;background:#C43926;text-align:center;line-height:30px;color:white;border-radius:5px;font-size:14px;margin-right:20px;margin-top:5px;}      
+#content #content_m{width:100%;height:auto;border:1px solid #D7D7D7;padding-bottom:100px;margin-top:20px}
+#content table{margin:0 auto;margin-top:20px}
+td{padding-right:30px;padding-top:5px}
+table .sub_but{border:0px;padding:5px;background:#C43926;color:white;border-radius:2px;float:left;}
+.label{text-align:right;vertical-align:top;font-weight:bold;width:30%;font-size:14px;padding:4px 8px} 
+textarea{width:400px;height:150px}
+#attr_value table{margin:0 0 0 0;}
+</style>
+</head>
+<body>        
+<div id="content">
+      <div id="content_h">
+          <a>后台管理中心</a>-><a>新建商品类型</a>
+          <a class='btn' style="padding-left:0" href="{:U('goods_type')}">商品属性</a>
+      </div>
+      <div id="content_m">
+          <form action="{:U('attr_update')}" method="post" onsubmit="return check();">
+                <input type="hidden" name="attr_id" value="{$attr['attr_id']}"></input>  
+                <table cellspacing="10">
+                          <tr>
+                                <td class="label">属性名称:</td>
+                                <td><input type="text" name="attr_name" value="{$attr['attr_name']}"></input></td>
+                          </tr>
+                          <tr>
+                                <td class="label">所属商品类型:</td>
+                                <td>
+                                   <select name="type_id">
+                                      <option>请选择...</option>
+                                      <volist name="goods_type" id="v">
+                                      <if condition="$v['id'] eq $attr['type_id']">
+                                      <option value="{$v['id']}" style="text-indent:{$v['padding']}" selected='selected'>{$v['html']} {$v['type_name']}</option>
+                                      <else/>
+                                      <option value="{$v['id']}" style="text-indent:{$v['padding']}">{$v['html']} {$v['type_name']}</option>
+                                      </if>
+                                      </volist>
+                                   </select>
+                                </td>
+                          </tr>
+                          <tr>
+                                <td class="label">上级特征量:</td>
+                                <td>
+                                   <select name="pid">
+                                      <option value="0">顶级</option>
+                                      <volist name="attrs" id="v">
+                                      <if condition="$v['attr_id'] eq $attr['pid']">
+                                      <option value="{$v['attr_id']}" style="text-indent:{$v['padding']}" selected='selected'>{$v['html']} {$v['attr_name']}</option>
+                                      <else/>
+                                      <option value="{$v['attr_id']}" style="text-indent:{$v['padding']}">{$v['html']} {$v['attr_name']}</option>
+                                      </if>
+                                      </volist>
+                                   </select> 
+                                </td>
+                          </tr>
+                          <tr>
+                                <td class="label">排序:</td>
+                                <td><input type="text" name="attr_sort" value="{$attr['attr_sort']}"></input></td>
+                          </tr>                          
+                          <tr>
+                                <td class="label">属性值是否可选:</td>
+                                <td>
+                                    <input type="radio" value="1" name="attr_type" {$attr['attr_type_1']}></input>唯一属性
+                                    <input type="radio" value="2" name="attr_type" {$attr['attr_type_2']}></input>单选属性
+                                    <input type="radio" value="3" name="attr_type" {$attr['attr_type_3']}></input>复选属性
+                                </td>
+                          </tr>
+                          <tr>
+                                <td class="label">是否允许上传图片:</td>
+                                <td>
+                                    <input type="radio" value="no" name="type" {$attr['type_1']}></input>不允许
+                                    <input type="radio" value="picture" name="type" {$attr['type_2']}></input>单图
+                                    <input type="radio" value="gallery" name="type" {$attr['type_3']}></input>相册
+                                </td>
+                          </tr>
+                          <tr>
+                                <td class="label"><span>以存在的可选值:</span></td>
+                                <td>
+                                   <volist name="attr['attr_value']" id='v'>
+                                    <span style="padding-right:15px">{$v['attr_value']}</span>
+                                   </volist>
+                                </td>
+                          </tr>
+                          <tr>
+                             <td class="label"><a href="javascript:attr_show()">更多操作+</a></td>
+                             <td id="attr_value" style="padding-top:0">
+                             	   <table>
+							            <tr>
+							               <td>特征值</td>
+							               <td>排序</td>
+							               <td>操作</td>
+							            </tr>
+							            <volist name="attr['attr_value']" id="v">
+							            <tr>
+							               <td><input type="text" name="oldattr_value{$v['id']}" value="{$v['attr_value']}" ></input></td>
+							               <td><input type="text" name="oldattr_sort{$v['id']}" value="{$v['sort']}" style="width:40px;border:0;text-align:center"></input></td>
+							               <td><a>删除</a></td>
+							            </tr>
+							            </volist>
+						            </table>
+                             </td>
+                          </tr>
+                          <tr>
+                                <td class="label">该属性值的录入方式:</td>
+                                <td>
+                                    <input type="radio" value="1" name="attr_input_type" {$attr['attr_input_type_1']}></input>手工录入
+                                    <input type="radio" value="2" name="attr_input_type" {$attr['attr_input_type_2']}></input>从下面的列表中选择（一行代表一个可选值）
+                                </td>
+                          </tr>
+                          <tr>
+                                <td class="label">可选值列表:</td>
+                                <td>
+                                    <if condition="$attr['attr_input_type_1'] eq 'checked=checked'">
+                                    <textarea name="attr_value" disabled="disabled"></textarea>
+                                    <else/>
+                                    <textarea name="attr_value"></textarea>
+                                    </if> 
+                                </td>
+                          </tr>
+                          <tr><td></td><td><input type="submit" value="确认修改" class="sub_but"/></td></tr>
+                  </table>
+           </form>		            
+       </div>
+</div>
+</body>
+<script type="text/javascript">        
+/*检查是否为空*/
+function check(){
+	var attr_name=$("input[name='attr_name']").val();
+	var type_id=$("select[name='type_id']").val();
+	var error='';
+	error=(attr_name=='')?"属性名称不能为空":error;
+	error=(type_id=='')?"商品类型不能为空":error;
+	if(!error){
+		return true;
+	}else{
+		alert(error);
+		return false;
+	}	
+}
+
+$("input[name='attr_input_type']").click(function(){
+	var val=$(this).val();
+	if(val==1){
+		$("textarea[name='attr_value']").attr("disabled",true);
+	}else{
+		$("textarea[name='attr_value']").removeAttr("disabled");
+	}
+})
+
+ function attr_show(){
+   if($("#attr_value table").is(":visible")){
+	    $("#attr_value table").slideUp(500);
+   }else{
+	    $("#attr_value table").slideDown(500);
+   }
+	
+} 
+</script>
+</html>

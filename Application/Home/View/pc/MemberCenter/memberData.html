@@ -1,0 +1,295 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	
+<title>个人中心-账号信息</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<style>
+.btn_addimg{position:relative;}
+.btn_addimg input{width:100px;position:absolute;left:0;top:0;filter:alpha(opacity=50);-moz-opacity:0;-khtml-opacity:0;opacity:0;}
+</style>
+<!-- www.orangesha.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?54f6f54d47704101dc27b337de5fd6c3";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->	
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="MemberPublic:MemberLeft" />  
+        <div class="user-right marT20 box-s-c1 fRi">          
+	    <div class="user-box">
+	        <div class="user-nav user-nav-m1">
+	            您的位置：
+	            <a class="cCol2-h" href="#">账户信息</a>
+	            >
+	            <span class="f-cCol3">个人资料</span>
+	        </div>
+        <div class="clearfix">
+            <form method="post" style="height:611px;">
+            <div class="marL140 marT100 fLe">
+                <div class="person-header ofwHidden">
+                    <div class="person-frame"></div>
+                    <img src="__ROOT__{$member_data['headimg']|substr=1}" width="100%" height="100%">
+                </div>
+            </div>          
+            <div class="fLe marT40 marB200">
+                <table class="reg-table" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="name-tab"><span>手机：</span></td>
+                        <td class="cont-tab">
+                            <span id="moblie">{$member_data['username']}</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="name-tab"><span>昵称：</span></td>
+                        <td class="cont-tab">
+                            <span id="moblie">{$member_data['nickname']}</span>
+                        </td>
+                        <td></td>
+                    </tr>                    
+                    <tr>
+                        <td class="name-tab"><span>性别：</span></td>
+                        <td class="cont-tab" id="sex">
+                            <label for="man">
+                            <if condition="$member_data['sex'] eq ''">
+                                暂无填写
+                            </if>
+                            <if condition="$member_data['sex'] eq 1">
+                              男
+                            </if>
+                            <if condition="$member_data['sex'] eq 2">
+                              女
+                            </if>
+                            </label>                        
+                         </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="name-tab"><span>邮箱：</span></td>
+                        <td class="cont-tab">
+                            <span id="email">
+                            <if condition="$member_data['email'] eq ''">
+                                暂未填写
+                            <else/>
+                            {$member_data['email']}
+                            </if>
+                        </span>
+                        </td>
+                        <td class="prompt"></td>
+                    </tr>
+                    <tr>
+                        <td class="name-tab"><span>座机：</span></td>
+                        <td class="cont-tab">
+                            <if condition="$member_data['zuoji'] eq ''">
+                                暂未填写
+                             <else/>  
+                             {$member_data['zuoji']}  
+                            </if>                               
+                        </td>
+                        <td class="prompt"></td>
+                    </tr>
+                    <tr>
+                        <td class="name-tab"><span>QQ：</span></td>
+                        <td class="cont-tab">
+                           <if condition="$member_data['qq'] eq ''">
+                                暂未填写
+                            <else/>  
+                             {$member_data['qq']}     
+                            </if>                      
+                        </td>
+                        <td class="prompt"></td>
+                    </tr>
+                    <tr>
+                        <td class="name-tab"></td>
+                        <td class="cont-tab">
+
+                        </td>
+                        <td class="prompt"></td>
+                    </tr>
+                    <tr>
+                        <td class="name-tab"></td>
+                        <td class="cont-tab">
+                            <input type="button" id="submit_set" class="butt01 butt-style-1" value="编辑">
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            </form>
+            <!--修改的表单-->
+            <form  id="form" style="height:580px;display:none;">
+            <div class="marL140 marT100 fLe">
+                <div class="person-header ofwHidden">
+                    <div class="person-frame"></div>
+                    <img src="__ROOT__{$member_data['headimg']|substr=1}" width="100%" height="100%">
+                </div>
+                <a class="cCol1 marT10 disBlock txtCenter btn_addimg">设置头像
+                    <input type="file" name="headimg"></input>
+                </a>
+            </div> 
+            <div class="fLe marT40 marB200">
+                <table class="reg-table" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="name-tab"><span>手机号码：</span></td>
+                        <td class="cont-tab">
+                            <input type="text" id="username" disabled name="username" class="txt03 txt-style-1" value="{$member_data['username']}" />
+                        </td>
+                        <td class="prompt"></td>
+                    </tr>
+                    <tr>
+                        <td class="name-tab"><span>昵称：</span></td>
+                        <td class="cont-tab">
+                            <input type="text" id="username" name="nickname" class="txt03 txt-style-1" value="{$member_data['nickname']}" />
+                        </td>
+                        <td class="prompt"></td>
+                    </tr>                    
+                    <tr>
+                        <td class="name-tab"><span>性别：</span></td>
+                        <td class="cont-tab" id="sex">
+                            <if condition="$member_data['sex'] eq 1">
+                            <input type="radio" value="1" name="sex" checked="checked" />
+                            <else/>
+                            <input type="radio" value="1" name="sex" />
+                            </if>
+                            <label for="man">男</label>
+                            <if condition="$member_data['sex'] eq 2">
+                            <input value="2" type="radio" name="sex" checked="checked"/>
+                            <else/>
+                            <input value="2" type="radio" name="sex"/>
+                            </if>
+                            <label for="women">女</label>
+                        </td>
+                        <td>
+                    </tr>
+                    <tr>
+                        <td class="name-tab"><span>邮箱：</span></td>
+                        <td class="cont-tab">
+                            <input id="email" name="email" type="text" class="txt03 txt-style-1" value="{$member_data['email']}"  placeholder="请输入邮箱" />
+                        </td>
+                        <td class="prompt"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="name-tab"><span>座机：</span></td>
+                        <td class="cont-tab">
+                            <input id="phone" name="zuoji" type="text" class="txt03 txt-style-1" value="{$member_data['zuoji']}" placeholder="请输入座机号码" />
+                        </td>
+                        <td class="prompt"></td>
+                    </tr>
+                    <tr>
+                        <td class="name-tab"><span>QQ：</span></td>
+                        <td class="cont-tab">
+                            <input id="qq" name="qq" type="text" class="txt03 txt-style-1" value="{$member_data['qq']}" placeholder="请输入QQ号码" />
+                        </td>
+                        <td class="prompt"></td>
+                    </tr>
+                    <tr>
+                        <td class="name-tab"></td>
+                        <td class="cont-tab">
+                            <span style="color:green;"></span>
+                        </td>
+                        <td class="prompt"></td>
+                    </tr>
+                    <tr>
+                        <td class="name-tab"></td>
+                        <td class="cont-tab">
+                            <a style="width:60px;height:26px;display:block;text-align:center;line-height:26px" href="javascript:;" id="submit_butt" class="butt01 butt-style-1">提交</a>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<!-- /主体 -->
+<include file="Public:footer" />  
+</body>
+<script type="text/javascript">
+//判断左边导航
+function checkNav(){
+	$(".user-left-wrap .list:eq(0)>ul>li:eq(2) a").css("color","#ff6600")
+}
+checkNav()
+
+$("#submit_set").click(function(){
+    $("form:eq(0)").css("display","none");
+    $("form:eq(1)").css("display","block");
+});
+
+$("#submit_butt").click(function(){
+    request();
+})
+
+/*
+ * 提交数据
+ **/
+function request(){  
+    var data = new FormData($("#form")[0]);  // 要求使用的html对象
+    var url  = "{:U('MemberCenter/memberData')}";
+    $.ajax({  
+          url : url ,  
+          type: 'POST',  
+          data: data,  
+          async: true,  
+          // 下面三个参数要指定，如果不指定，会报一个JQuery的错误 
+　　　　　cache: false,  
+          contentType: false,  
+          processData: false,  
+          success: function (res) {  
+              alert(res.msg);
+              if(res.status){
+                  window.location.reload();
+              } 
+          },  
+          error: function (returndata) {  
+              console.log(returndata); 
+          }  
+     });  
+}
+
+$(".btn_addimg input").change(function(){
+    var file   = $(this)[0].files[0];   
+    var reader = new FileReader(); 
+    var _this  = this; 
+    //将文件以Data URL形式读入页面  
+    reader.readAsDataURL(file);  
+    reader.onload=function(e){ 
+        //显示文件      
+        $(".person-header img").attr("src",this.result);
+    }  
+}) 
+</script>
+</html>

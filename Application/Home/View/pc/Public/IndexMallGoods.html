@@ -1,0 +1,43 @@
+<!-- 商城商品start -->
+<div class="mar1200c marT10 ofwVisible">
+    <div class="contents">
+        <h4 class="f-18-c1 marB5"></h4>
+    </div>       
+</div>
+<volist name="mall_goods" id="v">
+<div class="index-brand">
+    <div class="brand-left">
+        <!-- 商品标题 -->
+        <div class="title">
+        
+        <a href="http://{$Think.server.HTTP_HOST}/mall/c-{$v['id']}.html" target="_blank" title="{$v['cat_name']}"><img src="__ROOT__{$v['cat_thumb']|substr=1}"> {$v['cat_name']}</a>
+        </div>
+        <!-- 商品导航 -->
+        <div class="left_nav">
+            <volist name="v['child']" id="v1">
+            <a href="http://{$Think.server.HTTP_HOST}/mall/c-{$v1['id']}.html" target="_blank" title="{$v1['cat_name']}">{$v1['cat_name']}</a>
+            </volist>
+        </div>
+        <img class="brand-icon" src="__ROOT__{$v['cat_thumb_1']|substr=1}" alt="">
+    </div>
+    <!-- 商品列表 -->
+    <!-- start -->
+    <ul class="brand-right">
+    <volist name="v['goods']" id="v1" key="k">
+        <if condition="$k elt 10">
+        <li>
+            <a href="http://{$v1['domain']}.orangesha.com/shangpin-{$v1['id']}.html" target="_blank" title="{$v1['goods_name']}">
+                <img src="__ROOT__<if condition="substr($v1['goods_thumb'] , 0 , 1) eq '.'">{$v1['goods_thumb']|substr=1}<else/>{$v1['goods_thumb']}</if>" alt="{$v1['goods_name']}">
+                <div class="text">
+                    {$v1['goods_name']}
+                    <div class="price">￥{$v1['goods_price']>=10000?$v1['goods_price']/10000:$v1['goods_price']}{$v1['goods_price']>=10000?'万':'元'}
+                    </div>
+                </div>
+            </a>
+        </li>
+        </if>
+    </volist>    
+    </ul>
+</div>        
+</volist>
+<!-- 商城商品end -->

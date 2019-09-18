@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/My97DatePicker/WdatePicker.js"></script> 
+<meta name="description" content="" />
+<style>
+*{padding:0; margin:0;font-size:16px;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0} 
+#main #main_h{width:100%;height:40px;float:left;margin-top:20px;color:black;}
+#main_h form input{height:26px;border-radius:3px;border:1px solid black}
+#main_h form select{height:26px}
+#main_h form button{border:0px;border-radius:3px;height:27px;width:80px;background:#0384E2;color:white;line-height:26px}
+#main table{width:100%;border-top:1px solid #E7E9F3;margin:20px auto;float:left}
+#main table tr{background:#FCFCFC}
+#main table tr:hover{background:#F1FCEA}   
+#main table tr:first-child{background:#F4F5F9} 
+#main table tr td{border-left:1px solid #E7E9F3;border-bottom:1px solid #E7E9F3;font-size:20px;padding:5px;font-size:14px;}
+#main table tr .td{border-left:0px}
+#main td img{max-width:150px}
+#main td a{display:block;margin-left:10px;float:left;padding:5px;background:#44B549;border-radius:4px;color:white;font-size:14px}     
+.btn{border:0;border-radius:4px;color:white;padding:5px;background:#44B549;font-size:14px;margin-left:300px}
+#page{width:100%;height:auto;float:left}
+#page li{float:right}
+#page li a{display:block;float:left;height:22px;padding:4px;border:1px solid #dfdfdf;margin-left:5px;line-height:22px;}
+#page li span{display:block;float:left;height:22px;padding:4px;border:1px solid #dfdfdf;margin-left:5px;line-height:22px;}
+#page li p{float:left;padding:4px;height:22px;line-height:22px;margin-left:5px;}
+</style>
+</head>
+    <body>
+    <div id="wraper">   
+          <div id="main">    
+             <div id="main_h">
+                <form action="{:U(bigwheel)}" method="post">
+                                                       过滤:<select name='isuse'>
+	                    <option value='1'>显示全部</option>
+	                    <option value='2'>显示编码以用的</option>
+	                    <option value='3'>显示编码没用的</option>
+                    </select>
+                                                            中奖编码:<input type='text' name='num' value=''></input>
+                                                            中奖时间:<input type='text' name='time' value='' onClick="WdatePicker()"></input>
+                    <button>点击查询</button>
+                </form>                         
+             </div>     
+             <table cellspacing="0">
+	              <tr>
+	                  <td class='td'>编号</td>
+	                  <td>粉丝昵称</td>	        
+	                  <td>所在地</td>	
+	                  <td>头像</td>
+	                  <td>中奖结果</td>
+	                  <td>奖品编码</td>
+	                  <td>中奖时间</td>
+	                  <td>是否使用</td>
+	                  <td>操作</td>
+	              </tr> 
+	              <volist name="list" id="v">
+	               <tr class='tr'>
+	                   <td class='td'>{$v.id}</td>
+	                   <td>{$v['msg'].nickname}</td>
+	                   <td>{$v['msg'].province} {$v['msg'].city}</td>
+	                   <td><if condition="$v['msg']['headimgurl'] neq ''"><img src="{$v['msg'].headimgurl}" style="max-width:60px;"/></if></td>
+	                   <td>{$v.result}</td>
+	                   <td>{$v.num}</td>
+	                   <td>{$v['time']|date="Y-m-d",###}</td>
+	                   <td><if condition="$v['isuse'] eq '2'">已使用<else/>未使用</if></td>
+	                   <td><if condition="$v['isuse'] neq '2'"><a href="javascript:set({$v['id']})">设为已使用</a></if></td>
+	               </tr>
+	              </volist>                                 
+             </table>
+            <ul id="page"><li>{$page}</li></ul>
+         </div>
+    </div>	
+    </body>
+    <script type="text/javascript">
+       function freshen(){  	     
+  	    	  $.post("{:U('freshen')}",{},function(res){
+  	             window.location.reload();
+  	     	  })
+       }
+       
+       function set(id){
+    	   $.post("{:U('set')}",{'id':id},function(res){
+    		   alert(res);
+	             window.location.reload();
+	      })
+       }
+    </script>
+</html>

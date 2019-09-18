@@ -1,0 +1,343 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="keywords" content="工业机器人租赁，智能装备租赁，智能装备分享，工业智能机器人交易，e橙优品">
+    <meta name="description" content="e橙优品专注于解决国内智能设备空闲问题，对接供给方和需求方，为万千中小企业解决设备和融资问题。我们是智能装备行业的专业电商平台，需求方、供给方、融资租赁公司三赢的B2B交易平台。">
+    <meta name="copyright" content="深圳市橙橙网络科技有限公司(www.orangesha.com)版权所有">
+    <meta name="author" content="e橙优品"> 
+  <title>e 橙优品智能装备分享平台-专业智能装备分享平台-工业智能装备租赁平台</title>
+
+
+
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+
+  <link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+
+  <!--[if (gte IE 9)|!(IE)]><!-->
+
+  <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-2.0.3.min.js"></script>
+
+  <!--<![endif]-->
+
+  <!--[if lte IE 8 ]>
+
+  <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+
+  <![endif]-->
+
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/home.css" type="text/css">
+
+    <link rel="stylesheet" href="/Public/Orange/script/jquery.kinMaxShow/base.css" type="text/css">
+
+    <link rel="stylesheet" type="text/css" href="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.css">
+
+    <link rel="shortcut icon" href="/Public/Home/images/ee.ico" type="image/x-icon">
+
+    <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.js"></script>
+
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/tool.js"></script>
+
+	
+
+    <link href="{:C('STATIC_URL')}/Home/css/css/cssReset.css" rel="stylesheet">
+
+    <link href="{:C('STATIC_URL')}/Home/css/css/allShare.css" rel="stylesheet">
+
+<!-- www.orangesha.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?54f6f54d47704101dc27b337de5fd6c3";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+
+<body >
+
+  <!-- 头部 -->
+
+  <!-- 导航条 页面头部
+
+================================================== -->
+
+
+
+<include file="Public:header" />
+
+
+
+<!-- banner + 导航 -->
+<div class="n-bCol4 min-w1200">
+    <div class="home-nav-wrap mar1200c posRel">
+        <div class="home-menu n-bCol5">
+            <span class="f-16-c1 home-menu-tl all-share">
+                <a href="/index.php?s=/Home/index/Goodsha.html" style="color:#fff;">所有分享装备</a>
+            </span>
+            
+        </div>
+        <div class="home-nav-group">
+                <div class="nav f16C1">
+                    <a href="{:U('Index/index')}" title="e橙优品">首页</a>
+                    <a href="{:U('Mall/index')}" title="e橙优品">品牌商城</a>
+					<a href="{:U('Mechine/index')}" title="e橙优品">机器人街</a>
+                    <a href="{:U('Server/server')}" title="e橙优品">金融服务</a>
+                    <a href="/index.php?s=/Home/Groupbuy/index.html" title="e橙优品">团购秒拍</a>
+                    <a href="{:U('Public/index')}" title="e橙优品">融资招标</a>
+                    <a href="{:U('Integration/index')}" title="e橙优品">集成项目</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 首页banner部分 -->
+   
+    <!-- banner + 导航 End -->
+
+
+      
+    <!-- body -->
+
+<div class="all-share-page" >  
+
+        <ul class="share-list clearfix">
+
+            <li>
+
+                <div class="content">
+
+                    <h2><a href="{:U('Goodsha/lists/category/72')}">工业机器人<img src="{:C('STATIC_URL')}/Home/image/images/all-share%20(2).png" alt class="icon"></a></h2>
+
+                    <ul class="clearfix">
+					 <volist name="goodlist1" id="vo1" > 
+
+                        <li><a href="{:U('Goodsha/lists',array('category'=>$vo1['id']))}" >{$vo1.cat_name}</a></li>
+ 
+                     </volist> 
+
+                    </ul>
+
+                </div>
+
+            </li>
+
+            <li>
+
+                <div class="content">
+
+                    <h2><a href="{:U('Goodsha/lists/category/81')}" >工业无人机<img src="{:C('STATIC_URL')}/Home/image/images/all-share%20(3).png" alt class="icon"></a></h2>
+
+                    <ul class="clearfix">
+                    <volist name="goodlist2" id="vo2" > 
+                        <li><a href="{:U('Goodsha/lists',array('category'=>$vo2['id']))}" >{$vo2.cat_name}</a></li>
+
+                     </volist>               
+                     </ul>
+
+                </div>
+
+            </li>
+
+  
+        <li>
+
+                <div class="content">
+
+                    <h2> <a href="{:U('Goodsha/lists',array('category'=>102))}" > 工业级&nbsp;3D&nbsp;打印机<img src="{:C('STATIC_URL')}/Home/image/images/all-share%20(1).png" alt class="icon"></a></h2>
+
+                    <ul class="clearfix">
+<volist name="goodlist3" id="vo3" > 
+					
+                        <li><a href="{:U('Goodsha/lists',array('category'=>$vo3['id']))}">{$vo3.cat_name}</a></li>
+ </volist>
+                      
+
+                    </ul>
+
+                </div>
+
+            </li>
+
+        <li>
+
+                <div class="content">
+
+                    <h2> <a href="{:U('Goodsha/lists',array('category'=>91))}" > 数控机床装备<img src="{:C('STATIC_URL')}/Home/image/images/all-share%20(4).png" alt class="icon"></a></h2>
+
+                    <ul class="clearfix">
+<volist name="goodlist4" id="vo4" > 
+					
+                        <li><a href="{:U('Goodsha/lists',array('category'=>$vo4['id']))}">{$vo4.cat_name}</a></li>
+ </volist>
+                      
+
+                    </ul>
+
+                </div>
+
+            </li>
+
+       
+
+   
+        <li>
+
+                <div class="content">
+
+                    <h2> <a href="{:U('Goodsha/lists',array('category'=>92))}" > 实验室仪器设备<img src="{:C('STATIC_URL')}/Home/image/images/all-share%20(6).png" alt class="icon"></a></h2>
+
+                    <ul class="clearfix">
+<volist name="goodlist5" id="vo5" > 
+					
+                        <li><a href="{:U('Goodsha/lists',array('category'=>$vo5['id']))}">{$vo5.cat_name}</a></li>
+ </volist>
+                      
+
+                    </ul>
+
+                </div>
+
+            </li>
+
+        <li>
+
+                <div class="content">
+
+                    <h2> <a href="{:U('Goodsha/lists',array('category'=>106))}" > 新能源装备<img src="{:C('STATIC_URL')}/Home/image/images/all-share%20(8).png" alt class="icon"></a></h2>
+
+                    <ul class="clearfix">
+<volist name="goodlist6" id="vo6" > 
+					
+                        <li><a href="{:U('Goodsha/lists',array('category'=>$vo6['id']))}">{$vo6.cat_name}</a></li>
+ </volist>
+                      
+
+                    </ul>
+
+                </div>
+
+            </li>
+
+            <li>
+
+                <div class="content">
+
+                    <h2> <a href="{:U('Goodsha/lists',array('category'=>110))}" >节能环保装备<img src="{:C('STATIC_URL')}/Home/image/images/all-share%20(8).png" alt class="icon"></a></h2>
+
+                    <ul class="clearfix">
+<volist name="goodlist7" id="vo7" > 
+					
+                        <li><a href="{:U('Goodsha/lists',array('category'=>$vo7['id']))}">{$vo7.cat_name}</a></li>
+ </volist>
+                      
+
+                    </ul>
+
+                </div>
+
+            </li>
+
+            <li>
+
+                <div class="content">
+
+                    <h2> <a href="{:U('Goodsha/lists',array('category'=>114))}" >生物产业装备<img src="{:C('STATIC_URL')}/Home/image/images/all-share%20(7).png" alt class="icon"></a></h2>
+
+                    <ul class="clearfix">
+<volist name="goodlist8" id="vo8" > 
+                        <li><a href="{:U('Goodsha/lists',array('category'=>$vo8['id']))}">{$vo8.cat_name}</a></li>
+ </volist>
+            
+
+                    </ul>
+
+                </div>
+
+            </li>
+
+            <li>
+
+                <div class="content">
+
+                    <h2><a href="{:U('Goodsha/lists',array('category'=>118))}" >新材料产业<img src="{:C('STATIC_URL')}/Home/image/images/all-share%20(9).png" alt class="icon"></a></h2>
+
+                    <ul class="clearfix">
+<volist name="goodlist9" id="vo9" > 
+                        <li><a href="{:U('Goodsha/lists',array('category'=>$vo9['id']))}">{$vo9.cat_name}</a></li>
+
+ </volist>
+                    </ul>
+
+                </div>
+
+            </li>
+
+            <li>
+
+                <div class="content">
+
+                    <h2> <a href="{:U('Goodsha/lists',array('category'=>122))}" > 计算机电子设备<img src="{:C('STATIC_URL')}/Home/image/images/all-share%20(10).png" alt class="icon"></a></h2>
+
+                    <ul class="clearfix">
+                 <volist name="goodlist10" id="vo10" > 
+				  
+                        <li><a href="{:U('Goodsha/lists',array('category'=>$vo10['id']))}">{$vo10.cat_name}</a></li>
+
+                     
+                 </volist>
+                    </ul>
+
+                </div>
+
+            </li>
+
+            <li>
+
+                <div class="content">
+
+                    <h2><a href="{:U('Goodsha/lists',array('category'=>122))}" >自动化生产线<img src="{:C('STATIC_URL')}/Home/image/images/all-share%20(11).png" alt class="icon"></a></h2>
+
+                    <ul class="clearfix">
+                         <volist name="goodlist11" id="vo11" > 
+                        
+                        <li><a href="{:U('Goodsha/lists',array('category'=>$vo11['id']))}">{$vo11.cat_name}</a></li>
+
+                         </volist>   
+
+                    </ul>
+
+                </div>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+  <!-- /主体 -->
+
+<div style="margin-top:-180px;">
+
+    <!-- 底部 -->
+
+    <include file="Public:footer" />
+
+    <!-- /底部 -->
+
+</div>	
+
+</body>
+
+</html>

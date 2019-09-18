@@ -1,0 +1,156 @@
+[2016-11-25 09:17:37.724] [110160] [orange] [MYSQL]
+SHOW VARIABLES LIKE 'lower_case_%'
+
+[2016-11-25 09:17:37.729] [110160] [orange] [MYSQL]
+SHOW VARIABLES LIKE 'profiling'
+
+[2016-11-25 09:17:37.736] [110160] [orange] [MYSQL]
+SHOW DATABASES
+
+[2016-11-25 09:17:38.705] [110161] [orange] [MYSQL]
+SELECT @@character_set_database, @@collation_database
+
+[2016-11-25 09:17:38.726] [110161] [orange] [MYSQL]
+SHOW FULL TABLES WHERE Table_type != 'VIEW'
+
+[2016-11-25 09:17:44.043] [110161] [orange] [MYSQL]
+SHOW CREATE TABLE `tp_shop_category`
+
+[2016-11-25 09:17:44.075] [110162] [orange] [MYSQL]
+SELECT * FROM `tp_shop_category` LIMIT 0, 1000
+
+[2016-11-25 09:17:44.082] [110162] [orange] [MYSQL]
+SHOW COLUMNS FROM `orange`.`tp_shop_category`
+
+[2016-11-25 09:36:02.415] [110162] [orange] [MYSQL]
+SELECT * FROM `tp_shop_category` LIMIT 0, 1000
+
+[2016-11-25 09:36:02.421] [110162] [orange] [MYSQL]
+SHOW COLUMNS FROM `orange`.`tp_shop_category`
+
+[2016-11-25 14:54:12.888] [110161] [orange] [MYSQL]
+SHOW CREATE TABLE `tp_mall_goods`
+
+[2016-11-25 14:54:12.888] [110161] [orange] [MYSQL]
+2006 - MySQL server has gone away
+
+[2016-11-25 14:54:12.912] [112463] [orange] [MYSQL]
+SHOW CREATE TABLE `tp_mall_goods`
+
+[2016-11-25 14:54:13.131] [112462] [orange] [MYSQL]
+SELECT * FROM `tp_mall_goods` LIMIT 0, 1000
+
+[2016-11-25 14:54:13.164] [112462] [orange] [MYSQL]
+SHOW COLUMNS FROM `orange`.`tp_mall_goods`
+
+[2016-11-25 17:09:42.178] [112463] [orange] [MYSQL]
+SHOW CREATE TABLE `tp_shop_nav_css`
+
+[2016-11-25 17:09:42.268] [113936] [orange] [MYSQL]
+SELECT * FROM `tp_shop_nav_css` LIMIT 0, 1000
+
+[2016-11-25 17:09:42.274] [113936] [orange] [MYSQL]
+SHOW COLUMNS FROM `orange`.`tp_shop_nav_css`
+
+[2016-11-25 17:09:57.093] [113936] [orange] [MYSQL]
+SELECT * FROM `tp_shop_nav_css` LIMIT 0, 1000
+
+[2016-11-25 17:09:57.099] [113936] [orange] [MYSQL]
+SHOW COLUMNS FROM `orange`.`tp_shop_nav_css`
+
+[2016-11-25 17:09:57.797] [113936] [orange] [MYSQL]
+SELECT * FROM `tp_shop_nav_css` LIMIT 0, 1000
+
+[2016-11-25 17:09:57.803] [113936] [orange] [MYSQL]
+SHOW COLUMNS FROM `orange`.`tp_shop_nav_css`
+
+[2016-11-25 17:09:58.228] [113936] [orange] [MYSQL]
+SELECT * FROM `tp_shop_nav_css` LIMIT 0, 1000
+
+[2016-11-25 17:09:58.233] [113936] [orange] [MYSQL]
+SHOW COLUMNS FROM `orange`.`tp_shop_nav_css`
+
+[2016-11-25 17:09:58.474] [113936] [orange] [MYSQL]
+SELECT * FROM `tp_shop_nav_css` LIMIT 0, 1000
+
+[2016-11-25 17:09:58.479] [113936] [orange] [MYSQL]
+SHOW COLUMNS FROM `orange`.`tp_shop_nav_css`
+
+[2016-11-25 17:09:58.682] [113936] [orange] [MYSQL]
+SELECT * FROM `tp_shop_nav_css` LIMIT 0, 1000
+
+[2016-11-25 17:09:58.688] [113936] [orange] [MYSQL]
+SHOW COLUMNS FROM `orange`.`tp_shop_nav_css`
+
+[2016-11-25 17:09:58.908] [113936] [orange] [MYSQL]
+SELECT * FROM `tp_shop_nav_css` LIMIT 0, 1000
+
+[2016-11-25 17:09:58.914] [113936] [orange] [MYSQL]
+SHOW COLUMNS FROM `orange`.`tp_shop_nav_css`
+
+[2016-11-25 17:09:59.129] [113936] [orange] [MYSQL]
+SELECT * FROM `tp_shop_nav_css` LIMIT 0, 1000
+
+[2016-11-25 17:09:59.134] [113936] [orange] [MYSQL]
+SHOW COLUMNS FROM `orange`.`tp_shop_nav_css`
+
+[2016-11-25 17:09:59.298] [113936] [orange] [MYSQL]
+SELECT * FROM `tp_shop_nav_css` LIMIT 0, 1000
+
+[2016-11-25 17:09:59.303] [113936] [orange] [MYSQL]
+SHOW COLUMNS FROM `orange`.`tp_shop_nav_css`
+
+[2016-11-25 17:09:59.498] [113936] [orange] [MYSQL]
+SELECT * FROM `tp_shop_nav_css` LIMIT 0, 1000
+
+[2016-11-25 17:09:59.505] [113936] [orange] [MYSQL]
+SHOW COLUMNS FROM `orange`.`tp_shop_nav_css`
+
+[2016-11-25 17:10:00.083] [113936] [orange] [MYSQL]
+SELECT * FROM `tp_shop_nav_css` LIMIT 0, 1000
+
+[2016-11-25 17:10:00.088] [113936] [orange] [MYSQL]
+SHOW COLUMNS FROM `orange`.`tp_shop_nav_css`
+
+[2016-11-25 17:10:00.283] [113936] [orange] [MYSQL]
+SELECT * FROM `tp_shop_nav_css` LIMIT 0, 1000
+
+[2016-11-25 17:10:00.288] [113936] [orange] [MYSQL]
+SHOW COLUMNS FROM `orange`.`tp_shop_nav_css`
+
+[2016-11-25 17:24:29.102] [113936] [orange] [MYSQL]
+SELECT * FROM `tp_shop_nav_css` LIMIT 0, 1000
+
+[2016-11-25 17:24:29.106] [113936] [orange] [MYSQL]
+SHOW COLUMNS FROM `orange`.`tp_shop_nav_css`
+
+[2016-11-25 17:39:31.035] [113936] [orange] [MYSQL]
+SELECT * FROM `tp_shop_nav_css` LIMIT 0, 1000
+
+[2016-11-25 17:39:31.041] [113936] [orange] [MYSQL]
+SHOW COLUMNS FROM `orange`.`tp_shop_nav_css`
+
+[2016-11-25 17:43:42.909] [113936] [orange] [MYSQL]
+SELECT * FROM `tp_shop_nav_css` LIMIT 0, 1000
+
+[2016-11-25 17:43:42.915] [113936] [orange] [MYSQL]
+SHOW COLUMNS FROM `orange`.`tp_shop_nav_css`
+
+[2016-11-25 17:50:43.905] [113936] [orange] [MYSQL]
+SELECT * FROM `tp_shop_nav_css` LIMIT 0, 1000
+
+[2016-11-25 17:50:43.911] [113936] [orange] [MYSQL]
+SHOW COLUMNS FROM `orange`.`tp_shop_nav_css`
+
+[2016-11-25 17:50:54.449] [113936] [orange] [MYSQL]
+SELECT * FROM `tp_shop_nav_css` LIMIT 0, 1000
+
+[2016-11-25 17:50:54.455] [113936] [orange] [MYSQL]
+SHOW COLUMNS FROM `orange`.`tp_shop_nav_css`
+
+[2016-11-25 18:05:34.483] [113936] [orange] [MYSQL]
+SELECT * FROM `tp_shop_nav_css` LIMIT 0, 1000
+
+[2016-11-25 18:05:34.488] [113936] [orange] [MYSQL]
+SHOW COLUMNS FROM `orange`.`tp_shop_nav_css`
+

@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2,user-scalable=yes" />
+<title>长沙高新区虹桥小学</title>
+<meta name="keywords" content="" />
+<meta name="description" content=""/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/phone/css/jquery.mobile-1.2.0.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/phone/css/master.css" />
+<link rel="stylesheet" href="__PUBLIC__/phone/css/xwzhongxin/news.css" />
+<script type="text/javascript" src="__PUBLIC__/phone/js/jquery-1.6.4.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/phone/js/jquery.mobile-1.2.0.js"></script>
+<script type="text/javascript" src="__PUBLIC__/phone/js/banner.js"></script>
+<script type="text/javascript" src="__PUBLIC__/phone/js/my_js.js"></script>
+
+    <!-- <link rel="stylesheet" href="__PUBLIC__/phone/css/Common/index.css" /> -->
+    <!-- <link rel="stylesheet" href="__PUBLIC__/phone/css/Common/rest.css" /> -->
+    <!-- <link rel="stylesheet" href="__PUBLIC__/phone/css/index/same.css" /> -->
+    <script type="text/javascript" src="__PUBLIC__/phone/js/myscript.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/phone/js/focus.js"></script>
+<script type="text/javascript" src="__PUBLIC__/phone/js/jquery.SuperSlide.js"></script>
+
+</head>
+<body>
+<div data-role="page" data-theme="a">
+<!--~~~ header start~~~ -->
+        <include file="Public:header" />
+<!--~~~~~header end~~~~~~~~~~~~~ -->
+
+<!-- ~~~主体内容开始 ~~~-->
+<div data-role="content" >
+  <!-- *****************学校公告开始************ -->
+          <div class="gonggao">
+                        <div class="title ui-bar-f ui-grid-a"><span class="ui-block-a">学校公告</span><span class="ui-block-b more_i"><a  data-role="button" data-inline="true"></a></span></div>
+                                  <ul>
+                                    <volist name="data['39']" id="v">
+                                            <li class="cultureNews-box">
+                                                    <a href="{:U('xxgonggao_content',array('id'=>$v['id'],'column_id'=>$v['column_id']))}">
+                                                      <div class="xxgg_img">
+                                                                <img src="__ROOT__{$v['thumb']|substr=1}" alt=""  /> 
+                                                      </div>  
+                                                    
+                                                    <div class="cultureNews-information current-image">
+                                                              <div class ="center">
+                                                                        <span>
+                                                                                {$v['title']}
+                                                                        </span>
+                                                                        <i>{$v['updatetime']|date="Y-m-d",###}</i>
+                                                                </div>
+                                                    </div>
+                                                    </a>
+                                            </li>
+                                    </volist>
+                                  </ul>
+          </div>
+          <!-- ************************学校公告结束******************************************* -->
+
+
+       <!--******************************** 校园动态开始************ -->
+          <div class="gonggao">
+                        <div class="title ui-bar-f ui-grid-a"><span class="ui-block-a">校园动态</span><span class="ui-block-b more_i"><a  data-role="button" data-inline="true"></a></span></div>
+                                   <ul>
+                                    <volist name="data['41']" id="v">
+                                            <li class="cultureNews-box">
+                                                    <a href="{:U('xydongtai_content',array('id'=>$v['id'],'column_id'=>$v['column_id']))}">
+                                                            <div class="xxgg_img">
+                                                                      <img src="__ROOT__{$v['thumb']|substr=1}" alt=""  /> 
+                                                            </div>  
+                                                          
+                                                            <div class="cultureNews-information current-image">
+                                                                    <div class ="center">
+                                                                              <span>
+                                                                                      {$v['title']}
+                                                                              </span>
+                                                                              <i>{$v['updatetime']|date="Y-m-d",###}</i>
+                                                                      </div>
+                                                            </div>
+                                                    </a>
+                                            </li>
+                                    </volist>
+                                  </ul>
+          </div>
+          <!-- ******************************校园动态结束******************************************* -->
+
+
+      <!-- ********每周菜谱***************** -->
+<div class="meizhoucaipu" >
+          <div class="title ui-bar-f ui-grid-a"><span class="ui-block-a">每周菜谱</span><span class="ui-block-b more_i"><a  data-role="button" data-inline="true"></a></span></div>
+          <div class="big-pic-in"  >
+                    <div class="pic-list"  >
+                              <a >
+                                      <p ><img  src="__PUBLIC__/phone/images/caipu.png" width="100%"></p>
+                             </a>
+                    </div>
+          </div>
+</div>
+      <!-- ********每周菜谱结束****************************** -->
+</div>          
+<!--主体内容结束                     -->
+  <!-- 尾部开始 -->
+<include file="Public:footer" />
+<!-- 尾部结束 -->
+</div>
+</body>
+  <script>
+  $(function(){
+    setcss();
+        function setcss(){
+                  img_length = ('.xxgg_img').length;
+                  for(var i=0; i<img_length;i++){
+                             var xxgg_img_height = $(".xxgg_img").eq(i).height()
+                             var img_height = $(".xxgg_img img").eq(i).height();
+                             if(img_height < xxgg_img_height){
+                                  var height = (xxgg_img_height - img_height)/2;
+                                  $(".xxgg_img").eq(i).css({'margin-top':height});       
+                                }else{
+                                      $(".xxgg_img").eq(i).css({'height':'100%','margin':0});
+                                }
+                    }    
+        }
+
+        $(window).resize(function(){
+            setcss();
+        })
+  })
+
+  </script>
+</html>

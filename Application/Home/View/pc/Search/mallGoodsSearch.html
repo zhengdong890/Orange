@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="keywords" content="橙橙，chengcheng,SHA,orange,orangsha,分享，橙橙分享,无人机，数控机床，机床，打印机，3D，3D打印机,深圳市橙橙网络科技有限公司">
+<meta name="description" content="橙橙分享专注服务于国内智能装备过剩产能在供需之间的对接共享合作,我们同时也是国内智能装备的专业电商交易平台,是撮合需求方、供给方、融资租赁公司三方的融资租赁B2B交易平台。">
+<meta name="copyright" content="深圳市橙橙网络科技有限公司(www.orangesha.com)版权所有">
+<meta name="author" content="橙橙分享"> 
+<title>{$seo['title']}</title>
+
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/home.css" type="text/css">
+<link rel="stylesheet" href="/Public/Orange/script/jquery.kinMaxShow/base.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.css">
+<link rel="shortcut icon" href="/Public/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.js"></script>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/tool.js"></script>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/list.js"></script>   
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Orange/css/home.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/list.css" type="text/css">    
+    <style>
+    #listdiv {height:50px;}
+    .menu{display:none;}
+    p.text{padding:0 0;}
+    </style>    
+</head>
+<body >
+<include file="Public:header_top" />
+<include file="Public:header_search" />
+<!-- body -->
+
+<div class="list">
+    <div class="list-header">
+        <span>
+        <a href="{:U('Index/index')}">首页</a>
+        <a> > 商城商品搜索结果</a>
+        <span class="header-right">共 {$count}件相关商品</span></span>
+    </div>
+    <!--<div class="recommended fl">
+        <div class="info-right">
+            <div class="title">近期热卖商品</div>
+            <volist name='hot_goods' id='v'>
+            <div class="li">
+                <a href="http://{$v['domain']}.orangesha.com/shangpin-{$v['id']}.html"><img src="__ROOT__{$v['goods_thumb']|substr=1}" alt=""></a>
+                <div class="text"> <a href="http://{$v['domain']}.orangesha.com/shangpin-{$v['id']}.html">{$v['goods_name']}</a></div>
+                <div class="price">￥{$v['goods_price']/10000}万元
+                <div class="sales">销量：{$v['sale_num']}</div>
+                </div>
+            </div>
+            </volist>
+        </div>
+    </div>-->
+    <div class="right-list fl">
+        <div class="list-title">
+ 
+            <div class="list-price clearfix">
+                <p class="text fl">价钱:</p>
+                <ul class="clearfix fl">
+                    <volist name='price' id='v'>
+                    <a data-price="{$v[0]}" href='javascript:;' class='price_a'><li>{$v[1]}</li></a>
+                    </volist>
+                    <li class="into">
+                        <input type="text" name="low_price"> - <input type="text" name="height_price"> <span class='price_btn'>确定</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- 商品列表 -->
+        <ul class="good-list clearfix">
+            <volist name="goods" id="v">      
+            <li>
+                <div class="good-box">
+                    <a href="http://{$v['domain']}.orangesha.com/shangpin-{$v['id']}.html">
+                    <img class="good-icon" src="__ROOT__{$v['goods_thumb']}" alt="商品">
+                    </a>
+                    <div class="contain">
+                        <div class="row-price">￥<span class="price"><if condition="$v['goods_price'] gt 10000">{$v['goods_price']/10000}万元<else />{$v['goods_price']}元</if></span>
+                        <span class="closing">月成交 {$v['sale_num']} 笔</span></div>
+                        <div class="title"><a href="http://{$v['domain']}.orangesha.com/shangpin-{$v['id']}.html">{$v['goods_name']}</a></div>
+                        <div class="shop-name"><a href="http://{$v['domain']}.orangesha.com">{$v['shop_name']}</a><span class="rated">评价 <span>{$v['comment_number']}</span></span></div>
+                        <div class="shop-icon">
+                            <if condition="$v['is_renzheng'] eq '1'">
+                                <img src="{:C('STATIC_URL')}/Home/images/renzheng.png" alt="">
+                            </if>
+                            <if condition="$v['safest'] neq ''">
+                                <img src="{:C('STATIC_URL')}/Home/image/safest.png" alt="">
+                            </if>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            </volist>
+        </ul>
+        <!-- 商品列表结束 -->
+        <div class="section-bt">
+           {$html}
+        </div>
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- /底部 -->
+</body>
+<script>
+var paramer_arr = {$paramers};
+    paramer_arr['p'] = 1;
+/*价格地址*/
+var price = (function(){  
+    $(".price_a").click(function(){
+    	var price = $(this).attr('data-price');
+    	paramer_arr['price'] = price;
+    	window.location.href = getUrl(paramer_arr);
+    });
+
+	$(".price_btn").click(function(){
+	    var price_1 = $(this).prev('input').prev('input').val(),
+	        price_1 = parseInt(price_1) > 0 ? parseInt(price_1) : 0,
+	        price_2 = $(this).prev('input').val(),
+	        price_2 = parseInt(price_2) > 0 ? parseInt(price_2) : 'max',
+	        price   = price_1 + '-' + price_2;   
+	    paramer_arr['price'] = price;   
+	    window.location.href = getUrl(paramer_arr);
+	});    
+})();
+
+function getUrl(paramer_arr){
+    var paramer = '';
+    for(var k in paramer_arr){
+
+        paramer+='&'+ k + '=' + paramer_arr[k];
+    }
+    paramer = paramer.substring(1);
+    return "{:U('mallGoodsSearch')}" + '&' + paramer;
+}
+
+function GetRequest() {   
+   var url = location.search; //获取url中"?"符后的字串   
+   var theRequest = new Object();   
+   if (url.indexOf("?") != -1) {   
+      var str = url.substr(1);   
+      strs = str.split("&");   
+      for(var i = 0; i < strs.length; i ++) {   
+         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);   
+      }   
+   }   
+   return theRequest;   
+} 
+
+$(".go").click(function(){
+	var val = $(".go_number").val();
+	paramer_arr['p'] = parseInt(val) > 0 ? parseInt(val) : 1;
+	window.location.href = getUrl( paramer_arr);
+})
+</script>
+</html>

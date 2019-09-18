@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>店铺模版</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/shopIndex.css" type="text/css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/list.css" type="text/css">
+<link href="__PUBLIC__/Home/css/shop.css" rel="stylesheet">
+<link href="__PUBLIC__/Home/css/footer.css" rel="stylesheet">
+<link rel="stylesheet" href="__PUBLIC__/css/style.css" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/Home/static/jquery-2.0.3.min.js"></script>
+<script src="__PUBLIC__/Home/js/header.js"></script>
+<script src="/Public/layer/layer.js"></script>
+<script src="/Public/js/navshop.js"></script> 
+<style>
+.header_div{ float: left; border-left: 1px solid #E2E2E2; margin-top: 20px; padding-left: 10px; max-width: 125px;}
+.header_div:first-of-type{max-width: 180px; margin-right:17px; margin-left: 164px; }
+.header_div:nth-of-type(2){min-width: 132px;}
+.header_div>p{ color: #000; font-weight: bold; line-height: 6px; margin-bottom: 7px;}
+.header_div>div{padding: 0px 4px; width: 58px; background-color: #FF812D; color: #fff; border-radius: 4px;text-align:center}
+.header_div>ul{ overflow: hidden;line-height: 15px; margin-bottom: 2px;}
+.header_div>ul li{ float: left; text-align: center; width: 28px; color: #999;}
+</style>
+</head>
+<body>
+<include file="Public:header_top" />
+<include file="Public:shop_headSearch" />
+<div class="shop">
+    <div class="header">
+        <div class="header-inner">
+      <img src="/Public/img/image1/orange.png" class="shop-logo">    
+            <div class="shop-title">
+                <h1>e橙优品智能装备分享</h1>
+                国内最大的智能装备分享平台
+            </div>
+			<!--
+            <ul class="youhui">
+            	<li><img src="/Public/Home/image/优惠卷01.png"></li>
+            	<li><img src="/Public/Home/image/优惠卷02.png"></li>
+            	<li><img src="/Public/Home/image/优惠卷03.png"></li>
+            </ul>
+			-->
+			<a href="#" title="{$seller_id}" onclick="collectshop(this)" class="myshop" style="background: url('/Public/Home/image/收藏本店.png') no-repeat 6px 2px;">收藏本店</a>
+            <a href="#" title="{$seller_id}" onclick="relation(this)" class="seller" style="background: url('/Public/Home/image/联系卖家.png') no-repeat 6px 2px;">联系卖家</a>
+        </div>
+        
+    </div>
+<include file="Public:shopnav" />
+	
+    <div class="banner">
+        <img id="banner" src="__ROOT__{$banner|substr=1}" alt="">
+    </div>
+    <div class="shop-list clearfix">" 
+       
+        <ul style="overflow: auto;">
+            <volist name='allgoods' id='v'>
+            <li>
+                <a href="{:U('Mall_goods/goods',array('goods_id'=>$v['id']))}"><img src="__ROOT__{$v['goods_thumb']|substr=1}" alt=""></a>
+                <a href="{:U('Mall_goods/goods',array('goods_id'=>$v['id']))}"><p>{$v['goods_name']}</p></a>
+                <div class="money">
+                    <span class="price">￥{$v['goods_price']} 万元</span>
+                    <span class="sales">销量{$v['sale_num']}</span>
+                </div>
+            </li>
+            </volist>
+			
+        </ul>
+		<!-- 商品列表结束 -->
+        <div class="section-bt">
+            {$page}
+        </div>
+    </div>
+   
+</div>
+
+<!-- 底部 -->
+<include file="Public:footer" />
+
+<script>
+
+
+function collectshop(obj){
+  var title = $(obj).attr('title');
+
+  if( title ){
+		$.post("{:U('Shop/shopcllect')}",{'title':title},function(data){
+				if( data.msg=='ok'){
+				  alert('收藏该店铺成功！');
+				}else if(data.msg=='onemore'){
+				  alert('您已经收藏过该店铺了！');
+				}else if(data.msg=='nologin'){
+				  alert('你还没登录哦！');
+				}else{  
+				  alert('收藏该店铺失败！');
+				}
+		});  
+  }else{
+        alert('店铺不存在！');
+  }
+
+}
+
+function relation(obj){
+  var title = $(obj).attr('title');
+  if( title ){
+    layer.open({
+      type: 2,
+      title: '联系卖家',
+      shadeClose: true,
+      shade: false,
+      maxmin: true, //开启最大化最小化按钮
+      area: ['400px', '400px'],
+	  content: "<?php echo U('Shop/getseller');?>?title="+title
+    });
+		
+  }else{
+       alert('店铺不存在!');                
+  }
+}
+var paramer = "{$paramers}";
+    var paramer_arr = [];
+	paramer_arr.push(paramer);
+    var str = 'p=1';
+	paramer_arr.push(str);
+
+$(".go").click(function(){
+
+	var val = $(".go_number").val();
+	
+	
+	paramer_arr['p'] = parseInt(val) > 0 ? parseInt(val) : 1;
+	houzstr =  paramer_arr.join('&');		
+	window.location.href = "{:U('allgoods')}"+'?'+houzstr;
+	
+})
+var shop_css = "{$shop_css}";		
+$('.navwrap').css('background','#'+shop_css);
+$('.pros').css('background','#'+shop_css);
+
+	        var shop_status = "{$shop_data.status}";
+			var shop_name = "{$shop_data.shop_name}";
+			var shop_desc = "{$shop_data.desc}";
+			var shop_thumb = "{$shop_data.thumb|substr=1}";
+		  
+			if( shop_status==2 ){
+			 
+			   $('.header-inner').find('img').attr('src',shop_thumb);
+			   $(' .shop-title').html('<h1>'+shop_name+'</h1>'+shop_desc+'');
+               $('.conpanyname').find('p').html(shop_name); 			   
+			}
+</script>
+
+<!-- /底部 -->
+</body>
+</html>

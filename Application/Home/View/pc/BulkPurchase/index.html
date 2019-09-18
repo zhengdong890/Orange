@@ -1,0 +1,466 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="keywords" content="{$seo['keywords']}">
+<meta name="description" content="{$seo['description']}"">
+<meta name="copyright" content="深圳市橙橙网络科技有限公司(www.orangesha.com)版权所有">
+<meta name="author" content="橙橙分享"> 
+<title>{$seo['title']}</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/Orange/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<link href="{:C('STATIC_URL')}/Home/css/caigou.css" rel="stylesheet" >
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/Orange/css/home.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery.omniwindow.js"></script>
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<script src="{:C('STATIC_URL')}/layer/layer.js"></script>
+
+
+<!-- www.orangesha.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?54f6f54d47704101dc27b337de5fd6c3";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+ <body >
+ <!-- 头部 -->
+<include file="Public:header_top" />
+<div class="n-bCol3 bg">
+    <div class="header mar1200c posRel">
+        <div class="header-right fRi">            
+            <ul style="list-style:none;margin:6px 0px 0px 30px; width: 310px; height: 60px; background: url({:C('STATIC_URL')}/images/images/header-right_03.jpg) no-repeat;" >       
+                <a href="javascript:void(0);" onclick="Openwindow()"><li style="margin-left: -12px; float:left; height: 60px; line-height: 100px;">申请批采</li></a>
+                <a><li style="float:left;margin-left:65px; height: 60px; line-height: 100px;">提交审核</li></a> 
+                <a><li style="float:left;margin-left:65px; height: 60px; line-height: 100px;">免费发布</li></a>         
+            </ul>           
+        </div>     
+        <a class="logo" href="{:U('Index/index')}" title="e橙优品 - 工业品超市/MRO采购服务平台"></a>
+        <div class="clear"></div>
+    </div>
+</div>	
+<!-- /头部 -->
+<div class="body">
+    <div class="nav">
+        <ul>
+            <li class="current"><a href="http://www.orangesha.com/plcg.html">首页</a></li>
+            <li><a href="{:U('BulkPurchase/projectRules')}">批量采购规则</a></li>
+            <li><a href="{:U('BulkPurchase/tenancy')}">名企专区</a></li>
+        </ul>
+    </div>         
+    <div class="classifiy_div">
+    	<p>相关分类 <span>（共{$total_num}条条采购）</span></p>
+    	<ul>
+        <foreach name="categorys" item="vo">
+    		<li>
+            
+            <a href="http://www.orangesha.com/plcg.html?cat_id={$vo.id}">{$vo.cat_name}<span>（{$vo.num}）</span>
+            </a>
+            
+            </li>
+            </foreach>
+    	</ul>
+    </div>
+    <div class="screen">
+    	<span>发布时间 
+        <select onchange="window.location=this.value">
+	        <option>{$name|default="全部采购"}</option>
+            <option value="http://www.orangesha.com/plcg.html">全部采购</option>
+	        <option value="http://www.orangesha.com/plcg.html?time=3">三天内新采购</option>
+	        <option value="http://www.orangesha.com/plcg.html?time=7">一周内新采购</option>
+	        <option value="http://www.orangesha.com/plcg.html?time=30">一个月内新采购</option>
+	        <option value="http://www.orangesha.com/plcg.html?time=31">一个月以上新采购</option>
+        </select>
+        </span>
+    	<span>是否有报价 
+        <select onchange="window.location=this.value">
+        <option>查看所有</option>
+        <option>有报价</option>
+        <option>无报价</option>
+
+        </select>
+        </span>
+    	<span>采购地点 <select><option>查看所有</option></select></span>
+    </div>
+    <div class="list max-width">
+        <div class="left">
+            <div class="title">
+            	<span style="width: 316px;">采购信息</span>
+            	<span style="width: 136px;">所属类目</span>
+            	<span style="width: 136px;">采购数量</span>
+            	<span style="width: 136px;">采购地点</span>
+            	<span style="width: 170px;">到期时间</span>
+            </div> 
+            <ul id="test2">
+                <volist name="list" id="vo">
+                <li>                	
+                    <a>
+                    	<table>
+	                    	<tr>
+	                    		<td>
+	                    			<div class="datail" data-id="{$vo.id}">
+	                    				<p>{$vo.modelnum} {$vo.title}</p>
+		                    			<p>项目概况：{$vo.des}</p>                                   
+	                    			</div>
+	                    		</td>
+	                    		<td>
+	                    			<div>
+	                    				{$vo.cat_name}
+	                    			</div>
+	                    		</td>
+	                    		<td>
+	                    			<div>
+	                    				{$vo.num}{$vo.unit}
+	                    			</div>	
+	                    		</td>
+	                    		<td>
+	                    			<div>
+	                    				{$vo.area}
+	                    			</div>	
+	                    		</td>
+	                    		<td>
+	                    			<div>
+	                    				剩下 <span id="d_d">{$vo.day}天</span></span>{$vo.time}小时<span id="d_h"> </span>{$vo.minute}分<span id="d_h">
+	                    			</div>	
+	                    		</td>
+	                    		<td>
+	                    			<div>
+	                    				<a target="_blank" href="http://www.orangesha.com/index.php?m=Home&c=BulkPurchase&a=writeOffer&id={$vo.id}">立即报价</a>
+	                    			</div>
+	                    		</td>
+	                    	</tr>
+	                    </table>  
+                    </a>                  
+                </li>
+                </volist>
+                <div class="clear" style="clear:both;"></div>
+            </ul>
+            <div class="section-bt">{$html}</div>
+        </div>          
+    </div>
+    <div class="max-width h-title">
+        <!-- <div class="h-title-top"><span class="icon"></span><i></i>Process</div> -->
+        <div class="h-title-bottom">合作流程</div>
+    </div>
+        <div class="max-width hzlc">
+            <ul>
+                <li>
+                    <div class="hzlc-icon">1</div>
+                    <div class="hzlc-text">
+                        <div class="hzlc-right-title">制定项目</div>
+                        <div class="hzlc-right-english">DEVELOP PROJECT</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="hzlc-icon">2</div>
+                    <div class="hzlc-text">
+                        <div class="hzlc-right-title">提交项目</div>
+                        <div class="hzlc-right-english">SELECTION MODEL</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="hzlc-icon">3</div>
+                    <div class="hzlc-text">
+                        <div class="hzlc-right-title">批采招标</div>
+                        <div class="hzlc-right-english">SUBMIT PROJECT</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="hzlc-icon">4</div>
+                    <div class="hzlc-text">
+                        <div class="hzlc-right-title">签约支付</div>
+                        <div class="hzlc-right-english">PAY AFTER SIGNING</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="ow-overlay ow-closed"></div> 
+                                <div class="modal ow-closed">
+                                	<div>项目详情 <span class="csc">X</span></div>
+                                	<form id="formGroupbuy2">																	    
+										<div class="title">采购信息</div>
+											<table>
+												<tr>
+													<td>项目命名：</td>
+													<td><span class="project_name"></span></td>
+												</tr>
+												<tr>
+													<td>所属分类：</td>
+													<td><span class="cat_name"></span></td>
+												</tr>
+												<tr>
+													<td>需求数量：</td>
+													<td><span class="num"></span><span class="unit"></span></td>
+												</tr>
+												<tr>
+													<td>采购地点：</td>
+													<td><span class="project_address"></span></td>
+												</tr>
+												<tr>
+													<td>发布日期：</td>
+													<td><span class="create_time"></span></td>
+												</tr>
+											</table>
+											<!--立即报价-->
+											<div class="now_pay">
+												<a target="_blank" href="http://www.orangesha.com/index.php?m=Home&c=BulkPurchase&a=writeOffer">立即报价</a>
+												<p>还剩下 <span id="t_d"></span>天<span id="t_h"></span>时<span id="t_m"></span>分 到期</p>
+												<p>您还可以：<a class="catID" href="">查看该分类采购信息</a>，让e橙优品帮助您销售！</p>
+											</div>
+										<div class="title">采购详情</div>
+											<table>
+												<tr>
+													<td>价格要求：</td>
+													<td><span class="price_range"></span></td>
+												</tr>
+												<tr>
+													<td>详细信息：</td> 
+													<td><p class="des" style="width: 570px ;"></p></td>
+												</tr>
+												<tr>
+													<td>采购附件：</td> 
+													<td><img class="thumb"> <img class="thumb1"> <img class="thumb2"></td>
+												</tr>
+											</table>	
+										<div class="title">联系方式</div>
+											<table>
+												<tr>
+													<td>联系人：</td>
+													<td><span class="contact"></span></td>
+												</tr>
+												<tr>
+													<td>联系方式：</td> 
+													<td><span class="phone_number"></span></td>
+												</tr>
+											</table>
+									</form>
+                                </div>
+        <div class="Company max-width">
+            <div class="max-width h-title">
+                    <!-- <div class="h-title-top"><span class="icon"></span><i></i>Company</div> -->
+                    <div class="h-title-bottom">名企专区<a href="{:U('BulkPurchase/tenancy')}" class="more">了解更多 +</a></div>
+
+            </div>
+            <ul class="lease">
+			<volist name="img" id="vo">
+                 <li class="lease-1"><a href="{$vo.url}" target="_blank"><img src="{$vo.tj_thumb}" ></a></li>
+            </volist> 
+            </ul>
+            <div class="winning">
+                <div class="winning-title">中标项目</div>
+               <div class="text-slider">
+                   <ul class="text-slider-wrap">
+				     <volist name="select" id="v">
+                       <li>
+                           <div class="winning-list-title"><span style="display: inline-block; width: 75%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{$v.title}</span> <span style="float: right; margin-right: 12px;display: inline-block; width: 18%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;text-align: right;">{$v.area}</span></div>
+                           <div class="winning-list-unit">项目概况：{$v.desc}</div>
+                           <div class="winning-list-date">{$v.update_time|substr=0,10}</div>
+                       </li>
+                     </volist> 
+					  
+                    </ul>
+               </div>
+            </div>
+           <!--  <ul class="icon">
+                <li class="icon-1"></li>
+                <li class="icon-2"></li>
+                <li class="icon-3"></li>
+                <li class="icon-4"></li>
+                <li class="icon-5"></li>
+                <li class="icon-6"></li>
+                <li class="icon-7"></li>
+                <li class="icon-8"></li>
+                <li class="icon-9"></li>
+                <li class="icon-10"></li>
+                <li class="icon-11"></li>
+                <li class="icon-12"></li>
+                <li class="icon-13"></li>
+                <li class="icon-14"></li>
+                <li class="icon-15"></li>
+                <li class="icon-16"></li>
+                <li class="icon-17"></li>
+                <li class="icon-18"></li>
+                <li class="icon-19"></li>
+                <li class="icon-20"></li>
+                <li class="icon-21"></li>
+                <li class="icon-22"></li>
+                <li class="icon-23"></li>
+                <li class="icon-24"></li>
+            </ul> -->
+        </div>
+    </div>
+    <div class="clear" style="clear:both;"></div>       
+   <script type="text/javascript">
+   	  	
+    window.onload=function () {
+	
+	 
+	   $('.current').parent().attr('href',"javascript:void(0)");	
+	        /*融资租赁轮播*/
+	        function scroll(){
+	            $(".text-slider-wrap").animate({"margin-top":"-96px"},800,function(){
+	                $(".text-slider-wrap li:eq(0)").appendTo($(".text-slider-wrap"));
+	                $(".text-slider-wrap").css({"margin-top":0})
+	            })
+	        }
+	        setInterval(scroll,3000);   
+  		}
+    	function test(id){    //user函数名 一定要和action中的第三个参数一致上面有      
+	        $.get('{:U('Public/test')}', {'p':id}, function(data){  //用get方法发送信息到test方法
+	           //var info= eval('('+data+')') ;//将返回的json数据转换成js对象\
+	           var data=JSON.parse(data); 
+			 //  alert(data);
+	           //console.log(data.result[0].cpname);
+	       
+	            var s='';
+	                s+='<ul id="test">';
+	                for (var i = 0; i < data['result'].length; i++) {
+		                 s += '<li><div class="list-title"><span class="icon"></span><a href="{:U('Public/tenancy')}">'+data['result'][i].title+'</div>';
+		                 s += '<div class="content">项目需求：'+data['result'][i].des+'...</div>';
+		                 s += '<div class="date">'+data['result'][i].create_time;
+		                 s += '</div></li>';
+	                }
+	                   s += '<div class="clear" style="clear:both;"></div>';         
+	                //
+	                s+='</ul>';
+	                pg=' <div class="pages-btn" id="pg">'+data['pg']+'</div>';
+	 
+	                $('#test').html(s);
+	                $('#pg').html(pg);
+	
+	        });     
+    	}
+	 
+function Openwindow(){
+	
+	layer.open({
+	  type: 2,
+	  title: '申请采购',
+	  maxmin: true,
+	  shadeClose: true, //点击遮罩关闭层
+	  area : ['76%' , '90%'],
+	  content: '{:U('Server/request')}'
+	 });
+}  	
+
+    
+var paramer_arr = GetRequest();
+    PATH_NAME   = window.location.pathname;
+paramer_arr['p'] = 1;
+
+function getUrl(paramer_arr){
+    var paramer = '';
+    for(var k in paramer_arr){
+        paramer+='&'+ k + '=' + paramer_arr[k];
+    }
+    paramer = paramer.substring(1);
+    return PATH_NAME + '?' + paramer;
+}
+
+function GetRequest() {   
+   var url = location.search; //获取url中"?"符后的字串   
+   var theRequest = new Object();   
+   if (url.indexOf("?") != -1) {   
+      var str = url.substr(1);   
+      strs = str.split("&");   
+      for(var i = 0; i < strs.length; i ++) {   
+         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);   
+      }   
+   }   
+   return theRequest;   
+}  
+  
+$(".go").click(function(){
+	var val = $(".go_number").val();
+	paramer_arr['p'] = parseInt(val) > 0 ? parseInt(val) : 1;
+	window.location.href = getUrl( paramer_arr);
+})
+
+var list = {$list_json};
+console.log(list)
+//项目详情  	
+	function countTime(data) {  
+        //获取当前时间  
+        var date = new Date();  
+        var now = date.getTime();  
+        //设置截止时间  
+        var endDate = new Date(data);  
+        var end = endDate.getTime();  
+        //时间差  
+        var leftTime = end-now;  
+        //定义变量 d,h,m,s保存倒计时的时间  
+        var d,h,m,s;  
+        if (leftTime>=0) {  
+            d = Math.floor(leftTime/1000/60/60/24);  
+            h = Math.floor(leftTime/1000/60/60%24);  
+            m = Math.floor(leftTime/1000/60%60);  
+                               
+        }  
+        //将倒计时赋值到div中  
+        document.getElementById("t_d").innerHTML = d;  
+        document.getElementById("t_h").innerHTML = h;  
+        document.getElementById("t_m").innerHTML = m;  
+        //递归每秒调用countTime方法，显示动态时间效果  
+            /*setTimeout(countTime,1000);*/  
+  
+    }    
+	$("#test2 li .datail").click(function(){			
+		$(".ow-overlay").css("display","block");
+		$(".modal").css("display","block");
+		$('.modal').omniWindow() // create modal
+	    .trigger('show'); // and show it
+	    var id = $(this).attr("data-id")
+	    
+	    $.post("http://www.orangesha.com/index.php?m=Home&c=BulkPurchase&a=detail",{'id':id},function(res){
+			var str = res.data.deadline;
+			
+			countTime(str)
+						
+			if(res.status){   
+			    $("#formGroupbuy2 .project_name").text(res.data.title); 
+			    $("#formGroupbuy2 .cat_name").text(res.data.cat_name);
+			    $("#formGroupbuy2 .num").text(res.data.num);
+			    $("#formGroupbuy2 .unit").text(res.data.unit);	    
+			    $("#formGroupbuy2 .project_address").text(res.data.area);
+			    $("#formGroupbuy2 .create_time").text(res.data.create_time);
+			    $("#formGroupbuy2 .price_range").text(res.data.price_range);
+			    $("#formGroupbuy2 .des").text(res.data.des);	    
+			    $("#formGroupbuy2 .contact").text(res.data.contact_people);
+			    $("#formGroupbuy2 .phone_number").text(res.data.phone);
+			    $("#formGroupbuy2 .thumb").attr("src",res.data.thumb);
+			    $("#formGroupbuy2 .thumb1").attr("src",res.data.thumb1);
+			    $("#formGroupbuy2 .thumb2").attr("src",res.data.thumb2);
+			    $("#formGroupbuy2 .catID").attr("href","http://www.orangesha.com/plcg.html?cat_id="+res.data.catid);
+			}
+			if(res.status==0){
+				alert(res.msg)
+			}
+		});	  
+	})
+	
+//关闭模态框
+	$(".modal>div>span").click(function(){
+		$(".ow-overlay").css("display","none");
+		$(".modal").css("display","none");	
+		$("input[name='type']").removeAttr("checked");
+		$("input[name='type']").attr("checked",false);
+	})	
+	
+</script>
+<!-- 头部 -->
+	<include file="Public:footer" />
+	<!-- /头部 -->
+</body>
+
+</html>

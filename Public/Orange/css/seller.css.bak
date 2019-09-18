@@ -1,0 +1,240 @@
+@charset "utf-8";
+/* CSS Document */
+
+.header {
+    padding:25px 0 25px
+}
+.bodyer {
+    font-size:12px;
+    color: #666666;
+}
+.bor-top-1c {
+    border-top:1px solid #666666;
+}
+.category-s {
+    margin:20px 100px;
+}
+.caregory-seach li {
+    clear: both;
+    margin-bottom:25px;
+}
+.caregory-seach li .label-s {
+    display:inline-block;
+    zoom:1;
+    *display:inline;
+    width:133px;
+    text-align: right;
+    color:#333;
+    height:30px;
+    line-height:32px;
+}
+.select-wrap {
+    width:420px;
+    height:24px;
+    line-height:24px;
+    padding:0 40px 0 10px;
+    border:1px solid #52afaf;
+}
+.sel-butt {
+    position:absolute;
+    right:0;
+    top:0;
+    display:block;
+    width:11px;
+    height:8px;
+    padding:9px 9px 7px 9px;
+
+
+}
+.select-wrap.on {
+    border-color:#ff6600;
+}
+.select-wrap.on .sel-butt {
+    background-color:#ff6600;
+}
+.sel-butt i {
+    background:url("../img/in-icon.png") no-repeat;
+    display:block;
+    width:11px;
+    height:8px;
+}
+.sel-butt .b-1 {
+    background-position: -35px -11px;
+}
+.on .sel-butt .b-1 {
+    background-position: -47px -11px;
+}
+
+.box-bder {
+    border:1px solid #d2d2d2;
+}
+.category-s-wrap .item {
+    width:203px;
+}
+.category-s-wrap {
+    margin:16px 25px;
+}
+.caty-seach-wrap {
+    width:132px;
+    height:20px;
+    margin:6px 0 8px 14px;
+    padding-right:5px;
+}
+.caty-seach-wrap.seach-sign {
+    padding-left:25px;
+    background:url("../img/seek_12x12.jpg") no-repeat 6px center;
+}
+.caty-seach-wrap .txt-s-01 {
+    width:100%;
+    height:20px;
+    line-height:20px;
+    border:0 none;
+    color:#666666;
+}
+.caty-content-list {
+    width:100%;
+    height:310px;
+    overflow: hidden;
+    overflow-y:scroll;
+}
+.caty-content-list a {
+    display:block;
+    width:144px;
+    padding-left:13px;
+    padding-right:35px;
+    height:32px;
+    line-height:32px;
+    overflow:hidden;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+    background:url("../img/jt-icon.png") no-repeat 171px -8px;
+    transition: none;
+    font-size:14px;
+}
+.caty-content-list a:hover,
+.caty-content-list .cur a{
+    background-color:#37a4a2;
+    background-position:171px 12px;
+    color:#fff;
+}
+.caty-nav {
+    border:1px solid #52b0b0;
+    background:#d1eeee;
+    height:32px;
+    line-height:32px;
+    color:#333;
+    font-size:14px;
+    margin-left:25px;
+    margin-top:10px;
+    padding:0 17px;
+
+}
+/* 商品信息分享 */
+.sp-info-share {
+    width:998px;
+    border:1px solid #37a4a2;
+
+}
+.sp-info-share .share-tl {
+    height:37px;
+    line-height:37px;
+}
+.sp-info-share .share-tl span {
+    padding-left:20px;
+}
+
+.sp-info-share-cont {
+    margin:20px 26px 120px;
+}
+.sp-info-share-content dt,
+.sp-info-share-content dd {
+    line-height:22px;
+}
+.sp-info-share-content .lab-cont {
+    position:absolute;
+    left:-115px;
+    top:0;
+    display:block;
+    width:100px;
+    padding-right:15px;
+    line-height:22px;
+    color:#333333;
+    height:22px;
+    text-align: right;
+}
+.lab-cont em {
+    color:#ff6600;
+}
+.sp-sontent {
+    border:1px solid #d0d0d0;
+    background:#f6f6f6;
+}
+.sp-sontent li {
+    float: left;
+    margin-bottom:12px;
+}
+.sp-mar-1 {
+    width:666px;
+    padding:18px 55px;
+}
+.sp-mar-2 {
+     width:764px;
+     padding:18px 0;
+}
+.sp-mar-3 {
+    width:764px;
+}
+.sp-mar-4 {
+    padding:14px 10px;
+}
+.sp-mar-4 li {
+    margin-bottom:0;
+}
+.sp-sontent.sp-col-1 {
+    border:0 none;
+    background:#ffffff;
+}
+.sp-sontent .line-01 {
+    background:url("../img/line_2x13.jpg") no-repeat 143px center;
+}
+.sp-sontent .butt {
+    min-width:35px;
+    margin-left:6px;
+    padding-right:15px;
+    cursor: pointer;
+    background:url("../img/jt-b_11x7.png") no-repeat right center;
+}
+
+.sp-sontent.sp-mar-2 li {
+    margin-right:20px;
+}
+.sp-sontent .sp-tab {
+    width:100%;
+}
+.sp-sontent .sp-tab td {
+    border:1px solid #bfbfbf;
+}
+.sp-sontent .sp-tab-p-1 {
+    padding:0 15px;
+}
+.sp-sontent .name-tab {
+    text-align: center;
+    background:#f6f6f6;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

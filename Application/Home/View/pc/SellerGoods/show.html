@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>分类管理</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/all-use.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/side-nav.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/sell-management.css">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+<script src="/Public/layer/layer.js"></script>                   
+<style>
+.btn{ cursor: pointer; font-family: "微软雅黑";}
+.safeguard{ width: 970px; border: 1px solid #E4E4E4; float: left; margin: 30px 0px 0px 6px; padding-bottom: 20px;}
+.safeguard_top{ width: 100%; background-color: #F2F1F1; padding: 10px 40px; box-sizing: border-box;}
+.safeguard_box{ width: 500px; padding: 0px 150px 30px 150px; margin: 0 auto; border: 1px solid #E4E4E4; margin-bottom: 70px; text-align: center;}
+.safeguard>button{ color: #fff; background-color: #37A4A2; border-radius: 3px; padding: 4px 8px; margin: 20px 38px;}
+.safeguard>button span{ font-size: 15px; font-weight: bold;}
+.safeguard>table{ border-top: 2px solid #D8D8D8; width: 95%; margin: 0 auto;}
+.safeguard>table tr{ height: 45px; border-bottom: 1px solid #DCDCDC; cursor: pointer;}
+.safeguard>table tr:hover{ background-color: #F1F1F1;}
+.safeguard>table thead tr{color: #333; background-color: #F1F1F1; cursor: default;}
+.safeguard>table tr td:first-of-type{ width: 8%;}
+.safeguard>table tr td:nth-of-type(2){ width: 30%; text-align: left;}
+.safeguard>table tr td:nth-of-type(3){ width: 45%; text-align: left;}
+.safeguard>table tr td:nth-of-type(4){ width: 10%;}
+.safeguard>table tr td:nth-of-type(2) input{ width: 170px; height: 20px; padding: 2px 10px; }
+.safeguard>table tr td:nth-of-type(3) input{ width: 30px; text-align: center; height: 20px; padding: 2px 10px; }
+.add_fenlei{ width: 192px; height: 26px; padding: 2px 10px; color: #999; border: 1px solid #D7D7D7;text-align: left;}
+.add_fenlei span{ color: #FF6600;}
+.safeguard>table tr td a{ color: #3879DF;}
+.safeguard>table tr td a:hover{ text-decoration: underline;}
+.safeguard>p{ line-height: 80px; text-indent: 32px;}
+.all_choose{ border: 1px solid #D9D9D9; color: #999; padding: 4px 10px; border-radius: 3px; margin-right: 10px;}
+.all_delete{border:1px solid #A4A4A4;  color: #000; padding: 4px 10px; border-radius: 3px;}
+.save_btn{ margin: 22px 28px 0px 0px; float: right; color: #fff; background-color: #37A4A2; padding: 6px 10px; border-radius: 3px; margin-top: 24px;}
+.hide{display:none}
+
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end --> 
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="Public:sellerLeft" />         
+            <div class="sell-management clearfix" style='width:auto;'>
+                <div class="safeguard">
+                	<div class="safeguard_top">分类管理</div>
+                	<button class="btn" onclick="addrootcat()"><span>+</span> 添加顶级分类</button>
+                	<table>
+                		<thead>
+                			<td></td>
+                			<td>分类名称</td>
+                			<td>排序</td>
+                			<td>操作</td>
+                		</thead>
+						 <volist name="treeData" id="vo">
+                		<tr class="treeData{$vo.id}">
+                			<td catid="{$vo.id}><input type="checkbox" ></td>
+                			<td catid="{$vo.id}"><span> ▼ </span> <input type="text" value="{$vo.name}" class="rootname"></td>
+                			<td catid="{$vo.id}"><input type="text" value="{$vo.sort}" class="rootsort"></td>
+                			<td><a href="{:U('SellerGoods/delcat',array('delid'=>$vo['id']))}">删除</a></td>
+                		</tr>
+						
+						<volist name="vo['child']" id="vv">
+                		<tr>
+                			<td></td>
+                			<td  catid="{$vv.id}">&nbsp;&nbsp;└&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="{$vv.name}" class="goods_name"></td>
+                			<td  catid="{$vv.id}">&nbsp;&nbsp;└&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="{$vv.sort}"  class="catsort"></td>
+                			<td><a href="{:U('SellerGoods/delcat',array('delid'=>$vv['id']))}">删除</a></td>
+                		</tr>
+						</volist>
+						<tr>
+                			<td></td>
+                			<td  catid="{$vo.id}">&nbsp;&nbsp;└&nbsp;&nbsp;&nbsp;&nbsp;<button class="add_fenlei btn"  catid="{$vo.id}"><span>+</span> 添加子分类</button></td>
+                			<td></td>
+                			<td></td>
+                		</tr>
+                	   </volist>
+                		
+                	</table>
+                	<p>
+					<!--
+                	  <button class="all_choose btn"><input type="checkbox" id="allChoose" /> 全选</button>
+                	  <label><button class="all_delete btn">批量删除</button></label>
+					 --> 
+                	  <button class="save_btn btn">保存更改</button>
+                	</p>
+                </div> 
+            </div>                   
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+$('.add_fenlei').click(function(){ 
+    var catid = $.trim($(this).attr('catid'));
+
+	$(this).parent().parent().before('<tr><td></td><td  catid="'+catid+'">&nbsp;&nbsp;└&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="" class="addgoods_name"></td><td  catid="'+catid+'">&nbsp;&nbsp;└&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="" class="addcatsort"></td><td><a href="{:U(\'SellerGoods/delcat\',array(\'delid\'=>"'+catid+'"))}">删除</a></td></tr>');
+ 
+})
+
+/*修改顶级分类*/
+$('.rootname').blur(function(){
+  var catid = $(this).parent().attr('catid');
+  var catname= $.trim($(this).val());
+   $.post("{:U('SellerGoods/showupdate')}",{'catid':catid,'catname':catname},function(data){
+		if( data.msg=='ok'){			
+		 console.log('修改成功！');	
+		}
+	});
+
+})
+
+/*修改二级分类*/
+$('.goods_name').blur(function(){
+  var childid = $(this).parent().attr('catid');
+  var childname= $.trim($(this).val());
+  
+   $.post("{:U('SellerGoods/showupdate')}",{'childid':childid,'childname':childname},function(data){
+		if( data.msg=='ok'){			
+		  console.log('修改成功！');	
+		}
+	});
+
+})
+
+/*修改顶级分类排序*/
+$('.rootsort').blur(function(){
+
+  var rootid = $(this).parent().attr('catid');
+  var rootsort = $.trim($(this).val());
+   $.post("{:U('SellerGoods/showupdate')}",{'rootid':rootid,'rootsort':rootsort},function(data){
+		if( data.msg=='ok'){			
+		  console.log('修改成功！');	
+		}
+	});
+
+})
+ 
+/*修改二级分类排序*/
+$('.catsort').blur(function(){
+  var aid = $(this).parent().attr('catid');
+  var childsort = $.trim($(this).val());
+  	
+   $.post("{:U('SellerGoods/showupdate')}",{'aid':aid,'childsort':childsort},function(data){
+		if( data.msg=='ok'){			
+		 console.log('修改成功！');	
+		}
+	});
+
+})
+/*添加子分类*/
+
+$(document).on("blur", ".addgoods_name", function(){
+  var addid = $(this).parent().attr('catid');
+  var addchild = $.trim($(this).val());
+   $.post("{:U('SellerGoods/showupdate')}",{'addid':addid,'addchild':addchild},function(data){
+		if( data.msg=='ok'){			
+		  console.log('修改成功！');	
+		}
+	});
+})
+/*修改添加子分类排序*/
+$(document).on("blur", ".addcatsort", function(){
+  var asortid = $.trim($(this).parent().prev().find('input').val()); 
+  var asortchild = $.trim($(this).val());
+ 
+   $.post("{:U('SellerGoods/showupdate')}",{'asortid':asortid,'asortchild':asortchild},function(data){
+		if( data.msg=='ok'){
+             console.log('修改成功！');		
+
+		}
+	});
+	
+})
+
+function addrootcat(){
+
+    layer.open({
+      type: 2,
+      title: '添加顶级分类',
+      shadeClose: true,
+      shade: false,
+      maxmin: true, //开启最大化最小化按钮
+      area: ['400px', '200px'],
+	  content: "{:U('SellerGoods/navupdate')}"
+    });
+}
+
+$('.save_btn').click(function(){
+  alert('保存成功！');
+});
+
+</script>
+</body>
+</html>

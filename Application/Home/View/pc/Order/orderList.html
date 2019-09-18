@@ -1,0 +1,266 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/all-use.css" rel="stylesheet">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/side-nav.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/send-goods.css" rel="stylesheet">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/favicon.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+<script src="{:C('STATIC_URL')}/Home/js/tabs-nav.js"></script>
+<script src="{:C('STATIC_URL')}/Home/js/store-tool.js"></script>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="Public:header_top" /> 
+<!-- 头部_顶部end -->	
+<!-- 头部_搜索栏start -->
+<include file="Public:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">       
+        <include file="Public:MemberLeft" />  
+        <div class="user-right marT20 box-s-c1 fRi">          
+			<div class="send-goods">
+			   <ul class="nav-top clearfix">
+			       <li class="active" id="wait-order">等待发货的订单</li>
+			       <li id="sending">发货中的订单</li>
+			       <li id="has-send">已发货的订单</li>
+			   </ul>
+			   <div class="order-section">
+			       <!-- 等待发货的订单 -->
+			       <div class="wait-order">
+			           <div class="wait-btns">
+			               <p class="active">未发货的订单</p>
+			               <p>被取消的订单</p>
+			           </div>
+			           <div class="search-order">
+			               <p>收件人名称: <input type="text" class="user-name"></p>
+			               <p>创建时间：<input type="text" class="user-time"> 至 <input type="text" class="user-time"></p>
+			               <p>订单编号: <input type="text" class="user-num"></p>
+			               <p>订单类型：<select class="user-type">
+			                   <option>全部</option>
+			               </select></p>
+			               <p class="search-btn">搜索</p>
+			           </div>                   
+			           <div class="section-bt">
+			               <div class="btns">
+			                   <label><input type="checkbox" id="all-chose"><p>全选</p></label>
+			                   <p class="btn">批量发货</p>
+			                   <p class="btn">批量免运费</p>
+			               </div>
+			               <div class="turn-page">
+			                   <div class="left-btn"></div>
+			                   <div class="right-btn"></div>
+			               </div>
+			           </div>
+			       </div>
+			       <!-- /等待发货的订单 -->
+			       <!--  发货中  -->
+			       <div class="sending box-hide">
+			           <div class="search-order">
+			               <p>收件人名称: <input type="text" class="user-name"></p>
+			               <p>创建时间：<input type="text" class="user-time"> 至 <input type="text" class="user-time"></p>
+			               <p>订单编号: <input type="text" class="user-num"></p>
+			               <p>订单类型：<select class="user-type">
+			                   <option>全部</option>
+			               </select></p>
+			               <p class="search-btn">搜索</p>
+			           </div>
+			           <table class="goods-list"  cellpadding="0" cellspacing="0" width="100%">
+			               <tr>
+			                   <th>订单编号</th>
+			                   <th>订单状态 </th>
+			                   <th width="190px">商品标题</th>
+			                   <th>数量</th>
+			                   <th>创建时间</th>
+			                   <th>付款时间</th>
+			                   <th>实际支付</th>
+			                   <th>买家</th>
+			               </tr>
+			               <tr>
+			                   <td>10021234567</td>
+			                   <td>发货中</td>
+			                   <td><p>新松 360kg重载机器人SRB360A</p></td>
+			                   <td>10</td>
+			                   <td>2016-10-25 15:20:40</td>
+			                   <td>2016-10-25 18:10:10</td>
+			                   <td>45000.00</td>
+			                   <td>Q1655373</td>
+			               </tr>
+			               <tr>
+			                   <td>10021234568</td>
+			                   <td>发货中</td>
+			                   <td><p>城市环保六轴无人机 广州格赛 测绘 无人机 GS-1200</p></td>
+			                   <td>5</td>
+			                   <td>2016-10-25 15:20:40</td>
+			                   <td>2016-10-25 18:10:10</td>
+			                   <td>45000.00</td>
+			                   <td>Q1655373</td>
+			               </tr>
+			           </table>
+			           <div class="section-bt">
+			               <div class="turn-page">
+			                   <div class="left-btn"></div>
+			                   <div class="right-btn"></div>
+			               </div>
+			           </div>
+			       </div>
+			       <!--  /发货中  -->
+			       <!--  已发货  -->
+			       <div class="has-send box-hide">
+			           <div class="search-order">
+			               <p>收件人名称: <input type="text" class="user-name"></p>
+			               <p>创建时间：<input type="text" class="user-time"> 至 <input type="text" class="user-time"></p>
+			               <p>订单编号: <input type="text" class="user-num"></p>
+			               <p>订单类型：<select class="user-type">
+			                   <option>全部</option>
+			               </select></p>
+			               <p class="search-btn">搜索</p>
+			           </div>
+			           <table class="goods-list"  cellpadding="0" cellspacing="0" width="100%">
+			               <tr>
+			                   <th>订单编号</th>
+			                   <th>订单状态 </th>
+			                   <th width="190px">商品标题</th>
+			                   <th>数量</th>
+			                   <th>创建时间</th>
+			                   <th>付款时间</th>
+			                   <th>实际支付</th>
+			                   <th>买家</th>
+			               </tr>
+			               <tr>
+			                   <td>10021234567</td>
+			                   <td>已发货</td>
+			                   <td><p>新松 360kg重载机器人SRB360A</p></td>
+			                   <td>10</td>
+			                   <td>2016-10-25 15:20:40</td>
+			                   <td>2016-10-25 18:10:10</td>
+			                   <td>45000.00</td>
+			                   <td>Q1655373</td>
+			               </tr>
+			               <tr>
+			                   <td>10021234568</td>
+			                   <td>已发货</td>
+			                   <td><p>城市环保六轴无人机 广州格赛 测绘 无人机 GS-1200</p></td>
+			                   <td>5</td>
+			                   <td>2016-10-25 15:20:40</td>
+			                   <td>2016-10-25 18:10:10</td>
+			                   <td>45000.00</td>
+			                   <td>Q1655373</td>
+			               </tr>
+			           </table>
+			           <div class="section-bt">
+			               <div class="turn-page">
+			                   <div class="left-btn"></div>
+			                   <div class="right-btn"></div>
+			               </div>
+			           </div>
+			       </div>
+			       <!--  /已发货  -->
+			   </div>
+			</div>
+        </div>
+    </div>    
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+var order = (function(){
+    var  order  = {},
+    order_data  = {},
+    html_model  = [];
+	html_model.push("<div class='order-details'>");
+	html_model.push("   <div class='order-title'>");
+	html_model.push("      <label><input type='checkbox' class='list-input'>订单编号:%ORDER_SN%</label>");
+	html_model.push("      <p class='start-time'>创建时间:%TIME%</p>");
+    html_model.push("   </div>");
+    html_model.push("   <ul class='clearfix'>");
+    html_model.push("      <li class='clearfix'>");
+    html_model.push("         <div class='goods-info fLe'>");
+    html_model.push("            <div class='goods-title clearfix'>");
+    html_model.push("               <p class='fLe'>%GOODS_NAME%</p>");
+    html_model.push("            </div>");
+    html_model.push("            <div class='goods-img'><img src='%GOODS_THUMB%' alt></div>");
+    html_model.push("         </div>");
+    html_model.push("         <div class='buyers-info fLe'>");
+    html_model.push("               <p>收货信息：%ADDRESS%  %NAME%   %TEL_NUM%  </p>");
+    html_model.push("               <p>买家选择：快递</p>");
+    html_model.push("               <p>物流公司：未选择物流公司</p>");
+    html_model.push("         </div>")    
+    html_model.push("      </li>");
+    html_model.push("   </ul>");
+    html_model.push("   <div class='order-bt clearfix'>");
+    html_model.push("       <p class='fRi send-btn'>发货</p>");
+    html_model.push("       <p class='fRi close-order'>关闭订单</p>");
+    html_model.push("   </div>");
+    html_model.push("</div>");
+    html_model = html_model.join('');
+
+    getOrderList();
+
+	function getOrderList(){
+		var wraper = $(".goods_list");
+		var _this  = this;
+		var url    = "{:U('Order/getOrder')}";
+		/*ajax分页*/
+		ajaxPage({
+	    	wraper:wraper,	
+			parameter:'',//附加参数
+		    listRows:5,//每页显示条数
+			rollPage:3,//最多显示多少页码
+			url:url,//ajax请求地址
+			//回调函数
+			callback:function(data,page){
+			    order      = data.order; 
+			    order_data = data.order_data;           
+	            showHtml();
+			}
+		});
+	}
+
+    /**
+     * 动态输出html
+     */
+    function showHtml(){
+    	var html = [],
+    	    order_id;
+        for(var k in order_data){
+            order_id  = order_data[k]['order_id'];
+        	var html_ = html_model.replace(/%GOODS_NAME%/g,order_data[k].goods_name).replace(/%ORDER_SN%/g,order[order_id].order_sn).replace(/%TIME%/g,order[order_id].time).replace(/%GOODS_THUMB%/g,order_data[k]['goods_thumb']?order_data[k]['goods_thumb'].substring(1):'').replace(/%ADDRESS%/g,order[order_id].address).replace(/%NAME%/g,order[order_id].name).replace(/%TEL_NUM%/g,order[order_id].tel_num);
+            html.push(html_);
+        }
+        html = html.join('');
+        $(".search-order").after(html);
+    }
+})();
+                  
+
+$(".goods_list").on('click','.delete',function(){
+	if(confirm('确认删除!')){
+	    var id = $(this).attr('data-id');
+		$.post("{:U('Seller_goods/goodsDelete')}",{"id":id},function(res){                
+	        alert(res['msg']);
+	        if(res['status']){
+	        	window.location.reload();
+	        }        
+	    }); 
+	}
+})
+</script>
+</body>
+</html>
+
+    

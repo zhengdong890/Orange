@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>留言板</title>
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/index.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/rest.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/common.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/liner.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/ygfuwu/princil.css" />
+		<script type="text/javascript" src="__PUBLIC__/phone/js/jquery.js" ></script>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/myscript.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/phone/js/focus.js"></script>
+	</head>
+	<body>
+	<div class="wrp">
+			<!--顶部-->
+			<include file="Public:header" />
+			<!--顶部结束-->
+			
+			<div class="mainWrap relative clearfix" style="margin-bottom: 30px;">
+				<section class="header-main">
+					<ul class="navs clear">
+						<span class="slider"></span>
+						<li><a href="../sunshineService/principal.html" class="navs-item">校长信箱</a></li>
+						<li><a href="../sunshineService/message.html" target="_blank">留言</a></li>
+					</ul>
+				</section>
+				<div class="detailContent clearfix">
+					<div class="column_R">
+						<div class="mainContent">
+							<div class="introTit clearfix">
+								<div class="introTitImg" style="background-image:url(__PUBLIC__/phone/images/small.jpg)"></div>
+								<h2>留言板</h2>
+							</div>
+						</div>
+					</div>
+					<div class="content-wrap clearfix article_cn1">
+						<div class="cont_top">
+							<div class="content">
+								<div class="title">
+		                        	<h3 style="font-size:22px;">温馨提示</h3>
+							    </div>
+							    <div class="ts1">
+                        	        <p>留言板是我校为方便群众通过电子网络与学校沟通而开辟的栏目。在这里，您可以向学校反映您
+                        	          	所关心和需要解决的各种问题，也欢迎对我校教育工作提出宝贵的批评和建议。所反映之事如在我
+                        	          	校受理职责范围内，我校都将为您保密并按 "分级负责，谁主管、谁负责"的原则认真办理，受理情
+                        	          	况将在30个工作日内以适当的方式及时向您反馈，请勿重复来信。填写者应 逐项填写表中内容（如
+                        	          	不涉及被投诉者的可不填写），反映内容或建议事项字数在1000字以内为宜，并至少留下一个联系方
+                        	          	式（最好 是电子邮箱或电话）。所填内容表述务必简明、准确和真实，否则由此引起的不良后果及法
+                        	          	律责任自负。
+                        	        </p>
+                                </div>
+							    <form name="form" class="formjzxx" method="post" action="Guestbook.asp?action=add">
+									<div class="formjzxx">
+										<p>您的姓名：
+							            <input id="name" name="ename" type="text" class="easyui-validatebox validatebox-text">　  请输入您的姓名  &nbsp;
+							            <input style="width:20px" id="ckbName" type="checkbox" value="1" name="niming"><label for="ckbName">匿名提交</label></p>
+							            <div id="extinfo" style="display: block;">
+							            <p>性　　别：<input type="radio" name="sex" style="width:30px" value="男" checked="checked">男　<input type="radio" name="sex" value="女" style="width:30px">女　 选择您的性别（默认为男）</p>
+										<p>年　　龄：<input class="easyui-validatebox validatebox-text" validtype="number" name="age">　请输入您的年龄（必须为合理的整形数字）</p>
+										<p>邮　　编：<input class="easyui-validatebox validatebox-text" validtype="number" name="zip">　必须为6位的整型数字</p>
+										<p>单　　位：<input name="danwei" type="text" class="easyui-validatebox validatebox-text" validtype="length[2,50]">　请输入您的工作单位：如：某某公司、务农等</p>
+										<p>家庭地址：<input name="address" type="text" class="easyui-validatebox validatebox-text" validtype="length[2,50]">　请输入您正确的家庭住址以便联系</p>
+										<p>固定电话：<input name="phone" type="text" class="easyui-validatebox validatebox-text">　请输入您的联系电话（固话）</p>
+							            <p>手　　机：<input id="mobphone" name="mobphone" type="text" class="easyui-validatebox validatebox-text" validtype="mobile">　重要：请保证此号码的正确，做为首选联系方式</p>
+							            <p>电子邮件：<input id="email" name="email" type="text" class="easyui-validatebox validatebox-text" validtype="email">　请输入您正确的电子邮箱账号</p>
+							            </div>
+							            <p>留言标题：<input id="title" name="title" type="text" class="easyui-validatebox validatebox-text" required="true" validtype="length[1,20]">　<span>* </span>请输入标题</p>
+										<p>留言内容：<textarea id="content" name="content" cols="" rows="" class="validatebox" required="true" validtype="length[10,500]"></textarea></p>
+							        </div>
+						           <p style="float:left; padding-bottom:10px;">
+									    <font style="border:none; float:left;">验证码：</font>
+									    <font style="width:490px;border:none; float:left;">
+						                    <input name="txt_check" type="text" size="6" maxlength="4" class="reg_txt"> <img src="checkcode.asp " alt="验证码,看不清楚?请点击刷新验证码" height="10" style="cursor : pointer;" onclick="this.src='checkcode.asp?t='+(new Date().getTime());">
+						                </font>
+						            </p>
+						           <p>　　　　
+						       　                     <input type="submit" value="提交" class="submit" style="padding-top:0px">　
+						       	        <input type="reset" value="重置" class="submit" style="padding-top:0px">
+						           	
+						           </p>
+						        </form>
+	                            <h2 class="ehf">在线回复</h2>
+	                            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="emailtable2">
+			                        <tbody>
+			                        	<tr>
+				                           <th scope="col">标题</th>
+				                           <th scope="col" width="20%">处理情况</th>
+			                            </tr>
+				                        <tr>
+				                           <td><a href="ans.asp?id=16" target="_blank">这个是测试信息</a></td>
+				                           <td><font>通过</font></td>
+				                        </tr>
+			                            <tr>
+				                           <td><a href="ans.asp?id=15" target="_blank">主　　题</a></td>
+				                           <td><font>通过</font></td>
+			                            </tr>
+			                            <tr>
+				                            <td><a href="ans.asp?id=14" target="_blank">sadf</a></td>
+				                            <td><font>通过</font></td>
+				                        </tr>
+			                            <tr>
+				                            <td><a href="ans.asp?id=10" target="_blank">sdf</a></td>
+				                            <td><font>通过</font></td>
+			                            </tr>
+			                        </tbody>
+	                            </table>
+	                            <div class="page1">
+	                                <p style="width:700px;; text-align:center; margin-top:15px;"></p>
+	                                <form action="email.asp?1=1" method="post" name="frmjump">
+										<font color="#FF0000" style="font-size: 13px;"> 
+											<input type="hidden" name="page" value="1">
+											<input type="hidden" name="intPageCount" value="1">
+											共4条记录&nbsp;&nbsp;第1/1页 &nbsp; 
+											<a href="email.asp?1=1&amp;page=1">首页</a>
+										</font>
+										<font color="#FF0000" style="font-size: 13px;">
+										    <font color="#FF0000">
+										        <a href="email.asp?1=1&amp;page=1">尾页</a>
+										    </font> 
+										        跳转到 &nbsp; 
+										    <input type="text" size="3" name="inputpage" maxlength="3" style="border-style: solid; border-width: 1">
+										    &nbsp;页&nbsp;&nbsp;
+										</font> 
+										<input type="button" name="Button" value="转到" onclick="vbscript:jump()">
+										  &nbsp;  
+								    </form>
+								</div>
+							</div>
+						</div>
+				    </div>
+				</div>		
+			</div>
+	    <!-- footer start -->
+	    <include file="Public:footer" />
+	    <!-- footer end-->
+		</div>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/common.js" ></script>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/jquery-1.11.2.min.js" ></script>
+	</body>
+</html>

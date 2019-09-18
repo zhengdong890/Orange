@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>我的购物车</title>
+<link rel="stylesheet" href="__PUBLIC__/Home/css/public.css" type="text/css">
+<link href="__PUBLIC__/Home/css/cssReset.css" rel="stylesheet">
+<link href="__PUBLIC__/Home/css/shopping-cart.css" rel="stylesheet">
+<link rel="shortcut icon" href="__PUBLIC__/Home/images/ee.ico" type="image/x-icon">
+<link href="__PUBLIC__/Home/css/footer.css" rel="stylesheet">
+<script src="__PUBLIC__/Home/js/jquery-1.10.2.min.js"></script>
+<!-- www.orangesha.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?54f6f54d47704101dc27b337de5fd6c3";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end --> 
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="shopping-cart">
+   <ul class="nav-top clearfix">
+       <!--<li id="share">分享商品</li>-->
+       <li class="active" id="mall">商城商品</li>
+   </ul>
+   <div class="cart-content">
+       <!--<form action="{:U('Order/orderConfirm')}" method="post" name="shopping-cart" class="share">
+           <div class="table">
+               <div class="tr-h">
+                   <div class="table-cell th th-chose"><label><input type="checkbox" class="all-chose">全选</label></div>                   
+                   <div class="table-cell th th-goods">商品名称</div>
+                   <div class="table-cell th th-time">租期</div>
+                   <div class="table-cell th th-price">单价</div>
+                   <div class="table-cell th th-num">数量</div>
+                   <div class="table-cell th th-subPrice">金额</div>
+                   <div class="table-cell th th-operation">操作</div>
+               </div>
+
+           </div>
+           <div class="settlement clearfix">
+               <label class="fLe"><input type="checkbox" class="all-chose">全选</label>
+               <a href="javascript:;" class="fLe all_delete">删除</a>
+               <a href="javascript:;" class="fLe">移入收藏夹</a>
+               <button class="fRi">去结算</button>
+               <p class="fRi">总价：<span class="all-totals">{$total_price}</span></p>
+               <p class="fRi">已选<span class="all-num">0</span>件商品</p>
+           </div>
+       </form>   -->
+       <form action="{:U('Mall_order/orderConfirm')}" method="post" name="shopping-cart" class="mall">
+           <div class="table">
+               <div class="tr-h">
+                   <div class="table-cell th th-chose"><label><input type="checkbox" class="all-chose">全选</label></div>
+                   <div class="table-cell th th-sku">订货号</div>
+                   <div class="table-cell th th-goods">商品名称</div>
+                   <div class="table-cell th th-price">单价</div>
+                   <div class="table-cell th th-num">数量</div>
+                   <div class="table-cell th th-subPrice">金额</div>
+                   <div class="table-cell th th-operation">操作</div>
+               </div>
+           </div>
+           <div class="settlement clearfix">
+               <label class="fLe"><input type="checkbox" class="all-chose">全选</label>
+               <a href="javascript:;" class="fLe">删除</a>
+               <a href="javascript:;" class="fLe">移入收藏夹</a>
+               <button class="fRi">去结算</button>
+               <p class="fRi">总价：<span class="all-totals">0</span></p>
+               <p class="fRi">已选<span class="all-num">0</span>件商品</p>
+           </div>
+       </form>
+   </div>
+</div>
+<include file="Public:footer" />
+</body>
+<script>
+/*$('.nav-top li').click(function () {
+  var divId = $(this).attr('id');
+   $(this).addClass('active');
+   $(this).siblings().removeClass('active');
+   $('.'+divId).show();
+   $('.'+divId).siblings().hide();
+   if(divId == 'mall' && !mall_goods.isGet()){
+   	   mall_goods.getCartGoods();
+   }
+});*/
+
+
+
+/*商城商品*/
+var mall_goods = (function(){
+	var goods        = {},
+	    total_price  = 0,
+	    check_number = 0,
+	    is_get       = false, 
+	    html_1       = [], 
+	    html_2       = [];
+
+	    html_1.push("<div class='wrap'>");
+        html_1.push("   <div class='cmp-name'>");
+        html_1.push("      <input type='checkbox' class='shop-chose' data-shop=%SELLER_ID%>");
+        html_1.push("      店铺：深圳科技");
+        html_1.push("   </div>");
+        html_1 = html_1.join('');
+	    html_2.push("<div class='tr-d'>");
+        html_2.push("   <div class='table-cell td td-chose'>");
+        html_2.push("      <input type='checkbox' name='goods_id[]' value='%ID%' class='goods-input' data-flag='%SELLER_ID%,%FLAG%'>");
+        html_2.push("   </div>");
+        html_2.push("   <div class='table-cell td th-sku'>");
+        html_2.push("      <p class='sku'>100000</p>");
+        html_2.push("   </div>");
+        html_2.push("   <div class='table-cell td td-goods'>");
+        html_2.push("         <div class='goods-img fLe'>");
+        html_2.push("            <img src='%GOODS_THUMB%' alt />");
+        html_2.push("         </div>");
+        html_2.push("         <div class='goods-txt fLe'>");
+        html_2.push("            <p>%GOODS_NAME%</p>");
+        html_2.push("            <div class='goods-icons'>");
+        html_2.push("               <span></span><span></span>");
+        html_2.push("            </div>");
+        html_2.push("         </div>");
+        html_2.push("   </div>");
+        html_2.push("   <div class='table-cell td th-price'>");
+        html_2.push("      <p class='actual-price'>%GOODS_PRICE%万元</p>");
+        html_2.push("   </div>");
+        html_2.push("   <div class='table-cell td th-num goods-num' data-type=2 data-id='%SELLER_ID%,%K%'>");
+        html_2.push("      <span class='reduce'>-</span>");
+        html_2.push("      <span class='num'>%NUMBER%</span>");
+        html_2.push("      <span class='add'>+</span>");
+        html_2.push("   </div>");
+        html_2.push("   <div class='table-cell td th-subPrice share-price'>¥%TOTAL_PRICE%万元</div>");
+        html_2.push("   <div class='table-cell td th-operation' >");
+        html_2.push("      <p><a href='javascript:;' class='delete' data-id='%CART_ID%,%K%' data-seller_id=%SELLER_ID%>删除</a></p>");
+        html_2.push("      <p><a href='javascript:;'>移入收藏夹</a></p>");
+        html_2.push("   </div>");
+        html_2.push("</div>");
+        html_2 = html_2.join('');
+
+	/*减少*/   
+    $(".mall .table").on('click','.reduce',function(){
+        var ids        = $(this).parent('div').attr('data-id'),
+            id_arr     = ids.split(','),
+            seller_id  = id_arr[0],
+            goods_id   = id_arr[1],
+            goods_data = goods[seller_id]['data'][goods_id];
+        var number = goods_data['number'] - 1;
+        if(number <= 0){
+            return false;
+        }
+        goods[seller_id]['data'][goods_id]['number'] = number;  
+        $(this).siblings('.num').text(number); 
+        totalPrice(seller_id , goods_id);//统计价格
+        $(this).parent('div').siblings('.share-price').text(goods[seller_id]['data'][goods_id]['total_price']+'万元');   
+    })
+    
+    /*增加*/   
+    $(".mall .table").on('click','.add',function(){
+        var ids        = $(this).parent('div').attr('data-id'),
+            type       = $(this).parent('div').attr('data-type'),
+            id_arr     = ids.split(','),
+            seller_id  = id_arr[0],
+            goods_id   = id_arr[1],
+            goods_data = goods[seller_id]['data'][goods_id];
+        var number = goods_data['number'] + 1;
+        if(number > goods_data['goods_number']){
+            return false;
+        }
+        goods[seller_id]['data'][goods_id]['number'] = number;
+        $(this).siblings('.num').text(number);
+        totalPrice(seller_id , goods_id);//统计价格
+        $(this).parent('div').siblings('.share-price').text(goods[seller_id]['data'][goods_id]['total_price']+'万元');
+    })
+    
+    /*删除*/
+    $(".mall").on('click','.delete',function(){
+        var ids       = $(this).attr('data-id'); 
+        var seller_id = $(this).attr('data-seller_id'),
+           id_arr     = ids.split(','),
+                 id  = id_arr[0],
+            k = id_arr[1];
+            delete goods[seller_id]['data'][k];
+        var _this = this;
+        $.post("/index.php/Home/Mall_cart/cartDelete.html",{id:id},function(res){
+        /*console.log(res); */   
+          $(_this).parent().parent().parent().prev().remove();
+          $(_this).parent().parent().parent().remove();
+          
+          getCheckTotal();
+        })       
+    })
+
+    /*统计总价*/
+    function totalPrice(seller_id , goods_id){
+        var goods_data = goods[seller_id]['data'][goods_id];
+        /*统计单个商品总价格*/
+        var new_total = goods_data['goods_price'] * goods_data['number']; 
+        goods[seller_id]['data'][goods_id]['total_price'] = new_total;
+        getCheckTotal();
+    }
+
+    /**
+     * 数据初始化
+     */
+    function dataInit(goods_){
+        /*购买商品数据初始化*/
+        for(var k in goods_){
+        	  var seller_id = goods_[k]['member_id']? goods_[k]['member_id'] : 0;
+            goods_[k]['goods_price'] = goods_[k]['goods_price']/10000;
+	          goods_[k]['total_price'] = goods_[k]['goods_price'] * goods_[k]['number'];
+	          total_price += goods_[k]['total_price'];//统计总价
+        	  if(!goods[seller_id]){
+                goods[seller_id] = {'data':{},'total_price':0};
+        	  }
+        	  goods_[k]['number'] = parseInt(goods_[k]['number']);            
+            goods[seller_id]['data'][k] = goods_[k];
+        }
+    }
+
+    /**
+     * 获取共享购物车商品
+     */
+    function getCartGoods(){
+    	$.post("{:U('Mall_cart/getCartGoods')}",{},function(res){
+    		dataInit(res['data'],res['goods_rent']);
+    		is_get = true;
+    		showHtml();
+    	})
+    }
+
+    /**
+     * 动态输出html
+     */
+    function showHtml(){
+    	var html = [];
+    	var i =0;
+        for(var k in goods){
+        	html_1_ = html_1.replace(/%SELLER_ID%/g,k);
+            html.push(html_1_);
+            var goods_data = goods[k]['data'];
+            for(var k1 in goods_data){
+            	var html_2_ = html_2.replace(/%GOODS_THUMB%/,goods_data[k1].goods_thumb.substring(1)).replace(/%RENT_TIME%/,goods_data[k1].rent_time).replace(/%GOODS_PRICE%/,goods_data[k1].goods_price).replace(/%GOODS_NAME%/,goods_data[k1].goods_name).replace(/%TOTAL_PRICE%/,goods_data[k1].total_price).replace(/%NUMBER%/,goods_data[k1].number).replace(/%SELLER_ID%/g,k).replace(/%ID%/g,goods_data[k1].id).replace(/%FLAG%/g,k1).replace(/%CART_ID%/g,goods_data[k1].cart_id).replace(/%K%/g,i);
+	            html.push(html_2_);
+	            i++;
+            }
+            html.push("</div>");
+        }
+        html = html.join('');
+        $(".mall .table").append(html);
+    }
+    
+    /*全选*/
+    $(".mall .all-chose").click(function(){
+        if($(this).is(':checked')){
+            $(".mall .goods-input").prop("checked",true);
+        }else{
+        	$(".mall .goods-input").prop("checked",false);
+        }
+        for(var seller_id in goods){
+            for(var goods_id in goods[seller_id]['data']){
+                goods[seller_id]['data'][goods_id]['checked'] = $(this).is(':checked');              
+            }
+        }
+        getCheckTotal();
+    })
+   
+    /*商家全选*/
+    $(".mall").on('click','.cmp-name .shop-chose',function(){
+    	var seller_id = $(this).attr('data-shop');
+        if($(this).is(':checked')){
+        	$(this).parent('.cmp-name').siblings('.tr-d').find('.goods-input').prop("checked",true);
+        }else{
+        	$(this).parent('.cmp-name').siblings('.tr-d').find('.goods-input').prop("checked",false);
+        }
+    	for(var goods_id in goods[seller_id]['data']){
+            goods[seller_id]['data'][goods_id]['checked'] = $(this).is(':checked'); 	
+        }
+        getCheckTotal();
+    })
+    
+    /*单选*/
+    $(".mall").on('click','.goods-input',function(){
+    	var ids       = $(this).attr('data-flag'),
+    	    id_arr    = ids.split(','),
+            seller_id = id_arr[0],
+            goods_id  = id_arr[1];
+        goods[seller_id]['data'][goods_id]['checked'] = $(this).is(':checked');	
+        getCheckTotal();
+        $(this).parent().parent().toggleClass("active")
+    })
+
+    /*获取选中的总价*/ 
+    function getCheckTotal(){
+    	var total        = 0,
+    	    number = 0;
+        for(var k in goods){
+            var goods_data = goods[k]['data'];
+            for(var k1 in goods_data){
+            	if(goods_data[k1]['checked']){
+            		number++;
+            		total += goods_data[k1]['total_price'];
+            	}                
+            }
+        } 
+        total_price  = total; 
+        check_number = number;
+        $(".mall .all-num").text(check_number); 
+        $(".mall .all-totals").text(total_price+'万元');        
+    }
+
+    return{
+    	getCartGoods : function(){
+    		getCartGoods();
+    	},
+    	isGet:function(){
+    		return is_get;
+    	},
+    	checkNumber:function(){
+    		return check_number;
+    	}
+    }
+})();
+mall_goods.getCartGoods();
+
+$(".share button").click(function(){
+	if(!rent_goods.checkNumber()){
+        alert('请选择商品');
+        return false;
+	}
+})
+
+$(".mall button").click(function(){
+	if(!mall_goods.checkNumber()){
+        alert('请选择商品');
+		return false;
+	}
+})
+
+
+</script>
+</html>

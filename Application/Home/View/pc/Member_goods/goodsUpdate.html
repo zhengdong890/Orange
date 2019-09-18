@@ -1,0 +1,694 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/all-use.css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/goods-shelves.css">
+<link rel="stylesheet" href="utf8-jsp/themes/default/css/ueditor.css"/>
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script src="{:C('STATIC_URL')}/Home/js/tabs-nav.js"></script>
+<script src="{:C('STATIC_URL')}/Home/js/store-tool.js"></script>
+<script type="text/javascript" charset="utf-8" src="{:C('STATIC_URL')}/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="{:C('STATIC_URL')}/js/ueditor/ueditor.all.js"> </script>
+<style>
+label{ cursor: pointer;}
+.btn{display:block;width:100px;margin-top:6px;color:white;height:28px;line-height:28px;text-align:center;float:left;background:#C43926;border-radius:4px;margin-left:92px;}
+.star{ color: #ff771c;}
+.get-img>div{ width: 100%; height: 20px; background-color: rgba(0,0,0,0.4); color: #fff; text-align: center; font-size: 12px;}
+.addError p:nth-of-type(2){color: red;}
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->   
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="goods-shelves" style='margin-top:20px'>
+    <h2>填写商品信息</h2>
+    <div class="addError">
+    	<img src="{:C('STATIC_URL')}/Home/image/addError.png" />
+    	<p>您的商品信息审核不通过，以下为审核不通过原因，请审核对后重新提交：</p>
+    	<p></p>
+    	<p>请重新填写信息，点击“发布”再次进行审核。</p>
+    </div>
+    <form class="shelves-section" id='form'>
+        <input type="hidden" name="cat_id" value="{$goods['cat_id']}"></input>
+        <input type="hidden" name="number"></input>
+        <input type="hidden" name="id" value="{$goods['id']}"></input>
+        <div class="section-box general-info clearfix" style="width: 110%;">
+        	<h3 class="fLe"><span class="star">*</span>商品标题: </h3>
+        	<input type="text" name='goods_name' id="biaoti" maxlength='60' value="{$goods['goods_name']}">
+        	&nbsp;<span class="zishu">0</span>/60
+        </div>
+        <div class="section-box general-info clearfix">
+        	<h3 class="fLe"><span class="star">*</span>商品数量: </h3>
+        	<input type="text" name='goods_number' id="number"  value="{$goods['goods_number']}"/> 台
+        </div>
+        <div class="section-box general-info clearfix">
+            <h3 class="fLe">&nbsp;&nbsp;&nbsp;&nbsp;商品属性: </h3>
+            <p class="ps">错误填写宝贝属性，可能会引起宝贝下架或搜索流量减少，影响您的正常销售，请认真准确填写！</p>
+            <div class="box general-box fRi clearfix">
+                <div><span class="star">*</span> 品牌&nbsp;:&nbsp;
+                   <select name="brand_id">
+                        <option value="0">请选择...</option>
+                        <volist name="brands" id="v">
+                           <if condition="$v['id'] eq $goods['brand_id']">
+                              <option value="{$v['id']}" selected='selected'> {$v['brand_name']}</option>
+                           <else/>
+                              <option value="{$v['id']}">{$v['html']} {$v['brand_name']}</option>
+                           </if>
+                        </volist>
+                   </select>
+                </div>
+                <div>&nbsp;&nbsp;型号&nbsp;:&nbsp; <input type="text" name="goods_model"  value="{$goods['goods_model']}">
+                </div>
+                <div>&nbsp;&nbsp;设备成色&nbsp;:&nbsp; <input type="text" name="sbcs" value="{$goods['sbcs']}" style="width: 100px;" placeholder="几成新">
+                </div>
+                <div><span class="star">*</span> 设备厂家&nbsp;:&nbsp; <input type="text" name="sbcj" value="{$goods['sbcj']}">
+                </div>
+                <div><span class="star">*</span> 购置时间&nbsp;:&nbsp; <input type="datetime-local" name="buy_time" value="{$goods['buy_time']}"  style="width: 210px;padding-top: 1px; cursor: pointer;">
+                </div>
+                <div><span class="star">*</span> 联系电话&nbsp;:&nbsp; <input type="text" name="phone" value="{$goods['phone']}">
+                </div>
+                <div style="width: 100%;" class="area_select">
+                	<span class="star">*</span> 地址&nbsp;:&nbsp;
+                	<div class="address">省&nbsp;
+                      <select name="province">
+                        <option value="0">请选择...</option>             
+                      </select>
+                    </div>
+                    <div class="address">市&nbsp;
+                      <select name="city">
+                        <option value="0">请选择...</option>             
+                      </select>
+                    </div>
+                    <div class="address">区&nbsp;
+                      <select name="area">
+                        <option value="0">请选择...</option>             
+                      </select>
+                    </div>
+                </div>
+        
+                <div style="display: none;">
+                                               是否上架&nbsp;:&nbsp;
+                    <label><input type="radio" name="status" value='1' checked/>是</label>
+                    &nbsp;&nbsp;&nbsp;
+                    <label><input type="radio" name="status" value='0' />否</label>
+                </div>            
+            </div>
+        </div>
+        <div class="section-box general-info clearfix">
+        	<h3 class="fLe"><span class="star">*</span>商品主图: </h3>
+        	<p class="ps">商品主图大小不能超过<span class="star">3MB</span>，最多可传<span class="star">5</span>张图，<span class="star">700*700</span>以上的图片上传以后宝贝详情页自动提供放大镜功能</p>	
+        	<div class="box general-box fRi clearfix" style="padding: 16px 0 2px 0px; border: none; background-color: white">
+        		<div class="box images-box fRi clearfix" style="border: none; width: 100%;padding: 16px 0 2px 0px; background-color: white">
+            	<div class="img">
+                    <!--上传商品缩略图片-->
+                    <label class="get-img" style="background:url('{$goods[goods_img]|substr=1}') no-repeat; background-size: 100%;">
+                       <div>商品主图</div>
+                       <input type="file" class="file-img" name='goods_img'>
+                    </label>
+                </div>
+                <volist name="goods_gallery" id="v">
+		         <div class='img'>
+		           <label class='get-img' style="background:url('__ROOT__{$v['gallery_img']|substr=1}') no-repeat; background-size: 100%;">
+		             <input type='file' class='file-img' name="oldgallery_img{$v['id']}">
+		             <span class='icon-close' data-galleryid="{$v['id']}"></span>       
+		           </label>                                     
+		         </div>
+                </volist>
+                <for start="1" end="$gallery_number+1" step="1">
+                    <div class='img'>
+                        <label class='get-img'>
+                            <input type='file' class='file-img' name='gallery_img{$i}'>
+                            <span class='icon-close'></span>      
+                        </label>                                      
+                    </div>
+                </for>  
+            </div>
+        	</div>
+        </div>
+        <div class="section-box rent-info clearfix">
+            <h3 class="fLe">&nbsp;&nbsp;&nbsp;&nbsp;费用明细: </h3>
+            <p class="ps">请填写您的租金费用，错误填写价格，影响您的正常分享，请认真准确填写！</p>
+            <div class="box rent-box fRi clearfix" style="background-color: #fff; border-bottom: none; padding: 0px;">
+            	<div class="selectActive1">
+            		出租费用
+            	</div>
+            	<div class="selectActive2">
+            		委托项目
+            	</div>
+            </div>
+            <div class="box rent-box fRi clearfix select1" style="background-color: #fff;">
+            	<div><span class="star">*</span> 租赁价格&nbsp;:&nbsp;<input type="text" name="goods_price" value="{$goods['goods_price']}"> 元/每<span class="unit-class">月</span></div>
+                <!--<div>
+                    <span class="word2"><span class="star">*</span> 库存</span>&nbsp;:&nbsp;
+                    <input type="text" name='goods_number' value="{$goods['goods_number']}"/> 台
+                </div>-->
+                <div class="all-width">
+                    <span class="star">*</span> 出租单位选择&nbsp;:&nbsp;
+                    <label><input id="unit1" type="radio" name="rent_dw" value="1" checked> 月</label>&nbsp;&nbsp;&nbsp;
+                    <label><input id="unit2" type="radio" name="rent_dw" value="2"> 天</label>&nbsp;&nbsp;&nbsp;
+                    <label><input id="unit3" type="radio" name="rent_dw" value="3"> 时</label>&nbsp;&nbsp;&nbsp;
+                </div>
+                <div>
+                    <span class='rent_dw'><span class="star">*</span> 最小出租月数&nbsp;:</span>
+                    <input type="text" name="min_rent" value="{$goods['min_rent']}"> <span class="unit-class">月</span>
+                </div>
+                <div>
+                    <span class='rent_dw'><span class="star">*</span> 最大出租月数&nbsp;:</span>
+                    <input type="text" name="max_rent" value="{$goods['max_rent']}"> <span class="unit-class">月</span>
+                </div>
+                <div class="on_rent" style="width: 100%;">
+                    <span class='rent_dw'>&nbsp;&nbsp;&nbsp;区间优惠设置&nbsp;:</span>
+                    <div class='all-width rent'>&nbsp;&nbsp;&nbsp;<input class='rent_min' type="text" > - <input class='rent_max' type="text"> 价格：<input class='rent-price' type="text"> &nbsp;&nbsp;&nbsp;<a class="goods_rent_add">点击添加</a></div>
+                </div>	
+                <div>
+                    <span class='rent_dw'><span class="star">*</span> 保险费&nbsp;:&nbsp;</span>
+                    <label><input type="radio" name="safest" value="0"> 建议购买</label>&nbsp;
+                    <label><input type="radio" name="safest" value="1"> 不买</label>
+                </div>
+                <div>
+                    <span class='rent_dw'><span class="star">*</span> 押金&nbsp;:&nbsp;</span>
+                    <label><input type="radio" name="deposit" value="0"> 无</label>&nbsp;
+                    <label><input type="radio" name="deposit" value="1"> 月租金*3</label>&nbsp; 
+                    <label><input type="radio" name="deposit" value="2"> 月租金*6</label>
+                </div>
+            </div>
+            <div class="box rent-box fRi clearfix select2">            	                
+                <div>
+                    <span class='rent_dw'>委托加工费&nbsp;:&nbsp;</span>
+                    <input type="text" name="goods_price" value="{$goods['goods_price']}"> /件起
+                </div>                
+            </div>
+        </div>
+        <!--<div class="section-box general-info clearfix">
+            <h3 class="fLe"><span>*</span>扩展属性&nbsp;:&nbsp;</h3>
+            <div class="box more-box fRi clearfix">
+                <volist name="extendattr" id="v">
+                <if condition="$v['child'] eq ''">
+                <div>
+                    <span>{$v['attr_name']}</span>&nbsp;:&nbsp;
+                    <if condition="$v['attr_input_type'] neq '2'">
+                    <input type="text" name="extendattr{$v['attr_id']}">
+                    <else/>
+                    <select name="extendattr{$v['attr_id']}">                                    
+                        <option value='0'>请选择</option>
+                        <volist name="v['all_value']" id="v1">
+                            <option value="{$v1['attr_value']}">{$v1['attr_value']}</option>
+                        </volist>
+                    </select>   
+                    </if>
+                </div>   
+                </volist>
+            </div>
+        </div>-->
+
+        <div class="section-box general-info clearfix">
+            <h3 class="fLe"><span>*</span>商品描述&nbsp;:&nbsp;</h3>
+            <textarea class="box editor-box fRi clearfix" name="goods_content" id="myEditor">{$goods_data['goods_content']}</textarea>
+        </div>
+        <div class="section-box rent-info clearfix">
+            <a class='btn' href='javascript:;'>确认发布</a>
+        </div>
+    </form>
+</div>
+<include file="Public:footer" />  
+</body>
+<script type="text/javascript">
+
+//标题字数  
+$('#biaoti').bind('input propertychange', function() {  
+    $('.zishu').html($(this).val().length); 
+}); 
+
+var goods = {$goods_json};
+console.log(goods)
+
+if(goods.rent_dw==4){
+	$(".selectActive2").css("background-color","#D2D2D2");
+	$(".selectActive1").css("background-color","#fff");
+	$(".select2").css("display","block").css("background-color","#fff");
+	$(".select1").css("display","none");
+	is_cz = true;
+}
+if(goods.rent_dw==1){
+	is_cz = false;
+}
+if(goods.rent_dw==2){
+	$(".unit-class").text("天")
+	$("input[name='rent_dw']:eq(1)").attr("checked","true")
+}
+if(goods.rent_dw==3){
+	$(".unit-class").text("时")
+	$("input[name='rent_dw']:eq(2)").attr("checked","true")
+}
+
+if(goods.is_check==1 && goods.check_status==0){
+	$(".addError").css("display","block");
+	$(".addError>p:eq(1)").text(goods.check_content)
+}
+//保险
+if(goods.safest==0){
+	$("input[name='safest']:eq(0)").attr("checked","true")
+}
+if(goods.safest==1){
+	$("input[name='safest']:eq(1)").attr("checked","true")
+}
+//押金
+if(goods.deposit==0){
+	$("input[name='deposit']:eq(0)").attr("checked","true")
+}
+if(goods.deposit==1){
+	$("input[name='deposit']:eq(1)").attr("checked","true")
+}
+if(goods.deposit==2){
+	$("input[name='deposit']:eq(2)").attr("checked","true")
+}
+/**
+ * 商品区域选择
+ */
+var area = (function(){
+    var select_name = 'province',
+        change_name = select_name,
+        area        = {},//保存已经获取的区域
+        select_area = {'province':goods.province,'city':goods.city,'area':goods.area};
+    $(".area_select").on('change','select',function(){
+        select_name  = $(this).attr('name'),
+        value        = $(this).val(); 
+        change_name  = select_name == 'province'? 'city' : (select_name == 'city'? 'area' : ''); 
+        select_area[select_name] = value;
+        if(select_name == 'province'){
+            select_area['city'] = 0;
+            select_area['area'] = 0;
+        }
+        if(select_name == 'city'){
+            select_area['area'] = 0;
+        }
+        if(change_name){
+            getArea(value);
+        }       
+    })
+    
+    function getArea(area_no , init_area_name){  
+        if(area[area_no]){          
+            showAreaHtml(area[area_no]);
+        }else{
+
+            $.post("{:U('Area/getArea')}",{'area_no':area_no},function(res){
+                area[area_no] = res;
+                showAreaHtml(res , init_area_name);
+            })
+        }       
+    }
+
+    function showAreaHtml(data , init_area_name){ 
+        var html = ["<option value='0'>请选择...</option>"];
+        for(var k in data){
+            if(init_area_name && data[k].area_no == goods[init_area_name]){
+                html.push("<option selected value='" + data[k].area_no +"'>" + data[k].area_name + "</option>");
+            }else{
+                html.push("<option value='" + data[k].area_no +"'>" + data[k].area_name + "</option>");
+            }           
+        }
+        html = html.join('');       
+        if(init_area_name){
+            $("select[name='"+ init_area_name +"']").html(html);
+        }else{
+            $("select[name='"+ change_name +"']").html(html);
+            if(change_name == 'city'){
+                $("select[name='area']").html("<option value='0'>请选择...</option>");  
+            }
+        }
+        
+    } 
+           
+    function checkArea(){
+        if(select_area['province'] == '100000' || select_area['province'] == '110000' || select_area['province'] == '120000' || select_area['province'] == '130000'){
+            if(!select_area['province'] || !select_area['city']){
+                return '请选择区域';
+            }
+        }else{
+            if(!select_area['province'] || !select_area['city'] || !select_area['area']){
+                return '请选择区域';
+            }           
+        }
+        return '';
+    }
+
+    return {
+        init : function(){
+            getArea(0 , 'province'); 
+            getArea(goods.province , 'city'); 
+            getArea(goods.city , 'area');
+        },
+        checkArea : function(){
+            return checkArea();
+        }
+    }     
+})();
+area.init();
+
+/**
+ * 商品租期
+ */
+var goods_rent = (function(){
+    var rent_dw           = 1,//租期单位默认为1
+        min_rent          = {$goods['min_rent']}, //租期最小值 
+        max_rent          = {$goods['max_rent']}, //租期最大值 
+        goods_rent_       = {$goods_rent_json}, //商品区间价格
+        goods_rent        = {},
+        status            = true,
+        msg               = '',
+        goods_rent_number = 1;
+    
+    
+    /*设置事件*/
+    function setEvents(){
+        /*租期区间小值*/
+        $(".on_rent").on('blur','.rent_min',function(){
+                msg         = '';
+            var start_value = $(this).val(),            
+                id          = $(this).attr('name');
+                id          = id.substring(6);
+            var end_value   = $("end_"+id).val(); // 获取相邻的值
+            if(goods_rent[id].start){
+                var r = checkRentData(id , start_value ,'start');
+            }else{
+                var r = checkRentData(id , start_value);
+            }   
+            if(r){
+                status            = true,
+                goods_rent[id].start = parseInt(start_value);
+            }else{
+                status            = false,
+                $(this).val(goods_rent[id].start);
+            }   
+        })
+        
+        /*租期区间大值*/
+        $(".on_rent").on('blur','.rent_max',function(){
+                msg         = '';
+            var end_value   = $(this).val(),            
+                id          = $(this).attr('name');
+                id          = id.substring(4);      
+            if(goods_rent[id].end){
+                var r = checkRentData(id , end_value ,'end');               
+            }else{
+                var r = checkRentData(id , end_value);
+            }
+            if(r){
+                goods_rent[id].end = parseInt(end_value);
+            }else{
+                $(this).val(goods_rent[id].end);
+            }
+        })
+         
+        /*租期单位变化*/
+        $("input[name='rent_dw']").click(function(){
+            rent_dw = $(this).val();
+            changeRentHtml();
+        });
+
+        $("#unit1").click(function(){       	
+        	$(".unit-class").text("月")
+        })
+        $("#unit2").click(function(){       	
+        	$(".unit-class").text("天")
+        })
+        $("#unit3").click(function(){       	
+        	$(".unit-class").text("时")
+        })
+        $("#unit4").click(function(){       	
+        	$(".unit-class").text("台/件")
+        })
+        
+        /*增加租期区间段*/
+        $(".goods_rent_add").on('click',function(){       
+            var html = '';
+                html +="<div class='all-width rent'>"; 
+                html +=   "&nbsp;&nbsp;&nbsp;<input class='rent_min' type='text' name='start_"+(-goods_rent_number)+"' >";
+                html +=   "&nbsp;-&nbsp;";
+                html +=   "<input class='rent_max' type='text' name='end_"+(-goods_rent_number)+"'>";
+                html +=   " <span>价格&nbsp;:&nbsp;</span>";   
+                html +=   " <input type='text' name='goods_rent_price_"+(-goods_rent_number)+"' class='rent-price'>";   
+                html +=   " <a href='javascript:;'' class='cancel-row rent_delete'>删除</a>";
+                html+="</div>";
+            $(this).parent('div').before(html);            
+            goods_rent[(-goods_rent_number)] = {
+              'start' : '',
+              'end'   : '',
+              'goods_rent_price' : ''
+            };
+            goods_rent_number++;   
+        })
+        
+        /*删除租期区间段*/
+        $(".on_rent").on('click','.rent_delete',function(){
+            var id = $(this).parent('div').children('input').attr('name');
+                id = id.substring(6);
+            $(this).parent('div').remove();
+            delete goods_rent[id];
+        })
+
+        $("input[name='min_rent']").blur(function(){           
+            if($("input[name='min_rent']").val()>200){
+            	alert("最小租期不能超过200")
+            	min_rent = parseInt($(this).val());
+            }
+            if($("input[name='min_rent']").val()<0){
+            	alert("最小租期不能小于0")
+            	min_rent = parseInt($(this).val());
+            }
+        })
+
+        $("input[name='max_rent']").blur(function(){
+            
+            if($("input[name='max_rent']").val()>200){
+            	alert("最大租期不能超过200")
+            	max_rent = parseInt($(this).val());
+            }  
+            if($("input[name='max_rent']").val()<0){
+            	alert("最大租期不能小于0")
+            	max_rent = parseInt($(this).val());
+            }
+        })
+    }
+    
+    /**
+     * 根据出租单位动态改变html
+     */
+    function changeRentHtml(){
+        if(rent_dw == 1){
+            $(".rent_dw").eq(0).html('<span class="star">*</span> 最小出租月数 :');
+            $(".rent_dw").eq(1).html('<span class="star">*</span> 最小出租月数 :');
+        }else
+        if(rent_dw == 2){
+            $(".rent_dw").eq(0).html('<span class="star">*</span> 最小出租天数 :');
+            $(".rent_dw").eq(1).html('<span class="star">*</span> 最大出租天数 :');
+        }else
+        if(rent_dw == 3){
+            $(".rent_dw").eq(0).html('<span class="star">*</span> 最小出租小时 :');
+            $(".rent_dw").eq(1).html('<span class="star">*</span> 最大出租小时 :');
+        }else
+        if(rent_dw == 4){
+            $(".rent_dw").eq(0).html('<span class="star">*</span> 最小出租件数 :');
+            $(".rent_dw").eq(1).html('<span class="star">*</span> 最大出租件数 :');
+        }
+    }
+
+    /**
+     * 检查租期是否设置正确
+     */
+    function checkRentData(id , value ,type){
+        if(value < min_rent || value > max_rent){
+            msg = '设置的数据不正确';
+            return false;
+        }
+        if(type == 'start'){
+            if(value > goods_rent[id].end){
+                msg = '设置的数据只能小于第二个';
+                return false;
+            }        
+        }else
+        if(type == 'end'){
+            if(value < goods_rent[id].start){
+                msg = '设置的数据只能大于第一个';
+                return false;
+            }
+          
+        }
+        for(var k in goods_rent){
+            if(value <= goods_rent[k].end && value >= goods_rent[k].start && k != id){
+                msg = '设置的数据区间段不正确';
+                return false
+            }
+        }  
+        return true;
+    }
+
+    return {
+        init : function(){
+            setEvents();
+        },
+        getStatus : function(){
+            return {
+               'status' : status,
+               'msg'    : msg
+            }
+        },
+        checkIsEmpty : function(){
+            for(var k in goods_rent){
+                if(!goods_rent[k]['start'] || !goods_rent[k]['end']){
+                    return false;
+                }
+            }  
+            return true;
+        }
+    }
+})();
+goods_rent.init();
+var is_cz = false;
+/**
+ * 商品相册和图片
+ */
+var goods_gallery = (function(){
+    $(".get-img").on('change','input',function(){
+        var file   = $(this)[0].files[0];   
+        var reader = new FileReader(); 
+        var _this  = this; 
+        //将文件以Data URL形式读入页面  
+        reader.readAsDataURL(file);  
+        reader.onload=function(e){ 
+            //显示文件      
+            $(_this).parent('.get-img').css("background","url("+this.result+") no-repeat").css("background-size","100%");
+        }  
+    })
+
+    $(".images-box").on('change','input',function(){
+        var file   = $(this)[0].files[0];   
+        var reader = new FileReader(); 
+        var _this  = this; 
+        //将文件以Data URL形式读入页面  
+        reader.readAsDataURL(file);  
+        reader.onload=function(e){ 
+            //显示文件      
+            $(_this).parent('.get-img').css("background","url("+this.result+") no-repeat").css("background-size","100%");
+        }  
+    }) 
+
+    /*添加商品相册*/
+    var num = 0;
+    $(".get-img2").click(function(){
+        num++; 
+        var html  = "<div class='img'>";
+            html += "<label class='get-img'>";
+            html += "<input type='file' class='file-img' name='gallery_img" + num + "' >";
+            html += "<span class='icon-close'></span>";          
+            html += "</label>";                                      
+            html += "</div>";                            
+        $(this).parent('.img').before(html);         
+        $("input[name='number']").val(num);//设置上传图片个数  
+    })         
+
+    $(".images-box").on('click','.icon-close',function(){
+    	$(this).prev().prop('disabled','true');
+    	var gallery_id =$(this).attr('data-galleryid');
+    	if(gallery_id){
+     		if(confirm('确认删除?')){  
+     			var _this = this;
+		     	$.post("{:U('goodsGalleryDelete')}",{"gallery_id":gallery_id},function(res){      
+		            alert(res['msg']);
+		            if(res['status']){
+		                $(_this).parent("label").parent(".img").remove();  
+		            } 
+		        });
+		    }
+    	}else{
+	        num--; 
+	        $("input[name='number']").val(num);//设置上传图片个数 
+	        $(this).parent("label").parent(".img").remove();   		
+    	}                
+    })  
+})();
+
+$(".btn").click(function(){
+    request();
+})
+
+/*
+ * 提交数据
+ **/
+function request(){  
+    var data = new FormData($("#form")[0]);  // 要求使用的html对象
+    var url  = "{:U('Member_goods/goodsUpdate')}";
+    var url_ = "{:U('Member_goods/goodsList')}";
+    if(is_cz){
+        data.append("goods_price", $('.select2 input').val());
+    }
+    if(is_cz == false){
+    	data.append("goods_price", $('.select1 input').val());
+    	if($("input[name='safest']").is(':checked')==true){
+    		data.append("safest", $("input[name='safest']:checked").val());
+    	}
+    	if($("input[name='deposit']").is(':checked')==true){
+    		data.append("deposit", $("input[name='deposit']:checked").val());
+    	}  
+    }
+    data.append("number", {$gallery_number});
+    $.ajax({  
+          url : url ,  
+          type: 'POST',  
+          data: data,  
+          async: true,  
+          // 下面三个参数要指定，如果不指定，会报一个JQuery的错误 
+　　　　　       cache: false,  
+          contentType: false,  
+          processData: false,  
+          success: function (res) {  
+              alert(res.msg);
+              if(res.status){
+                  window.location.href = "{:U('Member_goods/goodsList')}";
+              } 
+          },  
+          error: function (returndata) {  
+              console.log(returndata); 
+          }  
+     });  
+}
+
+function checkdata(){
+    var msg = goods_rent.getStatus();
+    var r   = goods_rent.checkIsEmpty();
+    if(msg.status && r){
+        return true;
+    }
+    return false;
+}
+
+window.onload = function(){
+     window.UEDITOR_HOME_URL = "{:C('STATIC_URL')}/js/ueditor/";
+     UE.getEditor('myEditor', {
+         theme:"default", //皮肤
+         lang:"zh-cn", //语言
+         initialFrameWidth:800,  //初始化编辑器宽度,默认800
+         initialFrameHeight:400,
+         allHtmlEnabled:false,
+     })
+}  
+</script>
+</html>

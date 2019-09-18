@@ -1,0 +1,134 @@
+<extend name="NBase/mallcommon"/>
+<block name="style">
+    <link href="{:C('STATIC_URL')}/Orangesha/css/details.css" rel="stylesheet">
+    <script type="text/javascript" src="__STATIC__/jquery.imagezoom.min.js"></script>
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Orangesha/js/tool.js"></script>
+     <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+</block>
+<block name="header">
+    <div class="shop-logo">
+        <img src="{:C('STATIC_URL')}/Orangesha/image/shop_logo.jpg" alt="">
+    </div>
+    <div class="shop-nav">
+        <ul>
+            <li>首页</li>
+            <li>所有商品</li>
+            <li>配件</li>
+        </ul>
+    </div>
+</block>
+<block name="body" >
+    <div class="details">
+        <div class="nav-top">当前位置 : 首页  >  分享  >  无心磨床  >  动压型</div>
+        <div class="details-info">
+            <div class="info-left">
+                <div class="left-image">
+                    <!--图片展示区域-->
+                    <div class="box">
+                        <div class="tb-booth tb-pic tb-s310">
+                            <a href="{$pics.0.path}"><img src="{$pics.0.path}" alt="" rel="{$pics.0.path}" class="jqzoom" /></a>
+                        </div>
+                        <ul class="tb-thumb" id="thumblist">
+                            <volist name="pics" id="ps" key="pk">
+                                <eq name="pk" value="1">
+                                    <li class="tb-selected">
+                                        <div class="tb-pic tb-s40">
+                                            <a href="#">
+                                                <img src="{$ps.path}" mid="{$ps.path}" big="{$ps.path}" style="width:100%;">
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <else />
+                                    <li>
+                                        <div class="tb-pic tb-s40">
+                                            <a href="#">
+                                                <img src="{$ps.path}" mid="{$ps.path}" big="{$ps.path}" style="width:100%;">
+                                            </a>
+                                        </div>
+                                    </li>
+                                </eq>
+
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+                <!--信息展示-->
+                <div class="left-info">
+                    <div class="info-title">{$good.title}</div>
+                    <div class="price">价格：    <span><b>￥{$good.price}</b> 元</span></div>
+                    <div class="good-info">
+                        <span>累计销量<span>{$good.sales}</span></span><span>累计评价<span>126</span></span>
+                    </div>
+                    <div class="nums">
+                        数量：    <span class="tool-minus">-</span><span class="nums-num tool-num">1</span><span class="tool-plus">+</span>
+                        件(库存360件)
+                    </div>
+                    <div class="btn">
+                        <div class="now">立即购买</div>
+                        <div class="cat">加入购物车</div>
+                    </div>
+                </div>
+                <!-- 选项卡 -->
+                <div class="tab">
+                    <div class="tab-nav">
+                        <div class="details-of active">详情介绍</div>
+                        <!-- <div>产品参数</div> -->
+                        <div class="details-rated">评价(10)</div>
+                        <div class="hr"></div>
+                    </div>
+                    <div class="details-of-list">
+                        {$good.content}
+                    </div>
+                    <div class="details-rated-list">
+                        评价内容
+                    </div>
+                </div>
+            </div>
+            <!-- 广告栏 -->
+            <div class="info-right">
+                <div class="title">近期热租商品</div>
+                <div class="li">
+                    <img src="{:C('STATIC_URL')}/Orangesha/image/details_li.jpg" alt="">
+                    <div class="text">欧泰立式数控铣床OTM-950...</div>
+                    <div class="price">￥7000.00 /月起<div class="sales">销量：260</div></div>
+                </div>
+                <div class="li">
+                    <img src="{:C('STATIC_URL')}/Orangesha/image/details_li.jpg" alt="">
+                    <div class="text">欧泰立式数控铣床OTM-950...</div>
+                    <div class="price">￥7000.00 /月起<div class="sales">销量：260</div></div>
+                </div>
+                <div class="li">
+                    <img src="{:C('STATIC_URL')}/Orangesha/image/details_li.jpg" alt="">
+                    <div class="text">欧泰立式数控铣床OTM-950...</div>
+                    <div class="price">￥7000.00 /月起<div class="sales">销量：260</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function(){
+            document.oncontextmenu=function(e){return false;} 
+            $('body').bind("selectstart",function(){return false;});
+            // 图放大镜
+            $(".jqzoom").imagezoom();
+            $("#thumblist li a").click(function(){
+                $(this).parents("li").addClass("tb-selected").siblings().removeClass("tb-selected");
+                $(".jqzoom").attr('src',$(this).find("img").attr("mid"));
+                $(".jqzoom").attr('rel',$(this).find("img").attr("big"));
+            });
+            $(".tab-nav .details-of,.tab-nav .details-rated").click(function(){
+                $(".tab-nav .active").removeClass("active");
+                $(this).addClass("active");
+                if($(this).text()!="详情介绍"){
+                    $(".details-of-list").css("display","none");
+                    $(".details-rated-list").css("display","block");
+                }else{
+                    $(".details-of-list").css("display","block");
+                    $(".details-rated-list").css("display","none");
+                }
+            });
+            tool.minus(1);
+            tool.plus(10);
+        });
+    </script>
+</block>

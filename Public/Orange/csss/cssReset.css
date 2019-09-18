@@ -1,0 +1,126 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* 
+* =============
+*   css reset 
+* =============
+*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td { margin:0; padding:0; }
+body { background:#fff; color:#666666; font-size:14px; font-family: "微软雅黑","宋体",Verdana, Arial, Helvetica, sans-serif; }
+td,th,caption { font-size:14px; }
+i{ font-style:normal;}
+h1, h2, h3, h4, h5, h6 { font-weight:normal; font-size:100%; }
+p { line-height:20px;}
+address, caption, cite, code, dfn, em, strong, th, var { font-style:normal; font-weight:normal;}
+a { color:#555; text-decoration:none; }
+a:hover { text-decoration:none; }
+img { border:none; }
+ol,ul,li { list-style:none; }
+input, textarea, select, button { font:14px Verdana,Helvetica,Arial,sans-serif;  }
+input:focus { outline:none;}
+table { border-collapse:collapse; }
+html {overflow-y: scroll;} 
+/* css common */
+.clearfix:after {content: "."; display: block; height:0; clear:both; visibility: hidden;}
+.clearfix { *zoom:1; }
+
+.fLe { float:left;}
+.fRi { float:right; }
+
+input[type=button],button,a {
+	-moz-transition: all 0.2s ease-out 0s;
+    -webkit-transition: all 0.2s ease-out 0s;
+    -o-transition: all 0.2s ease-out 0s;
+    transition: all 0.2s ease-out 0s;
+}
+.disNone {
+	display:none;
+}
+.disBlock {
+	display:block;
+}
+.posRel {
+	position:relative;
+}
+.vAlignMid {
+	vertical-align:middle;
+}
+.underLine a:hover {
+	text-decoration:underline;
+}
+
+/* 
+* =============
+*    margin
+* =============
+*/
+
+/* margin-top */
+.marT10 {
+	margin-top:10px;	
+}
+.marT15 {
+	margin-top:15px;	
+}
+.marT20 {
+	margin-top:20px;	
+}
+.marT24 {
+	margin-top:24px;	
+}
+.marT30 {
+	margin-top:30px;	
+}
+.marT40 {
+	margin-top:40px;	
+}
+.marT50 {
+	margin-top:50px;	
+}
+.marT60 {
+	margin-top:60px;
+}
+.marT100 {
+	margin-top:100px;	
+}
+
+/* margin-left */
+.marL12 {
+	margin-left:12px;
+}
+.marL16 {
+	margin-left:16px;
+}
+.marL150 {
+	margin-left:150px;
+}
+.marL260 {
+	margin-left:260px;
+}
+.marL290 {
+	margin-left:290px;
+}
+.marL330 {
+	margin-left:330px;
+}
+.marL420 {
+	margin-left:420px;
+}
+/* margin-right */
+.marR10 {
+	margin-right:10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>新闻——E橙优品</title>
+<meta name="description" content="{$data.description}">
+<meta name="keywords" content="{$data.keyword}">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link href="{:C('STATIC_URL')}/Home/css/header.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/home.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/problem.css" type="text/css">
+<script src="/Public/js/jquery-2.0.3.min.js"></script>
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<script src="{:C('STATIC_URL')}/Seo/seo_news.js"></script>
+
+
+<style>
+.hide{display:none;}
+.menu{ display: none;}
+.problem .location{margin-bottom: 12px;}
+.problem .location a{ color: #688BCB;}
+.section,.section2{position: relative; width:980px;float:left; margin-left:20px;background-color: #F8F8F8; padding: 20px 40px 100px 40px; box-sizing: border-box;}
+.section>div:first-of-type{margin-bottom: 20px; border-bottom: 2px solid #A0D9D6;width: 100%;height: 40px;font-size: 22px;font-weight: bold;text-align: center;}
+.section2>div:first-of-type p{padding-bottom: 10px; margin-bottom: 20px; border-bottom: 2px solid #A0D9D6;width: 100%;height: 40px;font-size: 22px;font-weight: bold;}
+.section2>div:first-of-type p span{ display: block; font-size: 14px;font-weight: normal;margin-top: 6px;}
+.section>ul>li{font-weight: bold; height:40px; line-height: 40px;} 
+.section>ul>li a{ color: #666;}
+.section>ul>li a span:nth-of-type(2){ float: right;}
+.section .page_btn{ width: 92%;position: absolute; bottom: 48px;text-align: right;}
+.section .page_btn>ul{overflow: auto;display: inline-flex;}
+.section .page_btn>ul li{ float: left; width: 30px; height: 30px; line-height: 30px; text-align: center; border: 1px solid #DFDFDF;margin-right: 8px;}
+.section .page_btn>ul .active{background-color: #37A3A3; color: #fff;}
+.section .page_btn>div{display: inline-block;margin-left: 20px;}
+.section .page_btn>div span{ color: #37A3A3;}
+.section .page_btn>div input{width: 36px;height: 26px;border-radius: 4px;padding-left: 4px;margin: 0px 4px; border: 1px solid #dfdfdf;}
+.section .page_btn>div button{font-family: "微软雅黑"; background-color: #37A3A3; color: #fff; width: 50px; height: 26px; border-radius: 4px;}
+.news-nav{width: 198px;float: left;}
+.news-nav>ul{ background-color: #EBE9EA;}
+.news-nav>ul li{text-align: center;font-weight: bold; height: 40px; line-height: 40px; cursor: pointer;} 
+.news-nav>ul .active{background-color: #37A3A3; color: #fff;}
+.news-nav>div{width: 100%; padding: 10px 20px; box-sizing: border-box; border: 1px solid #EBE9EA; margin: 10px 0px;}
+.news-nav>div>ul li{border-bottom: 1px solid #EBE9EA;line-height: 26px;padding-top: 10px;width: 100%; white-space: nowrap;text-overflow: ellipsis; overflow: hidden;} 
+.news-nav>div>ul li:last-of-type{border-bottom: none;}
+.news-nav>div>ul a:hover{color: #ff6600;}
+</style>
+</head>
+<body>
+<include file="Public:header_top" />
+<include file="Public:header_search" />
+<include file="Public:mallNav" />
+<div class="problem clearfix">
+    <div class="location">当前位置：<a href="http://www.orangesha.com/">首页</a> > <a href=""> <if condition="$data['type'] eq 1"><a href="http://www.orangesha.com/xinwen.html">新闻</a>
+    <elseif condition="$data['type'] eq 2"/><a href="http://www.orangesha.com/gonggao.html">公告</a>
+    <else/><a href="http://www.orangesha.com/rules.html">规则</a>
+    </if></a> > 
+    <if condition="$data['type'] eq 1">新闻详情
+    <elseif condition="$data['type'] eq 2"/>公告详情
+    <else/>规则详情
+    </if>
+    </div>
+    <div class="news-nav">
+        <ul attr_id={$type}>
+            <a href=""><li>新闻</li></a>
+        </ul>
+        <div>
+            最新文章
+            <ul>
+            <foreach name="news" item="vo">
+                <a href="http://www.orangesha.com/xinwen_{$vo.id}.html"><li>· {$vo.title}</li></a>
+            </foreach>
+            </ul>
+        </div>
+         <div>
+            最新商品
+            <ul>
+            <foreach name="goods" item="vo">
+                <a href="http://{$vo['domain']}.orangesha.com/shangpin-{$vo['id']}.html" title="{$v1['goods_name']}">
+                <li>
+                    · {$vo.goods_name}
+                </li></a>
+            </foreach>
+            </ul>
+        </div>
+        <div>
+            店铺推荐
+            <ul>
+            <foreach name="shop" item="vo">
+                <a href="http://{$vo['domain']}.orangesha.com/">
+                <li>
+                    · {$vo.shop_name}
+                </li>
+                </a>
+            </foreach>
+                
+            </ul>
+        </div>
+
+    </div>
+    <!--新闻-->
+    <div class="section2">
+        <div>
+            <p>
+                {$data['title']}
+                <span>{$data['update_time']|date="Y-m-d H:i:s",###}</span>
+            </p>
+        </div>
+        <div>
+            {$data['content']|html_entity_decode}
+        </div>
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- /底部 -->    
+<script>
+    if($(".news-nav>ul").attr("attr_id")==1){
+        $(".news-nav ul li:eq(0)").addClass("active")
+        $(".news-nav ul li:eq(0)").siblings().removeClass("active")
+    }
+    if($(".news-nav>ul").attr("attr_id")==2){
+        $(".news-nav ul li:eq(1)").addClass("active")
+        $(".news-nav ul li:eq(1)").siblings().removeClass("active")
+    }
+    if($(".news-nav>ul").attr("attr_id")==3){
+        $(".news-nav ul li:eq(2)").addClass("active")
+        $(".news-nav ul li:eq(2)").siblings().removeClass("active")
+    }
+
+    $(".news-nav ul li").click(function(){
+        $(this).addClass("active")
+        $(this).siblings().removeClass("active")
+        if($(".news-nav ul li:eq(0)").is(".active")){
+            $(".section:eq(0)").css("display","block")
+            $(".section:eq(1)").css("display","none")
+            $(".section:eq(2)").css("display","none")
+        }
+        if($(".news-nav ul li:eq(1)").is(".active")){
+            $(".section:eq(1)").css("display","block")
+            $(".section:eq(0)").css("display","none")
+            $(".section:eq(2)").css("display","none")
+        }
+        if($(".news-nav ul li:eq(2)").is(".active")){
+            $(".section:eq(2)").css("display","block")
+            $(".section:eq(1)").css("display","none")
+            $(".section:eq(0)").css("display","none")
+        }
+    })
+</script>
+</body>
+</html>
+

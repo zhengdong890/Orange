@@ -1,0 +1,7 @@
+*{padding:0; margin:0;font-family:"";font-style:normal;font-size:16px;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;}  
+#wraper{width:1400px;height:auto;float:left;box-shadow:0px 0px 2px 1px  #999999;background:white;}
+#main{width:1200px;height:auto;float:left;}  

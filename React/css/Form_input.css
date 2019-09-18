@@ -1,0 +1,13 @@
+.form{width:100%;height:auto;float:left;}   
+.formTable{margin:0 auto;margin-top:10px;}
+.displayBlock{display:block}
+.formTable td .label{float:right;color:#192E32;font-weight:700;font-size:14px}
+.formTable td .isShow{width:20px;height:20px;float:left;}
+.formTable td .margin{margin-left:15px}
+.formTable input{width:400px;height:20px;border-radius:3px;border-bottom:1px solid #E3E9EF;border-top:1px solid #ABADB3;border-left:1px solid #E2E3EA;border-right:1px solid #DBDFE6}
+.formTable textarea{width:500px;height:160px;border-radius:3px;border-bottom:1px solid #E3E9EF;border-top:1px solid #ABADB3;border-left:1px solid #E2E3EA;border-right:1px solid #DBDFE6}
+.formTable td{padding-right:30px;padding-top:10px}
+.formTable .btn{border:0px;background:#C43926;color:white;padding:5px;border-radius:4px;float:left;}
+.formTable td .p_0{height:20px;float:left;line-height:20px}
+.formTable td .p_1{height:20px;float:left;line-height:20px;}
+.formTable td .errorMsg{padding-left:5px;color:red}

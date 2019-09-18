@@ -1,0 +1,83 @@
+﻿售后申请单详情各属性值说明
+id            : 售后申请单id,
+order_id      : 所属订单id,
+order_data_id : 所属订单详情id,
+goods_id      : 商品id,
+refund_sn     : 售后申请单编号,
+type          : 售后单类型 1 退款 2换货 3退货退款，
+beacuse       : 申请原因,
+refund_content: 说明,
+create_time   : 申请时间,
+status        : 当前售后申请单状态 -1卖家不同意 -2已撤销 0申请中 1卖家同意 2已完成
+handle_time   : 处理完成时间,
+case          : 退款金额,
+thumb         : 买家申请上传的图片
+
+
+卖家ajax获取售后申请列表
+地址 : http://www.orangesha.com/index.php/Home/SellerRefund/getRefundList
+请求json参数 : {
+    firstRow : 开始页数,
+    listRows : 每页显示多少条
+}
+返回
+{
+    status : 0失败 1成功, 
+    msg    : ,
+    data   : [
+        {
+            id            : 售后申请单id,
+            order_id      : 所属订单id,
+            order_data_id : 所属订单详情id,
+            goods_id      : 商品id,
+            refund_sn     : 售后申请单编号,
+            type          : 售后申请单类型 1 退款 2换货 3退货退款,
+            beacuse       : 申请原因,
+            refund_content: 说明,
+            create_time   : 申请时间,
+            status        : 当前售后申请单状态 -1卖家不同意 -2已撤销 0申请中 1卖家同意 2已完成,
+            handle_time   : 处理完成时间,
+            case          : 退款金额,
+            thumb         : 买家申请上传的图片,
+
+        },
+        ............
+        {}
+    ],
+    totalRows:总记录数
+}
+
+售后详情页面 
+地址 : http://www.orangesha.com/?m=Home&c=SellerRefund&a=refundDetail&id= 
+
+status : 当前售后申请单状态(-1卖家不同意 -2已撤销 0申请中 1卖家同意 2已完成)
+代码例子 <div data-status='{$refund_goods['status']}'> jq获取$(div).attr('data-status');
+其他售后详情属性类似这样 如退款金额 则{$refund_goods['case']}
+
+售后详情数据 json字符串 需要转成json 
+代码例子 <div data-refund_goods='{$refund_goods_json}'> 
+jq获取 var refund_goods = $(div).attr('data-refund_goods');
+转换   refund_goods = JSON.parse(refund_goods);
+
+订单详情数据 json字符串 需要转成json
+代码例子 <div data-order_data='{$order_data}'> 
+jq获取   var order_data = $(div).attr('data-order_data');   
+转换     order_data = JSON.parse(rder_data);
+
+卖家ajax审核售后
+地址 : http://www.orangesha.com/index.php/Home/SellerRefund/checkRefund
+请求json参数 : {
+    id     : 售后申请单id,
+    status : 审核状态 (-1:不同意申请 , 1:同意申请)
+}
+返回
+{status : 0失败 1成功, msg : }
+
+卖家ajax确认退款
+地址 : http://www.orangesha.com/index.php/Home/SellerRefund/refundCase
+请求json参数 : {
+    id     : 售后申请单id
+}
+返回
+{status : 0失败 1成功, msg : }
+

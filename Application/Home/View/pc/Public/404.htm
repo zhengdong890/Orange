@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>404错误页面</title>
+<link href="http://www.baozoulol.top/404/404.css" rel="stylesheet" type="text/css" />
+<script src="http://www.baozoulol.top/404/jquery.js"></script>
+<script>
+		
+var isPC = window.location.search;
+	//alert(isPC);
+  if (isPC != '?pc'){
+	  
+		var mobileAgent = new Array("iphone", "ipod", "ipad", "android", "mobile", "blackberry", "webos", "incognito", "webmate", "bada", "nokia", "lg", "ucweb", "skyfire");
+		var browser = navigator.userAgent.toLowerCase(); 
+		var isMobile = false; 
+		for (var i=0; i<mobileAgent.length; i++){ if (browser.indexOf(mobileAgent[i])!=-1){ isMobile = true; 
+		//alert(mobileAgent[i]); 
+		location.href = 'http://www.zhangkun.vip';
+		break; } };
+	  };
+</script>
+
+<script type="text/javascript">
+$(function(){
+
+$(".xspt img").mouseover(function(){
+	$(this).animate({
+	right: 10,
+	},
+	 500,
+	 function(){
+		$(this).animate({
+	 right: 0,
+	}, 500);
+		});
+});
+
+$(".jrwz img").mouseover(function(){
+	$(this).animate({
+	left: 10,
+	},
+	 500,
+	 function(){
+		$(this).animate({
+	 left: 0,
+	}, 500);
+		});
+});
+	});
+</script>
+
+
+</head>
+
+<body>
+
+<div class="w_body">
+    <div class="dr_con">
+       <div class="dr_con1"></div>
+       <div class="dr_con2"><img src="http://www.baozoulol.top/404/daoru_phone2.png" width="372" height="125"></div>
+       <div class="dr_con3">
+       <table>
+  <tr>
+    <td width="120"><a href="http://www.orangesha.com" class="xspt"><img src="http://www.baozoulol.top/404/daoru_xs.png" width="96" height="24" border="0"></a></td>
+    <td width="9" align="center" id="jt_bor"><img src="http://www.baozoulol.top/404/fenge.png" width="5" height="25"></td>
+    <td width="142" align="center"><a href="http://www.orangesha.com" class="jrwz"><img src="http://www.baozoulol.top/404/daoru_jwz.png" width="95" height="23" border="0"></a></td>
+  </tr>
+</table>
+</div>
+       <div class="dr_con4"></div>
+    </div>
+    <div class="c_left"> 
+      <!--fn-声音显示 -->
+      <div class="fn-audio" id="sectionMusic"> <img id="imgMusicBtn" class="audio_close" src="404/music_but.png" width="20" height="17" onClick="SwitchMusic();" /> </div>
+      <div style="display: none; visibility: hidden;">
+        <audio id="myMusic" autoplay="autoplay" loop>
+          <source src=""  />
+          您的浏览器不支持html5音频格式</audio>
+      </div>
+      <div id="PauseTime" style="display: none; visibility: hidden;"> </div>
+      <script src="http://www.baozoulol.top/404/music.js"></script> 
+      <!--fn-声音显示 end--> 
+    </div>
+  </div>
+
+<embed src="404/END THEME.mp3" loop="-1" autostart="true" width="0" height="0" controls="controlpanel">
+</body>
+</html>

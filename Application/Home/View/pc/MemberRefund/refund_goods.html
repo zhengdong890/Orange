@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>等待商家处理退款</title>
+		<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+        <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+        <link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+        <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/orderRefund.css" type="text/css">
+        <link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+        <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+        <script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script> 
+	</head>
+	<body>
+		<include file="Public:header_top" />
+		<div class="orderRefund_top" data-type={$refund_goods['type']} data-refundId={$refund_goods['id']} data-time={$refund_goods['create_time']}>
+			<div>
+				<a class="logo2" href="http://{$Think.server.HTTP_HOST}" title="中国工业机器人,数控机床多少钱一台,无人机,3d打印机多少钱,农业无人机"></a>
+				<p>您的位置： <a href="{:U('Index/index')}">首页</a> > <a href="{:U('MemberOrder/orderList')}">我的订单</a> > <a>售后</a> </p>
+			</div>			
+		</div>	
+		<ul class="refund_step3">
+			<li>
+				<div style="background-color: #FF9972;"><span>1</span>买家申请退货退款</div>
+			</li>
+			<li>
+				<div style="background-color: #FF4400;"><span>2</span>卖家处理退货申请</div>				
+			</li>
+			<li>
+				<div><span>3</span>买家退货给卖家</div>				
+			</li>
+			<li>
+				<div><span>4</span>卖家确认收货，退款完成</div>				
+			</li>
+		</ul>
+		<div class="orderRefund_box">
+			<!--等待商家处理-->
+			<div class="fl refunding refund_style_box" data-id="{$order_data.id}">
+				<div>
+					<h3>请等待商家处理 <span class="star">还剩<span id="t_d"></span>天<span id="t_h"></span>时<span id="t_m"></span>分<span id="t_s"></span>秒</span></h3>
+			        <p>您已经成功发起退货退款申请，请耐心等待商家处理。</p>
+				</div>
+				<div>
+					<p>· 商家统一或者超时未处理，系统将退款给您。</p>
+					<p>· 如果商家拒绝，您可以修改退款申请后再次发起，商家会重新处理</p>
+				    <button>修改申请</button>
+				    <p>您还可以：<a href="javascript:;" class="revoke">撤销申请</a> | <a href="javascript:;">申请介入</a></p>
+				</div>
+				<div>
+					<h3>协商历史</h3>
+				</div>
+			</div>
+			<!--退款详情-->
+			<div class="right2">
+				<h3>退款详情</h3>
+				<div>
+				<img src="{$order_data.goods_thumb}" alt="" width="200" />
+					<p><a class="order_detail">{$order_data.goods_name}</a></p>
+				</div>
+				<table>
+					<tr>
+						<td>卖家：</td>
+						<td>{$order_data.shop_name}</td>
+					</tr>
+					<tr>
+						<td>联系电话：</td>
+						<td>{$order_data.tel_num}</td>
+					</tr>
+					<tr>
+						<td>订单编号：</td>
+						<td class="order_sn">{$order_data.order_sn}</td>
+					</tr>
+					<tr>
+						<td>成交时间：</td>
+						<td>{$order_data.create_time|date="Y-m-d H:i:s",###}</td>
+					</tr>
+					<tr>
+						<td>单价：</td>
+						<td>¥ {$order_data.goods_price}*{$order_data.number}（数量）</td>
+					</tr>
+					<tr>
+						<td>邮费：</td>
+						<td>¥{$order_data['shipping_price']}</td>
+					</tr>
+					<tr>
+						<td>商品总价：</td>
+						<td>¥{$order_data['total_price']}</td>
+					</tr>
+				</table>
+				<table>
+					<tr>
+						<td>退款编号：</td>
+						<td class="refundId">{$refund_goods.refund_sn}</td>
+					</tr>
+					<tr>
+						<td>退款金额：</td>
+						<td>¥{$order_data.total_price}</td>
+					</tr>
+					<tr>
+						<td>原因：</td>
+						
+						<td><foreach name="because" item="vo">{$vo} ， </foreach></td>
+	
+					</tr>
+					<tr>
+						<td>要求：</td>
+						<td>仅退款</td>
+					</tr>
+					<tr>
+						<td>货物状态：</td>
+						<td><if condition="$data.send_status eq 0">未发货<elseif condition="$data.send_status eq 1"/>已发货</if></td>
+					</tr>
+					<tr>
+						<td>说明：</td>
+						<td>...</td>
+					</tr>
+				</table>
+			</div>
+		</div>	
+		<include file="Public:footer" />  
+		<script>
+			// 当前售后状态 0表示未处于申请售后中 
+			// -11 商家不同意退款     11 申请退款     12 商家同意申请退款 13 已退款  
+			// -21 商家不同意换货     21 申请换货     22 商家同意申请换货 23 商家已重新发货  
+			// -31 商家不同意退款退货 31 申请退货退款 32商家同意退款退货  33 已退款 
+			var applyTime = $(".orderRefund_top").attr("data-time")
+			
+			//退款倒计时
+		    function GetRTime(){	    	    
+		    			var iM = applyTime * 1000;   //得到申请时时间			
+						var nDate  = new Date(iM);   //直接将秒数当参数传进去。			
+						var now    = new Date(nDate);   
+						var year   = now.getFullYear(nDate);
+						var month  = now.getMonth(nDate);
+					    var date   = now.getDate(nDate); 
+					    var hour   = now.getHours(nDate);
+					    var minute = now.getMinutes(nDate);
+					    var second = now.getSeconds(nDate);
+					    
+					    date   = date < 10 ? '0' + date : date;
+					    hour   = hour < 10 ? '0' + hour : hour;
+					    minute = minute < 10 ? '0' + minute : minute;
+					    
+				    	var endTime = year + "/" + parseInt(month+1) + "/" + parseInt(date+2) + " " + hour + ":" + minute + ":" + second;  
+				    	
+					    var EndTime= new Date(endTime);
+					    var NowTime = new Date();
+					    var t =EndTime.getTime() - NowTime.getTime();
+					    var d=0;
+					    var h=0;
+					    var m=0;
+					    var s=0;
+					    if(t>=0){
+					      d=Math.floor(t/1000/60/60/24);
+					      h=Math.floor(t/1000/60/60%24);
+					      m=Math.floor(t/1000/60%60);
+					      s=Math.floor(t/1000%60);
+					    }	
+					    if(t<0 && applyTime!=0){
+					    	var id = $(".refunding").attr("data-id")
+					    	console.log(id)
+					    	$.post("http://www.orangesha.com/index.php/Home/SellerRefund/checkRefund",{'id':id,'status':2},function(res){
+								
+								if(res.status==1){
+									window.location.href="http://www.orangesha.com/index.php/Home/MemberRefund/return_goods&id="+id
+								}
+								if(res.status==0){
+									console.log(res)
+								}
+							})						      						      
+					    }	
+					    document.getElementById("t_d").innerHTML = d;
+					    document.getElementById("t_h").innerHTML = h;
+					    document.getElementById("t_m").innerHTML = m;
+					    document.getElementById("t_s").innerHTML = s;  
+		    		
+			}
+		    GetRTime();
+			setInterval(GetRTime,1000);
+			
+			//撤销退款申请		
+			$(".revoke").click(function(){
+				var refund_id = $(".orderRefund_top").attr("data-refundId")
+				if(confirm("确认要撤销申请吗？")){   
+				    $.post("http://www.orangesha.com/index.php/Home/MemberRefund/revoke",{'refund_id':refund_id},function(res){
+						console.log(res)
+						if(res.status==1){
+							alert("撤销成功")
+							window.location.href="{:U('MemberOrder/orderList')}";
+						}
+						if(res.status==0){
+							alert(res.msg)
+						}
+					})	
+				}	
+			})
+		</script>	
+	</body>
+</html>

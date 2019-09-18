@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>我的订单-物流详情</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/footer.css" >
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/buy-order.css" >
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+ <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->	
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">       
+        <div class="detail_top">
+        	<p>您的位置：<a href="{:U('Member_center/member')}">个人中心</a> > <a href="{:U('MemberOrder/orderList')}">我的订单</a> > <span>物流详情</span></p>        	
+        </div>
+        <div class="package_info">
+        	<div>包裹信息</div>
+        	<ul class="logistics_ul">
+        		<li><img src="{:C('STATIC_URL')}/Home/image/logistics1_2.png"></li>
+        		<li>
+        			<img class="logisticsLine" src="{:C('STATIC_URL')}/Home/image/logisticsLine.png">
+        			<img src="{:C('STATIC_URL')}/Home/image/logistics2_2.png">
+        		</li>
+        		<li>
+        			<img class="logisticsLine" src="{:C('STATIC_URL')}/Home/image/logisticsLine.png">
+        			<img src="{:C('STATIC_URL')}/Home/image/logistics3_2.png">
+        		</li>
+        		<li>
+        			<img class="logisticsLine" src="{:C('STATIC_URL')}/Home/image/logisticsLine.png">
+        			<img src="{:C('STATIC_URL')}/Home/image/logistics4_2.png">
+        		</li>
+        	</ul>
+        	<div class="logistics_div">
+        	<!-- 物流状态: 0-无轨迹 2-在途中，3-签收,4-问题件 -->
+	        	<div>您的宝贝<if condition="$state eq 0">还没发货<elseif condition="$state eq 2 "/>正在快马加鞭<elseif condition="$state eq 3"/>已经签收<else />有问题</if></div>
+
+	        	<ul>
+	        	<foreach name="logistics" item="vo">
+	        		<li>
+	        			<span>•</span>&nbsp;	
+	        			<span>{$vo.AcceptTime}</span>
+	        	
+
+	        			<span>{$vo.AcceptStation}</span>
+	        		
+	        			
+	        		</li>
+	        		<li>&nbsp; &nbsp;</li>
+	        		</foreach>
+	        	</ul>
+	        	<div>以上信息已经过优化处理，如需查看快递公司源文信息 <a>请点击</a></div>
+	        </div>
+	        <foreach name="order_data" item="vo">
+	        </foreach>
+	        <ul class="address_ul">
+	        	<li>运单号码：<span>{$arr['LogisticCode']}</span> 物流公司：<span>{$com.company}</span> 客服电话：<span>{$com.phone}</span></li>
+	        	<li>卖家昵称：<span>{$vo.name}</span></li>
+	        	<li>收货地址：<span>{$vo.address} {$vo.name}先生 {$Think.session.member_data.nickname}</span></li>
+	        	<li>发货地址：<span>深圳市南山区软件产业基地4栋a座702 严先生 13715964458</span></li>
+	        </ul>
+	        <ul class="good_img">
+	        <foreach name="order_data" item="vo">
+	        	<li><img src="{$vo.goods_thumb}"></li>
+	        	</foreach>
+	        </ul>
+        </div>        
+    </div>    
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+ $(".more_logistics").click(function(){
+ 	$(this).parent().parent().next().next().toggle()
+ })
+</script>
+</body>
+</html>
+
+
+
+    

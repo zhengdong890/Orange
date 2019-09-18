@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>需方交易-我的订单</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/footer.css" >
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/buy-order.css" >
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+ <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->	
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">       
+        <div class="detail_top">
+        	<p>您的位置：<a href="http://www.orangesha.com/member.html">个人中心</a> > <a href="http://www.orangesha.com/order.html">我的订单</a> > <span>订单详情</span></p>
+            <volist name="order_data" id="vo">
+            </volist>
+        	<ul class="order_ul">
+        		<li>拍下商品</li>
+        		<li>付款</li>
+        		<li>卖家发货</li>
+        		<li>确认收货</li>
+        		<li>评价</li>
+        	</ul>
+        	<ul>
+        		<li>{$order_data[0]['time']}</li>
+        		<li>{$order_data[0]['pay_time']}</li>
+        		<li>{$order_data[0]['send_time']}</li>
+        		<li>{$order_data[0]['receipt_time']}</li>
+        		<li>{$order_data[0]['comment_time']}</li>
+        	</ul>
+        </div>
+        <div class="detail_info">
+        	<div class="detail_info_left">
+	        	<div>订单信息</div>
+	        	<table>
+	        		<tr>
+	        			<td>收货地址：</td>
+	        			<td>{$vo.address}</td>
+	        		</tr>
+	        		<tr>
+	        			<td>买家留言：</td>
+	        			<td>{$vo.content}</td>
+	        		</tr>
+	        		<tr>
+	        			<td>发票抬头：</td>
+	        			<td></td>
+	        		</tr>
+	        		<tr>
+	        			<td>订单编号：</td>
+	        			<td>{$vo.order_sn}</td>
+	        		</tr>
+	        		<tr>
+	        			<td>商家：</td>
+	        			<td>{$vo.name}</td>
+	        		</tr>
+	        	</table>
+	        </div>
+            <!--订单状态-->
+            <if condition="$order_data[0]['pay_status'] eq 1 && $order_data[0]['send_status'] eq 0 && $order_data[0]['status'] eq 1">
+	        <div class="detail_info_right" style="background: url('__PUBLIC__/Home/image/Sigh.png') no-repeat 45px 60px;">
+	        	<p>订单状态：买家已经付款，等待卖家发货</p>	        	
+	        	<p>{$order_data[0]['pay_time']} </p>	        	
+	        </div>
+            <elseif condition="$order_data[0]['pay_status'] eq 0 && $order_data[0]['status'] eq 1"/>
+            <div class="detail_info_right" style="background: url('__PUBLIC__/Home/image/Sigh.png') no-repeat 45px 60px;">
+                <p>订单状态：订单已经提交，等待买家付款</p>
+                <p>• 您还有 <span class="detail_time">2天 20小时58分41秒</span> 来付款，超时订单自动关闭</p>
+                <p>{$order_data[0]['time']}  </p>
+                
+            </div>
+            <elseif condition="$order_data[0]['pay_status'] eq 1 && $order_data[0]['send_status'] eq 1 && $order_data[0]['status'] eq 1"/>
+            <div class="detail_info_right" style="background: url('__PUBLIC__/Home/image/Sigh.png') no-repeat 45px 60px;">
+                <p>订单状态：卖家已经发货，等待买家签收</p>
+                <p>• 您还有 <span class="detail_time">2天 20小时58分41秒</span> 来确认收货，超时订单自动关闭</p>
+                <p>物流： <span>顺丰速运</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 运单号： <span>{$order_data[0]['air_way_code']}</span></p>
+                <p>{$order_data[0]['send_time']} </p>
+                
+            </div>
+            <elseif condition="$order_data[0]['comment_status'] eq 0 && $order_data[0]['pay_status'] eq 2 && $order_data[0]['status'] eq 1"/>
+            <div class="detail_info_right" style="background: url('__PUBLIC__/Home/image/Sigh.png') no-repeat 45px 60px;">
+                <p>订单状态：买家已签收,等待买家评价</p>
+                <p>物流： <span>顺丰速运</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 运单号： <span>{$order_data[0]['air_way_code']}</span></p>
+                <p>{$order_data[0]['receipt_time']}  <span class="orange">已签收，感谢试用顺丰，期待再次为您服务</span></p>
+                <p>您可以 <button>评价</button></p>
+            </div>
+           <elseif condition="$order_data[0]['comment_status'] eq 1"/>
+            <div class="detail_info_right" style="background: url('__PUBLIC__/Home/image/complete.png') no-repeat 45px 60px;">
+                <p>订单状态：评价成功</p>
+                <p>物流： <span>顺丰速运</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 运单号： <span>{$order_data[0]['air_way_code']}</span></p>
+                <p>{$order_data[0]['comment_time']}  <span class="orange">已签收，感谢试用顺丰，期待再次为您服务</span></p>
+                <p>您可以 <button>评价</button></p>
+            </div>
+            <elseif condition="$order_data[0]['status'] eq -1"/>
+             <div class="detail_info_right" style="background: url('__PUBLIC__/Home/image/complete.png') no-repeat 45px 60px;">
+                <p>订单状态：交易已关闭</p>
+            </div>
+            </if> 
+        </div>
+        <ul class="detail_list_top">
+        	<li>商品</li>
+        	<li>单价</li>
+        	<li>数量</li>
+        	<li>预计出货期</li>
+        	<li>交易状态</li>
+        </ul>
+        <foreach name="order_data" item="vo">
+        <ul class="detail_list">               	
+        	<li>
+        		<div>
+        			<p>
+        				包裹<span> {$key+1}</span>
+        				<if condition="$vo.status eq 1 && $vo.pay_status eq 1 && $vo.send_status eq 1">
+                        <span class="express">顺丰快递</span>
+                        </if>
+        				&nbsp;&nbsp;订单号：<span class="orderNumber">{$vo.order_sn}</span>
+                        <if condition="$vo.status eq 1 && $vo.pay_status eq 1 && $vo.send_status eq 1">查看物流</a></if>
+        			</p>
+        		</div>
+        		<div>
+        			<ul class="detail_list_info">
+        				<li><img src="{$vo.goods_thumb}"/></li>
+        				<li>{$vo.goods_name}</li>
+        				<li>¥ {$vo.goods_total_price}</li>
+        				<li>{$vo.number}</li>
+                        <li><if condition="$vo.term eq 0">当天发货<else />{$vo.term}天后发货</if></li>
+        				<li>
+                            <if condition="$vo.pay_status eq 0 && $vo.send_status eq 0 && $vo.comment_status eq 0 && $vo.status eq 1">待付款 未发货 未评价 
+                            <elseif condition="$vo.pay_status eq 1 && $vo.send_status eq 0 && $vo.comment_status eq 0  && $vo.status eq 1"/>已付款 未发货 未评价 
+                             <elseif condition="$vo.pay_status eq 1 && $vo.send_status eq 1 && $vo.comment_status eq 0  && $vo.status eq 1"/>已付款 已发货 未评价
+                             <elseif condition="$vo.pay_status eq 1 && $vo.send_status eq 2 && $vo.comment_status eq 0  && $vo.status eq 1"/>已付款 已收货 未评价
+                               <elseif condition="$vo.pay_status eq 1 && $vo.send_status eq 2 && $vo.comment_status eq 1  && $vo.status eq 1"/>已付款 已收货 已评价 已完成
+                               <elseif condition="$vo.status eq -1"/>
+                               交易已关闭
+                            </if>            
+                                       
+                        </li>
+        			</ul>       			
+        	    </div>
+        	</li>
+        </ul>
+        </foreach>
+        <div class="detail_bottom">
+        	<table>
+        		<tr>
+        			<td>商品总价：</td>
+        			<td>¥ {$total_price}</td>
+        		</tr>
+        		<tr>
+        			<td>运费：</td>
+        			<td>¥ {$shipping_price}</td>
+        		</tr>
+                <tr>
+                    <td>优惠金额：</td>
+                    <td>¥ {$shop_coupon_price}</td>
+                </tr>
+        		<tr>
+        			<td>订单总价：</td>
+        			<td>¥ {$total_price-$shop_coupon_price+$shipping_price}</td>
+        		</tr>
+                <if condition="$order_data[0]['pay_status'] eq 1">
+                <tr>
+                    <td>实付款：</td>
+                    <td>¥ {$total_price-$shop_coupon_price+$shipping_price}</td>
+                </tr>
+                </if>        		
+        	</table>
+        </div>
+    </div>    
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+
+</script>
+</body>
+</html>
+
+
+
+    

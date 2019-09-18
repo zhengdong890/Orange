@@ -1,0 +1,306 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>个人中心-企业认证</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/validate.js"></script>
+
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+
+<style>
+.yyzz{float:left;margin-top:3px;}
+.yyzz_text{float:left;margin-left:7px;}
+.btn_addimg{display:block;width:100px;color:white;position:relative;height:28px;line-height:28px;text-align:center;background:#C43926;border-radius:4px;}
+.btn_addimg input{width:100px;position:absolute;left:0;top:0;filter:alpha(opacity=50);-moz-opacity:0;-khtml-opacity:0;opacity:0;height:28px;}
+.img{width:300px;height:auto;float:left;position: relative;}
+.img img{max-width:100%;max-height:150px;}
+.submit_btn{ cursor: pointer; font-family:"微软雅黑"; font-size: 12px; display:block;width:100px;margin-top:10px;color:white;position:relative;height:28px;line-height:28px;text-align:center;float:left;background:#C43926;border-radius:4px;}
+.bus_lice_td{display:none;}
+.renzheng_success{color: red; font-size: 24px; font-weight: bold; font-family: "微软雅黑"; margin: 120px auto; width: 300px; height: 80px; display: none;}
+.prompt{ color: #ff6600; padding-left: 10px;}
+.img_loading{ display: none;background-color: rgba(0,0,0,0.5);color: #fff; font-weight: bold; position: absolute;left: 0;top: 0;width: 100px;height: 100px;border: 1px solid #eee;text-align: center;line-height: 100px;}
+.reg-table input{ visibility: hidden;}
+</style>
+<!-- www.orangesha.com Baidu tongji analytics -->
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->	
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="MemberPublic:MemberLeft" />  
+        <div class="user-right marT20 box-s-c1 fRi">        
+	        <div class="user-box ofwHidden user-f-12">
+	            <div class="vali-tl">
+	                <div class="vali-tl-list fRi">
+	                    <ul class="step_li">
+	                        <li><i>1</i><span>提交申请 ></span></li>
+	                        <li><i>2</i><span>资质审核 ></span></li>
+	                        <li><i>3</i><span>创建成功 </span></li>
+	                    </ul>
+	                </div>
+	                <span class="f-16-c1" >企业资质审核</span>
+	            </div>
+	            <form id='form'>
+	                <div class="marT50">
+	                    <table class="table reg-table" cellpadding="0" cellspacing="0">
+	                        <tr>
+	                            <td class="name-tab"><span>系统提示：</span></td>
+	                            <td class="cont-tab">
+	                                <span style="color: red"></span>
+	                            </td>
+	                            <td class="prompt"></td>
+	                        </tr>                        
+	                        <tr>
+	                            <td class="name-tab"><i>*</i><span>公司名称：</span></td>
+	                            <td class="cont-tab">
+	                                <input type="text" name="name" class="txt03 txt-style-7" placeholder="请填写公司名称" />
+	                            </td>
+	                            <td class="prompt"></td>
+	                        </tr>
+	                        <tr>
+	                            <td class="name-tab"><i>*</i><span>公司地址：</span></td>
+	                            <td class="cont-tab">
+	                                <input type="text" name="address" class="txt03 txt-style-7" placeholder="请填写公司地址" />
+	                            </td>
+	                            <td class="prompt"></td>
+	                        </tr>
+	                        <tr>
+	                            <td class="name-tab"><i>*</i><span>公司联系方式：</span></td>
+	                            <td class="cont-tab">
+	                                <input type="text" name="contact" class="txt03 txt-style-7" placeholder="请填写公司联系方式" />
+	                            </td>
+	                            <td class="prompt"></td>
+	                        </tr>
+	                        <tr>
+	                            <td class="name-tab"><i>*</i><span>指定联系人：</span></td>
+	                            <td class="cont-tab">
+	                                <input type="text" name="place_contact" class="txt03 txt-style-7" placeholder="请填写指定联系人" />
+	                            </td>
+	                            <td class="prompt"></td>
+	                        </tr>
+	                        <tr>
+	                            <td class="name-tab"><i>*</i><span>指定联系人号码：</span></td>
+	                            <td class="cont-tab">
+	                                <input type="text" name="contact_phone" class="txt03 txt-style-7" placeholder="请填写指定联系人号码" />
+	                            </td>
+	                            <td class="prompt"></td>
+	                        </tr>
+	                         <tr>
+	                            <td class="name-tab"><i>*</i><span>营业执照选择：</span></td>
+	                            <td class="cont-tab">
+	                               <input type='radio' name='bus_lice_type' value='1' class='yyzz' checked/>
+	                               <p class='yyzz_text'>企业三证合一</p>
+	                               <input type='radio' name='bus_lice_type' value='2' class='yyzz' style='margin-left:20px'/>
+	                               <p class='yyzz_text'>普通营业执照</p>
+	                            </td>
+	                            <td class="prompt"></td>
+	                        </tr>
+	                        <tr>
+	                            <td class="name-tab"><i>*</i><span>营业执照：</span></td>
+	                            <td class="cont-tab">
+	                                <div class='img'>
+	                                	<div class="img_loading">上传中...</div>
+		                        	    <img id="businessLicense" style="border: 1px solid #eee; width: 100px; height: 100px;"/>
+		                                <a class="btn_addimg">点击添加
+		                                  <input type="file" name="bus_lice" class='yyzz_select'></input>
+		                                </a>
+	                                </div>                                             
+	                            </td>
+	                            <td class="prompt"></td>
+	                        </tr>
+	                        <tr>
+	                            <td class="name-tab"><i>*</i><span>开户许可证：</span></td>
+	                            <td class="cont-tab">
+	                                <div class='img'>
+	                                	<div class="img_loading">上传中...</div>
+		                        	    <img id="accountLicenc" style="border: 1px solid #eee; width: 100px; height: 100px;"/>
+		                                <a class="btn_addimg">点击添加
+		                                  <input type="file" name="permit" class='yyzz_select'></input>
+		                                </a>
+	                                </div> 
+	                            </td>
+	                            <td class="prompt"></td>
+	                        </tr>
+	                        <tr class='bus_lice_td'>
+	                            <td class="name-tab"><i>*</i><span>组织机构代码证：</span></td>
+	                            <td class="cont-tab">
+	                                <div class='img'>
+	                                	<div class="img_loading">上传中...</div>
+		                        	    <img />
+		                                <a class="btn_addimg">点击添加
+		                                  <input type="file" name="code" class='yyzz_select'></input>
+		                                </a>
+	                                </div> 
+	                            </td>
+	                            <td class="prompt"></td>
+	                        </tr>
+	                        <tr class='bus_lice_td'>
+	                            <td class="name-tab"><i>*</i><span>税务登记证：</span></td>
+	                            <td class="cont-tab">
+	                                <div class='img'>
+	                                	<div class="img_loading">上传中...</div>
+		                        	    <img />
+		                                <a class="btn_addimg">点击添加
+		                                  <input type="file" name="registration" class='yyzz_select'></input>
+		                                </a>
+	                                </div> 
+	                            </td>
+	                            <td class="prompt"></td>
+	                        </tr> 
+	                        <tr>
+	                            <td class="name-tab"></td>
+	                            <td class="cont-tab">
+	                               <a class='submit_btn' href='javascript:;'>确认</a>
+	                            </td>
+	                            <td class="prompt"></td>
+	                        </tr>                         
+	                    </table>
+	                </div>                     
+	            </form>
+		        <div class="notice notice-s-1 user-f-12 marAuto0 marB50">
+		            <div class="notice-wrap">
+		                <h4 class="f-14-c1">企业用户须知</h4>
+		                <p>1. 您在认证时需要提供您所在企业的营业执照、组织机构代码证、税务登记证、开户许可证扫描件，以及加盖贵公司公章的《企业认证授权书》扫描件。
+		                    e橙优品网只支持3MB以下的jpg、gif、png、pdf、jpeg格式的图片或文件。</p>
+		                <p>2.您在认证时提交的企业资质文件会由e橙优品企业资质审核人员在1-2个工作日内完成审核，审核通过后即可成为e橙优品网企业用户，并可登录e橙优品网买货。</p>
+		            </div>
+		        </div>
+	        </div>
+        </div>
+    </div>
+</div>						        
+<include file="Public:footer" />  
+</body>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/business.js"></script>
+<script>
+//判断左边导航
+function checkNav(){
+	$(".user-left-wrap .list:eq(0)>ul>li:eq(0) a").css("color","#ff6600")
+}
+checkNav()
+
+//判断当前浏览类型  
+  function BrowserType(){  
+      var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  
+      var isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器  
+      var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器  
+      var isEdge = userAgent.indexOf("Windows NT 6.1; Trident/7.0;") > -1 && !isIE; //判断是否IE的Edge浏览器  
+      var isFF = userAgent.indexOf("Firefox") > -1; //判断是否Firefox浏览器  
+      var isSafari = userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") == -1; //判断是否Safari浏览器  
+      var isChrome = userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Safari") > -1; //判断Chrome浏览器  
+  
+      if (isIE)   
+      {  
+           var reIE = new RegExp("MSIE (\\d+\\.\\d+);");  
+           reIE.test(userAgent);  
+           var fIEVersion = parseFloat(RegExp["$1"]);  
+           if(fIEVersion == 7)  
+           { return "IE7";}  
+           else if(fIEVersion == 8)  
+           { return "IE8";}  
+           else if(fIEVersion == 9)  
+           { return "IE9";}  
+           else if(fIEVersion == 10)  
+           { return "IE10";}  
+           else if(fIEVersion == 11)  
+           { return "IE11";}  
+           else  
+           { return "0"}//IE版本过低  
+       }//isIE end  
+         
+       if (isFF) {  return "FF";}  
+       if (isOpera) {  return "Opera";}  
+       if (isSafari) {  return "Safari";}  
+       if (isChrome) { return "Chrome";}  
+       if (isEdge) { return "Edge";}  
+   }
+
+var type = BrowserType();
+if(type == "IE7" || type == "IE8" || type == "IE9" || type == "0" ){
+	alert('您的浏览器ie版本过低,请使用ie10以上');
+}
+
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?54f6f54d47704101dc27b337de5fd6c3";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+
+window.onload = function(){
+	$(".reg-table input").css("visibility","visible")
+}
+　　
+
+//企业认证
+$.post("{:U('MemberCenter/getQualification')}", function(res){
+    //判断企业是否认证成功
+    //认证成功
+    if(res.data.renzheng_status==3){
+    	$(".cont-tab span").text("企业认证成功！")
+    	$(".step_li li:eq(2)").addClass("cur"); 
+    	$("input").attr("disabled","disabled")            	
+    	//用户填写信息
+    	$("input[name='name']").val(res.data.name);
+    	$("input[name='address']").val(res.data.address);
+    	$("input[name='contact']").val(res.data.contact);
+    	$("input[name='place_contact']").val(res.data.place_contact);
+    	$("input[name='contact_phone']").val(res.data.contact_phone);
+    	$("#businessLicense").attr("src",res.data.bus_lice);
+    	$("#accountLicenc").attr("src",res.data.permit);
+    	$(".img>a").css("display","none");
+    	$(".submit_btn").css("display","none")
+    }
+    //审核中
+    if(res.data.renzheng_status==1){
+    	$(".cont-tab span").text("认证正在审核中，请耐心等待。")
+    	$(".step_li li:eq(1)").addClass("cur"); 
+    	$("#form input").attr("disabled","ture");
+    	//用户填写信息
+    	$("input[name='name']").val(res.data.name);
+    	$("input[name='address']").val(res.data.address);
+    	$("input[name='contact']").val(res.data.contact);
+    	$("input[name='place_contact']").val(res.data.place_contact);
+    	$("input[name='contact_phone']").val(res.data.contact_phone);
+    	$("#businessLicense").attr("src",res.data.bus_lice);
+    	$("#accountLicenc").attr("src",res.data.permit);
+    	$(".img>a").css("display","none");
+    	$(".submit_btn").css("display","none");
+    }
+    //认证失败
+    if(res.data.renzheng_status==2){
+    	$(".cont-tab span").text(res.data.content)
+    	$(".step_li li:eq(0)").addClass("cur"); 
+    	//用户填写信息
+    	$("input[name='name']").val(res.data.name);
+    	$("input[name='address']").val(res.data.address);
+    	$("input[name='contact']").val(res.data.contact);
+    	$("input[name='place_contact']").val(res.data.place_contact);
+    	$("input[name='contact_phone']").val(res.data.contact_phone);
+    	console.log(validate);
+    	validate.checkField('name',res.data.name);
+    	validate.checkField('address',res.data.address);
+    	validate.checkField('contact',res.data.contact);
+    	validate.checkField('place_contact',res.data.place_contact);
+    	validate.checkField('contact_phone',res.data.contact_phone);
+    }
+});
+</script>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>所有商品</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/shopIndex.css" type="text/css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/list.css" type="text/css">
+<link href="__PUBLIC__/Home/css/shop_headSearch.css" rel="stylesheet">
+<link href="__PUBLIC__/Home/css/shop.css" rel="stylesheet">
+<link href="__PUBLIC__/Home/css/footer.css" rel="stylesheet">
+<link rel="stylesheet" href="__PUBLIC__/css/style.css" type="text/css">
+<link rel="shortcut icon" href="/Public/Home/images/ee.ico" type="image/x-icon">
+<script type="text/javascript" src="__PUBLIC__/Home/static/jquery-2.0.3.min.js"></script>
+<script src="__PUBLIC__/Home/js/header.js"></script>
+<script src="/Public/layer/layer.js"></script>
+<script src="/Public/js/navshop.js"></script> 
+</head>
+<body>
+<include file="Public:header_top" />
+<include file="Public:shop_headSearch" />
+<div class="shop">
+    <div class="header">
+        <div class="header-inner">
+            <img src="__ROOT__{$shop_data['thumb']|substr=1}" class="shop-logo">  
+            <div class="shop-title">
+                <h1>{$shop_data['shop_name']}</h1>
+                {$shop_data['desc']}
+            </div>
+			 <ul class="youhui" style="display: block;">
+            <foreach name="shop_coupons" item="vo">
+              <li data-name={$vo.name} data-sellid={$vo.seller_id} data-id={$vo.id} data-max={$vo.max} data-price={$vo.benefit_price} data-status={$vo.status} data-stime={$vo.start_time} data-etime={$vo.end_time}>
+                <div class="face_value"><span>¥</span>{$vo.benefit_price}</div>
+                <div class="use_condition">
+                  <p>优惠券</p>
+                  <p>满 <span>{$vo.max}</span> 元使用</p>
+                </div>
+              </li>
+            </foreach>
+            </ul>   
+      <a title="{$seller_id}" onclick="collectshop(this)"  class="myshop" style="background: url('/Public/Home/image/收藏本店.png') no-repeat 6px 2px;">收藏本店</a>
+            <a href="http://wpa.qq.com/msgrd?v=3&uin={$shop_data['qq']}&site=qq&menu=yes" class="seller" style="background: url('/Public/Home/image/联系卖家.png') no-repeat 6px 2px;">联系卖家</a>
+        </div>
+        
+    </div>    
+<include file="Public:shopnav" />
+	
+	<!--条件筛选-->
+    <div class="sort_order_div">
+    	<div class="select_class">
+    		<ul>   		
+    			<li class="height">
+    				<div>品牌</div>
+    				<div>
+			            <foreach name="brand_name" item="vo">
+			    			<a href="http://{$shop_data['domain']}.orangesha.com/Goods/allgoods.html?brand_id={$vo.id}">{$vo['brand_name']}</a>
+			            </foreach> 
+    				</div> 
+    				<button class="more">更多</button>
+    			</li>    		
+    		</ul>
+	        <ul>        
+		        <li class="height">
+		            <div>类型</div>
+		            <div>
+			            <foreach name="cat_name" item="v">
+			            	<a href="http://{$shop_data['domain']}.orangesha.com/Goods/allgoods.html?cat_id={$v.id}">{$v.name}</a>
+			            </foreach>
+		            </div>
+		            <button class="more">更多</button>
+		        </li>        
+	        </ul>
+    	</div>
+    	<div class="sort_order">
+	    	<div class="sort_order_top">
+				<ul>
+					<a href="http://{$shop_data.domain}.orangesha.com/Goods/allgoods?man=1"><li>人气</li></a>
+					<a href="http://{$shop_data.domain}.orangesha.com/Goods/allgoods?xin=1"><li>新品</li></a>
+					<a href="http://{$shop_data.domain}.orangesha.com/Goods/allgoods?sales=1"><li>销量</li></a>
+					<a href="http://{$shop_data.domain}.orangesha.com/Goods/allgoods?price_=1"><li>价格</li></a>
+				</ul>
+	            <span><input type="text" name="low_price" placeholder="最低价"> - <input type="text" name="height_price" placeholder="最高价"> <button class='price_btn'>确定</button>
+                </span>
+	    		<span>共 <span>{$num}</span> 个产品组</span>
+	    	</div>
+	    	<div class="sort_order_bottom">
+	    		购买数量小于库存时，可当日出货，购买数量大于库存时，请以购物车内预计出货日为准。
+	    	</div>
+	    </div>
+    </div>
+
+    <div class="shop-list clearfix">        
+        <ul style="overflow: auto;">
+            <volist name='allgoods' id='v'>
+            <li>
+                <a href="http://{$domain}.orangesha.com/shangpin-{$v['id']}.html"><img src="__ROOT__<if condition="substr($v['goods_thumb'] , 0 , 1) eq '.'">{$v['goods_thumb']|substr=1}<else/>{$v['goods_thumb']}</if>"/></a>
+                <a href="http://{$domain}.orangesha.com/shangpin-{$v['id']}.html"><p>{$v['goods_name']}</p></a>
+                <div class="money">
+                    <span class="price">￥{$v['goods_price']>=10000?$v['goods_price']/10000:$v['goods_price']} {$v['goods_price']>=10000?'万元':'元'}</span>
+                    <span class="sales">销量{$v['sale_num']}</span>
+                </div>
+            </li>
+            </volist>			
+        </ul>
+		<!-- 商品列表结束 -->
+        <div class="section-bt">
+            {$page}
+        </div>
+    </div>
+   
+</div>
+
+<!-- 底部 -->
+<include file="Public:footer" />
+
+<script>
+
+
+function collectshop(obj){
+  var title = $(obj).attr('title');
+
+  if( title ){
+		$.post("{:U('Shop/shopcllect')}",{'title':title},function(data){
+				if( data.msg=='ok'){
+				  alert('收藏该店铺成功！');
+				}else if(data.msg=='onemore'){
+				  alert('您已经收藏过该店铺了！');
+				}else if(data.msg=='nologin'){
+				  alert('你还没登录哦！');
+				}else{  
+				  alert('收藏该店铺失败！');
+				}
+		});  
+  }else{
+        alert('店铺不存在！');
+  }
+
+}
+
+//更多属性
+$(".select_class>ul>li>.more").click(function(){
+	$(this).parent("li").toggleClass("height")
+})
+
+//点击领取优惠券
+$(".youhui li").click(function(){
+	var name = $(this).attr("data-name"),
+	    id = $(this).attr("data-id"),
+	    sellerId = $(this).attr("data-sellid"),
+	    max = $(this).attr("data-max"),
+	    benefitPrice = $(this).attr("data-price"),
+	    status = $(this).attr("data-status"),
+	    start_time = $(this).attr("data-stime"),
+	    end_time = $(this).attr("data-etime");
+	    
+	var data = {
+		'seller_id' : sellerId,
+		'coupon_id' : id,
+		'coupon_name' : name,
+		'max' : max,
+		'benefit_price' : benefitPrice,
+		'status' : status,
+		'start_time' : start_time,
+		'end_time' : end_time
+	}
+	$.post("{:U('Index/couponAdd')}",data,function(res){
+		console.log(res)
+		if(res.status){
+			alert("领取成功！")
+		}
+		if(res.status==0){
+			alert(res.msg)
+		}
+	});
+})
+
+function relation(obj){
+  var title = $(obj).attr('title');
+  if( title ){
+    layer.open({
+      type: 2,
+      title: '联系卖家',
+      shadeClose: true,
+      shade: false,
+      maxmin: true, //开启最大化最小化按钮
+      area: ['400px', '400px'],
+	  content: "<?php echo U('Shop/getseller');?>?title="+title
+    });
+		
+  }else{
+       alert('店铺不存在!');                
+  }
+}
+var paramer = "{$paramers}";
+    var paramer_arr = [];
+	paramer_arr.push(paramer);
+    var str = 'p=1';
+	paramer_arr.push(str);
+
+$(".go").click(function(){
+
+	var val = $(".go_number").val();
+	
+	
+	paramer_arr['p'] = parseInt(val) > 0 ? parseInt(val) : 1;
+	houzstr =  paramer_arr.join('&');		
+	window.location.href = "{:U('allgoods')}"+'?'+houzstr;
+	
+})
+var shop_css = "{$shop_css}";		
+$('.navwrap').css('background','#'+shop_css);
+$('.pros').css('background','#'+shop_css);
+
+	        var shop_status = "{$shop_data.status}";
+			var shop_name = "{$shop_data.shop_name}";
+			var shop_desc = "{$shop_data.desc}";
+			var shop_thumb = "{$shop_data.thumb|substr=1}";
+		  
+			if( shop_status==2 ){
+			 
+			   $('.header-inner').find('img').attr('src',shop_thumb);
+			   $(' .shop-title').html('<h1>'+shop_name+'</h1>'+shop_desc+'');
+               $('.conpanyname').find('p').html(shop_name); 			   
+			}
+//价格区间搜索
+$(".price_search").click(function(){
+	var data = {
+		'low_price':$("input[name=low_price]").val(),
+		'height_price':$("input[name=height_price]").val()
+	}
+	$.post("http://www.orangesha.com/index.php/Home/MallCategorys/goodsList",data,function(res){
+		console.log(res)				
+	})	
+})
+
+var paramer_arr  = GetRequest();
+    PATH_NAME    = '';  
+//paramer_arr['p'] = 1;
+/*价格地址*/
+var price = (function(){  
+    $(".price_a").click(function(){
+    	var price = $(this).attr('data-price');
+    	paramer_arr['price'] = price;
+    	window.location.href = getUrl(paramer_arr);
+    });
+
+	$(".price_btn").click(function(){
+	    var price_1 = $(this).prev('input').prev('input').val(),
+	        price_1 = parseInt(price_1) > 0 ? parseInt(price_1) : 0,
+	        price_2 = $(this).prev('input').val(),
+	        price_2 = parseInt(price_2) > 0 ? parseInt(price_2) : '10000000000',
+	        price   = price_1 + '-' + price_2;   
+	    paramer_arr['price'] = price;   
+	    window.location.href = getUrl(paramer_arr);
+	});    
+})();
+
+function getUrl(paramer_arr){
+    var paramer = '';
+    for(var k in paramer_arr){
+        paramer+='&'+ k + '=' + paramer_arr[k];
+    }
+    paramer = paramer.substring(1);
+    return paramer ? (PATH_NAME + '?' + paramer) : PATH_NAME;
+}
+
+function GetRequest() {   
+   var url = location.search; //获取url中"?"符后的字串   
+   var theRequest = new Object();   
+   if (url.indexOf("?") != -1) {   
+      var str = url.substr(1);   
+      strs = str.split("&");   
+      for(var i = 0; i < strs.length; i ++) {   
+         theRequest[strs[i].split("=")[0]] = decodeURI(strs[i].split("=")[1]);   
+      }   
+   }   
+   return theRequest;   
+}
+</script>
+
+<!-- /底部 -->
+</body>
+</html>

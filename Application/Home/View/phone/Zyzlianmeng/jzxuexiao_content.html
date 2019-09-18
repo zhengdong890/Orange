@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>家长学校</title>
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/index.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/rest.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/common.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/liner.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Zyzlianmeng/parents.css" />
+		<!-- ~~~手机端头部公共~~ -->
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/djshide/partyEthics.css" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=yes" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/phone/css/jquery.mobile-1.2.0.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/phone/css/master.css" />
+		<script type="text/javascript" src="__PUBLIC__/phone/js/jquery-1.6.4.min.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/jquery.mobile-1.2.0.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/banner.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/my_js.js"></script>
+		<!--~~~~~~手机端头部公共结束~~~~  -->			
+		<script type="text/javascript" src="__PUBLIC__/phone/js/jquery.js" ></script>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/myscript.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/phone/js/focus.js"></script>
+	</head>
+	<body>
+	<div class="wrp">
+									<!-- header start -->
+				<include file="Public:header" />
+				<!-- header end -->
+			<div class="mainWrap relative clearfix" style="margin-bottom: 30px;">
+<!-- 				<section class="header-main">
+					<ul class="navs clear">
+						<span class="slider"></span>
+						<li><a href="../volunteeralliance/parents.html" class="navs-item">家长学校</a></li>
+					</ul>
+				</section> -->
+				<div class="detailContent clearfix">
+					<div class="column_R">
+						<div class="mainContent">
+							<div class="introTit clearfix">
+								<div class="introTitImg" style="background-image:url(__PUBLIC__/phone/images/small.jpg)"></div>
+								<h2>家长学校</h2>
+							</div>
+						</div>
+					</div>
+					<div class="content-wrap clearfix">
+						<div class="container">
+							<h3>{$data_content['title']}</h3>
+							<p class="xwtime">
+                                                                 发表于：{$data_content['updatetime']|date="Y-m-d H:i:s",###}　　　浏览次数：       &nbsp;&nbsp;&nbsp;&nbsp;作者：{$data_content['author']}
+                            </p>
+							<div class="Content_Nr">
+                                    			<p style="text-indent:28.0pt;">
+										{$data_content['content']}
+									</p>
+									
+									
+							    </div>
+					        </div>
+							<div class="ull_top">
+								<ul class="ull">
+	                              		  <li><strong>上一篇：</strong>
+			                                	<if condition="$data_content_up">
+			                                				<a href="{:U('jzxuexiao_content',array('id'=>$data_content_up['id'],'column_id'=>$data_content_up['column_id'],'type'=>"0"))}">{$data_content_up['title']}</a>
+		                                		<else />
+			                                				没有上一篇了
+			                                	</if>
+	                                	</li>
+
+							        <li><strong>下一篇：</strong>
+					                      	  <if condition="$data_content_down">
+			                                				<a href="{:U('jzxuexiao_content',array('id'=>$data_content_down['id'],'column_id'=>$data_content_down['column_id'],'type'=>"1"))}">{$data_content_down['title']}</a>
+		                                		  <else />
+			                                				没有下一篇了
+		                              			</if>
+							        </li>
+							    </ul>
+						    </div>
+						</div>
+				    </div>
+				</div>		
+			</div>
+<include file="Public:footer" />
+		</div>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/common.js" ></script>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/jquery-1.11.2.min.js" ></script>
+	</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/My97DatePicker/WdatePicker.js"></script>
+<meta name="description" content="" />
+<style>
+*{padding:0; margin:0;font-size:16px;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border:0}    
+#content{width:98%;height:auto;float:left;padding-left:1%;background:#F4F5F9;padding-bottom:50px}
+/*内容页头部样式*/
+#content #content_h{width:100%;height:40px;border:1px solid #D7D7D7;line-height:40px;margin-top:15px;background:white}
+#content #content_h a{padding-left:10px}
+/*内容页搜索模块样式*/
+#content #search{width:100%;height:auto;float:left;background:#F4F5F9;margin-top:20px;padding:12px 0 12px;border:1px solid #D7D7D7;} 
+#search p{float:left;margin-left:10px;font-size:13px}
+#search input{width:150px}     
+#search p select option{text-indent:5px}   
+#search a{border:0;border-radius:4px;background:#C43926;margin-left:10px;color:white;height:32px;padding:3px 13px 3px 13px;width:100px;font-size:13px;margin-top:-1px}      
+/*内容页订单列表样式*/
+#content #content_m{width:100%;height:auto;float:left;border:1px solid #D7D7D7;margin-top:20px}
+#content table{margin:0 auto;width:100%}
+#content table td span{float:right}
+.caozuo{width:auto;}   
+.caozuo div{width:50px;height:21px;margin:0 auto}   
+.caozuo div a{width:21px;height:21px;display:block;margin-left:4px;float:left;} 
+table tr{background:white}
+table tr:hover{background:#F1FCEA}  
+table tr:first-child{background:#F4F5F9} 
+table tr td{border-left:1px solid #E7E9F3;border-bottom:1px solid #E7E9F3;font-size:20px;padding:10px;font-size:14px;}
+table tr .td{border-left:0px} 
+td img{max-width:100px;max-height:100px}
+td{padding-right:30px;padding-top:10px}
+/*内容页订单列表分页样式*/
+#page{width:100%;height:30px;float:left;margin-top:15px;background:white}
+#page li{float:right}
+#page li a{display:block;float:left;height:22px;padding:4px;border:1px solid #dfdfdf;margin-left:5px;line-height:22px;}
+#page li span{display:block;float:left;height:22px;padding:4px;border:1px solid #dfdfdf;margin-left:5px;line-height:22px;}
+#page li p{float:left;padding:4px;height:22px;line-height:22px;margin-left:5px;}
+/*批量处理样式*/
+.select_checkbox{width:80px;height:16px;margin:0 auto}
+.select_checkbox input{width:16px;height:16px;float:left;}
+.select_checkbox a{height:16px;float:left;text-indent:5px;line-height:15px;}
+#caozuo{width:100%;height:auto;float:left;margin-top:10px}
+#caozuo a{display:block;width:80px;height:30px;line-height:30px;text-align:center;float:left;background:#C43926;margin-left:5px;border-radius:4px;color:white;font-size:14px;}
+#caozuo button{display:block;width:80px;height:30px;line-height:30px;text-align:center;float:left;background:#C43926;margin-left:5px;border-radius:4px;color:white;font-size:14px;border:0}
+.addbackground{ background:red }
+</style>
+</head>
+<body>
+<div id="content">
+     <div id="content_h">
+           <a>后台管理中心</a>-><a>店铺管理</a>
+     </div>     
+  <div id="search">
+       <form action="{:U('Order/index')}" method="post">
+           <p>店铺名称: <input type="text" name="out_trade_no"></input></p>
+           <p>卖家账号: <input type="text" name="name"></input></p> <br/>         
+           <p>开店时间查询:
+           <input type="text" style="width:100px" name="start_time" onfocus="WdatePicker()"/> ～
+           <input type="text" style="width:100px" name="end_time" onfocus="WdatePicker()"/>
+           </p>               
+           <a onclick="searchorder()" style="margin-left:50px;margin-top:3px;">搜索</a>
+       </form>
+    </div> 
+    <div id="content_m">
+        <table cellspacing="0" id="bdingdanappend">                                                    
+            <tr >
+                 
+                <td>店铺logo</td>
+                <td>店铺名称</td>    				
+                <td>卖家账号</td>
+               
+				<td>开店时间</td>
+			
+                <td>操作</td>
+            </tr>  
+            <volist name="list" id="v">
+                <tr>
+                    <td><img src="{$v['thumb']|substr=1}" ></td>
+                    <td style="width:80px;">{$v['shop_name']}</td> 
+                    <td>{$v['username']}</td>
+                    
+					<td>{$v['time']}</td>					
+					<td>
+                       <a href="javascript:seeshop({$v['member_id']})">查看店铺</a> |  <a href="javascript:hiddenshop({$v['member_id']})" class="mytitle_{$v['member_id']}">屏蔽店铺</a> |  <a href="javascript:openshop({$v['member_id']})">取消屏蔽</a>
+                    </td>
+                </tr> 
+	        </volist>                        
+        </table>
+    <ul id="page"><li>{$page}</li></ul>
+   </div>
+         
+	
+</div>	
+</body>
+     <script type="text/javascript">
+	                               
+	function test(id){    //user函数名 一定要和action中的第三个参数一致上面有
+        var id = id;
+       // alert(id);
+        $.get('{:U('Shopmanage/test')}', {'p':id}, function(data){  //用get方法发送信息到test方法
+           //var info= eval('('+data+')') ;//将返回的json数据转换成js对象\
+           var data=JSON.parse(data);
+           //console.log(data.result[0].cpname);
+            //console.log(data);
+               var s='';
+               
+                for (var i = 0; i < data['result'].length; i++) {
+				     var status='';
+					 s+='<tr>';
+					 var thumb = data['result'][i].thumb;
+					  if( thumb ){
+					   var nowlogo = thumb.substring(1); 
+					 }else{
+					   var nowlogo = '';
+					 }
+					
+				     s += '<td><img src='+nowlogo+'></td>';					
+					 s += '<td>'+data['result'][i].shop_name+'</td>';
+					 s += '<td>'+data['result'][i].username+'</td>';
+					 
+					 s += '<td>'+data['result'][i].time+'</td>';					 					
+					 s += '<td><a href="javascript:seeshop('+data['result'][i].member_id+')">查看店铺</a> | <a href="javascript:hiddenshop('+data['result'][i].member_id+')">屏蔽店铺</a> | <a href="javascript:openshop('+data['result'][i].member_id+')">取消屏蔽</a></td>';					
+	                 s += '</tr>';
+                }
+                 
+               
+                   pg='<li>'+data['pg']+'</li>';
+            
+				   $("#bdingdanappend tr:gt(0)").remove();
+				   $('#bdingdanappend').append(s); 
+				   $('#page').html(pg);
+			  
+        });
+     
+    }
+		
+
+	function searchorder(){
+		  var out_trade = $("input[name='out_trade_no']").val();
+		  var out_trade_no =$.trim(out_trade);		 
+		  var shopname = $("input[name='name']").val();
+		  var name =$.trim(shopname);	  
+		  var start_time = $("input[name='start_time']").val();
+		
+		  var end_time = $("input[name='end_time']").val();		  
+		  var json_data = {'out_trade_no':out_trade_no,'name':name,'start_time':start_time,'end_time':end_time};
+	          $.post('{:U('Shopmanage/test')}',json_data,function(data){
+		        var adata=JSON.parse(data);
+			//var totaldata=eval("("+data+")");
+			//$('.all-totals').html(totaldata.goods_total);
+			//alert(totaldata);
+			var sa='';
+			for (var i = 0; i < adata['result'].length; i++) {
+				     var status='';
+					 sa+='<tr>';
+					 var thumb = adata['result'][i].thumb;
+					 if( thumb ){
+					   var nowlogo = thumb.substring(1); 
+					 }else{
+					   var nowlogo = '';
+					 }
+										 
+				     sa += '<td><img src='+nowlogo+'></td>';					
+					 sa += '<td>'+adata['result'][i].shop_name+'</td>';
+					 sa += '<td>'+adata['result'][i].username+'</td>';			 
+					 sa += '<td>'+adata['result'][i].time+'</td>';					 					
+					 sa += '<td><a href="javascript:seeshop('+adata['result'][i].member_id+')">查看店铺</a> | <a href="javascript:hiddenshop('+adata['result'][i].member_id+')">屏蔽店铺</a> | <a href="javascript:openshop('+adata['result'][i].member_id+')">取消屏蔽</a></td>';					
+	                 sa += '</tr>';
+                }                               
+                   pg='<li>'+adata['pg']+'</li>';           
+				   $("#bdingdanappend tr:gt(0)").remove();
+				   $('#bdingdanappend').append(sa); 
+				   $('#page').html(pg);
+			
+	         });	
+	  
+	
+	}		
+								   
+								   
+	    function seeshop(id){
+    	   	  var id=id;   
+   	    	  $.post("{:U('Shopmanage/seeshop')}",{"id":id},function(res){
+			     if( res.msg=='ok' ){
+				   window.location.href="{:U('Home/Seller_goods/goodsList')}";
+				 }
+   	             
+   	     	  })
+       	   
+	    }
+		
+		 function hiddenshop(id){
+		          var aid=id;
+    	   		   if(!confirm('确认屏蔽该店铺!')){				  				 
+				   }else{
+				   
+					   $.post("{:U('Shopmanage/hiddenshop')}",{"id":aid},function(res){
+							 if( res.msg=='ok' ){
+							   var username=res.username;
+							   alert('用户为'+username+'的店铺已被屏蔽！');							 
+							   $('.mytitle_'+aid).addClass('addbackground');
+							   // $('.mytitle_'+aid).css('background','red');
+							   
+							 }
+					 
+					  })
+				   }
+   	    	  
+       	   
+	    }
+		
+		function openshop(id){
+		           var bid=id;
+    	   		   if(!confirm('确定要取消屏蔽该店铺吗？')){				   
+				   }else{
+
+					   $.post("{:U('Shopmanage/openshop')}",{"id":bid},function(res){
+							 if( res.msg=='ok' ){
+							   var username=res.username;
+							   alert('用户为'+username+'的店铺已取消屏蔽！');
+							  // $('.mytitle_'+bid).css('background','white');				  
+							  $('.mytitle_'+bid).removeClass('addbackground');
+							 }					 
+					  })
+				   }  	    	         	   
+	    }
+				
+		$(function(){
+		 var value = 2;	
+		 $.post('{:U('Shopmanage/delsession')}',{'value':value},function(data){
+				
+		  })
+		  
+		  
+		 $.post("{:U('Shopmanage/checkclass')}",{"zid":'all'},function(res){
+							 if( res.msg=='ok' ){
+							
+							    for(i=0;i<res['getarr'].length;i++){
+                                
+								   $('.mytitle_'+res['getarr'][i]).addClass('addbackground'); 
+								}     
+                                   
+							 }
+					 
+					  }) 
+		  
+		  
+		})
+		
+		
+		
+		
+		
+		
+    </script>
+</html>

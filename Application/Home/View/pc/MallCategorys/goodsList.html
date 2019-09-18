@@ -1,0 +1,437 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="keywords" content="{$seo['keyword']}">
+<meta name="description" content="{$seo['description']}"">
+<meta name="copyright" content="深圳市橙橙网络科技有限公司(www.orangesha.com)版权所有">
+<meta name="author" content="橙橙分享"> 
+<title>{$end_crumb['cat_name']}</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/home.css" type="text/css">
+<link rel="stylesheet" href="/Public/Orange/script/jquery.kinMaxShow/base.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.css">
+<link rel="shortcut icon" href="/Public/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.js"></script>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/tool.js"></script>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/list.js"></script>   
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/list.css" type="text/css">    
+  
+</head>
+<body >
+<include file="Public:header_top" />
+<include file="Public:header_search" />
+<include file="Public:mallNav" />
+<!-- body -->
+
+<div class="list">
+    <div class="list-header">
+        <span>
+        <a href="">首页</a>
+        <volist name='crumb' id='v'>
+        <a href="http://{$Think.server.HTTP_HOST}/mall/c-{$v['id']}.html"> &nbsp;>&nbsp;<span>{$v['cat_name']}</span>&nbsp;&nbsp;</a>
+        </volist>
+        &nbsp;
+        <span class="header-right">共 {$count}件相关商品</span></span>
+    </div>
+    
+    <div class="right-list">
+        <div class="list-title">
+            <div class="list-cmp">
+                <div class="clearfix">
+                    <p class="text fl">品牌:</p>
+                    <ul class="clearfix brand" style="max-height: 60px;">
+                        <volist name='brands' id='v'>
+                        <a href="javascript:;" title="{$v['brand_name']}"><li data-id="{$v['id']}">{$v['brand_name']}</li></a>
+                        </volist>
+                    </ul>
+                </div>
+
+                <a href="javascript:;" class="more">更多</a>
+                <a href="javascript:;" class="more chose-more">多选</a>
+                <div class="btns">
+                    <a href="javascript:;" class="save">确定</a>
+                </div>
+            </div>
+            <if condition="$next_cat neq ''">
+            <div class="list-type">
+                <div class="clearfix">
+                    <p class="text fl">类型:</p>
+                    <ul class="clearfix fl" style="max-height: 60px;">
+                    <volist name='next_cat' id='v'>
+                    <li><a href="javascript:;" data-id="{$v['id']}" title="{$v['cat_name']}">{$v['cat_name']}</a></li>
+                    </volist>
+                    </ul>
+                </div>
+                <a href="javascript:;" class="more">更多</a>
+            </div>
+            </if>
+            <if condition="$level egt 3">
+            <div class="list-type">
+                <div class="clearfix">
+                    <p class="text fl" style="min-height: 40px;">其他选项:</p>
+                        <ul class="clearfix fl other_op goods_attr">
+                            <volist name='attr' id='v'>
+                        	<span>
+                        		<li data-attr="{$v['attr_id']}">
+                        			{$v['attr_name']}                                
+	                            </li>
+	                            <ul>
+	                                <volist name="v['attr_value']" id='v1'>       
+	                                <li value='{$v1['attr_value_id']}' class='goods_attr_li'>{$v1['attr_value']}</li>
+	                                </volist>
+	                            </ul>
+                        	</span>
+                            </volist>                        	
+                        </ul>                       
+                </div>
+                <a href="javascript:;" class="more2">更多</a>
+            </div>
+            </if>
+        </div>
+        <!--价格、排序方式-->
+        <div class="sort_order">
+        	<div class="sort_order_top">
+    			<ul>
+    				<a href="http://www.orangesha.com/mall/c-{$cat_id}.html?mem=1"><li>人气</li></a>
+    				<a href="http://www.orangesha.com/mall/c-{$cat_id}.html?news=1"><li>新品</li></a>
+    				<a href="http://www.orangesha.com/mall/c-{$cat_id}.html?sales=1"><li>销量</li></a>
+    				<a href="http://www.orangesha.com/mall/c-{$cat_id}.html?low=1"><li>价格</li></a>
+    			</ul>
+                <span><input type="text" name="low_price" placeholder="最低价"> - <input type="text" name="height_price" placeholder="最高价"> <button class='price_btn'>确定</button>
+                </span>
+        		<span><a>大图</a> <a>列表</a></span>
+        		<span><a href="http://www.orangesha.com/goods.html?on_sale=1">只显示在售商品</a></span>
+        		<span>共 <span>2</span> 个产品组</span>
+        	</div>
+        	<div class="sort_order_bottom">
+        		购买数量小于库存时，可当日出货，购买数量大于库存时，请以购物车内预计出货日为准。
+        	</div>
+        </div>
+        <!-- 商品列表 -->
+        <ul class="good-list list1 clearfix">
+            <volist name="goods" id="v">      
+            <li>
+                <div class="good-box">
+                    <a href="http://{$v['domain']}.orangesha.com/shangpin-{$v['id']}.html" target="_blank">
+                    <img class="good-icon" src="__ROOT__<if condition="substr($v['goods_thumb'] , 0 , 1) eq '.'">{$v['goods_thumb']|substr=1}<else/>{$v['goods_thumb']}</if>" alt="{$v['goods_name']}">
+                    </a>
+                    <div class="contain">
+                        <div class="row-price">￥<span class="price">{$v['goods_price']>=10000?$v['goods_price']/10000:$v['goods_price']}{$v['goods_price']>=10000?'万元':'元'}</span>
+                        <span class="closing">月成交 {$v['sale_num']} 笔</span>
+                        </div>
+                        <div class="title">
+                        <a href="http://{$v['domain']}.orangesha.com/shangpin-{$v['id']}.html" target="_blank">{$v['goods_name']}</a></div>
+                        <div class="shop-name"><a href="http://{$v['domain']}.orangesha.com" target="_blank">{$v['shop_name']}</a><span class="rated">评价 <span>{$v['comment_number']}</span></span></div>
+                        
+                    </div>
+                </div>
+                <if condition="$v['caiji_id'] eq 0 && $v['term'] eq 0"><div class="shipment" data-id="{$v['term']}">当日出货</div></if>
+                <if condition="$v['favourable'] neq ''">
+                <div class="discount" style="display: block;">
+                <if condition="substr($v['favourable'] , 0 , 1) eq '1'">{:substr($v['favourable'] , 2)}折</if>
+                </div>
+                </if>
+            </li>
+            </volist>
+        </ul>
+        <!-- 商品列表结束 -->
+        <div class="section-bt">
+           {$html}
+        </div>
+    </div>
+    <div class="recommended fl">
+        <!--<div class="type-list">
+            <volist name='equipment_category' id='v'>
+            <h3 class="typeList_h3"><span></span>{$v['cat_name']}</h3>
+            <ul pid="{$v['id']}" class="type_list type_list{$v['id']}">               
+                <volist name="v.child" id='v1'>
+                <li <if condition="$v1.id eq $cat_id">class='active'</if>>
+                <span><a class="aaaa" data-id="{$v1['id']}" data-router="{$v1['router']}">{$v1['cat_name']}</a></span>
+                </li> 
+                </volist>               
+            </ul>
+            </volist>
+            <div class="first_type">{$crumb[0][1]}</div>
+            <ul>
+                <volist name='equipment_category' id='v'>
+                <if condition="$k lt 14">
+                <li>
+                    <div class="typeList_h3">{$v['cat_name']}</div>
+                    <ul class="menu-2">
+                    	<div>二级分类</div>
+                        <li><a href="#">三级分类</a></li>
+                        <li><a href="#">三级分类</a></li>
+                        <li><a href="#">三级分类</a></li>
+                        <li><a href="#">三级分类</a></li>
+                    </ul>                            
+                </li>
+                </if>
+                </volist>
+            </ul>
+        </div>-->
+        <!--<div class="info-right">
+            <div class="title">近期热卖商品</div>
+            <volist name='hot_goods' id='v'>
+            <div class="li">
+                <a href="http://{$v['domain']}.orangesha.com/shangpin-{$v['id']}.html"><img src="__ROOT__{$v['goods_thumb']|substr=1}" alt=""></a>
+                <div class="text"> <a href="{:U('Mall_goods/goods',array('goods_id'=>$v['id']))}">{$v['goods_name']}</a></div>
+                <div class="price">￥{$v['goods_price']>=10000?$v['goods_price']/10000:$v['goods_price']}
+                {$v['goods_price']>=10000?'万元':'元'}
+                <div class="sales">销量：{$v['sale_num']}</div>
+                </div>
+            </div>
+            </volist>
+        </div>-->
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- /底部 -->
+</body>
+<script>
+var cat_id = {$cat_id};
+
+function abcd(){
+	for(var i = 0;i<$(".home-nav-group .nav a").length;i++){
+		if($(".home-nav-group .nav a").eq(i).text()=="融资招标"){
+			$(".home-nav-group .nav a").eq(i).css("display","none")
+		}	
+		if($(".home-nav-group .nav a").eq(i).text()=="集成项目"){
+			$(".home-nav-group .nav a").eq(i).css("display","none")
+		}
+		if($(".home-nav-group .nav a").eq(i).text()=="设备出租"){
+			$(".home-nav-group .nav a").eq(i).attr("rel","")
+		}
+		if($(".home-nav-group .nav a").eq(i).text()=="批量采购"){
+			$(".home-nav-group .nav a").eq(i).attr("rel","")
+		}
+		if($(".home-nav-group .nav a").eq(i).text()=="品牌闪购"){
+			$(".home-nav-group .nav a").eq(i).attr("rel","")
+		}
+	}
+}
+abcd()
+
+//分类菜单显示隐藏
+$(".home-menu").hover(function(){
+	$(".menu").stop().slideToggle()
+})
+$(".menu>.mall_menu>li").hover(function(){
+	$(this).children(".menu-2").toggle()
+})
+
+//头部橙橙首页隐藏
+$(".homePage").css("display","none");
+
+//其他选项
+$(".list .list-title div .other_op>span").hover(function(){
+	$(this).find("ul").toggle()
+})
+$(".other_op>span>li>ul>li").click(function(){
+	$(this).toggleClass("active")
+})
+
+//人气、销量、新品、价格升降排序
+$(".sort_order_top>ul>li").click(function(){
+	$(this).toggleClass("active")
+	$(this).siblings().removeClass("active")
+})
+//判断人气、销量、新品、价格页面
+function checkURL(){
+	var url = window.location.href ;
+	var str = url.split("&").pop().replace();
+	if(str=="mem=1"){
+		$(".sort_order_top>ul li:eq(0)").addClass("active")
+	}
+	if(str=="news=1"){
+		$(".sort_order_top>ul li:eq(1)").addClass("active")
+	}
+	if(str=="sales=1"){
+		$(".sort_order_top>ul li:eq(2)").addClass("active")
+	}
+	if(str=="low=1"){
+		$(".sort_order_top>ul li:eq(3)").addClass("active")
+	}
+}
+checkURL()
+
+//判断出货期
+function checkTerm(){
+	var term = window.location.href ;
+	for(var i = 0; i<$(".good-list>li>.shipment").length;i++){
+		if($(".good-list>li>.shipment").eq(i).attr("data-id")==0){
+			$(".good-list>li>.shipment").eq(i).css("display","block")	
+		}
+	}
+}
+checkTerm()
+
+//价格区间搜索
+$(".price_search").click(function(){
+	var data = {
+		'low_price':$("input[name=low_price]").val(),
+		'height_price':$("input[name=height_price]").val()
+	}
+	$.post("http://www.orangesha.com/index.php/Home/MallCategorys/goodsList",data,function(res){
+		console.log(res)				
+	})	
+})
+
+var paramer_arr  = GetRequest();
+    PATH_NAME    = '';  
+//paramer_arr['p'] = 1;
+/*价格地址*/
+var price = (function(){  
+    $(".price_a").click(function(){
+    	var price = $(this).attr('data-price');
+    	paramer_arr['price'] = price;
+    	window.location.href = getUrl(paramer_arr);
+    });
+
+	$(".price_btn").click(function(){
+	    var price_1 = $(this).prev('input').prev('input').val(),
+	        price_1 = parseInt(price_1) > 0 ? parseInt(price_1) : 0,
+	        price_2 = $(this).prev('input').val(),
+	        price_2 = parseInt(price_2) > 0 ? parseInt(price_2) : 'max',
+	        price   = price_1 + '-' + price_2;   
+	    paramer_arr['price'] = price;   
+	    window.location.href = getUrl(paramer_arr);
+	});    
+})();
+
+/*类型地址*/
+var cat = (function(){
+    $(".list-type .clearfix").on('click','a',function(){
+        var id = $(this).attr('data-id');
+        var router = $(this).attr('data-router');
+        PATH_NAME  = "http://" + '{$Think.server.HTTP_HOST}' + '/mall/c-' + id +'.html'; 
+    	window.location.href  = getUrl(paramer_arr);
+    })   
+})();
+
+/*品牌地址*/
+var brand = (function(){
+	var type  = 1,
+	    brand = {};
+    $(".brand").on('click','li',function(){   
+        var id = $(this).attr('data-id');  
+        if(type == 1){            
+            paramer_arr['brand_id'] = id;
+    	    window.location.href  = getUrl(paramer_arr);
+        }else{
+            /*多选*/
+            if(brand[id]){
+            	delete brand[id]
+            }else{
+            	brand[id] = id;
+            }                 
+        }
+    })    
+    
+    /**
+     * 模式切换
+     */
+    $(".chose-more").click(function(){
+        type = type == 1 ? 2 : 1;//模式切换
+        $(this).toggleClass("active")
+        $(this).prev().prev().find(".brand").toggleClass("paddLeft")
+    })
+    
+    $('.close').click(function () {
+    	type=1;
+    	$(this).parent().prev().removeClass("active")
+    });
+    
+    $(".save").click(function(){
+    	var arr = [];
+    	for(var k in brand){
+            arr.push(k);
+    	}
+    	paramer_arr['brand_id'] = arr.join(',');
+    	window.location.href  = getUrl(paramer_arr);
+    })
+})();
+
+var goods_attr = (function(){
+	var __attr = [];
+	if(typeof(paramer_arr.attr) != 'undefined'){
+        var temp_attr = paramer_arr.attr.split('-');
+        temp_attr.forEach(function(v){
+        	var arr = v.split('_');
+        	__attr[arr[0]] = arr;
+        	__attr[arr[0]].shift();
+        })
+	}
+    $(".goods_attr").on('click','.goods_attr_li',function(){   
+        var attr_id     = $(this).parents('li').attr('data-attr'),
+            attr_value  = $(this).attr('value');
+            index       = -1;
+        if(typeof(__attr[attr_id]) != 'undefined'){
+        	index = __attr[attr_id].indexOf(attr_value)
+        }else{
+            __attr[attr_id] = [];
+        }       
+        if(index >= 0){
+            __attr[attr_id].splice(index , 1);
+            if(!__attr[attr_id].length){
+               __attr.splice(attr_id , 1); 
+        	}
+        }else{
+        	__attr[attr_id].push(attr_value);
+        }
+        paramer_arr['attr']   = createSearchAttr(__attr);
+        window.location.href  = getUrl(paramer_arr);
+    })
+
+    function createSearchAttr(data){
+    	var str = '';
+        data.forEach(function(v , k){
+        	str += k + '_';
+        	v.forEach(function(v1){
+                str += v1 + '_';
+        	});
+        	str = str.substring(0 , str.length - 1) + '-';       	
+        });
+        return str.substring(0 , str.length - 1);   
+    }    
+})();
+
+function getUrl(paramer_arr){
+    var paramer = '';
+    for(var k in paramer_arr){
+        paramer+='&'+ k + '=' + paramer_arr[k];
+    }
+    paramer = paramer.substring(1);
+    return paramer ? (PATH_NAME + '?' + paramer) : PATH_NAME;
+}
+
+function GetRequest() {   
+   var url = location.search; //获取url中"?"符后的字串   
+   var theRequest = new Object();   
+   if (url.indexOf("?") != -1) {   
+      var str = url.substr(1);   
+      strs = str.split("&");   
+      for(var i = 0; i < strs.length; i ++) {   
+         theRequest[strs[i].split("=")[0]] = decodeURI(strs[i].split("=")[1]);   
+      }   
+   }   
+   return theRequest;   
+} 
+
+$(".go").click(function(){
+	var val = $(".go_number").val();
+	paramer_arr['p'] = parseInt(val) > 0 ? parseInt(val) : 1;
+	window.location.href = getUrl( paramer_arr);
+})
+</script>
+</html>

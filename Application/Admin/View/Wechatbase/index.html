@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="__PUBLIC__/css/public_css.css" type=text/css rel=stylesheet />
+<meta name="description" content="" />
+<style> 
+#main table{border-top:1px solid #E7E9F3;width:600px;margin:20px auto}
+#main table tr:first-child{background:#F4F5F9}  
+#main table tr td{border-left:1px solid #E7E9F3;border-bottom:1px solid #E7E9F3;font-size:20px;text-align:center;padding:20px;}
+#main table tr .td{border-left:0px}
+#main td img{max-width:150px}
+#main td a{display:block;margin-left:10px;float:left;padding:10px;background:#F4F5F9;border:1px solid #E6E7EC}     
+</style>
+</head>
+    <body>
+    <div id="wraper">     
+          <div id="main">          
+             <table cellspacing="0">
+                  <volist name="list" id="v">
+	                  <tr>
+	                      <td class='td'>{$v['id']}</td>
+	                      <td>{$v.name}</td>	                    
+	                      <td>{$v.sort}</td>
+	                      <td><a href="{:U('update',array('id'=>$v['id']))}">编辑</a><a href="{:U('delete',array('id'=>$v['id']))}" onclick="return confirm('确认是否删除')">删除</a></td>
+	                  </tr>
+                  </volist>                                 
+             </table>
+         </div>
+    </div>	
+    </body>
+    <script type="text/javascript">
+
+    </script>
+</html>

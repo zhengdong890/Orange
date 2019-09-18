@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="<a href="http://www.w3.org/1999/xhtml">http://www.w3.org/1999/xhtml</a>">
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <title></title>
+ <style>
+ * {
+ margin: 0;
+ padding: 0;
+ }
+ .main {
+ position: relative;
+ margin: 100px auto;
+ width: 300px;
+ height: 300px;
+ border-radius: 300px;
+ border: 1px solid #000;
+ box-shadow: 2px 5px #808080;
+ }
+ #timeLabel {
+ position: absolute;
+ background-color: pink;
+ width: 80px;
+ height: 25px;
+ left: 110px;
+ top: 180px;
+ color: #fff;
+ line-height: 25px;
+ text-align: center;
+ }
+ #hour {
+ width: 100px;
+ height: 10px;
+ background-color: red;
+ position: absolute;
+ left: 150px;
+ top: 145px;
+ transform-origin: 0 50%;
+ }
+ #minute {
+ width: 120px;
+ height: 8px;
+ background-color: blue;
+ position: absolute;
+ left: 150px;
+ top: 146px;
+ transform-origin: 0 50%;
+ }
+ #second {
+ width: 140px;
+ height: 4px;
+ background-color: green;
+ position: absolute;
+ left: 150px;
+ top: 148px;
+ transform-origin: 0 50%;
+ }
+ .hourPointer, .minuterPointer, .secondPointer {
+ position: absolute;
+ transform-origin: 0 50%;
+ }
+ .hourPointer {
+ height: 10px;
+ width: 12px;
+ left: 150px;
+ top: 145px;
+ background-color: #f00;
+ z-index: 3;
+ }
+ .minuterPointer {
+ height: 8px;
+ width: 10px;
+ left: 150px;
+ top: 146px;
+ background-color: #b6ff00;
+ z-index: 2;
+ }
+ .secondPointer {
+ height: 6px;
+ width: 8px;
+ left: 150px;
+ top: 147px;
+ background-color: #fa8;
+ z-index: 1;
+ }
+ </style>
+ <script>
+
+ </script>
+</head>
+<body>
+ <div class="main" id="biaopan">
+ <div id="timeLabel"></div>
+ <div id="hour"></div>
+ <div id="minute"></div>
+ <div id="second"></div>
+ </div>
+</body>

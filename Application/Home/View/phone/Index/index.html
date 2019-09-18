@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>虹桥小学</title>
+    <link rel="stylesheet" href="__PUBLIC__/phone/css/Common/index.css" />
+    <link rel="stylesheet" href="__PUBLIC__/phone/css/Common/rest.css" />
+    <link rel="stylesheet" href="__PUBLIC__/phone/css/index/same.css" />
+        <!-- ~~~手机端头部公共~~ -->
+    <!-- <link rel="stylesheet" href="__PUBLIC__/phone/css/djshide/partyEthics.css" /> -->
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=yes" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/phone/css/jquery.mobile-1.2.0.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/phone/css/master.css" />
+<!-- <link rel="stylesheet" href="__PUBLIC__/phone/css/xwzhongxin/news.css" />  -->   
+    <script type="text/javascript" src="__PUBLIC__/phone/js/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/phone/js/banner.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/phone/js/my_js.js"></script>
+    <!--~~~~~~手机端头部公共结束~~~~  -->    
+
+    <script type="text/javascript" src="__PUBLIC__/phone/js/myscript.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/phone/js/focus.js"></script>
+<script type="text/javascript" src="__PUBLIC__/phone/js/jquery.SuperSlide.js"></script>
+  </head>
+  <body>
+    <div class="wrp">
+  <include file='Public/header' />
+      <!--轮播以下内容-->
+      <div class="con_wap">
+  <!-- *****************学校公告开始************ -->
+          <div class="gonggao_index">
+                        <div class="title ui-bar-f ui-grid-a"><span class="ui-block-a">学校公告</span><span class="ui-block-b more_i"><a  data-role="button" data-inline="true"></a></span></div>
+                        <ul>
+                                <volist name="gonggao" id="v">
+                                <li class="cultureNews-box">
+                                        <a href="{:U('Xwzhongxin/xxgonggao_content',array('id'=>$v['id'],'column_id'=>$v['column_id']))}">
+                                        
+                                        <div class="cultureNews-information current-image">
+                                                        <span>
+                                                                {$v['title']}
+                                                        </span>
+                                        </div>
+                                        </a>
+                                </li>
+                                </volist>
+                        </ul>
+          </div>
+          <!-- ************************学校公告结束******************************************* -->
+             <!-- ~~~美德少年开始~~~ -->
+          <div class="news product  meideshaonian_index">
+                  <div class="title ui-bar-f ui-grid-a">
+                        <span class="ui-block-a">美德少年</span>
+                        <span class="ui-block-b more_i">
+                             <a data-role="button" data-inline="true"></a>
+                        </span>
+                  </div>
+                  <div class="cont_top">
+                          <ul class="list2">
+                            <volist name="meideshaonians" id="v">
+                                    <li class="cultureNews">
+                                      <a href="{:U('Hqshaonian/mdshaonian_content',array('id'=>$v['id'],'column_id'=>$v['column_id']))}"><span>{$v['title']}</span><em>{$v['updatetime']|date="Y-m-d",###}</em></a>
+                                    </li>                                    
+                            </volist>
+                          </ul>
+                  </div>
+          </div>
+          <!--~~~~~~美德少年结束~~~~~~-->
+
+          <!-- ~~~校本研训开始~~~ -->
+          <div class="news product  meideshaonian_index">
+                  <div class="title ui-bar-f ui-grid-a">
+                        <span class="ui-block-a">校本研训</span>
+                        <span class="ui-block-b more_i">
+                             <a href="news.asp" data-role="button" data-inline="true"></a>
+                        </span>
+                  </div>
+                  <div class="cont_top">
+                          <ul class="list2">
+                            <volist name="xiaobenyanxun" id="v">
+                              <if condition="$v  neq '' ">
+                                    <li class="cultureNews">
+                                          <a href="{:U('Chyanxun/xbyanxun_content',array('id'=>$v['id'],'column_id'=>$v['column_id']))}"><span>{$v['title']}</span><em>{$v['updatetime']|date="Y-m-d",###}</em></a>
+                                    </li>                                 
+                                </if>       
+                            </volist>
+                          </ul>
+                  </div>
+          </div>
+          <!-- ~~~校本研训结束~~~ -->
+                
+
+               <!-- ~~~校园动态开始~~~ -->
+          <div class="news product  meideshaonian_index">
+                  <div class="title ui-bar-f ui-grid-a">
+                        <span class="ui-block-a">校园动态</span>
+                        <span class="ui-block-b more_i">
+                             <a href="news.asp" data-role="button" data-inline="true"></a>
+                        </span>
+                  </div>
+                  <div class="cont_top">
+                          <ul class="list2">
+                            <volist name="xiaoyuandongtai" id="v">
+                                    <li class="cultureNews">
+                                      <a href="{:U('Xwzhongxin/xydongtai_content',array('id'=>$v['id'],'column_id'=>$v['column_id']))}"><span>{$v['title']}</span><em>{$v['updatetime']|date="Y-m-d",###}</em></a>
+                                    </li>                                    
+                            </volist>
+                          </ul>
+                  </div>
+          </div>
+          <!-- ~~~校园动态结束~~~ -->
+
+
+
+
+<!-- 教师风采开始 -->
+        <div class="fw_wap clearfix">
+                  <div class="title ui-bar-f ui-grid-a">
+                        <span class="ui-block-a">教师风采</span>
+                        <span class="ui-block-b more_i">
+                             <a href="news.asp" data-role="button" data-inline="true"></a>
+                        </span>
+                  </div>
+                  <div class="slideTxtBox2">
+                            <div class="bd">
+                                        <div id="leftMarquee" class="infoList">
+                                                <div class="bdr">
+                                                          <ul>
+                                                                <volist name="jiaoshifengcai" id="v">
+                                                                <li class="hceg"><img src="__ROOT__{$v['thumb']|substr=1}"  /><span>{$v['title']}</span></li>
+                                                                </volist>
+                                                          </ul>
+                                                </div>
+                                                <script type="text/javascript">$("#leftMarquee").slide({mainCell:".bdr ul",effect:"leftMarquee",vis:5,interTime:40,autoPlay:true});</script>
+                                        </div>
+                            </div>
+                  </div>
+        </div>
+<!-- 教师风采结束        -->
+
+      </div>
+    <include file="Public:footer" />
+    </div>
+<!--     <div id=img1 style="    bottom: 20px;z-index: 100;left: 0px;width: 59px;position: absolute;top: 200px;height: 61px;visibility: visible;display: inline-block;position: fixed;">
+      <a href="{$ftp}" target="_blank"><img src="__PUBLIC__/phone/images/index/ftp.gif" width="109" height="88" border="0"></a>
+    </div> -->
+    <script type="text/javascript" src="__PUBLIC__/phone/js/js.js"></script>
+    <script type="text/javascript">$(".slideTxtBox2").slide();</script>
+  </body>
+</html>

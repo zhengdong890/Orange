@@ -1,0 +1,42 @@
+body,div,ul,li,p,input{padding:0;margin:0;outline:none;font-size:12px;font-family:"微软雅黑";}
+ul,li{list-style:none;}
+a{text-decoration:none;}
+body{background-color:#fff;}
+.list{
+    width:1200px;
+    margin:0 auto;
+    overflow:hidden;
+}
+.list .list-header{position:relative;}
+.list .list-header span{font-size:14px;color:#333;line-height:30px;}
+.list .list-header .header-right{color:#666;position:absolute;right:0;top:0;}
+.list .list-title{height:81px;width:1198px;border:1px solid #d6d6d6;}
+.list .list-title .list-price,.list .list-title .list-type{height:40px;line-height:40px;font-size:12px;}
+.list .list-title .list-price{border-bottom:1px solid #d6d6d6;}
+.list .list-title div ul li{float:left;width:105px;height:40px;text-align:center;}
+.list .list-title div ul .text{color:#666;background-color:#eee;}
+.list .list-title .list-price .into{width:260px;}
+.list .list-title .list-price .into input{width:80px;height:20px;border:1px solid #a7a7a7;}
+.list .list-title .list-price .into span{background-color:#eee;font-size:12px;color:#333;padding:5px 10px;cursor:pointer;border:1px solid #a7a7a7;}
+.list .list-title:after{content:'';height:0;display:block;visibility:hidden;clear:both;}
+
+.list .good-list{width:1200px;}
+.list .good-list li{width:222px;height:346px;border:1px solid #f0f0f0;float:left;margin:20px 20px 0 0;}
+.list .good-list li .good-box{border:1px solid transparent;width:220px;height:344px;}
+.list .good-list li .good-box .good-icon{display:block;width:220px;height:220px;}
+.list .good-list li .good-box .contain{padding:0 10px;}
+.list .good-list li .good-box .contain .row-price{line-height:30px;height:30px;color:#ff6600;font-size:18px;position:relative;}
+.list .good-list li .good-box .contain .row-price .price{font-weight:bold;}
+.list .good-list li .good-box .contain .row-price .closing{position:absolute;right:0;top:0;font-size:12px;color:#888;}
+.list .good-list li .good-box .contain .title{font-size:14px;font-weight:bold;color:#000;height:36px;}
+.list .good-list li .good-box .contain .shop-name{height:28px;line-height:28px;font-size:12px;color:#888;position:relative;padding-left:12px;}
+.list .good-list li .good-box .contain .shop-name:before{content:'';width:8px;height:10px;display:block;position:absolute;background:url(good_shop_icon.png) no-repeat;top:8px;left:0;}
+.list .good-list li .good-box .contain .shop-name .rated{position:absolute;right:0;top:0;}
+.list .good-list li .good-box .contain .shop-name .rated span{color:#37a3a3;font-weight:bold;}
+.list .good-list li .good-box .contain .shop-icon{height:30px;}
+.list .good-list li:nth-child(5n){margin:20px 0 0 0;}
+.list .good-list li:hover{border:1px solid #37a3a3;}
+.list .good-list li:hover .good-box{border:1px solid #37a3a3;}
+
+
+

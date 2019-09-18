@@ -1,0 +1,113 @@
+#fixed_add{
+	width:100%;
+	height:100%;
+	float:left;
+	position:absolute;
+	z-index:9000;
+	background:rgba(0,0,0,0.3);
+} 
+
+.fixed_add_hide{
+    display:none;	
+}
+
+#fixed_add .fixed_add_wraper{
+	width:1000px;
+	height:560px;
+	background:white;
+	margin:50px auto;
+}
+
+#fixed_add .fixed_add_wraper .fixed_add_title{
+	width:100%;
+	height:30px;
+	float:left;
+	line-height:30px;
+	background:#46A2E6;color:white
+}
+
+#fixed_add .fixed_add_content{
+	width:960px;
+	height:530px;
+	float:left;
+	overflow:scroll;
+	margin-left:20px;
+}  
+
+#fixed_add .fixed_add_content table{
+    margin:0 auto;
+}   
+
+#fixed_add .fixed_add_a{
+	
+}
+
+#fixed_add .fixed_add_content table tr td{
+	width:auto;
+	border-left:1px solid #E7E9F3;
+	border-bottom:1px solid #E7E9F3;
+	padding:10px 20px 10px 20px;
+	font-size:13px;
+}
+
+#fixed_add .fixed_add_content table tr td input{
+	width:200px;
+	border:1px solid black;
+	border-radius:5px;
+	height:26px
+} 
+
+#fixed_add .fixed_add_content table tr td .textarea_1{
+	width:300px;
+	border:1px solid black;
+	border-radius:5px;
+	height:100px
+} 
+
+#fixed_add .fixed_add_content table tr td .textarea_2{
+	width:600px;
+	border:1px solid black;
+	border-radius:5px;
+	height:150px
+} 
+
+#fixed_add .fixed_add_content table tr td select{
+	border-radius:5px;
+	height:26px
+}  
+
+#fixed_add .fixed_add_content table tr td .type_radio{
+	width:auto;
+	height:24px;
+	float:left;
+	margin-left:8px;
+} 
+
+#fixed_add .fixed_add_content .p_text{
+	width:auto;
+    height:25px;
+	float:left;	
+	line-height:24px;
+	margin-left:8px;
+	font-size:13px;
+}    
+
+#fixed_add .fixed_add_content .p1{
+	width:100%;
+	height:auto;
+	float:left;
+	margin-top:10px;
+}     
+
+#fixed_add .fixed_add_content .btn{
+	display:block;
+	text-align:center;
+	line-height:26px;
+	float:left;
+	border-radius:4px;
+	background:#C43926;
+	margin-left:10px;
+	color:white;
+	height:26px;
+	width:50px;
+}

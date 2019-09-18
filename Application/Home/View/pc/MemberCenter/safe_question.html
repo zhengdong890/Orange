@@ -1,0 +1,252 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>账号安全-设置保密问题</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/changePhone.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+ <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->   
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="MemberPublic:MemberLeft" />  
+        <div class="user-right marT20 box-s-c1 fRi">
+            <ul class="left_top_ul">
+            	<li>账户安全</li>
+            	<li>>设置保密问题</li>
+            </ul> 
+            <div class="container">
+            	<ul class="step_ul">
+            		<li class="active">
+            			<div>1</div>验证身份
+            		</li>
+            		<li>
+            			<div>2</div>设置保密问题
+            		</li>
+            		<li>
+            			<div>3</div>设置成功
+            		</li>
+            	</ul>
+<!--第一步-->
+            	<div class="change_box1">
+                  <table class="phone_check">
+            		<tr>
+            			<td>手机号：</td>
+            			<td>{$Think.session.member_data.username}</td>
+            		</tr>
+            		<tr>
+            			<td>短信验证码：</td>
+            			<td><input type="text" id="checkcode"></td>
+            			<td>
+            				<button class="get_code">获取短信验证码</button>           				
+            			</td>
+            		</tr>
+            		<tr>
+            			<td></td>
+            			<td>
+            				<div class="code_error">
+            					<div>x</div>验证码错误
+            				</div>
+            			</td>
+            			<td></td>
+            		</tr>
+            	  </table>
+            	  <button class="nextStep1">下一步</button>
+            	</div>           	
+<!--第二步-->
+            	<div class="change_box2">
+                  <table class="set_question">
+            		<tr>
+            			<td>问题一：</td>
+            			<td>
+            				<select class="safeQuestion">
+            					<option>请选择安全问题</option>
+            				</select>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td>答案：</td>
+            			<td><input type="text" placeholder="请输入安全问题答案" id="answer1"></td>
+            		</tr>
+            		<tr>
+            			<td>问题二：</td>
+            			<td>
+            				<select class="safeQuestion">
+            					<option>请选择安全问题</option>
+            				</select>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td>答案：</td>
+            			<td><input type="text" placeholder="请输入安全问题答案" id="answer2"></td>
+            		</tr>
+            		<tr>
+            			<td>问题三：</td>
+            			<td>
+            				<select class="safeQuestion">
+            					<option>请选择安全问题</option>
+            				</select>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td>答案：</td>
+            			<td><input type="text" placeholder="请输入安全问题答案" id="answer3"></td>
+            		</tr>
+            	  </table>
+            	  <button class="nextStep2">下一步</button>
+            	</div>
+<!--修改成功   -->         	
+            	<div class="change_success">
+            		<p>保密问题设置成功</p>
+            		<p>请牢记您的答案！<!--，<span></span>秒后跳转到--></p>
+            		<p><a href="{:U('Member/Login')}">去登录</a></p>
+            	</div>           	
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /主体 -->
+<include file="Public:footer" />  
+
+<script>
+
+	//获取短信验证码
+	$(".get_code").click(function(){
+		var timer =60;
+        var setTime;
+
+         setTime=setInterval(function(){
+                if(timer==0){
+                	$(".get_code").css("background-color","#fff").css("color","#FF6200").css("border","1px solid #FF6200");
+		            $(".get_code").text("重新获取");
+                    clearInterval(setTime);
+                    return;                   
+                }
+                timer--;
+                $(".get_code").text(timer+" s 后重新获取");
+                $(".get_code").css("background-color","#CCC").css("color","#666").css("border","1px solid #CCC");
+            },1000);  
+        
+        $.post("{:U('MemberSecurity/createSecurityCode')}",function(res){
+        	
+            
+        })
+        
+	})
+	
+	function checkCode(){
+        var data = {'phone_code': $("#checkcode").val()};
+        $.post("{:U('MemberSecurity/checkSecurityCode')}",data,function(res){
+        	
+            if(res.status==1){
+    		  $(".change_box1").css("display","none");
+    		  $(".change_box2").css("display","block");
+    		  $(".step_ul li:eq(0)").removeClass("active");
+    		  $(".step_ul li:eq(1)").addClass("active");
+    	    }else{
+    		  $(".code_error").css("display","block");
+    	    }
+        })        
+    }
+	 
+	//下一步验证短信验证码
+    $(".nextStep1").click(function(){
+    	checkCode();    	
+    })
+
+//后台获取问题
+function showQuestion(){
+    var html = [];
+    $.post("{:U('MemberSecurity/getQuestion')}",function(res){
+    	
+    for(var k in res.data){
+    	html.push("<option value='"+ k +"'>"+res.data[k]+"</option>");
+	}
+	  html = html.join(''); 
+      $(".safeQuestion").html(html);
+    })
+	
+}
+
+    //提交问题&答案
+    function questionSubmit(){
+        var data = {
+        	'1': {       		
+        		'question': $(".safeQuestion").eq(0).val(),
+        		'answer'  : $("#answer1").val()
+        	},
+        	'2': {       		
+        		'question': $(".safeQuestion").eq(1).val(),
+        		'answer'  : $("#answer2").val()
+        	},
+        	'3': {       		
+        		'question': $(".safeQuestion").eq(2).val(),
+        		'answer'  : $("#answer3").val()
+        	},
+        };
+        
+        $.post("{:U('MemberSecurity/securityAdd')}",data,function(res){        	
+        	
+            if(res.status==1){
+            	$(".step_ul li:eq(1)").removeClass("active");
+    		    $(".step_ul li:eq(2)").addClass("active");
+    		    $(".change_box2").css("display","none");
+    		    $(".change_success").css("display","block");
+            }
+            if($('input').val()==''){
+            	alert("请选择问题并输入答案")
+            }
+        })        
+    }    
+
+showQuestion(); 
+ 
+    //提交问题下一步
+     $(".nextStep2").click(function(){
+     	         questionSubmit();     	         
+     })
+    
+    //回车键
+    $(".change_box1").keydown(function() {
+             if (event.keyCode == "13"){
+             	 //keyCode=13是回车键
+                 $('.nextStep1').click();                 
+             }
+        }); 
+    $(".change_box2").keydown(function() {
+             if (event.keyCode == "13"){
+             	 //keyCode=13是回车键
+                 $('.nextStep2').click();                 
+             }
+       });
+    
+     
+     
+     
+     
+     
+    
+  
+  
+  
+
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<link href="{:C('STATIC_URL')}/Home/css/orders.css" rel="stylesheet">
+</head>
+<body >
+<include file="Public:header_top" />	
+	<!-- 主体 -->
+    <div class="body">
+    	<div class="pay_top">
+    		<div class="e_logo">
+	    		<span>收银台</span>
+	    	</div>
+	        <div class="points">
+	            <div class="shopping-cart2"></div>
+	            <div class="text">购物车<i class="i1"></i>确认订单<i class="i2"></i>支付<i class="i3"></i>完成</div>
+	        </div>
+    	</div>
+    	<div class="completePay">
+    		<p>订单提交成功，请等待审核结果，审核完成后将会显示在您的订单列表中</p>
+    		<div>
+    			<span>重要提示：</span>我们将会尽快审核您的订单，请您耐心等待。
+    		</div>
+    		<button>查看订单详情</button>
+    	</div>
+    </div>
+    </body>
+<script type="text/javascript">
+  
+</script>
+<!-- /主体 -->
+<include file="Public:footer" />
+</body>
+</html>

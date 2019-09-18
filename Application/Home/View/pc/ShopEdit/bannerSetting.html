@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>店铺主页模版</title>
+<meta name="description" content="">
+<meta name="keywords" content="万德龙数控机床专营店">
+<link href="{:C('STATIC_URL')}/Home/css/cssReset.css" rel="stylesheet">
+<link href="{:C('STATIC_URL')}/Home/css/shop-decorate.css" rel="stylesheet">
+<link href="{:C('STATIC_URL')}/Home/css/shop.css" rel="stylesheet">
+<link href="{:C('STATIC_URL')}/Home/css/decorate.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+ <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<style>
+#bannerSetting{  width:1100px;height: 2000px; margin: 0 auto;}  
+#bannerSetting img{ width: 100%; transform: translateY(-70px);}
+</style>
+</head>
+<body>
+    <div id="bannerSetting">
+    	<img src="{:C('STATIC_URL')}/Home/image/bannerSetting.jpg">
+    </div>  
+    <!-- /导航模态框 -->
+    <!-- banner模态框  -->
+    <form class="banner-modal modal"  method="post" action="{:U('ShopEdit/shopBannerUpdate')}"  enctype="multipart/form-data">
+        <h3 class="modal-header">banner首页横幅设置<a href="javascript:;" class="close-modal"></a></h3>
+        <div class="modal-content">
+            <p class="prompt-txt">banner尺寸:1920px*500px&nbsp;</p>
+            <div class="banner-change">
+                <h4 class="fl">图片&nbsp;:&nbsp;</h4>
+                <input type="text" name="shop_name" class="src-txt">
+                <label class="src"><input type="file" id="banner-src" name='thumb' value="">选择路径</label>
+                
+                <div class="img"><img class="banner-img"></div>
+            </div>
+        </div>
+        <div class="btns">
+            <input class="save btn-active"  type="submit" name="subm" id="banner-save" value="保存">
+            <input type="button" class="cancel" onclick="window.close();" value="取消">
+        </div>
+    </form>
+    <!-- /banner模态框  -->
+    <!-- /编辑状态  -->
+    <script>
+    $("#banner-src").change(function(){
+    	$(".src-txt").val($("#banner-src").val())
+    })
+    	
+    </script>
+</body>
+
+</html>

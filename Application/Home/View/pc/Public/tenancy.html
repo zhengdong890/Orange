@@ -1,0 +1,303 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="工业机器人租赁，智能装备租赁，智能装备分享，工业智能机器人交易，e橙优品">
+    <meta name="description" content="e橙优品专注于解决国内智能设备空闲问题，对接供给方和需求方，为万千中小企业解决设备和融资问题。我们是智能装备行业的专业电商平台，需求方、供给方、融资租赁公司三赢的B2B交易平台。">
+    <meta name="copyright" content="深圳市橙橙网络科技有限公司(www.orangesha.com)版权所有">
+    <meta name="author" content="e橙优品"> 
+  <title>e 橙优品智能装备分享平台-专业智能装备分享平台-工业智能装备租赁平台</title>
+
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+  <script type=text/javascript src="{:C('STATIC_URL')}/cnt.php"></script>
+  <link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+  <!--[if (gte IE 9)|!(IE)]><!-->
+  <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-2.0.3.min.js"></script>
+  <!--<![endif]-->
+  <!--[if lte IE 8 ]>
+  <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+  <![endif]-->
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/home.css" type="text/css">
+    <link rel="stylesheet" href="/Public/Orange/script/jquery.kinMaxShow/base.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.css">
+    <link rel="shortcut icon" href="/Public/Home/images/ee.ico" type="image/x-icon">
+    
+    <link href="{:C('STATIC_URL')}/Home/Financing/css/tenancy.css" rel="stylesheet">
+    <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.js"></script>
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/tool.js"></script>
+	<script src="{:C('STATIC_URL')}/layer/layer.js"></script>
+<!-- www.orangesha.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?54f6f54d47704101dc27b337de5fd6c3";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body >
+	 <style>
+.pages-btn {width:510px;height:30px;margin:10px auto;}
+.pages-btn .prev{margin-right:48px;}
+.pages-btn a{padding:2px 8px;border:1px solid #bfbfbf;color:#747474;font-size:18px;margin-right:4px;}
+.pages-btn .current{display:inline-block;padding:2px 8px;font-size:18px;margin-right:4px;background:#b5b97e;color: #fff; }
+.pages-btn .prev{margin-right:48px;}
+.pages-btn .next{margin-left:44px;}
+ </style>
+  <!-- 头部 -->
+  <!-- 导航条 页面头部
+================================================== -->
+	<div class="cover-top jCover-top">
+    <div class="cover-top-body mar1200c clearfix">
+        <div class="cover-top-f fLe">
+                            <span class="wel-lp">您好，欢迎您来到橙橙智能装备</span>
+                    <a class="col1" href="{:U('Member/login')}">【登录】</a>
+                    <a class="col1" href="{:U('Member/register')}">【免费注册】</a>        </div>
+        <div class="cover-top-list cover-top-f fRi wel-rp">
+            <ul>
+                <li><a href="/index.php?s=/Home/center/index.html" class="cCol1-h">个人中心</a></li>
+                <li>|</li>
+                                <li class="ewm"><a href="#" class="cCol1-h">手机橙橙</a><div></div></li>
+                <li>|</li>
+                <li><a href="javascript:viod();" class="cCol1-h" onclick="showkefu()">在线客服</a></li>
+                <li>|</li>
+                <li><span class="phone-sign">0755-86573357（9:00-18:00）</span></li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+<div class="n-bCol3 bg">
+    <div class="header mar1200c posRel">
+        <div class="header-right fRi">
+		<a href="javascript:void(0);" onclick="Openwindow()">
+  <ul style="list-style:none;margin-left:30px;">       
+      <li>&nbsp;&nbsp;<img src="{:C('STATIC_URL')}/images/images/header-right_03.jpg" ></li>
+ 
+<li style="float:left;">免费申请</li>
+<li style="float:left;margin-left:71px;">填写材料</li> 
+<li style="float:left;margin-left:75px;">提交成功</li>         
+</ul>
+</a>
+        </div>
+       
+        <a class="logo" href="/index.php?s=/Home/index/index.html"></a>
+        <div class="clear"></div>
+    </div>
+</div>
+
+
+    <!-- body -->
+
+    <div class="tenancy">
+        <div class="tenancy-nav">
+             <ul>
+                 <li><a href="{:U('Index/index')}">首页</a></li>
+                <li><a href="{:U('Public/index')}">融资租赁规则</a></li>
+                <li class="current"><a href="{:U('Public/tenancy')}">融资租赁公司</a></li>
+            </ul>
+        </div>
+        <div class="tenancy-content">
+            <div class="places">当前位置：融资租赁首页 > <span class="current">融资租赁公司</span></div>
+            <div class="option">
+                <ul class="industries">
+                    <li class="text">行业</li>
+                    <volist name="cat" id="cat">
+                    <li><a href="javascript:void(0);" title="{$cat.id}" class="acat">{$cat.name}</a></li>
+                    </volist>
+                </ul>
+                <ul class="industries locality">
+                    <li class="text">地区</li>
+    <volist name="cityData" id="cci">                 
+ <li ><a  href="javascript:void(0);" title="{$cci.id}" class="ali"> {$cci.city}</a></li>
+ 
+   </volist>  
+                   
+                </ul>
+                <ul class="industries brands">
+                    <li class="text">品牌</li>
+	 <volist name="company_brand" id="brand">     				
+                    <li><a  href="javascript:void(0);" title="{$brand.id}" class="abrand"><img src="{$brand.thumb}"  ></a></li>
+	 </volist>  				
+                   
+                </ul>
+                <ul class="firm" id="test">
+                <volist name="tenancylist" id="vo">
+                    <li>
+                        <div class="firm-left"><img src="{:C('STATIC_URL')}/Financing/images/firm_icon.jpg" alt=""></div>
+                        <div class="firm-right">
+                            <div class="title">{$vo.cpname}</div>
+                            <p>主营：{$vo.content}...</p>
+                        </div>
+                    </li>
+                 </volist>  
+
+                
+               
+                </ul>
+                <div style="clear:both;"></div>
+                <div class="pages-btn" id="pg">
+                       {$page}
+                </div> 
+              
+            </div>
+        </div>
+    </div>
+    <div class="clear" style="clear:both;"></div>
+    <script type="text/javascript">
+
+    	 function tes(id){    //user函数名 一定要和action中的第三个参数一致上面有
+        var id = id;
+       // alert(id);
+        $.get('{:U('Public/tes')}', {'p':id}, function(data){  //用get方法发送信息到test方法
+           //var info= eval('('+data+')') ;//将返回的json数据转换成js对象\
+           var data=JSON.parse(data);
+           //console.log(data.result[0].cpname);
+       
+            var s='';
+                s+='<ul id="test">';
+                for (var i = 0; i < data['result'].length; i++) {
+	                 s += '<li><div class="firm-left"><img src="{:C('STATIC_URL')}/Financing/images/firm_icon.jpg" alt=""></div>';
+	                 s += '<div class="firm-right"><div class="title">'+data['result'][i].name+'</div>';
+	                 s += ' <p>主营：'+data['result'][i].content+'...</p>';
+	                 s += '</div></li>';
+                }
+               
+                //
+                s+='</ul>';
+                pg=' <div class="pages-btn" id="pg">'+data['pg']+'</div>';
+ 
+                $('#test').html(s);
+                $('#pg').html(pg);
+              
+        });
+        return false;
+    }
+    	
+			
+		$(function(){ 
+				$(".ali").click(function(){ 					
+				var	value =	$(this).attr('title');
+				
+						$.post('{:U("Public/tes")}',{'cityid':value},function(da){
+					
+						   var data=eval("("+da+")");
+						   //console.log(data);
+						   
+							 // alert(data);
+							  //var data=JSON.parse(data);
+				   //console.log(data.result[0].cpname);
+				   
+					var s='';
+						s+='<ul id="test">';
+						for (var i = 0; i < data['result'].length; i++) {
+							 s += '<li><div class="firm-left"><img src="{:C('STATIC_URL')}/Financing/images/firm_icon.jpg" alt=""></div>';
+							 s += '<div class="firm-right"><div class="title">'+data['result'][i].name+'</div>';
+							 s += ' <p>主营：'+data['result'][i].content+'...</p>';
+							 s += '</div></li>';
+						}               
+					  
+						s+='</ul>';
+						pg=' <div class="pages-btn" id="pg">'+data['pg']+'</div>';
+		 
+						$('#test').html(s);
+						$('#pg').html(pg);
+							
+						})
+								
+		        })
+				
+				
+				     
+			$(".acat").click(function(){ 					
+				var	value1 = $(this).attr('title'); 
+				
+						$.post('{:U("Public/tes")}',{'catid':value1},function(da){
+						   var data=eval("("+da+")");
+						   //console.log(data);
+						   
+							 // alert(data);     
+							  //var data=JSON.parse(data);
+				   //console.log(data.result[0].cpname);
+				   
+					var s='';
+						s+='<ul id="test">';
+						for (var i = 0; i < data['result'].length; i++) {
+							 s += '<li><div class="firm-left"><img src="{:C('STATIC_URL')}/Financing/images/firm_icon.jpg" alt=""></div>';
+							 s += '<div class="firm-right"><div class="title">'+data['result'][i].name+'</div>';
+							 s += ' <p>主营：'+data['result'][i].content+'...</p>';
+							 s += '</div></li>';
+						}               
+					  
+						s+='</ul>';
+						pg=' <div class="pages-btn" id="pg">'+data['pg']+'</div>';
+		 
+						$('#test').html(s);
+						$('#pg').html(pg);
+							
+						})
+								
+		        })	
+				
+				
+			$(".abrand").click(function(){ 					
+				var	value2 = $(this).attr('title'); 
+				
+						$.post('{:U("Public/tes")}',{'brandid':value2},function(da){
+						   var data=eval("("+da+")");
+						   //console.log(data);
+						   
+							 // alert(data);     
+							  //var data=JSON.parse(data);
+				   //console.log(data.result[0].cpname);
+				   
+					var s='';
+						s+='<ul id="test">';
+						for (var i = 0; i < data['result'].length; i++) {
+							 s += '<li><div class="firm-left"><img src="{:C('STATIC_URL')}/Financing/images/firm_icon.jpg" alt=""></div>';
+							 s += '<div class="firm-right"><div class="title">'+data['result'][i].name+'</div>';
+							 s += ' <p>主营：'+data['result'][i].content+'...</p>';
+							 s += '</div></li>';
+						}               
+					  
+						s+='</ul>';
+						pg=' <div class="pages-btn" id="pg">'+data['pg']+'</div>';
+		 
+						$('#test').html(s);
+						$('#pg').html(pg);
+							
+						})
+								
+		        })		
+				
+				
+			
+})
+   function Openwindow(){
+	
+	layer.open({
+	  type: 2,
+	  title: '申请表单',
+	  maxmin: true,
+	  shadeClose: true, //点击遮罩关闭层
+	  area : ['600px' , '420px'],
+	  content: '{:U('Server/request')}'
+	  });
+
+
+}		
+	
+    </script>
+
+
+  <!-- 底部 -->
+    <include file="Public:footer" />
+   <!-- /底部 --> 	
+    	
+    	
+    </body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>彩虹课程-首页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/phone/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/phone/js/myjq.js"></script>
+<meta name="description" content="" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" /> 
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/jquery.mobile-1.2.0.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/master.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/phone/css/master.css" />
+
+
+<style>
+html{font-size:62.5%;}   
+*{padding:0; margin:0;font-family:"方正黑体简体";font-style:normal;font-size:1.6rem;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0}
+#wraper{width:100%;height:auto;float:left;}
+
+
+#content{width:98%;height:auto;float:left;padding-left:1%;padding-right:1%;padding-top:20px;padding-bottom:50px;background:#FDFAEB}
+#content #course_category{width:100%;height:auto;float:left;background:#FDFAEB}
+#course_category p{width:100%;height:21px;float:left;line-height:21px}
+#course_category p span{padding-left:6px}
+#course_category p img{max-height:21px;float:left;}
+#course_category ul{width:100%;height:auto;float:left;margin-top:5px}
+#course_category ul a{display:block;width:32%;height:26px;float:left;background:#299557;border-radius:3px;margin-top:5px;margin-left:1%}
+#course_category ul a:nth-child(1){margin-left:0}
+#course_category ul a:nth-child(4){margin-left:0}   
+#course_category ul a:nth-child(5){width:40%}
+#course_category ul a img{max-width:26px;float:left;}
+#course_category ul a span{display:block;width:auto;height:26px;float:left;line-height:26px;font-size:1.3rem;color:white;padding-left:2px}
+
+#content .category{width:100%;height:auto;float:left;padding-top:18px;}
+.category .category_h{width:100%;height:auto;float:left;}
+.category_h b{background:#269258;color:white;}
+.category_h span{padding-left:6px}
+.category ul{width:100%;height:auto;float:left;border:1px solid #E8E4D8;box-sizing:border-box;margin-top:8px;padding-bottom:18px}
+.category ul li{width:48%;height:auto;float:left;padding-top:5px;margin-left:1%;border-left:1px solid #E8E4D8;box-sizing:border-box;}
+
+.category ul li .course_img{width:96%;height:120px;margin-left:2%;float:left;}
+.course_img p{display:block;width:100%;height:120px;text-align:center} 
+.course_img p img{max-width:100%;max-height:100px;} 
+       
+.category ul li h2{width:100%;height:30px;float:left;text-align:center;font-size:1.3rem;line-height:15px}
+.category ul li .guankan{width:100%;height:auto;float:left;text-align:center;font-size:1.2rem}
+.category ul li .guankan span{font-size:1.2rem}      
+.category ul li .comment{float:left;margin-left:3px;font-size:1.2rem;color:black}
+.category ul li .zan{float:right;margin-right:5px}
+
+
+</style>
+<body>
+<div id="wraper">
+<include file="Public:header" />
+       <div id="content">
+             <div class="news">
+	               <div class="title ui-bar-f ui-grid-a"><span class="ui-block-a">课程分类</span><span class="ui-block-b"><a data-role="button" data-inline="true"></a></span></div>
+		           <div class="ClassNava">
+					    <div class="NavTree">
+							  <ul>
+								<volist name="course_category" id="v">
+								  <li><A href='{:U('course',array('cat_id'=>$v['id']))}'>{$v['cat_name']}</A> </li>
+								</volist>  
+							  </ul>
+					          <div class='clearfix'></div>
+					     </div>
+		            </div>
+		            <volist name="course_category" id="v" key="k">
+		            <div class="product">
+			              <div class="title ui-bar-f ui-grid-a"><span class="ui-block-a">{$v['cat_name']}</span><span class="ui-block-b more_i"><a href="{:U('course',array('cat_id'=>$v['id']))}" data-role="button" data-inline="true"></a></span></div>
+				                 <ul class="product_con ui-grid-b">
+									 <volist name="v['course']" id="v1" key="k1">     
+									 <li  <if condition="$k1 eq 1">class="ui-block-a"<else/><if condition="$k1 eq 2">class="ui-block-b"<else/>class="ui-block-c"</if></if>>
+									     <a href="{:U('course_evaluate',array('course_id'=>$v1['course_id']))}">
+									     <div>
+									     <if condition="$v1['course_thumb'] neq ''">
+									          <img src="__ROOT__{$v1['course_thumb']|substr=1}" alt="{$v1['course_name']}">
+									     <else/>
+									          <img src="__PUBLIC__/images/01.jpg" alt="{$v1['course_name']}">
+									      </if>
+									      </div>
+									      <p>{$v1['course_name']}</p>
+									      </a> 
+									  </li>	
+									  </volist> 				          
+								 </ul>
+						  </div>   
+				      </volist>                       
+               </div>
+       </div>
+    <!-- 主要内容结束    -->
+    <!-- 底部开始    -->
+<include file="Public:footer" />
+    <!-- 底部结束    -->
+</div>
+</body>
+<script type="text/javascript">
+
+</script>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>售后管理</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/all-use.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/side-nav.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/sell-management.css">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+<style>
+.refund{ width: 970px; border: 1px solid #E4E4E4; float: left; margin: 30px 0px 0px 6px;}
+.refund_top{ width: 100%; background-color: #F2F1F1; padding: 10px 40px; box-sizing: border-box;}
+.refund_box{ padding: 10px 20px;margin-bottom: 30px;}
+.refund_box>button{ color: white; padding: 3px 16px;cursor: pointer; background-color: #37A4A2; border-radius: 5px;font-family: "微软雅黑"; margin: 20px 0px 10px 0px;}
+.refund_box>table td{ text-align: left; height: 45px; width: 400px;}
+.refundInput{ height: 20px; width: 160px; padding: 2px 4px; }
+.refundTime{ width: 190px; padding: 2px 6px; height: 20px;cursor: pointer; font-family: "微软雅黑";}
+.refundReason{width: 220px; height: 26px; font-size: 12px; border-color: #E6E6E6; background-color: #EEEEEE; padding: 0px 5px; font-family: "微软雅黑"; cursor: pointer;}
+.search_box1{ width: 100%; padding: 20px 0px; min-height: 294px;}
+
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end --> 
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="Public:sellerLeft" />         
+            <div class="sell-management clearfix" style='width:auto;'>
+                <div class="refund">
+                	<div class="refund_top">售后管理</div>
+                	<div class="refund_box">
+                		<table class="noBorder">
+                			<tr>
+                				<td style="width: 530px;">订单编号： <input type="text" class="refundInput" /></td>
+                				<td>售后编号： <input type="text" class="refundInput" /></td>
+                			</tr>
+                			<tr>
+                				<td style="width: 530px;">申请时间： <input type="datetime-local" class="refundTime" value="" /> 到 <input type="datetime-local"  class="refundTime" value=""/></td>
+                				<td>
+                					售后状态： 
+                		               <select class="refundReason">
+                		               	  <option>全部</option>
+                		                  <option>退款申请等待买家确认</option>	
+                		                  <option>卖家不同意，等待买家修改</option>	
+                		                  <option>退款申请达成，等待买家发货</option>	
+                		                  <option>卖家已发货，等待买家确认收货</option>	
+                		                  <option>退款关闭</option>	
+                		                  <option>退款成功</option>	
+                		               </select>
+                				</td>
+                			</tr>
+                		</table>               		
+                		<button>搜索</button>
+                		<div class="search_box1">
+                			没有售后维权记录。
+                		</div>
+                	</div>               	
+                </div>
+            </div>                   
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+//判断左边导航
+function checkNav(){
+	$(".side-nav>ul:eq(4)>li:eq(3) a").css("color","#ff6600")
+}
+checkNav();
+</script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="工业机器人租赁，智能装备租赁，智能装备分享，工业智能机器人交易，e橙优品">
+    <meta name="description" content="e橙优品专注于解决国内智能设备空闲问题，对接供给方和需求方，为万千中小企业解决设备和融资问题。我们是智能装备行业的专业电商平台，需求方、供给方、融资租赁公司三赢的B2B交易平台。">
+    <meta name="copyright" content="深圳市橙橙网络科技有限公司(www.orangesha.com)版权所有">
+    <meta name="author" content="e橙优品"> 
+  <title>e 橙优品智能装备分享平台-专业智能装备分享平台-工业智能装备租赁平台</title>
+
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+  <link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+  <!--[if (gte IE 9)|!(IE)]><!-->
+  <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-2.0.3.min.js"></script>
+  <!--<![endif]-->
+  <!--[if lte IE 8 ]>
+  <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+  <![endif]-->
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/home.css" type="text/css">
+    <link rel="stylesheet" href="/Public/Orange/script/jquery.kinMaxShow/base.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.css">
+    <link rel="shortcut icon" href="/Public/Home/images/ee.ico" type="image/x-icon">
+    <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.js"></script>
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/tool.js"></script>
+	<link rel="stylesheet" href="{:C('STATIC_URL')}/Orange/css/home.css" type="text/css">
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Orangesha/css/list.css" type="text/css">
+
+<!-- www.orangesha.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?54f6f54d47704101dc27b337de5fd6c3";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body >
+  <!-- 头部 -->
+  <!-- 导航条 页面头部
+================================================== -->
+
+<include file="Public:header" />
+<include file="Public:nav" />
+    <!-- body -->
+
+
+
+
+
+   
+    <div class="list" style="margin-top:-430px;">
+        <div class="list-header">
+            <span>首页 > 节能环保装备 > 噪音处理</span><span class="header-right">共 10362件相关商品</span>
+        </div>
+        <div class="list-title">
+            <div class="list-price">
+                <ul>
+                    <li class="text">价钱:</li>
+                    <li>0-500</li>
+                    <li>500-5000</li>
+                    <li>5万-8万</li>
+                    <li>5万-10万</li>
+                    <li>10万以上</li>
+                    <li class="into">
+                        <input type="text"> - <input type="text"> <span>确定</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="list-type">
+                <ul>
+                    <li class="text">类型:</li>
+                    <li>工业机器人</li>
+                    <li>数控机床</li>
+                    <li>工业无人机</li>
+                    <li>工业3D打印机</li>
+                    <li>实验室仪器设备</li>
+                    <li>新能源装备</li>
+                    <!-- <li>节能环保装备</li>
+                    <li>生物产业装备</li>
+                    <li>新材料产业装备</li>
+                    <li>计算机电子设备</li>
+                    <li>自动化生产线</li> -->
+                </ul>
+            </div>
+        </div>
+        <!-- 商品列表 -->
+        <ul class="good-list">
+            <volist name="goodlist" id="gl" >
+                <li>
+                    <a href="{:U('Goods/goods',array('goods_id'=>$gl['id']))}">
+                        <div class="good-box">
+                            <img class="good-icon" src="{$gl['goods_thumb']}" alt="商品">
+                            <div class="contain">
+                                <div class="row-price">￥<span class="price">{$gl['goods_price']}</span><span class="closing">成交{$gl.sales}笔</span></div>
+                                <div class="title">{$gl['goods_name']}</div>
+                                <div class="shop-name"><span class="rated">评价<span>20</span></span></div>
+                                <div class="shop-icon">
+                                    <img src="{:C('STATIC_URL')}/Orangesha/image/goods_img_icon1.jpg" alt="">
+                                    <img src="{:C('STATIC_URL')}/Orangesha/image/goods_img_icon2.jpg" alt="">
+                                    <img src="{:C('STATIC_URL')}/Orangesha/image/goods_img_icon3.jpg" alt="">
+                                    <img src="{:C('STATIC_URL')}/Orangesha/image/goods_img_icon4.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </volist>
+        </ul>
+        <!-- 商品列表结束 -->
+        {$page}
+    </div>
+ <!-- 底部 -->
+    <include file="Public:footer" />
+    <!-- /底部 -->
+	</body>
+	</html>

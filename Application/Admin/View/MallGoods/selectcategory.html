@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="description" content="" />
+<style>
+*{padding:0; margin:0;font-size:16px;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0} 
+#container{
+	width: 98%;
+    margin-left: 1%;
+	height: auto;
+    float: left;
+    padding-bottom: 10px;
+}
+#Crumbs {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #d7d7d7;
+    line-height: 40px;
+    margin-top: 5px;
+    float: left;
+}
+#container #main {
+	width: 100%;
+    border: 1px solid #d7d7d7;
+    margin-top: 5px;
+    height: auto;
+    float: left;
+    padding-bottom: 10px;
+}
+#container #main table {
+    width: 100%;
+    margin: 0 auto;
+}
+#container #main .td_label {
+    text-align: right;
+    vertical-align: top;
+    font-weight: bold;
+    width: 30%;
+    font-size: 14px;
+    padding: 4px 8px;
+}
+.btn{display:block;width:100px;margin-top:10px;color:white;position:relative;height:28px;line-height:28px;text-align:center;float:left;background:#C43926;border-radius:4px;}
+</style>
+</head>
+<body>          
+<div id="container">
+    <div id="Crumbs">
+        <a>后台管理中心</a>-><a>选择分类</a>
+    </div>
+    <div id="main">		               
+        <table cellspacing="10" class="table_form">
+            <tr class='tr_submit'>
+               <td class="td_label"></td>
+               <td><a class='btn' href='javascript:;'>确认</a></td>
+            </tr>
+        </table>     
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+/*
+ * 分类联动
+ * */
+(function(w){
+var __SELECT_ID,
+    __LEVEL     = {},
+    __NOW_LEVEL = 1,   
+    __data_cash = {}//缓存
+
+	$("#main .table_form").on('change' , 'select' , function(){
+	    var id    = $(this).val();
+	    if(id == '0'){
+            return
+	    }
+	    __NOW_LEVEL = parseInt($(this).attr('data-level')) + 1;
+	    if(__NOW_LEVEL == 5){
+             __SELECT_ID = id;
+	    }
+	    if(typeof(__data_cash[id]) == 'undefined'){	   	
+            requestData(id);
+	    }else{
+	    	appenChildren(id , __data_cash[id]);
+	    }	    	    
+	})
+
+	function requestData(id){
+		$.post('{:U('Mall_category/categoryList')}' , {id : id} , function(res){
+			if(res.length > 0){
+                appenChildren(id , res);				
+				__LEVEL[__NOW_LEVEL] = true;
+			}			
+		})    
+	}
+    
+    function appenChildren(id , data){
+    	/*先缓存数据*/
+    	if(typeof(__data_cash[id]) == 'undefined'){
+            __data_cash[id] = data;
+    	} 
+    	var html = createHtml(data);      
+    	if(__LEVEL[__NOW_LEVEL]){
+            $("#main .table_form tr").eq(__NOW_LEVEL - 1).replaceWith(html);    	
+        }else{
+    		$("#main .table_form .tr_submit").before(html);
+    	}  
+        /*清空其他下拉菜单*/
+    	$("#main .table_form tr:gt(" + (__NOW_LEVEL-1) + ")").find('select').html('<option value=0>请选择</option>');  		
+    }
+
+	/*
+	 * 创建html
+	 * */
+	function createHtml(data){
+		var html = '';
+		html = html 
+            +  '<tr>'
+            +  '    <td class="td_label">'+ __NOW_LEVEL +'级:</td>'
+            +  '    <td>'
+            +  '        <select name="cat_id" data-level="' + __NOW_LEVEL + '">' 
+            +  '            <option value=0>请选择</option>';
+		data.map(function(v){
+            html += '       <option value="' + v.id +'">' + v.cat_name +'</option>';	
+		})	
+		html = html 
+		    +  '        </select> '
+		    +  '    </td>'  
+		    +  '</tr>';
+	    return html;
+	}
+    
+    w.liangdon = {
+    	r : function(){
+    		requestData(0);
+    	},
+    	g : function(){
+    		return __SELECT_ID;
+    	}
+    }
+	
+})(window);
+liangdon.r();
+
+$('.btn').click(function(){
+	cat_id = liangdon.g();
+	if(cat_id){		
+		window.location.href='http://houtai.orangesha.com/index.php/MallGoods/goodsAdd?cat_id='+cat_id;
+	}else{
+		alert('请选择4级分类');
+	}
+})
+</script>
+</html>

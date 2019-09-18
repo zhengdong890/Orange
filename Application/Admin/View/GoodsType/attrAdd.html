@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="description" content="" />
+<style>
+*{padding:0; margin:0;font-size:16px;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0} 
+#content{width:98%;height:auto;float:left;margin-left:1%;}
+#content #content_h{width:100%;height:40px;border:1px solid #D7D7D7;line-height:40px;margin-top:15px}
+#content #content_h a{padding-left:10px}
+.btn{width:100px;height:30px;float:right;display:block;background:#C43926;text-align:center;line-height:30px;color:white;border-radius:5px;font-size:14px;margin-right:20px;margin-top:5px;}      
+#content #content_m{width:100%;height:auto;border:1px solid #D7D7D7;padding-bottom:100px;margin-top:20px}
+#content table{margin:0 auto;margin-top:20px}
+#content table td span{float:right}
+input[type=text]{width:400px;height:24px;border-radius:3px;border-bottom:1px solid #E3E9EF;border-top:1px solid #ABADB3;border-left:1px solid #E2E3EA;border-right:1px solid #DBDFE6}
+td img{max-width:250px}
+td{padding-right:30px;padding-top:5px}
+table .sub_but{border:0px;padding:5px;background:#C43926;color:white;border-radius:2px;float:left;}
+textarea{width:400px;height:150px}
+</style>
+</head>
+<body>          
+<div id="content">
+      <div id="content_h">
+          <a>后台管理中心</a>-><a>新建商品类型</a>
+          <a class='btn' style="padding-left:0" href="{:U('goodsType')}">商品属性</a>
+      </div>
+      <div id="content_m">
+          <form action="{:U('attrAdd')}" method="post" onsubmit="return check();">
+                <table cellspacing="10">
+                          <tr>
+                                <td><span>属性名称:</span></td>
+                                <td><input type="text" name="attr_name"></input></td>
+                          </tr>
+                          <tr>
+                                <td><span>所属商品类型:</span></td>
+                                <td>
+                                   {$type_name}
+                                   <input type="hidden"  name="type_id" value="{$type_id}"></input>
+                                </td>
+                          </tr>
+                          <tr>
+                                <td><span>上级特征量:</span></td>
+                                <td>
+                                   <select name="pid">
+                                      <option value="0">顶级</option>
+                                      <volist name="attr" id="v">
+                                      <option value="{$v['attr_id']}" style="text-indent:{$v['padding']}">{$v['html']} {$v['attr_name']}</option>
+                                      </volist>
+                                   </select> 
+                                </td>
+                          </tr>
+                          <tr>
+                                <td><span>属性值是否可选:</span></td>
+                                <td>
+                                    <input type="radio" value="1" name="attr_type" checked='checked'></input>唯一属性
+                                    <input type="radio" value="2" name="attr_type"></input>单选属性
+                                    <input type="radio" value="3" name="attr_type"></input>复选属性
+                                </td>
+                          </tr>
+                          <tr>
+                                <td class="label">是否允许上传图片:</td>
+                                <td>
+                                    <input type="radio" value="no" name="type" checked='checked'></input>不允许
+                                    <input type="radio" value="picture" name="type"></input>单图
+                                    <input type="radio" value="gallery" name="type"></input>相册
+                                </td>
+                          </tr>
+                          <tr>
+                                <td><span>该属性值的录入方式:</span></td>
+                                <td>
+                                    <input type="radio" value="1" name="attr_input_type" checked='checked'></input>手工录入
+                                    <input type="radio" value="2" name="attr_input_type"></input>从下面的列表中选择（一行代表一个可选值）
+                                </td>
+                          </tr>
+                          <tr>
+                                <td valign="top"><span>可选值列表:</span></td>
+                                <td><textarea name="attr_value" disabled="disabled"></textarea></td>
+                          </tr>
+                          <tr><td></td><td><input type="submit" value="确认添加" class="sub_but"/></td></tr>
+                  </table>
+           </form>		            
+       </div>
+</div>
+</body>
+<script type="text/javascript">        
+/*检查是否为空*/
+function check(){
+	var attr_name=$("input[name='attr_name']").val();
+	var type_id=$("select[name='type_id']").val();
+	var error='';
+	error=(attr_name=='')?"属性名称不能为空":error;
+	error=(type_id=='')?"商品类型不能为空":error;
+	if(!error){
+		return true;
+	}else{
+		alert(error);
+		return false;
+	}	
+}
+
+$("input[name='attr_input_type']").click(function(){
+	var val=$(this).val();
+	if(val==1){
+		$("textarea[name='attr_value']").attr("disabled",true);
+	}else{
+		$("textarea[name='attr_value']").removeAttr("disabled");
+	}
+})
+</script>
+</html>

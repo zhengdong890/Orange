@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="description" content="" />
+<style>
+*{padding:0; margin:0;font-size:16px;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0} 
+#wraper{width:98%;height:auto;float:left;margin-left:1%;}
+#wraper #content_h{width:100%;height:40px;border:1px solid #D7D7D7;line-height:40px;margin-top:15px}
+#wraper #content_h a{padding-left:10px}      
+#content #content_m{width:100%;height:auto;border:1px solid #D7D7D7;padding-bottom:100px;margin-top:20px}
+#content table{margin:0 auto;margin-top:20px}
+input[type=text]{width:400px;height:24px;border-radius:3px;border-bottom:1px solid #E3E9EF;border-top:1px solid #ABADB3;border-left:1px solid #E2E3EA;border-right:1px solid #DBDFE6}
+.btn_a{display:block;width:100px;margin-top:10px;color:white;position:relative;height:28px;line-height:28px;text-align:center;float:left;background:#C43926;border-radius:4px;}
+td{padding-right:30px;padding-top:5px}
+textarea{width:400px;height:300px}
+</style>
+</head>
+<body>          
+<div id="wraper">
+    <div id="content_h">
+        <a>后台管理中心</a>-><a>商品分类单位值-单位</a>
+    </div>
+    <div id="content_m">
+        <form id = 'form'>
+            <input type='hidden' name='id' value='{$data['id']}' />
+	        <table cellspacing="10" class='table'>
+	            <tr>
+	                <td class = 'td_label'>当前分类:</td>
+	                <td>{$data['cat_name']}</td>
+	            </tr>
+	            <tr>
+	                <td class = 'td_label' valign="top">可选值列表:</td>
+	                <td class = 'unit'>
+	                    <volist name="data['unit_unit']" id='v'>
+	                    <p style='margin-top:5px'>
+	                        <input name='unit_unit[]' type='text' value='{$v}'/>
+	                        <a href='javascript:;' class='delete'>删除</a>
+	                    </p>
+	                    </volist>
+	                    <a href='javascript:;' class='btn_add_attr'>点击添加属性</a>
+	                </td>
+	            </tr>	            
+	            <tr>
+	                <td></td>
+	                <td>
+	                    <a class='btn_a'>确认保存</a>
+	                </td>
+	            </tr>
+	        </table>	 
+        </form>           
+    </div>
+</div>
+</body>
+<script type="text/javascript"> 
+(function(w){	    
+	$(".btn_add_attr").click(function(){
+		var html = $.html.createHtml();
+	    $(this).before(html);	   
+	})
+
+	$(".table").on('click' , '.delete' , function(){
+		$(this).parent('p').remove();   		
+	})
+
+	$.obj = {
+	    /*对象是否为空*/
+	    isEmpty : function(obj){
+	        for(var k in obj){
+	        	return false;
+	        }
+	        return true;
+	    },  
+	    /*过滤 空的对象*/
+	    filterEmpty : function(data){
+	        for(var k in data){
+	           if(this.isEmpty(data[k])){
+	               delete data[k];
+	           }
+	        }
+	        return data;
+	    }
+	},
+	$.html = {
+	    createHtml : function(){
+	    	var html = '';
+	        html = html
+		    + "<p style='margin-top:5px'>"
+		    + "    <input name='unit_unit[]' type='text'></input>"
+		    + "    <a href='javascript:;' class='delete'>删除<a/>"
+		    + "</p>";
+		    return html;	 
+	    }
+	};
+
+	w.unit_obj = {
+	    getData : function(){
+	    	var data = [];
+	    	$("input[name='unit_unit[]']").each(function(){
+	    		var v = $(this).val();
+                data.push(v);
+	    	})
+	    	data = $.obj.filterEmpty(data);
+	    	if($.obj.isEmpty(data)){
+	    		data = '';
+	    	}
+	    	data = data.join(',');      	
+	    	return data;   
+	    }
+	}
+})(window , $ || {});
+
+
+$(".btn_a").click(function(){
+    request();
+})  
+
+/*
+ * 提交数据
+ **/
+function request(){   
+    var url  = "{:U('Mall_category/unitUnitUpdate')}";
+    var url_ = "{:U('Mall_category/categoryList')}";
+    var unit_unit = unit_obj.getData();
+    if(unit_unit == ''){
+        alert('保存成功');return;
+	}
+    var id = {$data['id']};  
+    $.post(url , {id : id , unit_unit : unit_unit} , function(res){
+    	alert(res.msg);
+        if(res.status == '1'){       	
+        	window.location.href = url_;
+        }
+    }); 
+}
+</script>
+</html>

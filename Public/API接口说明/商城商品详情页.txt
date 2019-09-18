@@ -1,0 +1,12 @@
+直接购买处理
+请求方式   get
+是否为ajax 不是
+请求 地址 : http://www.orangesha.com/index.php?m=Home&c=Mall_order&a=buy
+请求参数{
+        goods_id : 商品id,
+        sku[]    : 10_20 //10为sku_id 20表示数量
+        ....
+        sku[]    : 10_20 //10为sku_id 20表示数量   
+}
+例子
+http://www.orangesha.com/index.php?m=Home&c=Mall_order&a=buy&goods_id=100&sku[]=10_20.........&sku[]=11_22

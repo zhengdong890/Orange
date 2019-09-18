@@ -1,0 +1,13 @@
+<!-- 首页banner部分 -->
+
+	<div class="swiper-container" style="height:365px;overflow:hidden;width: 665px;">
+	    <div class="swiper-wrapper">
+	        <volist name="banners" id="v">
+	        <a href="{$v['url']}" class="swiper-slide" target="_blank" style="background:url(__ROOT__{$v['banner_thumb']|substr=1});background-position:center;">
+	        </a>    
+	        </volist>   
+	    </div>
+	    <div class="pagination"></div>  
+	</div>
+
+<!-- banner + 导航 End -->

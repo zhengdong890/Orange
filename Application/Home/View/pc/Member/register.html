@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>e橙优品-注册</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="{:C('STATIC_URL')}/Home/css/register.css" rel="stylesheet">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/validate.js?v=1.0"></script>
+ <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<style>
+.contain-width .body .row input{display: none;}
+.error_div{display: none;z-index: 1000; width: 100%; height: 100%; position: fixed; left: 0; top: 0; background-color: rgba(0,0,0,0.5);} 
+.error_div .error_text{ width: 400px; height: 120px; background-color: #AAAAAA; margin: 300px auto;padding-top: 15px; box-sizing: border-box;}
+.error_div .error_text>div{text-align: center; background-color: #fff; width: 370px; height: 90px;margin: 0 auto;}
+.error_div .error_text>div p{color: red; line-height: 48px;margin: 0;}
+.error_div .error_text>div button{border: none;margin: 0 auto; background-color: #F01E0D; color: #fff; font-family: "微软雅黑"; width: 60px;height: 30px; border-radius: 6px; cursor: pointer;}
+</style>
+</head>
+<body>
+<!-- 头部 -->
+    <div class="register public">
+        <div class="header-top">
+            <div>您好，欢迎您来到e橙优品智能装备<a href="{:C('ORANGESHA_URL')}/login.html" class="login">    请登录    </a><a href="{:C('ORANGESHA_URL')}/register.html"> 免费注册 </a></div>  
+        </div>
+        <div class="header-logo">
+            <a href="{:C('ORANGESHA_URL')}"><div class="logo"></div></a>
+            <div class="text">欢迎注册</div>
+        </div>
+        <!-- 主体 -->
+        <div class="contain">
+            <div class="contain-width">
+            <!-- 注册用户信息 -->
+                    <div class="body">
+                        <div class="row">
+                            <div class="row-title"><i>*</i>手机号：</div>
+                            <input class="row-input" name='telnum' type="text" placeholder="请输入11位手机号码">
+                            <div class="status error"></div>
+                        </div>
+                        <div class="row image-yzm">
+                            <div class="row-title"><i>*</i>验证码：</div>
+                            <input class="row-input" name='send_phone_code' type="text" placeholder="请输入图片验证码">
+                            <img src class='phone_code' alt="验证码"/>
+                            <span style="font-size: 14px;line-height: 48px;margin-left: 10px;color: #666;">无法获取短信验证码？点击图片切换</span>
+                            <div class="status error"></div>
+                        </div>
+                        <div class="row sms">
+                            <div class="row-title"><i>*</i>短信验证码：</div>
+                            <input class="row-input" name='register_code' type="text" placeholder="请输入短信验证码">
+                            <div class="sms-btn getCode">获取验证码</div>
+                            <div class="status error"></div>
+                        </div>
+                        <div class="row row-password">
+                            <div class="row-title"><i>*</i>设置密码：</div>
+                            <input class="row-input" name='password' placeholder="密码请输入8-16位字母和数字" onfocus="this.type='password'">
+                            <div class="status error"></div>
+                        </div>
+                        <div class="row">
+                            <div class="row-title"><i>*</i>确认密码：</div>
+                            <input class="row-input" name='repeat_password' placeholder="请确认密码" onfocus="this.type='password'">
+                            <div class="status error"></div>
+                        </div>
+                        <div class="row image-yzm">
+                            <div class="row-title"><i>*</i>验证码：</div>
+                            <input class="row-input" name='code' type="text" placeholder="请输入图片验证码">
+                            <img class='code' alt="验证码"/>
+                            <div class="status error"></div>
+                        </div>
+                        <div class="row row-xy">
+                            <div class="row-title"></div>
+                            <input id="xy" type="checkbox" name='is_read' value='1'><label for="xy"><i>阅读并同意</i></label><a target="_blank" href="{:C('ORANGESHA_URL')}/agreement.html" id="agreement">《e橙优品用户服务协议》</a>
+                        </div>
+                        <div class="row row-submit">
+                            <div class="row-title"></div>
+                            <input type="submit" value="提交注册" class='btn_submit'>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <!--错误提示-->
+    <div class="error_div">
+    	<div class="error_text">
+    		<div>
+    			<p>请认真阅读并同意《e橙优品用户服务协议》</p>
+    			<button class="close_error_div">确认</button>
+    		</div>
+    	</div>
+    </div>
+    <!-- 公共底部 -->
+    <include file="Public:footer" />
+</body>
+<script type="text/javascript">
+window.onload = function(){ 
+　　$(".contain-width .body input").css("display","inline-block")
+} 
+  
+//获取短信验证码
+	function getCodeTime(){
+		var timer =60;
+        var setTime;
+
+         setTime=setInterval(function(){
+                if(timer==0){
+                	$(".getCode").css("background-color","#EEEEEE").css("color","#666").css("text-align","center");
+		            $(".getCode").text("重新获取");
+                    clearInterval(setTime);
+                    return;                   
+                }
+                timer--;
+                $(".getCode").text(timer+" s 后重新获取");
+                $(".getCode").css("background-color","#CCC").css("color","#666").css("text-align","left").css("text-indent","5px");
+            },1000);                     	      
+	}
+	
+var formSubmit = (function(){
+    var data = {};            
+    var validate = new formValidate({
+        rules:{
+            'telnum' : {
+                'require' : '请输入手机号码',
+                'phone_number': '*手机格式不正确，请重新输入'
+            },
+            'code':{
+                'require' : '请输入验证码',
+                'length': [4,'验证码长度应该为4位']
+            },
+            'register_code':{
+                'require' : '请输入短信验证码',
+                'length': [6,'短信验证码长度应该为6位']
+            },
+            'password':{
+                'require' : '请输入密码',
+                'regex'   : ["^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$",'密码为8-16位数字+字母组合'],
+                'equalTo' : ['repeat_password','两次密码不一致']
+            },
+            'repeat_password':{
+                'require' : '请输入确认密码',
+                'equalTo' : ['password','两次密码不一致']
+            },            
+            'is_read':{
+                'require' : '请先阅读并同意橙橙网用户服务协议'
+            }
+        },
+        msg:{
+           'telnum' : '请输入手机号码',
+           'register_code':'请输入短信验证码',           
+           'password': '请输入密码',
+           'repeat_password':'请输入重复密码',
+           'is_read':'请先阅读并同意橙橙网用户服务协议'     
+        }
+    });
+
+    $(".btn_submit").click(function(){   
+        if(!validate.checkSubmitStatus()){
+        	$(".error_div").css("display","block");
+            $(".error_div .error_text div p").text(validate.getFirstError())
+        }else{
+            $.post("{:U('Member/register')}",data,function(res){
+            	console.log(res)
+                if(res.status){             
+                	autoLogin();                	
+                }   
+                if(res.status==0){
+                	$(".error_div").css("display","block");
+                	$(".error_div .error_text div p").text(res.msg)
+                }
+            })            
+        }    
+    }) 
+    
+    function autoLogin(){
+    	var value = validate.getValue();
+        var data  = {username:value.telnum,password:value.password}; 
+        $.post("{:U('Member/login')}",data,function(res){     	
+            if(res.status){                   
+                window.location.href="http://www.orangesha.com/member.html";
+            }
+        })  
+    }
+        
+    $("input").blur(function(){
+        var attr_name = $(this).attr('name');
+        if(attr_name){
+           data[attr_name] = $(this).val();        
+           if(attr_name == 'is_read'){
+              var val = $(this).is(':checked')? 1 : '';
+           }else{
+              var val = $(this).val();
+           }
+           var result = validate.checkField(attr_name,val);
+           if(result){
+                if(result == '两次密码不一致'){
+                    $("input[name='repeat_password']").siblings('.status').text(result);
+                    $("input[name='repeat_password']").siblings('.status').removeClass('success');
+                    $("input[name='repeat_password']").siblings('.status').addClass('error').addClass('error2');   
+                    $(this).siblings('.status').text('');
+                    $(this).siblings('.status').removeClass('error').removeClass('error2');
+                    $(this).siblings('.status').addClass('success'); 
+                }else{
+                    $(this).siblings('.status').text(result);
+                    $(this).siblings('.status').removeClass('success');
+                    $(this).siblings('.status').addClass('error').addClass('error2');                   
+                }       
+           }else{
+                if(attr_name == 'password' && data['password'] == data['repeat_password']){
+                    $("input[name='repeat_password']").siblings('.status').text('');
+                    $("input[name='repeat_password']").siblings('.status').removeClass('error').removeClass('error2');
+                    $("input[name='repeat_password']").siblings('.status').addClass('success');   
+                }
+                $(this).siblings('.status').text('');
+                $(this).siblings('.status').removeClass('error').removeClass('error2');
+                $(this).siblings('.status').addClass('success');
+           }    
+        }        
+    }) 
+
+    $(".getCode").click(function(){
+    	var send_phone_code = $("input[name='send_phone_code']").val();
+    	 if(!send_phone_code){
+              $("input[name='send_phone_code']").parent().find(".status").text('请输入图片验证码')
+              $("input[name='send_phone_code']").parent().find("span").css("display","none")
+              $("input[name='send_phone_code']").parent().find(".status").removeClass('success').addClass('error').addClass('error2').css("visibility","visible")
+              return
+    	 }
+         if(!validate.msg['telnum']){
+             $.post("{:U('Member/createRegisterPhoneCode')}",{'telnum':data['telnum'],send_phone_code:send_phone_code},function(res){             
+                if(res.status==1){
+                    getCodeTime();
+                    $(".error:eq(0)").css("display","none");
+                }
+                if(res.status==0){
+                	$(".error_div").css("display","block")
+                    $(".error_div .error_text div p").text(res.msg)                  
+                }               
+             })
+         }else{
+            $(".error_div .error_text div p").text(validate.msg['telnum']) 
+         }
+    })
+})()
+
+getValidateCode('.phone_code' , "{:U('getPhoneCode')}",function(data){
+    getValidateCode('.code' , "{:U('getcode')}");    	
+});
+
+$(".close_error_div").click(function(){
+	$(".error_div").css("display","none")
+})
+
+$(".phone_code").click(function(){
+    getValidateCode('.phone_code' , "{:U('getPhoneCode')}");
+})
+
+$(".code").click(function(){
+    getValidateCode('.code' , "{:U('getcode')}");
+})
+
+function getValidateCode(obj , url , callback){
+	url = url+'&rand='+Math.random();
+    $.get(url,function(res){   
+        $(obj).attr("src", res);   	
+        if(callback){
+            callback();
+        }       
+    })    
+}
+</script>
+</html>

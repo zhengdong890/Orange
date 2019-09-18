@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>后台登录{:U('login')}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/myjq.js"></script>
+<style>
+*{padding:0; margin:0;font-family:"方正黑体简体";font-style:normal;font-size:16px;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0}
+html{height:100%;}   
+body{height:100%;background:linear-gradient(to top,#023678,#067EB5);}
+#wraper{width:100%;height:100%;float:left}
+#main{width:100%;height:auto;float:left;}
+#main ul{width:100%;height:350px;float:left;}
+#main ul li{width:548px;height:350px;margin:0 auto;border-radius:8px;background:white;padding:8px;display:none}
+#main ul li form{width:300px;height:auto;float:left;margin-top:5px}
+#main ul li p{width:100%;margin-top:15px;font-family:"黑体";float:left;color:#3E79B5}
+#main ul li p input{width:190px;height:22px;border:1px solid #3E79B5;border-radius:4px;}
+#main ul li div{width:100%;height:40px;float:left;margin-top:10px}
+#main ul li div p{width:150px;height:26px;float:left;margin-top:0;color:#3E79B5}
+#main ul li div p input{width:78px;height:25px;}
+#img{margin-left:13px}
+#logo{width:548px;height:139px;float:left}
+#left{width:245px;height:146px;float:left}
+.btn{width:70px;height:27px;float:left;border:0;margin-top:10px;border-radius:4px;background:#0384E2;color:white;text-align:center;line-height:27px}
+</style>
+</head>
+<body>
+<div id="wraper">     
+<div id="main">                  
+      <ul>                         
+          <li> 
+                <img src="" id="logo"/>
+                <img src="__PUBLIC__/admin_images/login_left.jpg" id="left"></img>   
+                <form id='form'>                        
+	                 <p>账&nbsp; 号: <input type="text" name="username"/></p>
+	                 <p>密&nbsp; 码: <input type="password" name="password"/></p>
+	                 <div>
+	                       <p style="margin-top:10px;">
+	                       验证码: <input type="text" name='code' />
+	                       </p>
+	                       <img src="{:U('Admin/code')}" onclick="javascript:shuaxin()" id='img'/>
+	                       <a style="line-height:28px;padding-right:3px;font-size:14px;float:right">看不清?点击换一张</a>
+	                 </div>
+	                 <a class="btn">登陆</a>  
+	                 <a class="btn" style="display:block;margin-left:8px;">重置</a>
+                </form>                         
+          </li>
+      </ul>
+</div>              
+</div>
+</body>
+<script type="text/javascript">
+var h;   
+/*加载完毕*/
+$(window).load(function(){ 
+	h=($().getOs())['height'];
+	setcss();   
+}) 
+ 
+//监听屏幕尺寸发生变化
+$(window).resize(function(){     
+	var now_h=($().getOs())['height'];
+    if(now_h!=h){
+	    h=now_h;
+	    setcss(); 
+	}
+})   
+
+function setcss(){
+	 var h=($(window).height());
+	 var margin_top=(h-366)/2;
+	 $("#main ul li").css('margin-top',margin_top+'px');
+	 $("#main ul li").css('display','block');
+}
+
+function check(){
+	var username=$("input[name='username']").val();
+	var password=$("input[name='password']").val();
+	var code=$("input[name='code']").val();
+	var error='';
+	error=username==''?"账号不能为空":(password==''?"密码不能为空":(code==''?"验证码不能为空":error));
+    if(error){
+    	alert(error);
+    	return false;
+    }else{
+    	return true;
+    }    
+}
+         
+function shuaxin(){
+   var verifyimg = $("#img").attr("src");
+   //$("#img").attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
+   $("#img").attr("src", verifyimg + '&rand=' + Math.random());
+}
+
+$(".btn").click(function(){
+    request();          
+})
+
+/*
+ * 提交数据
+ **/
+function request(){  
+    var data = new FormData($("#form")[0]);  // 要求使用的html对象
+    var url  = "{:U('Admin/login')}";
+    var url_ = "{:U('Index/index')}"
+    $.ajax({  
+          url : url ,  
+          type: 'POST',  
+          data: data,  
+          async: true,  
+          // 下面三个参数要指定，如果不指定，会报一个JQuery的错误 
+　　　　　cache: false,  
+          contentType: false,  
+          processData: false,  
+          success: function (res) {  
+          	  alert(res.msg);
+              if(res.status){
+                  window.location.href = url_;
+              } 
+          },  
+          error: function (returndata) {  
+              console.log(returndata); 
+          }  
+     });  
+}
+</script>

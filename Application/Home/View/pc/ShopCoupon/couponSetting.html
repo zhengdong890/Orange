@@ -1,0 +1,232 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>优惠券设置</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/all-use.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/side-nav.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/sell-management.css">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+<style>
+.star{ color: #FF7628;}
+.refund{ width: 970px; border: 1px solid #E4E4E4; float: left; margin: 30px 0px 0px 6px;}
+.refund_top{ width: 100%; background-color: #F2F1F1; padding: 10px 40px; box-sizing: border-box;}
+.refund_box{ padding: 10px 30px;margin-bottom: 30px; min-height: 479px;}
+
+.coupon_table{  margin: 50px auto 0px auto; }
+.coupon_table tr{ height: 40px;}
+.coupon_table tr td:first-of-type{ text-align: right;border: none;}
+.coupon_table tr td:nth-of-type(2){ text-align: left; text-indent: 12px;border: none;}
+.coupon_table tr td:nth-of-type(3){ text-align: left; padding-left: 10px; color: red; width: 160px;border: none;}
+.coupon_table tr td:nth-of-type(3) span{ display: none;}
+.coupon_table tr td input{ height: 26px; border-radius: 2px; padding-left: 8px; font-family: "微软雅黑";}
+select{width: 310px;height: 28px;border: 1px solid #D5D5D5;color: #7B7B7B;font-family: "微软雅黑"; cursor: pointer; border-radius: 2px;}
+.longInput{ width: 300px;}
+.shortInput{ width: 100px;}
+.create{ cursor: pointer; border-radius: 6px; color: #fff; background-color: #37A4A2;width: 150px; height: 28px; margin-right: 8px; text-align: center; font-family: "微软雅黑";}
+.coupon_table a{ cursor: pointer; padding: 4px 60px; text-align: center; border-radius: 6px; color: #fff; background-color: #959595; font-family: "微软雅黑";}
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end --> 
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="Public:sellerLeft" />         
+            <div class="sell-management clearfix" style='width:auto;'>
+                <div class="refund">
+                	<div class="refund_top">优惠券设置</div>
+                	<div class="refund_box">
+                		<table cellspacing="4" class="coupon_table">
+                			<tr>
+                				<td><span class="star">*</span> 优惠券名称：</td>
+                				<td><input class="longInput" id="couponName" type="text" placeholder="最多支持10个字"/></td>
+                				<td><span id="error1">*请输入优惠券名称</span></td>
+                			</tr>
+                			<tr>
+                				<td><span class="star">*</span> 面值：</td>
+                				<td>
+                					<select class="shortInput" id="offer">
+                						<option value="3">3</option>
+                						<option value="5">5</option>
+                						<option value="10">10</option>
+                						<option value="20">20</option>
+                						<option value="30">30</option>
+                						<option value="40">40</option>
+                						<option value="50">50</option>
+                						<option value="60">60</option>
+                						<option value="80">80</option>
+                						<option value="100">100</option>
+                						<option value="120">120</option>
+                						<option value="150">150</option>
+                						<option value="200">200</option>
+                					</select> 元
+                				</td>
+                				<td><span id="error2">*请输入正确的面值</span></td>
+                			</tr>
+                			<tr>
+                				<td><span class="star">*</span> 每人限领：</td>
+                				<td>
+                					<input class="shortInput" id="max_num" type="text"> 张
+                				</td>
+                				<td><span id="error3">*输入有误</span></td>
+                			</tr>
+                			<tr>
+                				<td><span class="star">*</span> 订单金额：</td>
+                				<td><input style="vertical-align: middle;" type="radio" name="limit"> 不限制</td>
+                			</tr>
+                			<tr>
+                				<td></td>
+                				<td>
+                					<input style="vertical-align: middle;" type="radio" name="limit" /> 满 <input type="text" id="max_price" style="width: 60px;" /> 元可使用
+                				</td>
+                				<td><span id="error4">*请输入正确的订单金额</span></td>
+                			</tr>
+                			<tr>
+                				<td><span class="star">*</span> 发放总量：</td>
+                				<td><input class="shortInput" type="text" id="couponNumber" /> 张</td>
+                				<td><span id="error5">*请输入正确的发放数量</span></td>
+                			</tr>
+                			<tr>
+                				<td><span class="star">*</span> 生效时间：</td>
+                				<td><input class="longInput" type="datetime-local" id="start_time" style="cursor: pointer;"></td>
+                				<td><span id="error6">*请选择生效时间</span></td>
+                			</tr>
+                			<tr>
+                				<td><span class="star">*</span> 过期时间：</td>
+                				<td><input class="longInput" type="datetime-local" id="end_time" style="cursor: pointer;"></td>
+                				<td><span id="error7">*请选择过期时间</span></td>
+                			</tr>
+                			<tr style="height: 90px;">
+                				<td></td>
+                				<td>
+                					<button class="create">创建</button>
+                					<a href="{:U('ShopCoupon/coupon')}">取消</a>
+                				</td>
+                			</tr>
+                		</table>               		
+                	</div>               	
+                </div>
+            </div>                   
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+//判断左边导航
+function checkNav(){
+	$(".side-nav>ul:eq(3)>li:eq(5) a").css("color","#ff6600")
+}
+checkNav();
+
+//验证优惠券名称
+function error1(){
+	if($("#couponName").val()==""){
+        $("#error1").css("display","block")
+    }else{
+    	$("#error1").css("display","none")
+    }
+}
+//验证限领
+function error3(){
+	var reg = /^[0-9]*$/;
+	var b=$("#max_num").val();
+	var a=reg.test(b);;
+	if(a==false || b==""){
+        $("#error3").css("display","block")
+	}else{
+    	$("#error3").css("display","none")
+    }
+}
+//验证订单金额
+function error4(){
+	var reg = /^[0-9]*$/;
+	var b=$("#max_price").val();
+	var a=reg.test(b);;
+	if(a==false){
+        $("#error4").css("display","block")
+	}else{
+    	$("#error4").css("display","none")
+    }
+}
+//验证发放数量
+function error5(){
+	var reg = /^[0-9]*$/;
+	var b=$("#couponNumber").val();
+	var a=reg.test(b);
+	if(a==false |b==""){
+        $("#error5").css("display","block")
+	}else{
+    	$("#error5").css("display","none")
+    }
+}
+//验证生效时间
+function error6(){
+	if($("#start_time").val()==""){
+ 	 	$("#error6").css("display","block")
+ 	}else{
+    	$("#error6").css("display","none")
+    }
+}
+//验证过期时间
+function error7(){
+	if($("#end_time").val()==""){
+        $("#error7").css("display","block")
+    }else{
+    	$("#error7").css("display","none")
+    }
+}
+$(".create").click(function(){ 
+ 	error1();
+	error3();
+	error4();
+	error5();
+	error6();
+	error7();
+	var limitVal;
+	if($(".coupon_table input[name='limit']:eq(0)").is(":checked")){
+		limitVal = 0
+	}
+	if($(".coupon_table input[name='limit']:eq(1)").is(":checked")){
+		limitVal = $("#max_price").val()
+	}
+ 	var data = {
+ 		'max': limitVal,
+ 		'benefit_price':$("#offer").val(),
+ 		'start_time':$("#start_time").val(),
+ 		'end_time':$("#end_time").val(),
+ 		'number':$("#couponNumber").val(),
+ 		'max_number':$("#max_num").val(),
+ 		'name':$("#couponName").val()
+ 		}
+ 	$.post("{:U('ShopCoupon/couponAdd')}",data,function(res){
+        if(res.status){
+       		window.location.href="{:U('ShopCoupon/coupon')}";
+        }              
+        if($("#start_time").val()>$("#end_time").val()){
+        	alert("生效时间不得大于过期时间")
+        }
+        else{
+       		alert(res.msg)
+        }
+    })  
+ })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>优惠券</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/favorites.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+<style>
+.user-right>.coupon_top{width: 100%;height: 40px; line-height: 40px;background-color: #E5E5E5; padding:0px 40px;box-sizing: border-box;}
+.user-right>.coupon_top span{ float: right;position: relative;}
+.user-right>.coupon_top span input{font-family: "微软雅黑";padding-left: 4px;width: 153px;margin-right: 20px;}
+.user-right>.coupon_top span button{position: absolute; left: 138px;top: 10px; width: 30px; height: 30px;background: url({:C('STATIC_URL')}/Home/img/glass.png) no-repeat;}
+.user-right>.coupon_top span a{ color: #547AC5;}  
+.user-right>.coupon_detail_title{position: relative;z-index: 300; width: 94%; margin: 20px auto;padding-left:180px; box-sizing: border-box; background-color: #E5E5E5;height: 33px; line-height: 32px;}
+.user-right>.coupon_detail_title ul{position: absolute;left: 28px;border: 1px solid #E5E5E5; width: 125px;}
+.user-right>.coupon_detail_title ul li{font-size: 12px;height: 31px;padding-left: 12px;cursor: pointer;}
+.user-right>.coupon_detail_title ul li:hover{background-color: #EEEEEE;}
+.user-right>.coupon_detail_title ul li:hover a{ color: #ff6600;}
+.user-right>.coupon_detail_title ul li:first-of-type{background-color: #E5E5E5;}
+.user-right>.coupon_detail_title ul li:nth-of-type(n+2){display: none;}
+.user-right>.coupon_detail_title a{margin-right: 10px;}
+.user-right>.coupon_detail_title .active{color: #547AC5;}
+.coupon_list{width: 94%; margin: 20px auto; overflow: auto;}
+.coupon_list>li{ width: 25%; float: left;margin-bottom: 20px;}
+.coupon_list>li>div:first-of-type{position: relative;z-index: 100; background: url("__PUBLIC__/Home/image/5.png") no-repeat;color: #fff;height: 159px;width: 214px;padding: 20px 10px;box-sizing: border-box;}
+.coupon_list>li>div:first-of-type>div{ height: 70px;}
+.coupon_list>li>div:first-of-type>div>span:first-of-type{font-size: 26px;}
+.coupon_list>li>div:first-of-type>div>span:first-of-type i{font-size: 40px;}
+.coupon_list>li>div:first-of-type>div>span:nth-of-type(2){float: right; line-height: 66px;}
+.coupon_list>li>div:first-of-type>ul>li{ font-size: 12px;}
+.coupon_list>li>div:nth-of-type(2){position: relative;top: -4px; padding: 20px 0px; box-sizing: border-box; background-color: #EEEEEE;width: 214px;height: 100px;}
+.coupon_list>li>div:nth-of-type(2)>div{ width: 150px;height: 60px;background-color: #ccc;margin-left: 24px; color: #fff;font-size: 30px; text-align: center;line-height: 56px;}
+.coupon_list>li>div:nth-of-type(2)>div>img{width: 100%; height: 100%;}
+.coupon_list>li>div:nth-of-type(2) .enterShop{ position: absolute; right: 12px; top: 24px; cursor: pointer;}
+.coupon_list>li>div:nth-of-type(2) .deleCoupon{ position: absolute; right: 13px; top: 54px; cursor: pointer;}
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end --> 
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="MemberPublic:MemberLeft" />  
+        <div class="user-right marT20 fRi">
+           <div class="coupon_top">
+              优惠券
+             <span><input type="text" placeholder="店铺名称"><button></button> <a target="_blank" href="http://www.orangesha.com/rules-529.html">优惠券规则说明</a> </span>
+           </div>
+           <div class="coupon_detail_title">
+              <ul>
+                <li><if condition="$use eq 1">可用优惠券（{$use_coupon|default="0"}）
+                  <elseif condition="$is_use eq 1" />已用优惠券（{$is_use_coupon|default='0'}）
+                  <elseif condition="$time eq 1" />过期优惠卷（{$old_coupon|default="0"}）
+                  <else />全部优惠卷（<if condition="$all_coupon neq ''">{$all_coupon}<else />0</if>）</if>
+                </li>
+                <li><a href="http://www.orangesha.com/myCoupon.html">全部优惠卷（<if condition="$all_coupon neq ''">{$all_coupon}<else />0</if>）</a></li>
+                <li><a href="http://www.orangesha.com/myCoupon.html?use_=1">可用优惠券（{$use_coupon|default="0"}）</a></li>
+                <li><a href="http://www.orangesha.com/myCoupon.html?is_use=1">已用优惠券（{$is_use_coupon|default='0'}）</a></li>
+                <li><a href="http://www.orangesha.com/myCoupon.html?time=1">过期优惠券（{$old_coupon|default="0"}）</a></li>
+              </ul>           
+            <!-- <a class="active">新到帐</a>
+              <a>即将过期</a>
+              <a>最优惠</a> -->
+           </div>
+           <ul class="coupon_list">
+           <foreach name="mem_coupon" item="vo">
+              <li>
+                <div>
+                  <div><span>¥<i>{$vo.benefit_price}</i></span> <span>全店通用</span></div>
+                  <ul>
+                    <li>满{$vo.max}元</li>
+                    <li>{$vo.start_time|substr=0,11} 至 <span class="endTime" data-use="{$vo.status}" data-time="{$vo.end_time}">{$vo.end_time|substr=0,11}</span></li>
+                    <li>{$vo.shop_name}</li>
+                  </ul>
+                </div>
+                <div>
+                  <div><img src="{$vo.thumb}" alt=""></div>
+                  <a href="http://{$vo.domain}.orangesha.com/" target="_blank" class="enterShop"><img src="__PUBLIC__/Home/image/w.png"></a>
+                  <button class="deleCoupon" data-id={$vo.id}><img src="__PUBLIC__/Home/image/l.png"></button>
+                </div>
+              </li>
+              </foreach>
+             
+           </ul>
+        </div>
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+//判断左边导航
+function checkNav(){
+  $(".user-left-wrap .list:eq(3)>ul>li:eq(2) a").css("color","#ff6600")
+}
+checkNav() 
+
+//判断优惠券是否过期 & 是否已使用
+function checkCouponTime(){
+  for(var i = 0; i<$(".endTime").length; i++){
+    var Time = $(".endTime").eq(i).attr("data-time");//过期时间
+    var Time2 = Date.parse(new Date(Time));//过期时间转换成时间戳
+    Time2 = Time2 / 1000;
+    var nowTime = Date.parse(new Date());//现在时间
+    nowTime = nowTime / 1000
+    if(Time2-nowTime<=0){
+      $(".coupon_list>li").eq(i).find("div:eq(0)").css("background","url(/Public/Home/image/6.png) no-repeat")
+      $(".coupon_list>li").eq(i).find("div:eq(0) div span:eq(1)").css("display","none")
+    }
+    if($(".endTime").eq(i).attr("data-use")==2){
+      $(".coupon_list>li").eq(i).find("div:eq(0)").css("background","url(/Public/Home/image/7.png) no-repeat")
+      $(".coupon_list>li").eq(i).find("div:eq(0) div span:eq(1)").css("display","none")
+    }
+  }
+  
+}
+checkCouponTime()
+
+$(".user-right>div").click(function(){
+  $(this).addClass("active");
+  $(this).siblings().removeClass("active")
+})
+
+$(".coupon_detail_title>ul").mouseenter(function(){
+  $(".coupon_detail_title>ul li").css("display","block")
+  $(".coupon_detail_title>ul li").css("background-color","#fff");
+})
+$(".coupon_detail_title>ul").mouseleave(function(){
+  $(".coupon_detail_title>ul li:eq(0)").css("background-color","#E5E5E5")
+  $(".coupon_detail_title>ul li").eq(1).css("display","none")
+  $(".coupon_detail_title>ul li").eq(2).css("display","none")
+  $(".coupon_detail_title>ul li").eq(3).css("display","none")
+  $(".coupon_detail_title>ul li").eq(4).css("display","none")
+})
+
+//删除优惠券
+$(".deleCoupon").click(function(){
+  var id = $(this).attr("data-id"),
+      a = $(this).parent().parent() 
+  if(confirm("确定要删除该优惠券吗？")){
+    $.post("http://www.orangesha.com/index.php?m=Home&c=MemberCoupon&a=coupon_del",{'id':id},function(res){                 
+          if(res.status==1){
+            a.remove()
+          }       
+    });
+  }
+})
+</script>
+</body>
+</html>
+
+    

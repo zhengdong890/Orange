@@ -1,0 +1,138 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>交易纠纷</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/favorites.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+<style>
+table{ width: 100%;}
+table thead td{border-color: #E4F6F6; background-color: #E4F6F6;line-height: 34px;}
+table tbody td{border-color: #E4F6F6; background-color: #F8F8F8;padding: 12px 0px;text-align: center;}
+table tbody td:first-of-type{ text-align: left;width: 56%;}table tbody td:nth-of-type(2){width: 12%;}table tbody td:nth-of-type(3){width: 17%;}
+table tbody td img{width: 80px; height: 80px; border: 1px solid #ccc;vertical-align: text-top;margin: 0px 16px;}
+.disputes_top{width: 96%;margin: 0 auto; border-bottom: 1px solid #ccc; font-weight: bold;line-height: 40px;}
+.disputes_top a{ float: right; color: #5A78C8;font-weight: normal;}
+.disputes_nav{overflow: auto;margin: 10px 20px;}
+.disputes_nav li{ float: left; margin-right: 20px;font-weight: bold;position: relative;cursor: pointer;}
+.disputes_nav li:last-of-type{margin-right: 0px;}
+.disputes_nav .active{ color: #ff6600; border-bottom: 2px solid #ff6600;}
+.section-box{position: absolute;left: 20px; top: 86px;width: 96%;}
+.section-box>ul{ overflow: auto;width: 100%; background-color: #F8F8F8;margin: 12px 0px;}
+.section-box>ul li{ float: left;text-align: center;line-height: 32px;}
+.section-box>ul li:first-of-type{ width: 53%;}.section-box>ul li:nth-of-type(2){ width: 12%;}.section-box>ul li:nth-of-type(3){ width: 14%;}.section-box>ul li:nth-of-type(4){ width: 12%;}
+.section-box>div:first-of-type{background-color: #FFFFE4; color: #ff6600;padding:4px 14px;}
+.section-box2{ display: none;}
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->	
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="MemberPublic:MemberLeft" />  
+        <div class="user-right marT20 fRi">
+           <div class="disputes_top">
+	           	交易纠纷
+	           	<a>交易纠纷规则说明</a> 
+           </div>
+           <ul class="disputes_nav">
+	           	<li class="active">可申请订单</li>
+	           	    <div class="section-box1 section-box">
+	           	       <div>目前您的部分订单可能无法申请，我们正逐步覆盖到所有卖家，若订单无法申请，请您至商品详情页联系卖家在线客服寻求帮助。</div>
+			           <ul>
+			           		<li>订单详情</li>
+			           		<li>收货人</li>
+			           		<li>支付金额</li>
+			           		<li>交易操作</li>
+			           </ul>
+			           <!--<table>
+			           		<thead>
+			           			<tr>
+				           			<td colspan="4">
+				           				<span>2017-04-04 07:50:29</span>
+				           				<span>订单号：2102563254523</span>
+				           				<span>深圳科技...</span>
+				           			</td>
+				           		</tr>
+			           		</thead>
+			           		<tbody>
+			           			<tr>
+			           				<td><img> 是倒萨倒萨大的 <span>x2</span></td>
+			           				<td>李大</td>
+			           				<td>¥ 104.00</td>
+			           				<td><button>申请交易纠纷</button></td>
+			           			</tr>
+			           		</tbody>
+			           </table>-->
+		            </div>
+	           	<li>已申请记录</li>
+		           	<div class="section-box2 section-box">
+		           	   <div>重要提醒：e橙优品平台及销售商不会以任何理由，要求您点击任何网址链接进行退款操作。</div>
+			           <ul>
+			           		<li>纠纷单详情</li>
+			           		<li>纠纷类型</li>
+			           		<li>全部状态</li>
+			           		<li>操作</li>
+			           </ul>
+			           <!--<table>
+			           		<thead>
+			           			<tr>
+				           			<td colspan="4">
+				           				<span>2017-04-04 07:50:29</span>
+				           				<span>订单号：2102563254523</span>
+				           				<span>深圳科技...</span>
+				           			</td>
+				           		</tr>
+			           		</thead>
+			           		<tbody>
+			           			<tr>
+			           				<td><img> 是倒萨倒萨大的 <span>x2</span></td>
+			           				<td>李大</td>
+			           				<td>¥ 104.00</td>
+			           				<td><button>申请交易纠纷</button></td>
+			           			</tr>
+			           		</tbody>
+			           </table>-->
+		            </div>
+           </ul>           
+        </div>
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+//判断左边导航
+function checkNav(){
+	$(".user-left-wrap .list:eq(4)>ul>li:eq(2) a").css("color","#ff6600")
+}
+checkNav() 
+
+$(".disputes_nav li").click(function(){
+	$(this).addClass("active")
+	$(this).siblings().removeClass("active")
+	$(this).next("div").css("display","block")
+	$(this).siblings().next("div").css("display","none")
+})
+</script>
+</body>
+</html>
+
+    

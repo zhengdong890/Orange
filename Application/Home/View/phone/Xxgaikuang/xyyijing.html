@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>校园一景</title>
+	    <link rel="stylesheet" href="__PUBLIC__/phone/css/Common/index.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/rest.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/common.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/liner.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/xxjianjie/Survey.css" />
+		<script type="text/javascript" src="__PUBLIC__/phone/js/jquery.js" ></script>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/myscript.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/phone/js/focus.js"></script>
+	</head>
+	<body>
+	<div class="wrp">
+										<!-- header start -->
+				<include file="Public:header" />
+				<!-- header end -->
+			<div class="mainWrap relative clearfix" style="margin-bottom: 30px;">
+				<section class="header-main">
+					<ul class="navs clear">
+						<span class="slider"></span>
+						<li><a href="../schoolsurvey/introduction.html" class="navs-item">学校简介</a></li>
+						<li><a href="../schoolsurvey/honor.html" target="_blank">荣誉广角</a></li>
+						<li><a href="../schoolsurvey/Campus.html" target="_blank">校园一景</a></li>
+						<li><a href="../schoolsurvey/President.html" target="_blank">校长寄语</a></li>
+					</ul>
+				</section>	
+				<div class="detailContent clearfix">
+					<div class="column_R">
+						<div class="mainContent">
+							<div class="introTit clearfix">
+								<div class="introTitImg" style="background-image:url(__PUBLIC__/phone/images/small.jpg)"></div>
+								<h2>校园一景</h2>
+							</div>
+						</div>
+					</div>
+					<div class="news_p clearfix article_cn1">
+						<div class="new_img">
+							<ul class="ull">
+								<volist name="data" id="v">
+								<li>
+										<img src="__ROOT__{$v['thumb']|substr=1}" alt="" />
+										<p style="text-align: center;">{$v['title']}</p>
+								</li>
+								</volist>
+							</ul>
+						</div>
+						<div class="cont_top">
+							<p id="PageInfo" class="page">
+							{$page}
+							</p>
+					</div>	
+					</div>
+					
+				</div>		
+			</div>
+				<!-- footer start -->
+				<include file="Public:footer" />
+				<!-- footer end -->
+		</div>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/common.js" ></script>
+	</body>
+</html>

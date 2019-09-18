@@ -1,0 +1,38 @@
+.tableList{margin:0 auto;width:auto}
+.tableList td span{float:right}
+.tableList tr{background:white}
+.tableList tr:hover{background:#F1FCEA}  
+.tableList tr:first-child{background:#F4F5F9} 
+.tableList tr td{border-left:1px solid #E7E9F3;border-bottom:1px solid #E7E9F3;font-size:20px;padding:10px;font-size:14px;}
+.tableList tr .td{border-left:0px} 
+.tableList tr .table_td{text-align:center;}
+
+.tableList tr .table_td .table_td_text{
+   	width:250px;
+	white-space:nowrap; 
+	overflow:hidden; 
+	text-overflow:clip;	
+	font-size:14px;
+}
+
+.tableList tr .table_btn{background:white;border:0}
+.tableList input{width:30px;height:24px;border-radius:3px;border-bottom:1px solid #E3E9EF;border-top:1px solid #ABADB3;border-left:1px solid #E2E3EA;border-right:1px solid #DBDFE6;text-align:center}
+.tableList td img{max-width:60px;max-height:60px}
+.tableList td{padding-right:30px;padding-top:10px}
+.tableList .table_handle{width:auto;text-align:center}   
+.tableList .table_handle div{width:50px;height:21px;margin:0 auto}   
+.tableList .table_handle div a{width:21px;height:21px;display:block;margin-left:4px;float:left;} 
+.tableList .table_handle .table_handle_a{
+	color:black;
+	text-decoration:none   
+}
+
+.tableList .table_handle .table_handle_a:hover{
+    color:pink;
+    text-decoration:none   
+}
+
+/*批量处理样式*/
+.tableList .select_checkbox{width:80px;height:16px;margin:0 auto}
+.tableList .select_checkbox input{width:16px;height:16px;float:left;}
+.tableList .select_checkbox a{height:16px;float:left;text-indent:5px;line-height:15px;}

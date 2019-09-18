@@ -1,0 +1,8 @@
+#searchForm{width:100%;height:auto;float:left;background:#F4F5F9;margin-top:5px;padding:12px 0 12px;border:1px solid #D7D7D7;} 
+#searchForm p{float:left;margin-left:10px;font-size:13px}
+#searchForm input{width:150px} 
+#searchForm .input_text{
+	width:110px;
+}  
+#searchForm p select option{text-indent:5px}   
+#searchForm button{border:0;border-radius:4px;background:#C43926;margin-left:10px;color:white;height:26px;width:40px;font-size:13px;margin-top:-1px}

@@ -1,0 +1,63 @@
+@charset "utf-8";
+*{margin:0;padding:0;list-style-type:none;}
+a,img{border:0;color:#333;text-decoration:none;}
+body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
+.hide{display:none}
+.clearfix:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0}
+.clearfix{*zoom:1}
+em,i,s{font-style:normal;}
+
+/* 导航样式 */
+.header-wrap{background-color:#fff;width:100%; float: left;}
+.navwrap{height:36px; solid; background-color: #37A4A2; box-shadow:0 1px 2px #999;-webkit-box-shadow:0 1px 2px #999;-moz-box-shadow:0 1px 2px #999}
+#nav{height:36px;width:1200px;margin:0 auto;position:relative;padding:0;z-index:99}
+.navbar{height:36px;padding-left:210px;position:relative;width: 100%;box-sizing: border-box;}
+.navbar a{float:left;width:98px; overflow: hidden; text-overflow: ellipsis; text-align:center;height:36px;line-height:36px;color:#fff;padding:0 15px;text-decoration:none;font-size:16px; font-weight: bold; font-family:"\5FAE\8F6F\96C5\9ED1";white-space:nowrap;position:relative}
+.navbar a.first{border-left:0 none}
+.navbar a.last{border-right:0 none}
+.navbar a:hover{background-color:#535353;color:#fff}
+
+.navbar a:hover{text-decoration:none}
+.navbar a.current:hover{color:#fff}
+.navbar .navbt{width:105px;height:30px;position:absolute;top:3px;right:10px;background:url(../images/navbt.jpg) no-repeat;border:0 none;float:none;font-size:14px;line-height:30px;padding:0}
+a.navbt span{padding-left:18px}
+
+.pros{position:absolute;top:0px;left:0;z-index:1000;width:210px;background-color:#37A4A2}
+.pros h2{width:194px;height:36px;line-height:38px;color:#fff;padding-left:16px;font-size:16px;font-weight:400;font-family:"\5FAE\8F6F\96C5\9ED1"}
+.subpage h2{cursor:pointer}
+.subpage .prosul{display:none}
+.prosul{padding-left:3px;width:207px;margin-top:2px;_overflow:hidden;height:414px}
+
+li.food{background-position:10px 15px}
+li.enjoy{background-position:10px -35px}
+li.women{background-position:10px -85px}
+li.life{background-position:10px -135px}
+li.travel{background-position:10px -185px}
+li.goods{background-position:10px -235px}
+.prosul li{line-height:50px;height:50px;_overflow:hidden;border-bottom:1px #377372 dashed;margin-right:3px;padding-left:38px;}
+.prosul li.prosahover{border-bottom:1px #fff solid;background-color:#fff;margin-right:0;padding-right:3px;}
+.prosul a{color:#ffd0c0;padding-right:8px;_padding-right:6px;white-space:nowrap;overflow: hidden;text-overflow: ellipsis; display:inline-block;height:50px}
+
+
+.prosul li.prosahover a{color:#636363}
+.prosul li a.ti{font-size:14px;font-family:"\5FAE\8F6F\96C5\9ED1";color:#fff;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width: 85%;}
+.prosul li.prosahover a.ti{color:#d03322}
+.prosul li a:hover{color:#d03322}
+.prosul li.nochild a:hover{color:#fff}
+.prosul li i{float:right;display:block;width:3px;height:50px;text-indent:-999em;background-position:0 -276px;padding-right:12px}
+.prosul li.prosahover i{background-position:0 -326px}
+.prosul li.last{border-bottom:0 none}
+.prosul li.bd-solid{border-bottom:1px #c22900 solid}
+.prosul li.hotareas{background-image:none;padding-left:12px;line-height:26px;height:106px;*overflow:hidden}
+.prosul li.hotareas i{line-height:30px;margin-top:-2px;height:40px;background-position:0 -279px}
+.prosul li.hotareas a{line-height:30px;height:30px}
+.prosul li.hotareas a.hot{background-position:right 0}
+.prosul li h2{padding-left:0;line-height:40px;display:inline;font-size:14px;font-weight:400;}
+.prosul li.prosahover h2{color:#d03322}
+.prosmore{padding:15px 0 15px 15px;position:absolute;z-index:999;left:210px;top:38px;background-color:#fff;border-left:0 none;width:214px;height:382px}
+.prosul .prosmore{text-align:left}
+.prosul .prosmore span{float:left;height:36px;width:107px;line-height:22px}
+.prosul li .prosmore a{height:18px;line-height:18px;padding:0 4px}
+.prosul li .prosmore a:hover{background-color:#d03322;color:#fff}
+.prosmore em{font-weight:400;padding-top:9px;display:inline-block}
+.prosmore em.morehot{padding-right:22px}

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>免费发布分享</title>
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css">
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/all-use.css">
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/seller.css">
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+    <link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/release-goods.css">
+    <link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+     <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+    <script src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+    <script src="{:C('STATIC_URL')}/Home/js/tabs-nav.js"></script>
+    <script src="{:C('STATIC_URL')}/Home/js/store-tool.js"></script>
+</head>
+<body>
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->	
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+   <div class="release-goods">
+       <div class="box-bder">
+           <div class="category-s-wrap">
+               <!-- items -->
+               <div class="item box-bder fLe ">
+                   <div class="caty-seach-wrap seach-sign box-bder">
+                       <input type="text" class="txt-s-01" placeholder="选择种类"  readonly="ture"/>
+                   </div>
+                   <ul class="caty-content-list" id="first-list">
+                        <volist name="categorys" id="v">
+                        <li>
+                            <a href="javascript:;" data-id="{$v['id']}">{$v['cat_name']}</a>
+                        </li>
+                        </volist>
+                   </ul>
+               </div>
+               <!-- items End -->
+               <!-- items -->
+               <div class="item box-bder fLe marL16">
+                   <div class="caty-seach-wrap seach-sign box-bder">
+                       <input type="text" class="txt-s-01" placeholder="选择二级分类" readonly="ture" />
+                   </div>
+                   <ul class="caty-content-list" id="second-list">
+                        
+                   </ul>
+               </div>
+               <!-- items End -->
+               <div class="clear"></div>
+           </div>
+       </div>
+       <div class="disInBlock caty-nav">
+           <span>您当前选择的是：</span>
+           <span id="first-lv"></span>&nbsp;-&nbsp;
+           <span id="second-lv"></span>
+       </div>
+       <div class="txtCenter">
+           <a href="javascript:;" class="release-btn">进入发布页面</a>
+       </div>
+   </div>
+  
+<include file="Public:footer" />    
+</body>
+<script type="text/javascript">
+/*
+ * 选择商品分类
+ * */
+var select_category = (function(){
+  var categorys = {},//保存已经获取到的分类
+      cat_id    = '';
+  /*
+   * 点击一级菜单
+   * */
+  $("#first-list").on('click','a',function(){
+      var cat_id = $(this).attr('data-id'),//获取商品分类id
+          text   = $(this).html();
+      getCategory(cat_id);//请求后台获取下一级商品分类
+      /*点击样式处理*/
+      $(this).parent().addClass('cur');
+      $(this).parent().siblings().removeClass('cur');  
+      $('#first-lv').html(text);
+  })
+
+  /*
+   * 点击二级菜单
+   * */
+  $("#second-list").on('click','a',function(){    
+      var text   = $(this).html();
+          cat_id = $(this).attr('data-id'); 
+      /*点击样式处理*/
+      $(this).parent().addClass('cur');
+      $(this).parent().siblings().removeClass('cur');  
+      $('#second-lv').html(text);
+  })
+
+  /*提交*/
+  $(".release-btn").click(function(){
+      if(cat_id){
+          window.location.href = "__MODULE__/FreeRelease/goodsAdd/cat_id/"+cat_id;
+      }else{
+          alert('请选择商品分类');
+      }
+  })
+
+  /*
+   * 请求后台获取下一级商品分类
+   * */
+  function getCategory(cat_id){
+      if(categorys[cat_id]){
+          showCategoryTwo(categorys[cat_id]);
+      }else{
+        $.post("{:U('FreeRelease/getCategory')}",{'cat_id':cat_id},function(res){
+            if(res['status']){
+               categorys[cat_id] = res['data'];
+               showCategoryTwo(res['data']);
+            }
+        })      
+      }
+  }
+
+  /*
+   * 组装html显示
+   * */
+  function showCategoryTwo(data){
+      var html = [];
+      for(var k in data){
+          html.push("<li><a href='javascript:;' data-id='"+data[k].id+"'>");
+          html.push(data[k].cat_name);
+          html.push("</a></li>");
+      }
+      html = html.join('');
+      $("#second-list").html(html);//显示
+  }
+})();
+
+$.post("{:U('FreeRelease/getCategory')}",function(res){
+            console.log(res.data)
+            var html = [];
+        for(var k in res.data){
+          html.push("<li><a href='javascript:;' data-id='"+res.data[k].id+"'>");
+          html.push(res.data[k].cat_name);
+          html.push("</a></li>");
+        }
+        html = html.join('');
+        $("#first-list").html(html);//显示              
+    }) 
+</script>
+</html>

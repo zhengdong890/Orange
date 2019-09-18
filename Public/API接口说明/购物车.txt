@@ -1,0 +1,66 @@
+﻿获取购物车商品
+地址 : http://www.orangesha.com/index.php?m=Home&c=Mall_cart&a=getCartGoods
+返回
+{
+    status : 0失败 1成功, 
+    msg    : ,
+    //购物车数据
+    data   : [
+        {
+            cart_id      : 购物车商品id,
+            goods_id     : 商品id,
+            goods_name   : 商品名字,
+            goods_number : 商品购买数量,
+            goods_price  : 商品单价,
+            goods_thumb  : 商品图片,
+            member_id    : 卖家id,
+            number       : 购买数量,
+            shop_name    : 卖家店铺名字,
+			sku_code     : sku编码,
+			sku_id       : sku_id,
+			term         : 预计出货期       
+        }
+    ],
+    //优惠券信息
+    coupon : [
+        {
+            id            : 优惠券id,
+            seller_id     : 卖家id,
+            max           : '减免需要消费的金额',
+            benefit_price : '优惠金额',
+            start_time    : '开始时间',
+            end_time      : '过期时间',
+            name          : '优惠券标题'    
+        }...........
+    ]
+}
+
+
+加入购物车
+请求地址 : 当前二级域名 + Cart/cartAdd;
+参数 : {   
+    goods_id : 商品id,
+    sku_data : {
+        {
+           sku_id : sku组合id
+           number : 购买数量
+        },
+        .......
+        {
+           sku_id : sku组合id
+           number : 购买数量
+        },      
+    }
+}
+返回 {status , msg}
+
+sku_data = {};
+
+sku_id = $().attr(sku_id);
+if(number = ''){
+   if(isset(sku_data[sku_id])){
+      delete sku_data[sku_id]
+   }
+}else{
+   sku_data[sku_id] = {sku_id:sku_id , number:10};
+}

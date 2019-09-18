@@ -1,0 +1,217 @@
+/******************************************卖家中心-商品中心******************************************************/
+发布商品页
+ajax提交发布的商品信息
+地址 : http://www.orangesha.com/index.php/Home/Seller_goods/goodsAdd
+请求参数 : {
+    goods_name   : 商品标题(既商品名称),必填
+    goods_number : 商品数量(既库存),必填
+    goods_price  : 商品价格 必填
+    brand_id     : 商品品牌,数字类型的非0值,必选
+    cat_id       : 商品分类id 必填
+    shop_cat     : 所属店铺分类id
+    goods_model  : 商品型号 必填
+    spec         : 规格  
+    special      : 产品特性   
+    uses         : 用途
+    goods_content: 商品描述   
+    goods_img    : 商品主图
+
+    gallery_img1 : 商品相册图片1
+    gallery_img2 : 商品相册图片2...
+    ...............................
+    gallery_imgN : 商品相册图片N
+    number       : 商品相册图片的数量
+   
+    //以下为选择的其他属性格式 
+    如 颜色 id 为10 选择了红色和白色
+       尺寸 id 为11 选择了M
+    则格式是  
+    (如果商品分类无属性 以下不要)
+    attr : {
+        '10':[
+            {attr_value_id: , attr_value:'白色'},
+            {attr_value_id: , attr_value:'红色'},
+            //自定义属性
+            {attr_value_id: 小于0的任意数 , attr_value:'红色'}
+        ],
+        '11':[
+            {attr_value_id: , attr_value:'M'}
+            //自定义属性
+            {attr_value_id: 小于0的任意数 , attr_value:'N'}
+        ]
+    }
+    
+    
+    //组合属性格式 如颜色id为10 尺寸id为11 设置了红色 + M码的组合 价格为100 数量为50 sku编码为abc
+                   如颜色id为11 尺寸id为11 设置了白色 + N码的组合 价格为150 数量为40 sku编码为abcd
+    sku : {
+        {
+            price      : 100,//价格
+            number     : 50,//数量
+            sku_code   : abc,//sku编码
+            term       : 期货,
+            unit       : 包装单位
+            unit_unit  : 包装单位-单位
+            unit_value : 包装单位值
+            sku_value  : {
+                10 : {
+                    attr_value_id : 红色的attr_value_id,
+                    attr_value : 红色的attr_value值
+                }, 
+                11 : {
+                    attr_value_id : M的attr_value_id//属性组合
+                    attr_value : M的attr_value值
+                }
+            }
+            //自定义属性格式
+            sku_value  : {
+                10 : {
+                    attr_value_id : 小于0的任意数,
+                    attr_value : 红色的attr_value值
+                }, 
+                11 : {
+                    attr_value_id : 小于0的任意数
+                    attr_value : M的attr_value值
+                }
+            }
+        },
+        ........... 
+    }
+    
+    //运费模板
+    templet_id : 运费模板id   
+    goods_unit_value : 商品单位值
+}
+
+发布商品页
+ajax获取运费模板
+地址 : http://www.orangesha.com/index.php/Home/ShippingTemplet/getShippingTemplet
+返回 {
+    status : 1
+    data   : {
+        'name'           : '', //模板名称
+        'province'       : '',//省
+        'city'           : '',//市
+        'free_status'    : '',//是否包邮 1自定义邮费 2卖家承担运费
+        'free_condition' : '',//指定包邮条件
+        'start_number'   : '',//首件数
+        'start_price'    : '',//首件价格
+        'add_number'     : '', //加价数量
+        'add_price'      : ''//加价价格
+    }
+}
+
+
+编辑商品页
+访问地址 : http://www.orangesha.com/index.php/Home/Seller_goods/goodsUpdate
+页面数据 {$goods_data['字段名']}
+
+编辑商品页
+ajax提交编辑的商品信息
+地址 : http://www.orangesha.com/index.php/Home/Seller_goods/goodsUpdate
+请求参数 : {
+    id           : 商品id
+    goods_name   : 商品标题(既商品名称),必填
+    goods_number : 商品数量(既库存),必填
+    goods_price  : 商品价格 必填
+    brand_id     : 商品品牌,数字类型的非0值,必选
+    cat_id       : 商品分类id 必填
+    shop_cat     : 所属店铺分类id
+    goods_model  : 商品型号 必填
+    spec         : 规格  
+    special      : 产品特性   
+    uses         : 用途
+    goods_content: 商品描述   
+    goods_img    : 商品主图
+
+    gallery_img1 : 商品相册图片1
+    gallery_img2 : 商品相册图片2...
+    ...............................
+    gallery_imgN : 商品相册图片N
+    number       : 商品相册图片的数量
+
+    //新增其他属性格式 (如果商品分类无属性 以下不要)
+    new_attr : {'10':['白色','红色'],'11':['M']}
+
+
+    //新增sku组合属性格式 如颜色id为10 尺寸id为11 设置了红色 + M码的组合 价格为100 数量为50 sku编码为abc
+                   如颜色id为10 尺寸id为11 设置了白色 + N码的组合 价格为150 数量为40 sku编码为abcd
+    new_sku : {
+        {
+            price      : 100,//价格
+            number     : 50,//数量
+            sku_code   : abc,//sku编码
+            (如果商品分类无属性 以下不要)
+            sku_value  : {10 : 红色, 11 : M]//属性组合
+            term       : 期货,
+            unit       : 包装单位
+            unit_unit  : 包装单位-单位
+            unit_value : 包装单位值
+        },
+        {
+            price      : 100,//价格
+            number     : 50,//数量
+            sku_code   : abc,//sku编码
+            sku_value  : {10 : 红色, 11 : M]//属性组合
+            term       : 期货,
+            unit       : 包装单位
+            unit_unit  : 包装单位-单位
+            unit_value : 包装单位值            
+        },
+        {
+            price      : 100,//价格
+            number     : 50,//数量
+            sku_code   : abc,//sku编码
+            sku_value  : {10 : 白色, 11 : N]//属性组合
+            term       : 期货,
+            unit       : 包装单位
+            unit_unit  : 包装单位-单位
+            unit_value : 包装单位值            
+        } 
+    }
+
+    //旧的sku组合属性修改
+    old_sku : {
+        sku的id : {
+            id     : 'sku的id',
+            price  : 100,//价格
+            number : 50,//数量
+            term   : 期货,
+            unit   : 包装单位
+            unit_unit  : 包装单位-单位
+            unit_value : 包装单位值            
+        }
+    }
+    
+    //需要删除的sku
+    delete_sku : [sku_id,sku_id...],//js的数组格式
+    //运费模板
+    templet_id : 运费模板id  
+    goods_unit_value : 商品单位值
+    
+}
+
+
+删除sku
+ajax提交编辑的商品信息
+地址 : http://www.orangesha.com/index.php/Home/Seller_goods/deleteSku
+请求参数 : {
+    id : 
+}
+
+获取商城商品数据
+地址 : http://www.orangesha.com/index.php/Home/Seller_goods/goodsList
+返回 : {"status":'' , 'msg':'' ,data:[]}
+data : [
+    {
+      "id":"商品id","goods_name":'商品名称',"goods_price":"商品价格",
+      "goods_thumb":"商品图片","status":"上下架状态 1表示上架 0表示下架","goods_number":"库存","create_time":'发布时间',group_id:'闪购id(为数字表示已经申请过闪购了)'  
+     },....{}
+]
+
+更改商品上下架状态
+地址 : http://www.orangesha.com/index.php/Home/Seller_goods/statusChange
+参数 : {id的值1:'上下架值',id的值3:'上下架值',.....,id的值N:'上下架值',}
+说明 : 上下架值 1表示上架 0表示下架  
+返回 : {"status":'' , 'msg':''}
+

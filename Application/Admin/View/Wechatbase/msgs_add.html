@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="description" content="" />
+<style>    
+*{padding:0; margin:0;font-size:16px;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0} 
+#main #main_h{width:100%;height:40px;float:left;margin-top:20px;color:black;border-bottom:1px solid #dfdfdf}
+#main_h a{height:20px;float:right;margin-left:20px;padding:5px;border:1px solid #E6E7EC;background:#F4F5F9;border-radius:4px;color:black}
+#main_h span{line-height:40px;}
+#main #content{width:100%;height:auto;float:left;margin-top:100px}   
+#content table{width:auto;margin:0 auto}
+input{width:500px;height:24px;border-radius:3px;border:1px solid black;}
+textarea{width:500px;height:160px;border-radius:3px;border:1px solid black;}
+td img{max-width:250px}
+td{padding-right:30px;padding-top:10px}
+table button{border:0px;font-size:16px;background:#44B549;color:white;padding:5px;border-radius:2px;float:left}
+#add{position:fixed;width:100%;height:100%;z-index:9999;background:rgba(0,0,0,0.3);display:none} 
+#add ul{width:800px;height:100%;margin:0 auto;background:white;}   
+#add table{width:100%;border-top:1px solid #E7E9F3;margin:30px auto;float:left}
+#add table tr td{border-left:1px solid #E7E9F3;border-bottom:1px solid #E7E9F3;font-size:20px;padding:10px;font-size:14px;}
+.btn{display:block;float:left;padding:6px;margin-left:10px;background:#D5D5D5;border-radius:2px;}
+</style>
+</head>
+<body>
+<div id="add">
+   <ul>
+   <a href="javascript:remove_show_msgs()" style="float:right">关闭</a>
+   <table cellspacing="0">
+<!--           <tr>
+              <td class='td'>标题</td>
+              <td>关键词</td>
+              <td>操作</td>
+          </tr> 
+          <volist name="list" id="v">
+           <tr>
+               <td class='td'>{$v.title}</td>
+               <td>{$v.keyword}</td>	                    
+               <td><a href="javascript:add({$v['id']})">选中</a></td>
+           </tr>
+          </volist> 
+          <tr><td colspan='3'><a href="javascript:remove_show_msgs()">取消</a></td></tr> -->                                
+    </table>
+    </ul>
+</div>
+<div id="wraper">     
+    <div id="main"> 
+       <div id="main_h">
+        <span>新增群发消息 </span>
+         <a href="{:U('image-text')}">返回</a>                              
+       </div>  
+       <div id="content">    
+         <table cellspacing="10">   
+                 <input type="hidden" name="id" value=''></input>                                           
+                 <tr>
+                        <td><span>请选择消息类型:</span></td>
+                        <td>
+                           <select name="msgs_type">
+                              <option value='0'>请选择...</option>
+                              <option value='text'>文本消息</option>
+                              <option value='news'>图文消息</option>
+                              <option value='morenews'>多图文消息</option>
+                           </select>                             
+                        </td>
+                 </tr> 
+                 <tr>
+                        <td><span>请选择消息:</span></td>
+                        <td>
+                           <a href="javascript:show_msgs()">点击选择消息</a>                          
+                        </td>
+                 </tr>	
+                 <tr>
+                        <td><span>当前选择消息关键字:</span></td>
+                        <td>
+                            <p class='set_keyword'>暂未选择   </p>                    
+                        </td>
+                 </tr>	
+                 <tr>
+                        <td><span>选择发送的人群:</span></td>
+                        <td>
+                           <select name="group">
+                              <option value='0'>全部</option>
+                           </select>                     
+                        </td>
+                 </tr>		                                                                             		                                            
+                 <tr><td></td><td><button>确认发送</button></td></tr>
+         </table>
+       </div>   
+   </div>
+</div>	
+</body>
+<script type="text/javascript">
+function show_msgs(){
+   var type=$("select[name='msgs_type']").val();
+	  $.post("{:U('show_msgs_html')}",{"type":type},function(res){
+           $("#add ul table").html(res);
+           $("#add").css('display','block');
+   	  })
+}
+
+function remove_show_msgs(){
+	$("#add").css('display','none');
+}
+
+function set_msgs(id,obj){
+	var keyword=$(obj).parent('td').siblings('td').eq(1).text();
+	$("input[name='id']").val(id);
+	$(".set_keyword").html(keyword);
+	alert('选择成功');
+	remove_show_msgs();
+}
+
+$("button").click(function(){
+	var msg_id=$("input[name='id']").val();
+	var groupid=$("select[name='group']").val();
+	if(msg_id==''){
+		alert('请先选择要发送的消息');
+	}else{
+		
+	}	
+})
+</script>
+</html>

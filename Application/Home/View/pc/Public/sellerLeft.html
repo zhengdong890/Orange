@@ -1,0 +1,41 @@
+<div class="side-nav">
+    <h3><a href="{:U('MemberCenter/member')}" style="color:#ffffff">个人中心</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{:U('Seller_order/sellerIndex',array('seller_id'=>$domain))}" style="color:#ffffff">店家中心</a></h3>
+    <ul class="border-bottom clearfix">
+        <li class="title">交易管理</li>
+        <li><a href="{:U('Seller_order/orderList')}">订单管理</a></li>
+        <li><a href="{:U('Seller_order/assess_manage')}">评价管理</a></li>
+    </ul>
+    <ul class="border-bottom clearfix">
+        <li class="title">物流管理</li>
+        <li><a href="{:U('Seller_order/delivery')}">发货管理</a></li>
+        <li><a href="http://www.orangesha.com/wuliu.html?title=1">运费模板</a></li>
+        <li><a href="http://www.orangesha.com/wuliu.html?title=4">地址管理</a></li>
+        <li><a href="http://www.orangesha.com/wuliu.html?title=3">物流跟踪</a></li>
+    </ul>
+    <ul class="border-bottom clearfix">
+        <li class="title">商品管理</li>
+        <li><a href="{:U('SellerGoods/selectCategory')}" target="_blank">发布商品</a></li>
+        <li><a href="{:U('SellerGoods/goodsList')}">商品中心</a></li>	
+        <li><a href="http://www.orangesha.com/index.php?m=Home&c=SellerGoods&a=apply_brand" target="_blank">品牌申请</a></li>	
+        <li><a href="http://www.orangesha.com/index.php?m=Home&c=SellerGoods&a=ActivityCenter">促销活动</a></li>
+    </ul>
+    <ul class="border-bottom clearfix">
+        <li class="title">店铺管理</li>
+        <!--<li><a href="{:U('ShopEdit/shopSetting')}">店铺设置</a></li>-->
+        <li><a href="{:U('ShopCategory/categoryList')}">分类管理</a></li>
+        <li><a href="{:U('ShopNav/navList')}">导航管理</a></li>        
+        <li><a href="{:U('ShopEdit/bannerSetting')}" target="_blank">banner设置</a></li> 
+        <li><a href="{:U('ShopCoupon/coupon')}">优惠券设置</a></li>
+        <li><a href="{:U('Seller_order/example')}" target="_blank">模板示例</a></li>
+        <li><a href="{:U('Public/jiandian')}" target="_blank">建店指引</a> <div style="background: url(/Public/Home/image/zhiyin.png) no-repeat;width: 31px;height: 14px;overflow: hidden;position: absolute;right: -3px;top: 5px;"></div></li>
+    </ul>
+    <ul class="clearfix">
+        <li class="title"> 客户服务</li>
+        <li><a href="{:U('MemberCenter/safeguard')}">消费者保障</a></li>
+        <li><a href="{:U('SellerRefund/refund')}">退款管理</a></li>
+        <li><a href="{:U('MemberCenter/afterSale')}">售后管理</a></li>
+        <li><a href="{:U('MemberCenter/foul')}">违规记录</a></li>
+        <li><a href="{:U('SellerRule/ruleList')}" target="_blank">开店规则</a></li>
+        <li><a href="{:U('Shop/shop_notice')}" target="_blank">店铺公告</a></li>
+    </ul>
+</div>

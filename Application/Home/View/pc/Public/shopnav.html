@@ -1,0 +1,68 @@
+﻿    <div class="header-wrap">
+			<div class="navwrap">
+				<div id="nav">
+					<div class="navbar clearfix">				
+						<a class="current" href="{:U('Shop/index',array('seller_id'=>$seller_id))}">首页</a>
+						<volist name='shop_nav' id='v'>
+							<if condition="$v.rsort gt -1">
+							  <a href="{:U('Shop/goodsList',array('seller_id'=>$seller_id,'cat_id'=>$v['cat_id']))}">{$v.nav_name}</a>
+							</if>						 						
+						</volist>
+						
+						<volist name='shop_nav' id='v'>	 
+						<if condition="$v.rsort eq -1">
+						 <a href="{:U('Shop/company',array('seller_id'=>$seller_id))}">{$v.nav_name}</a>
+						 </if>
+						</volist>    
+						<volist name='shop_nav' id='v'>
+						 <if condition="$v.rsort eq -2">
+						 <a href="{:U('Shop/service',array('seller_id'=>$seller_id))}">{$v.nav_name}</a>
+						 </if>
+						</volist>
+						
+						<input type="text" id="shop_search" placeholder="商品名称"><button id="search"><img src="/Public/Home/image/glass.png"</button>
+					</div>
+					<div class="pros subpage" id="pros_shop_css">
+						<h2><a href="{:U('Shop/allgoods',array('seller_id'=>$seller_id))}" style="color:#FFFFFF; font-size: 16px; font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所有商品 ≡</a></h2>
+						<ul class="prosul clearfix" id="proinfo">
+						<volist name="shopcat" id="cat">
+							<li class="food">
+								<i>&gt;</i>		
+								<a class="ti" href="{:U('Shop/showgoods',array('seller_id'=>$seller_id,'cat_id'=>$cat['id']))}">{$cat.name}</a>
+								
+								
+								
+								<div class="prosmore hide">
+								<volist name="cat['child']" id="sun" >
+									<span><em><a href="{:U('Shop/showgoods',array('seller_id'=>$seller_id,'cat_id'=>$sun['id']))}">{$sun.name}</a></em></span>
+								</volist>
+								</div>
+								
+							</li>
+							
+						</volist>
+							
+							
+						</ul>
+					</div>					
+										
+				</div>
+			</div>
+		</div>
+<script>
+$('#search').click(function(){
+    var  seller_id = "{$seller_id}";
+    var search = $('#shop_search').val();	
+    $.post('{:U('Shop/search')}',{'search':search,'seller_id':seller_id},function(data){	
+		 if( data.msg=='ok' ){		
+            var goods_id = parseInt(data.goods_id);		 			
+			window.location.href="<?php echo U('Mall_goods/goods'); ?>?goods_id="+goods_id;
+		 }else{
+		   alert('你搜索的商品不存在！');
+		 }	  
+	
+	});
+
+})
+
+</script>	

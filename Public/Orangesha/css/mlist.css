@@ -1,0 +1,33 @@
+body,div,span,ul,li,a,p,img,input{padding:0;margin:0;outline:none;}
+ul,li{list-style:none;}
+a{text-decoration:none;}
+.list{
+    width:1200px;
+    margin:0 auto;
+}
+.list .list-header{position:relative;}
+.list .list-header span{font-size:14px;color:#333;line-height:30px;}
+.list .list-header .header-right{color:#666;position:absolute;right:0;top:0;}
+.list .list-title{height:81px;width:1198px;border:1px solid #d6d6d6;}
+.list .list-title .list-price,.list .list-title .list-type{height:40px;line-height:40px;font-size:12px;}
+.list .list-title .list-price{border-bottom:1px solid #d6d6d6;}
+.list .list-title div ul li{float:left;width:105px;height:40px;text-align:center;}
+.list .list-title div ul .text{color:#666;background-color:#eee;}
+.list .list-title .list-price .into{width:260px;}
+.list .list-title .list-price .into input{width:80px;height:20px;border:1px solid #a7a7a7;}
+.list .list-title .list-price .into span{background-color:#eee;font-size:12px;color:#333;padding:5px 10px;cursor:pointer;border:1px solid #a7a7a7;}
+.list .list-title:after{content:'';height:0;display:block;visibility:hidden;clear:both;}
+.list .goods{position:relative;}
+.list .goods li{width:218px;height:378px;border:1px solid #f1f1f1;padding-left:10px;margin:20px 10px 0 0;cursor:pointer;float:left;}
+.list .goods li:hover{border:1px solid #757575;}
+.list .goods li .goods-img{display:block;width:208px;height:208px;border:1px solid transparent;margin:10px 0;}
+.list .goods li:hover .goods-img{border:1px solid #757575;}
+.list .goods li .goods-price{font-size:18px;color:#ff6600;}
+.list .goods li .goods-info{font-size:12px;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:10px;}
+.list .goods li .shops{font-size:12px;color:#888;}
+.list .goods li .sum{font-size:12px;color:#666;}
+.list .goods li .sum .sum-num{color:#662512;}
+.list .goods li .sum .sum-rated{color:#ff6600;}
+.list .goods li .goods-info,.list .goods li .shops,.list .goods li .sum{margin-top:10px;}
+.list .goods li .icon{height:30px;margin-top:10px;}
+.list .goods li .icon img{width:30px;height:30px;}

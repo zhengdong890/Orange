@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="__PUBLIC__/css/public_css.css" type=text/css rel=stylesheet />
+<meta name="description" content="" />
+<style>
+#main #main_h{width:100%;height:40px;float:left;margin-top:20px;color:black;}
+#main_h a{height:20px;float:left;margin-left:20px;padding:8px;border:1px solid #E6E7EC;background:#F4F5F9;border-radius:4px;color:black}
+#main_h a span{padding-left:5px}
+   #main_h a img{float:left;margin-top:2px}
+#main table{width:100%;border-top:1px solid #E7E9F3;margin:20px auto;float:left}
+#main table tr{background:#FCFCFC}
+#main table tr:hover{background:#F1FCEA}   
+#main table tr:first-child{background:#F4F5F9} 
+#main table tr td{border-left:1px solid #E7E9F3;border-bottom:1px solid #E7E9F3;font-size:20px;padding:10px;font-size:14px;}
+#main table tr .td{border-left:0px}
+.tr td{height:60px;}
+#main td img{max-width:150px}
+#main td a{display:block;margin-left:10px;float:left;padding:5px;background:#44B549;border-radius:4px;color:white;font-size:14px}     
+.btn{border:0;border-radius:4px;color:white;padding:5px;background:#44B549;font-size:14px;margin-left:300px}
+#page{width:100%;height:auto;float:left}
+#page li{float:right}
+#page li a{display:block;float:left;height:22px;padding:4px;border:1px solid #dfdfdf;margin-left:5px;line-height:22px;}
+#page li span{display:block;float:left;height:22px;padding:4px;border:1px solid #dfdfdf;margin-left:5px;line-height:22px;}
+#page li p{float:left;padding:4px;height:22px;line-height:22px;margin-left:5px;}
+</style>
+</head>
+    <body>
+    <div id="wraper">
+          <include file="Public:header" />   
+          <include file="Public:left" />       
+          <div id="main"> 
+             <div id="main_h">
+               <a href="javascript:freshen()"><img src="__PUBLIC__/admin_images/text.png" /><span>刷新所有粉丝信息</span></a>                              
+             </div>         
+             <table cellspacing="0">
+                  <tr>
+                      <td class='td'>编号</td>
+                      <td>粉丝昵称</td>
+                      <td>性别</td>
+                      <td>分组名</td>
+                      <td>省(直辖市)</td>
+                      <td>城市</td>
+                      <td>头像</td>
+                      <td>关注时间</td>
+                  </tr> 
+                  <volist name="list" id="v">
+	                  <tr class='tr'>
+	                      <td class='td'>{$v.id}</td>
+	                      <td>{$v.nickname}</td>
+	                      <td>{$v.sex}</td>
+	                      <td>{$v.groupid}</td>
+	                      <td>{$v.province}</td>
+	                      <td>{$v.city}</td>
+	                      <td><if condition="$v['headimgurl'] neq ''"><img src="{$v.headimgurl}" style="max-width:60px;"/></if></td>
+	                      <td>{$v['subscribe_time']|date="Y-m-d",###}</td>
+	                  </tr>
+                  </volist>                                 
+             </table>
+             <ul id="page"><li>{$page}</li></ul>
+         </div>
+    </div>	
+    </body>
+    <script type="text/javascript">
+       $("#left div ul").eq(2).css('display','block');
+       $("#left div ul li").eq(10).css({'background':'#44B549','color':'white'});
+       
+       function freshen(){  	     
+  	    	  $.post("{:U('freshen')}",{},function(res){
+  	             window.location.reload();
+  	     	  })
+       }
+    </script>
+</html>

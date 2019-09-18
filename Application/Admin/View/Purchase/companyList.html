@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="description" content="" />
+<style>
+*{padding:0; margin:0;font-size:16px;font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border:0} 
+#content{width:98%;height:auto;float:left;margin-left:1%;}
+#content #content_h{width:100%;height:40px;border:1px solid #D7D7D7;line-height:40px;margin-top:15px}
+#content #content_h a{padding-left:10px}
+#content #content_m{width:100%;height:auto;border:1px solid #D7D7D7;padding-bottom:100px;margin-top:20px}
+#content table{margin:0 auto;width:100%}
+#content table td span{float:right}
+.caozuo{text-align:center}
+.caozuo a{color:black;text-decoration:underline} 
+.caozuo a:hover{color:pink;text-decoration:underline}   
+table tr{background:white;}
+table tr:hover{background:#F1FCEA}  
+table tr:first-child{background:#F4F5F9} 
+table tr td{border-left:1px solid #E7E9F3;border-bottom:1px solid #E7E9F3;padding:10px;font-size:14px;}
+table tr .td{border-left:0px} 
+input{width:500px;height:24px;border-radius:3px;border-bottom:1px solid #E3E9EF;border-top:1px solid #ABADB3;border-left:1px solid #E2E3EA;border-right:1px solid #DBDFE6}
+td img{max-width:100px;max-height:100px}
+td{padding-right:30px;padding-top:10px}
+#page{width:100%;height:auto;float:left;margin-top:15px}
+#page li{float:right}
+#page li a{display:block;float:left;height:22px;padding:4px;border:1px solid #dfdfdf;margin-left:5px;line-height:22px;}
+#page li span{display:block;float:left;height:22px;padding:4px;border:1px solid #dfdfdf;margin-left:5px;line-height:22px;}
+#page li p{float:left;padding:4px;height:22px;line-height:22px;margin-left:5px;}
+.btn{width:80px;height:30px;float:right;display:block;background:red;text-align:center;line-height:30px;color:white;border-radius:5px;font-size:14px;margin-right:20px;margin-top:5px;}
+</style>
+</head>
+<body>
+<div id="content">
+     <div id="content_h">
+           <a>后台管理中心</a>-><a>批量采购列表</a>
+           <a class='btn' style="padding-left:0" href="{:U('companyAdd')}">新增</a>
+     </div>     
+     <div id="content_m">
+         <table cellspacing="0">
+              <tr>
+                  <td>ID</td>
+                  <td style="text-align:center">公司或商户</td>
+                  <td style="text-align:center">省份</td>
+                  <td style="text-align:center">创建时间</td>
+                  <td style="text-align:center">更新时间</td>
+                  <td style="text-align:center">推荐</td>
+                  <td style="text-align:center">操作</td>
+              </tr> 
+              <volist name="companys" id="v">
+               <tr data-status='{$v['is_tj']}' data-id='{$v['id']}'>
+                    <td>{$v['id']}</td>		
+                    <td style="text-align:center">{$v['name']}</td>   
+                    <td style="text-align:center">{$v['area_name']}</td>               
+                    <td style="text-align:center">{$v['create_time']|date="Y-m-d H:i:s",###}</td>
+                    <td style="text-align:center">{$v['update_time']}</td>  
+                    <td style="text-align:center">
+                        <if condition="$v['is_tj'] eq 1">
+
+                    <a href="javascript:void(0)"  class="is_show"><img src="/Public/admin_images/yes.gif"/></a>   
+                    <else />
+                    <a href="javascript:void(0)"  class="is_show"><img src="/Public/admin_images/no.gif"/></a>
+                    </if>
+                    </td>                       
+                    <td class='caozuo'>
+                         <a href="{:U('Purchase/companyUpdate',array('id'=>$v['id']))}">编辑</a> | <a href="javascript:companyDelete({$v['id']})" onclick="return confirm('确认是否删除')">删除</a>
+                    </td>
+                </tr>
+              </volist>               
+         </table>
+         <ul id="page"><li>{$page}</li></ul>
+     </div>
+</div>	
+</body>
+<script type="text/javascript">    
+function companyDelete(id){
+  $.post("{:U('companyDelete')}",{"id":id},function(res){                
+        alert(res.msg);
+        window.location.reload();
+  });  
+}
+
+/*ajax更改状态*/
+$("table").on('click' , '.is_show' , function(){
+    var id     = $(this).parents('tr').attr('data-id'),
+        _this  = this;
+        status = $(this).parents('tr').attr('data-status'),
+        status = status == '1' ? '0' : '1';
+
+    $.post("{:U('Purchase/changeStatus')}",{id : id , status : status},function(res){ 
+        alert(res.msg);   
+        if(res.status == '0'){
+           return;
+        }
+       
+        $(_this).parents('tr').attr('data-status' , status);
+        status == '1' && $(_this).children("img").attr("src","__PUBLIC__/admin_images/yes.gif");
+        status == '0' && $(_this).children("img").attr("src","__PUBLIC__/admin_images/no.gif");
+    });    
+})
+</script>
+</html>

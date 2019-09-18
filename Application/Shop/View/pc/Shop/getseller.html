@@ -1,0 +1,55 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>共享商品</title>
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="__PUBLIC__/Home/static/jquery-2.0.3.min.js"></script>
+<script src="/Public/layer/layer.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="__PUBLIC__/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+
+<style>
+*{
+	padding: 0;
+	margin: 0;
+}
+ul{ }
+input{ outline: none;}
+.container_ul{padding: 20px 10px 20px 10px;}
+.container_ul>li:first-of-type{ margin-top: 10px;}
+ul li{ list-style:none; margin-bottom: 20px; font-family: "微软雅黑";border-bottom:1px solid #ccc;}
+#childuls{ padding: 15px 0px 15px 30px;}
+#childuls>li{ color: #666; font-family: "微软雅黑";}
+#childuls li span{ margin-left:5px;cursor:pointer;float:right; }
+#childuls li span a{ background:#37A4A2;color:#FFFFFF;padding:4px 10px; border-radius: 5px; font-size: 14px; font-family: "微软雅黑";}
+a { text-decoration:none; }
+#childuls li {margin-top:10px;}
+#add{ background:#37A4A2; color:#FFFFFF; padding: 4px 10px; border-radius: 5px; font-size: 14px; font-family: "微软雅黑";}
+</style>
+</head>
+<body >
+
+<div class="bodyer">
+	
+		  <ul class="container_ul">
+	
+				<li style="margin-left:28px;">卖家昵称：{$memInfo.nickname}</li>
+				<li style="margin-left:28px;">卖家电话：{$memInfo.telnum}</li>
+				<li style="margin-left:28px;">卖家邮箱：{$memInfo.email}</li>
+				<li style="margin-left:28px;">卖家QQ：{$memInfo.qq}</li>
+				<li style="margin-left:28px;">卖家座机：{$memInfo.zuoji}</li>
+
+		   </ul>  
+	 
+</div>
+  
+
+
+</body>
+</html>
+
+    

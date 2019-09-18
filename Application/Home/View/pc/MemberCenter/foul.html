@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>违规记录</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/all-use.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/side-nav.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/foul.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/sell-management.css">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end --> 
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="Public:sellerLeft" />         
+            <div class="sell-management clearfix" style='width:auto;'>
+                <div class="refund">
+                	<div class="refund_top">违规记录</div>
+                	<div class="refund_box">
+                		<div class="refund_box_info">
+                			<p class="refund_title">违规处理</p>
+                			<ul>
+                				<li>
+                					<p>待您处理</p>
+                					<p><span>0</span> 项</p>
+                					<p><a href="{:U('MemberCenter/viewViolation')}">查看 ></a></p>
+                				</li>
+                				<li>
+                					<p>审核中</p>
+                					<p><span>0</span> 项</p>
+                					<p><a href="{:U('MemberCenter/viewViolation2')}">查看 ></a></p>
+                				</li>
+                				<li>
+                					<p>违规记录</p>
+                					<p><span>0</span> 项</p>
+                					<p><a href="{:U('MemberCenter/viewViolation3')}">查看 ></a></p>
+                				</li>
+                			</ul>
+                			<p class="refund_title">违规扣分</p>
+                			<div>
+                				<p><img src="/Public/Home/images/g_03.png">恭喜您，当前没有违规扣分，请继续保持！</p>
+                			</div>
+                		</div>
+                	</div>                	
+                </div>
+            </div>                   
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+//判断左边导航
+function checkNav(){
+	$(".side-nav>ul:eq(4)>li:eq(4) a").css("color","#ff6600")
+}
+checkNav();
+</script>
+</body>
+</html>

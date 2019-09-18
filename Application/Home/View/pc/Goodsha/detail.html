@@ -1,0 +1,246 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="工业机器人租赁，智能装备租赁，智能装备分享，工业智能机器人交易，e橙优品">
+    <meta name="description" content="e橙优品专注于解决国内智能设备空闲问题，对接供给方和需求方，为万千中小企业解决设备和融资问题。我们是智能装备行业的专业电商平台，需求方、供给方、融资租赁公司三赢的B2B交易平台。">
+    <meta name="copyright" content="深圳市橙橙网络科技有限公司(www.orangesha.com)版权所有">
+    <meta name="author" content="e橙优品"> 
+  <title>e 橙优品智能装备分享平台-专业智能装备分享平台-工业智能装备租赁平台</title>
+
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+  <link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+  <!--[if (gte IE 9)|!(IE)]><!-->
+  <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-2.0.3.min.js"></script>
+  <!--<![endif]-->
+  <!--[if lte IE 8 ]>
+  <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+  <![endif]-->
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/home.css" type="text/css">
+    <link rel="stylesheet" href="/Public/Orange/script/jquery.kinMaxShow/base.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.css">
+    <link rel="shortcut icon" href="/Public/Home/images/ee.ico" type="image/x-icon">
+    <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.js"></script>
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/tool.js"></script>
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Orange/css/home.css" type="text/css">
+
+	<!-- www.orangesha.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?54f6f54d47704101dc27b337de5fd6c3";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body >
+  <!-- 头部 -->
+  <!-- 导航条 页面头部
+================================================== -->
+
+<include file="Public:header" />
+<include file="Public:nav" />
+    <!-- body -->
+	
+	
+    <div class="bodyer marB50" style="margin-top:-430px;">
+        <div class="mar1200c">
+            <div class="cur-nav f-14-c1 n-bCol4">
+                <h4 class="marL20">
+                    <span>当前位置：</span>
+                    <a href="#" class="cCol1-h">首页</a>
+                    >
+                    <a href="#" class="cCol1-h">分享</a>
+                    >
+                    <a href="#" class="cCol1-h">无心磨床</a>
+                    >
+                    <span>动压型</span>
+                </h4>
+            </div>
+            <div class="product-info box-frame marT10">
+                <div class="r-content-wrap">
+                    <div class="r-cont-right pro-list-wrap">
+                        <!-- 放大镜 -->
+                        <div class="r-product-pic fLe">
+                            <div class="tb-booth tb-pic tb-s310">
+                                <a href="img/product/01.jpg"><img src="{$goodImg}" alt="商品展示图" rel="" class="jqzoom" /></a>
+                            </div>
+                            <div class="ofwHidden">
+                                <ul class="tb-thumb" id="thumblist">
+                                    <li class="tb-selected"><div class="tb-pic tb-s40"><a href="javascript:">
+                                        <img src="" mid="" big=""></a></div></li>
+                                    <li><div class="tb-pic tb-s40"><a href="javascript:"><img  src="" mid="" big=""></a></div></li>
+                                    <li><div class="tb-pic tb-s40"><a href="javascript:"><img src="" mid="" big=""></a></div></li>
+                                    <li><div class="tb-pic tb-s40"><a href="javascript:"><img src="" mid="" big=""></a></div></li>
+                                    <li><div class="tb-pic tb-s40"><a href="javascript:"><img src="" mid="" big=""></a></div></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- 放大镜 End -->
+                        <div class="product-info-list fRi w420">
+                            <h4 class="f-16-c1 p-info-tl "><span class="f-bold">{$info.title}</span></h4>
+                            <div class="jg-wrap n-bCol6 marT10">
+                                <span class="f-12-c1 f-bold">价格：</span>
+                                <span class="f-18 f-cCol6"><em class="f-bold">￥{$info.price}</em> /月起</span>
+                            </div>
+                            <div class="f-14-c1 p-inf-list marT10">
+                                <p>联系方式 :  <em class="f-cCol6"></em>{$info.attr.phone}</p>
+                                <p>设备品牌 :  {$info.brand}</p>
+                                <p>设备型号 :  {$info.attr.xh}</p>
+                                <p>数<i style="margin-left:28px;"></i>量 :  <em class="f-cCol6">{$info.stock}</em> 台</p>
+                                <p>所 在 地 :  {$info.attr.location}</p>
+                                <p>最短租约 :  <em class="f-cCol6">{$info.slease}</em> 个月</p>
+                                <p>最长租约 :  <em class="f-cCol6">{$info.llease}</em> 个月</p>
+                                <p>设备成色 :  全新</p>
+                                <p>使用范围 :  - -</p>
+                            </div>
+                            <div class="z-contact marT15 clearfix">
+                                    <a href="#" class="marT5 butt03-a butt-style-5 butt-s-1 f-16 fLe">联系客服</a>
+                                    <p class="disInBlock fLe f-10 f-cCol3 marL20" style="padding-top:10px;">
+                                        <span style="margin-left:-20px;">*安调费/拆装费/运输费按机型/路程计算，满12个月减半，满24个月全免。</span><br/>
+                                        <span style="margin-left:-20px;">*本设备鼓励租转买，租期所付租金转为预付款，设备依据残值折价销售</span>
+                                    </p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="cost-detail bAllCol1-1 marT10">
+                            <h4 class="tl n-bCol7"><span class="f-16 marL30 f-cCol6">费用明细</span></h4>
+                            <div class="cont">
+                                <div class="clearfix f-16-c1">
+                                    <span class="disInBlock fLe">租期可选范围 :  {$info.slease} 至 {$info.llease} 个月</span>
+                                    <div class="disInBlock fRi m-butt-num">
+                                        <span class="fLe">租期选择 :</span>
+                                        <p class="disTable fLe numb-bt marL10">
+                                            <span class="disTable-cell reduce_b">-</span>
+                                            <span class="disTable-cell"><input type="text" class="txt06 f-14 numb-val txt-style-4 txt-s-1" value="0" disabled="disabled" id="num" />  </span>
+                                            <span class="disTable-cell add_b">+</span>
+                                        </p>
+                                        <span class="fLe f-14-c1 marL5">月/台</span>
+                                    </div>
+                                </div>
+                                <!-- 列表 -->
+                                <ul class="cont-list">
+                                    <li>
+                                        <span class="fRi">￥<span class="monthMoney">{$info.price}</span></span>
+                                        <span class="f-14-c1">第 {$info.slease}至 {$info.llease}个月每月租金 :</span>
+                                    </li>
+                                    <li>
+                                        <span class="fRi f-cCol6">￥<span class="money">0</span></span>
+                                        <span class="f-14-c1">租金总额 : <em class="f-10-c2"></em></span>
+                                    </li>
+                                    <li>
+                                        <span class="fRi f-cCol6">￥{$info.insurance}</span>
+                                        <span class="f-14-c1">保险总额 : <em class="f-10-c2"></em></span>
+                                    </li>
+                                    <li>
+                                        <span class="fRi f-cCol6">￥<span class="deposit">{$info.deposit}</span></span>
+                                        <span class="f-14-c1">押金 : <em class="f-10-c2"></em></span>
+                                    </li>
+                                    <li>
+                                        <span class="fRi f-cCol6">￥<span class="sum">0</span></span>
+                                        <span class="f-14-c1">总额 : <em class="f-10-c2"></em></span>
+                                    </li>
+                                    <!-- <li style="display:none;">
+                                        <span class="fRi f-cCol6">￥10000.00</span>
+                                        <span class="f-14-c1">首期付款 : <em class="f-10-c2">(押金+首月租金+保险总额)</em></span>
+                                    </li> -->
+                                </ul>
+                                <div class="buy-butt-wrap txtCenter marT50" style="text-align:right;">
+                                <a href="javascript:" class="f-16 f-bold butt01-a butt-a-1 butt-s-1" id="buynow" >立即购买</a>
+                                <a class="f-16 marL20 f-bold butt01-a butt-a-1 reset-butt-verify" href="javascript:" id="addcart" >加入购物车</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="goods-info-wrap bAllCol1-1 marT25" id="Goods_card">
+                            <div class="goods-card-lable n-bCol7">
+                                <a href="javascript:" class="list-s1 cur" data-val="1">详情介绍</a>
+                                <a href="javascript:" class="list-s2" data-val="0">评价<em class="f-cCol9">（10）</em></a>
+                            </div>
+                            <div class="goods-info-tab" style="overflow:hidden;">
+                                <div class="tab">
+                                    {$info.content}
+                                </div>
+                                <div class="tab" style="display: none">
+                                    这里是商品评价
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="r-content">
+                    <img src="{:C('STATIC_URL')}/Orange/img/test/test_7.jpg" >
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Orange/js/wb_methods.js"></script>
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Orange/js/jquery.imagezoom.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //图片放大
+            $(".jqzoom").imagezoom({
+                xzoom:380,
+                yzoom:380
+            });
+            //放大镜图片传递地址
+            $("#thumblist li a").click(function(){
+                $(this).parents("li").addClass("tb-selected").siblings().removeClass("tb-selected");
+                $(".jqzoom").attr('src',$(this).find("img").attr("mid"));
+                $(".jqzoom").attr('rel',$(this).find("img").attr("big"));
+            });
+            $(".disTable-cell").click(function(){
+                var num = $(".disTable-cell input").val();
+                var money = $(".monthMoney").text();
+                var deposit = parseInt($(".deposit").text());
+                $(".money").text(money*num);
+                $(".sum").text(money*num+deposit);
+            });
+        })
+        wb.num_control(".numb-bt");
+        wb.optionsCard("#Goods_card ", "#Goods_card a",".goods-info-tab","click","cur")
+
+
+        $("#addcart").click(function(){
+            var gid={$info.id};
+            var price={$info.price};
+            var num=$("#num").val().trim();
+           var guser={$info.uid};  //可以注释掉
+
+            if(num<={$info.llease}&&num>={$info.slease}){
+                $.ajax({
+                    type: "POST",
+                    url: "{:U('Center/addshopcart')}",
+                    data: {gid:gid,num:num,price:price,guser:guser},
+                    success: function(msg){
+                            alert(msg['info'])
+                            window.location = msg['url'];
+                    }
+                });
+            }else{
+                alert("您的租期必须在规定时间范围内！");
+            }
+        });
+
+        $('#buynow').click(function(){
+            var num=$("#num").val().trim();
+            if(num<={$info.llease}&&num>={$info.slease}){
+                var url="{:U('Sell/order')}";
+                var urls=url.slice(0,-5)+"/id/"+{$info.id}+"/num/"+num+'.html';
+                window.open (urls,'newwindow')
+            }else{
+                alert("您的租期必须在规定时间范围内！");
+            }
+        });
+
+    </script>
+    <include file="Public:footer" />
+    <!-- /底部 -->
+	</body>
+	</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>退款成功</title>
+		<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+        <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+        <link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+        <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/orderRefund.css" type="text/css">
+        <link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+        <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+        <script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script> 
+	</head>
+	<body>
+		<include file="Public:header_top" />
+		<div class="orderRefund_top" data-type={$refund_goods['type']} data-refundId={$refund_goods['id']} data-time={$refund_goods['create_time']}>
+			<div>
+				<a class="logo2" href="http://{$Think.server.HTTP_HOST}" title="中国工业机器人,数控机床多少钱一台,无人机,3d打印机多少钱,农业无人机"></a>
+				<p>您的位置： <a href="{:U('Index/index')}">首页</a> > <a href="{:U('MemberOrder/orderList')}">我的订单</a> > <a>售后</a> </p>
+			</div>			
+		</div>	
+		<ul class="refund_step2">
+			<li>
+				<div style="background-color: #FF9972;"><span>1</span>买家申请</div>
+			</li>
+			<li>
+				<div style="background-color: #FF9972;"><span>2</span>卖家处理退款申请</div>
+				
+			</li>
+			<li>
+				<div style="background-color: #FF4400;"><span>3</span>退款成功</div>
+				
+			</li>
+		</ul>
+		<div class="orderRefund_box">
+		<!--退款成功-->
+			<div class="fl refund_ok refund_style_box">
+				<div>
+					<h3>退款成功</h3>
+			        <p>退款成功时间：<span>{$time|date="Y-m-d H:i:s",###}</span></p>
+				</div>
+			    <div>
+			    	<p>退款总金额：<span class="star">¥{$refund_goods.case}</span>  <a href="javascript:;">查看钱款去向</a></p>
+			    	<div>
+			    		<ul>
+			    			<li>退款明细</li>
+			    			<li>金额（元）</li>
+			    			<li>状态</li>
+			    		</ul>
+			    		<ul>
+			    			<li>退回银行卡</li>
+			    			<li>{$refund_goods.case}</li>
+			    			<li></li>
+			    		</ul>
+			    	</div>
+			    </div>
+			    <div>
+			    	<h3>协商历史</h3>
+			    	<!--<ul>
+			    		<li>
+			    			<p>卖家 <span>2017-04-12 14:30:55</span></p>
+			    			<p>商家主动同意，退款给买家20.00元。</p>
+			    		</li>
+			    		<li>
+			    			<p>卖家 <span>2017-04-12 14:30:55</span></p>
+			    			<p>商家同意了本次售后服务申请。</p>
+			    		</li>
+			    		<li>
+			    			<p>买家 <span>2017-04-12 14:30:55</span></p>
+			    			<p>发起了申请，货物状态：未发货，原因：其他，金额：20.00元，说明：...。</p>
+			    		</li>
+			    	</ul>-->
+			    </div>
+			</div>
+		<!--退款详情-->
+			<div class="right2">
+				<h3>退款详情</h3>
+				<div>
+				<img src="{$order_data.goods_thumb}" alt="" width="200" />
+					<p><a class="order_detail">{$order_data.goods_name}</a></p>
+				</div>
+				<table>
+					<tr>
+						<td>卖家：</td>
+						<td>{$order_data.shop_name}</td>
+					</tr>
+					<tr>
+						<td>联系电话：</td>
+						<td>{$order_data.tel_num}</td>
+					</tr>
+					<tr>
+						<td>订单编号：</td>
+						<td class="order_sn">{$order_data.order_sn}</td>
+					</tr>
+					<tr>
+						<td>成交时间：</td>
+						<td>{$order_data.create_time|date="Y-m-d H:i:s",###}</td>
+					</tr>
+					<tr>
+						<td>单价：</td>
+						<td>¥ {$order_data.goods_price}*{$order_data.number}（数量）</td>
+					</tr>
+					<tr>
+						<td>邮费：</td>
+						<td>¥{$order_data['shipping_price']}</td>
+					</tr>
+					<tr>
+						<td>商品总价：</td>
+						<td>¥{$order_data['total_price']}</td>
+					</tr>
+				</table>
+				<table>
+					<tr>
+						<td>退款编号：</td>
+						<td class="refundId">{$refund_goods['refund_sn']}</td>
+					</tr>
+					<tr>
+						<td>退款金额：</td>
+						<td>¥{$order_data.total_price}</td>
+					</tr>
+					<tr>
+						<td>原因：</td>
+						
+						<td><foreach name="because" item="vo">{$vo} ，</foreach></td>
+
+					</tr>
+					<tr>
+						<td>要求：</td>
+						<td><if condition="$refund_goods['type'] eq 1">仅退款<elseif condition="$refund_goods['type'] eq 2" />换货<else />退款退货</if></td>
+					</tr>
+					<tr>
+						<td>货物状态：</td>
+						<td><if condition="$data.send_status eq 0">未发货<elseif condition="$data.send_status eq 1"/>已发货</if></td>
+					</tr>
+					<tr>
+						<td>说明：</td>
+						<td>...</td>
+					</tr>
+				</table>
+			</div>
+		</div>	
+		<include file="Public:footer" />  
+	</body>
+</html>
+

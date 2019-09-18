@@ -1,0 +1,462 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>发货管理</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/all-use.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/side-nav.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/sell-management.css">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+<style>
+.hide{display:none}
+.search_box2{ display:none}
+#search_ul1{ overflow: hidden; border: none; padding: 20px 0px 0px 0px;}
+#search_ul1 li{ float: left; border: none; padding: 0px 5px; color: #000; margin-left: 20px;}
+#search_ul1 .active{ background-color: #D2D2D2; border-radius: 5px;}
+#search_ul2{ overflow: hidden;border: none; padding: 20px 0px 20px 20px;}
+#search_ul2 li{ float: left; border: none; margin-right: 33px;}
+
+#search_ul2 li input{ height: 23px; width: 90px;}
+button{ cursor: pointer; color: #fff; background-color: #37A4A2; padding: 2px 15px; font-size: 14px; border-radius: 5px; font-family: "微软雅黑";}
+label{ cursor: pointer;}
+#search_ul3{ overflow: hidden; border: none;}
+#search_ul3>li{ border: 1px solid #E1E1E1; width: 99%; padding:0px; color: #000;margin-bottom: 20px;}
+#search_ul3>li>p{ width: 100%; text-indent: 20px; box-sizing: border-box; line-height: 40px;}
+#search_ul3>li>div{ border-top: 1px solid #E1E1E1;border-bottom: 1px solid #E1E1E1; overflow: auto;}
+#search_ul3>li>div p{ line-height: 35px; text-indent: 20px; color: #333;}
+#search_ul3>li>div>div{ padding: 15px; display: inline-block; float: left;}
+#search_ul3>li>div>div:first-of-type{border-right: 1px solid #E1E1E1; width: 38%; height: 110px;}
+#search_ul3 li button{ margin-left: 20px;}
+#search_ul3>li>p a{ color: #005FBE;}
+#search_ul3>li>p a:hover{ text-decoration: underline;}
+.search_ul3_img{ width: 70px; height: 70px; border: 1px solid #E1E1E1; margin-left: 20px;}
+.search_ul3_img img{ width: 70px; height: 70px;}
+.search_box1>p{ position: absolute; bottom: 10px; text-indent: 20px;}
+#prev{ cursor: pointer; width: 40px; height: 40px; text-align: center; line-height: 40px; font-size: 24px; display: inline-block; border: 1px solid #E1E1E1; position: absolute; bottom: 10px; right: 90px;}
+#next{ cursor: pointer; width: 40px; height: 40px; text-align: center; line-height: 40px; font-size: 24px; display: inline-block; border: 1px solid #E1E1E1; position: absolute; bottom: 10px; right: 30px;}
+.search_table thead{ line-height: 35px;}
+.search_table thead td{ background-color: #eee;}
+.search_table tr{ line-height: 35px; border-top: 1px solid #D3D3D3;}
+.search_table td{font-size: 13px; width: 1%; text-align: center;}
+.waybillNumber{display: none; position: fixed;width: 400px;height: 400px;text-align: center; background-color: #fff;border: 1px solid #37A4A2;top: 200px;left: 50%;transform: translateX(-50%);}
+.waybillNumber>img{width: 200px; height: 200px;margin: 10px 0px;}
+.waybillNumber>p{line-height: 50px;}
+.waybillNumber>p input{height: 26px;padding-left: 4px;}
+.waybillNumber>a{cursor: pointer; width: 20px; height: 20px; line-height: 21px;color: #999; text-align: center; border: 1px solid #ccc;position: absolute;right: 6px; top: 6px;} 
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end --> 
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="Public:sellerLeft" />  
+        <div class="user-right marT20 fRi">
+            <div class="sell-management clearfix" style='width:auto'>
+                <div class="section">
+                    <ul class="nav-top clearfix">
+                        <li class="active">等待发货的订单</li>
+                        <li>已发货的订单</li>
+                    </ul>
+                    <!--等待发货的订单-->
+                    <div class="search_box1">
+                    	<ul id="search_ul1">
+                    		<li class="active">未发货的订单</li>
+                    		<li>被取消的订单</li>
+                    	</ul>
+                    	<ul id="search_ul2">
+                    		<li>收件人名称：<input type="text"></li>
+                    		<li>创建时间：<input type="text" style="width: 55px;"> 至 <input type="text" style="width: 55px;"></li>
+                    		<li>订单编号：<input type="text"></li>
+                    		<li>订单类型：<input type="text"></li>
+                    		<li><button>搜索</button></li>
+                    	</ul>
+                    	<ul id="search_ul3">
+
+                    	</ul>
+                    </div>
+                    
+                    <!--已发货的订单-->
+                    <div class="search_box2">
+                    	<ul id="search_ul2">
+                    		<li>收件人名称：<input type="text"></li>
+                    		<li>创建时间：<input type="text" style="width: 55px;"> 至 <input type="text" style="width: 55px;"></li>
+                    		<li>订单编号：<input type="text"></li>
+                    		<li>订单类型：<input type="text"></li>
+                    		<li><button>搜索</button></li>
+                    	</ul>
+                    	<table class="search_table">
+                    		<thead>
+                    			<td>订单编号</td>
+                    			<td>订单状态</td>
+                    			<td>商品标题</td>
+                    			<td>数量</td>
+                    			<td>创建时间</td>
+                    			<td>付款时间</td>
+                    			<td>实际支付</td>
+                    			<td>买家</td>
+                    		</thead>
+                    		<tbody>
+                    			
+                    		</tbody>
+                    	</table>
+                    </div>
+                </div>
+          </div>           
+        </div>
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+//判断左边导航
+function checkNav(){
+	$(".side-nav>ul:eq(1)>li:eq(1) a").css("color","#ff6600")
+}
+checkNav(); 
+
+/*待发货订单分页*/
+(function(e){
+var Page = function(config){
+    this.config(config);//配置    
+    this.ajax();//第一次ajax请求
+}
+
+//订单菜单切换
+$(".nav-top li:eq(0)").click(function(){
+	$(".search_box1").css("display","block");
+	$(".search_box2").css("display","none");
+	$(this).addClass("active");
+	$(this).siblings().removeClass("active");
+})
+$(".nav-top li:eq(1)").click(function(){
+	$(".search_box2").css("display","block");
+	$(".search_box1").css("display","none");
+	$(this).addClass("active");
+	$(this).siblings().removeClass("active");
+})
+
+Page.prototype = {
+    config:function(config){   
+    	//请求地址
+        this.url        = config.url;
+        // 分页栏每页显示的页数
+        this.rollPage   = /^[1-9]+[0-9]*]*$/.test(config.rollPage) ? config.rollPage : 3;
+        // 附加请求参数
+        this.parameter  = config.parameter ? config.parameter : '';
+        //总记录数 
+        this.totalRows;
+        //第多少条开始取  
+        this.firstRow;
+        //设置每页显示条数 默认20条
+        this.listRows   = /^[1-9]+[0-9]*]*$/.test(config.listRows) ? config.listRows : 20; 
+        //当前页数默认为1
+        this.nowPage    = /^[1-9]+[0-9]*]*$/.test(config.nowPage) ? config.nowPage : 1;
+        //每页显示的多少条数据 
+        this.callback   = config.callback||'';
+        //分页数据
+        this.page       = {};
+    },
+    /***初始运行***/
+    init:function(){
+    	//获得分页内容
+        this.get_page();
+        //回调函数
+        this.callback(this.data , this.page); 
+    },
+     /***ajax请求***/
+    ajax:function(){
+        var _this     = this;
+        this.firstRow = this.listRows * (this.nowPage - 1);      
+        var d = {firstRow : this.firstRow , listRows : this.listRows};
+        for(i in this.parameter){
+            if(typeof(this.parameter[i]) != 'undefined'){
+         	    d[i] = this.parameter[i];
+            }       
+        }
+        $.post(this.url,d,function(res){
+	        if(res){       
+			      //res= eval('(' +res + ')');
+			    _this.data      = res.data;
+			    _this.totalRows = res['total'];
+			    _this.init();
+	        }
+        })   
+    }, 
+     /***分页***/
+    get_page:function(){
+    	var __PAGE = {
+    		prev      : false,
+    		first     : false,
+    		page      : [],
+    		next      : false,
+    		end       : false,
+    		now_page  : ''
+    	};
+        /* 计算分页信息 */
+        this.totalPages = Math.ceil(this.totalRows/this.listRows); //总页数
+        //当前页面大于总页面
+        if(!this.totalPages && this.nowPage > this.totalPages){
+           this.nowPage = this.totalPages;//当前页面设置为总页面
+        } 
+        /* 计算分页临时变量 */
+        now_cool_page      = this.rollPage / 2;
+        now_cool_page_ceil = Math.ceil(now_cool_page);
+        //上一页
+        up_row  = this.nowPage - 1;  
+        __PAGE.prev = up_row > 0 ? up_row : false;
+        //下一页
+        down_row  = this.nowPage+1;  
+        __PAGE.next = (down_row <= this.totalPages) > 0 ? down_row : false;    
+        //数字连接
+        for(i = 1; i <= this.rollPage;i++){
+            /*计算出页数*/
+            if((this.nowPage - now_cool_page) <= 0 ){
+                page = i;
+            }else
+            if((this.nowPage + now_cool_page - 1) >= this.totalPages){
+                page = this.totalPages - this.rollPage + i;
+            }else{
+                page = this.nowPage - now_cool_page_ceil + i;
+            }  
+            //页数大于0并且页数不等于当前页面         
+            if(page > 0 && page != this.nowPage){
+                //当前页数小于或者等于总页数才让其显示
+                if(page <= this.totalPages){
+                 	__PAGE.page.push(page);                           
+                }else{
+                    break;
+                }
+            }else         
+            if(this.nowPage==page){
+             	__PAGE.page.push(page);
+             	__PAGE.now_page = page;
+            } 
+        }
+        __PAGE.totalPages = this.totalPages;
+        __PAGE.totalRows  = this.totalRows; 
+        this.page = __PAGE;         
+    }, 
+}
+
+e.ajaxPage = function(config){
+    return new Page(config);
+}
+e.ajaxPage2 = function(config2){
+    return new Page(config2);
+}
+})(window);
+
+
+(function(e){
+/*$(".page ul").on('click' , '.page_a' , function(){
+    var p = $(this).attr('data-p');
+    PageObj.nowPage = parseInt(p);
+    PageObj.ajax();    
+})     
+
+$(".page ul").on('click' , '.jump' , function(){
+    var p = $("input[name='jump_page']").val();
+    PageObj.nowPage = parseInt(p);
+    PageObj.ajax();    
+}) 
+
+$(".page ul").on('change' , '.set_listRows' , function(){
+    var listRows = $(this).val();
+    PageObj.nowPage  = 1;
+    PageObj.listRows = listRows;
+    PageObj.ajax();    
+}) */
+
+//发货
+$("#search_ul3").on('click' , '.deliver_good' , function(){
+	$(this).parent().parent().next(".waybillNumber").css("display","block")      
+}) 
+//确认发货
+$("#search_ul3").on('click' , '.deliver_goods' , function(){
+	var waybill_number = $(this).parent().prev().find("input[name='waybill_input']").val();
+    var id     = $(this).attr('data-id');
+    $.post("http://www.orangesha.com/index.php/Home/Seller_order/sendGoods",{'id':id , 'air_way_code':waybill_number}, function(res){       
+       console.log(res)
+    }) 
+}) 
+
+$("#search_ul3").on('click' , '.waybill_close' , function(){
+	$(this).parent().css("display","none");
+}) 
+
+//关闭订单
+/*$("#search_ul3").on('click' , '.delete' , function(){
+    var id     = $(this).parents('tr').attr('data-id');
+    var _this  = this;
+    $.post(delete_url , {id : id} , function(res){
+        if(res.status == '1'){
+            $(_this).attr('data-status' , status);                
+        }
+    })    
+}) */
+
+/*
+ * 时间戳转日期
+ * */	
+function formatDate(time){   
+    time = parseInt(time); 
+	if(!/^[0-9]{10}$/.test(time)){
+        return '';
+	}		
+	time = time * 1000;
+	var now    = new Date(time);  
+    var year   = now.getFullYear();  
+    var month  = now.getMonth()+1;     
+    var date   = now.getDate();     
+    var hour   = now.getHours();     
+    var minute = now.getMinutes();
+    var second = now.getSeconds(); 
+    month  = month < 10 ? '0' + month : month;
+    date   = date < 10 ? '0' + date : date;
+    hour   = hour < 10 ? hour + '0' : hour;
+    minute = minute < 10 ? '0' + minute : minute;
+    second = second < 10 ? '0' + second : second;
+    return   year + "-" + month + "-" + date + "   " + hour + ":" + minute + ":" + second;     
+} 
+//待发货html追加
+var html = {
+	createHtml : function(data){
+		var html = '';
+	    for(var k in data){
+	        html = html 
+	             + '<li>'
+	             + '    <p><input type="checkbox"> 订单编号: '+data[k].order_sn+'    &nbsp;&nbsp;&nbsp;&nbsp;  创建时间:'+formatDate(data[k].create_time)+'</p>'
+	             + '    <div style="overflow: auto;">'
+	             + '         <div>' 
+	             + '            <p>'+data[k].goods_name+'</p>'
+	             + '            <div class="search_ul3_img"><img src="'+data[k].goods_thumb+'" /></div>'
+	             + '         </div>'
+	             + '         <div>'
+	             + '            <p>发货信息：</p>'
+	             + '            <p>买家选择：</p>'	             
+	             + '            <p>物流公司：</p>'
+	             + '         </div>' 
+	             + '    </div>'     
+	             + '    <p style="text-align: right; padding-right: 20px;"><a>关闭订单</a>   <button class="deliver_good">发货</button></p>'
+	             + '</li>'
+	             + '<div class="waybillNumber">'
+	             + '   <a class="waybill_close">X</a>'
+	             + '   <img src="'+data[k].goods_thumb+'" />'
+	             + '   <p>'+data[k].goods_name+'</p>'
+	             + '   <p>请输入运单号：<input type="text" name="waybill_input"></p>'
+	             + '   <p><button data-id='+data[k].order_sn+' class="deliver_goods">确认发货</button></p>'
+                 + '</div>'
+	    }
+        return html;
+	}/*,	
+	createPage : function(data){
+	    var page = listRows_option;
+	    page += data.first !== false ? ('<a class="first" href="javascript:;">首页</a>') :
+	        ('<a class="first">首页</a>');
+	    page += data.prev !== false ? ('<a class="prev" href="javascript:;">上一页</a>') :
+	        ('<a class="first">上一页</a>');     
+	    for(var k in data.page){
+	    	page += data.page[k] == data.now_page ? 
+	    	    ('<a class="page_a now" data-p=' + data.page[k] + '>' + data.page[k] +'</a>') :
+	    	    ('<a class="page_a" href="javascript:;" data-p=' + data.page[k] + '>' + data.page[k] +'</a>');   	
+	    } 
+	    page += data.next !== false ? ('<a class="first" href="javascript:;">下一页</a>') :
+	        ('<a class="first">下一页</a>');
+	    page += data.end !== false ? ('<a class="first" href="javascript:;">末页</a>') :
+	        ('<a class="first">末页</a>');             
+	    page += '<p class="total">共' + data.totalPages + '页' + data.totalRows + '条数据</p>'; 
+	    page += '<input name="jump_page" value="1">';   
+	    page += '<a href="javascript:;" class="jump">GO</a>';
+	    return data;         
+	}*/
+};
+//已发货html追加
+var html2 = {
+	createHtml2 : function(data){
+		var html = '';
+	    for(var k in data){
+	    	console.log(data)
+	        html = html     		
+	             + '<tr>'
+	             + '    <td>'+data[k].order_sn+'</td>'
+	             + '    <td>已发货</td>'
+	             + '    <td>'+data[k].goods_name+'</td>' 
+	             + '    <td>'+data[k].number+'</td>'
+	             + '    <td>'+formatDate(data[k].create_time)+'</td>'
+	             + '    <td>'+formatDate(data[k].create_time)+'</td>'
+	             + '    <td>'+data[k].total_price+'</td>'
+	             + '    <td>'+data[k].name+'</td>'
+	             + '</tr>'	             
+	    }
+        return html;
+	}/*,	
+	createPage : function(data){
+	    var page = listRows_option;
+	    page += data.first !== false ? ('<a class="first" href="javascript:;">首页</a>') :
+	        ('<a class="first">首页</a>');
+	    page += data.prev !== false ? ('<a class="prev" href="javascript:;">上一页</a>') :
+	        ('<a class="first">上一页</a>');     
+	    for(var k in data.page){
+	    	page += data.page[k] == data.now_page ? 
+	    	    ('<a class="page_a now" data-p=' + data.page[k] + '>' + data.page[k] +'</a>') :
+	    	    ('<a class="page_a" href="javascript:;" data-p=' + data.page[k] + '>' + data.page[k] +'</a>');   	
+	    } 
+	    page += data.next !== false ? ('<a class="first" href="javascript:;">下一页</a>') :
+	        ('<a class="first">下一页</a>');
+	    page += data.end !== false ? ('<a class="first" href="javascript:;">末页</a>') :
+	        ('<a class="first">末页</a>');             
+	    page += '<p class="total">共' + data.totalPages + '页' + data.totalRows + '条数据</p>'; 
+	    page += '<input name="jump_page" value="1">';   
+	    page += '<a href="javascript:;" class="jump">GO</a>';
+	    return data;         
+	}*/
+};
+var __STATUS = {
+	'0'  : '申请中',
+	'-1' : '不同意',
+	'-2' : '已撤销',
+	'1'  : '同意',
+	'2'  : '已完成'
+}
+var config   = {
+	parameter : {pay_status : 1 , status : 1 , send_status : 0},
+    listRows  : 10, 
+    rollPage  : 3,
+    url       : "http://www.orangesha.com/index.php/Home/Seller_order/getOrderData",
+    callback:function(data,page){          
+        $("#search_ul3").html(html.createHtml(data));        
+        /*$(".page ul").html(html.createPage(page));*/        
+	}
+};
+var config2   = {
+	parameter : {pay_status : 1 , status : 1 , send_status : 1},
+    listRows  : 10, 
+    rollPage  : 3,
+    url       : "http://www.orangesha.com/index.php/Home/Seller_order/getOrderData",
+    callback:function(data,page){          
+        $(".search_table tbody").html(html2.createHtml2(data));
+        /*$(".page ul").html(html.createPage(page));*/        
+	}
+};
+var PageObj = ajaxPage(config);
+var PageObj2 = ajaxPage2(config2);
+})();
+</script>
+</body>
+</html>

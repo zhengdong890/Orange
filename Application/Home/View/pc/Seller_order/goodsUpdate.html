@@ -1,0 +1,531 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/all-use.css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/goods-shelves.css">
+<link rel="stylesheet" href="utf8-jsp/themes/default/css/ueditor.css"/>
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/validate.js"></script>
+<script src="{:C('STATIC_URL')}/Home/js/tabs-nav.js"></script>
+<script src="{:C('STATIC_URL')}/Home/js/store-tool.js"></script>
+<script type="text/javascript" charset="utf-8" src="{:C('STATIC_URL')}/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="{:C('STATIC_URL')}/js/ueditor/ueditor.all.js"> </script>
+<style>
+.btn{display:block;width:100px;margin-top:6px;color:white;height:28px;line-height:28px;text-align:center;float:left;background:#C43926;border-radius:4px;margin-left:92px;}
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->   
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="goods-shelves" style='margin-top:20px'>
+    <h2>填写商品信息</h2>
+    <form class="shelves-section" id='form'>
+        <input type="hidden" name="number"></input>
+        <input type="hidden" name="id" value="{$goods['id']}"></input>
+        <div class="section-box general-info clearfix">
+            <h3 class="fLe"><span>*</span>通用信息 : </h3>
+            <div class="box general-box fRi clearfix">
+                <div>商品名称&nbsp;:&nbsp;
+                    <input type="text" name='goods_name' value="{$goods['goods_name']}">
+                </div>
+                <div>商品品牌&nbsp;:&nbsp;                
+                   <select name="brand_id">
+                        <option value="0">请选择...</option>
+                        <volist name="brands" id="v">
+                           <if condition="$v['id'] eq $goods['brand_id']">
+                              <option value="{$v['id']}" selected='selected'> {$v['brand_name']}</option>
+                           <else/>
+                              <option value="{$v['id']}">{$v['html']} {$v['brand_name']}</option>
+                           </if>
+                        </volist>
+                   </select>
+                </div>
+                <div>商品型号&nbsp;:&nbsp;
+                    <input type="text" name="goods_model" value="{$goods['goods_model']}">
+                </div>
+                <div>所属分类&nbsp;:&nbsp;<span>工业机器人</span> </div>
+                <div>商品价格&nbsp;:&nbsp;
+                    <input type="text" name='goods_price' value="{$goods['goods_price']}">
+                </div>
+                <div>
+                    <span class="word2">库存</span>&nbsp;:&nbsp;
+                    <input type="text" name='goods_number' value="{$goods['goods_number']}" />
+                </div>
+                <div class="img">
+                    <span>上传商品缩略图片&nbsp;:&nbsp;</span>
+                    <label class="get-img" style="background:url('{$goods[goods_thumb]|substr=1}')">
+                       <input type="file" class="file-img" name='goods_thumb'>
+                    </label>
+                </div>
+                <div class="img"><span>上传商品图片&nbsp;:&nbsp;</span>
+                    <label class="get-img" style="background:url('{$goods[goods_img]|substr=1}')">
+                       <input type="file" class="file-img" name='goods_img'>
+                    </label>
+                </div>
+                <div>
+                    是否上架&nbsp;:&nbsp;
+                    <label><input type="radio" name="status" value='1' <if condition="$goods['status'] eq 1">checked</if> />是</label>
+                    &nbsp;&nbsp;&nbsp;
+                    <label><input type="radio" name="status" value='0' <if condition="$goods['status'] eq 0">checked</if>/>否</label>
+                </div>
+				
+				<div class="section-box general-info clearfix" style="width: 110%;">
+					<h3 class="fLe"><span class="star">*</span>商品在店铺中所属分类( 如未添加，请在右边添加！ ):&nbsp;&nbsp;&nbsp;&nbsp; </h3>
+						<select name="shop_cat"  id="selectcat" width="100">  				
+						  <option value ="0">未选择</option> 
+						 <volist name="shop_nav" id="vo"> 
+						 
+						 <if condition="$vo.id eq $shopcat">
+						  <option value ="{$vo.id}"  selected='selected'>{$vo.html}{$vo.name}</option>  		  
+						  </if>
+						  <option value ="{$vo.id}">{$vo.html}{$vo.name}</option>
+						 </volist>
+						</select>  
+				</div>
+				
+				<div class="section-box general-info clearfix">
+					<h3 class="fLe"><span class="star">*</span>类型选择 &nbsp;&nbsp;:&nbsp;&nbsp;  </h3>
+					<if condition="$is_new eq 1">
+					<input name="is_new" type="radio" value="1" checked/>新品推荐		
+					<input name="is_new" type="radio" value="0" />畅销商品
+                   <else/>
+                    <input name="is_new" type="radio" value="1" />新品推荐					
+					<input name="is_new" type="radio" value="0" checked/>畅销商品
+				   </if>				
+				</div>
+				
+            </div>
+        </div>
+        <div class="section-box general-info clearfix">
+            <h3 class="fLe"><span>*</span>团购申请&nbsp;:&nbsp;</h3>
+            <div class="box more-box fRi clearfix area_select">
+                <if condition="$group_list['goods_id'] eq ''">
+                <div>当前团购&nbsp;:&nbsp;
+                    {$group['title']}
+                </div>                
+                <div>申请加入&nbsp;:&nbsp;
+                    <label><input type="radio" name="is_group" value='1' />是</label>
+                    &nbsp;&nbsp;&nbsp;
+                    <label><input type="radio" name="is_group" value='0' checked/>否</label>
+                </div>  
+                <div>开始时间&nbsp;:&nbsp;
+                    {$group['start_time']}
+                </div> 
+                <div>结束时间&nbsp;:&nbsp;
+                    {$group['end_time']}
+                </div> 
+                <div class="img"><span>团购图片&nbsp;:&nbsp;</span>
+                    <label class="get-img" style="background:url('{$goods[goods_img]|substr=1}')">
+                       <input type="file" class="file-img" name='group_img'>
+                    </label>
+                </div>
+                <div>团购价格&nbsp;:&nbsp;
+                    <input type="text" name='goods_group_price' value="">
+                </div>
+                <else/>
+                <input type="hidden" name='is_group' value="1">
+                <div>当前团购&nbsp;:&nbsp;
+                    {$group['title']}
+                </div> 
+                <div>团购价格&nbsp;:&nbsp;
+                    <input type="text" name='goods_group_price' value="{$group_list['goods_group_price']}">
+                </div>                 
+                <div>开始时间&nbsp;:&nbsp;
+                    {$group['start_time']}
+                </div> 
+                <div>结束时间&nbsp;:&nbsp;
+                    {$group['end_time']}
+                </div> 
+                <div class="img"><span>团购图片&nbsp;:&nbsp;</span>
+                    <label class="get-img" style="background:url('{$group_list['group_img']|substr=1}')">
+                       <input type="file" class="file-img" name='group_img'>
+                    </label>
+                </div>               
+                </if>        
+            </div>
+        </div>
+        <div class="section-box general-info clearfix">
+            <h3 class="fLe"><span>*</span>添加区域&nbsp;:&nbsp;</h3>
+            <div class="box more-box fRi clearfix area_select">
+                <div>省&nbsp;:&nbsp;
+                     <select name="province">
+                        <option value="0">请选择...</option>             
+                     </select>
+                </div>
+                <div>市&nbsp;:&nbsp;
+                     <select name="city">
+                        <option value="0">请选择...</option>             
+                     </select>
+                </div>
+                <div>区&nbsp;:&nbsp;
+                     <select name="area">
+                        <option value="0">请选择...</option>             
+                     </select>
+                </div>            
+            </div>
+        </div>
+        <div class="section-box general-info clearfix">
+            <h3 class="fLe"><span>*</span>扩展属性&nbsp;:&nbsp;</h3>
+            <div class="box more-box fRi clearfix">
+            	 <volist name="extendattr" id="v">
+	             <if condition="$v['level'] neq '1'">
+	             <div>
+					<span>{$v['attr_name']}</span>&nbsp;:&nbsp;
+			        <if condition="$v['attr_input_type'] neq '2'">
+			        <input type='text' name="extendattr{$v['goods_extendattr_id']}" value="{$v['attr_value']}"></input>
+			        <else/>
+			        <if condition="$v['goods_extendattr_id'] neq ''">
+			        <select name="extendattr{$v['goods_extendattr_id']}">
+			        <else/>
+			        <select name="new_extendattr{$v['attr_id']}">
+			        </if>
+						<option value='0'>请选择</option>
+						<volist name="v['all_value']" id="v1">
+						<if condition="$v1['attr_value'] eq $v['attr_value']">
+						   <option value="{$v1['attr_value']}" selected='selected'>{$v1['attr_value']}</option>
+						<else/>
+		                   <option value="{$v1['attr_value']}">{$v1['attr_value']}</option>
+		                </if>
+					    </volist>
+					</select>										           
+					</if>
+                </div>
+	            <else/>
+	            <div>
+	                <span>{$v['attr_name']}</span>&nbsp;:&nbsp;
+					<volist name="v['level_1']" id="v1">
+					<span>{$v1['attr_name']}</span>&nbsp;:&nbsp;
+			        <if condition="$v1['attr_input_type'] neq '2'">
+			           <input type='text' name="extendattr{$v1['goods_extendattr_id']}" value="{$v1['attr_value']}"></input>
+			        <else/>
+			        <if condition="$v1['goods_extendattr_id'] neq ''">
+			            <select name="extendattr{$v1['goods_extendattr_id']}">
+			        <else/>
+			            <select name="new_extendattr{$v1['attr_id']}">
+			        </if>
+			            <option value='0'>请选择</option>
+			            <volist name="v1['all_value']" id="v2">
+			             <if condition="$v2['attr_value'] eq $v1['attr_value']">
+			                <option value="{$v2['attr_value']}" selected='selected'>{$v2['attr_value']}</option>
+			             <else/>
+			                <option value="{$v2['attr_value']}">{$v2['attr_value']}</option>
+			             </if>
+			            </volist>
+			        </select>										           
+				    </if>
+				</volist>
+				</div> 
+				</if> 
+	            </volist>
+            </div>
+        </div>
+        <div class="section-box general-info clearfix">
+            <h3 class="fLe"><span>*</span>商品相册&nbsp;:&nbsp;</h3>
+            <div class="box images-box fRi clearfix">
+                <volist name="goods_gallery" id="v">
+		        <div class='img'>
+		           <label class='get-img' style="background:url('__ROOT__{$v['gallery_img']|substr=1}')">
+		             <input type='file' class='file-img' name="oldgallery_img{$v['id']}">
+		             <span class='icon-close' data-galleryid="{$v['id']}"></span>       
+		           </label>                                     
+		        </div>
+                </volist>
+                <div class="img">
+                    <label class="get-img  get-img2"></label>
+                </div>
+            </div>
+        </div>
+        <div class="section-box general-info clearfix">
+            <h3 class="fLe"><span>*</span>详细内容&nbsp;:&nbsp;</h3>
+            <textarea class="box editor-box fRi clearfix" name="goods_content" id="myEditor">{$goods_data['goods_content']}</textarea>
+        </div>
+        <div class="section-box rent-info clearfix">
+            <a class='btn' href='javascript:;'>确认保存</a>
+        </div>
+    </form>
+</div>
+<include file="Public:footer" />  
+</body>
+<script type="text/javascript">
+var goods = {$goods_json};
+/**
+ * 商品区域选择
+ */
+var area = (function(){
+    var select_name = 'province',
+        change_name = select_name,
+        area        = {},//保存已经获取的区域
+        select_area = {'province':goods.province,'city':goods.city,'area':goods.area};
+    $(".area_select").on('change','select',function(){
+        select_name  = $(this).attr('name'),
+        value        = $(this).val(); 
+        change_name  = select_name == 'province'? 'city' : (select_name == 'city'? 'area' : ''); 
+        select_area[select_name] = value;
+        if(select_name == 'province'){
+            select_area['city'] = 0;
+            select_area['area'] = 0;
+        }
+        if(select_name == 'city'){
+            select_area['area'] = 0;
+        }
+        if(change_name){
+            getArea(value);
+        }       
+    })
+    
+    function getArea(area_no , init_area_name){     
+        if(area[area_no]){          
+            showAreaHtml(area[area_no]);
+        }else{
+            $.post("{:U('Area/getArea')}",{'area_no':area_no},function(res){
+                area[area_no] = res;
+                showAreaHtml(res , init_area_name);
+            })
+        }       
+    }
+
+    function showAreaHtml(data , init_area_name){ 
+        var html = ["<option value='0'>请选择...</option>"];
+        for(var k in data){
+            if(init_area_name && data[k].area_no == goods[init_area_name]){
+                html.push("<option selected value='" + data[k].area_no +"'>" + data[k].area_name + "</option>");
+            }else{
+                html.push("<option value='" + data[k].area_no +"'>" + data[k].area_name + "</option>");
+            }           
+        }
+        html = html.join('');       
+        if(init_area_name){
+            $("select[name='"+ init_area_name +"']").html(html);
+        }else{
+            $("select[name='"+ change_name +"']").html(html);
+            if(change_name == 'city'){
+                $("select[name='area']").html("<option value='0'>请选择...</option>");  
+            }
+        }
+        
+    } 
+           
+    function checkArea(){
+        if(select_area['province'] == '100000' || select_area['province'] == '110000' || select_area['province'] == '120000' || select_area['province'] == '130000'){
+            if(!select_area['province'] || !select_area['city']){
+                return '请选择区域';
+            }
+        }else{
+            if(!select_area['province'] || !select_area['city'] || !select_area['area']){
+                return '请选择区域';
+            }           
+        }
+        return '';
+    }
+
+    return {
+        init : function(){
+            getArea(0 , 'province'); 
+            getArea(goods.province , 'city'); 
+            getArea(goods.city , 'area');
+        },
+        checkArea : function(){
+            return checkArea();
+        }
+    }     
+})();
+area.init();
+
+/**
+ * 商品相册和图片
+ */
+var goods_gallery = (function(){
+    $(".get-img").on('change','input',function(){
+        var file   = $(this)[0].files[0];   
+        var reader = new FileReader(); 
+        var _this  = this; 
+        //将文件以Data URL形式读入页面  
+        reader.readAsDataURL(file);  
+        reader.onload=function(e){ 
+            //显示文件      
+            $(_this).parent('.get-img').css("background","url("+this.result+")");
+        }  
+    })
+
+    $(".images-box").on('change','input',function(){
+        var file   = $(this)[0].files[0];   
+        var reader = new FileReader(); 
+        var _this  = this; 
+        //将文件以Data URL形式读入页面  
+        reader.readAsDataURL(file);  
+        reader.onload=function(e){ 
+            //显示文件      
+            $(_this).parent('.get-img').css("background","url("+this.result+")");
+        }  
+    }) 
+
+    /*添加商品相册*/
+    var num = 0;
+    $(".get-img2").click(function(){
+        num++; 
+        var html  = "<div class='img'>";
+            html += "<label class='get-img'>";
+            html += "<input type='file' class='file-img' name='gallery_img" + num + "' >";
+            html += "<span class='icon-close'></span>";          
+            html += "</label>";                                      
+            html += "</div>";                            
+        $(this).parent('.img').before(html);         
+        $("input[name='number']").val(num);//设置上传图片个数  
+    })         
+
+    $(".images-box").on('click','.icon-close',function(){
+    	$(this).prev().prop('disabled','true');
+    	var gallery_id =$(this).attr('data-galleryid');
+    	if(gallery_id){
+     		if(confirm('确认删除?')){  
+     			var _this = this;
+		     	$.post("{:U('goodsGalleryDelete')}",{"gallery_id":gallery_id},function(res){      
+		            alert(res['msg']);
+		            if(res['status']){
+		                $(_this).parent("label").parent(".img").remove();  
+		            } 
+		        });
+		    }
+    	}else{
+	        num--; 
+	        $("input[name='number']").val(num);//设置上传图片个数 
+	        $(this).parent("label").parent(".img").remove();   		
+    	}                
+    })  
+})();
+
+var formSubmit = (function(){ 
+    var data     = {},
+        is_group = $("input[name='is_group']:checked").val(),
+        rules    = {
+            'goods_name' : {
+                'require' : '请输入商品名称'
+             },
+            'goods_price' : {
+                'require' : '请输入商品价格',
+                'regex'   : [/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/,'请输入正确的商品价格']
+             },
+             'goods_group_price' : {
+                'require' : '请输入团购价格',
+                'regex'   : [/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/,'请输入正确的团购价格']
+             },  
+             'goods_number' : {
+                'require' : '请输入库存',
+                'regex'   : [/^[1-9]+[0-9]*$/,'请输入正确的库存']
+             }, 
+             'goods_model' : {
+                'require' : '请输入商品型号'
+             }       
+        },
+        msg = {
+           'goods_name' : '',
+           'goods_price': '',
+           'goods_number' :'',
+           'goods_model': '', 
+           'goods_group_price':'请输入团购价格'               
+        };
+
+    if(is_group == 1){      
+        msg.goods_group_price = '';
+    }
+
+    var validate = new formValidate({
+        rules:rules,
+        msg:msg
+    });
+
+    $(".btn").click(function(){
+        if(area.checkArea()){
+            alert(area.checkArea());
+            return false;
+        }
+        if(is_group){
+        	var r = validate.checkSubmitStatus();
+        }else{
+        	var r = validate.checkSubmitStatus(['goods_group_price']);
+        }
+        if(!r){
+            alert(validate.getFirstError());
+        }else{
+            request();          
+        } 
+    })
+    
+    $("input").blur(function(){
+        var attr_name = $(this).attr('name');
+        if(attr_name && attr_name != 'is_group'){
+           data[attr_name] = $(this).val();        
+           var val    = $(this).val();
+           var result = validate.checkField(attr_name,val);
+           if(result){           
+                //$(this).siblings('.error').text(result);                     
+           }else{
+                //$(this).siblings('.error').text('');
+           }    
+        }      
+    })
+    
+    $("input[name='is_group']").click(function(){
+        is_group =  $(this).val();    
+    })
+
+    /*
+     * 提交数据
+     **/
+    function request(){  
+        var data = new FormData($("#form")[0]);  // 要求使用的html对象
+        var url  = "{:U('Seller_goods/goodsUpdate')}";
+        var url_ = "{:U('Seller_goods/goodsList')}"
+        $.ajax({  
+              url : url ,  
+              type: 'POST',  
+              data: data,  
+              async: true,  
+              // 下面三个参数要指定，如果不指定，会报一个JQuery的错误 
+    　　　　　cache: false,  
+              contentType: false,  
+              processData: false,  
+              success: function (res) {  
+                  alert(res.msg);
+                  if(res.status){
+                      window.location.href = url_;
+                  } 
+              },  
+              error: function (returndata) {  
+                  console.log(returndata); 
+              }  
+         });  
+    }   
+})();
+
+window.onload = function(){
+     window.UEDITOR_HOME_URL = "{:C('STATIC_URL')}/js/ueditor/";
+     UE.getEditor('myEditor', {
+         theme:"default", //皮肤
+         lang:"zh-cn", //语言
+         initialFrameWidth:800,  //初始化编辑器宽度,默认800
+         initialFrameHeight:400,
+         allHtmlEnabled:false,
+     })
+} 
+
+
+</script>
+</html>

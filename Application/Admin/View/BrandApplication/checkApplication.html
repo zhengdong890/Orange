@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="description" content="" />
+<style>
+html{font-size:62.5%}
+*{font-size:16px;font-family:Arial,Microsoft YaHei,\\9ED1\4F53,\\5B8B\4F53,sans-serif}
+*,li,ul{padding:0;margin:0}
+li,ul{list-style:none}
+a,a:hover{text-decoration:none}
+a:hover{border:0}
+button,input,select,textarea{outline:none}
+textarea{resize:none}
+
+#container{width:98%;margin-left:1%}
+#container,#container #main{height:auto;float:left;padding-bottom:10px}
+#container #main{width:100%;border:1px solid #d7d7d7;margin-top:5px}
+
+#Crumbs{width:100%;height:40px;border:1px solid #d7d7d7;line-height:40px;margin-top:5px;float:left}
+#Crumbs a{padding-left:10px}
+#Crumbs .btn{width:auto;padding:0 5px;height:30px;float:right;display:block;background:red;line-height:30px;color:#fff;border-radius:5px;font-size:14px;margin-right:20px;margin-top:5px}
+
+.block_edit{width:100%;height:auto;float:left}
+.block_edit table{width:100%;margin:10px auto}
+.block_edit table td{padding:5px}
+.block_edit table td.td_label{text-align:right;vertical-align:top;font-weight:700;width:20%;font-size:14px;padding:4px 8px}
+.block_edit table td .type_radio{width:auto;height:24px;float:left;margin-left:8px}
+.block_edit table td input{width:400px;height:20px;border-radius:3px;border-bottom:1px solid #e3e9ef;border-top:1px solid #abadb3;border-left:1px solid #e2e3ea;border-right:1px solid #dbdfe6}
+.block_edit table td .p_text{width:auto;height:25px;float:left;line-height:24px;margin-left:8px;font-size:13px}
+.block_edit table td .btn{display:block;text-align:center;line-height:26px;float:left;border-radius:4px;background:#c43926;color:#fff;height:26px;width:50px}
+
+.block_edit table td .img{width:100px;height:auto;float:left;}
+.block_edit table td .img img{max-width:100%;max-height:100px;float:left}
+/****上传按钮样式构造****/
+.btn_addimg{display:block;width:100px;margin-top:5px;color:white;position:relative;height:28px;line-height:28px;text-align:center;float:left;background:#C43926;border-radius:4px;}
+.btn_addimg input{width:100px;position:absolute;left:0;top:0;filter:alpha(opacity=50);-moz-opacity:0;-khtml-opacity:0;opacity:0;}
+</style>
+</head>
+<body>
+<div>
+<div id="container">
+    <div id="Crumbs">
+        <a>后台管理中心</a><span>&nbsp;&nbsp;-</span><a>品牌审核</a>
+    </div>
+    <div id="main">
+        <div class="block_edit">
+            <form id='form'>
+                <input type='hidden' name='id' value='{$data['id']}'>
+                <table>
+                    <tr>
+                        <td class="td_label">申请人店铺:</td>
+                        <td>
+                            {$shop_data['shop_name']}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_label">申请分类:</td>
+                        <td>
+                            {$cat_name}
+                        </td>
+                    </tr>                    
+                    <tr>
+                        <td class="td_label">品牌名称:</td>
+                        <td>
+                            {$data['brand_name']}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_label">品牌英文名称:</td>
+                        <td>
+                            {$data['brand_en_name']}
+                        </td>
+                    </tr>
+                    <tr>
+                         <td class="td_label">商标注册号:</td>
+                         <td>
+                            {$data['register_code']}
+                         </td>
+                    </tr>                    
+                    <tr>
+                         <td class="td_label">品牌所有人:</td>
+                         <td>
+                             {$data['brand_person']}
+                         </td>
+                    </tr> 
+                    <tr>
+                        <td class="td_label">商标注册证:</td>
+                        <td>
+                            <div class="img">
+                                <img src="__ROOT__{$data['trademark_register_img']|substr=1}"/>
+                            </div> 
+                        </td>
+                    </tr>  
+                    <tr>
+                        <td class="td_label">受理通知书:</td>
+                        <td>
+                            <div class="img">
+                                <img src="__ROOT__{$data['notice_img']|substr=1}"/>
+                            </div> 
+                        </td>
+                    </tr>                                      
+                    <tr>
+                        <td class="td_label">是否通过：</td>
+                        <td>                       
+	                        <input type="radio" name="status" class="type_radio" value="1" <if condition="$data['status'] eq '1'">checked
+	                        </if>>
+	                        <p class="p_text">是</p>
+	                        <input type="radio" name="status" class="type_radio" value="0" <if condition="$data['status'] eq '0'">checked
+	                        </if>>
+	                        <p class="p_text">否</p>
+                        </td>
+                    </tr>
+                    <tr>
+                         <td class="td_label">审核意见:</td>
+                         <td>
+                             <input type="text" name="content" value="{$data['content']}">
+                         </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><a class="btn" href="javascript:;">确认</a></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+</body>    
+<script>
+$(".btn").click(function(){
+    request();
+})
+
+/*
+ * 提交数据
+ **/
+function request(){  
+    var data = new FormData($("#form")[0]);  // 要求使用的html对象
+    var url  = "{:U('checkApplication')}";
+    var url_ = "{:U('brandList')}"
+    $.ajax({  
+          url : url ,  
+          type: 'POST',  
+          data: data,  
+          async: true,  
+          // 下面三个参数要指定，如果不指定，会报一个JQuery的错误 
+　　　　　cache: false,  
+          contentType: false,  
+          processData: false,  
+          success: function (res) {  
+              alert(res.msg);
+              if(res.status){
+                  window.location.href = url_;
+              } 
+          },  
+          error: function (returndata) {  
+              console.log(returndata); 
+          }  
+     });  
+}
+</script>       
+</html>

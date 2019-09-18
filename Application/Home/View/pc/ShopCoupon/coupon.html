@@ -1,0 +1,264 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>优惠券设置</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/all-use.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/side-nav.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/sell-management.css">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+<style>
+.star{ color: #FF7628;}
+.refund{ width: 970px; border: 1px solid #E4E4E4; float: left; margin: 30px 0px 0px 6px;}
+.refund_top{ width: 100%; background-color: #F2F1F1; padding: 10px 40px; box-sizing: border-box;}
+.refund_box{ padding: 10px 30px;margin-bottom: 30px; min-height: 479px;}
+
+.refund_box>p{margin: 6px 0px 25px 0px; font-size: 12px; color: #999;}
+.refund_box>p a{ margin-right: 15px; cursor: pointer; position: relative; color: #fff; background-color: #37A4A2; padding: 4px 10px 4px 24px; font-size: 12px; font-family: "微软雅黑"; border-radius: 2px;}
+.refund_box>p a span{ position: absolute; left: 4px; bottom: 3px; font-size: 25px; }
+.coupon_ul{ overflow: auto;}
+.coupon_ul>li{float: left; margin-right: 30px; border: 1px solid #DEDEDE; width: 220px; cursor: default;}
+.coupon_ul>li>div:first-of-type{ color: #000; font-weight: bold; width: 100%; background-color: #F2F1F1; height: 30px;line-height: 30px;font-size: 12px;padding-left: 16px;box-sizing: border-box;}
+.invalid{ color: #999; display: none;}.receive{ color: #999; float: right;}
+.coupon_ul>li>ul{ overflow: auto; border-bottom: 2px solid #EEEEEE; width: 86%; margin: 0 auto;padding: 12px 0px 6px 0px;}
+.coupon_ul>li>ul li{ font-size: 12px; color: #000; margin-bottom: 2px; cursor: default;}
+.coupon_ul>li>ul li a{ color: #3166FF;}
+.coupon_ul>li>ul li:nth-of-type(5){ float: right;}
+.denomination{ overflow: auto; width: 86%; height: 90px; margin: 14px auto; background: url("../../../../Public/Home/image/coupons bg.png") no-repeat; color: #fff;}
+.denomination>p:first-of-type{ text-align: right; font-size: 12px; margin-right: 5px;}
+.denomination>p:nth-of-type(2){ text-align: center; margin: 12px 0px 4px 0px;}
+.denomination>p:nth-of-type(3){  text-align: center; font-size: 12px;}
+.denomination>p:nth-of-type(2) span{ font-size: 38px;}
+.edit_coupon{z-index: 100;display: none; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); position: fixed;top: 0; left: 0;}
+.edit_coupon .edit_coupon_div{ width: 600px; background-color: #fff; margin: 150px auto;}
+.edit_coupon .edit_coupon_div>div{position: relative; width: 100%; height: 34px; background-color: #eee;line-height: 34px;padding-left: 20px; box-sizing: border-box;}
+.edit_coupon .edit_coupon_div>div button{ font-size: 18px; cursor: pointer; position: absolute; top: 5px; right: 10px;}
+.edit_coupon .edit_coupon_div>table{margin: 20px auto;}
+.edit_coupon .edit_coupon_div>table td{ border: none;line-height: 40px;}
+.edit_coupon .edit_coupon_div>table td input{height: 28px;padding-left: 6px;}
+.edit_coupon .edit_coupon_div>table tr td:first-of-type{ text-align: right;}
+.edit_coupon .edit_coupon_div>table tr td:nth-of-type(2){ text-align: left;}
+.edit_coupon .edit_coupon_div>table tr td:nth-of-type(3) span{color: red; visibility: hidden;}
+.edit_coupon .edit_coupon_div>table tr td .create{cursor: pointer; font-family: "微软雅黑"; width: 120px; color: #fff; background-color: #37A4A2; border-radius: 4px; height: 28px;}
+.edit_coupon .edit_coupon_div>table tr td .close_edit{cursor: pointer;font-family: "微软雅黑"; margin-left: 10px; width: 120px; background-color: #959595; color: #fff; border-radius: 4px; height: 28px;}
+ 
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end --> 
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="Public:sellerLeft" />         
+            <div class="sell-management clearfix" style='width:auto;'>
+                <div class="refund">
+                	<div class="refund_top">优惠券设置</div>
+                	<div class="refund_box">
+                		<p><a href="{:U('ShopCoupon/couponSetting')}"><span>+</span> 创建优惠卷</a> 最多可创建3个优惠卷</p>
+                		<ul class="coupon_ul">
+                			<foreach name="list" item="vo">
+                            <li id="coupon_li1">
+                                <div><span id="name">{$vo.name}</span><span class="receive">（领取中）</span></div>
+                                <ul>
+                                    <li>有效期: <span id="end_time">{$vo.end_time}</span></li>
+                                    <li>使用条件: 满 <span class="star max">{$vo.max}</span> 元</li>
+                                    <li>每人限领:   <span class="star" id="max_number">{$vo.max_number}</span> 张</li>
+                                    <li>剩余: <span class="star" id="sy_number">{$vo.sy_number}</span> 张</li>
+                                    <li>
+                                        <a href="javascript:;" class="editCoupon" data-id={$vo.id}>编辑</a> | <a href="javascript:;" class="dele_coupon" data-id={$vo.id}>失效</a>
+                                        <span class="invalid">已失效</span>
+                                    </li>
+                                </ul>
+                                <div class="denomination">
+                                    <p>优惠券</p>
+                                    <p><span id="benefit_price">{$vo.benefit_price}</span> 元</p>
+                                    <p>满<span class="max">{$vo.max}</span>元使用</p>
+                                </div>
+                            </li>
+                            </foreach>
+                		</ul>  
+                	</div>               	
+                </div>
+            </div>                   
+    </div>
+</div>
+<!--编辑优惠券-->
+<div class="edit_coupon">
+	<div class="edit_coupon_div">
+		<div>优惠券编辑 <button onclick="return false">X</button></div>
+		<table cellspacing="4" class="coupon_table">
+			<tr>
+				<td><span class="star">*</span> 优惠券名称：</td>
+				<td><input class="longInput" id="couponName" type="text" placeholder="最多支持10个字"/></td>
+				<td><span id="error1">*请输入优惠券名称</span></td>
+			</tr>
+			<tr>
+				<td><span class="star">*</span> 面值：</td>
+				<td>
+					<select class="shortInput" id="offer">
+						<option value="3">3</option>
+						<option value="5">5</option>
+						<option value="10">10</option>
+						<option value="20">20</option>
+						<option value="30">30</option>
+						<option value="40">40</option>
+						<option value="50">50</option>
+						<option value="60">60</option>
+						<option value="80">80</option>
+						<option value="100">100</option>
+						<option value="120">120</option>
+						<option value="150">150</option>
+						<option value="200">200</option>
+					</select> 元
+				</td>
+				<td><span id="error2">*请输入正确的面值</span></td>
+			</tr>
+			<tr>
+				<td><span class="star">*</span> 每人限领：</td>
+				<td>
+					<input class="shortInput" id="max_num" type="text"> 张
+				</td>
+				<td><span id="error3">*输入有误</span></td>
+			</tr>
+			<tr>
+				<td><span class="star">*</span> 订单金额：</td>
+				<td><input style="vertical-align: middle;" type="radio" name="limit"> 不限制</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<input style="vertical-align: middle;" type="radio" name="limit" /> 满 <input type="text" id="max_price" style="width: 60px;" /> 元可使用
+				</td>
+				<td><span id="error4">*请输入正确的订单金额</span></td>
+			</tr>
+			<tr>
+				<td><span class="star">*</span> 发放总量：</td>
+				<td><input class="shortInput" type="text" id="couponNumber" /> 张</td>
+				<td><span id="error5">*请输入正确的发放数量</span></td>
+			</tr>
+			<tr>
+				<td><span class="star">*</span> 生效时间：</td>
+				<td><input class="longInput" type="datetime-local" id="start_time" style="cursor: pointer;"></td>
+				<td><span id="error6">*请选择生效时间</span></td>
+			</tr>
+			<tr>
+				<td><span class="star">*</span> 过期时间：</td>
+				<td><input class="longInput" type="datetime-local" id="end_time" style="cursor: pointer;"></td>
+				<td><span id="error7">*请选择过期时间</span></td>
+			</tr>
+			<tr style="height: 90px;">
+				<td></td>
+				<td>
+					<button class="create" data-id= onclick="return false">保存修改</button>
+					<button class="close_edit" onclick="return false">取消</button>
+				</td>
+			</tr>
+		</table> 
+	</div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+
+<script>
+//判断左边导航
+function checkNav(){
+	$(".side-nav>ul:eq(3)>li:eq(4) a").css("color","#ff6600")
+}
+checkNav();
+
+	//判断是否已添加3张优惠券
+	function checkCouponNum(){
+		if($(".coupon_ul>li").length>=3){
+			$(".refund_box>p>a").css("display","none")
+		}
+	}
+	checkCouponNum()
+	
+	//编辑优惠券
+	$(".editCoupon").click(function(){
+		var id = $(this).attr("data-id");		    		    
+		$(".edit_coupon").css("display","block");
+		$.post("http://www.orangesha.com/index.php?m=Home&c=ShopCoupon&a=edit",{'id': id},function(res){
+			var startTime = res.start_time
+			    endTime = res.end_time
+			console.log(res);
+			$(".edit_coupon_div #couponName").val(res.name);
+			$(".edit_coupon_div #offer").val(res.benefit_price);
+			$(".edit_coupon_div #max_num").val(res.max_number);
+			if(res.max==0){
+				$(".edit_coupon_div input[name='limit']:eq(0)").attr("checked","checked")
+				$(".edit_coupon_div #max_price").val("")
+			}
+			if(res.max!=0){
+				$(".edit_coupon_div input[name='limit']:eq(1)").attr("checked","checked");
+				$(".edit_coupon_div #max_price").val(res.max)
+			}
+			$(".edit_coupon_div #couponNumber").val(res.number);
+			$(".edit_coupon_div #start_time").val(startTime.replace(/ /,"T"));
+			$(".edit_coupon_div #end_time").val(endTime.replace(/ /,"T"));
+			$(".edit_coupon_div .create").attr("data-id",res.id);
+	    })
+	})
+
+	
+	//保存修改
+	$(".edit_coupon_div .create").click(function(){
+		var data = {
+			'id' : $(".edit_coupon_div .create").attr("data-id"),
+			'name' : $(".edit_coupon_div #couponName").val(),
+			'benefit_price' : $(".edit_coupon_div #offer").val(),
+			'max_number' : $(".edit_coupon_div #max_num").val(),
+			'max' : $(".edit_coupon_div #max_price").val(),
+			'number' : $(".edit_coupon_div #couponNumber").val(),
+			'start_time' : $(".edit_coupon_div #start_time").val(),
+			'end_time' : $(".edit_coupon_div #end_time").val()
+		}
+		$.post("http://www.orangesha.com/index.php?m=Home&c=ShopCoupon&a=couponUpdate",data,function(res){
+             
+             if(res.status){
+             	window.location.reload();
+             }
+	    })
+	})
+	
+	//删除优惠券
+	$(".dele_coupon").click(function(){
+		var id = $(this).attr("data-id");
+		if(confirm("确定要删除该优惠券吗？")){ 
+			$.post("http://www.orangesha.com/index.php?m=Home&c=ShopCoupon&a=couponDelete",{'id': id},function(res){
+				console.log(res);
+				if(res.status){
+					alert("删除成功!")
+					window.location.reload()
+				}
+	        })
+		}
+	})
+	
+	//关闭编辑页
+	$(".edit_coupon_div .close_edit").click(function(){
+		$(".edit_coupon").css("display","none")
+	})
+	$(".edit_coupon_div>div>button").click(function(){
+		$(".edit_coupon").css("display","none")
+	})
+</script>
+</body>
+</html>
+</body>
+</html>

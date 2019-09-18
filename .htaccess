@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+Options +FollowSymlinks
+RewriteEngine on  
+
+RewriteCond %{QUERY_STRING} createRegisterPhoneCode
+RewriteCond %{HTTP_REFERER} !(http:\/\/www.orangesha.com\/register\.html)
+RewriteRule ^(.*)$  - [F,L]
+
+RewriteCond %{HTTP_HOST} ^orangesha.com [NC]
+RewriteRule ^(.*)$ http://www.orangesha.com/$1 [L,R=301]
+
+RewriteCond $1 !^(index\.php|Public|caiji|Upload|App|access_token\.txt|robots\.txt|MP_verify_RgL7BaUzuH0hwE3P\.txt|baidu_verify_4wgLsXnx76\.html)   
+RewriteRule ^(.*)$ /index.php/$1 [L]
+</IfModule>

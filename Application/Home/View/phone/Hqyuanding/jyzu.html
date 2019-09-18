@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>教研组</title>
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/index.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/rest.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/common.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/liner.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/hqyuanding/hongqiaoGardener.css" />
+		<script type="text/javascript" src="__PUBLIC__/phone/js/jquery.js" ></script>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/myscript.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/phone/js/focus.js"></script>
+	</head>
+	<body>
+	<div class="wrp">
+									<!-- header start -->
+				<include file="Public:header" />
+				<!-- header end -->
+			<div class="mainWrap relative clearfix" style="margin-bottom: 30px;">
+				<section class="header-main">
+					<ul class="navs clear">
+						<span class="slider"></span>
+						<li><a href="../hongqiaoGardener/administrative .html" class="navs-item">行政班子</a></li>
+						<li><a href="./hongqiaoGardener/research.html">教研组</a></li>
+						<li><a href="../hongqiaoGardener/elegant .html">教师风采</a></li>
+					</ul>
+				</section>
+				<div class="detailContent clearfix">
+					<div class="column_R">
+						<div class="mainContent">
+							<div class="introTit clearfix">
+								<div class="introTitImg" style="background-image:url(__PUBLIC__/phone/images/small.jpg)"></div>
+								<h2>教研组</h2>
+							</div>
+						</div>
+					</div>
+					<div class="content-wrap clearfix article_cn1">
+						<div class="pageinfo cont_top">
+							<div class="new_img">
+								<ul class="ull">
+									<volist name="data" id="v">
+									<li>
+										<a >
+											<img src="__ROOT__{$v['thumb']|substr=1}" alt="" width="308" />
+											<br />
+											<p style="text-align: center;font-size: 14px;">{$v['title']}</p>
+										</a>
+									</li>
+								</volist>
+									
+								</ul>
+						    </div> 
+	
+							<p id="PageInfo" class="page">
+								{$page}
+						    </p>
+			
+						</div>
+				    </div>
+				</div>		
+			</div>
+				<!-- footer start -->
+				<include file="Public:footer" />
+				<!-- footer end -->
+		</div>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/common.js" ></script>
+	</body>
+</html>

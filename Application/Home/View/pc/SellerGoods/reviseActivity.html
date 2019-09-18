@@ -1,0 +1,602 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>修改活动</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/all-use.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/side-nav.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/reviseActivity.css" rel="stylesheet">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end --> 
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="Public:sellerLeft" />         
+        <div class="sell-management clearfix" style='width:auto;'>
+            <div class="safeguard">
+            	<div class="safeguard_top">营销活动修改</div>
+            	<form id="Activity">
+            		<table class="safeguard_table">
+	            		<tr>
+	            			<td>活动名称：</td>
+	            			<td><input type="text" name="title" class="active_name" value="{$data['title']}"></td>
+	            		</tr>
+	            		<tr>
+	            			<td>活动时间：{$data['start_time']}</td>
+	            			<td><input class="longInput" value="" name="start_time" type="datetime-local" id="start_time" style="cursor: pointer;"> 至 <input class="longInput" name="end_time" value="" type="datetime-local" id="end_time" style="cursor: pointer;"></td>
+	            		</tr>
+	            		<tr>
+	            			<td>指定范围：</td>
+	            			<td><input type="radio" name="scope" value="1" <if condition="$data['scope'] eq 1">checked</if>/> 全店 <input type="radio" name="scope" value="2" <if condition="$data['scope'] eq 2">checked</if>/> 指定商品  &nbsp;&nbsp;&nbsp; 选中商品：<span class="data_length">{$number}</span> <a href="javascript:;" class="select_goods">重新选择</a></td>
+	            		</tr>
+	            		<tr>
+	            			<td>数量阶段：</td>
+	            			<td>
+	            				<div class="active_num">
+	            					<div class="active_num_top">购买至 <input type="text" value="{$data['min_max']}" name="min_max"> 元</div>
+
+	            					<div class="active_div" data-id="1">
+				                		<p>打折</p>
+				                		<p>商品价格 <span>乘</span> <input type="text" value="<if condition="substr($data['favourable'] , 0 , 1) eq '1'">{:substr($data['favourable'] , 2)}</if>" class="favour"> 折</p>
+				                	</div>
+	            					<div class="active_div" data-id="2">
+				                		<p>减钱</p>
+				                		<p>商品价格 <span>减</span> <input type="text" value="<if condition="substr($data['favourable'] , 0 , 1) eq '2'">{:substr($data['favourable'] , 2)}</if>" class="favour"> 元</p>
+				                	</div>
+	            				</div>
+	            			</td>
+	            		</tr>
+	            		<tr>
+	            			<td></td>
+	            			<td><button class="release_btn" onclick="return false">确定发布</button></td>
+	            		</tr>
+	            	</table>
+            	</form>
+            </div>
+        </div> 
+        <!--选择商品-->
+		<div class="active_select">
+			<div class="active_select_div">
+				<div class="active_select_top">选择商品 <button class="close_active_select">x</button></div>
+				<div class="active_select_search">
+					<select><option>全部分类</option></select>
+					<div>
+						<input type="text" placeholder="搜索宝贝标题、商家编码" />
+						<button>
+							<img src="__PUBLIC__/Home/image/glass.png" />
+						</button>
+					</div>
+					<div class='section-bt'></div>  
+				</div>
+				<div class="active_select_ultop">
+						<span><input type="checkbox" class="chose_all"></span>
+						<span>宝贝 /订货号</span>
+						<span>价格（元）</span>
+						<span><input type="checkbox"> 只显示已选择</span>
+				</div>	
+				<ul class="active_select_ul">
+								
+				</ul>
+				<div>					
+					<button class="active_cancel close_active_select">取消</button>
+					<button class="active_submit close_active_select">确定</button>
+				</div>
+			</div>
+		</div>
+		<!--选择商品-->
+    </div>   
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+//判断左边导航
+function checkNav(){
+	$(".side-nav>ul:eq(2)>li:eq(4) a").css("color","#ff6600")
+}
+checkNav();
+
+function checkValue(){
+	var val  = "{$data['start_time']}";
+	var val2 = "{$data['end_time']}";
+	$("#start_time").val(val.replace(/ /,"T"))
+	$("#end_time").val(val2.replace(/ /,"T"))
+	
+	var favourable = "{$data['favourable']}";
+	favourable = favourable.substring(0,1)
+	//打折
+	if(favourable == 1){
+		$(".active_num .active_div:eq(0)").find("p:eq(1)").css("visibility","visible")
+		$(".active_num .active_div:eq(0)").css("background-color","#fff").css("background","url('__PUBLIC__/Home/image/active_release.png') no-repeat")
+		$(".active_num .active_div:eq(0)").addClass("block");
+	}
+	//减钱
+	if(favourable == 2){
+		$(".active_num .active_div:eq(1)").find("p:eq(1)").css("visibility","visible")
+		$(".active_num .active_div:eq(1)").css("background-color","#fff").css("background","url('__PUBLIC__/Home/image/active_release.png') no-repeat")
+		$(".active_num .active_div:eq(1)").addClass("block");
+	}
+	
+	var arr = "{$data['goods_id']}";	
+	arr=arr.split(","); 
+	console.log(arr)
+}
+checkValue()
+
+var sku_data = new Array;
+/*分页*/
+(function(e){
+var Page = function(config){
+    this.config(config);//配置    
+    if(this.request_type == 'get'){
+        this.get();
+    }
+    if(this.request_type == 'post'){
+        this.post();
+    }
+}
+
+Page.prototype = {
+    config:function(config){   
+    	//请求地址
+        this.url        = config.url;
+        // 分页栏每页显示的页数
+        this.rollPage   = /^[1-9]+[0-9]*]*$/.test(config.rollPage) ? config.rollPage : 3;
+        // 附加请求参数
+        this.paramer    = config.paramer ? config.paramer : '';
+        //总记录数 
+        this.totalRows;
+        //第多少条开始取  
+        this.firstRow;
+        //设置每页显示条数 默认20条
+        this.listRows   = /^[1-9]+[0-9]*]*$/.test(config.listRows) ? config.listRows : 20; 
+        //当前页数默认为1
+        this.nowPage    = /^[1-9]+[0-9]*]*$/.test(config.nowPage) ? config.nowPage : 1;
+        //每页显示的多少条数据 
+        this.callback   = config.callback||'';
+        this.request_type = config.request_type;
+        //分页数据
+        this.page       = {};
+        this.data_cache = [];//得到的数据根据分页缓存
+        this.cache = typeof(config.cache)!=='undefined'?config.cache:false; //是否开启缓存  
+    },
+    /***初始运行***/
+    init:function(){
+      //获得分页内容
+        this.get_page();
+        //回调函数
+        this.callback(this.data , this.page); 
+    },
+    /***ajax请求***/
+    post:function(){
+        var _this     = this;
+        this.firstRow = this.listRows * (this.nowPage - 1);      
+        var d = {firstRow : this.firstRow , listRows : this.listRows};
+        for(i in this.parameter){
+            if(typeof(this.parameter[i]) != 'undefined'){
+              d[i] = this.parameter[i];
+            }       
+        }
+        $.post(this.url , d , function(res){
+            if(res){       
+                _this.data      = res['data'];
+                _this.totalRows = res['totalRows'];
+                _this.init();
+            }
+        })   
+    }, 
+    /***ajax请求***/
+    get : function(){
+       if(this.cache && typeof(this.data_cache[this.nowPage])!=='undefined'){
+           this.data = this.data_cache[this.nowPage];
+           this.init();
+       }else{      
+          var _this     = this;
+          this.firstRow = this.listRows * (this.nowPage - 1);      
+          var d = {firstRow : this.firstRow , listRows : this.listRows};
+          for(i in this.parameter){
+              if(typeof(this.parameter[i]) != 'undefined'){
+                d[i] = this.parameter[i];
+              }       
+          }
+          $.get(this.url , d ,function(res){
+              if(res){       
+                  _this.data_cache[_this.nowPage] = res['data'];
+                  _this.data      = res['data'];
+                  _this.totalRows = res['totalRows'];
+                  _this.init();
+              }
+          })
+      }   
+    }, 
+     /***分页***/
+    get_page:function(){
+    	var __PAGE = {
+    		prev      : false,
+    		first     : false,
+    		page      : [],
+    		next      : false,
+    		end       : false,
+    		now_page  : ''
+    	};
+        /* 计算分页信息 */
+        this.totalPages = Math.ceil(this.totalRows/this.listRows); //总页数
+        //当前页面大于总页面
+        if(!this.totalPages && this.nowPage > this.totalPages){
+           this.nowPage = this.totalPages;//当前页面设置为总页面
+        } 
+        /* 计算分页临时变量 */
+        now_cool_page      = this.rollPage / 2;
+        now_cool_page_ceil = Math.ceil(now_cool_page);
+        //上一页
+        up_row  = this.nowPage - 1;  
+        __PAGE.prev = up_row > 0 ? up_row : false;
+        //下一页
+        down_row  = this.nowPage+1;  
+        __PAGE.next = (down_row <= this.totalPages) > 0 ? down_row : false;    
+        //数字连接
+        for(i = 1; i <= this.rollPage;i++){
+            /*计算出页数*/
+            if((this.nowPage - now_cool_page) <= 0 ){
+                page = i;
+            }else
+            if((this.nowPage + now_cool_page - 1) >= this.totalPages){
+                page = this.totalPages - this.rollPage + i;
+            }else{
+                page = this.nowPage - now_cool_page_ceil + i;
+            }  
+            //页数大于0并且页数不等于当前页面         
+            if(page > 0 && page != this.nowPage){
+                //当前页数小于或者等于总页数才让其显示
+                if(page <= this.totalPages){
+                 	__PAGE.page.push(page);                           
+                }else{
+                    break;
+                }
+            }else         
+            if(this.nowPage==page){
+             	__PAGE.page.push(page);
+             	__PAGE.now_page = page;
+            } 
+        }
+        __PAGE.totalPages = this.totalPages;
+        __PAGE.totalRows  = this.totalRows; 
+        this.page = __PAGE;         
+    }, 
+}
+
+e.ajaxPage = function(config){
+    return new Page(config);
+}
+})(window);
+
+(function(e){ 
+    /*
+     * 分页事件绑定 
+     **/
+    var page_event = (function(){
+    	/*
+         * 其他页码
+         **/
+        $(".section-bt").on('click' , '.else_page' , function(){
+        	 var p = $(this).attr('data-p');
+		    __PAGE.nowPage = parseInt(p);
+		    __PAGE.post(); 
+		    $(".chose_all").attr("checked",false)
+        })
+
+        /*
+         * 点击分页跳转
+         **/
+        $(".section-bt").on('click' , '.page_a' , function(){
+        	 var p = $(this).attr('data-p');
+		    __PAGE.nowPage = parseInt(p);
+		    __PAGE.post();  
+		    $(".chose_all").attr("checked",false)
+        })     
+    })(); 
+
+    var html = {
+    	createHtml : function(data){
+    		var html = '';			
+    	    for(var k in data.goods_data){
+    	        html = html 				
+    	             + '<li class="active_select_goodinfo">'
+    	             + '    <span><input type="checkbox" class="check_input" data-id="'+data.goods_data[k].id+'"></span>'
+    	             + '    <span>'
+    	             + '        <img class="good_img" src="'+data.goods_data[k].goods_thumb+'"/>'
+    	             + '        <a>'+data.goods_data[k].goods_name+'</a>'
+    	             + '    </span>'
+    	             + '    <span>'+data.goods_data[k].goods_price+'</span>'
+    	             + '    <span></span>'
+    	             + '</li>'
+    	             + '<li class="active_select_table">'
+    	             + '	<table class="active_select_skutable" data-id="'+data.goods_data[k].id+'">'
+    	             + '		<thead>'
+                     + this.createSkuHeadHtml(data.goods_data[k].id)	             
+    	             + '		</thead>'
+    	             + '		<tbody>'
+                     + this.createSKUHtml(data.goods_data[k].id)	             
+    	             + '		</tbody>'
+    	             + '	</table>'
+    	             + '</li>'
+    	    }
+            return html;
+    	},
+    	createSkuHeadHtml : function(goods_id){
+            var html = '<tr>'
+                + '<td>订货号</td>';
+            if(__goods_attr[goods_id] !== undefined){
+                __goods_attr[goods_id].forEach(function(v){
+                    html = html                 
+                     + '<td>' + v.attr_name +'</td>'                
+                });  
+            }
+         	html = html 	
+             	+ '		<td>面价</td>'
+             	+ '	</tr>'	        
+            return html;
+            
+    	},
+    	createSKUHtml : function(goods_id){
+    		var html = '';
+            var __this = this;
+            if(__sku_data[goods_id] === undefined){
+                return '';
+            }            
+            __sku_data[goods_id].forEach(function(v){
+                html = html                 
+                 + '<tr>'
+                 + '    <td><input type="checkbox"> '+ v.sku_code +'</td>'
+                 + __this.createSkuValue(v.sku_value)
+                 + '    <td>'+ v.price +'</td>'
+                 + '</tr>'                
+            });	   
+            return html;       
+    	},	
+        createSkuValue : function(data){
+            var html = '';
+            for(var k in data){
+                html = html                   
+                + '<td>'+ data[k].attr_value +'</td>'
+            }   
+            return html;       
+        },        
+    	createPage : function(data){  		
+		    var page_html;
+		    //首页处理
+		    /*var first = data.first !== false ? 
+		        ('<a class="first else_page" data-p=1 href="javascript:;"><<</a>') :
+		        ('<a class="first"><<</a>');*/
+		    //上一页处理
+		    var prev = data.prev !== false ? 
+		            ('<a class="prev else_page" data-p=' + data.prev + ' href="javascript:;">上一页</a>') :
+		            ('<a class="prev">上一页</a>'); 
+		    //页码处理
+		    var page = '';    
+		    for(var k in data.page){
+		    	page = page + 
+		    	    (data.page[k] == data.now_page ? 
+		    	    ('<a class="page_a now" data-p=' + data.page[k] + '>' + data.page[k] +'</a>') :
+		    	    ('<a class="page_a" href="javascript:;" data-p=' + data.page[k] + '>' + data.page[k] +'</a>'));   
+            } 
+		    //下一页处理
+		    var next = data.next !== false ? 
+		        ('<a class="next else_page" data-p=' + data.next + ' href="javascript:;">下一页</a>') :
+		        ('<a class="first">下一页</a>');
+            //末页处理
+		    /*var end = data.end !== false ? 
+		        ('<a class="end else_page" data-p=' + data.end + ' href="javascript:;">>></a>') :
+		        ('<a class="end">>></a>');   */
+		    //统计处理          
+		    /*var count = '<span class="total">共' + data.totalPages + '页' + data.totalRows + '条数据</span>';*/
+		    //跳转处理 
+	        page_html = prev + page + next;
+            return page_html;       
+    	},   
+    	createListRowsOption : function(data){
+    		var str = '<select class="set_listRows">';
+    		data.map(function(v){
+    	        str +='<option value="' + v + '">' + v +'</option>';
+    		});
+    		str +='</select>';
+    		return str;    	
+    	}
+    };
+
+
+    /**
+     *sku数据处理
+     */
+    function skuDataInit(data){
+        data.forEach(function(v){
+            if(__sku_data[v.goods_id] === undefined){
+                __sku_data[v.goods_id] = [];
+            }
+            var sku_value = [];
+            for(var k in v.sku_value){
+                var temp = v.sku_value[k];
+                temp.attr_id = k;
+                sku_value.push(temp);
+            }
+            //属性统一排序
+            sku_value.sort(function(a,b){
+                return (a.attr_id - b.attr_id)
+            })            
+            v.sku_value = sku_value;
+            __sku_data[v.goods_id].push(v);
+        }); 
+        /*console.log(__sku_data);*/
+    }
+
+    /**
+     *商品属性处理
+     */
+    function attrDataInit(data){
+        data.forEach(function(v){
+            if(__goods_attr[v.goods_id] === undefined){
+                __goods_attr[v.goods_id] = [];
+            }
+            __goods_attr[v.goods_id].push(v);
+        }); 
+        //属性统一排序
+        for(var k in __goods_attr){
+            __goods_attr[k].sort(function(a,b){
+                return (a.attr_id - b.attr_id)
+            })            
+        }
+        /*console.log(__goods_attr);*/
+    }
+
+    var __sku_data   = {};
+    var __goods_attr = {};
+    var listRows_option = html.createListRowsOption([10 , 20 , 40]);
+    var config   = {
+        listRows     : 2, 
+        rollPage     : 3,
+        cache        : true,
+        request_type : "post",
+        url          : "http://www.orangesha.com/sellerGoods/getGoodsAndSku",
+        callback:function(data , page){         
+            skuDataInit(data.sku); 
+            attrDataInit(data.attr);
+            $(".active_select_ul").html(html.createHtml(data)); 
+            $(".section-bt").html(html.createPage(page));
+    	}        
+    };
+    var __PAGE = ajaxPage(config);
+    
+    //全选
+	$(".chose_all").click(function(){
+		if($(this).is(':checked')){
+			$(".check_input").prop("checked",true)
+		}else{
+			$(".check_input").prop("checked",false)
+		}
+		for(var i =0; i<$(".check_input").length; i++){
+			sku_data.push($(".check_input").eq(i).attr("data-id"))
+		}
+		console.log(sku_data)
+		$(".data_length").text(sku_data.length)
+	})
+	
+	//单选
+	$(".active_select_ul").on('click','.check_input',function(){	
+		var id = $(this).attr("data-id")
+		var u = sku_data.indexOf(id);
+		if($(this).is(':checked')){			
+			if(u == -1){
+				sku_data.push(id)
+			}			
+		}else{
+			if(u != -1){
+				sku_data.splice(u,1)
+			}
+		}
+		$(".data_length").text(sku_data.length)
+		console.log(sku_data)
+	})
+
+	//指定商品
+	$("input[name='scope']:eq(1)").click(function(){
+		$(".active_select").css("display","block")	
+		$(".active_select_div").css("display","block");
+	})
+		
+})();
+
+//提交数据
+function request(){  		
+		    var data = new FormData($("#Activity")[0]);  // 要求使用的html对象
+		    var url  = "http://www.orangesha.com/ReleaseActivity/activityAdd";
+		    var type = $(".block").attr("data-id");
+		    var a = $(".block .favour").val();
+		    console.log(a)
+		    console.log(type)
+		    data.append("favourable_type",type);
+		    data.append("goods_id",sku_data);
+		    data.append("favourable",a)	
+		
+		    $.ajax({  
+		          url : url ,  
+		          type: 'POST',  
+		          data: data,  
+		          async: true,  
+		          // 下面三个参数要指定，如果不指定，会报一个JQuery的错误 
+		　　　　　       cache: false,  
+		          contentType: false,  
+		          processData: false,  
+		          success: function (res) {  
+		          	console.log(res)
+		          	alert(res.msg);
+		              if(res.status){
+						window.location.href="http://www.orangesha.com/index.php?m=Home&c=SellerGoods&a=ActivityCenter"
+		                
+		              } 
+		          },  
+		          error: function (returndata) {  
+		              console.log(returndata); 		              
+		          }  
+		     });  
+		}
+		$(".release_btn").click(function(){
+			if($("#start_time").val()>$("#end_time").val()){
+        		alert("生效时间不得大于过期时间")
+        	}else{
+        		request()
+        	}			
+		})
+
+
+$(".active_num .active_div").click(function(){
+	$(this).find("p:eq(1)").css("visibility","visible")
+	$(this).siblings(".active_div").find("p:eq(1)").css("visibility","hidden")
+	$(this).css("background-color","#fff").css("background","url('__PUBLIC__/Home/image/active_release.png') no-repeat")
+	$(this).siblings(".active_div").css("background-color","#F7F7F7").css("background","");
+	$(this).addClass("block");
+	$(this).siblings(".active_div").removeClass("block");
+	$(this).siblings(".active_div").find("input").val("");
+})
+
+//重新选择
+$(".select_goods").click(function(){
+	$(".active_select").css("display","block")
+	$(".active_select_div").css("display","block");
+	$("input[name='scope']:eq(1)").attr("checked",true)
+})
+//关闭选择商品
+$(".active_select").click(function(){
+	$(".active_select").css("display","none")
+	$(".active_select_div").css("display","none")
+});
+$(".active_select_div").click(function(event){
+    event.stopPropagation();
+});
+
+$(".close_active_select").click(function(){
+	$(".active_select").css("display","none")
+})
+
+
+
+
+</script>
+</body>
+</html>

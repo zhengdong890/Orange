@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="description" content="" />
+<style>
+*{padding:0; margin:0;font-size:16px;font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border:0} 
+#content{width:98%;height:auto;float:left;margin-left:1%;}
+#content #content_h{width:100%;height:40px;border:1px solid #D7D7D7;line-height:40px;margin-top:15px}
+#content #content_h a{padding-left:10px}
+#content #content_m{width:100%;height:auto;border:1px solid #D7D7D7;padding-bottom:100px;margin-top:20px}
+.btn{width:80px;height:30px;float:right;display:block;background:red;text-align:center;line-height:30px;color:white;border-radius:5px;font-size:14px;margin-right:20px;margin-top:5px;}
+.addrule{ background:#46A2E6;color:#FFFFFF;border-radius:5px; }
+.addrule:hover{background:#3F97E0;color:#FFFFFF;border-radius:5px;cursor:pointer;}
+
+</style>
+</head>
+<body>
+<div id="content">
+     <div id="content_h">
+           <a>后台管理中心</a>-><a>配置权限</a>
+            <a class='btn' style="padding-left:0" href="{:U('rule_add')}">添加规则</a>
+     </div>
+	 
+     <div id="content_m">
+
+                            <form action="{U:('group_access')}" method="post">
+								<table>
+                                
+										<tr>
+                                           
+											<th colspan="3" align="center" style="width:200px;">组名：
+												<input type="text" name="title"  />
+											</th>
+                                        </tr>
+										<tr>
+                                            <th class="center" style="width:100px;">
+                                                <label>
+                                                  
+                                                    <span class="lbl">控制器</span>
+                                                </label>
+                                            </th>
+                                           
+                                            <th>方法</th>
+										</tr>
+                                 
+
+                                  
+                                        <volist name="rules" id="v">
+											<tr>
+												 <td class="center">
+													<label>
+														<input level="{$v['level']}" type="checkbox"  name="rules{$v['id']}" value="{$v['id']}" class="checkall"  /><span class="lbl"> {$v['title']}</span> 
+														<span class="lbl"></span>
+													</label>
+												</td>							
+												<td>
+												<volist  name="v['child']" id="v1" key="k">
+													<input type="checkbox"  level="{$v1['level']}" class="child" name="rules{$v1['id']}" value="{$v1['id']}" {$v1['check']}> <span class="lbl"> {$v1['title']}</span> 
+												 </volist>
+												</td>
+											</tr>
+									   </volist>
+								
+									<tr>
+										<td colspan="3"> <p><button class="addrule">确认保存</button></p></td>
+									</tr>
+                                 </table>
+								 
+								</form>
+                          
+    </div>
+</div>
+<script type="text/javascript">
+/*勾选所有分组子权限*/
+	$('.checkall').each(function(){
+		   $(this).click(function(){
+		      var level = $(this).attr('level');
+			  var Allnext = $(this).parent().parent().next().find(":checkbox");
+			  if( $(this).attr('checked')){		 				 				
+				   $(Allnext).each(function(k,v){						
+						if($(v).attr('level') > level){
+							$(v).attr('checked','checked'); 
+						}else {
+						    return false;
+						}			   
+				   })		  				
+			  }else{
+			       $(Allnext).each(function(k,v){
+			       	    if($(v).attr('level') > level){
+						    
+							$(v).removeProp('checked','checked'); 
+						}else {
+						    return false;
+						}			   
+				   })	
+			  }
+		   
+		   })
+	})
+
+	/*勾选子权限时勾选所属分组权限*/
+	$('.child').click(function(){
+	    if( $(this).attr('checked')){		
+	       $(this).parent().prev().find('label').find(':checkbox').prop("checked","checked");
+	    }
+		var sib = $(this).parent().find(':checkbox');
+		
+		var n=0;
+		$(sib).each(function(){
+		   if($(this).attr("checked")){
+		     n++;
+		   }
+		
+		})
+		if(n==0){
+		   $(this).parent().prev().find('label').find(':checkbox').removeProp("checked","checked");
+		}
+	  
+	})
+/*页面加载时勾选子权限所属分组权限*/	
+
+	$(function(){	 
+	  $('.child').each(function(){
+			if($(this).attr("checked")){
+			   $(this).parent().prev().find('label').find(':checkbox').prop("checked","checked");		
+			}	  
+	  })
+	
+	})
+
+</script>
+</body>
+</html>

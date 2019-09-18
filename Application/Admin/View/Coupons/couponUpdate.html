@@ -1,0 +1,297 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="/Public/js/My97DatePicker/WdatePicker.js"></script>
+<meta name="description" content="" />
+<style>
+html{font-size:62.5%}
+*{font-size:16px;font-family:Arial,Microsoft YaHei,\\9ED1\4F53,\\5B8B\4F53,sans-serif}
+*,li,ul{padding:0;margin:0}
+li,ul{list-style:none}
+a,a:hover{text-decoration:none}
+a:hover{border:0}
+button,input,select,textarea{outline:none}
+textarea{resize:none}
+
+#container{width:98%;margin-left:1%}
+#container #main{width:100%;border:1px solid #d7d7d7;margin-top:5px;height:auto;float:left;padding-bottom:10px}
+
+#Crumbs{width:100%;height:40px;border:1px solid #d7d7d7;line-height:40px;margin-top:5px;float:left}
+#Crumbs a{padding-left:10px}
+#Crumbs .btn{width:auto;padding:0 5px;height:30px;float:right;display:block;background:red;line-height:30px;color:#fff;border-radius:5px;font-size:14px;margin-right:20px;margin-top:5px}
+
+.block_edit table td .radio,.check{width:20px;height:20px;float:left;margin-left:15px;}
+.radio_m{margin-left:0px;}
+.radio_text{height:20px;float:left;line-height:20px}
+
+.block_edit{width:100%;height:auto;float:left}
+.block_edit table{width:100%;margin:10px auto}
+.block_edit table td{padding:5px}
+.block_edit table td.td_label{text-align:right;vertical-align:top;font-weight:700;width:20%;font-size:14px;padding:4px 8px}
+.block_edit table td .type_radio{width:auto;height:24px;float:left;margin-left:8px}
+.block_edit table td input[type='text']{width:400px;height:20px;border-radius:3px;border-bottom:1px solid #e3e9ef;border-top:1px solid #abadb3;border-left:1px solid #e2e3ea;border-right:1px solid #dbdfe6}
+.block_edit table td .p_text{width:auto;height:25px;float:left;line-height:24px;margin-left:8px;font-size:13px}
+.block_edit table td .btn{display:block;text-align:center;line-height:26px;float:left;border-radius:4px;background:#c43926;margin-left:10px;color:#fff;height:26px;width:100px}
+
+.td_label_p{margin-top:10px;}
+</style>
+</head>
+<body>
+<div id="container">
+    <div id="Crumbs">
+        <a>后台管理中心</a><span>&nbsp;&nbsp;-</span><a>编辑平台优惠券</a>
+    </div>
+    <div id="main">
+        <div class="block_edit" json-data='{$json_data}'>
+            <form id='form'>
+            <input type='hidden' name='id' value="{$data['id']}">
+            <table>
+                <tr>
+                    <td class="td_label">优惠券名称:</td>
+                    <td>
+                        <input type="text" name="name" value="{$data['name']}">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_label">面值:</td>
+                    <td>
+                        <input type="text" name="benefit_price" value="{$data['benefit_price']}"></input>           
+                    </td>
+                </tr>     
+                <tr>
+                    <td class="td_label">每人限领:</td>
+                    <td>
+                        <input type="text" name="max_number" value="{$data['max_number']}"></input>           
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_label">订单金额:</td>
+                    <td>
+                        <p>
+                            <input class='radio' type="radio" name="order_case_type" value="1" <if condition="$data['max'] eq 0">checked</if> /> 不限制 
+                        </p>
+                        <p class='td_label_p'>
+                            <input class='radio' type="radio" name="order_case_type" value="2" <if condition="$data['max'] neq 0">checked</if >/> 
+                            满
+                            <input type="text" style='width:40px' name="max" value="{$data['max']}" />
+                            元可以使用
+                        </p>          
+                    </td>
+                </tr>                
+                <tr>
+                    <td class="td_label">发放总量:</td>
+                    <td>
+                        <input type="text" name="number" value="{$data['number']}"></input>           
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_label">发放数量:</td>
+                    <td>{$data['send_number']}</td>
+                </tr>                  
+                <tr>
+                    <td class="td_label">剩余数量:</td>
+                    <td>{$data['sy_number']}</td>
+                </tr>                                                     
+                <tr>
+                    <td class="td_label">开始时间:</td>
+                    <td>
+                        <input type="text" name="start_time" value="{$data['start_time']}">
+                        </input>           
+                    </td>
+                </tr>                
+                <tr>
+                    <td class="td_label">结束时间:</td>
+                    <td>
+                        <input type="text" name="end_time" value="{$data['end_time']}">
+                        </input>           
+                    </td>
+                </tr>                
+                <tr>
+                    <td></td>
+                    <td><a class="btn" href="javascript:;">确认保存</a></td>
+                </tr>
+            </table>
+            </form>
+        </div>
+    </div>
+</div>
+</body>      
+<script type="text/javascript">
+(function(w){
+    w.http = {
+        get : function (url , data , call_back){
+            var request_data = '';
+            for(var k in data){
+                request_data = request_data + k + '=' + data[k] + '&';
+            }    
+            request_data = request_data.substr(0 , -1);
+            url = url + '?' + request_data;
+            http.ajax(url , 'GET' , '' , call_back);
+        },
+        post : function(url , data , call_back){
+            var request_data = '';
+            for(var k in data){
+                request_data = request_data + encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) + '&';
+            }    
+            request_data = request_data.substr(0 , request_data.length - 1);
+            http.ajax(url , 'POST' , request_data , call_back);         
+        },
+        ajax : function(url , type , data , call_back){
+            var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+            xmlhttp.onreadystatechange = function(){
+                if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+                    var data         = xmlhttp.response;//获取返回数据
+                    var content_type = xmlhttp.getResponseHeader('Content-type');
+                    content_type = content_type.split(';');
+                    if(content_type[0] == 'application/json'){
+                        data = JSON.parse(data);
+                    }
+                    call_back(data);  
+                }
+            } 
+            xmlhttp.open(type , url , true);  
+            xmlhttp.setRequestHeader("X-Requested-With" , "XMLHttpRequest");
+            if(type == 'POST'){
+                xmlhttp.setRequestHeader("Content-type" , "application/x-www-form-urlencoded; charset=UTF-8");
+            }      
+            xmlhttp.send(data);//发送ajax
+        }
+    }        
+})(window);
+
+(function(w){
+    var str           = $(".block_edit").attr('json-data'),
+        __OLD_DATA    = JSON.parse(str),
+        __UPDATE_DATA = JSON.parse(str),
+        __MAX         = __UPDATE_DATA['max'];
+    var __ERROR    = {
+        name          : '',
+        benefit_price : '',
+        start_time    : '',
+        number        : '',
+        max_number    : '',
+        end_time      : '',
+        max           : ''
+    };
+    var __MSG = {
+        name          : '优惠券名称错误',
+        benefit_price : '面值错误',
+        start_time    : '开始时间不正确',
+        number        : '发放总量错误',
+        max_number    : '每人限领错误',
+        end_time      : '结束时间不正确',
+        max           : '满多少错误'
+    };
+
+    $("#form table").on('blur' , 'input' , function(){
+        if(name == 'order_case_type'){return}
+        var name = $(this).attr('name');
+        var val  = $(this).val(); 
+        if(name == 'max'){
+            __MAX = val;
+        }
+        if(val == ''){
+            __ERROR[name] = __MSG[name];
+            return;
+        }
+        __ERROR[name]    = '';
+        __UPDATE_DATA[name] = val;   
+    }) 
+
+    $("#form table input[name='start_time']").focus(function(){
+        WdatePicker({
+            el: this ,
+            dateFmt:'yyyy-MM-dd HH:mm:ss'
+        })        
+    });
+
+    $("#form table input[name='end_time']").focus(function(){
+        WdatePicker({
+            el: this ,
+            dateFmt:'yyyy-MM-dd HH:mm:ss'
+        })        
+    });
+
+    var __object = {
+        /*获取差集 比较下标和值*/
+        diffAssoc : function(obj1 , obj2){
+            var obj = {};
+            for(var k in obj1){
+                if((typeof(obj2[k]) != 'undefined' && obj1[k] != obj2[k]) || typeof(obj2[k]) == 'undefined'){
+                    obj[k] = obj1[k]; 
+                }
+            }
+            return obj;
+        },
+        isEmpty : function(obj){
+            for(var k in obj){
+              return false;
+            }
+            return true;
+        }    
+    }; 
+
+    w.form_data = {
+        getError  : function(){
+            for(var k in __ERROR){
+                if(__ERROR[k] != ''){
+                    return __ERROR[k];
+                }                
+            }
+            return true;
+        },
+        getRequestData : function(){
+            var result = {status : true , error : '' ,type : '' , data : {}};
+            var data = __UPDATE_DATA;
+            var order_case_type = $('.radio:checked').val();
+            data.max = order_case_type == '1' ? 0 : __MAX; 
+            var error = form_data.getError();
+            if(error !== true){
+                result.status = false;
+                result.error  = error;
+            }
+            /*检测新数据和旧数据是否一致*/
+            data = __object.diffAssoc(data , __OLD_DATA);
+            if(__object.isEmpty(data)){
+                result.type = 'nochange';
+            }else{
+                data.id = __OLD_DATA.id;
+                result.data = data;
+            } 
+            return result;
+        }
+    }        
+})(window);
+
+$(".btn").click(function(){
+    request();           
+})
+
+/*
+ * 提交数据
+ **/
+function request(){ 
+    var url  = "{:U('Coupons/couponUpdate')}";
+    var url_ = "{:U('Coupons/couponList')}";
+    var data = form_data.getRequestData(); 
+    if(!data.status){
+        alert(data.error);
+    }else
+    if(data.type == 'nochange'){
+        window.location = url_;
+    }else{
+        http.post(url , data.data , function(res){
+            alert(res.msg);
+            if(res.status){
+                window.location.href = url_;
+            }       
+        })
+    }
+
+}  
+</script>      
+</body>
+</html>

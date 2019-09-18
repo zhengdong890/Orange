@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="description" content="" />
+<style>    
+*{padding:0; margin:0;font-size:16px;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0} 
+#main{width:100%;height:auto;float:left}   
+#main #main_h{width:100%;height:40px;float:left;margin-top:20px;color:black;border-bottom:1px solid #dfdfdf}
+#main_h a{height:20px;float:right;margin-left:20px;padding:5px;border:1px solid #E6E7EC;background:#F4F5F9;border-radius:4px;color:black}
+#main_h span{line-height:40px;}
+#main #content{width:100%;height:auto;float:left;margin-top:100px}   
+#content table{width:800px;margin:0 auto}
+input{width:500px;height:24px;border-radius:3px;border:1px solid black;}
+textarea{width:500px;height:160px;border-radius:3px;border:1px solid black;}
+td img{max-width:250px}
+td{padding-right:50px;padding-top:10px}
+table button{border:0px;font-size:16px;background:#44B549;color:white;padding:5px;border-radius:2px;}
+</style>
+</head>
+    <body>
+    <div id="wraper">      
+          <div id="main"> 
+             <div id="main_h">
+                 <span>编辑文本自定义内容 </span>
+                 <a href="{:U('text')}">返回</a>                              
+             </div>
+             <div id="content">        
+	             <table cellspacing="10">
+	                 <form action="{:U('addtext')}" method="post">                                                                     
+	                                 <tr>
+	                                        <td><span>关键词:</span></td>
+	                                        <td><input type="text" name="keyword" value=""></input></td>
+	                                 </tr> 
+	                                 <tr>
+	                                        <td valign="top"><span>关键词类型:</span></td>
+	                                        <td>
+	                                           <p style="height:26px;line-height:26px"><input type="radio" name="type" value="1" style="width:14px;float:left"/>包含匹配（当此关键词包含粉丝输入关键词时有效）</p>
+	                                           <p style="height:26px;line-height:26px"><input type="radio" name="type" value="2" style="width:14px;float:left" checked='checked'/>完全匹配（当此关键词和粉丝输入关键词完全相同时有效）</p>
+	                                        </td>
+	                                 </tr>                         
+	                                  <tr>
+	                                        <td valign="top"><span>内容或简介:</span></td>
+	                                        <td><textarea name="content"></textarea><p>请不要多于1000字否则无法发送!</p></td>   
+	                                 </tr>                                                                      		                                            
+	                                 <tr><td></td><td><button>保存</button></td></tr>
+	                 </form>
+	             </table>
+             </div> 
+         </div>
+    </div>	
+    </body>
+    <script type="text/javascript">
+      
+    </script>
+</html>

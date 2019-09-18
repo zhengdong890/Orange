@@ -1,0 +1,45 @@
+<!-- 公共底部 -->
+<div class="footer_box">
+	<div class="footer">
+      <div class="footer-nav">
+        <volist name='help' id='v' key='k'>
+        <ul class="footer-nav{$k}" style="background:url('__ROOT__{$v['thumb']|substr=1}'')">
+            <li class="title">{$v['name']}</li>
+            <volist name="v['child']" id='v1'>
+            <li><a rel="nofollow" href="{:U('Problem/index',array('id'=>$v1['id']))}">{$v1['name']}</a></li>
+            </volist>
+        </ul>
+        </volist>
+      </div>
+      <div class="footer-bottom">
+        <div class="support">
+        	<div class="friendship_link">友情链接 <ul><foreach name="friend" item="vo"><li><a href="{$vo.url}">{$vo.name}</a></li></foreach></ul></div>       	
+        	<a target="_blank" href="{:U('Public/sitemap')}">网站地图</a> <span>客服电话 400-966-5770 周一至周五 9:00-18:00</span></div>
+          <p class="text">所有图片均受著作权保护，未经许可任何单位与个人不得使用、复制、转载、摘编，违者必究法律责任。</p>
+          <p class="text">&copy; 2010-2016 深圳市橙橙网络科技有限公司版权所有 粤ICP备16062724号</p>
+        <div class="ewm"></div>
+      </div>
+    </div>
+</div>
+<script src="/Public/layer/layer.js"></script>
+<div class="sidebar w1280">
+	<a class="sidebar-btn service" href="javascript:showsevice();" ></a>
+	<a  class="sidebar-btn top" href="#" style="display:none" ></a>
+</div>
+<script>
+
+function showsevice(){
+  
+    layer.open({
+      type: 2,
+      title: '',
+      shadeClose: true,
+      shade: false,
+	  offset: 'rb', //右下角弹出
+      maxmin: true, //开启最大化最小化按钮
+      area: ['650px', '460px'],
+	  content: "http://p.qiao.baidu.com/cps/chat?siteId=9913952&userId=22347187"
+    });
+}
+
+</script>

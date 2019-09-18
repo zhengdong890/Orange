@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/ueditor/ueditor.all.js"></script>
+<meta name="description" content="" />
+<style>
+*{padding:0; margin:0;font-size:16px;font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0} 
+   textarea{outline:none;resize:none;}
+/****内容样式****/  
+#content{width:98%;height:auto;float:left;margin-left:1%;}
+/****内容头部面包屑样式*****/
+#content #content_h{width:100%;height:40px;border:1px solid #D7D7D7;line-height:40px;margin-top:15px;float:left;}
+#content #content_h a{padding-left:10px}
+/****添加信息列表样式start****/   
+#content #content_m{width:100%;height:auto;border:1px solid #D7D7D7;padding-bottom:100px;margin-top:20px;float:left;} 
+/****列表信息样式****/    
+#content_m #content_m_m{width:100%;height:auto;float:left;}
+#content_m_m form{width:100%;height:auto;float:left;}     
+#content_m table{width:100%;margin:0 auto;}    
+#content_m table td .radio,.check{width:20px;height:20px;float:left;margin-left:15px;}
+.radio_m{margin-left:0px;}
+.radio_text{height:20px;float:left;line-height:20px}
+.check_m{margin-left:0px;}
+.check_text{height:20px;float:left;line-height:20px}
+form input[type='text']{width:400px;height:20px;border-radius:3px;border-bottom:1px solid #E3E9EF;border-top:1px solid #ABADB3;border-left:1px solid #E2E3EA;border-right:1px solid #DBDFE6}  
+.label{text-align:right;vertical-align:top;font-weight:bold;width:30%;font-size:14px;padding:4px 8px} 
+.img{width:100px;height:auto;float:left;}
+.img img{max-width:100%;max-height:100px;float:left}
+.btn{display:block;width:100px;margin-top:10px;color:white;position:relative;height:28px;line-height:28px;text-align:center;float:left;background:#C43926;border-radius:4px;}
+/****上传按钮样式构造****/
+.btn_addimg{display:block;width:100px;margin-top:5px;color:white;position:relative;height:28px;line-height:28px;text-align:center;float:left;background:#C43926;border-radius:4px;}
+.btn_addimg input{width:100px;position:absolute;left:0;top:0;filter:alpha(opacity=50);-moz-opacity:0;-khtml-opacity:0;opacity:0;}
+</style>
+</head>
+<body>          
+<div id="content">
+    <div id="content_h">
+        <a>后台管理中心</a>-><a>商城申请认证</a>
+    </div>
+    <div id="content_m">
+        <div id="content_m_m">
+		    <form id='form'>
+                <input type="hidden" name="id" value="{$data['id']}"></input>                    
+                <table cellspacing="10">
+                    <tr>
+                        <td class="label">企业名称:</td>
+                        <td>{$seller_data['name']}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">企业地址:</td>
+                        <td>{$seller_data['address']}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">联系方式:</td>
+                        <td>{$seller_data['contact']}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">公司指定联系人:</td>
+                        <td>{$seller_data['place_contact']}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">指定联系人号码:</td>
+                        <td>{$seller_data['contact_phone']}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">店铺名称:</td>
+                        <td>
+                            <input type="text" name="shop_name" value="{$shop_data['shop_name']}">
+                            </input>           
+                        </td>
+                    </tr>
+                    <tr>
+                           <td class="label">上传店铺Logo:</td>
+                           <td>
+                           	   <div class="img">
+                           	   <img src="__ROOT__{$shop_data['thumb']|substr=1}"/>
+                               <a class="btn_addimg">点击添加<input type="file" name="thumb"></input></a>                                             
+                               </div> 
+                           </td>
+                    </tr>
+                    <tr>
+                        <td class="label">域名设置:</td>
+                        <td>
+                            <input type="text" name="domain" value="{$shop_data['domain']}">
+                            </input>           
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">店铺描述:</td>
+                        <td>
+                            <input type="text" name="desc" value="{$shop_data['desc']}"></input>           
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">店铺qq:</td>
+                        <td>
+                            <input type="text" name="qq" value="{$shop_data['qq']}"></input>           
+                        </td>
+                    </tr>  
+                    <tr>
+                        <td class="label">物流服务:</td>
+                        <td>
+                            <input type="text" name="logistical" value="{$shop_data['logistical']}"></input>           
+                        </td>
+                    </tr>  
+                    <tr>
+                        <td class="label">服务态度:</td>
+                        <td>
+                            <input type="text" name="service" value="{$shop_data['service']}"></input>           
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td class="label">描述相符:</td>
+                        <td>
+                            <input type="text" name="desc_score" value="{$shop_data['desc_score']}"></input>           
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td class="label">评价数量:</td>
+                        <td>
+                            <input type="text" name="comment_number" value="{$shop_data['comment_number']}"></input>           
+                        </td>
+                    </tr>                                        
+                    <tr>
+                        <td class="label">审核结果:</td>
+                        <td>
+                           <if condition="$data['status'] eq 1">
+                           <input class='radio' type="radio" name="status" value="1" checked='checked' style='margin-left:0px'/>
+                           <else/>
+                           <input class='radio' type="radio" name="status" value="1" style='margin-left:0px'/>
+                           </if>
+                           <p class='radio_text'>通过</p>
+                           <if condition="$data['status'] eq 0">
+                           <input class='radio' type="radio" name="status" value="0" checked='checked'/>
+                           <else/>
+                           <input class='radio' type="radio" name="status" value="0" />
+                           </if>
+                           <p class='radio_text'>不通过</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">是否签约:</td>
+                        <td>
+                           <if condition="$data['is_sign'] eq 1">
+                           <input class='radio' type="radio" name="is_sign" value="1" checked='checked' style='margin-left:0px'/>
+                           <else/>
+                           <input class='radio' type="radio" name="is_sign" value="1" style='margin-left:0px'/>
+                           </if>
+                           <p class='radio_text'>已签约</p>
+                           <if condition="$data['is_sign'] eq 0">
+                           <input class='radio' type="radio" name="is_sign" value="0" checked='checked'/>
+                           <else/>
+                           <input class='radio' type="radio" name="is_sign" value="0" />
+                           </if>
+                           <p class='radio_text'>未签约</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">审核意见:</td>
+                        <td>
+                            <textarea name='content' style="width:300px;height:100px">{$data['content']}</textarea>
+                        </td>   
+                    </tr>
+                    <tr>
+	                    <td></td>
+	                    <td>
+	                        <a class='btn' href='javascript:;'>确认审核</a>
+	                    </td>
+                    </tr>
+		     </table>	  		                     
+		</div>   
+     </div>
+</div>
+</body>
+<script type="text/javascript"> 
+$(".btn").click(function(){
+    var data = new FormData($("#form")[0]);  // 要求使用的html对象
+    var url  = "{:U('MallApplication/mallApplication')}";
+    var url_ = "{:U('MallApplication/mallApplicationList')}"
+    $.ajax({  
+          url : url ,  
+          type: 'POST',  
+          data: data,  
+          async: true,  
+          // 下面三个参数要指定，如果不指定，会报一个JQuery的错误 
+　　　　　cache: false,  
+          contentType: false,  
+          processData: false,  
+          success: function (res) {  
+          	  alert(res.msg);
+              if(res.status){
+                  window.location.href = url_;
+              }  
+          },  
+          error: function (returndata) {  
+              console.log(returndata); 
+          }  
+     });
+})
+
+	$("input[name='thumb']").change(function(){
+	    var file   = $(this)[0].files[0];   
+	    var reader = new FileReader();  
+	    var _this  = this
+	    //将文件以Data URL形式读入页面  
+	    reader.readAsDataURL(file);  
+	    reader.onload=function(e){ 
+	    	//显示文件  
+	        $(_this).parent('a').siblings('img').attr("src",this.result);
+	    }
+	})
+</script>
+</html>

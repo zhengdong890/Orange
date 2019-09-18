@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>处理退款申请</title>
+		<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+        <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+        <link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+        <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/orderRefund.css" type="text/css">
+        <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+        <script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>       
+	</head>
+	<body>
+		<include file="Public:header_top" />
+		<div class="orderRefund_top">
+			<div>
+				<a class="logo2" href="http://{$Think.server.HTTP_HOST}" title="中国工业机器人,数控机床多少钱一台,无人机,3d打印机多少钱,农业无人机"></a>
+				<p>您的位置： <a href="{:U('Index/index')}">首页</a> > <a href="{:U('MemberOrder/orderList')}">我的订单</a> > <a>订单管理</a> </p>
+			</div>			
+		</div>	
+		<ul class="refund_step">
+			<li>
+				<span>1</span>买家申请仅退款
+			</li>
+			<li>
+				<span>2</span>卖家处理退款申请
+			</li>
+			<li>
+				<span>3</span>退款成功
+			</li>
+		</ul>
+		<div class="orderRefund_box">
+			<!--仅退款-->			
+			<div class="refund_style_1 dealWith_refund">				
+				<h2>请处理退款申请</h2>
+				<ul>
+					<li>· 如果您同意，将直接退款给买家。</li>
+					<li>· 如果您拒绝，买家可以要求e橙客服介入处理。如e橙客服核实是您的责任，将会影响您的店铺评分。</li>
+					<li>· 如果您逾期未处理，系统将自动退款给买家。</li>
+				</ul>
+				<button>同意退款申请</button>
+				<div>
+					<span>您还可以：</span> <a>拒绝退款申请</a> | <a>申请介入</a>
+  				</div>
+  				<div>留言板</div>
+  				<div>
+  					<img />
+  					<p>一座空城 - 买家 <span>2017-04-08 10:00:00</span></p>
+  					<p>发起了仅退款申请，货物状态：未收到货。原因：其他。金额：20.00元。</p>
+  				</div>  				
+			</div>
+			<!--退款成功-->
+			<div class="refund_ok refund_style_box">
+				<div>
+					<h3>退款成功</h3>
+			        <p>退款成功时间：<span>2017-04-12 14:30:55</span></p>
+				</div>
+			    <div>
+			    	<p>退款总金额：<span class="star">¥20.00</span>  <a>查看钱款去向</a></p>
+			    	<div>
+			    		<p>退回银行卡：¥20.00</p>
+			    		<ul>
+			    			<li>
+			    				卖家退款
+			    				<p>2017-04-12 14:30</p>
+			    			</li>
+			    			<li>
+			    				银行受理
+			    				<p>2017-04-12 16:30</p>
+			    			</li>
+			    			<li>
+			    				退款成功
+			    				<p>2017-04-12</p>
+			    			</li>
+			    		</ul>
+			    	</div>
+			    </div>
+			    <div>
+			    	<h3>协商历史</h3>
+			    	<ul>
+			    		<li>
+			    			<p>卖家 <span>2017-04-12 14:30:55</span></p>
+			    			<p>商家主动同意，退款给买家20.00元。</p>
+			    		</li>
+			    		<li>
+			    			<p>卖家 <span>2017-04-12 14:30:55</span></p>
+			    			<p>商家同意了本次售后服务申请。</p>
+			    		</li>
+			    		<li>
+			    			<p>买家 <span>2017-04-12 14:30:55</span></p>
+			    			<p>发起了申请，货物状态：未发货，原因：其他，金额：20.00元，说明：...。</p>
+			    		</li>
+			    	</ul>
+			    </div>
+			</div>
+			<!--订单信息-->
+			<div class="right">
+				<h3>订单信息</h3>
+				<div>
+					<img src="{$goods_thumb}" alt="" width="100" />
+					<p><a class="order_detail">商品名</a></p>
+				</div>
+				<table>
+					<tr>
+						<td>买家：</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>订单编号：</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>单价：</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>快递：</td>
+						<td></td>
+					</tr>
+				</table>
+				<table>
+					<tr>
+						<td>退款编号：</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>退款金额：</td>
+						<td><span class="star">20.00</span> 元</td>
+					</tr>
+					<tr>
+						<td>原因：</td>
+						<td>其他</td>
+					</tr>
+					<tr>
+						<td>要求：</td>
+						<td>仅退款</td>
+					</tr>
+					<tr>
+						<td>货物状态：</td>
+						<td>未收到货</td>
+					</tr>
+					<tr>
+						<td>说明：</td>
+						<td></td>
+					</tr>
+				</table>
+			</div>			
+		</div>
+	<script>
+	    function checkRefund(){
+	    	console.log({$type})
+	    	if({$type}==1){
+	    		$(".refund_style").css("display","none")
+	    		$(".refund_style_1").css("display","block")
+	    		$(".return").css("display","none")
+	    	}
+	    }
+	    checkRefund()
+	    
+	    $(".refund_style>ul li").hover(function(){
+			$(this).toggleClass("active");
+		})
+	    //退货推款
+		$(".refund_style>ul li:eq(0)").click(function(){
+			$(".refund_style").css("display","none")
+			$(".refund_style_2").css("display","block")
+			$(".refund_step").css("display","block")
+		})
+		//仅退款
+		$(".refund_style>ul li:eq(1)").click(function(){			
+			$(".refund_style>ul>div").css("display","block")
+		})
+		$(".refund_style>ul button").click(function(){
+			$(".refund_style").css("display","none")
+			$(".refund_style_1").css("display","block")
+			$(".refund_step").css("display","block")
+		})
+		//换货
+		$(".refund_style>ul li:eq(2)").click(function(){
+			$(".refund_style").css("display","none")
+			$(".refund_style_3").css("display","block")
+			$(".refund_step").css("display","block")
+		})
+		//上传帮助
+		$(".only_refund tr:eq(2) td a").click(function(){
+			var display =$(this).next("div").css('display');
+			if(display=="none"){
+				$(this).next("div").css("display","block")
+			}
+			if(display=="block"){
+				$(this).next("div").css("display","none")
+			}
+		})
+		//取消并返回
+		$(".return").click(function(){
+			$(".refund_style").css("display","block");
+			$(".refund_style_box").css("display","none");
+			$(".refund_step").css("display","none");
+			$(".refund_style>ul>div").css("display","none")
+			$("form").resetForm();
+		})
+		//选择退货退款原因
+		$("#refundForm2 tr:eq(0) td div").hover(function(){
+			$(this).find("ul").toggle()
+		})
+		$("#refundForm2 tr:eq(0) td div ul li").click(function(){
+			var a = $(this).text();
+			$(this).addClass("active");
+			$(this).siblings().removeClass("active")
+			$("#refundForm2 tr:eq(0) td div span").text(a)
+			$(this).find("ul").css("display","none")
+		})
+		//选择换货原因
+		$("#refundForm3 tr:eq(0) td div").hover(function(){
+			$(this).find("ul").toggle()
+		})
+		$("#refundForm3 tr:eq(0) td div ul li").click(function(){
+			var a = $(this).text();
+			$(this).addClass("active");
+			$(this).siblings().removeClass("active")
+			$("#refundForm3 tr:eq(0) td div span").text(a)
+			$(this).find("ul").css("display","none")
+		})
+	</script>	
+	</body>
+</html>

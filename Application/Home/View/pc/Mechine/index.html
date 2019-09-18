@@ -1,0 +1,329 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="keywords" content="{$seo['keywords']}">
+<meta name="description" content="{$seo['description']}"">
+<meta name="copyright" content="深圳市橙橙网络科技有限公司(www.orangesha.com)版权所有">
+<meta name="author" content="橙橙分享"> 
+<title>{$seo['title']}</title>
+
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/home.css" type="text/css">
+<link rel="stylesheet" href="/Public/Orange/script/jquery.kinMaxShow/base.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.css">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.js"></script>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/tool.js"></script>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/list.js"></script>   
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Orange/css/home.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/list.css" type="text/css">    
+    <style>
+    #listdiv {height:50px;}
+    .menu{display:none;}
+    p.text{padding:0 0;}
+    </style>    
+</head>
+<body >
+<include file="Public:header_top" />
+<include file="Public:header_search" />
+<include file="Public:nav" />
+<!-- body -->
+
+<div class="list">
+    <div class="list-header">
+        <span>
+        <a href="{:U('Index/index')}">首页</a> > 
+        <a href="http://{$Think.server.HTTP_HOST}/{$crumb[0][0]}.html"> {$crumb[0][1]}</a>
+        <if condition="$crumb[1][1] neq ''">>
+        <a href="http://{$Think.server.HTTP_HOST}/{$crumb[1][0]}.html"> {$crumb[1][1]}</a>
+        </if>
+        <span class="header-right">共 {$count}件相关商品</span></span>
+    </div>
+    <div class="recommended fl">
+        <div class="type-list">
+            <h3><span></span>{$crumb[0][1]}</h3>
+            <ul>
+                <volist name='cats' id='v'>
+                <if condition="$v['id'] eq $cat_id">
+                <li class="active">
+                <else/>
+                <li>
+                </if>
+                <span><a href="javascript:;" data-id="{$v['id']}" data-router="{$v['router']}">{$v['cat_name']}</a></span></li>
+                </volist>
+            </ul>
+        </div>
+        <div class="info-right">
+            <div class="title">近期热租商品</div>
+            <volist name='rents' id='v'>
+            <div class="li">
+                <a href="http://{$Think.server.HTTP_HOST}/fenxiang-{$v['id']}"><img src="__ROOT__{$v['goods_thumb']|substr=1}" alt=""></a>
+                <div class="text"> <a href="{http://{$Think.server.HTTP_HOST}/fenxiang-{$v['id']}">{$v['goods_name']}</a></div>
+                <div class="price">￥{$v['goods_price']} /月起
+                <div class="sales">销量：{$v['sale_num']}</div>
+                </div>
+            </div>
+            </volist>
+        </div>
+    </div>
+    <div class="right-list fl">
+        <div class="list-title">
+            <div class="list-cmp">
+                <div class="clearfix">
+                    <p class="text fl">品牌:</p>
+                    <ul class="clearfix fl brand">
+                        <volist name='brands' id='v'>
+                        <li data-id="{$v['id']}">
+                        <img src="__ROOT__{$v['brand_thumb']|substr=1}" alt="">
+                        </li>
+                        </volist>
+                    </ul>
+                </div>
+
+                <a href="javascript:;" class="more">更多</a>
+                <a href="javascript:;" class="more chose-more">多选</a>
+                <div class="btns">
+                    <a href="javascript:;" class="save">确定</a>
+                    <a href="javascript:;" class="close">取消</a>
+                </div>
+            </div>
+            <div class="list-price clearfix">
+                <p class="text fl">价钱:</p>
+                <ul class="clearfix fl">
+                    <volist name='price' id='v'>
+                    <li data-price="{$v[0]}" class='price_li'>{$v[1]}</li>
+                    </volist>
+                    <li class="into">
+                        <input type="text"> - <input type="text"> <span class='price_btn'>确定</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="list-type">
+                <div class="clearfix">
+                    <p class="text fl">类型:</p>
+                    <ul class="clearfix fl">
+                    <volist name='cats' id='v'>
+                    <li><a href="javascript:;" data-id="{$v['id']}" data-router="{$v['router']}">{$v['cat_name']}</a></li>
+                    </volist>
+                    </ul>
+                </div>
+                <a href="javascript:;" class="more">更多</a>
+            </div>
+            <div class="list-adr">
+                <div class="clearfix">
+                    <p class="text fl">区域:</p>
+                    <div class="chose-adr area_select">
+                        <select name='province'><option value="0">全国</option></select>
+                        <select name='city'><option value="0">市级</option></select>
+                        <a href="{$link}" style="border: 1px solid #A7A7A7; color: #000; padding:2px 10px;">确定</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 商品列表 -->
+        <ul class="good-list clearfix">
+            <volist name="goods" id="v">      
+            <li>
+                <div class="good-box">
+                    <a href="http://{$Think.server.HTTP_HOST}/fenxiang-{$v['id']}">
+                    <img class="good-icon" src="__ROOT__{$v['goods_thumb']|substr=1}" alt="商品">
+                    </a>
+                    <div class="contain">
+                        <div class="row-price">￥<span class="price">{$v['goods_price']}</span>
+                        <span class="closing">月成交 {$v['sale_num']} 笔</span></div>
+                        <div class="title"><a href="http://{$Think.server.HTTP_HOST}/fenxiang-{$v['id']}">{$v['goods_name']}</a></div>
+                        <div class="shop-name"><span class="rated">评价 <span>{$v['comment_number']}</span></span></div>
+                        <div class="shop-icon">
+                            <if condition="$v['is_renzheng'] eq '1'">
+                                <img src="{:C('STATIC_URL')}/Home/images/renzheng.png" alt="">
+                            </if>
+                            <if condition="$v['safest'] neq '0'">
+                                <img src="{:C('STATIC_URL')}/Home/images/safest.png" alt="">
+                            </if>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            </volist>
+        </ul>
+        <!-- 商品列表结束 -->
+        <div class="section-bt">
+           {$html}
+        </div>
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- /底部 -->
+</body>
+<script>
+var paramer_arr = GetRequest();
+    PATH_NAME   = window.location.pathname;
+paramer_arr['p'] = 1;
+/*价格地址*/
+var price = (function(){  
+    $(".price_li").click(function(){
+    	var price = $(this).attr('data-price');
+    	paramer_arr['price'] = price;
+    	window.location.href = getUrl(paramer_arr);
+    });
+
+	$(".price_btn").click(function(){
+	    var price_1 = $(this).prev('input').prev('input').val(),
+	        price_1 = parseInt(price_1) > 0 ? parseInt(price_1) : 0,
+	        price_2 = $(this).prev('input').val(),
+	        price_2 = parseInt(price_2) > 0 ? parseInt(price_2) : 'max',
+	        price   = price_1 + '-' + price_2;   
+	    paramer_arr['price'] = price;   
+	    window.location.href = getUrl(paramer_arr);
+	});    
+})();
+
+/*区域地址*/
+var area = (function(){
+	var select_name = 'province',
+	    change_name = select_name,
+	    area        = {},//保存已经获取的区域
+	    select_area = {'province':0,'city':0};
+	$(".area_select").on('change','select',function(){
+	    select_name  = $(this).attr('name'),
+	    value        = $(this).val(); 
+	    change_name  = select_name == 'province'? 'city' : ''; 
+	    select_area[select_name] = value;
+	    if(select_name == 'province'){
+	        select_area['city'] = 0;
+	    }
+	    if(change_name){
+	        getArea(value);
+	    }   
+	    paramer_arr['province'] = select_area['province']; 
+	    paramer_arr['city']     = select_area['city'];  
+	    $(".area_select a").attr('href' , getUrl(paramer_arr));
+	})
+
+	function getArea(area_no , init_area_name){     
+	    if(area[area_no]){          
+	        showAreaHtml(area[area_no]);
+	    }else{
+	        $.post("{:U('Area/getArea')}",{'area_no':area_no},function(res){
+	            area[area_no] = res;
+	            showAreaHtml(res , init_area_name);
+	        })
+	    }       
+	}
+
+	function showAreaHtml(data , init_area_name){ 
+	    if(init_area_name == 'province'){
+	        var html = ["<option value='0'>全国...</option>"];
+	    }else{
+	        var html = ["<option value='0'>市级...</option>"];
+	    }
+	    
+	    for(var k in data){
+	        html.push("<option value='" + data[k].area_no +"'>" + data[k].area_name + "</option>");
+	    }
+	    html = html.join('');       
+	    if(init_area_name){
+	        $("select[name='"+ init_area_name +"']").html(html);
+	    }else{
+	        $("select[name='"+ change_name +"']").html(html);
+	        if(change_name == 'city'){
+	            $("select[name='area']").html("<option value='0'>请选择...</option>");  
+	        }
+	    }  
+	}
+	getArea(0 , 'province'); 	
+})();
+
+/*类型地址*/
+var cat = (function(){
+    $(".list-type .clearfix").on('click','a',function(){
+        var id     = $(this).attr('data-id');
+        var router = $(this).attr('data-router');
+        PATH_NAME  = "http://" + '{$Think.server.HTTP_HOST}' + '/robots_' + router; 
+        window.location.href  = getUrl(paramer_arr);
+    })
+
+    $(".type-list").on('click','a',function(){
+        var id     = $(this).attr('data-id');
+        var router = $(this).attr('data-router');
+        PATH_NAME  = "http://" + '{$Think.server.HTTP_HOST}' + '/robots_' + router; 
+        window.location.href  = getUrl(paramer_arr);
+    })    
+})();
+
+/*品牌地址*/
+var brand = (function(){
+	var type  = 1,
+	    brand = {};
+    $(".brand").on('click','li',function(){   
+        var id = $(this).attr('data-id');    
+        if(type == 1){            
+            paramer_arr['brand_id'] = id;
+    	    window.location.href  = getUrl(paramer_arr);
+        }else{
+            /*多选*/
+            if(brand[id]){
+            	delete brand[id]
+            }else{
+            	brand[id] = id;
+            }                 
+        }
+    })    
+    
+    /**
+     * 模式切换
+     */
+    $(".chose-more").click(function(){
+        type = type == 1 ? 2 : 1;//模式切换
+    })
+
+    $(".save").click(function(){
+    	var arr = [];
+    	for(var k in brand){
+            arr.push(k);
+    	}
+    	paramer_arr['brand_id'] = arr.join(',');
+    	window.location.href  = getUrl(paramer_arr);
+    })
+})();
+
+function getUrl(paramer_arr){
+    var paramer = '';
+    for(var k in paramer_arr){
+        paramer+='&'+ k + '=' + paramer_arr[k];
+    }
+    paramer = paramer.substring(1);
+    return PATH_NAME + '?' + paramer;
+}
+
+function GetRequest() {   
+   var url = location.search; //获取url中"?"符后的字串   
+   var theRequest = new Object();   
+   if (url.indexOf("?") != -1) {   
+      var str = url.substr(1);   
+      strs = str.split("&");   
+      for(var i = 0; i < strs.length; i ++) {   
+         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);   
+      }   
+   }   
+   return theRequest;   
+} 
+
+$(".go").click(function(){
+	var val = $(".go_number").val();
+	paramer_arr['p'] = parseInt(val) > 0 ? parseInt(val) : 1;
+	window.location.href = getUrl( paramer_arr);
+})
+</script>
+</html>

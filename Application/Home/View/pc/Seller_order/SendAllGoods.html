@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>批量发货</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/all-use.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/side-nav.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/sell-management.css">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+<style>
+.hide{display:none}
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end --> 
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="Public:sellerLeft" />  
+        <div class="user-right marT20 fRi">
+        	<div class="sell-management clearfix" style='width:auto'>
+        		<div class="section2">
+		             <div class="deliver_top"><a href="{:U('Seller_order/sellerIndex')}">我的商城</a> > <a href="{:U('Seller_order/delivery')}">发货管理</a> > 发货</div>  
+		             <!--第一步-->
+		             <p class="deliver_step"><span>第一步</span> 确认发货/退货信息</p>
+		             <div class="deliver_address">
+		             	<p>我的发货信息：<input class="address_info" type="text" disabled="disabled" value="广东省深圳市宝安区 粤海街道 深圳软件产业基地"><a class="revise_address">更改我的发货信息</a></p>
+		             	<!--更改发货信息-->
+		             	<div class="edit_adress">
+		             		<p>请选择合适的地址： <a href="http://www.orangesha.com/wuliu.html?title=4">地址库管理</a> <a class="close_edit_adress" href="javascript:;">关闭</a></p>		            		
+		             		<ul>
+		             			<li>
+		             				<span><input type="radio" checked="checked" name="fahuo_adress"> 小林</span>
+		             				<span>广东省深圳市宝安区 粤海街道</span>
+		             				<span>515000</span>
+		             				<span>13522112145</span>
+		             			</li>
+		             			<li>
+		             				<span><input type="radio" name="fahuo_adress"> 小林</span>
+		             				<span>广东省深圳市宝安区 粤海街道</span>
+		             				<span>515000</span>
+		             				<span>13522112145</span>
+		             			</li>
+		             		</ul>
+		             	</div>
+		             	<p>我的退货信息：<input class="address_info" type="text" disabled="disabled" value="广东省深圳市宝安区 粤海街道 深圳软件产业基地"><a class="revise_address">更改我的退货信息</a></p>
+		             	<!--更改退货信息-->
+		             	<div class="edit_adress">
+		             		<p>请选择合适的地址： <a href="http://www.orangesha.com/wuliu.html?title=4" target="_blank">地址库管理</a> <a class="close_edit_adress" href="javascript:;">关闭</a></p>		            		
+		             		<ul>
+		             			<li>
+		             				<span><input type="radio" checked="checked" name="tuihuo_adress"> 小林</span>
+		             				<span>广东省深圳市宝安区 粤海街道</span>
+		             				<span>515000</span>
+		             				<span>13522112145</span>
+		             			</li>
+		             			<li>
+		             				<span><input type="radio" name="tuihuo_adress"> 小林</span>
+		             				<span>广东省深圳市宝安区 粤海街道</span>
+		             				<span>515000</span>
+		             				<span>13522112145</span>
+		             			</li>
+		             		</ul>
+		             	</div>
+		             	<div><span>*</span>请正确填写退货地址。若因地址填写不准确导致的货物无法退回等风险需要您承担。</div>
+		             </div>		             		             
+		             <!--第二布-->
+		             <p class="deliver_step"><span>第二步</span> 选择物流服务</p>
+		             <ul>
+		             	<li>公司名称</li>
+		             	<li>运单号码</li>
+		             	<li>操作</li>
+		             </ul>
+		             <ul>
+		             	<li>
+		             		<select>
+		             		<foreach name="kd" item="vo">
+		             			<option value="{$vo.code}">{$vo.company}</option>
+		             		</foreach>
+		             		</select>
+		             	</li>
+		             	<li><input type="text"></li>
+		             	<li><button>确认</button></li>
+		             </ul>
+		             <!--第三步-->
+		             <p class="deliver_step"><span>第三步</span> 确认收货信息及交货详情</p>
+		             <foreach name="order" item="vo">
+		             <div class="deliver_order" order_id="{$vo['order_id']}">
+		             	<div>订单编号：{$vo['order_sn']} 创建时间：{$vo['create_time']|date='Y-m-d H:i:s',###} <button class="send_btn">单独发送</button></div>
+		             	<foreach name="vo['data']" item="v">
+		             	<div class="good_div">
+		             		<img src="__ROOT__<if condition="substr($v['goods_thumb'] , 0 , 1) eq '.'">{$v['goods_thumb']|substr=1}<else/>{$v['goods_thumb']}</if>" alt="{$v['goods_name']}" />
+		             		<p>{$v['goods_name']}</p>
+		             	</div>
+		             	</foreach>
+		             	<div class="member_select">
+		             		<p>买家选择：快递</p>
+		             		<p>我的备注：<textarea placeholder="您可以在此输入备忘信息（仅卖家自己可见）"></textarea></p>
+		             	</div>
+		             	<div class="member_adress">
+		             		买家收货信息：<input class="address_info" type="text" disabled="disabled" value="{$order[0]['address']}">
+		             		<a class="revise_address">修改</a>
+		             	</div>
+		             </div>
+		             </foreach>
+		             <!--批量发货-->
+		             <div class="all_send_div">
+		             	<p>填写运单号后确认，交易状态就会更改为“卖家已发货，等待买家确认”</p>
+		             	<button class="all_send_btn">批量发货</button>
+		             </div>
+	            </div> 
+	        </div>     
+        </div>
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+//更改发货退货地址
+$(".revise_address").click(function(){
+	$(this).parent().next(".edit_adress").stop().slideToggle()
+})  
+$(".close_edit_adress").click(function(){
+	$(this).parent().parent().stop().css("display","none")
+})
+
+</script>
+</body>
+</html>

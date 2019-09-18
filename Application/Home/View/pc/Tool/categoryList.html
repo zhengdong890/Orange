@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="keywords" content="{$seo['keyword']}">
+<meta name="description" content="{$seo['description']}"">
+<meta name="copyright" content="深圳市橙橙网络科技有限公司(www.orangesha.com)版权所有">
+<meta name="author" content="橙橙分享"> 
+<title>{$seo['title']}</title>
+
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+  <link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link href="{:C('STATIC_URL')}/Home/css/header.css" rel="stylesheet">
+  <!--[if (gte IE 9)|!(IE)]><!-->
+  <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-2.0.3.min.js"></script>
+  
+  <!--<![endif]-->
+  <!--[if lte IE 8 ]>
+  <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+  <![endif]-->
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/home.css" type="text/css">
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Orange/css/home.css" type="text/css">
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Orange/script/jquery.kinMaxShow/base.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/swiper/swiper.min.css">
+    <link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/favicon.ico" type="image/x-icon">
+    <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+    <script type="text/javascript" src="__STATIC__/swiper/swiper.min.js"></script>
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/index.js"></script>
+    <style type="text/css">
+        #kinMaxShow .KMSPrefix_kinMaxShow_button {
+            margin: 0 -590px 0 0;
+        }
+        .pagination {
+            position: absolute;
+            z-index: 20;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+        .swiper-pagination-bullet {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 8px;
+            margin: 0 5px;
+            opacity: 0.8;
+            border: 1px solid #fff;
+            cursor: pointer;
+            background-color:#37a3a3;
+        }
+        .swiper-pagination-bullet-active{
+            background-color:#ff6600;
+        }
+        .menu{display:none;}
+    </style>
+<include file="Public:header_top" />
+<include file="Public:header_search" />
+<include file="Public:nav" />
+<!-- body -->
+<div class="bodyer marB50">
+	<volist name="mall_goods" id="v">
+	<div class="index-brand" style='margin-top:30px'>
+	    <div class="brand-left">
+	        <!-- 商品标题 -->
+	        <div class="title">
+	        <img src="__ROOT__{$v['cat_thumb']|substr=1}">
+            <a href="http://{$Think.server.HTTP_HOST}/{$v['router']}.html">{$v['cat_name']}</a></div>
+	        <!-- 商品导航 -->
+	        <div class="left_nav">
+	            <volist name="v['child']" id="v1">
+	            <a href="http://{$Think.server.HTTP_HOST}/{$v1['router']}.html">{$v1['cat_name']}</a>
+	            </volist>
+	        </div>
+	        <img class="brand-icon" src="__ROOT__{$v['cat_thumb_1']|substr=1}" alt="">
+	    </div>
+	    <!-- 商品列表 -->
+	    <!-- start -->
+	    <ul class="brand-right">
+	    <volist name="v['goods']" id="v1" key="k">
+	        <if condition="$k elt 8">
+	        <li>
+	            <a href="http://{$v1['domain']}.orangesha.com/shangpin-{$v1['id']}.html">
+	                <img src="__ROOT__{$v1['goods_thumb']|substr=1}" alt="">
+	                <div class="text">
+	                    {$v1['goods_name']}  
+	                    <div class="price">￥{$v1['goods_price']/10000}万</div>
+	                </div>
+	            </a>
+	        </li>
+	        </if>
+	    </volist>    
+	    </ul>
+	</div>        
+	</volist>
+    <div class="program">
+        <ul>
+            <li>
+                <div class="program-list">
+                    <div class="program-icon icon1"></div>
+                    <div class="text">
+                        <div class="text-top">全球精品</div>
+                        <div class="text-bottom">一站式全产业链平台</div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="program-list">
+                    <div class="program-icon icon2"></div>
+                    <div class="text">
+                        <div class="text-top">天天底价</div>
+                        <div class="text-bottom">优品秒拍优惠购不停</div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="program-list">
+                    <div class="program-icon icon3"></div>
+                    <div class="text">
+                        <div class="text-top">融资租赁</div>
+                        <div class="text-bottom">特有的招标配套服务</div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="program-list">
+                    <div class="program-icon icon4"></div>
+                    <div class="text">
+                        <div class="text-top">共享未来</div>
+                        <div class="text-bottom">智能装备的分享社区</div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+  <!-- /主体 -->
+<div> 
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- /底部 -->	
+</body>
+</html>

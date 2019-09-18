@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+<title>长沙高新区虹桥小学</title>
+<meta name="keywords" content="" />
+<meta name="description" content=""/>
+
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/phone/css/jquery.mobile-1.2.0.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/phone/css/master.css" />
+<link rel="stylesheet" href="__PUBLIC__/phone/css/ygfuwu/princil.css" />
+<script type="text/javascript" src="__PUBLIC__/phone/js/jquery-1.6.4.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/phone/js/jquery.mobile-1.2.0.js"></script>
+<script type="text/javascript" src="__PUBLIC__/phone/js/banner.js"></script>
+<script type="text/javascript" src="__PUBLIC__/phone/js/my_js.js"></script>
+
+    <!-- <link rel="stylesheet" href="__PUBLIC__/phone/css/Common/index.css" /> -->
+    <!-- <link rel="stylesheet" href="__PUBLIC__/phone/css/Common/rest.css" /> -->
+    <!-- <link rel="stylesheet" href="__PUBLIC__/phone/css/index/same.css" /> -->
+    <script type="text/javascript" src="__PUBLIC__/phone/js/myscript.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/phone/js/focus.js"></script>
+<script type="text/javascript" src="__PUBLIC__/phone/js/jquery.SuperSlide.js"></script>
+
+</head>
+<body>
+<div data-role="page" data-theme="a">
+<!--~~~~~~ header start~~~~~~~ -->
+<include file="Public:header" />
+<!--~~~~~header end~~~~~~~~~~~~~ -->
+<!-- 主体内容开始 -->
+<div data-role="content" class="content">
+      <!-- ~~~留言板开始~~~ -->
+          <div class="about">
+              <div class="title ui-bar-f ui-grid-a"><span class="ui-block-a">留言板</span><span class="ui-block-b more_i"><a href="about.asp" data-role="button" data-inline="true"></a></span></div>
+              <div class="content-wrap clearfix article_cn1">
+                        <div class="cont_top">
+                                  <div class="content">
+                                    <div class="title1">
+                                                  <h3 style="font-size:22px;">温馨提示</h3>
+                                      </div>
+                                      <div class="ts1">
+                                                      <p>留言板是我校为方便群众通过电子网络与学校沟通而开辟的栏目。在这里，您可以向学校反映您
+                                                          所关心和需要解决的各种问题，也欢迎对我校教育工作提出宝贵的批评和建议。所反映之事如在我
+                                                          校受理职责范围内，我校都将为您保密并按 "分级负责，谁主管、谁负责"的原则认真办理，受理情
+                                                          况将在30个工作日内以适当的方式及时向您反馈，请勿重复来信。填写者应 逐项填写表中内容（如
+                                                          不涉及被投诉者的可不填写），反映内容或建议事项字数在1000字以内为宜，并至少留下一个联系方
+                                                          式（最好 是电子邮箱或电话）。所填内容表述务必简明、准确和真实，否则由此引起的不良后果及法
+                                                          律责任自负。
+                                                      </p>
+                                      </div>
+                                      <form name="form" class="formjzxx" method="post" action="{:U('lyanban')}"  onsubmit = "return check();">
+                          <div class="formjzxx">
+                          <p>您的姓名：
+                                              <input id="name" name="name" type="text" class="easyui-validatebox validatebox-text">　  请输入您的姓名  &nbsp;
+                                              <input style="width:13px" id="ckbName" type="checkbox" value="1" name="niming"><label for="ckbName">匿名提交</label>
+                           </p>
+                                       <div id="extinfo" style="display: block;">
+                                              <p>性　　别：<input type="radio" name="sex" style="width:13px" value="男" checked="checked">男　<input type="radio" name="sex" value="女" style="width:13px">女　 选择您的性别（默认为男）</p>
+                                        <p>年　　龄：<input class="easyui-validatebox validatebox-text" validtype="number" name="age">　请输入您的年龄（必须为合理的整形数字）</p>
+                                        <p>邮　　编：<input class="easyui-validatebox validatebox-text" validtype="number" name="zipcode">　必须为6位的整型数字</p>
+                                        <p>单　　位：<input name="danwei" type="text" class="easyui-validatebox validatebox-text" validtype="length[2,50]">　请输入您的工作单位：如：某某公司、务农等</p>
+                                        <p>家庭地址：<input name="address" type="text" class="easyui-validatebox validatebox-text" validtype="length[2,50]">　请输入您正确的家庭住址以便联系</p>
+                                        <p>固定电话：<input name="phone" type="text" class="easyui-validatebox validatebox-text">　请输入您的联系电话（固话）</p>
+                                              <p>手　　机：<input id="mobphone" name="mobphone" type="text" class="easyui-validatebox validatebox-text" validtype="mobile">　重要：请保证此号码的正确，做为首选联系方式</p>
+                                              <p>电子邮件：<input id="email" name="email" type="text" class="easyui-validatebox validatebox-text" validtype="email">　请输入您正确的电子邮箱账号</p>
+                                              </div>
+                                              <p>留言标题：<input id="title" name="title" type="text" class="easyui-validatebox validatebox-text" required="true" validtype="length[1,20]">　<span>* </span>请输入标题</p>
+                                        <p>留言内容：<textarea id="content" name="content" cols="" rows="" class="validatebox" required="true" validtype="length[10,500]"></textarea></p>
+                          </div>
+                                           <p style="float:left; padding-bottom:10px;">
+                                          <font style="border:none; float:left;">验证码：</font>
+                                          <font style="width:490px;border:none; float:left;">
+                                                    <input name="code" type="text" size="6" maxlength="5" class="reg_txt"> <img src="{:U('code')}"  onclick="shuaxin('img1')"  alt="验证码,看不清楚?请点击刷新验证码" height="10" style="cursor : pointer;"  id="img1" />
+                                                </font>
+                                            </p>
+                                           <p>　　　　
+                                       　                     <input type="submit" value="提交" class="submit" style="padding-top:0px">　
+                                                <input type="reset" value="重置" class="submit" style="padding-top:0px">
+                                            
+                                           </p>
+                                        </form>
+
+                                  </div>
+                        </div>
+                </div>
+              </div>
+  <!-- ~~~留言板结束~~~ -->       
+ <!--~~~ 校长信箱开始~~~~ -->
+<div class="content-wrap clearfix article_cn1">
+              <div class="title ui-bar-f ui-grid-a"><span class="ui-block-a">校长信箱</span><span class="ui-block-b more_i"><a  data-role="button" data-inline="true"></a></span></div>  
+              <div class="cont_top">
+              <div id="content">
+                            <div class="xiaozhangxinxiang_title">
+                                          <h2 style="font-weight:bold; ">温馨提示——校长信箱使用说明：</h2>
+                                            <p>1、欢迎您为长沙虹桥小学的发展提出建议，对于我们工作中的不足之处提出批评；</p>
+                                            <p>2、使用校长信箱请您自觉遵守法律法规真实客观的反映情况或问题；</p>
+                                            <p>3、来信务必注明联系方式（电话或邮箱），以方便我们及时回复。</p>
+                              </div>
+                              <form name="form" class="formjzxx" method="post" action="{:U('xzxinxiang')}"  onsubmit="return check();">
+                              <table width="100%" border="0" cellspacing="0" cellpadding="0" class="emailtable">
+                                            <tbody> 
+                                              <tr style="">
+                                                       <td>主　　题：</td>
+                                                       <td><input name="title" type="text" class="einput"></td>
+                                              </tr>
+                                              <tr style="">
+                                                       <td>邮　　箱：</td>
+                                                       <td><input name="email" type="text" class="einput"></td>
+                                              </tr>
+                                              <tr style="">
+                                                       <td>手机号码：</td>
+                                                       <td><input name="telnum" type="text" class="einput">
+                                                       *</td>
+                                              </tr>
+                                              <tr>
+                                                       <td valign="top">内　　容：</td>
+                                                       <td><textarea class="etext" name="content"></textarea>
+                                                       *</td>
+                                              </tr>
+                                              <tr>
+                                                         <td>验 证 码：</td>
+                                                         <td>  
+                                                          <input name="code" type="text" size="6" maxlength="5" class="reg_txt"> <img src="{:U('code')}"  onclick="shuaxin('img2');"  id="img2"  alt="验证码,看不清楚?"  style="cursor : pointer;" /d></td>
+                                              </tr>
+                                              <tr id="button">
+                                                      <td colspan="2"><input name="提交" type="submit" class="submit" value="提交"></td>
+                                              </tr>
+                                            </tbody>
+                              </table>
+                              </form>
+            
+              </div>
+            </div>
+</div>
+ <!--~~~~~~ 校长信箱结束~~~~~~ -->
+</div>          
+<!--~~~~~~~主体内容结束~~~~~-->
+<!-- ~~~尾部开始~~~~ -->
+              <include file="Public:footer" />
+<!--~~~~~~ 尾部结束~~~~~ -->
+</div>
+</body>
+<script type="text/javascript"> 
+function check(){
+      var title=$("input[name='title']").val();
+      var content=$("textarea[name='content']").val();
+      var code=$("input[name='code']").val();
+      var error='';
+      error=title==''?"标题不能为空":(content==''?"内容不能为空":(code==''?"验证码不能为空":error));
+        if(error){
+          alert(error);
+          return false;
+        }else{
+          return true;
+        }    
+}
+         
+    function shuaxin(obj){
+       var verifyimg = $("#"+obj).attr("src");
+       $("#"+obj).attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
+    }  
+
+</script>
+</html>

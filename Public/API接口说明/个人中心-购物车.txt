@@ -1,0 +1,40 @@
+修改共享商品购物车的数量
+地址 : http://www.orangesha.com/index.php/Home/Cart/cartChangeNumber
+参数 : {id:'购物车id',number:'商品的数量'}
+返回 : {"status":'' , 'msg':''}
+
+
+修改共享商品购物车的租期
+地址 : http://www.orangesha.com/index.php/Home/Member_center/cartChangeTime
+参数 : {id:'购物车id',rent_time:'商品的租期'}
+返回 : {"status":'' , 'msg':''}
+
+
+删除共享商品购物车
+地址 : http://www.orangesha.com/index.php/Home/Cart/cartDelete
+参数 : {id:'删除的购物车id',}
+返回 : {"status":'' , 'msg':''}
+
+
+批量删除共享商品购物车
+地址 : http://www.orangesha.com/index.php/Home/Cart/cartAllDelete
+参数 : {id:'删除的购物车id',id:'删除的购物车id',.........,id:'删除的购物车id'}
+返回 : {"status":'' , 'msg':''}
+
+
+修改商品购物车的数量
+地址 : http://www.orangesha.com/index.php/Home/Mall_cart/cartChangeNumber
+参数 : {id:'购物车id',number:'商品的数量'}
+返回 : {"status":'' , 'msg':''}
+
+
+删除商城商品购物车
+地址 : http://www.orangesha.com/index.php/Home/Mall_cart/cartDelete
+参数 : {id:'删除的购物车id',}
+返回 : {"status":'' , 'msg':''}
+
+
+批量删除商城商品购物车
+地址 : http://www.orangesha.com/index.php/Home/Mall_cart/cartAllDelete
+参数 : {id:'删除的购物车id',id:'删除的购物车id',.........,id:'删除的购物车id'}
+返回 : {"status":'' , 'msg':''}

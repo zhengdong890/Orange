@@ -1,0 +1,151 @@
+/******************************************账号安全******************************************************/
+地址 : http://www.orangesha.com/index.php/Home/Member_center/getMemberData
+返回 : {  'status':'',
+          'msg'{
+               'email':'邮箱地址',
+               'telnum' :'电话号码',
+               'is_identity':'是否进行了身份验证',
+               'is_security':'是否有密保'
+          }
+        }
+
+/******************************************修改密码******************************************************/
+
+1.发送修改密码时 验证手机号码的短信
+地址 : http://www.orangesha.com/index.php/Home/MemberData/createPasswordUpdateCode
+返回 : {   'code':'',
+           'msg' :'',
+           'sub_code':'',
+           'request_id':'',
+           "result":{
+               'err_code':'','model':'','success':'true或者false'
+            }
+       }
+result 为空表示失败
+success true表示成功 false表示失败
+
+
+2.验证 生成手机短信验证码(修改密码)是否正确 
+地址 : http://www.orangesha.com/index.php/Home/MemberData/checkPasswordUpdateCode
+返回 : {   'status':'',
+           'msg' :''
+       }
+参数 {phone_code:''}
+status 1表示成功 0失败
+ 
+3.修改密码
+地址 : http://www.orangesha.com/index.php/Home/MemberData/passwordUpdate
+请求参数 : {old_password:'旧密码',password:'新密码',repeat_password:'确认新密码'}
+返回 : {"status": , 'msg':'' ，‘code’} 
+code :1 旧密码错误 
+status 1表示成功 0失败
+
+
+4.再次发送短信剩余时间
+地址 : http://www.orangesha.com/index.php/Home/MemberData/getPwdCodeTime
+返回 : {"status": , 'msg':'' ，‘code’,data:''} 
+data :剩余的时间 单位 为秒
+status 1表示成功 0失败
+
+/******************************************更换手机号码******************************************************/
+
+1.生成 旧的手机号码短信验证码
+地址 : http://www.orangesha.com/index.php/Home/MemberData/createChangePhoneCode
+返回 : {   'code':'',
+           'msg' :'',
+           'sub_code':'',
+           'request_id':'',
+           "result":{
+               'err_code':'','model':'','success':'true或者false'
+            }
+       }
+result 为空表示失败
+success true表示成功 false表示失败
+
+2.验证 旧的手机号码短信验证码 是否正确
+地址 : http://www.orangesha.com/index.php/Home/MemberData/checkChangePhoneCode
+请求参数 : {old_password:'旧密码',password:'新密码',repeat_password:'确认新密码'}
+返回 : {"status": , 'msg':''}
+status 1表示成功 0失败
+
+3.生成  新的手机号码短信验证码
+地址 : http://www.orangesha.com/index.php/Home/MemberData/createNewPhoneCode
+请求参数 : {telnum:''}
+返回 : {   'code':'',
+           'msg' :'',
+           'sub_code':'',
+           'request_id':'',
+           "result":{
+               'err_code':'','model':'','success':'true或者false'
+            }
+       }
+result 为空表示失败
+success true表示成功 false表示失败
+
+4.修改手机号码
+http://www.orangesha.com/index.php/Home/MemberData/changePhone
+请求参数 : {code:'收到的新手机号码的短信验证码'}
+返回 : {"status": , 'msg':'','code'}
+status 1表示成功 0失败
+
+
+/******************************************身份认证******************************************************/
+
+
+1.生成  手机号码短信验证码(用于身份认证)
+地址 : http://www.orangesha.com/index.php/Home/MemberCarded/createQulificationCode
+返回 : { 'status':'','msg':''  }
+
+2.验证 手机号码短信验证码(用于身份认证) 是否正确
+地址 : http://www.orangesha.com/index.php/Home/MemberCarded/checkQulificationCode
+请求参数 : {'phone_code':'手机接收到的验证码'}
+返回 : {"status": , 'msg':''}
+status 1表示成功 0失败
+
+3.身份认证信息ajax提交
+地址 : http://www.orangesha.com/index.php/Home/MemberCarded/identityQualification
+参数 : {name:'姓名',carded_code:'身份证',carded_thumb1:'身份证正面',carded_thumb2:'身份证反面',carded_thumb3:'身持身份证正面头部照'}
+返回 : {"status":'' , 'msg':''}
+
+
+/******************************************密保设置******************************************************/
+
+1.获取用户已经设置的密保
+地址 : http://www.orangesha.com/index.php/Home/MemberSecurity/getSecurity
+返回 : { 'status':'','msg':'','data'}
+
+1.生成  手机号码短信验证码(用于密保设置)
+地址 : http://www.orangesha.com/index.php/Home/MemberSecurity/createSecurityCode
+返回 : { 'status':'','msg':''  }
+
+1.验证 手机号码短信验证码(用于密保设置) 是否正确
+地址 : http://www.orangesha.com/index.php/Home/MemberSecurity/checkSecurityCode
+请求参数 : {'phone_code':'手机接收到的验证码'}
+返回 : {"status": , 'msg':''}
+
+2.获取密保的所有问题
+地址 : http://www.orangesha.com/index.php/Home/MemberSecurity/getQuestion
+返回 : { 'status':'','msg':'' ,'data':}
+
+2.ajax提交设置的密保问题 答案
+地址 : http://www.orangesha.com/index.php/Home/MemberSecurity/securityAdd
+参数 : {'1':{qusetion:'问题1'，answer:'答题1'},'2':{qusetion:'问题2'，answer:'答题3'},'3':{qusetion:'问题3'，answer:'答题3'}}
+返回 : {"status":'' , 'msg':''}
+
+
+/******************************************邮箱设置******************************************************/
+
+1.生成  手机号码短信验证码(用于邮箱设置)
+地址 : http://www.orangesha.com/index.php/Home/MemberEmail/CreateEmailBindingCode
+返回 : { 'status':'','msg':''  }
+
+
+1.验证 手机号码短信验证码(用于邮箱设置) 是否正确
+地址 : http://www.orangesha.com/index.php/Home/MemberEmail/checkEmailBindingCode
+请求参数 : {'phone_code':'手机接收到的验证码'}
+返回 : {"status": , 'msg':''}
+
+2.ajax提交设置的邮箱
+地址 : http://www.orangesha.com/index.php/Home/MemberEmail/addEmail
+请求参数 : {'email':'需要绑定的邮箱地址'}
+返回 : { 'status':'','msg':''}

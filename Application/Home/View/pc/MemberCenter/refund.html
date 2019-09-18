@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>退款管理</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/all-use.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/side-nav.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/sell-management.css">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+<style>
+.refund{ width: 970px; border: 1px solid #E4E4E4; float: left; margin: 30px 0px 0px 6px;}
+.refund_top{ width: 100%; background-color: #F2F1F1; padding: 10px 40px; box-sizing: border-box;}
+.refund_box{ padding: 10px 30px;margin-bottom: 30px;}
+.refund_box>button{ color: white; padding: 3px 16px; background-color: #37A4A2; border-radius: 5px;font-family: "微软雅黑"; margin: 20px 0px 10px 0px;}
+.refund_box>table td{ text-align: left; height: 45px; width: 330px;}
+.refundInput{ height: 20px; width: 160px; padding: 2px 4px; }
+.refundTime{ width: 85px; padding: 2px 6px; height: 20px}
+.refundReason{width: 220px; height: 26px; font-size: 12px; border-color: #E6E6E6; background-color: #EEEEEE; padding: 0px 5px; font-family: "微软雅黑"; cursor: pointer;}
+.op{ background-color: white; border-color:#E6E6E6;}
+.search_box1{ width: 100%; padding: 20px 0px;}
+.refund_ul{ background-color: #E4E4E4; overflow: auto; padding: 10px 0px;}
+.refund_ul>li{ float: left; color: #333; text-align: center; font-family: "微软雅黑";}
+.search_box2{ width: 100%; min-height: 186px;}
+.search_box2>p{ text-align: center; font-size: 14px; color: #333; margin-top: 50px;}
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end --> 
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="Public:sellerLeft" />         
+            <div class="sell-management clearfix" style='width:auto;'>
+                <div class="refund">
+                	<div class="refund_top">退款管理</div>
+                	<div class="refund_box">
+                		<table class="noBorder">
+                			<tr>
+                				<td>订单编号： <input type="text" class="refundInput" /></td>
+                				<td>退款申请时间： <input type="text" class="refundTime" value="" /> 到 <input type="text"  class="refundTime" value=""/></td>
+                			</tr>
+                			<tr>
+                				<td>退款编号： <input type="text" class="refundInput" /></td>
+                				<td>
+                					退款状态： 
+                		               <select class="refundReason">
+                		               	  <option class="op">全部</option>
+                		                  <option class="op">退款申请等待买家确认</option>	
+                		                  <option class="op">卖家不同意，等待买家修改</option>	
+                		                  <option class="op">退款申请达成，等待买家发货</option>	
+                		                  <option class="op">卖家已发货，等待买家确认收货</option>	
+                		                  <option class="op">退款关闭</option>	
+                		                  <option class="op">退款成功</option>	
+                		               </select>
+                				</td>
+                			</tr>
+                		</table>               		
+                		<button>搜索</button>
+                		<div class="search_box1">
+                			没有符合的退款订单，请尝试其他搜索条件。
+                		</div>
+                	</div>
+                	<div>
+                		<ul class="refund_ul">
+                			<li style="width: 10%;">退款编号</li>
+                			<li style="width: 25%;">订单编号/商品信息</li>
+                			<li style="width: 7%;">买家</li>
+                			<li style="width: 10%;">交易金额</li>
+                			<li style="width: 10%;">退款金额</li>
+                			<li style="width: 10%;">申请时间</li>
+                			<li style="width: 10%;">超时时间</li>
+                			<li style="width: 8%;">退款状态</li>
+                			<li style="width: 10%;">操作</li>
+                		</ul>
+                	</div>
+                	<div class="search_box2">
+                		<p>没有符合的退款订单，请尝试其他搜索条件。</p>
+                	</div>
+                </div>
+            </div>                   
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+
+</script>
+</body>
+</html>

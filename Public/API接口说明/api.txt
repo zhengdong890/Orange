@@ -1,0 +1,95 @@
++status 1表示成功 0失败
+
+获取服务与会员页数据
+地址 : http://www.orangesha.com/index.php/Home/ShopEdit/getService
+返回 : {"data":[{"id":"1","content":'',"type_id":"-1"},{"id":"2","content":'',"type_id":"-2"}],"status":1} 
+type_id:-1为服务数据 
+type_id -2为会员数据 
+
+
+服务与会员页保存
+地址 : http://www.orangesha.com/index.php/Home/ShopEdit/service
+请求参数 : {id:''}
+返回 : {"status":1}
+
+/******************************************注册账号******************************************************/
+
+获取短信发送间隔剩余时间
+地址 : http://www.orangesha.com/index.php/Home/Member/registerCodeTime
+返回 : {"status":1,'time':''}
+
+/******************************************个人中心-企业认证******************************************************/
+
+获取企业认证信息
+地址 : http://www.orangesha.com/index.php/Home/Member_center/getQualification
+返回 : {"status": , 'msg':'', data :{}}
+data里面数据:
+renzheng_status:0 未申请 renzheng_status:1 申请正在审核 renzheng_status:2 认证申请审核未通过 renzheng_status:3 认证申请审核通过
+because:1 营业执照未通过 because:2 开户许可证未通过 because:3 组织机构代码证未通过 because:4 税务登记证未通过
+
+申请企业认证
+地址 : http://www.orangesha.com/index.php/Home/Member_center/businessQualification
+参数 : {
+          name:'企业名称',address:'地址','contact':联系方式,place_contact:联系人,contact_phone:联系电话,
+          bus_lice_type:营业执照类型,bus_lice:营业执照,permit:开户许可证,registration:税务登记证,code:组织机构代码证
+        }
+参数说明 : bus_lice_type:1 三证合一 2其他 
+           bus_lice_type=1时 不需要registration:税务登记证和code:组织机构代码证
+           bus_lice_type=2时 需要registration:税务登记证和code:组织机构代码证
+返回 : {"status": , 'msg':''}
+status:0申请失败 status:1申请成功
+msg:提示说明
+
+
+/******************************************个人中心-企业认证******************************************************/
+
+获取卖家商城申请结果
+地址 : http://www.orangesha.com/index.php/Home/Member_center/getMallData
+返回 : {"status":1 , 'msg':'','result':''}
+code:1 未申请商城 code:2 申请商城正在审核 code:3 商城已经开通
+
+申请商城
+地址 : http://www.orangesha.com/index.php/Home/Member_center/mallApplication
+返回 : {"status":1 , 'msg':''}
+
+
+/******************************************商城商品购买详情页******************************************************/
+
+商城商品加入购物车
+地址 : http://www.orangesha.com/index.php/Home/Mall_cart/cartAdd
+请求参数 : {goods_id:'商品id'}
+返回 : {"status":1 , 'msg':'','code':''}
+status:0 无法购买 status:0可以购买
+code:10 未登录 code:11 商家未认证
+msg:提示说明
+
+直接购买商城商品时 需要验证是否可以购买
+地址 : http://www.orangesha.com/index.php/Home/Mall_cart/getSeller
+请求参数 : {goods_id:'商品id' , rent_number:'租用数量' , rent_time:'租用时间'}
+返回 : {"status":1 , 'msg':'','code':''}
+status:0 无法购买 status:0可以购买
+msg:提示说明
+
+
+
+/******************************************卖家中心-物流管理******************************************************/
+
+1.获取快递公司
+http://www.orangesha.com/index.php/Home/Courier/getCouriersCompany
+返回 : {"status": , 'msg':'','data':{}}
+status 1表示成功 0失败
+data:返回的快递公司数据
+
+2.选择快递公司 
+参数 : {'快递公司id1':'快递公司id1',.....,'快递公司idN':'快递公司idN'}
+http://www.orangesha.com/index.php/Home/Courier/selectCouriersCompany
+返回 : {"status": , 'msg':''}
+status 1表示成功 0失败
+
+2.取消快递公司 
+参数 : {id:'快递公司id'}
+http://www.orangesha.com/index.php/Home/Courier/awayCouriersCompany
+返回 : {"status": , 'msg':''}
+status 1表示成功 0失败
+
+

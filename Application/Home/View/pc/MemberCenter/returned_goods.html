@@ -1,0 +1,146 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>返修退换货</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/returned_goods.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->	
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">       
+        <include file="MemberPublic:MemberLeft" />  
+        <div class="user-right marT20 box-s-c1 fRi">          
+            <ul class="returnGood_top">
+            	<li class="active">申请返修/退换货</li>
+	            	<table class="section-box1">
+		            	<thead>
+		            		<tr>
+		            			<td>订单编号</td>
+		            			<td>订单商品</td>
+		            			<td><select><option>下单时间</option><option>最近三个月</option><option>三个月以前</option></select></td>
+		            		</tr>
+		            	</thead>
+		            	<tbody>
+		            		<td colspan="3" class="no_refund">暂无申请返修/退换货信息</td>
+		            		<!--<tr>
+		            			<td>552365452632</td>
+		            			<td>
+		            				<ul>
+		            					<li>
+		            						<p><img /></p>
+		            						<p><button>申请</button></p>
+		            					</li>
+		            					<li>
+		            						<p><img /></p>
+		            						<p><button>申请</button></p>
+		            					</li>
+		            				</ul>
+		            			</td>
+		            			<td>2017-04-04</br>10:03:10</td>
+		            		</tr>-->
+		            	</tbody>
+		            </table>
+            	<li>返修/退换货记录</li>
+	            	<table class="section-box2">
+		            	<thead>
+		            		<tr>
+		            			<td>返修/退换货编号</td>
+		            			<td>订单编号</td>
+		            			<td>商品名称</td>
+		            			<td><select><option>申请时间</option><option>最近三个月</option><option>三个月以前</option></select></td>
+		            			<td><select><option>全部状态</option><option>处理中</option><option>已完成</option><option>退款中</option><option>待您邮寄</option><option>上门取件</option><option>待您评价</option></select></td>
+		            		    <td>操作</td>
+		            		</tr>
+		            	</thead>
+		            	<tbody>
+		            		<td colspan="6" class="no_refund">暂无返修/退换货记录</td>
+		            		<!--<tr>
+		            			<td>552365452632</td>
+		            			<td>552365452632</td>
+		            			<td>萨达萨达萨达萨达</td>
+		            			<td>2017-04-04</td>
+		            			<td>处理中</td>
+		            			<td><a>查看</a></td>
+		            		</tr>-->
+		            	</tbody>
+		            </table>
+            	<li>退款明细</li>
+	            	<table class="section-box3">
+		            	<thead>
+		            		<tr>
+		            			<td>服务单信息</td>
+		            			<td>退款明细</td>
+		            			<td>差额原因</td>
+		            			<td>退款信息</td>
+		            		    <td>操作</td>
+		            		</tr>
+		            	</thead>
+		            	<tbody>
+		            		<tr>
+		            			<td colspan="5" class="no_refund">暂无退款信息</td>
+		            		</tr>
+		            	</tbody>
+		            </table>
+            	<li>维修费明细</li>
+	            	<table class="section-box4">
+		            	<thead>
+		            		<tr>
+		            			<td>返修/退换货编号</td>
+		            			<td>维修单号</td>
+		            			<td>商品名称</td>
+		            			<td><select><option>申请时间</option><option>最近三个月</option><option>三个月以前</option></select></td>
+		            		    <td><select><option>全部状态</option><option>处理中</option><option>已完成</option><option>退款中</option><option>待您邮寄</option><option>上门取件</option><option>待您评价</option></select></td>
+		            		    <td>操作</td>
+		            		</tr>
+		            	</thead>
+		            	<tbody>
+		            		<tr>
+		            			<td colspan="6" class="no_refund">暂无维修费明细</td>
+		            		</tr>
+		            	</tbody>
+		            </table>
+            </ul>   
+            <div class="returnGood_search">
+            	<input type="text" /> <button>查询</button>
+            </div>                
+        </div>
+    </div>    
+</div>
+<!-- /主体 -->
+<include file="Public:footer" /> 
+
+</body>
+<script type="text/javascript">
+//判断左边导航
+function checkNav(){
+	$(".user-left-wrap .list:eq(4)>ul>li:eq(0) a").css("color","#ff6600")
+}
+checkNav() 
+
+   $(".returnGood_top li").click(function(){
+   	  $(this).addClass("active");
+   	  $(this).siblings().removeClass("active");
+   	  $(this).next("table").css("display","block");
+   	  $(this).siblings().next("table").css("display","none")
+   })
+</script>
+</html>

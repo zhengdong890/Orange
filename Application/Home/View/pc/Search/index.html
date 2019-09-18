@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="工业机器人租赁，智能装备租赁，智能装备分享，工业智能机器人交易，e橙优品">
+    <meta name="description" content="e橙优品专注于解决国内智能设备空闲问题，对接供给方和需求方，为万千中小企业解决设备和融资问题。我们是智能装备行业的专业电商平台，需求方、供给方、融资租赁公司三赢的B2B交易平台。">
+    <meta name="copyright" content="深圳市橙橙网络科技有限公司(www.orangesha.com)版权所有">
+    <meta name="author" content="e橙优品"> 
+  <title>e 橙优品智能装备分享平台-专业智能装备分享平台-工业智能装备租赁平台</title>
+
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+  <link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+  <!--[if (gte IE 9)|!(IE)]><!-->
+  <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-2.0.3.min.js"></script>
+  <!--<![endif]-->
+  <!--[if lte IE 8 ]>
+  <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+  <![endif]-->
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/home.css" type="text/css">
+    <link rel="stylesheet" href="/Public/Orange/script/jquery.kinMaxShow/base.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.css">
+    <link rel="shortcut icon" href="/Public/Home/images/ee.ico" type="image/x-icon">
+    <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.js"></script>
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/tool.js"></script>
+	<link rel="stylesheet" href="{:C('STATIC_URL')}/Orange/css/home.css" type="text/css">
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Orangesha/css/list.css" type="text/css">
+<style>
+.menu{display:none;}
+</style>    
+</head>
+<body >
+<include file="Public:header" />
+<include file="Public:nav" />
+<div class="list">
+    <div class="list-header">
+        <span>首页 > 节能环保装备 > 噪音处理</span><span class="header-right">共 {$count}件相关商品</span>
+    </div>
+    <div class="list-title" style='height:120px'>
+        <div class="list-price">
+            <ul>
+                <li class="text">价钱:</li>
+                <volist name='price' id='v'>
+                <li><a href="{$v['link']}">{$v[1]}</a></li>
+                </volist>
+                <!--<li class="into">
+                    <input type="text"> - <input type="text"> <span>确定</span>
+                </li>-->
+            </ul>
+        </div>
+        <div class="list-type">
+            <ul>
+                <li class="text">品牌:</li>
+                <volist name='brands' id='v'>
+                <li><a href="{$v['link']}">{$v['brand_name']}</a></li>
+                </volist>
+            </ul>
+        </div>            
+    </div>
+</div>
+<div class="bodyer marB50" style="">
+    <div class="mar1200c marT10 ofwVisible">
+        <div class="org-items">
+            <ul>
+                <volist name="goods" id="v">
+                <li class="items-box">
+                        <a class="i-pic" href="{:U('Goods/goods',array('goods_id'=>$v['id']))}" title="橙橙分享"><img src="__ROOT__{$v['goods_thumb']|substr=1}" alt="橙橙分享"> </a>
+                        <p><span class="f-cCol6 fRi">￥{$v['goods_price']} 元/月起</span><span class="f-nowrap na-1">{$v['goods_name']}</span></p>
+                    </li>
+                </volist>
+            </ul>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- /底部 -->
+</body>
+</html>

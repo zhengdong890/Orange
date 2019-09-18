@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="/Uploads/Huploadify/Huploadify.css"/>
+<script type="text/javascript" src="__PUBLIC__/js/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="/Uploads/Huploadify/jquery.Huploadify.js"></script>
+<style type="text/css">
+</style>
+<script type="text/javascript">
+
+$(function(){
+  var dataid = "{$getdata['id']}"; 
+	$('#upload').Huploadify({
+		auto:true,
+		fileTypeExts:'*.jpg;*.png;*.exe',
+		multi:true,
+		formData:{'key':dataid},
+		fileSizeLimit:9999,
+		showUploadedPercent:true,//是否实时显示上传的百分比，如20%
+		showUploadedSize:true,
+		removeTimeout:1000,
+		uploader:"<?php echo U('Tender/companyimgajx');?>",
+		onUploadStart:function(){
+			//alert('开始上传'); 
+			},
+		onInit:function(){
+			//alert('初始化');
+			},
+		onUploadComplete:function(){		
+		     $.post("{:U('Tender/resultajax')}",{"id":dataid},function(res){                
+                 if(res.msg=='ok'){
+			
+                      	$('#conten_img').attr('src',res.img);	
+		         }		       
+            });		 		  
+			//alert('上传完成');
+			},
+		    onDelete:function(file){ 
+			console.log('删除的文件：'+file);
+			console.log(file);
+		}
+		});
+	});
+</script>
+</head>
+
+<body>
+
+<div id="upload"></div>
+<div  style="width:280px;height:151px;overflow:hidden;"><img id="conten_img" src="{$getdata['img']}" style="width:280px;height:151px;"> </div>
+<form method="post" action="" id="conpanyaddress">
+
+<p>链接地址：<input type="text"  name="address" value="{$getdata['url']}" size="40"></p>
+<p>公司名称：<input type="text"  name="name" value="{$getdata['name']}" size="40"></p>
+<p><a href="javascript:uploadimg({$getdata.id});" style="background:#C43926;width:100px;color:#fff;padding:5px 25px 5px 25px;text-decoration:none;border-radius:5px;">提交</a></p>
+</form>
+<script>
+function uploadimg(id){
+    var address = $("input[name='address']").val();
+    var name = $("input[name='name']").val();
+
+    $.post("{:U('Tender/companyimgajx')}",{"id":id,'name':name,'address':address},function(res){                
+        if(res.msg=='ok'){
+		   alert('ID为'+res.id+'的信息已修改成功');
+		
+		}
+        window.location.reload();
+  });
+
+}
+</script>    
+</body>
+</html>

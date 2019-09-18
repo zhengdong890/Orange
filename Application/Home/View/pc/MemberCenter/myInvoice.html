@@ -1,0 +1,220 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>我的发票</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/favorites.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+<style>
+button{font-family: "微软雅黑";cursor: pointer; }
+table{ width: 100%;}
+table tr td{ border-color: #F2F2F2;}
+table thead td{background-color: #F3F3F3; line-height: 36px;padding-left: 20px;}
+table tbody td{padding: 12px 0px;text-align: center;}
+table tbody td:first-of-type{ text-align: left;width: 63%;}table tbody td:nth-of-type(2){width: 13%;}table tbody td:nth-of-type(3){width: 14%;}
+table tbody td img{width: 80px; height: 80px; border: 1px solid #ccc;vertical-align: text-top;margin: 0px 16px;}
+.invoice_top{ overflow: auto; width: 96%; margin: 10px auto;border-bottom: 2px solid #F4F4F4;} 
+.invoice_top>li{ float: left;padding: 6px 20px;position: relative;cursor: pointer;}
+.invoice_top .active{ color: #ff6600; border-bottom: 2px solid #ff6600;}
+.section-box{ position: absolute;top: 50px;width: 96%;}
+.section-box2{display: none;}
+.section-box1>ul:first-of-type{background-color: #FFFEEA;padding: 10px 30px;width: 100%;box-sizing: border-box;}
+.section-box1>ul:first-of-type li{ color: #ff6600;}
+.section-box1>ul:nth-of-type(2){overflow: auto;background-color: #F3F3F3; margin: 10px 0px;width: 100%;}
+.section-box1>ul:nth-of-type(2) li{float: left;text-align: center;line-height: 36px;}
+.section-box1>ul:nth-of-type(2) li:first-of-type{ width: 60%;}.section-box1>ul:nth-of-type(2) li:nth-of-type(2){ width: 17%;}.section-box1>ul:nth-of-type(2) li:nth-of-type(3){ width: 11%;}.section-box1>ul:nth-of-type(2) li:nth-of-type(4){ width: 12%;}
+.section-box2>ul:first-of-type{margin: 10px 0px;}
+.section-box2>ul:first-of-type li{line-height: 22px;}
+.section-box2>ul:first-of-type li:last-of-type{color: red;}
+.section-box2>.add_invoice{background-color: #FFFCED; width: 100%;border: 1px solid #EDECD4;padding: 10px 20px; box-sizing: border-box;}
+.section-box2>.add_invoice span{font-weight: bold;}
+.section-box2>.add_invoice button{background-color: #F4FEF3; border: 1px solid #BDE2C4; border-radius: 2px;padding: 2px 10px; margin-left: 20px;}
+.section-box2 .addInvoice_form{display: none;}
+.addInvoice_form{border-top: 1px solid #F3F3F3;padding: 10px 20px;}
+.addInvoice_form p span{color: #ff6600;}
+.addInvoice_form table td{border: none;}
+.addInvoice_form table td:first-of-type{width: 5%;text-align: right;}.addInvoice_form table td:nth-of-type(2){width: 11%;text-align: left;}
+.addInvoice_form table td input{width: 300px; height: 26px;font-family: "微软雅黑";}
+.addInvoice_form table td .button1:first-of-type{width: 60px;cursor: pointer; border: 1px solid #E5F3E4;background-color: #F4FEF3;border-radius: 2px;margin-right: 15px;}.addInvoice_form table td .button1:nth-of-type(2){cursor: pointer;width: 60px; border-radius: 2px;border: 1px solid #E9E9E9;background-color: #F5F5F5;}
+.invoice_detail{ margin: 20px 30px;display: none;}
+.invoice_detail table{ margin-top: 20px;}
+.invoice_detail table tbody td{ padding-left: 30px;}
+.invoice_detail table tbody td:first-of-type{width: 3%;}.invoice_detail table tbody td:nth-of-type(2){text-align: left;}
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->	
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="MemberPublic:MemberLeft" />  
+        <div class="user-right marT20 fRi">
+         	<ul class="invoice_top">
+         		<li class="active">补开发票</li>
+         		    <div class="section-box1 section-box">
+	         		   	<ul>
+					        <li>温馨提示：</li>
+					        <li>1.补开发票需下单在180天内，普票订单完成，增票订单完成10天以上。</li>
+					        <li>2.非自营实物类商品发票不由京东开具，如需开票请联系卖家咨询。</li>
+				        </ul>
+				        <ul>
+				        	<li>订单详情</li>
+				        	<li>发票类型</li>
+				        	<li>状态</li>
+				        	<li>操作</li>
+				        </ul>
+				        <!--<table>
+				        	<thead>
+				        		<tr>
+				        			<td colspan="4">
+				        				<span>2017-04-04 07:50:29</span>
+				           				<span>订单号：2102563254523</span>
+				        			</td>
+				        		</tr>
+				        	</thead>
+				        	<tbody>
+				        		<tr>
+			           				<td><img> 是倒萨倒萨大的 <span>x2</span></td>
+			           				<td>普通发票</td>
+			           				<td>未开</td>
+			           				<td><a>联系卖家</a></td>
+			           			</tr>
+			           			<tr>
+			           				<td><img> 是倒萨倒萨大的 <span>x2</span></td>
+			           				<td>电子发票</td>
+			           				<td>已开</td>
+			           				<td><a>发票详情</a></td>
+			           			</tr>
+			           		</tbody>
+				        </table>-->
+         		    </div>
+         		<li>增票资质</li>
+         		    <div class="section-box2 section-box">
+	         		   	<ul>
+					        <li>我们会在一个工作日内完成审核工作。</li>
+					        <li>1)注意有效增值税发票开票资质仅为一个。</li>
+					        <li>2)发票常见问题查看增票资质帮助</li>
+					        <li>3)本页面信息仅供增值税专用发票 - 资质审核使用，切勿进行支付相关业务，谨防上当受骗。</li>
+				        </ul>
+				        <div class="add_invoice">
+				        	<span>您的增票资质：</span> 未添加 <button>添加增票资质</button>
+				        </div>
+				        <div class="addInvoice_form">
+				        	<p>填写增票资质信息<span>（所有信息均为必填）</span></p>
+				        	<form id="aptitude_form">
+				        		<table>
+					        		<tr>
+					        			<td>单位名称：</td>
+					        			<td><input type="text"></td>
+					        			<td></td>
+					        		</tr>
+					        		<tr>
+					        			<td>纳税人识别码：</td>
+					        			<td><input type="text"></td>
+					        			<td></td>
+					        		</tr>
+					        		<tr>
+					        			<td>注册地址：</td>
+					        			<td><input type="text"></td>
+					        			<td></td>
+					        		</tr>
+					        		<tr>
+					        			<td>注册电话：</td>
+					        			<td><input type="text"></td>
+					        			<td></td>
+					        		</tr>
+					        		<tr>
+					        			<td>开户银行：</td>
+					        			<td><input type="text"></td>
+					        			<td></td>
+					        		</tr>
+					        		<tr>
+					        			<td>银行账户：</td>
+					        			<td><input type="text"></td>
+					        			<td></td>
+					        		</tr>
+					        		<tr>
+					        			<td></td>
+					        			<td><input class="button1" type="button" value="确定"><input class="button1" onclick="document.getElementById('aptitude_form').reset()" type="button" value="取消"></td>
+					        			<td></td>
+					        		</tr>
+					        	</table>
+				        	</form>
+				        </div>
+         		    </div>
+         	</ul>
+         	<!--发票详情-->
+         	<div class="invoice_detail">
+         		<h3>发票详情</h3>
+         		<table>
+         			<thead>
+         				<tr>
+         					<td colspan="2">发票信息 <span>订单号：4752236521</span></td>
+         				</tr>
+         			</thead>
+         			<tbody>
+         				<tr>
+         					<td>发票类型</td>
+         					<td>电子发票</td>
+         				</tr>
+         				<tr>
+         					<td>发票内容</td>
+         					<td>明细</td>
+         				</tr>
+         				<tr>
+         					<td>发票抬头</td>
+         					<td>个人</td>
+         				</tr>
+         			</tbody>
+         		</table>
+         	</div>
+        </div>
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+//判断左边导航
+function checkNav(){
+	$(".user-left-wrap .list:eq(4)>ul>li:eq(1) a").css("color","#ff6600")
+}
+checkNav() 
+
+$(".invoice_top li").click(function(){
+	$(this).addClass("active")
+	$(this).siblings().removeClass("active")
+	$(this).next("div").css("display","block")
+	$(this).siblings().next("div").css("display","none")
+})
+
+$(".add_invoice button").click(function(){ 
+	$(".add_invoice").css("display","none")
+	$(".addInvoice_form").css("display","block")
+})
+
+$(".addInvoice_form table td .button1:eq(1)").click(function(){
+	$(".add_invoice").css("display","block")
+	$(".addInvoice_form").css("display","none")
+})
+</script>
+</body>
+</html>
+
+    

@@ -1,0 +1,375 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>促销活动中心</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/all-use.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/side-nav.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/reviseActivity.css" rel="stylesheet">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end --> 
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="Public:sellerLeft" />         
+        <div class="sell-management clearfix" style='width:auto;'>
+            <div class="safeguard">
+            	<div class="safeguard_top">营销活动列表</div>
+            	<!--筛选条件-->
+            	<div class="condition">
+            		<span>活动时间：<input type="datetime-local" class="time_input"> - <input type="datetime-local" class="time_input"> </span>
+            		<span>活动状态：<select><option>进行中</option><option>已过期</option></select></span>
+            		<span>活动名称：<input type="text" class="activity_name"></span>
+            		<button>搜索</button>
+            		<a href="http://www.orangesha.com/index.php?m=Home&c=SellerGoods&a=releaseActivity">新建活动</a>
+            	</div>            	
+            	<div class="list_title">
+            		<span>活动名称</span>
+            		<span>活动详情</span>
+            		<span>活动时间</span>
+            		<span>活动状态</span>
+            		<span>操作</span>
+            	</div>
+            	<div class="list_ul_div">
+	        		<ul class="list_ul">
+	            	</ul>
+	            	<div class='section-bt2'></div> 
+            	</div>
+            </div>
+        </div>         
+    </div>   
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+//判断左边导航
+function checkNav(){
+	$(".side-nav>ul:eq(2)>li:eq(4) a").css("color","#ff6600")
+}
+checkNav();
+
+/*分页*/
+(function(e){
+var Page = function(config){
+    this.config(config);//配置    
+    if(this.request_type == 'get'){
+        this.get();
+    }
+    if(this.request_type == 'post'){
+        this.post();
+    }
+}
+
+Page.prototype = {
+    config:function(config){   
+    	//请求地址
+        this.url        = config.url;
+        // 分页栏每页显示的页数
+        this.rollPage   = /^[1-9]+[0-9]*]*$/.test(config.rollPage) ? config.rollPage : 3;
+        // 附加请求参数
+        this.paramer    = config.paramer ? config.paramer : '';
+        //总记录数 
+        this.totalRows;
+        //第多少条开始取  
+        this.firstRow;
+        //设置每页显示条数 默认20条
+        this.listRows   = /^[1-9]+[0-9]*]*$/.test(config.listRows) ? config.listRows : 20; 
+        //当前页数默认为1
+        this.nowPage    = /^[1-9]+[0-9]*]*$/.test(config.nowPage) ? config.nowPage : 1;
+        //每页显示的多少条数据 
+        this.callback   = config.callback||'';
+        this.request_type = config.request_type;
+        //分页数据
+        this.page       = {};
+        this.data_cache = [];//得到的数据根据分页缓存
+        this.cache = typeof(config.cache)!=='undefined'?config.cache:false; //是否开启缓存  
+    },
+    /***初始运行***/
+    init:function(){
+      //获得分页内容
+        this.get_page();
+        //回调函数
+        this.callback(this.data , this.page); 
+    },
+    /***ajax请求***/
+    post:function(){
+        var _this     = this;
+        this.firstRow = this.listRows * (this.nowPage - 1);      
+        var d = {firstRow : this.firstRow , listRows : this.listRows};
+        for(i in this.parameter){
+            if(typeof(this.parameter[i]) != 'undefined'){
+              d[i] = this.parameter[i];
+            }       
+        }
+        $.post(this.url , d , function(res){
+            if(res){       
+                _this.data      = res['data'];
+                _this.totalRows = res['totalRows'];
+                _this.init();
+            }
+        })   
+    }, 
+    /***ajax请求***/
+    get : function(){
+       if(this.cache && typeof(this.data_cache[this.nowPage])!=='undefined'){
+           this.data = this.data_cache[this.nowPage];
+           this.init();
+       }else{      
+          var _this     = this;
+          this.firstRow = this.listRows * (this.nowPage - 1);      
+          var d = {firstRow : this.firstRow , listRows : this.listRows};
+          for(i in this.parameter){
+              if(typeof(this.parameter[i]) != 'undefined'){
+                d[i] = this.parameter[i];
+              }       
+          }
+          $.get(this.url , d ,function(res){
+              if(res){       
+                  _this.data_cache[_this.nowPage] = res['data'];
+                  _this.data      = res['data'];
+                  _this.totalRows = res['totalRows'];
+                  _this.init();
+              }
+          })
+      }   
+    }, 
+     /***分页***/
+    get_page:function(){
+    	var __PAGE = {
+    		prev      : false,
+    		first     : false,
+    		page      : [],
+    		next      : false,
+    		end       : false,
+    		now_page  : ''
+    	};
+        /* 计算分页信息 */
+        this.totalPages = Math.ceil(this.totalRows/this.listRows); //总页数
+        //当前页面大于总页面
+        if(!this.totalPages && this.nowPage > this.totalPages){
+           this.nowPage = this.totalPages;//当前页面设置为总页面
+        } 
+        /* 计算分页临时变量 */
+        now_cool_page      = this.rollPage / 2;
+        now_cool_page_ceil = Math.ceil(now_cool_page);
+        //上一页
+        up_row  = this.nowPage - 1;  
+        __PAGE.prev = up_row > 0 ? up_row : false;
+        //下一页
+        down_row  = this.nowPage+1;  
+        __PAGE.next = (down_row <= this.totalPages) > 0 ? down_row : false;    
+        //数字连接
+        for(i = 1; i <= this.rollPage;i++){
+            /*计算出页数*/
+            if((this.nowPage - now_cool_page) <= 0 ){
+                page = i;
+            }else
+            if((this.nowPage + now_cool_page - 1) >= this.totalPages){
+                page = this.totalPages - this.rollPage + i;
+            }else{
+                page = this.nowPage - now_cool_page_ceil + i;
+            }  
+            //页数大于0并且页数不等于当前页面         
+            if(page > 0 && page != this.nowPage){
+                //当前页数小于或者等于总页数才让其显示
+                if(page <= this.totalPages){
+                 	__PAGE.page.push(page);                           
+                }else{
+                    break;
+                }
+            }else         
+            if(this.nowPage==page){
+             	__PAGE.page.push(page);
+             	__PAGE.now_page = page;
+            } 
+        }
+        __PAGE.totalPages = this.totalPages;
+        __PAGE.totalRows  = this.totalRows; 
+        this.page = __PAGE;         
+    }, 
+}
+
+e.ajaxPage = function(config){
+    return new Page(config);
+}
+})(window);
+
+(function(e){ 
+    /*
+     * 分页事件绑定 
+     **/
+    var page_event = (function(){
+    	/*
+         * 其他页码
+         **/
+        $(".section-bt2").on('click' , '.else_page' , function(){
+        	 var p = $(this).attr('data-p');
+		    __PAGE.nowPage = parseInt(p);
+		    __PAGE.post(); 
+		    $(".chose_all").attr("checked",false)
+        })
+
+        /*
+         * 点击分页跳转
+         **/
+        $(".section-bt2").on('click' , '.page_a' , function(){
+        	 var p = $(this).attr('data-p');
+		    __PAGE.nowPage = parseInt(p);
+		    __PAGE.post();  
+		    $(".chose_all").attr("checked",false)
+        })     
+    })(); 
+
+    var html = {
+    	createHtml : function(data){
+    		/*console.log(data)*/    		
+    		var html = '';			
+    	    for(var k in data){	
+    	    	var favour = data[k].favourable.substr(0, 1);
+    	    	var str = data[k].end_time;
+				str = str.replace(/-/g,"/");
+				var date = new Date(str);
+				var now = new Date();
+				
+    	        html = html 				
+    	             + '<li>'
+    	             + '    <span>'+data[k].title+'</span>'
+    	            if(favour == 1){
+    	            	html+= '    <span>满'+data[k].min_max+'元、打'+data[k].favourable.slice(2)+'折</span>'
+    	            }
+    	            if(favour == 2){
+    	            	html+= '    <span>满'+data[k].min_max+'元、减'+data[k].favourable.slice(2)+'元</span>'
+    	            }
+    	        html = html    
+    	             + '    <span>'
+    	             + '        <p>'+data[k].start_time+'</p>'
+    	             + '    	<p>至 </p>'
+    	             + '    	<p>'+data[k].end_time+'</p>'
+    	             + '    </span>'
+    	             if(date < now) {
+					    html += '	<span style="color:red;">已过期</span>'
+					 }
+    	             if(date > now) {
+					    html += '	<span>进行中</span>'
+					 }				
+					if(data[k].status == 1){
+						html = html
+							+ '	<span><p><a href="http://www.orangesha.com/index.php?m=Home&c=SellerGoods&a=reviseActivity&id='+data[k].id+'">修改活动</a> <a data-id="'+data[k].id+'" href="javascript:;" class="pause_active">暂停</a> <a data-id="'+data[k].id+'" href="javascript:;" class="delete_active">删除</a></p></span>'
+    	            		+ '</li>'
+					}
+    	            if(data[k].status == 0){
+						html = html
+							+ '	<span><p><a href="http://www.orangesha.com/index.php?m=Home&c=SellerGoods&a=reviseActivity&id='+data[k].id+'">修改活动</a> <a data-id="'+data[k].id+'" href="javascript:;" class="pause_active">继续</a> <a data-id="'+data[k].id+'" href="javascript:;" class="delete_active">删除</a></p></span>'
+    	            		+ '</li>'
+					} 
+    	    }
+            return html;
+    	},       
+    	createPage : function(data){  		
+		    var page_html;
+		    //首页处理
+		    /*var first = data.first !== false ? 
+		        ('<a class="first else_page" data-p=1 href="javascript:;"><<</a>') :
+		        ('<a class="first"><<</a>');*/
+		    //上一页处理
+		    var prev = data.prev !== false ? 
+		            ('<a class="prev else_page" data-p=' + data.prev + ' href="javascript:;">上一页</a>') :
+		            ('<a class="prev">上一页</a>'); 
+		    //页码处理
+		    var page = '';    
+		    for(var k in data.page){
+		    	page = page + 
+		    	    (data.page[k] == data.now_page ? 
+		    	    ('<a class="page_a now" data-p=' + data.page[k] + '>' + data.page[k] +'</a>') :
+		    	    ('<a class="page_a" href="javascript:;" data-p=' + data.page[k] + '>' + data.page[k] +'</a>'));   
+            } 
+		    //下一页处理
+		    var next = data.next !== false ? 
+		        ('<a class="next else_page" data-p=' + data.next + ' href="javascript:;">下一页</a>') :
+		        ('<a class="first">下一页</a>');
+            //末页处理
+		    /*var end = data.end !== false ? 
+		        ('<a class="end else_page" data-p=' + data.end + ' href="javascript:;">>></a>') :
+		        ('<a class="end">>></a>');   */
+		    //统计处理          
+		    /*var count = '<span class="total">共' + data.totalPages + '页' + data.totalRows + '条数据</span>';*/
+		    //跳转处理 
+	        page_html = prev + page + next;
+            return page_html;       
+    	}  
+
+    };
+
+
+    var __sku_data   = {};
+    var __goods_attr = {};
+    var config   = {
+        listRows     : 5, 
+        rollPage     : 3,
+        cache        : true,
+        request_type : "post",
+        url          : "http://www.orangesha.com/ReleaseActivity/activityList",
+        callback:function(data , page){         
+            /*skuDataInit(data.sku); 
+            attrDataInit(data.attr);*/
+            $(".list_ul").html(html.createHtml(data)); 
+            $(".section-bt2").html(html.createPage(page));
+    	}        
+    };
+    var __PAGE = ajaxPage(config);
+    
+    //删除活动
+    $(".list_ul").on('click','.delete_active',function(){
+    	var id = $(this).attr("data-id");
+    	var this_ = $(this).parent().parent().parent("li");
+    	if(confirm("确定要删除该活动吗？")){
+    		$.post("http://www.orangesha.com/index.php?m=Home&c=ReleaseActivity&a=activityDelete",{'id':id},function(res){
+				if(res.status){   
+				    this_.remove();
+				}
+				if(res.status==0){
+					alert(res.msg)
+				}
+			});
+    	}    	
+    })
+    
+    //暂停活动
+    $(".list_ul").on('click','.pause_active',function(){
+    	var id = $(this).attr("data-id");
+    	var this_ = $(this).parent().parent().parent("li");
+    		$.post("http://www.orangesha.com/index.php?m=Home&c=ReleaseActivity&a=pause",{'id':id,'status':1},function(res){
+				if(res.status){   
+				    window.location.reload()
+				}
+				if(res.status==0){
+					alert(res.msg)
+				}
+			});   	
+    })
+				
+})();
+
+
+
+</script>
+</body>
+</html>

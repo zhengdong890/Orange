@@ -1,0 +1,84 @@
+<extend name="Base/common"/>
+<block name="style">
+    <link href="{:C('STATIC_URL')}/Orangesha/css/details.css" rel="stylesheet">
+    <link href="{:C('STATIC_URL')}/Orangesha/css/mlist.css" rel="stylesheet">
+</block>
+<block name="header">
+    <div class="nav-list">
+        <ul>
+            <li class="title">所有分享装备</li>
+            <li>首页</li>
+            <li>品牌商城</li>
+            <li>机器人街</li>
+            <li>机床超市</li>
+            <li>融资招标</li>
+            <li>集成项目</li>
+        </ul>
+    </div>
+</block>
+<block name="body" >
+
+    <div class="list">
+        <div class="list-header">
+            <span>
+                <a href="{:U('Index/index')}">首页</a> > <a href="{:U('Mall/index')}">{$pname}</a> > <span>{$category.title}</span>
+            </span><span class="header-right">共 {$count}件相关商品</span>
+        </div>
+        <div class="list-title">
+            <div class="list-price">
+                <ul>
+                    <li class="text">价钱:</li>
+                    <li>0-500</li>
+                    <li>500-5000</li>
+                    <li>5万-8万</li>
+                    <li>5万-10万</li>
+                    <li>10万以上</li>
+                    <li class="into">
+                        <input type="text"> - <input type="text"> <span>确定</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="list-type">
+                <ul>
+                    <li class="text">类型:</li>
+                    <li>工业机器人</li>
+                    <li>数控机床</li>
+                    <li>工业无人机</li>
+                    <li>工业3D打印机</li>
+                    <li>实验室仪器设备</li>
+                    <li>新能源装备</li>
+                    <!-- <li>节能环保装备</li>
+                    <li>生物产业装备</li>
+                    <li>新材料产业装备</li>
+                    <li>计算机电子设备</li>
+                    <li>自动化生产线</li> -->
+                </ul>
+            </div>
+        </div>
+        <ul class="goods">
+            <volist name="list" id="ls" >
+                <li>
+                    <a href="{:U('Mall/detail',array('id'=>$ls['id']))}"><img  class="goods-img" src="{$ls.cover_id|get_cover=###,'path'}" alt="">
+                    <div class="goods-price">￥{$ls.price}</div>
+                    <div class="goods-info">{$ls.title}</div></a>
+                    <div class="shops">橙橙官方发布</div>
+                    <div class="sum">总成交<span class="sum-num">{$ls.sales}</span>笔 | 评价<span class="sum-rated">0</span> |</div>
+                    <div class="icon">
+                        <img src="{:C('STATIC_URL')}/Orangesha/image/goods_img_icon1.jpg" alt="">
+                        <img src="{:C('STATIC_URL')}/Orangesha/image/goods_img_icon2.jpg" alt="">
+                        <img src="{:C('STATIC_URL')}/Orangesha/image/goods_img_icon3.jpg" alt="">
+                        <img src="{:C('STATIC_URL')}/Orangesha/image/goods_img_icon4.jpg" alt="">
+                    </div>
+                </li>
+            </volist>
+        </ul>
+    </div>
+    <div class="clear"></div>
+    <div class="page" style="width:1200px;height:30px;margin:0 auto;position:relative;">{$page}</div>
+</block>
+
+<block name="script">
+    <script>
+
+    </script>
+</block>

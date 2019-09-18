@@ -1,0 +1,264 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="工业机器人租赁，智能装备租赁，智能装备分享，工业智能机器人交易，e橙优品">
+    <meta name="description" content="e橙优品专注于解决国内智能设备空闲问题，对接供给方和需求方，为万千中小企业解决设备和融资问题。我们是智能装备行业的专业电商平台，需求方、供给方、融资租赁公司三赢的B2B交易平台。">
+    <meta name="copyright" content="深圳市橙橙网络科技有限公司(www.orangesha.com)版权所有">
+    <meta name="author" content="e橙优品"> 
+  <title>e橙优品智能装备分享平台-专业智能装备分享平台-工业智能装备租赁平台</title>
+  
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+  <link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+  <link href="{:C('STATIC_URL')}/Home/css/header.css" rel="stylesheet">
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/home.css" type="text/css">
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Orange/css/home.css" type="text/css">
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Orange/script/jquery.kinMaxShow/base.css" type="text/css">
+  <link rel="stylesheet" type="text/css" href="__STATIC__/swiper/swiper.min.css">
+  <link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+  <!--[if (gte IE 9)|!(IE)]><!-->
+  <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-2.0.3.min.js"></script>
+  
+  <!--<![endif]-->
+  <!--[if lte IE 8 ]>
+  <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+  <![endif]-->    
+    <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+    <script type="text/javascript" src="__STATIC__/swiper/swiper.min.js"></script>
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/index.js"></script>
+    <style type="text/css">
+        #kinMaxShow .KMSPrefix_kinMaxShow_button {
+            margin: 0 -590px 0 0;
+        }
+        .pagination {
+            position: absolute;
+            z-index: 20;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+        .swiper-pagination-bullet {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 8px;
+            margin: 0 5px;
+            opacity: 0.8;
+            border: 1px solid #fff;
+            cursor: pointer;
+            background-color:#37a3a3;
+        }
+        .swiper-pagination-bullet-active{
+            background-color:#ff6600;
+        }
+        .menu{display:none;}
+    </style>
+  <!-- 头部 -->
+  <!-- 导航条 页面头部
+================================================== -->
+
+<include file="Public:header" />
+<include file="Public:nav" />
+    <!-- body -->
+	
+    <div class="bodyer marB50">
+
+        <!-- 团购 -->
+        <div class="mar1200c marT10 ofwVisible">
+            <div class="index-brand">
+                <div class="brand-left">
+                    <!-- 商品标题 -->
+                    <div class="title"><img src="{:C('STATIC_URL')}/Orange/img/index_icon.png">工业机器人</div>
+                    <!-- 商品导航 -->
+                    <div class="nav">
+                        <a href="#">码垛机器人</a>
+                        <a href="#">包装机器人</a>
+                        <a href="#" style="border:0;">激光装备</a><br>
+                        <a href="#">自动引导车</a>
+                        <a href="#" style="border:0;">自动化流水线</a><br>
+                        <a href="#">通用机器人</a>
+                        <a href="#" style="border:0;">智能服务机器人</a><br>
+                        <a href="#" style="border:0;">智能物流装备</a>
+                    </div>
+                    <img class="brand-icon" src="{:C('STATIC_URL')}/Orange/img/z1.jpg" alt="">
+                </div>
+                <!-- 商品列表 -->
+				  <div style= "width:878px;height:430px;overflow:hidden;">
+					<ul style= "width:878px;height:430px;overflow:hidden;">
+						<volist name="arr1" id="v">
+						<li  style="width:216px;height:215px;overflow:hidden;float:left;border-left:1px solid #ccc;border-bottom:1px solid #cfcfcf;">
+								<a class="i-pic" href="{:U('Mall_goods/goods',array('goods_id'=>$v['id']))}" title="橙橙分享"><img src="__ROOT__{$v['goods_thumb']|substr=1}" alt="橙橙分享"  style="width:200px;height:180px;overflow:hidden;float:left;margin: 10px 10px 0;"> </a>
+								<span style="float:left;font-size:15px;text-overflow:ellipsis;white-space:normal;">{$v['goods_name']}</span><span style="float:right;margin-right:4px;margin-bottom:4px;color:#ff6500;font-weight:bold;">￥{$v['goods_price']}  万</span>
+						</li> 
+						</volist>
+					</ul>
+				   </div>		
+            </div>
+            <!-- 工业机器人end -->
+            <!-- 数控机床 -->
+            <div class="index-brand">
+                <div class="brand-left">
+                    <!-- 商品标题 -->
+                    <div class="title"><img src="{:C('STATIC_URL')}/Orange/img/index_icon2.png">数控机床</div>
+                    <!-- 商品导航 -->
+                    <div class="nav">
+                        <a href="#">数控钻床</a>
+                        <a href="#">数控车床</a>
+                        <a href="#" style="border:0;">数控铣床</a><br>
+                        <a href="#">数控磨床</a>
+                        <a href="#">数控镗铣床</a>
+                        <a href="#" style="border:0;">五轴联动床</a><br>
+                        <a href="#" style="border:0;">高速加工中心</a>
+                    </div>
+                    <img class="brand-icon" src="{:C('STATIC_URL')}/Orange/img/z2.jpg" alt="">
+                </div>
+                <!-- 商品列表 -->
+                <div style= "width:878px;height:430px;overflow:hidden;">
+					<ul style= "width:878px;height:430px;overflow:hidden;">
+						<volist name="arr2" id="v1">
+						<li  style="width:216px;height:215px;overflow:hidden;float:left;border-left:1px solid #ccc;border-bottom:1px solid #cfcfcf;">
+								<a class="i-pic" href="{:U('Mall_goods/goods',array('goods_id'=>$v1 ['id']))}" title="橙橙分享"><img src="__ROOT__{$v1['goods_thumb']|substr=1}" alt="橙橙分享"  style="width:200px;height:180px;overflow:hidden;float:left;margin: 10px 10px 0;"> </a>
+								<span style="float:left;font-size:15px;text-overflow:ellipsis;white-space:normal;">{$v1['goods_name']}</span><span style="float:right;margin-right:4px;margin-bottom:4px;color:#ff6500;font-weight:bold;">￥{$v1['goods_price']}  万</span>
+						</li> 
+						</volist>
+					</ul>
+				   </div>
+            </div>
+            <!-- 数控机床end -->
+            <!-- 工业无人机 -->
+            <div class="index-brand">
+                <div class="brand-left">
+                    <!-- 商品标题 -->
+                    <div class="title"><img src="{:C('STATIC_URL')}/Orange/img/index_icon3.png">工业无人机</div>
+                    <!-- 商品导航 -->
+                    <div class="nav">
+                        <a href="#">航拍无人机</a>
+                        <a href="#">测绘无人机</a>
+                        <a href="#" style="border:0;">运输无人机</a><br>
+                        <a href="#">热像仪无人机</a>
+                        <a href="#" style="border:0;">安防无人机</a><br>
+                        <a href="#">电力巡检无人机</a>
+                        <a href="#" style="border:0;">农林无人机</a>
+                    </div>
+                    <img class="brand-icon" src="{:C('STATIC_URL')}/Orange/img/z3.jpg" alt="">
+                </div>
+                <!-- 商品列表 -->
+                <div style= "width:878px;height:430px;overflow:hidden;">
+					<ul style= "width:878px;height:430px;overflow:hidden;">
+						<volist name="arr3" id="v2">
+						<li  style="width:216px;height:215px;overflow:hidden;float:left;border-left:1px solid #ccc;border-bottom:1px solid #cfcfcf;">
+								<a class="i-pic" href="{:U('Mall_goods/goods',array('goods_id'=>$v2['id']))}" title="橙橙分享"><img src="__ROOT__{$v2['goods_thumb']|substr=1}" alt="橙橙分享"  style="width:200px;height:180px;overflow:hidden;float:left;margin: 10px 10px 0;"> </a>
+								<span style="float:left;font-size:15px;text-overflow:ellipsis;white-space:normal;">{$v2['goods_name']}</span><span style="float:right;margin-right:4px;margin-bottom:4px;color:#ff6500;font-weight:bold;">￥{$v2['goods_price']}  万</span>
+						</li> 
+						</volist>
+					</ul>
+				   </div>
+            </div>
+            <!-- 工业无人机end -->
+            <!-- 工业3D打印机 -->
+            <div class="index-brand">
+                <div class="brand-left">
+                    <!-- 商品标题 -->
+                    <div class="title"><img src="{:C('STATIC_URL')}/Orange/img/index_icon4.png" style="left:66px;">工业3D打印机</div>
+                    <!-- 商品导航 -->
+                    <div class="nav">
+                        <a href="#">光固化（SLA）</a>
+                        <a href="#" style="border:0;">三维印刷（DLP）</a><br>
+                        <a href="#">三维激光内雕</a>
+                        <a href="#" style="border:0;">激光烧结（SLS）</a><br>
+                        <a href="#">金属打印机 </a>
+                        <a href="#" style="border:0;">熔融沉积(FDM)</a>
+                    </div>
+                    <img class="brand-icon" src="{:C('STATIC_URL')}/Orange/img/z4.jpg" alt="">
+                </div>
+                <!-- 商品列表 -->
+                <div style= "width:878px;height:430px;overflow:hidden;">
+					<ul style= "width:878px;height:430px;overflow:hidden;">
+						<volist name="arr4" id="v3">
+						<li  style="width:216px;height:215px;overflow:hidden;float:left;border-left:1px solid #ccc;border-bottom:1px solid #cfcfcf;">
+								<a class="i-pic" href="{:U('Mall_goods/goods',array('goods_id'=>$v3['id']))}" title="橙橙分享"><img src="__ROOT__{$v3['goods_thumb']|substr=1}" alt="橙橙分享"  style="width:200px;height:180px;overflow:hidden;float:left;margin: 10px 10px 0;"> </a>
+								<span style="float:left;font-size:15px;text-overflow:ellipsis;white-space:normal;">{$v3['goods_name']}</span><span style="float:right;margin-right:4px;margin-bottom:4px;color:#ff6500;font-weight:bold;">￥{$v3['goods_price']}  万</span>
+						</li> 
+						</volist>
+					</ul>
+				   </div>
+            <!-- 工业3D打印机end -->
+        </div>
+    </div>
+    <div class="program">
+        <ul>
+            <li>
+                <div class="program-list">
+                    <div class="program-icon icon1"></div>
+                    <div class="text">
+                        <div class="text-top">全球精品</div>
+                        <div class="text-bottom">一站式全产业链平台</div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="program-list">
+                    <div class="program-icon icon2"></div>
+                    <div class="text">
+                        <div class="text-top">天天底价</div>
+                        <div class="text-bottom">优品秒拍优惠购不停</div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="program-list">
+                    <div class="program-icon icon3"></div>
+                    <div class="text">
+                        <div class="text-top">融资租赁</div>
+                        <div class="text-bottom">特有的招标配套服务</div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="program-list">
+                    <div class="program-icon icon4"></div>
+                    <div class="text">
+                        <div class="text-top">共享未来</div>
+                        <div class="text-bottom">智能装备的分享社区</div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        window.onload = function(){
+            /*使用swiper控制banner*/
+            var mySwiper = new Swiper('.swiper-container',{
+                autoplay : 5000,//可选选项，自动滑动
+                loop : true,//可选选项，开启循环
+                pagination : '.pagination',
+                paginationClickable: true,
+                autoplayDisableOnInteraction:false
+            });
+            /*菜单悬浮时，显示子菜单*/
+            $(".menu ul li").mouseenter(function(){
+                $(this).find(".menu-2").css("display","block");
+            });
+            $(".menu ul li").mouseleave(function(){
+                $(this).find(".menu-2").css("display","none");
+            });
+            /*融资租赁轮播*/
+            setInterval(function(){
+                $(".text-slider-wrap").animate({marginTop:"-82px"},800,function(){
+                    $(".text-slider-wrap li:first").appendTo('.text-slider-wrap');
+                    $(this).css("marginTop","0");
+                });
+
+            },3000);
+        }
+    </script>
+  <!-- /主体 -->
+<div> 
+    <!-- 底部 -->
+    <include file="Public:footer" />
+    <!-- /底部 -->
+</div>	
+	
+</body>
+</html>

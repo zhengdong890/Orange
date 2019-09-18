@@ -1,0 +1,214 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>收银台</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/orders.css" rel="stylesheet">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<style>
+.confirm_payment{display: block;width: 200px;height: 38px;margin: 0 auto;background-color: #3AA4A4;color: #fff;line-height: 38px;text-align: center;border-radius: 6px;font-size: 18px;}
+.gdg_confirm_payment{display: none;width: 200px;height: 38px;margin: 0 auto;background-color: #3AA4A4;color: #fff;line-height: 38px;text-align: center;border-radius: 6px;font-size: 18px;}
+.pay_style3{background: url("__PUBLIC__/Home/image/weixin_pay3.png") no-repeat 550px 20px;height: 520px;position: relative;}
+.pay_style3>p{ font-size: 14px;}
+.pay_style3>p>img{ vertical-align: middle;margin-right: 5px;}
+.pay_style3>div{width: 450px; margin: 40px 0 0 65px; text-align: center;}
+.pay_style3>div>img{margin: 10px 0;}
+.pay_style3>div>p{font-size: 14px;}
+.pay_style3>div>p:nth-of-type(2){color: #ff6600;}
+.pay_style3>div>p:last-of-type{margin-top: 10px;}
+.pay_style3 .select_pay{position: absolute; bottom: 20px; left: 30px;color: #2D83FB;cursor: pointer;} 
+</style>
+</head>
+<body >
+<include file="Public:header_top" />	
+	<!-- 主体 -->
+    <div class="body">
+    	<div class="pay_top">
+    		<div class="e_logo">
+	    		<span>收银台</span>
+	    	</div>
+	        <div class="points">
+	            <div class="shopping-cart2"></div>
+	            <div class="text">购物车<i class="i1"></i>确认订单<i class="i2"></i>支付<i class="i3"></i>完成</div>
+	        </div>
+    	</div>
+    	<div class="order_info">
+    		<p>订单提交成功,请您尽快付款！</p>
+    	<volist name="order_data" id='v'>       
+        	<p>订单号:{$v['order_sn']} 
+        	<span class="pay_price">应付金额 : <span class="pay_num">{$pay_price>=10000?$pay_price/10000:$pay_price}</span>{$pay_price>=10000?'万元':'元'}</span></p>
+        	<p>收货地址 : {$address['address']} 收货人 : {$address['name']} {$address['telnum']}</p>
+        	<volist name="v['data']" id='v1'>
+        	<p>商品名称 : {$v1['goods_name']}</p>
+        	</volist>    
+        	<hr />
+        </volist>  
+        </div> 
+        <div class="pay_style">
+        	<p>平台支付</p>
+        	<p><img src="{:C('STATIC_URL')}/Home/image/payment2.png" /> 平台支付无法同时与其它方式一起支付</p>
+        	<ul>
+        		<li><img src="{:C('STATIC_URL')}/Home/image/payment3.png" /> 微信支付</li>
+        		<li><img src="{:C('STATIC_URL')}/Home/image/payment4.png" /> 支付宝支付</li>
+        		<li><img src="{:C('STATIC_URL')}/Home/image/payment5.png" /> 网银支付</li>
+        		<li><img src="{:C('STATIC_URL')}/Home/image/payment.png" /> 公对公转账</li>
+        	</ul>
+        </div>
+        <div class="pay_style2">
+        	<p>公对公转账</p>
+        	<div>
+        		<img src="{:C('STATIC_URL')}/Home/image/payment.png" /> 公对公转账
+        		<span class="pay_price">支付<span class="pay_num">{$pay_price}</span>元</span>
+        	</div>
+        	<p>
+        		开户行 : <span>民生银行深圳海岸城支行</span>&nbsp;&nbsp;&nbsp;
+        		账号 : <span>15236523265</span>        		
+        	</p>
+        	<p>公对公付款不支持线上支付,转账时请标注订单号</p>
+        	<p>汇款回执：<input type="text" placeholder="请输入汇款回执"></p>  
+        	<a class="select_pay" style="color: #2D83FB; cursor: pointer;">< 选择其他支付方式</a>
+        </div>
+        <!--微信支付二维码-->
+        <div class="pay_style3">
+        	<p><img src="__PUBLIC__/Home/image/weixin_pay1.png"> 微信支付</p>
+        	<div>
+        		<p>扫一扫付款</p>
+        		<p><span class="pay_num">{$pay_price>=10000?$pay_price/10000:$pay_price}</span>{$pay_price>=10000?'万元':'元'}</span></p>
+        		<img class="pay_ewm" /></br>
+        		<img src="__PUBLIC__/Home/image/weixin_pay2.png"/>
+        		<p>距离二维码过期还剩 <i style="color: #ff6600;">30</i> 秒，过期后请刷新 页面重新获取二维码。</p>
+        	</div>
+        	<!--<a class="select_pay">< 选择其他支付方式</a>-->
+        </div>
+        <a class="confirm_payment" href="javascript:;" data-id>确认支付</a>
+        <a class="gdg_confirm_payment" href="javascript:;">完成支付</a>
+    </div>
+    </body>
+<script type="text/javascript">
+  
+  $(".confirm_payment").click(function(){
+  	if($(".confirm_payment").attr("data-id")==2){
+  		alert_text = "该商户还在测试开店期，还没开通在线支付，采购请直接联系卖家"
+  		alert()
+  	}
+  })
+
+  $(".pay_style ul li:eq(2)").click(function(){
+  	$(this).addClass("active");
+  	$(this).siblings().removeClass("active");
+  	$(".confirm_payment").attr("data-id","2");
+  	$(".confirm_payment").attr("href","#")
+  })  
+
+  //微信支付
+  $(".pay_style ul li:eq(0)").click(function(){
+  	$(this).addClass("active");
+  	$(this).siblings().removeClass("active");
+  	$(".confirm_payment").attr("href","javascript:;");
+  	$(".confirm_payment").attr("data-id","weixin");
+  })
+  //支付宝支付
+  $(".pay_style ul li:eq(1)").click(function(){
+  	$(this).addClass("active");
+  	$(this).siblings().removeClass("active");
+  	$(".confirm_payment").attr("href","http://www.orangesha.com/Alipay/alipayPayment")
+  })  
+  
+  //公对公转账 
+  $(".pay_style ul li:eq(3)").click(function(){
+  	$(this).addClass("active");
+  	$(this).siblings().removeClass("active");  	
+  	$(".confirm_payment").attr("href","javascript:;");
+  	$(".confirm_payment").attr("data-id","gdg");
+  })
+  
+  //确认支付
+  var returnID;
+  $(".confirm_payment").click(function(){
+  	//微信
+  	if($(".confirm_payment").attr("data-id")=="weixin"){  		
+  		$.post("http://www.orangesha.com/WechatPay/createPayCode",function(res){ 
+			console.log(res)
+			if(res.status){
+				$(".pay_style").css("display","none");
+		  		$(".pay_style3").css("display","block");
+		  		$(".confirm_payment").css("display","none");
+		  		settime();
+				$(".pay_style3 .pay_ewm").attr("src",res.data);
+				returnID = res.id;
+				setInterval("checkWeixinpay(returnID)",5000);
+			}
+			if(res.status==0){
+				alert(res.msg)
+			}
+		})
+  	}
+  	//公对公转账
+  	if($(".confirm_payment").attr("data-id")=="gdg"){
+  		$(".pay_style2").css("display","block");
+  		$(".pay_style").css("display","none");
+  		$(".confirm_payment").css("display","none");
+  		$(".gdg_confirm_payment").css("display","block");
+  	}
+  })
+
+	//查询扫码支付订单是否支付成功
+	function checkWeixinpay(id){
+		$.post("http://www.orangesha.com/Home/MemberOrder/getOrderPayStatus",{'id' : id},function(res){ 
+			if(res.pay_status != 0){
+				window.location.href = "http://www.orangesha.com/Home/Msg/orderPaySuccess"				
+			}
+		})
+	}	
+  
+  //公对公转账完成支付
+  $(".gdg_confirm_payment").click(function(){
+  		$.post("http://www.orangesha.com/MallOrder/offlinePay",function(res){ 
+			if(res.status){
+				alert(res.msg);
+				window.location.href="http://www.orangesha.com/order.html"					
+			}
+			if(res.status==0){
+				alert(res.msg)				
+			} 
+		})
+  })
+  
+  
+  //选择其他支付方式
+  $(".select_pay").click(function(){
+  	$(".pay_style").css("display","block")
+  	$(".pay_style2").css("display","none")
+  	$(".confirm_payment").css("display","block")
+  	$(".gdg_confirm_payment").css("display","none")
+  })
+    
+    //二维码30秒过期
+    var countdown=30; 
+	function settime(val){ 
+		if (countdown == 0) { 
+			
+		}else{ 
+			countdown--; 
+		} 
+		setTimeout(function(){ 
+			settime(val) 
+		},1000) 
+		$(".pay_style3>div>p>i").text(countdown)
+	} 
+
+</script>
+<!-- /主体 -->
+<include file="Public:footer" />
+</body>
+</html>

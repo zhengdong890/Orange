@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="description" content="" />
+<style>
+*{padding:0; margin:0;font-size:16px;font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border:0} 
+#content{width:98%;height:auto;float:left;margin-left:1%;}
+#content #content_h{width:100%;height:40px;border:1px solid #D7D7D7;line-height:40px;margin-top:15px}
+#content #content_h a{padding-left:10px}
+#content #content_m{width:100%;height:auto;border:1px solid #D7D7D7;padding-bottom:100px;margin-top:20px}
+#content table{margin:0 auto;width:100%}
+#content table td span{float:right}
+.caozuo{text-align:center}
+.caozuo a{color:black;text-decoration:underline} 
+.caozuo a:hover{color:pink;text-decoration:underline}   
+table tr{background:white;}
+table tr:hover{background:#F1FCEA}  
+table tr:first-child{background:#F4F5F9} 
+table tr td{border-left:1px solid #E7E9F3;border-bottom:1px solid #E7E9F3;padding:10px;font-size:14px;}
+table tr .td{border-left:0px} 
+input{width:500px;height:24px;border-radius:3px;border-bottom:1px solid #E3E9EF;border-top:1px solid #ABADB3;border-left:1px solid #E2E3EA;border-right:1px solid #DBDFE6}
+td img{max-width:100px;max-height:100px}
+td{padding-right:30px;padding-top:10px}
+#page{width:100%;height:auto;float:left;margin-top:15px}
+#page li{float:right}
+#page li a{display:block;float:left;height:22px;padding:4px;border:1px solid #dfdfdf;margin-left:5px;line-height:22px;}
+#page li span{display:block;float:left;height:22px;padding:4px;border:1px solid #dfdfdf;margin-left:5px;line-height:22px;}
+#page li p{float:left;padding:4px;height:22px;line-height:22px;margin-left:5px;}
+.btn{width:80px;height:30px;float:right;display:block;background:red;text-align:center;line-height:30px;color:white;border-radius:5px;font-size:14px;margin-right:20px;margin-top:5px;}
+
+.fixed_wraper{ 
+    width:100%;
+    height:100%;
+    position:fixed;
+    background:white;
+    display:none;
+}
+
+.fixed_wraper .tree{
+    width:auto;
+    height:auto;
+    margin-top:20px;
+    margin-left:20px;
+    float:left;
+}
+
+.fixed_wraper .attr{
+    width:200px;
+    height:700px;
+    margin-top:20px;
+    float:left;
+    margin-left:15px;
+    border:1px solid pink;
+}
+
+.fixed_wraper .attr li{
+    width:180px;
+    margin-left:10px;
+    margin-top:5px;
+    height:auto;
+    float:left;
+}
+
+.fixed_wraper .attr li a{
+    margin-left:8px;
+}
+
+.fixed_wraper .handle{
+    width:100px;
+    height:auto;
+    float:left;
+    margin-top:20px;
+    margin-left:15px;
+}
+
+.fixed_wraper .tree .tree_list{
+    width:200px;
+    height:700px;
+    float:left;
+    border:1px solid pink;
+    padding:5px 5px 5px 10px;
+    margin-left:5px;
+    overflow-y:scroll;
+}
+.fixed_wraper .tree .tree_list li{
+    margin-top:5px;
+}
+.fixed_wraper .tree .tree_list li a.color{
+    color:pink;
+}
+</style>
+</head>
+<body>
+<div class="fixed_wraper" cat_id="{$cat_id}">
+    <div class="tree"></div>
+    <ul class="attr"></ul>
+    <div class='handle'>
+        <a href='javascript:;' class='btn btn_confirm'>确认</a>
+        <a href='javascript:;' class='btn btn_submit'>提交</a>
+        <a href='javascript:;' class='btn btn_close'>取消</a>
+    </div>
+</div>
+<div id="content">
+    <div id="content_h">
+        <a>后台管理中心</a>-><a>属性列表</a>
+        <a class='btn btn_attr' href='javascript:;'>选择分类</a>
+    </div>     
+    <div id="content_m">
+	     <table cellspacing="0">
+	          <tr>
+                  <td colspan="3">
+                  当前分类:&nbsp;
+                  <volist name="crumb" id='v'>
+                  {$v['cat_name']}&nbsp;&nbsp;
+                  </volist>
+                  </td>
+	          </tr> 	     
+	          <tr>
+                  <td>id</td>
+	              <td style="text-align:center">属性名称</td>
+	              <td style="text-align:center">操作</td>
+	          </tr> 
+	          <volist name="attr" id="v">
+              <tr data-id="{$v['attr_id']}">
+                  <td>{$v['attr_id']}</td>                    
+                  <td style="text-align:center">{$v.attr_name}</td>                     
+                  <td class='caozuo'>                     
+                       <a href="javascript:;" class='delete'>删除</a>
+                  </td>
+              </tr>
+              </volist>         
+	    </table>
+    </div>
+</div>	
+</body>
+<script type="text/javascript">    
+$("table .delete").click(function(){
+	// if(!confirm('确认删除?')){
+	//     return;	
+	// }
+    var attr_id = $(this).parents('tr').attr('data-id');
+    var _this   = this;
+    data = {attr_id : attr_id , cat_id : $(".fixed_wraper").attr('cat_id')}
+    $.post("{:U('Mall_category/attrAllocationDelete')}" , data , function(res){
+    	if(res.status == 1){
+            $(_this).parents('tr').remove();
+    	}
+    })    
+})
+
+$('.btn_attr').click(function(){
+	$(".fixed_wraper").css('display','block');
+})
+
+var __attr = (function(){
+	var __cat_attr = {};
+    var __html = {
+        createAttrList : function(data){
+            var html = '';
+            data.forEach(function(v , k){
+                html = html
+                + '<li key="' + k + '">'
+                + '<span>' + v.attr_name + '</span>'
+                + '<a href="javascript:;" class="delete">删除</a>'
+                + '</li>';    
+            });
+            html = html + '</ul>';
+            return html;
+        }
+    }
+    
+    $(".attr").on('click' , '.delete' ,function(){
+        var k = $(this).parent('li').attr('key');
+        delete __cat_attr[k];
+        $(this).parent('li').remove();
+    })
+
+    function addAttr(cat_id){
+        requestData(cat_id , function(res){
+            var html = __html.createAttrList(res);
+            __cat_attr = res;
+            $(".attr").html(html);
+        });
+    }
+
+    /**
+     * 请求获取数据
+     */
+    function requestData(id , func){
+        $.post('{:U('Attr/getAttrByCatId')}' , {id : id} , func);    
+    }
+
+    return {
+    	addAttr : addAttr,
+    	getAttr : function(){
+    		var attr = [];
+    		for(var k in __cat_attr){
+                attr.push(__cat_attr[k].attr_id);
+    		}
+    		return {
+    			attr : attr
+    		};
+    	}
+    }
+})();
+
+/**
+ * 多级分类树
+ */
+var class_tree = (function(){
+	var __cat_id     = $(".fixed_wraper").attr('cat_id');
+    var __tree_next  = {};//存储某个分类的下一级分类数据
+    var __level      = {};
+    var __now_select = {};//用户当前选择的分类路径
+    var __now_cat    = 0;
+    var __html = {
+        createTreeList : function(data , level){
+            var html = '<ul class="tree_list" level="' + level + '">';
+            data.forEach(function(v){
+                html = html
+                + '<li id="' + v.id +'">'
+                + '    <a href="javascript:;" class="tree_a">' + v.cat_name + '</a>'
+                + '</li>';    
+            });
+            html = html + '</ul>';
+            return html;
+        }
+    }
+    
+    var event = function(){
+        $(".tree").on('click' , '.tree_a' , function(){
+            var id    = $(this).parent('li').attr('id'); 
+            var level = $(this).parents('.tree_list').attr('level'); 
+            __now_cat = id;
+            level = parseInt(level) + 1;
+            addTreeList(id , level);
+            $(this).parents('.tree_list').find('.color').removeClass('color');
+            $(this).addClass('color');
+        })
+
+        $(".handle .btn_confirm").click(function(){
+        	if(__now_cat == 0){
+                alert('请先选择分类');
+        	}else{
+        		__attr.addAttr(__now_cat);
+        	}           
+        })
+
+        $(".handle .btn_close").click(function(){
+            $(".fixed_wraper").css('display','none');
+        })
+
+        $(".handle .btn_submit").click(function(){
+            var data = __attr.getAttr();
+            data.cat_id  = __cat_id;
+            data.type_id = __now_cat;
+            $.post("{:U('attrAllocation')}" , data , function(res){
+                alert(res.msg);
+                location.reload();
+            });
+        })        
+    }
+    
+    /**
+     * 根据level级数清除所有比他大的二级的html
+     */
+    function clearHtmlByLevel(level){
+        $(".tree_list").eq(level+1).html('');
+        $(".tree_list").eq(level+2).html('');
+        delete __now_select[level+1];
+        delete __now_select[level+2];
+    }
+ 
+    /**
+     * 添加html
+     */
+    function addTreeList(id , level){
+        if(__now_select[level] == id){
+            return;
+        }
+        if(level > 1){
+           __now_select[level-1] = id;
+        }        
+        if(typeof(__tree_next[id]) == 'object' && __tree_next[id] != 'null'){
+            var html = __html.createTreeList(__tree_next[id] , level);
+            if(__level[level]){
+                $(".tree_list").eq(level-1).replaceWith(html);
+            }else{
+                $(".tree").append(html);
+            }    
+            clearHtmlByLevel(level-1);            
+        }else{
+            requestData(id , function(res){
+                if(res.length == 0) return;
+                __tree_next[id] = res;
+                var html = __html.createTreeList(res , level);
+                if(__level[level]){
+                    $(".tree_list").eq(level-1).replaceWith(html);
+                }else{
+                    __level[level] = level;
+                    $(".tree").append(html);
+                }
+                clearHtmlByLevel(level-1);
+            });              
+        }
+    }
+
+    /**
+     * 请求获取数据
+     */
+    function requestData(id , func){
+        $.post('{:U('Mall_category/categoryList')}' , {id : id} , func);    
+    }
+
+    event();
+    return {
+        addTreeList : addTreeList
+    }
+})();
+class_tree.addTreeList(0 , 1);
+</script>
+</html>

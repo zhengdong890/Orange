@@ -1,0 +1,694 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>订单管理</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/all-use.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/side-nav.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/sell-management.css">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+<style>
+.hide{display:none}
+.section-bt{width:100%;height:auto;margin-top:10px;margin-bottom:20px;}
+.section-bt .btns{line-height: 42px;}
+.section-bt .btns p,.section-bt .btns label,.section-bt .btns label input{display: inline-block;}
+.section-bt .btns label p{padding-left: 10px;}
+.section-bt .btns .btn{margin-left: 32px;border:1px #d5d5d5 solid;padding:0 10px;border-radius: 5px;cursor: pointer;}
+.section-bt .turn-page{position: relative;text-align: center;margin-top: 40px;}
+.section-bt .turn-page .omit{border:none;}
+.section-bt .turn-page .omit:hover{border:none;background-color: transparent;color:#d5d5d5;}
+.section-bt .turn-page div,.section-bt .to-page input{width: 32px;padding: 0px 4px; height:32px;border:1px #d5d5d5 solid;display: inline-block;margin-left: 12px;
+    cursor: pointer;vertical-align: top;line-height: 32px;text-align: center;}
+.section-bt .turn-page .active{background-color: #ff8448;color:#fff;}
+.section-bt .turn-page>div:hover{border-color: #ff8448;}
+.section-bt .turn-page .right-btn,.section-bt .turn-page .left-btn{width: 34px;}
+.section-bt .to-page{width:auto;display: inline-block; margin-left: 20px;}
+.section-bt .to-page input{margin:0 7px;vertical-align: middle;}
+.section-bt .to-page input[type="button"]{background-color: #fff;width: 54px; font-family: "微软雅黑";}
+.section-bt .turn-page .total{display: inline-block; line-height: 34px;margin: 0px 20px;}
+.section-bt .to-page input[name="jump_page"]{width: 80px; height: 30px;} 
+
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end --> 
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="Public:sellerLeft" />  
+        <div class="user-right marT20 fRi">
+            <div class="sell-management clearfix" style='width:auto'>
+                 <div class="section">
+                    <ul class="nav-top clearfix">
+                        <li class="active">近三个月订单</li>
+                        <li>等待买家付款</li>
+                        <li>等待发货</li>
+                        <li>已发货</li>
+                        <li>待评价</li>
+                        <li>成功订单</li>
+                        <li>关闭订单</li>
+                        <li>三个月前订单</li>
+                    </ul>
+                    <ul class="table_top">
+                        <li>商品</li>
+                        <li>单价</li>
+                        <li>数量</li>
+                        <li>买家</li>
+                        <li>交易状态</li>
+                        <li>实收款</li>
+                        <li>评价</li>
+                    </ul>
+                   <table class="goods-list tab_1"  cellpadding="0" cellspacing="0">    
+                   </table>
+                   <table class="goods-list tab_2 hide"  cellpadding="0" cellspacing="0">
+                   </table>
+                   <table class="goods-list tab_3 hide"  cellpadding="0" cellspacing="0">   
+                   </table>
+                   <table class="goods-list tab_4 hide"  cellpadding="0" cellspacing="0">    
+                   </table>
+                   <table class="goods-list tab_5 hide"  cellpadding="0" cellspacing="0">    
+                   </table>
+                   <table class="goods-list tab_6 hide"  cellpadding="0" cellspacing="0">    
+                   </table>
+                   <table class="goods-list tab_7 hide"  cellpadding="0" cellspacing="0">    
+                   </table>  
+                   <table class="goods-list tab_8 hide"  cellpadding="0" cellspacing="0">
+                   </table>                                                                           
+                    <div class="section-bt section-bt_1">
+                       <div class="btns">
+                           <label>
+                               <input type="checkbox" class="all-chose" data-tab='1'><p>全选</p>
+                           </label>
+                       </div>
+		                <div class="turn-page" data-type='threeMonthOrder'></div>
+                    </div>
+                    <div class="section-bt section-bt_2 hide">
+                        <div class="btns">
+                            <label>
+                               <input type="checkbox" class="all-chose" data-tab='2'><p>全选</p>
+                            </label>
+                        </div>
+		                <div class="turn-page" data-type='waitPayOrder'></div>
+                    </div>
+                    <div class="section-bt section-bt_3 hide">
+                        <div class="btns">
+                            <label>
+                               <input type="checkbox" class="all-chose" data-tab='3'><p>全选</p>
+                            </label>
+                            <a class="btn all_send">批量发货</a>
+                        </div>
+		                <div class="turn-page" data-type='waitSendOrder'></div>
+                    </div>
+                    <div class="section-bt section-bt_4 hide">
+                        <div class="btns">
+                            <label>
+                               <input type="checkbox" class="all-chose" data-tab='4'><p>全选</p>
+                            </label>
+                        </div>
+		                <div class="turn-page" data-type='sendOrder'></div>
+                    </div> 
+                    <div class="section-bt section-bt_5 hide">
+                        <div class="btns">    
+                        </div>
+		                    <div class="turn-page" data-type='waitCommentOrder'></div>
+                    </div>
+                    <div class="section-bt section-bt_6 hide">
+                        <div class="btns"></div>
+		                    <div class="turn-page" data-type='successOrder'></div>
+                    </div>
+                    <div class="section-bt section-bt_7 hide">
+                        <div class="btns"></div>
+		                    <div class="turn-page" data-type='closeOrder'></div>
+                    </div> 
+                    <div class="section-bt section-bt_8 hide">
+                        <div class="btns"></div>
+		                    <div class="turn-page" data-type='threeMonthBeforeOrder'></div>
+                    </div>                                                                         
+                </div>
+          </div>           
+        </div>
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+//判断左边导航
+function checkNav(){
+	$(".side-nav>ul:eq(0)>li:eq(1) a").css("color","#ff6600")
+}
+checkNav(); 
+
+/*分页*/
+(function(e){
+var Page = function(config){
+    this.config(config);//配置    
+    if(this.request_type == 'get'){
+        this.get();
+    }
+    if(this.request_type == 'post'){
+        this.post();
+    }
+}
+
+Page.prototype = {
+    config:function(config){   
+        //请求地址
+        this.url        = config.url;
+        // 分页栏每页显示的页数
+        this.rollPage   = /^[1-9]+[0-9]*]*$/.test(config.rollPage) ? config.rollPage : 3;
+        // 附加请求参数
+        this.paramer    = config.paramer ? config.paramer : '';
+        //总记录数 
+        this.totalRows;
+        //第多少条开始取  
+        this.firstRow;
+        //设置每页显示条数 默认20条
+        this.listRows   = /^[1-9]+[0-9]*]*$/.test(config.listRows) ? config.listRows : 20; 
+        //当前页数默认为1
+        this.nowPage    = /^[1-9]+[0-9]*]*$/.test(config.nowPage) ? config.nowPage : 1;
+        //每页显示的多少条数据 
+        this.callback   = config.callback||'';
+        this.request_type = config.request_type;
+        //分页数据
+        this.page       = {};
+        this.data_cache = [];//得到的数据根据分页缓存
+        this.cache = typeof(config.cache)!=='undefined'?config.cache:false; //是否开启缓存  
+    },
+    /***初始运行***/
+    init:function(){
+      //获得分页内容
+        this.get_page();
+        //回调函数
+        this.callback(this.data , this.page); 
+    },
+    /***ajax请求***/
+    post:function(){
+        var _this     = this;
+        this.firstRow = this.listRows * (this.nowPage - 1);      
+        var d = {firstRow : this.firstRow , listRows : this.listRows};
+        for(i in this.parameter){
+            if(typeof(this.parameter[i]) != 'undefined'){
+              d[i] = this.parameter[i];
+            }       
+        }
+        $.post(this.url , d , function(res){
+            if(res){       
+                _this.data      = res['data'];
+                _this.totalRows = res['total'];
+                _this.init();
+            }
+        })   
+    }, 
+    /***ajax请求***/
+    get : function(){
+       if(this.cache && typeof(this.data_cache[this.nowPage])!=='undefined'){
+           this.data = this.data_cache[this.nowPage];
+           this.init();
+       }else{      
+          var _this     = this;
+          this.firstRow = this.listRows * (this.nowPage - 1);      
+          var d = {firstRow : this.firstRow , listRows : this.listRows};
+          for(i in this.parameter){
+              if(typeof(this.parameter[i]) != 'undefined'){
+                d[i] = this.parameter[i];
+              }       
+          }
+          $.get(this.url , d ,function(res){
+              if(res){       
+                  _this.data_cache[_this.nowPage] = res['data'];
+                  _this.data      = res['data'];
+                  _this.totalRows = res['totalRows'];
+                  _this.init();
+              }
+          })
+      }   
+    }, 
+    /***分页***/
+    get_page:function(){
+        var __PAGE = {
+            prev      : false,
+            first     : false,
+            page      : [],
+            next      : false,
+            end       : false,
+            now_page  : ''
+        };
+        /* 计算分页信息 */
+        this.totalPages = Math.ceil(this.totalRows/this.listRows); //总页数
+        //当前页面大于总页面
+        if(!this.totalPages && this.nowPage > this.totalPages){
+            this.nowPage = this.totalPages;//当前页面设置为总页面
+        } 
+        /* 计算分页临时变量 */
+        now_cool_page      = this.rollPage / 2;
+        now_cool_page_ceil = Math.ceil(now_cool_page);
+        //上一页
+        up_row  = this.nowPage - 1;  
+        __PAGE.prev = up_row > 0 ? up_row : false;
+        //下一页
+        down_row  = this.nowPage+1;  
+        __PAGE.next = (down_row <= this.totalPages) > 0 ? down_row : false;    
+        //数字连接
+        for(i = 1; i <= this.rollPage;i++){
+            /*计算出页数*/
+            if((this.nowPage - now_cool_page) <= 0 ){
+                page = i;
+            }else
+            if((this.nowPage + now_cool_page - 1) >= this.totalPages){
+                page = this.totalPages - this.rollPage + i;
+            }else{
+                page = this.nowPage - now_cool_page_ceil + i;
+            }  
+            //页数大于0并且页数不等于当前页面         
+            if(page > 0 && page != this.nowPage){
+                //当前页数小于或者等于总页数才让其显示
+                if(page <= this.totalPages){
+                  __PAGE.page.push(page);                           
+                }else{
+                    break;
+                }
+            }else         
+            if(this.nowPage==page){
+                __PAGE.page.push(page);
+                __PAGE.now_page = page;
+            } 
+        }
+        __PAGE.totalPages = this.totalPages;
+        __PAGE.totalRows  = this.totalRows; 
+        this.page = __PAGE;         
+    }, 
+}
+
+e.ajaxPage = function(config){
+    return new Page(config);
+}
+})(window);
+
+
+(function(w){
+    /*请求地址*/
+    var get_order_url = 'http://www.orangesha.com/SellerOrder/getOrderData?type=';
+    var __REQUEST_URL = {
+        //近3个月订单数据
+        getThreeMonthOrder       : get_order_url + 'getThreeMonthOrder',
+        //等待付款
+        getWaitPayOrder          : get_order_url + 'getWaitPayOrder',
+        //等待发货
+        getWaitSendOrder         : get_order_url + 'getWaitSendOrder',
+        //已经发货
+        getSendOrder             : get_order_url + 'getSendOrder',
+        //等待评论
+        getWaitCommentOrder      : get_order_url + 'getWaitCommentOrder',
+        //交易成功
+        getSuccessOrder          : get_order_url + 'getSuccessOrder',
+        //关闭的订单
+        getCloseOrder            : get_order_url + 'getCloseOrder',
+        //三个月之前的订单的订单
+        getThreeMonthBeforeOrder : get_order_url + 'getThreeMonthBeforeOrder',
+        //发货地址        
+        sendUrl                  : 'http://www.orangesha.com/SellerOrder/SendGoods'   
+    };
+    
+    /*每种订单列表创建状态*/
+    var __HTML_STATUS = {
+        threeMonthOrder       : false,
+        waitPayOrder          : false,
+        waitSendOrder         : false,
+        sendOrder             : false,
+        waitCommentOrder      : false,
+        successOrder          : false,
+        closeOrder            : false,
+        threeMonthBeforeOrder : false
+    };
+    
+    /*分页通用配置参数*/
+    var __PAGE_CONFIG   = {
+        listRows     : 10,    //每页显示10条
+        rollPage     : 3,     //分页显示3页
+        cache        : true,  //启用ajax缓存
+        request_type : 'get', //get方式获取
+    }
+
+    /*生成html*/
+    var __HTML = {
+        //生成近三个月订单的html
+        createOrder : function(data){
+            var html = '';
+            for(var k in data){
+                var price = {
+                    pay_price         : data[k].pay_price,//支付价格
+                    shipping_price    : data[k].shipping_price,//运费
+                    shop_coupon_price : data[k].shop_coupon_price,//优惠
+                };
+                html = html 
+                    + '<tr class="order_margin">'
+                    + '    <tr class="order_margin">'
+                    + '        <td colspan="7">'
+                    + '            <div class="order_margin_div"></div>'
+                    + '        </td>'
+                    + '    </tr>'
+                    + '    <tr class="order_header">'
+                    + '        <td colspan="7">'
+                    + '            <input type="checkbox" class="list-input" value="'+data[k].order_id+'"> 订单号：' + data[k].order_sn 
+                    +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;时间 ：'  + data[k].create_time
+                    + '        </td>'
+                    + '    </tr>'
+                    +  __HTML.createOrderData(data[k].data , price)
+            }
+            return html;                
+        },
+        //生成订单详情
+        createOrderData : function(data , price){
+            var html = '';
+            var comment_html;
+            for(var k in data){
+            	if(data[k].comment_status == 0){
+                	comment_html = '<td>等待买家评价</td>'
+                }
+                if(data[k].comment_status == 1){
+                	comment_html = '<td>买家已评价</td>'
+                }
+            }
+            for(var k in data){
+                html = html                    
+                    + '<tr class="order_body">'
+                    + '        <td>'
+                    + '            <img src="' + data[k].goods_thumb + '">'
+                    + '            <p>' + data[k].goods_name + '</p>'
+                    + '        </td>'
+                    + '        <td>' + data[k].goods_price + '元</td>'
+                    + '        <td>' + data[k].number + '</td>'
+                    + '        <td>' + data[k].name + '</td>'
+                    + ( k == 0 ? __HTML.createOrderStatusHtml(data[k] , data.length + 1) : '')
+                    + ( k != 0 ? '' : 
+                      '<td rowspan="' + (data.length + 1) +'">' 
+                    + '    <p>¥ '+price.pay_price+'</p> '
+                    + '    <p>(含运费:' + price.shipping_price +')</p>'
+                    + '    <p>(优惠:' + price.shop_coupon_price +')</p>'
+                    + '</td>')
+                    + comment_html                  
+                    + '</tr>';
+            }
+            return html;  
+        },
+        //生成订单状态的Html
+        createOrderStatusHtml : function(data , rowspan){
+            var order_status,
+                order_id,
+                send_url = '';//发货地址
+            if(data.status == '-1'){
+                order_status = '交易关闭'
+            }
+            if(data.pay_status == '0'){
+                order_status = '等待买家付款'
+            }
+            if(data.pay_status == '1' && data.send_status == '0'){
+                send_url = __REQUEST_URL.sendUrl + '?id[]=' + data.order_id;
+                order_status = '买家已付款'
+            }
+            if(data.send_status == '1'){
+                order_status = '已发货'
+            }
+            if(data.send_status == '2'){
+                order_status = '买家已收货'
+            }
+            if(data.comment_status == '1'){
+                order_status = '买家已评论'
+            }
+            var html = ''   
+                + '<td class="goods-state" rowspan="' + rowspan +'">'              
+                + '    <p>' + order_status + '</p>'
+                + '    <p><a class="order_detail" href="{:U('Seller_Orderdetail/orderDetail')}&id=' + data.order_id + '" target="_blank">详情</a></p>'
+                + (send_url == '' ? '' :  
+                  '    <p><a class="send_good" target="_blank" href="' + send_url + '">发货</a></p>')
+                + '    '
+                + '</td>'
+            return html;              
+        }, 
+        //生成分页
+        createPage : function(data){
+            var page = data.first !== false ? ('<div class="page-btn" href="javascript:;">首页</diva>') :
+                ('<div class="page-btn">首页</div>');
+            page += data.prev !== false ? ('<div class="left-btn" href="javascript:;"></div>') :
+                ('<div class="left-btn"></div>');     
+            for(var k in data.page){
+              page += data.page[k] == data.now_page ? 
+                  ('<div class="page_a now" data-p=' + data.page[k] + '>' + data.page[k] +'</div>') :
+                  ('<div class="page_a" href="javascript:;" data-p=' + data.page[k] + '>' + data.page[k] +'</div>');    
+            } 
+            page += data.next !== false ? ('<div class="right-btn" href="javascript:;"></div>') :
+                ('<div class="right-btn"></div>');
+            page += data.end !== false ? ('<div class="page-btn" href="javascript:;">末页</div>') :
+                ('<div class="page-btn">末页</div>');             
+            page += '<p class="total">共 <span>' + data.totalPages + '</span> 页 ' + data.totalRows + '个订单</p>'; 
+            page += '<p class="to-page">跳至 <input class="go_number" type="text" value="1"> 页';   
+            page += '<input type="button" class="go" value="跳转"></p>';
+            return page;         
+        }
+    }
+        
+    
+    /*获取订单数据 并显示*/
+    var __MAIN = {
+        /*
+         * 获取订单
+         **/
+        getOrderData : function(url , func){
+            var config   = {
+                listRows     : __PAGE_CONFIG.listRows, 
+                rollPage     : __PAGE_CONFIG.rollPage,
+                cache        : __PAGE_CONFIG.cache,
+                request_type : __PAGE_CONFIG.request_type,
+                url          : url,
+                callback     : func
+            };
+            return ajaxPage(config);
+        },
+        /*
+         * 三个月之前的订单
+         **/
+        threeMonthOrder : function(){
+            if(__HTML_STATUS.threeMonthOrder !== false){
+                return;
+            }
+            __HTML_STATUS.threeMonthOrder = __MAIN.getOrderData(__REQUEST_URL.getThreeMonthOrder , function(data , page){          
+                $(".tab_1").html(__HTML.createOrder(data));
+                //分页
+                $(".section-bt_1 .turn-page").html(__HTML.createPage(page));                                     
+            });         
+        },  
+        /*
+         * 等待付款的订单
+         **/
+        waitPayOrder : function(){
+            if(__HTML_STATUS.waitPayOrder !== false){
+                return;
+            }
+            __HTML_STATUS.waitPayOrder = __MAIN.getOrderData(__REQUEST_URL.getWaitPayOrder , function(data , page){          
+                $(".tab_2").html(__HTML.createOrder(data));
+                //分页
+                $(".section-bt_2 .turn-page").html(__HTML.createPage(page));                                     
+            });                    
+        },
+        /*
+         * 等待发货
+         **/
+        waitSendOrder : function(){
+            if(__HTML_STATUS.waitSendOrder !== false){
+                return;
+            }
+            __HTML_STATUS.waitSendOrder = __MAIN.getOrderData(__REQUEST_URL.getWaitSendOrder , function(data , page){          
+                $(".tab_3").html(__HTML.createOrder(data));
+                //分页
+                $(".section-bt_3 .turn-page").html(__HTML.createPage(page));                                     
+            });                
+        },
+        /*
+         * 已经发货
+         **/
+        sendOrder : function(){
+            if(__HTML_STATUS.sendOrder !== false){
+                return;
+            }
+            __HTML_STATUS.sendOrder = __MAIN.getOrderData(__REQUEST_URL.getSendOrder , function(data , page){
+                $(".tab_4").html(__HTML.createOrder(data));
+                //分页
+                $(".section-bt_4 .turn-page").html(__HTML.createPage(page));                                     
+            });               
+        },
+        /*
+         * 等待评论
+         **/
+        waitCommentOrder : function(){
+            if(__HTML_STATUS.waitCommentOrder !== false){
+                return;
+            }
+            __HTML_STATUS.waitCommentOrder = __MAIN.getOrderData(__REQUEST_URL.getWaitCommentOrder , function(data , page){          
+                $(".tab_5").html(__HTML.createOrder(data));
+                //分页
+                $(".section-bt_5 .turn-page").html(__HTML.createPage(page));                                     
+            });                     
+        },
+        /*
+         * 交易成功
+         **/
+        successOrder : function(){
+            if(__HTML_STATUS.successOrder !== false){
+                return;
+            }
+            __HTML_STATUS.successOrder = __MAIN.getOrderData(__REQUEST_URL.getSuccessOrder , function(data , page){
+                $(".tab_6").html(__HTML.createOrder(data));
+                //分页
+                $(".section-bt_6 .turn-page").html(__HTML.createPage(page));                                     
+            });                  
+        },
+        /*
+         * 关闭的订单
+         **/
+        closeOrder : function(){
+            if(__HTML_STATUS.closeOrder !== false){
+                return;
+            }
+            __HTML_STATUS.closeOrder = __MAIN.getOrderData(__REQUEST_URL.getCloseOrder , function(data , page){
+                $(".tab_7").html(__HTML.createOrder(data));
+                //分页
+                $(".section-bt_7 .turn-page").html(__HTML.createPage(page));                                     
+            });              
+        },
+        /*
+         * 三个月之前的订单
+         **/
+        threeMonthBeforeOrder : function(){
+            if(__HTML_STATUS.threeMonthBeforeOrder !== false){
+                return;
+            }
+            __HTML_STATUS.threeMonthBeforeOrder = __MAIN.getOrderData(__REQUEST_URL.getThreeMonthBeforeOrder , function(data , page){
+                $(".tab_8").html(__HTML.createOrder(data));
+                //分页
+                $(".section-bt_8 .turn-page").html(__HTML.createPage(page));                                     
+            });              
+        }
+    }
+    
+    /*
+     * 分页事件绑定 
+     **/
+    var page_event = (function(){
+        /*
+         * 点击分页跳转
+         **/
+        $(".section").on('click' , '.page_a' , function(){
+            var p    = $(this).attr('data-p');
+            var type = $(this).parents('.turn-page').attr('data-type');
+            var page = __HTML_STATUS[type];
+            page.nowPage = parseInt(p);
+            page.get();    
+        })
+
+        /*
+         * 输入分页跳转
+         **/
+        $(".section").on('click' , '.jump' , function(){
+            var p = $("input[name='jump_page']").val();
+            page.nowPage = parseInt(p);
+            page.get();    
+        }) 
+
+        /*
+         * 改变分页每页显示条数
+         **/
+        $(".section").on('change' , '.set_listRows' , function(){
+            var listRows = $(this).val();
+            var type = $(this).parents('.turn-page').attr('data-type');
+            var page = __HTML_STATUS[type];
+            page.nowPage = 1;
+            page.listRows = listRows;
+            page.get();    
+        })      
+    })();
+
+   /*
+    * 点击批量发货
+    **/            
+    $(".section-bt").on('click' , '.all_send' , function(){    	
+        if(confirm('确认发货?')){ 
+        	var chk_value = []; 
+        	$('input[class="list-input"]:checked').each(function(){ 
+	            chk_value.push($(this).val()); 
+	        }); 	
+        	if(chk_value.length==0){
+        		alert('请选择需要发货的订单！');
+        	}else{        	  	                          
+	          var data;
+	          for(var i=0;i<chk_value.length;i++){
+	              data += "id[]="+chk_value[i]+"&"
+	          }
+	          console.log(data.substring(9,data.length-1))
+	   		  window.open('http://www.orangesha.com/index.php/Home/Seller_order/SendAllGoods?' + data.substring(9,data.length-1))
+        	}          
+        }
+    });
+
+    /*全选*/
+    $(".section-bt").on('click','.all-chose',function(){
+        var tab = $(this).attr('data-tab');
+        var obj = $(".tab_" + tab +" input[type='checkbox']");
+        if($(this).prop('checked')){
+          obj.prop('checked',true);
+        }else{
+          obj.prop('checked',false);
+        }      
+    });
+
+    w.order_list = {
+        orderData : function(func){
+            __MAIN[func]();           
+        }
+    }
+    
+})(window);
+order_list.orderData('threeMonthOrder');
+
+
+
+var nav = (function(){
+    var order_func = {
+        '1' : 'threeMonthOrder',
+        '2' : 'waitPayOrder',
+        '3' : 'waitSendOrder',
+        '4' : 'sendOrder',
+        '5' : 'waitCommentOrder',
+        '6' : 'successOrder',
+        '7' : 'closeOrder',
+        '8' : 'threeMonthBeforeOrder'
+    };
+
+  	$('.nav-top li').on('click',function (){
+  	    $(this).addClass('active');
+  	    $(this).siblings().removeClass('active');
+  	    var num = parseInt($(this).index()) + 1;
+  	    $(".tab_" + num).removeClass('hide').siblings('table').addClass('hide');
+  	    $(".goods-list").find(".list-input").attr("checked",false);
+  	    $(".all-chose").attr("checked",false);
+  	    $(".section-bt_" + num).removeClass('hide').siblings('.section-bt').addClass('hide');
+        order_list.orderData(order_func[num]);	   
+  	});	
+})();
+</script>
+</body>
+</html>

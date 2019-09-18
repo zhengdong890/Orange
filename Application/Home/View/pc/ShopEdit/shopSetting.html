@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/all-use.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/side-nav.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/store-setting.css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+ <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="Public:header_top" /> 
+<!-- 头部_顶部end --> 
+<!-- 头部_搜索栏start -->
+<include file="Public:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="Public:sellerLeft" />  
+        <div class="user-right marT20 fRi">
+             <div class="store-setting">
+                 <ul class="nav-top clearfix">
+                     <li class="active" id="service-pro">店铺基本设置</li>
+                 </ul>
+                 <div class="setting-section">
+                    <form id='form'>
+                        <div>店铺名称:<span>*</span>
+                            <input type="text" name='shop_name' value="{$data['shop_name']}">
+                        </div>
+                        <div>
+                            <div class="clearfix">
+                                <p class="fLe">店铺标志:</p>
+                                <if condition="$data['logo'] neq ''">
+                                <div class="store-img fLe" style="background:url('{$data['logo']|substr=1}')"></div>
+                                <else/>
+                                <div class="store-img fLe"></div>
+                                </if>
+                            </div>
+                            <div>
+                                <label class="file-btn">上传图标
+                                <input type="file" name='logo'>
+                                </label>
+                                <p class="prompt">文件格式GIF、JPG、JPEG、PNG文件大小80K以内，建议尺寸80PX*80PX</p>
+                            </div>
+                        </div>
+                        <div>经营地址:<span>*</span>
+                           <select name='area'>
+                               <option value='0'>请选择省/直辖市</option>
+                               <volist name='area' id='v'>
+                               <if condition="$v['area_no'] eq $data['area']">
+                               <option value="{$v['area_no']}" selected>{$v['area_name']}</option>
+                               <else/>
+                               <option value="{$v['area_no']}">{$v['area_name']}</option>
+                               </if>
+                               </volist> 
+                           </select>
+                        </div>
+                        <button class="save-btn">保存</button>
+                    </form>
+                 </div>
+             </div>         
+        </div>
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+var logo = "{$data['logo']}";
+$(".save-btn").click(function(){
+    if(!$("input[name='shop_name']").val()){
+        alert('必须输入店铺名字');
+        return false;
+    }
+    if(!$("input[name='logo']").val() && logo == ''){
+        alert('必须选择logo');
+        return false;
+    }
+    request();
+    return false;
+})
+
+$("input[name='logo']").on('change','input',function(){
+    var file   = $(this)[0].files[0];   
+    var reader = new FileReader(); 
+    //将文件以Data URL形式读入页面  
+    reader.readAsDataURL(file);  
+    reader.onload=function(e){ 
+        //显示文件      
+        $(".store-img").css("background","url("+this.result+")");
+    }  
+})
+
+/*
+ * 提交数据
+ **/
+function request(){  
+    var data = new FormData($("#form")[0]);  // 要求使用的html对象
+    var url  = "{:U('ShopEdit/shopSetting')}";
+    $.ajax({  
+          url : url ,  
+          type: 'POST',  
+          data: data,  
+          async: true,  
+          // 下面三个参数要指定，如果不指定，会报一个JQuery的错误 
+　　　　　cache: false,  
+          contentType: false,  
+          processData: false,  
+          success: function (res) {  
+              alert(res.msg); 
+              window.location.reload();            
+          },  
+          error: function (returndata) {  
+              console.log(returndata); 
+          }  
+     });  
+}
+</script>
+</body>
+</html>

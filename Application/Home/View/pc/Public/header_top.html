@@ -1,0 +1,32 @@
+<div class="cover-top jCover-top">
+    <div class="cover-top-body mar1200c clearfix">
+        <div class="cover-top-f fLe">
+        	 <span><a class="homePage" href="http://{$Think.server.HTTP_HOST}"><img src="{:C('STATIC_URL_QILIU')}/Home/image/home.png" />橙橙首页</a></span>             
+             <span class="wel-lp">您好，<if condition="$Think.session.member_data.nickname eq ''">{$Think.session.member_data.username}<else/>{$Think.session.member_data.nickname}</if>&nbsp;欢迎光临e橙优品工业商城</span>         
+             <if condition="$Think.session.member_data.id eq ''" >
+             <a class="col1" href="http://www.orangesha.com/login.html" rel="nofollow">【登录】</a>
+             <a class="col1" href="http://www.orangesha.com/register.html" rel="nofollow">【免费注册】</a> 
+             <else/>
+             <a class="col1" href="http://www.orangesha.com/logout.html" rel="nofollow">【注销】</a>
+             </if>      
+        </div>
+        <div class="cover-top-list cover-top-f fRi wel-rp">
+            <ul>
+                <li><a href="http://www.orangesha.com/member.html" target="_blank" class="cCol1-h" rel="nofollow">个人中心</a></li>
+                <li>|</li>
+                <li class="ewm"><a href="#" class="cCol1-h">手机橙橙</a><div></div></li>
+                <li>|</li>
+                <li><a class="cCol1-h" target="_blank" href="http://www.orangesha.com/order.html" rel="nofollow">我的订单</a></li>
+                <li>|</li>
+                <li><a href="javascript:open('http://p.qiao.baidu.com/cps/chat?siteId=9913952&userId=22347187')" class="cCol1-h" rel="nofollow">在线客服</a></li>
+                <li>|</li>
+                <li><span class="phone-sign">400-966-5770（9:00-18:00）</span></li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+  
+
+
+

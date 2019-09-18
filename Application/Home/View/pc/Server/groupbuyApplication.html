@@ -1,0 +1,102 @@
+<html>
+	<head>
+		<meta charset="utf-8" >
+		<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Homejs/jquery-1.10.2.min.js"></script>
+<![endif]-->
+		<style>
+			*{ font-family: "微软雅黑";}
+			select{  font-size: 14px; color: #999; outline: none;}	
+			table{ margin: 0 auto;}	
+			table td{ font-family: "微软雅黑";  font-size: 14px; color: #666;}
+			table td input{width:540px;height:25px;margin-bottom: 10px; padding-left: 4px;}
+			table td select{ width: 70px; height: 30px; cursor: pointer;}
+			table td select option{ text-align: center; cursor: pointer;}
+			table td:first-of-type{ text-align: right; width: 190px;  position: relative;}
+			.td_title{ font-size: 14px; color: #666;}
+			#describe{ position: absolute; left: 110px; top: 8px;}
+			.contacts,.contacts_phone{ width: 221px;}.project_sum,.project_sum,.position{ width: 90px;}
+			.checkbox{ width: 14px; height: 14px; vertical-align: middle; cursor: pointer;}
+			#issub{width:100px;height:45px;cursor:pointer;border-radius:5px;background:#7194A8;color:#FFFFFF;margin-top: 10px;}
+			.star{ color: #FF6600;}
+			textarea{ width: 540px; height: 130px; vertical-align: top; margin-bottom: 4px;}
+			.get-img{text-align: center; display: inline-block;border:1px solid #999; width: 82px;height: 82px;position: relative;background: url(../images/add-img_03.jpg) no-repeat;background-size: 100%;cursor: pointer;}
+            .file-img{display: none;}
+		</style>
+	<!-- www.orangesha.com Baidu tongji analytics -->
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	var hm = document.createElement("script");
+	hm.src = "//hm.baidu.com/hm.js?54f6f54d47704101dc27b337de5fd6c3";
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+</head>
+	<body style="overflow-y:auto">
+		<div style="width:100%;height:100%;text-align:center;"> 
+			
+				<form action="" method="post" >
+			<table>
+				<tr>
+				   <td class="td_title"><span class="star">*</span> 团购标题：</td>
+				   <td><input type="text" name="project_name"></td>
+				</tr>
+				<tr>
+				   <td class="td_title"><span class="star">*</span> 团购价格：</td>
+				   <td><input type="text" class="contacts" name="project_name"> 万元</td>
+				</tr>
+				<tr>
+				   <td class="td_title"><span class="star">*</span> 开始时间：</td>
+				   <td><input type="datetime-local" class="contacts" name="customer_name"></td>
+				</tr>
+				<tr>
+				   <td class="td_title"><span class="star">*</span> 活动时间：</td>
+				   <td><input type="radio" name="Type" class="checkbox"> 7天 <input type="radio" name="Type" class="checkbox"> 15天 <input type="radio" name="Type" class="checkbox"> 30天</td>
+				</tr>
+				<tr>
+				   <td class="td_title"> 闪购位置：</td>
+				   <td><input type="radio" name="recommend" class="checkbox"> 上首页 <input type="radio" name="recommend" class="checkbox"> 上推荐</td>
+				</tr>
+				<tr>
+			    	<td><span class="star">*</span> 团购图片：</td>
+			    	<td>
+			    		<label class="get-img" style="background:url('{$group_list['group_img']|substr=1}') no-repeat; background-size: 100%;">
+                          <span class="getImg_span" style="line-height: 80px;">添加图片</span><input type="file" class="file-img" name='group_img'>
+                        </label>&nbsp;&nbsp;
+                        <span class="star">上传图片分辨率为493*222像素，大小不能超过2MB</span>
+			    	</td>
+			   </tr>				
+				<tr>
+			    	<td></td>
+			    	<td style="text-align: right;"><input type="submit" id="issub" name="sub" value="提交"></td>
+			    </tr>
+			</table>
+			
+		</form>
+		
+		</div>		
+	</body>
+<script>
+    //添加图片
+	$(".get-img").on('change','input',function(){
+        var file   = $(this)[0].files[0];   
+        var reader = new FileReader(); 
+        var _this  = this; 
+        //将文件以Data URL形式读入页面  
+        reader.readAsDataURL(file);  
+        reader.onload=function(e){ 
+            //显示文件      
+            $(_this).parent('.get-img').css("background","url("+this.result+") no-repeat").css("background-size","100%");
+            $(".getImg_span").css("display","none")
+        }  
+    })
+	
+	
+</script>
+	
+	
+</html>

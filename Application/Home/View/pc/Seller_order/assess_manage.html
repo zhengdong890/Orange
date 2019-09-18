@@ -1,0 +1,254 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>评价管理</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/all-use.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/side-nav.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/sell-management.css">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+<style>
+.hide{display:none}
+#top_ul{ overflow: hidden; border-bottom: 1px solid #FF6600; padding: 0px; margin-bottom: 10px;}
+#top_ul>li{ height: 40px; line-height: 40px; border-right: none; background-color: #fff; color: #000;cursor: pointer; }
+#top_ul>li:first-of-type{ background-color: #FF6600; color: #fff;}
+#assess_list2{display: none;}
+#assess_list thead,#assess_list2 thead{ background-color: #F4F5FA; margin-top: 10px;}
+#assess_list thead td,#assess_list2 thead td{ border-bottom: none;line-height: 30px;}
+#assess_list tr:last-of-type td{ border-bottom: none;}
+#assess_list2 tr:last-of-type td{ border-bottom: none;}
+#assess_list tr td:first-of-type{ width: 175px;}
+#assess_list2 tr td:first-of-type{ width: 175px;}
+#assess_list tr td:nth-of-type(2){ width: 475px; text-align: left;padding-left: 20px;box-sizing: border-box;}
+#assess_list2 tr td:nth-of-type(2){ width: 475px; text-align: left;padding-left: 20px;box-sizing: border-box;}
+#assess_list tr td:nth-of-type(3){ width: 95px;}
+#assess_list2 tr td:nth-of-type(3){ width: 95px;}
+#assess_list tr td:nth-of-type(4){ width: 130px;}
+#assess_list2 tr td:nth-of-type(4){ width: 130px;}
+#assess_list tr td:nth-of-type(5){ width: 70px; }
+#assess_list2 tr td:nth-of-type(5){ width: 70px;}
+#assess_list tr td button,#assess_list2 tr td button{ color: #fff; background-color: #FF6600; padding: 2px 8px; border-radius: 4px; font-family: "微软雅黑";}
+
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end --> 
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="Public:sellerLeft" />  
+        <div class="user-right marT20 fRi">
+            <div class="sell-management clearfix" style='width:auto'>
+                <div class="section">
+                   <ul id="top_ul">
+                   	  <li>来自买家的评价</li>
+                      <li>已删除的评价</li>
+                   </ul> 
+                   <table id="assess_list">
+                   	  <thead>
+                   	  	 <td>评价 ▼</td>
+                   	  	 <td>评论 ▼</td>
+                   	  	 <td>评价人</td>
+                   	  	 <td>商品信息</td>
+                   	  	 <td>操作</td>
+                   	  </thead>
+                   	  <!--<tr>
+                   	  	<td>好评</td>
+                   	  	<td>商品挺有用的。</br> <span>[2016-08-12 10:20:50]</span></td>
+                   	  	<td>卖家：激励</td>
+                   	  	<td>
+                   	  		<p>乐伯特 码垛型机器人 LT2100-E-6</p>
+                   	  		<p>乐伯特 码垛型机器人 LT2100-E-6</p>
+                   	  		<p>1200 元/月</p>
+                   	  	</td>
+                   	  	<td><button>回复</button></td>
+                   	  </tr>
+                   	  <tr>
+                   	  	<td>好评</td>
+                   	  	<td>商品挺有用的。</br> <span>[2016-08-12 10:20:50]</span></td>
+                   	  	<td>卖家：激励</td>
+                   	  	<td>
+                   	  		<p>乐伯特 码垛型机器人 LT2100-E-6</p>
+                   	  		<p>乐伯特 码垛型机器人 LT2100-E-6</p>
+                   	  		<p>1200 元/月</p>
+                   	  	</td>
+                   	  	<td><button>回复</button></td>
+                   	  </tr>
+                   	  <tr>
+                   	  	<td>好评</td>
+                   	  	<td>商品挺有用的。</br> <span>[2016-08-12 10:20:50]</span></td>
+                   	  	<td>卖家：激励</td>
+                   	  	<td>
+                   	  		<p>乐伯特 码垛型机器人 LT2100-E-6</p>
+                   	  		<p>乐伯特 码垛型机器人 LT2100-E-6</p>
+                   	  		<p>1200 元/月</p>
+                   	  	</td>
+                   	  	<td><button>回复</button></td>
+                   	  </tr>-->
+                   </table>
+                   <table id="assess_list2">
+                   	  <thead>
+                   	  	 <td>评价 ▼</td>
+                   	  	 <td>评论 ▼</td>
+                   	  	 <td>评价人</td>
+                   	  	 <td>商品信息</td>
+                   	  	 <td>操作</td>
+                   	  </thead>
+                   	  <!--<tr>
+                   	  	<td>好评</td>
+                   	  	<td>商品挺有用的。</br> <span>[2016-08-12 10:20:50]</span></td>
+                   	  	<td>卖家：激励</td>
+                   	  	<td>
+                   	  		<p>乐伯特 码垛型机器人 LT2100-E-6</p>
+                   	  		<p>乐伯特 码垛型机器人 LT2100-E-6</p>
+                   	  		<p>1200 元/月</p>
+                   	  	</td>
+                   	  	<td><button>回复</button></td>
+                   	  </tr>-->                  	  
+                   </table>
+                    
+                </div>
+          </div>           
+        </div>
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+//判断左边导航
+function checkNav(){
+	$(".side-nav>ul:eq(0)>li:eq(2) a").css("color","#ff6600")
+}
+checkNav() ;
+
+//订单菜单切换
+$("#top_ul li:eq(0)").click(function(){
+	$("#assess_list").css("display","block");
+	$("#assess_list2").css("display","none");
+	$(this).css("background-color","#FF6600").css("color","#fff");
+	$(this).siblings().css("background-color","#fff").css("color","#000");
+})
+$("#top_ul li:eq(1)").click(function(){
+	$("#assess_list2").css("display","block");
+	$("#assess_list").css("display","none");
+	$(this).css("background-color","#FF6600").css("color","#fff");
+	$(this).siblings().css("background-color","#fff").css("color","#000");
+})
+
+var nav = (function(){
+	var tap  = {'1':1};
+	$('.nav-top li').on('click',function (){
+	   $(this).addClass('active');
+	   $(this).siblings().removeClass('active');
+	   var num = parseInt($(this).index()) + 1;
+	   $(".tab_" + num).removeClass('hide').siblings('table').addClass('hide');
+	   $(".section-bt_" + num).removeClass('hide').siblings('.section-bt').addClass('hide');
+	   if(!tap[num]){
+	   	   tap[num] = 1;
+           order.getInitData(num);
+	   }	   
+	});	
+})();
+
+var order = (function(){
+    var html_model = [],
+        now_number = '1',//当前显示的tab
+        parameters = {
+          'tab_1' : {'time':'+3'},
+          'tab_2' : {'status':0},
+          'tab_3' : {'status':1 , 'send_status':0},
+          'tab_4' : {'status':1 , 'send_status':1},
+          'tab_5' : {'status':1 , 'send_status':2},
+          'tab_6' : {'status':1 , 'send_status':2},
+          'tab_7' : {'status':-1},
+          'tab_8' : {'time':'-3'}
+        };          
+    html_model.push("<tr>");
+    html_model.push("   <td>");
+    html_model.push("      <input type='checkbox' class='list-input' value='%ID%'/>");
+    html_model.push("      <p>%GOODS_NAME%</p>");
+    html_model.push("   </td>");
+    html_model.push("   <td>%GOODS_PRICE%万元</td>");
+    html_model.push("   <td>%NUMBER%</td>");
+    html_model.push("   <td>小城</td>");
+    html_model.push("   <td id='goods-state'>已发货</td>");
+    html_model.push("   <td>%TOTAL_PRICE%</td>");
+    html_model.push("   <td>无</td>");
+    html_model.push("</tr>");
+    html_model = html_model.join('');  
+    
+    function getOrderData(){  		    		
+        var wraper = $(".section-bt_" + now_number + " .turn-page"),
+            _this  = this,
+            url    = "{:U('getOrderData')}";//请求地址
+        /*ajax分页*/
+        ajaxPage({
+            wraper:wraper,  
+            parameter:parameters['tab_' + now_number],//附加参数
+            listRows:5,//每页显示条数
+            rollPage:5,//最多显示多少页码
+            url:url,//ajax请求地址
+            cache:true,//是否开启缓存
+            //回调函数
+            callback:function(data,page,now_page){ 
+                wraper.html(page);
+                showHtml(data);          
+            }
+        });    		
+    }
+    
+    function showHtml(data){
+       var html = [
+            "<tr>",
+            "   <th width='265px'>商品</th>",
+            "   <th>单价</th><th>数量</th>",
+            "   <th>买家</th><th>交易状态</th>",
+            "   <th>实收款</th><th>评价</th>",
+            "</tr>"
+       ],
+       html_= '';
+       for(var k in data){
+          html_= html_model.replace(/%NUMBER%/,data[k].number).replace(/%GOODS_PRICE%/,data[k].goods_price).replace(/%GOODS_NAME%/,data[k].goods_name).replace(/%TOTAL_PRICE%/,data[k].total_price).replace(/%ID%/g,data[k].id);
+            html.push(html_);
+        }
+        html = html.join('');
+        $(".tab_" + now_number).html(html);      
+    }
+    
+    /*全选*/
+    $(".section-bt").on('click','#all-chose',function(){
+        var tab = $(this).attr('data-tab');
+        var obj = $(".tab_" + tab +" input[type='checkbox']");
+        if($(this).prop('checked')){
+        	obj.prop('checked',true);
+        }else{
+        	obj.prop('checked',false);
+        }      
+    });
+
+    return {
+        getInitData : function(num){
+           now_number = num;
+           getOrderData(); 
+        }
+    }
+})();
+order.getInitData("1");
+</script>
+</body>
+</html>

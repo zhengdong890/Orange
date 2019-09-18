@@ -1,0 +1,29 @@
+<div class="col-wx-6">
+	<div class="box marR5 n-bCol3" style="background-color:#fff;">
+		<div class="group-buy">
+			<div class="text-slider-title">
+			    <i></i>进行中项目<span> / ONGOING PROJECTS</span>
+			</div>
+			<div class="text-slider posRel">
+				<ul class="text-slider-wrap">
+				    <volist name='tender' id='v'>
+				    <li>
+					<a href="{:U('Tender/index')}" >
+				        <div class="item">
+				            <h4 class="f-16-c1 f-nowrap"><span>{$v['title']}</span></h4>
+				            <p class="f-nowrap marL20">{$v['des']}</p>
+				        </div>
+					</a>
+				    </li>
+				    </volist>                                                                             
+				</ul>
+				<ul class="text-direction-nav">
+				    <li style="display:none;">
+				        <a class="z-prev" id="z_prev" title="e橙优品">prev</a>
+				        <a class="z-next" id="z_next" title="e橙优品">next</a>
+				    </li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

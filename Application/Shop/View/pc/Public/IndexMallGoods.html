@@ -1,0 +1,42 @@
+<!-- 商城商品start -->
+<div class="mar1200c marT10 ofwVisible">
+    <div class="contents">
+        <h4 class="f-18-c1 marB5">品牌商城</h4>
+    </div>       
+</div>
+<volist name="mall_goods" id="v">
+<div class="index-brand">
+    <div class="brand-left">
+        <!-- 商品标题 -->
+        <div class="title">
+        <img src="__ROOT__{$v['cat_thumb']|substr=1}">
+        <a href="http://{$Think.server.HTTP_HOST}/{$v['router']}.html">{$v['cat_name']}</a>
+        </div>
+        <!-- 商品导航 -->
+        <div class="left_nav">
+            <volist name="v['child']" id="v1">
+            <a href="http://{$Think.server.HTTP_HOST}/{$v1['router']}.html">{$v1['cat_name']}</a>
+            </volist>
+        </div>
+        <img class="brand-icon" src="__ROOT__{$v['cat_thumb_1']|substr=1}" alt="">
+    </div>
+    <!-- 商品列表 -->
+    <!-- start -->
+    <ul class="brand-right">
+    <volist name="v['goods']" id="v1" key="k">
+        <if condition="$k elt 8">
+        <li>
+            <a href="{:U('Mall_goods/goods',array('goods_id'=>$v1['id']))}">
+                <img src="__ROOT__{$v1['goods_thumb']|substr=1}" alt="">
+                <div class="text">
+                    {$v1['goods_name']}  
+                    <div class="price">￥{$v1['goods_price']}万</div>
+                </div>
+            </a>
+        </li>
+        </if>
+    </volist>    
+    </ul>
+</div>        
+</volist>
+<!-- 商城商品end -->

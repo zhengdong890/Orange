@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="description" content="" />
+<style>
+*{padding:0; margin:0;font-size:16px;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0} 
+#content{width:98%;height:auto;float:left;margin-left:1%;}
+#content #content_h{width:100%;height:40px;border:1px solid #D7D7D7;line-height:40px;margin-top:15px}
+#content #content_h a{padding-left:10px}
+#content #content_m{width:100%;height:auto;border:1px solid #D7D7D7;padding-bottom:100px;margin-top:20px}
+#content table{margin:0 auto;margin-top:20px}
+#content table td span{float:right}
+#content table td .isshow{width:20px;height:20px;float:left;}
+input{width:400px;height:24px;border-radius:3px;border-bottom:1px solid #E3E9EF;border-top:1px solid #ABADB3;border-left:1px solid #E2E3EA;border-right:1px solid #DBDFE6}
+textarea{width:500px;height:160px;border-radius:3px;border-bottom:1px solid #E3E9EF;border-top:1px solid #ABADB3;border-left:1px solid #E2E3EA;border-right:1px solid #DBDFE6}
+td img{max-width:250px}
+td{padding-right:30px;padding-top:5px}
+table button{border:0px;background:#C43926;color:white;padding:5px;border-radius:2px;float:left;}
+.btn_addimg{display:block;width:100px;margin-top:10px;color:white;position:relative;height:28px;line-height:28px;text-align:center;float:left;background:#C43926;border-radius:4px;}
+.btn_addimg input{width:100px;position:absolute;left:0;top:0;filter:alpha(opacity=50);-moz-opacity:0;-khtml-opacity:0;opacity:0;}
+textarea{outline:none;resize:none;}
+.img{width:100px;height:auto;float:left;}
+.img img{max-width:100%;max-height:100px;float:left}
+.btn{display:block;width:100px;margin-top:10px;color:white;position:relative;height:28px;line-height:28px;text-align:center;float:left;background:#C43926;border-radius:4px;}
+</style>
+</head>
+    <body>          
+        <div id="content">
+               <div id="content_h">
+                 <a>后台管理中心</a>-><a>出租banner编辑</a>
+               </div>
+               <div id="content_m">
+		               <form id='form'>
+		                       <table cellspacing="10">
+		                              <input type="hidden" name="id" value="{$banner['id']}"></input>
+	                                  <tr>
+	                                        <td><span>指向url链接:</span></td>
+	                                        <td><input type="text" name="url" value="{$banner['url']}"></input></td>
+	                                  </tr>
+	                                  <tr>
+	                                        <td><span>排序:</span></td>
+	                                        <td><input type="text" name="sort" value="{$banner['sort']}"></input></td>
+	                                  </tr>   
+	                                  <tr>
+	                                       <td valign="top"><span>当前banner图片:</span></td>
+	                                       <td>
+	                                           <div class="img">
+	                                           	  <if condition="$banner['banner_thumb'] neq ''"> 
+	                                           	     <img src="__ROOT__{$banner['banner_thumb']|substr=1}"/>
+	                                           	  </if>
+	                                               <a class="btn_addimg">点击修改<input type="file" name="banner_thumb" onchange='show(this);'></input></a>                                             
+	                                            </div> 
+	                                       </td>
+	                                   </tr> 
+	                                   <tr><td></td><td><a style="width:100px;" class='btn'>确认保存</a></td></tr>
+	                          </table>
+	                   </form>		            
+                </div>
+        </div>
+    </body>
+    <script type="text/javascript">        
+    //上传图片预览
+    function show(obj){
+  	    var file = obj.files[0];   
+  	    var reader = new FileReader();  
+  	    //将文件以Data URL形式读入页面  
+  	    reader.readAsDataURL(file);  
+  	    reader.onload=function(e){ 
+  	    	//显示文件  
+  	    	$(".img img").attr("src",this.result);
+  	    }
+    } 
+
+  $(".btn").click(function(){
+      request();          
+  })
+
+  /*
+   * 提交数据
+   **/
+  function request(){  
+      var data = new FormData($("#form")[0]);  // 要求使用的html对象
+      var url  = "{:U('Banner/bannerUpdate')}";
+      var url_ = "{:U('Banner/bannerList')}"
+      $.ajax({  
+            url : url ,  
+            type: 'POST',  
+            data: data,  
+            async: true,  
+            // 下面三个参数要指定，如果不指定，会报一个JQuery的错误 
+  　　　　　cache: false,  
+            contentType: false,  
+            processData: false,  
+            success: function (res) {  
+                alert(res.msg);
+                if(res.status){
+                    window.location.href = url_;
+                } 
+            },  
+            error: function (returndata) {  
+                console.log(returndata); 
+            }  
+       });  
+  }     
+    </script>
+</html>

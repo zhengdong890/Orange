@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>{$shop_data['shop_name']}</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/shopIndex.css" type="text/css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="__PUBLIC__/css/style.css" type="text/css">
+<link href="__PUBLIC__/Home/css/shop.css" rel="stylesheet">
+<link href="__PUBLIC__/Home/css/shop_headSearch.css" rel="stylesheet">
+<link href="__PUBLIC__/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="/Public/Home/images/ee.ico" type="image/x-icon">
+<script type="text/javascript" src="__PUBLIC__/Home/static/jquery-2.0.3.min.js"></script>
+<script src="__PUBLIC__/Home/js/header.js"></script>
+<script src="/Public/layer/layer.js"></script> 
+<script src="/Public/js/navshop.js"></script> 
+</head>
+<body>
+<include file="Public:header_top" />
+<include file="Public:shop_headSearch" />
+<div class="shop">
+    <div class="header">
+        <div class="header-inner">
+        <img src="__ROOT__{$shop_data['thumb']|substr=1}" class="shop-logo">    
+            <div class="shop-title">
+                <h1>{$shop_data['shop_name']}</h1>
+                {$shop_data['desc']}
+            </div>			
+            <ul class="youhui" style="display: block;">
+            <foreach name="shop_coupons" item="vo">
+            	<li data-name={$vo.name} data-sellid={$vo.seller_id} data-id={$vo.id} data-max={$vo.max} data-price={$vo.benefit_price} data-status={$vo.status} data-stime={$vo.start_time} data-etime={$vo.end_time}>
+            		<div class="face_value"><span>¥</span>{$vo.benefit_price}</div>
+            		<div class="use_condition">
+            			<p>优惠券</p>
+            			<p>满 <span><if condition="$vo['max'] egt 10000">{$vo['max']/10000}万元<else />{$vo.max}元</if></span> 使用</p>
+            		</div>
+            	</li>
+            </foreach>
+            </ul>		
+			<a title="{$seller_id}" onclick="collectshop(this)"  class="myshop" style="background: url('/Public/Home/image/收藏本店.png') no-repeat 6px 2px;">收藏本店</a>
+            <a href="http://wpa.qq.com/msgrd?v=3&uin={$shop_data['qq']}&site=qq&menu=yes" class="seller" style="background: url('/Public/Home/image/联系卖家.png') no-repeat 6px 2px;">联系卖家</a>
+        </div>        
+    </div>	
+	<include file="Public:shopnav" /> 			
+    <div class="banner">
+        <img id="banner" src="/Public/img/image1/58396c43f0d34.jpg" alt="">
+    </div>
+    <div class="shop-list">
+        <h2><span>FAST SELLING PRODUCTS /</span>  畅销商品</h2>
+        <ul class="shop_goods1">
+            <volist name='hot_goods' id='v'>
+            <li>
+                <a href="http://{$domain}.orangesha.com/shangpin-{$v['id']}.html" title="{$v['goods_name']}"><img src="__ROOT__{$v['goods_thumb']}" alt=""></a>
+                <a href="http://{$domain}.orangesha.com/shangpin-{$v['id']}.html" title="{$v['goods_name']}"><p>{$v['goods_name']}</p></a>
+                <div class="money">
+                    <span class="price">￥{$v['goods_price']>=10000?$v['goods_price']/10000:$v['goods_price']} {$v['goods_price']>=10000?'万元':'元'}</span>
+                    <span class="sales">销量{$v['sale_num']}</span>
+                </div>
+            </li>
+            </volist>
+        </ul>
+    </div>
+    <div class="shop-list">
+        <h2><span>NEW PRODUCTS /</span>  新品推荐</h2>
+        <ul class="shop_goods2">
+            <volist name='new_goods' id='v'>
+            <li>
+                <a href="http://{$domain}.orangesha.com/shangpin-{$v['id']}.html" title="{$v['goods_name']}"><img src="__ROOT__{$v['goods_thumb']}" alt=""></a>
+                <a href="http://{$domain}.orangesha.com/shangpin-{$v['id']}.html" title="{$v['goods_name']}"><p>{$v['goods_name']}</p></a>
+                <div class="money">
+                    <span class="price"><if condition="$v['goods_price'] gt 10000">￥{$v['goods_price']/10000}万元<else />{$v['goods_price']}元</if></span>
+                    <span class="sales">销量{$v['sale_num']}</span>
+                </div>
+            </li>
+            </volist>
+        </ul>
+    </div>
+</div>
+
+<!-- 底部 -->
+<include file="Public:nofooter" />
+
+<script>
+//店铺详情
+$(".header_div").mouseenter(function(){
+	$(".shop_detail").css("display","block")
+})
+$(".shop_detail").mouseleave(function(){
+	$(".shop_detail").css("display","none")
+})
+
+console.log($(".shop_goods li").length)
+
+function getGoodlist(){
+	if($(".shop_goods1").find("li").length==0){
+		$(".shop_goods1").prev("h2").css("display","none")
+	}
+	if($(".shop_goods2").find("li").length==0){
+		$(".shop_goods2").prev("h2").css("display","none")
+	}
+}
+getGoodlist()
+
+//点击领取优惠券
+$(".youhui li").click(function(){
+	var name = $(this).attr("data-name"),
+	    id = $(this).attr("data-id"),
+	    sellerId = $(this).attr("data-sellid"),
+	    max = $(this).attr("data-max"),
+	    benefitPrice = $(this).attr("data-price"),
+	    status = $(this).attr("data-status"),
+	    start_time = $(this).attr("data-stime"),
+	    end_time = $(this).attr("data-etime");
+	    
+	var data = {
+		'seller_id' : sellerId,
+		'coupon_id' : id,
+		'coupon_name' : name,
+		'max' : max,
+		'benefit_price' : benefitPrice,
+		'status' : status,
+		'start_time' : start_time,
+		'end_time' : end_time
+	}
+	$.post("{:U('Index/couponAdd')}",data,function(res){
+		console.log(res)
+		if(res.status){
+			alert("领取成功！")
+		}
+		if(res.status==0){
+			alert(res.msg)
+		}
+	});
+})
+
+/*店铺收藏 */
+function collectshop(obj){
+  var title = $(obj).attr('title');
+  if( title ){
+		$.post("{:U('Shop/shopcllect')}",{'title':title},function(data){
+				if( data.msg=='ok'){
+				  alert('收藏该店铺成功！');
+				}else if(data.msg=='onemore'){
+				  alert('您已经收藏过该店铺了！');
+				}else{  
+				  alert('请先登录账户！');
+				}
+		});  
+  }else{
+        alert('店铺不存在！');
+  }
+}
+
+function relation(obj){
+  var title = parseInt($(obj).attr('title'));
+  if( title >0){     
+    window.location.href="tencent://message/?uin="+title+"&Site=sc.chinaz.com&Menu=yes";
+		
+  }else{
+        alert('正在联系卖家，请稍等！');
+  }
+
+}
+
+			var shop_css = "{$shop_css}";	
+          	var banner = "{$banner}";
+						
+            if( banner ){
+			   var bannerimg = banner.substring(1);
+			   $('#banner').attr("src",bannerimg);
+			}	
+          		
+			$('.navwrap').css('background','#'+shop_css);
+			$('.pros').css('background','#'+shop_css);
+			
+			var shop_status = "{$shop_status}";
+			var shop_name = "{$shop_data.shop_name}";
+			var shop_desc = "{$shop_data.desc}";
+			var shop_thumb = "{$shop_data.thumb|substr=1}";
+		  
+			if( shop_status==1 ){
+			   $(".shop_name").text(shop_name)
+			   $('.header-inner').find('img').attr('src',shop_thumb);
+			   $(' .shop-title').html('<h1>'+shop_name+'</h1>'+shop_desc+'');			
+			   $('.conpanyname').find('p').html(shop_name);
+			}
+	
+
+</script>
+
+<!-- /底部 -->
+</body>
+</html>

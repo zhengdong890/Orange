@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>申请添加品牌</title>
+		<link rel="shortcut icon" href="__PUBLIC__/Home/images/ee.ico" type="image/x-icon">
+		<link rel="stylesheet" href="__PUBLIC__/Home/css/apply_brand.css" type="text/css">
+		<link rel="stylesheet" href="__PUBLIC__/Home/css/cssReset.css" type="text/css">
+		<link rel="stylesheet" href="__PUBLIC__/Home/css/public.css" type="text/css">
+		<link rel="stylesheet" href="__PUBLIC__/Home/css/all-use.css">
+		<link href="__PUBLIC__/Home/css/footer.css" rel="stylesheet">
+		<script type="text/javascript" src="__PUBLIC__/Home/static/jquery-2.0.3.min.js"></script>
+		<script src="__PUBLIC__/Home/js/header.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/js/validate.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/Home/js/jQuery.Hz2Py-min.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/Home/js/globalScripts.js"></script>
+	</head>
+	<body>
+		<!-- 头部_顶部start -->
+		<include file="MemberPublic:header_top" /> 
+		<!-- 头部_顶部end -->   
+		<!-- 头部_搜索栏start -->
+		<include file="MemberPublic:header_search" /> 
+		<!-- 头部_搜索栏end -->
+		<div class="apply_list">
+		  <form id='apply_form'>	
+			<table cellspacing="10">
+				<tr>
+					<td>品牌名 <span class="star">*</span></td>
+					<td>
+						<input type="text" placeholder="中文名" class="apply_list_input brand_cn_name" name="brand_name"/>
+						<input type="text" placeholder="英文名" class="apply_list_input brand_en_name" name="brand_en_name"/> <span class="apply_error1">* 请输入品牌名</span>
+						<p>1)只有中文或英文品牌名，对应的输入框填写即可，如无英文品牌名，不输入即可</p>
+						<p>2)必须与商标网查询的品牌名一致，（拼音、繁体、图形商标无法受理）</p>
+						<p>3)中文和英文需同一持有人持有，且商标注册大类一致，方可合并品牌。</p>
+						<p></p>
+					</td>
+				</tr>
+				<tr>
+					<td>商标注册号/申请号</td>
+					<td>
+						<input type="text" class="apply_list_input" name="register_code">
+						<p>商标注册证和商标受理通知书中的注册号或申请号，多个注册号请用"/"隔开</p>
+					</td>
+				</tr>
+				<tr>
+					<td>商标注册证/受理通知书</td>
+					<td>
+						<div class="img">							
+		                    <label class="get-img">
+		                       <input type="file" class="file-img" name='trademark_register_img'>
+		                    </label>
+		                    <p>商标注册证</p>
+		                </div>
+                        <div class="img">                        	
+		                    <label class="get-img">
+		                       <input type="file" class="file-img" name='notice_img'>
+		                    </label>
+		                    <p>受理通知书</p>
+		                </div>
+						<p style="color: red;">若提供图片将优先审核,图片格式：jpg,png,jpeg 持有中文和英文各商标证可上传2张 注意：新申请的商标，其注册号在商标网的信息不全，会审核失败。需要再提交商标受理通知书和具有完整注册号及商品信息的商标注册申请书才能被审核通过。（商标注册申请书有多页，请将多页图片合并到一张提交，具体内容参见范例图示）</p>
+					</td>
+				</tr>
+				<tr>
+					<td>品牌所有人 <span class="star">*</span></td>
+					<td>
+						<input type="text" class="apply_list_input brand_person" name="brand_person"> <span class="apply_error2">* 请输入品牌所有人</span>
+						<p>填写商标注册证或商标受理通知书的注册人或申请人信息</p>
+					</td>
+				</tr>
+				<tr>
+					<td>所属类目 <span class="star">*</span></td>
+					<td>
+						<button class="select_classify" onclick="return false">选择类目路径</button><span class="apply_error3">* 请选择所属类目</span>
+						<p>如果您有多品类产品销售，则要把品牌加入不同品类的品牌库，这步操作可以一次把你的品牌最多添加入10个品类的品牌库里</p>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<div class="box-bder">
+				            <div class="category-s-wrap">
+				               <!-- items -->
+				               <div class="item box-bder fLe search-test-inner">
+				                   <div class="caty-seach-wrap seach-sign box-bder">
+				                   	   <img src="__PUBLIC__/Home/image/glass.png" />
+				                       <input type="text" class="txt-s-01 search-value" placeholder="选择一、二级分类"/>
+				                       <ul class="search-value-list"></ul>
+				                   </div>
+				                   <ul class="caty-content-list" id="first-list">
+				                        <volist name="categorys" id="v">
+				                        <li class="search-li" data-name="{$v['cat_name']}"> 
+				                            <a href="javascript:;" data-id="{$v['id']}">{$v['cat_name']} <img class="cur" src="__PUBLIC__/Home/img/3_1.png"></a>
+				                            <ul class="caty-content-list2 second-list">
+				                               <volist name="v['child']" id="v1">
+				                               <li>
+				                               <a href="javascript:;" data-id="{$v1['id']}">{$v1['cat_name']}</a>
+				                               </li>
+				                               </volist> 
+				                            </ul>
+				                        </li>
+				                        </volist>
+				                   </ul>
+				               </div>
+				               <!-- items End -->
+				               <!-- items -->
+				               <div class="item box-bder fLe search-test-inner2">
+				                   <div class="caty-seach-wrap seach-sign box-bder">
+				                   	   <img src="__PUBLIC__/Home/image/glass.png" />
+				                       <input type="text" class="txt-s-01 search-value2" placeholder="选择三级分类"/>
+				                       <ul class="search-value-list2"></ul>
+				                   </div>
+				                   <ul class="caty-content-list caty-content-list3" id="Third-list">
+				                        
+				                   </ul>
+				               </div>
+				               <!-- items End -->
+				               <div class="item box-bder fLe search-test-inner3">
+				                   <div class="caty-seach-wrap seach-sign box-bder">
+				                   	   <img src="__PUBLIC__/Home/image/glass.png" />
+				                       <input type="text" class="txt-s-01 search-value3" placeholder="选择四级分类"/>
+				                       <ul class="search-value-list3"></ul>
+				                   </div>
+				                   <ul class="caty-content-list caty-content-list3" id="Fourth-list">
+				                        
+				                   </ul>
+				               </div>
+				               <!-- items End -->
+				               <div class="clear"></div>
+				            </div>
+				            <button onclick="return false" class="release-btn">确认添加</button>
+				     </div>				        
+						<ul class="classify">
+							
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><button class="apply_list_submit" onclick="return false">提交</button></td>
+				</tr>
+			</table>
+		  </form>
+		</div>
+		<!-- 底部 -->
+		<include file="Public:footer" />  
+	</body>
+	<script>
+	//引用
+	$(function(){
+	    // search-test-inner --->  最外层div
+	    // search-value --->  input 输入框
+	    // search-value-list --->  搜索结果显示div
+	    // search-li --->  搜索条目
+	    new SEARCH_ENGINE("search-test-inner","search-value","search-value-list","search-li");
+	});
+	
+	$(".get-img").on('change','input',function(){
+        var file   = $(this)[0].files[0];   
+        var reader = new FileReader(); 
+        var _this  = this; 
+		
+        //将文件以Data URL形式读入页面  
+        reader.readAsDataURL(file);  
+        reader.onload=function(e){ 
+            /*num++; */
+            //显示文件      
+            $(_this).parent('.get-img').css("background","url("+this.result+") no-repeat").css("background-size","100% 100%");
+        }  
+        /*$("input[name='number']").val(num);*///设置上传图片个数  
+	})
+		
+	//选择添加类目
+	$(".select_classify").click(function(){
+		$(".box-bder").slideToggle();
+	})
+	
+/*
+ * 选择商品分类
+ * */
+var select_category = (function(){
+  var categorys = {},//保存已经获取到的分类
+      cat_id    = '',
+      data_cat_id = [],
+      first_text,
+      second_text,
+      Third_text,
+      Fourth_text;
+  /*
+   * 点击一级菜单
+   * */
+  $("#first-list>li>a").click(function(){
+      var text   = $(this).text();
+      /*点击样式处理*/
+      var images = ['__PUBLIC__/Home/img/3_1.png', '__PUBLIC__/Home/img/3.png'] 
+      first_text = text;
+      second_text = undefined;
+      Third_text = undefined;
+      Fourth_text = undefined;
+        if($(this).children("img").attr("src")=="__PUBLIC__/Home/img/3_1.png"){ 
+			$(this).children("img").attr("src",images[1]);  
+		}else{ 
+			$(this).children("img").attr("src",images[0]); 
+		} 
+  })
+  
+  $(".caty-content-list>li>a").click(function(){
+  	$(this).next(".caty-content-list2").slideToggle();
+  })
+  
+  //搜索结果点击一级菜单
+  $(".search-value-list").on('click','a',function(){ 
+  	var a = $(this).text();
+  	for(var i= 0; i<$("#first-list>li>a").length; i++){
+  		console.log($("#first-list>li>a").eq(i).text())
+  		if($("#first-list>li>a").eq(i).text() == a){  			
+  			$("#first-list>li").eq(i).find(".caty-content-list2").slideToggle();
+  			$("#first-list>li").eq(i).siblings().find(".caty-content-list2").css("display","none");
+  			first_text = a;
+  			second_text = undefined;
+      		Third_text = undefined;
+      		Fourth_text = undefined;
+  			break;
+  		} 
+  	}  	
+  	$(".search-value").val("");
+  	$(".search-value-list li").remove();
+  })
+  
+  /*
+   * 点击二级菜单
+   * */
+  $(".second-list").on('click','a',function(){    
+      var text   = $(this).text();
+          cat_id = $(this).attr('data-id'); 
+      $("#Fourth-list li").remove(); 
+      getCategory(cat_id);//请求后台获取下一级商品分类
+      /*点击样式处理*/
+      $(this).parent().addClass('cur');
+      $(this).parent().siblings().removeClass('cur');  
+      second_text = text;
+      Third_text = undefined;
+      Fourth_text = undefined;
+  })
+  
+  //搜索结果点击三级菜单
+  $(".search-value-list2").on('click','a',function(){ 
+  	var a = $(this).text();  	
+  	for(var i= 0; i<$("#Third-list>li>a").length; i++){
+  		if($("#Third-list>li>a").eq(i).text() == a){ 
+  			cat_id = $("#Third-list>li>a").eq(i).attr('data-id'); 
+     		getCategory2(cat_id);//请求后台获取下一级商品分类
+			$("#Third-list>li").eq(i).addClass("cur")
+			$("#Third-list>li").eq(i).siblings().removeClass('cur');  
+			console.log(a)
+  			Third_text = a;
+  			Fourth_text = undefined;
+  			break;
+  		} 
+  	}  	
+  	$(".search-value2").val("");
+  	$(".search-value-list2 li").remove();
+  })
+  
+  /*
+   * 请求后台获取下一级商品分类
+   * */
+  function getCategory(cat_id){
+      if(categorys[cat_id]){
+          showCategoryTwo(categorys[cat_id]);
+      }else{
+        $.post("{:U('SellerGoods/getCategory')}",{'cat_id':cat_id},function(res){
+            if(res['status']){
+               categorys[cat_id] = res['data'];
+               showCategoryTwo(res['data']);
+            }
+        })      
+      }
+  }
+
+  /*
+   * 组装三级分类html显示
+   * */
+  function showCategoryTwo(data){
+      var html = [];
+      for(var k in data){
+          html.push("<li class='search-li2' data-name='"+data[k].cat_name+"'><a href='javascript:;' data-id='"+data[k].id+"'>");
+          html.push(data[k].cat_name);
+          html.push(" </a></li>");
+      }
+      html = html.join('');
+      $("#Third-list").html(html);//显示
+      new SEARCH_ENGINE("search-test-inner2","search-value2","search-value-list2","search-li2");
+  }
+  
+  /*
+   * 点击三级菜单
+   * */
+  $("#Third-list").on('click','a',function(){    
+      var text   = $(this).text();
+          cat_id = $(this).attr('data-id'); 
+      getCategory2(cat_id);//请求后台获取下一级商品分类
+      /*点击样式处理*/
+      $(this).parent().addClass('cur');
+      $(this).parent().siblings().removeClass('cur');  
+      Third_text = text;
+      Fourth_text = undefined;
+  })
+  /*
+   * 请求后台获取下一级商品分类
+   * */
+  function getCategory2(cat_id){
+      if(categorys[cat_id]){
+          showCategoryThree(categorys[cat_id]);
+      }else{
+        $.post("{:U('SellerGoods/getCategory')}",{'cat_id':cat_id},function(res){
+            if(res['status']){
+               categorys[cat_id] = res['data'];
+               showCategoryThree(res['data']);
+            }
+        })      
+      }
+  }
+
+  /*
+   * 组装四级分类html显示
+   * */
+  function showCategoryThree(data){
+      var html = [];
+      for(var k in data){
+          html.push("<li class='search-li3' data-name='"+data[k].cat_name+"'><a href='javascript:;' data-id='"+data[k].id+"'>");
+          html.push(data[k].cat_name);
+          html.push(" </a></li>");
+      }
+      html = html.join('');
+      $("#Fourth-list").html(html);//显示
+      new SEARCH_ENGINE("search-test-inner3","search-value3","search-value-list3","search-li3");
+  }
+  
+  /*
+   * 点击四级菜单
+   * */
+  $("#Fourth-list").on('click','a',function(){    
+      var text   = $(this).text();
+          cat_id = $(this).attr('data-id'); 
+      /*点击样式处理*/
+      $(this).parent().addClass('cur');
+      $(this).parent().siblings().removeClass('cur');  
+      Fourth_text = text;
+  })
+  
+  //搜索结果点击四级菜单
+  $(".search-value-list3").on('click','a',function(){ 
+  	var a = $(this).text();  	
+  	for(var i= 0; i<$("#Fourth-list>li>a").length; i++){
+  		if($("#Fourth-list>li>a").eq(i).text() == a){ 
+  			cat_id = $("#Fourth-list>li>a").eq(i).attr('data-id'); 
+			$("#Fourth-list>li").eq(i).addClass("cur")
+			$("#Fourth-list>li").eq(i).siblings().removeClass('cur');  
+  			Fourth_text = a;
+  			break;
+  		} 
+  	}  	
+  	$(".search-value3").val("");
+  	$(".search-value-list3 li").remove();
+  })
+
+    function contains(arr, obj){ 
+    	var html = [];
+	    var i = arr.length;  
+	    while (i--) {  
+	        if (arr[i] === obj) {  
+	            return true; 
+	        }  
+	    }  
+	    arr.push(obj);
+	    html.push('<li><span id="first-lv">'+ first_text +'</span> > <span id="second-lv">'+ second_text +'</span> > <span id="Third-lv">'+ Third_text +'</span><button class="dele_lv" data-index="" onclick="return false">x</button></li>');
+        $(".classify").append(html);
+	} 
+	function contains2(arr, obj){ 
+    	var html = [];
+	    var i = arr.length;  
+	    while (i--) {  
+	        if (arr[i] === obj) { 
+	        	alert("请不要重复选择该分类")
+	            return true; 
+	            
+	        }  
+	    }  
+	    arr.push(obj);
+	    html.push('<li><span id="first-lv">'+ first_text +'</span> > <span id="second-lv">'+ second_text +'</span> > <span id="Third-lv">'+ Third_text +'</span> > <span id="Fourth-lv">'+ Fourth_text +'</span><button class="dele_lv" data-index="" onclick="return false">x</button></li>');
+        $(".classify").append(html);
+	} 
+	
+    /*确认分类*/
+    $(".release-btn").click(function(){
+  	    
+        if(cat_id && $("#Fourth-list li").length == 0 && Third_text != undefined){
+            
+            contains(data_cat_id, cat_id);                
+            $(this).text("再次添加");
+            $(".caty-content-list3 li").remove();
+            $(".caty-content-list2").css("display","none");
+            first_text=undefined;
+            second_text=undefined;
+            Third_text=undefined;
+        }else if(cat_id && $("#Fourth-list li").length != 0 && Third_text != undefined && Fourth_text == undefined){
+        	for(var i = 0; i<$("#Fourth-list li").length;i++){
+        		cat_id = $("#Fourth-list li a").eq(i).attr("data-id");
+        		var s = data_cat_id.length;  
+			    while (s--) {  
+			        if (data_cat_id[s] === cat_id) { 
+			        	alert("请不要重复选择该分类")
+			            return true; 		            
+			        }  
+			    }  
+			    data_cat_id.push(cat_id);
+        	}         	
+        	var html = [];
+			html.push('<li><span id="first-lv">'+ first_text +'</span> > <span id="second-lv">'+ second_text +'</span> > <span id="Third-lv">'+ Third_text +'</span><button class="dele_lv" data-index="" onclick="return false">x</button></li>');
+        	$(".classify").append(html);
+        	$(".dele_lv").attr("data-index",$("#Fourth-list li").length)
+        	
+        }else if(cat_id && $("#Fourth-list li").length != 0 && Third_text != undefined && Fourth_text != undefined){
+        	
+            contains2(data_cat_id, cat_id);      
+            $(this).text("再次添加");
+            $(".caty-content-list3 li").remove();
+            $(".caty-content-list2").css("display","none");
+            first_text=undefined;
+            second_text=undefined;
+            Third_text=undefined;
+            Fourth_text=undefined;
+        }else{
+        	if($("#Third-list li").length == 0 && second_text != undefined){
+        		alert('该分类没有三级分类，请联系客服进行添加');
+        	}else{
+        		alert('请选择商品分类');
+        	}
+        }
+        console.log(data_cat_id)
+        console.log(cat_id)
+    }) 
+    
+  //删除分类
+  	$(document).on('click', '.dele_lv', function(){
+		a = $(this).parent().index()
+		b = $(this).attr("data-index")
+		if(b==""){
+			data_cat_id.splice(a,1)
+		}
+		if(b!=""){
+			data_cat_id.splice(a,b)
+		}		
+		$(this).parent().remove()
+	});
+	
+  
+  //提交按钮
+	$(".apply_list_submit").click(function(){
+        if($(".brand_cn_name").val()=="" || $(".brand_en_name").val()==""){
+            $(".apply_error1").css("visibility","visible")
+        }
+        if($(".brand_cn_name").val()!="" || $(".brand_en_name").val()!=""){
+            $(".apply_error1").css("visibility","hidden")
+        }
+        if($(".brand_person").val()==""){
+        	$(".apply_error2").css("visibility","visible")
+        }
+        if($(".brand_person").val()!=""){
+        	$(".apply_error2").css("visibility","hidden")
+        }
+        if($(".classify li").length==0){
+        	$(".apply_error3").css("visibility","visible")
+        }
+        if($(".classify li").length!=0){
+        	$(".apply_error3").css("visibility","hidden")
+        }
+        if(($(".brand_cn_name").val()!="" || $(".brand_en_name").val()!="") && $(".brand_person").val()!="" && $(".classify li").length!=0){
+           request(); 
+        } 
+    })
+	
+	/*
+	 * 提交数据
+	 **/
+	function request(){  
+	    var data = new FormData($("#apply_form")[0]);  // 要求使用的html对象
+	    var url  = "http://www.orangesha.com/index.php/Home/BrandApplication/application";
+        data.append('cat_id',data_cat_id);
+	    $.ajax({  
+	          url : url ,  
+	          type: 'POST',  
+	          data: data,  
+	          async: true,  
+	          // 下面三个参数要指定，如果不指定，会报一个JQuery的错误 
+	　　　　　cache: false,  
+	          contentType: false,  
+	          processData: false,  
+	          success: function (res) {  
+	              if(res.status){
+	              	console.log(res)
+	              	alert("申请成功，请等待审核结果！");
+	              	$(".apply_list_submit").attr("disabled","disabled");
+	              	window.location.reload();
+	              } 
+	              if(res.status==0){
+	              	alert(res.msg);
+	              }
+	          },  
+	          error: function (returndata) {  
+	              console.log(returndata); 
+	          }  
+	     });  
+	}
+})();
+	
+	  
+	</script>
+</html>

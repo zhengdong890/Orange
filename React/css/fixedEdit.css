@@ -1,0 +1,174 @@
+#fixed_edit{
+	width:100%;
+	height:100%;
+	float:left;
+	position:absolute;
+	z-index:9000;
+	background:rgba(0,0,0,0.3);
+} 
+
+.fixed_edit_hide{
+    display:none;	
+}
+
+#fixed_edit .fixed_edit_wraper{
+	width:1000px;
+	height:560px;
+	background:white;
+	margin:50px auto;
+}
+
+#fixed_edit .fixed_edit_wraper .fixed_edit_title{
+	width:100%;
+	height:30px;
+	float:left;
+	line-height:30px;
+	background:#46A2E6;color:white
+}
+
+#fixed_edit .fixed_edit_content{
+	width:960px;
+	height:530px;
+	float:left;
+	overflow:scroll;
+	margin-left:20px;
+}  
+
+#fixed_edit .fixed_edit_content table{
+    margin:0 auto;
+}  
+ 
+#fixed_edit .fixed_edit_a{
+	
+}
+
+#fixed_edit .fixed_edit_content table tr td{
+	width:auto;
+	border-left:1px solid #E7E9F3;
+	border-bottom:1px solid #E7E9F3;
+	padding:10px 20px 10px 20px;
+	font-size:13px;
+}
+
+
+/****上传按钮样式构造****/
+#fixed_edit .fixed_edit_content table tr td .addimg{
+    width:200px;
+	height:auto;	
+}
+
+#fixed_edit .fixed_edit_content table tr td .addimg img{
+    max-width:200px;	
+}
+
+#fixed_edit .fixed_edit_content table tr td .btn_addimg{
+	display:block;
+	width:100px;
+	margin-top:5px;
+	color:white;
+	position:relative;
+	height:28px;
+	line-height:28px;
+	text-align:center;
+	float:left;
+	background:#C43926;
+	border-radius:4px;
+}
+
+#fixed_edit .fixed_edit_content table tr td .btn_addimg input{
+	width:100px;
+	position:absolute;
+	left:0;
+	top:0;
+	filter:alpha(opacity=50);
+	-moz-opacity:0;
+	-khtml-opacity:0;
+	opacity:0;
+}
+
+#fixed_edit .fixed_edit_content table tr td .textarea_1{
+	width:300px;
+	border:1px solid black;
+	border-radius:5px;
+	height:100px
+} 
+
+#fixed_edit .fixed_edit_content table tr td .textarea_2{
+	width:600px;
+	border:1px solid black;
+	border-radius:5px;
+	height:150px
+} 
+
+#fixed_edit .fixed_edit_content table tr td .content_text{
+	width:700px;
+}
+
+#fixed_edit .fixed_edit_content table tr td .content_text_1{
+	width:300px;
+}
+
+#fixed_edit .fixed_edit_content table tr td .type_text{
+	width:200px;
+	border:1px solid black;
+	border-radius:5px;
+	height:26px
+}
+ 
+#fixed_edit .fixed_edit_content textarea{
+	width:200px;
+	height:40px;
+	border-radius:5px;
+}  
+
+#fixed_edit .fixed_edit_content table tr td input{
+	width:200px;
+	border:1px solid black;
+	border-radius:5px;
+	height:26px
+} 
+
+#fixed_edit .fixed_edit_content table tr td select{
+	border-radius:5px;
+	height:26px
+} 
+ 
+#fixed_edit .fixed_edit_content table tr td .type_radio{
+	width:auto;
+	height:24px;
+	float:left;
+	margin-left:8px;
+}  
+
+#fixed_edit .fixed_edit_content table tr td .img{
+	max-width:200px;
+}  
+
+#fixed_edit .fixed_edit_content .p_text{
+	width:auto;
+    height:25px;
+	float:left;	
+	line-height:24px;
+	margin-left:8px;
+	font-size:13px;
+}    
+  
+#fixed_edit .fixed_edit_content .p1{
+	width:100%;
+	height:auto;
+	float:left;
+	margin-top:10px;
+}     
+
+#fixed_edit .fixed_edit_content .btn{
+	display:block;
+	text-align:center;
+	line-height:26px;
+	float:left;
+	border-radius:4px;
+	background:#C43926;
+	margin-left:10px;
+	color:white;
+	height:26px;
+	width:50px;
+}

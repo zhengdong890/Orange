@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>处理退款申请</title>
+		<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+        <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+        <link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+        <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/orderRefund.css" type="text/css">
+        <link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+        <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+        <script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>       
+	</head>
+	<body>
+		<include file="Public:header_top" />
+		<div class="orderRefund_top">
+			<div>
+				<a class="logo2" href="http://{$Think.server.HTTP_HOST}" title="中国工业机器人,数控机床多少钱一台,无人机,3d打印机多少钱,农业无人机"></a>
+				<p>您的位置： <a href="{:U('Index/index')}">首页</a> > <a href="{:U('SellerRefund/refund')}">退款管理</a> > <a>退款申请处理</a> </p>
+			</div>			
+		</div>	
+		<ul class="refund_step">
+			<li>
+				<div>买家申请仅退款</div>
+				<!--<div></div>-->
+			</li>
+			<li>
+				<div>卖家处理退款申请</div>
+				<!--<div></div>		-->		
+			</li>
+			<li>
+				<div>退款成功</div>	
+				<!--<div></div>	-->				
+			</li>
+		</ul>
+		<div class="orderRefund_box">
+			<!--仅退款-->			
+			<div class="dealWith_refund" data-id={$refund_goods['id']} data-status='{$refund_goods['status']}'>				
+				<h2>请处理退款申请</h2>
+				<ul>
+					<li>· 如果您同意，将直接退款给买家。</li>
+					<li>· 如果您拒绝，买家可以要求e橙客服介入处理。如e橙客服核实是您的责任，将会影响您的店铺评分。</li>
+					<li>· 如果您逾期未处理，系统将自动退款给买家。</li>
+				</ul>
+				<button class="agree_refund">同意退款申请</button>
+				<div>
+					<span>您还可以：</span> <a class="refuse_refund">拒绝退款申请</a> | <a>申请介入</a>
+  				</div>
+  				<div>留言板</div>
+  				<!--<div>
+  					<img />
+  					<p>一座空城 - 买家 <span>2017-04-08 10:00:00</span></p>
+  					<p>发起了仅退款申请，货物状态：未收到货。原因：其他。金额：20.00元。</p>
+  				</div>  -->				
+			</div>
+			<!--退款成功-->
+			<div class="refund_ok2 refund_style_box2">
+				<div>
+					<h2>退款成功</h2>
+			        <p>· 退款金额：<span class="star">{$refund_goods.case}</span>元。</p>
+				</div>
+			    <div>
+			    	<div>留言板</div>
+			    	<!--<ul>
+			    		<li>
+			    			<img src="{$re.goods_thumb}" alt=""/>
+			    			<p>卖家 <span>{$re.create_time}</span></p>
+			    			<p>商家主动同意，退款给买家{$re.total_price}元。</p>
+			    		</li>
+			    		<li>
+			    			<img />
+			    			<p>卖家 <span>2017-04-12 14:30:55</span></p>
+			    			<p>商家同意了本次售后服务申请。</p>
+			    		</li>
+			    		<li>
+			    			<img />
+			    			<p>买家 <span>2017-04-12 14:30:55</span></p>
+			    			<p>发起了申请，货物状态：未发货，原因：其他，金额：20.00元，说明：...。</p>
+			    		</li>
+			    	</ul>-->
+			    </div>
+			</div>
+			<!--订单信息-->
+			<div class="right">
+				<h3>订单信息</h3>
+				<div>
+					<img src="__ROOT__<if condition="substr($order_data.goods_thumb , 0 , 1) eq '.'">{$order_data.goods_thumb|substr=1}<else/>{$order_data.goods_thumb}</if>" alt="" width="100" />
+					<p><a class="order_detail">{$order_data.goods_name}</a></p>
+				</div>
+				<table>
+					<tr>
+						<td>买家：</td>
+						<td>{$refund_goods.buy_name}</td>
+					</tr>
+					<tr>
+						<td>订单编号：</td>
+						<td>{$refund_goods.order_sn}</td>
+					</tr>
+					<tr>
+						<td>单价：</td>
+						<td>￥{$order_data.goods_price}</td>
+					</tr>
+					<tr>
+						<td>快递：</td>
+						<td>￥0.00元</td>
+					</tr>
+				</table>
+				<table>
+					<tr>
+						<td>退款编号：</td>
+						<td>{$refund_goods.refund_sn}</td>
+					</tr>
+					<tr>
+						<td>退款金额：</td>
+						<td><span class="star">{$refund_goods.case}</span> 元</td>
+					</tr>
+					<tr>
+						<td>原因：{$because}</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>要求：</td>
+						<td><if condition="$re.type eq 1">仅退款<elseif condition="$re.type eq 2"/>换货<else/>退货退款</if></td>
+					</tr>
+					<tr>
+						<td>货物状态：</td>
+						<td><if condition="$re.beacuse eq 1">未收到货<else/>已收到货</if></td>
+					</tr>
+					<tr>
+						<td>说明：</td>
+						<td>{$refund_goods.refund_content}</td>
+					</tr>
+				</table>
+			</div>			
+		</div>
+		<!-- 底部 -->
+		<include file="Public:footer" />
+		<!-- 底部 -->  
+	<script>
+		//判断是否已退款
+		function check_agreeRefund(){	
+			var data_status = $(".dealWith_refund").attr("data-status")
+			console.log(data_status)
+			//卖家同意
+			if(data_status==1){
+				$(".dealWith_refund").css("display","none")
+				$(".refund_ok2").css("display","block")
+				$(".refund_step li:eq(1) div").css("background-color","#99D7D6")
+				$(".refund_step li:eq(2) div").css("background-color","#219C9A")
+			}				
+			//卖家不同意
+			
+			//申请中
+			if(data_status==0){
+				$(".dealWith_refund").css("display","block")
+				$(".refund_ok2").css("display","none")
+				$(".refund_step li:eq(1) div").css("background-color","#219C9A")
+				$(".refund_step li:eq(2) div").css("background-color","#99D7D6")
+			}
+		}
+		check_agreeRefund()
+
+	    //同意退款申请
+	    $(".agree_refund").click(function(){
+	    	var id = $(".dealWith_refund").attr("data-id")
+			if(confirm("确认要同意申请吗？")){   
+			    $.post("http://www.orangesha.com/index.php/Home/SellerRefund/checkRefund",{'id':id,'status':2},function(res){
+					console.log(res)
+					if(res.status==1){
+						$(".dealWith_refund").css("display","none")
+						$(".refund_ok2").css("display","block")
+						$(".refund_step li:eq(1) div").css("background-color","#99D7D6")
+						$(".refund_step li:eq(2) div").css("background-color","#219C9A")
+					}					
+				})	
+			}
+	    })
+	    //不同意退款申请
+	    $(".refuse_refund").click(function(){
+	    	var id = $(".dealWith_refund").attr("data-id")
+			if(confirm("确认不同意申请吗？")){   
+			    $.post("http://www.orangesha.com/index.php/Home/SellerRefund/checkRefund",{'id':id,'status':-1},function(res){
+					console.log(res)
+					if(res.status==1){
+						/*$(".dealWith_refund").css("display","none")
+						$(".refund_ok2").css("display","block")
+						$(".refund_step li:eq(1) div").css("background-color","#99D7D6")
+						$(".refund_step li:eq(2) div").css("background-color","#219C9A")*/
+						alert(res.msg)
+					}					
+				})	
+			}
+	    })	    
+	</script>	
+	</body>
+</html>
+

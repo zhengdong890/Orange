@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>校长信箱</title>
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/index.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/rest.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/common.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/liner.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/ygfuwu/princil.css" />
+		<script type="text/javascript" src="__PUBLIC__/phone/js/jquery.js" ></script>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/myscript.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/phone/js/focus.js"></script>
+	</head>
+	<body>
+	<div class="wrp">
+			<!-- 头部开始 -->
+			<include file="Public:header" />  
+			<!-- 头部结束 -->
+			<div class="mainWrap relative clearfix" style="margin-bottom: 30px;">
+				<section class="header-main">
+					<ul class="navs clear">
+						<span class="slider"></span>
+						<li><a href="../sunshineService/principal.html" class="navs-item">校长信箱</a></li>
+						<li><a href="../sunshineService/message.html" target="_blank">留言</a></li>
+					</ul>
+				</section>	
+				<div class="detailContent clearfix">
+					<div class="column_R">
+						<div class="mainContent">
+							<div class="introTit clearfix">
+								<div class="introTitImg" style="background-image:url(__PUBLIC__/phone/images/small.jpg)"></div>
+								<h2>校长信箱</h2>
+							</div>
+						</div>
+					</div>
+					<div class="content-wrap clearfix article_cn1">
+						<div class="cont_top">
+							<div class="content">
+								<div class="title">
+		                        	<h2 style="padding-left:30px; font-weight:bold; ">温馨提示——校长信箱使用说明：</h2>
+		                            <p>1、欢迎您为长沙虹桥小学的发展提出建议，对于我们工作中的不足之处提出批评；</p>
+		                            <p>2、使用校长信箱请您自觉遵守法律法规真实客观的反映情况或问题；</p>
+		                            <p>3、来信务必注明联系方式（电话或邮箱），以方便我们及时回复。</p>
+							    </div>
+							    <form name="form" class="formjzxx" method="post" action="{:U('liuyan')}">
+				                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="emailtable">
+				                        <tbody>
+				                        	<tr style="height:40px;">
+						                       <td>主　　题：</td>
+						                       <td><input name="title" type="text" class="einput"></td>
+					                        </tr>
+					                        <tr style="height:40px;">
+					                           <td>邮　　箱：</td>
+					                           <td><input name="email" type="text" class="einput"></td>
+					                        </tr>
+					                        <tr style="height:40px;">
+					                           <td>手机号码：</td>
+					                           <td><input name="mobphone" type="text" class="einput">
+					                           *</td>
+					                        </tr>
+					                        <tr>
+					                           <td valign="top">内　　容：</td>
+					                           <td><textarea cols="" rows="6" class="etext" name="content"></textarea>
+					                           *</td>
+					                        </tr>
+					                        <tr style="height:40px;">
+					                           <td>验 证 码：</td>
+					                           <td>  <input name="txt_check" type="text" size="6" maxlength="4" class="reg_txt"> <img src="__PUBLIC__/"  alt="验证码,看不清楚?请点击刷新验证码" height="10" style="cursor : pointer;" onclick="this.src='checkcode.asp?t='+(new Date().getTime());"><input name="提交" type="submit" class="submit" value="提交"></td>
+					                        </tr>
+				                        </tbody>
+				                    </table>
+	                            </form>
+	                            <h2 class="ehf">在线回复</h2>
+	                            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="emailtable2">
+			                        <tbody>
+			                        	<tr>
+				                           <th scope="col">标题</th>
+				                           <th scope="col" width="20%">处理情况</th>
+			                            </tr>
+				                        <tr>
+				                           <td><a href="ans.asp?id=16" target="_blank">这个是测试信息</a></td>
+				                           <td><font>通过</font></td>
+				                        </tr>
+			                            <tr>
+				                           <td><a href="ans.asp?id=15" target="_blank">主　　题</a></td>
+				                           <td><font>通过</font></td>
+			                            </tr>
+			                            <tr>
+				                            <td><a href="ans.asp?id=14" target="_blank">sadf</a></td>
+				                            <td><font>通过</font></td>
+				                        </tr>
+			                            <tr>
+				                            <td><a href="ans.asp?id=10" target="_blank">sdf</a></td>
+				                            <td><font>通过</font></td>
+			                            </tr>
+			                        </tbody>
+	                            </table>
+	                            <div class="page1">
+	                                <p style="width:700px;; text-align:center; margin-top:15px;"></p>
+	                                <form action="email.asp?1=1" method="post" name="frmjump">
+										<font color="#FF0000" style="font-size: 13px;"> 
+											<input type="hidden" name="page" value="1">
+											<input type="hidden" name="intPageCount" value="1">
+											共4条记录&nbsp;&nbsp;第1/1页 &nbsp; 
+											<a href="email.asp?1=1&amp;page=1">首页</a>
+										</font>
+										<font color="#FF0000" style="font-size: 13px;">
+										    <font color="#FF0000">
+										        <a href="email.asp?1=1&amp;page=1">尾页</a>
+										    </font> 
+										        跳转到 &nbsp; 
+										    <input type="text" size="3" name="inputpage" maxlength="3" style="border-style: solid; border-width: 1">
+										    &nbsp;页&nbsp;&nbsp;
+										</font> 
+										<input type="button" name="Button" value="转到" onclick="vbscript:jump()">
+										  &nbsp;  
+								    </form>
+								</div>
+							</div>
+						</div>
+				    </div>
+				</div>		
+			</div>
+				<!-- footer start -->
+				<include file="Public:footer" />
+				<!-- footer end -->
+		</div>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/common.js" ></script>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/jquery-1.11.2.min.js" ></script>
+	</body>
+</html>

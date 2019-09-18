@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="description" content="" />
+<style>    
+*{padding:0; margin:0;font-size:16px;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0} 
+#main #main_h{width:100%;height:36px;float:left;margin-top:20px;color:black;border-bottom:1px solid #E6E7EC;}
+#main_h a{float:right;border:0;background:#44B549;padding:4px;border-radius:4px;color:white}
+#main table{width:100%;border-top:1px solid #E7E9F3;margin:30px auto;float:left;}
+#main table tr{background:#FCFCFC}
+#main table tr:hover{background:#F1FCEA}   
+#main table tr:first-child{background:#F4F5F9} 
+#main table tr td{border-left:1px solid #E7E9F3;border-bottom:1px solid #E7E9F3;font-size:20px;padding:10px;font-size:14px;}
+#main table tr .td{border-left:0px}
+#main td img{max-width:150px}
+#main td p{font-size:14px;}
+#main td a{display:block;margin-left:10px;float:left;padding:5px;background:#44B549;border-radius:4px;color:white;font-size:14px}     
+.btn{border:0;border-radius:4px;color:white;padding:5px;background:#44B549;font-size:14px;margin-left:300px}
+</style>
+</head>
+    <body>
+    <div id="wraper">       
+          <div id="main"> 
+             <div id="main_h">
+                                             模板消息配置                   
+                 <a href="{:U('addtempletmsg')}">添加模板</a>      
+             </div>         
+             <table cellspacing="0">
+                  <tr>
+                      <td class='td'>模板编号</td>
+                      <td>模板ID</td> 
+                      <td>模板名</td>
+                      <td>回复内容</td>
+                      <td>所属行业</td>
+                      <td>头部颜色</td>     
+                      <td>文字颜色</td>  
+                      <td>状态</td>
+                      <td>操作</td>                                   
+                  </tr> 
+                  <volist name="list" id="v">
+                  <tr>
+                      <td class='td'>{$v['id']}</td>
+                      <td>{$v['tplid']|msubstr=0,16,'utf-8',true}</td>
+                      <td>{$v['name']}</td>
+                      <td>
+                        {$v['data']|msubstr=0,16,'utf-8',true}				
+                      </td>
+                      <td>IT科技_互联网|电子商务</td>
+                      <td><input type="text" value="{$v['topcolor']}" style="background:{$v['topcolor']};width:70px;border:0"></input></td>     
+                      <td><input type="text" value="{$v['color']}" style="background:{$v['color']};width:70px;border:0"></input></td> 
+                      <td><select><option>关闭</option><option>开启</option></select></td> 
+                      <td><a href="{:U('updatetempletmsg',array('id'=>$v['id']))}">修改</a></td> 
+                  </tr> 
+                  </volist>                                        
+             </table>
+         </div>
+    </div>	
+    </body>                    
+    
+    <script type="text/javascript">    
+       function deletetext(id){
+    	   if(confirm('确认删除?')){      
+ 	    	  $.post("{:U('deletetext')}",{"id":id},function(res){
+ 	             alert(res);
+ 	             window.location.reload();
+ 	     	  })
+     	   }
+       }
+    </script>
+</html>

@@ -1,0 +1,184 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>个人中心-账号安全</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->   
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="MemberPublic:MemberLeft" />  
+        <div class="user-right marT20 box-s-c1 fRi">
+            
+    <div class="user-box">
+        <div class="user-nav user-nav-m1">
+            您的位置：
+            <a class="cCol2-h" href="#">账户信息</a>
+            >
+            <span class="f-cCol3">个人资料</span>
+        </div>
+        <div class="">
+            <div class="safety-box">
+                <!-- 安全等级 -->
+                <div class="safety safety-tl clearfix">
+                    <ul>
+                        <li><span class="f-18-c1">安全等级</span></li>
+                        <li><span class="f-18-c1 marL12"><em class="cCol1 f-bold safety_point">40</em> 分</span></li>
+                        <li>
+                            <div class="safety-lv posRel">
+                                <div class="safety-lv-cur bCol1"><span class="safety-bar" title="当前等级为：40"></span></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 安全等级 End -->
+                <div class="safety-items-wrap">
+                    <ul>
+                        <li class="safety-item clearfix marT30">
+                            <div class="cont fLe sPad">
+                                <h4 class="f-16-c1">更换密码</h4>
+                                <p class="f-12-c1">为了保证您的购物安全，建议您定期更改密码以保护账户安全</p>
+                            </div>
+                            <div class="fn-butt fRi disTable">
+                                <div class="disTable-cell vAlignMid txtCenter">
+                                	<a href="{:U('MemberCenter/passwordUpdate')}" class="butt04-a butt-style-2">立即修改</a
+                                </div>
+                            </div>
+                        </li>
+                        <li class="safety-item clearfix marT30">
+                            <div class="cont fLe sEmail">
+                                <h4 class="f-16-c1">邮箱绑定</h4>
+                                <p class="f-12-c1">您验证的邮箱： 
+                                    <if condition = "$Think.session.member_data.email neq ''">
+                                    <span>{$Think.session.member_data.email}</span>
+                                    <else/>
+                                    <span>尚未绑定</span>
+                                    </if>
+                                </p>
+                            </div>
+                            <div class="fn-butt fRi disTable">
+                                <div class="disTable-cell vAlignMid txtCenter">
+                                    <if condition = "$Think.session.member_data.email neq ''">
+                                    <a class="butt04-a butt-style-2 safety1" href="{:U('MemberCenter/bindEmail')}">立即修改</a>
+                                    <else/>
+                                    <a href="{:U('MemberCenter/bindEmail')}" class="butt04-a butt-style-2 safety1">立即绑定</a>
+                                    </if>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="safety-item clearfix marT30">
+                            <div class="cont fLe sMobile">
+                                <h4 class="f-16-c1">更换手机</h4>
+                                <p class="f-12-c1">您当前验证的手机： 
+                                    <span>{$Think.session.member_data.username}</span> 
+                                </p>
+                            </div>
+                            <div class="fn-butt fRi disTable">
+                                <div class="disTable-cell vAlignMid txtCenter">
+                                	<a href="{:U('MemberCenter/changePhone')}" class="butt04-a butt-style-2">立即修改</a>                                    
+                                </div>
+                            </div>
+                        </li>
+                        <li class="safety-item clearfix marT30">
+                            <div class="cont fLe sIdentity">
+                                <h4 class="f-16-c1">身份认证<if condition = "$Think.session.member_data.is_identity eq '-1'">(未通过审核,请重新认证)
+                                </if>
+                                </h4>
+                                <p class="f-12-c1">用于提升账号的安全性和信任级别。认证后不能修改认证信息。
+                                </p>
+                            </div>
+                            <div class="fn-butt fRi disTable">
+                                <div class="disTable-cell vAlignMid txtCenter">
+                                    <if condition = "$Think.session.member_data.is_identity eq 1">
+                                    <else/>
+                                    <a href="{:U('MemberCenter/identityAuthentication')}" class="butt04-a butt-style-2 safety2">立即认证</a>
+                                    </if>        
+                                </div>
+                            </div>
+                        </li>
+                        <li class="safety-item clearfix marT30">
+                            <div class="cont fLe sQuestions">
+                                <h4 class="f-16-c1">保密问题</h4>
+                                <p class="f-12-c1">为保护账户安全，验证您身份的工具之一。</p>
+                            </div>
+                            <div class="fn-butt fRi disTable">
+                                <div class="disTable-cell vAlignMid txtCenter">
+                                    <if condition = "$Think.session.member_data.is_security eq 1">
+                                    <a class="butt04-a butt-style-2 safety3">立即修改</a>
+                                    <else/>
+                                    <a href="{:U('MemberCenter/safe_question')}" class="butt04-a butt-style-2 safety3">立即设置</a>
+                                    </if>  
+
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </div>
+
+</div>
+<!-- /主体 -->
+<include file="Public:footer" />  
+
+<script>
+	//判断左边导航
+	function checkNav(){
+		$(".user-left-wrap .list:eq(0)>ul>li:eq(1) a").css("color","#ff6600")
+	}
+	checkNav()
+
+   //判断账号安全等级
+    function safetypoint(){
+    	var a = $(".safety1").text();
+	    var b = $(".safety2").text();
+	    var c = $(".safety3").text();
+	    
+	    if(a=="立即修改" || b!="立即认证" || c=="立即修改"){
+	    	$(".safety-lv-cur").css("width","60%");
+	    	$(".safety_point").text("60")
+	    }
+	    if(a=="立即修改" && b!="立即认证"){
+	    	$(".safety-lv-cur").css("width","80%");
+	    	$(".safety_point").text("80")
+	    }
+	    if(a=="立即修改" && c=="立即修改"){
+	    	$(".safety-lv-cur").css("width","80%");
+	    	$(".safety_point").text("80")
+	    }
+	    if(b!="立即认证" && c=="立即修改"){
+	    	$(".safety-lv-cur").css("width","80%");
+	    	$(".safety_point").text("80")
+	    }
+	    if(a=="立即修改" && b!="立即认证" && c=="立即修改"){
+	    	$(".safety-lv-cur").css("width","100%");
+	    	$(".safety_point").text("100")
+	    }
+    }
+	safetypoint()
+	
+</script>
+</body>
+</html>

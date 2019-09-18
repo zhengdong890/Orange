@@ -1,0 +1,62 @@
+.block_edit{
+	width:100%;
+	height:auto;
+	float:left;
+}
+
+.block_edit table{
+	width:100%;
+	margin:10px auto;
+}
+
+.block_edit table td{
+    padding:5px 5px 5px 5px;
+}
+
+.block_edit table td.td_label{
+	text-align:right;
+	vertical-align:top;
+	font-weight:bold;
+	width:20%;
+	font-size:14px;
+	padding:4px 8px
+} 
+
+.block_edit table td .type_radio{
+	width:auto;
+	height:24px;
+	float:left;
+	margin-left:8px;
+}  
+
+.block_edit table td input{
+	width: 400px;
+    height: 20px;
+    border-radius: 3px;
+    border-bottom: 1px solid #E3E9EF;
+    border-top: 1px solid #ABADB3;
+    border-left: 1px solid #E2E3EA;
+    border-right: 1px solid #DBDFE6;
+} 
+
+.block_edit table td .p_text{
+	width:auto;
+    height:25px;
+	float:left;	
+	line-height:24px;
+	margin-left:8px;
+	font-size:13px;
+} 
+
+.block_edit table td .btn{
+	display:block;
+	text-align:center;
+	line-height:26px;
+	float:left;
+	border-radius:4px;
+	background:#C43926;
+	margin-left:10px;
+	color:white;
+	height:26px;
+	width:50px;
+}

@@ -1,0 +1,24 @@
+获取店铺收藏
+地址 : http://www.orangesha.com/index.php/Home/Collect/shopCollect
+result 为空表示失败
+返回 : {"status": , 'msg':'',data:[{shop_name:店铺名字,time:收藏时间,seller_id:店铺id}]
+
+获取商品收藏
+地址 : http://www.orangesha.com/index.php/Home/Collect/goodsCollect
+result 为空表示失败
+返回 : {"status": , 'msg':'',data:[
+    share:[{
+        id         : 商品id
+        goods_name : 商品名字,
+        goods_thumb: 商品缩略图,
+        goods_price: 商品价格
+    }],
+    mall:[{
+        id         : 商品id
+        goods_name : 商品名字,
+        goods_thumb: 商品缩略图,
+        goods_price: 商品价格
+    }]
+    
+]}
+share 共享商品 mall商城商品

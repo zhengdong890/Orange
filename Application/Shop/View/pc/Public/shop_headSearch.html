@@ -1,0 +1,93 @@
+
+<div class="n-bCol3 bg">
+    <div class="header mar1200c posRel" style="background-color: #fff;">
+    	<div class="header_div conpanyname">
+    		<p>{$shop_data['shop_name']}</p>
+    		<div>品牌直销</div>
+    	</div>
+    	<div class="header_div">
+    		<ul>
+    			<li>描述</li>
+    			<li>服务</li>
+    			<li>物流</li>
+    		</ul>
+    		<ul>
+    			<li style="color: #FE6700;">{$shop_data['desc_score']}</li>
+    			<li style="color: #FE6700;">{$shop_data['service']}</li>
+    			<li style="color: #FE6700;">{$shop_data['logistical']}</li>
+    		</ul>
+    	</div>
+    	<div class="shop_detail" style="display: none;">
+    		<p>店铺动态评分</p>
+    		<ul>
+    			<li>描述相符 : <span>{$shop_data['desc_score']}</span></li>
+    			<li>服务态度 : <span>{$shop_data['service']}</span></li>
+    			<li>物流服务 : <span>{$shop_data['logistical']}</span></li>
+    		</ul>
+    		<p>店铺服务</p>
+    		<div>
+    	      <table>
+    			<tr>
+    				<td>掌</td>
+    				<td colspan="2"></td>
+    				<td>柜</td>
+    				<td style="white-space: nowrap;overflow: hidden;">&nbsp;:&nbsp;&nbsp;</td>
+    			</tr>
+    			<tr>
+    				<td>开</td>
+    				<td>店</td>
+    				<td>时</td>
+    				<td>长</td>
+    				<td>&nbsp;:&nbsp;&nbsp;{$shop_data['time']|date='Y-m-d',###}</td>
+    			</tr>
+    			<tr>
+    				<td>所</td>
+    				<td colspan="2" style="text-align: center;">在</td>
+    				<td>地</td>
+    				<td style="white-space: nowrap;overflow: hidden;">&nbsp;:&nbsp;&nbsp;{$shop_data['address']}</td>
+    			</tr>
+    			<tr>
+    				<td>工</td>
+    				<td>商</td>
+    				<td>执</td>
+    				<td>照</td>
+    				<td>&nbsp;:&nbsp;&nbsp;<img src="__PUBLIC__/Home/image/gszz.png"></td>
+    			</tr>
+    		  </table>
+    		</div>
+    		<a href="http://{$domain}.orangesha.com">进店逛逛</a>
+    		<a title="{$seller_id}" onclick="collectshop(this)">收藏本店</a>
+    	</div>
+        <div class="header-right fRi">
+            <div class="header-seach-w-1 marR291">
+                <div class="z-seach">
+                    <div class="header-seach-card">
+                    	<a class="cur" href="javascript:">产品</a> 
+                    	<a style="display: none;" href="javascript:">出租</a>
+                        <a href="javascript:">店铺</a>
+                    </div>
+                    <form action="http://www.orangesha.com/Home/Search/index" method="get">
+                        <input type='hidden' name='type' value='2'>
+                        <input type="text" name='keyword' class="txt04 txt-style-1" placeholder="商品名/品牌" style="font-size:12px;"/>
+                        <button class="z-submit icon-btn-search" id="submit" style='width:100px'>搜索</button>
+                    </form>
+                </div>
+                <div class="z-seach-hot demo-cCol2">
+                    <a href="http://www.orangesha.com/mall/c-5390.html">办公用品</a>
+                    <a href="http://www.orangesha.com/mall/c-7096.html">电动工具</a>
+                    <a href="http://www.orangesha.com/mall/c-2987.html">安全防护</a>
+                    <a href="http://www.orangesha.com/mall/c-44.html">PLC</a>
+                    <a href="http://www.orangesha.com/mall/c-4426.html">电工器材</a>
+                    <a href="http://www.orangesha.com/mall/c-3484.html">手套</a>
+                </div>
+            </div>
+        </div>
+        <a href="http://www.orangesha.com/Home/Cart/cartList" class="buyCar_butt icon-s-1">
+            我的购物车 >
+            <span class="icon-s-num-1">{$cart_total}</span>
+        </a>
+        <a title="中国工业机器人,数控机床多少钱一台,无人机,3d打印机多少钱,农业无人机,自动化生产线,节能环保产品,实验室仪器设备,工业机器人,码垛机器人,包装机器人,弧焊机器人,数控机床,电子设备,新材料,新能源,e橙优品" class="logo2" href="http://www.orangesha.com"></a>
+        <div class="clear"></div>
+    </div>
+</div>
+

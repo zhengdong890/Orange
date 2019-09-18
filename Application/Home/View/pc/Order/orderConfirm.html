@@ -1,0 +1,238 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>确认订单</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<link href="{:C('STATIC_URL')}/Home/css/orders.css" rel="stylesheet">
+</head>
+<body >
+<include file="Public:header_top" />	
+	<!-- 主体 -->
+    <div class="body">
+        <div class="pay_top">
+    		<div class="e_logo">
+	    		<span>收银台</span>
+	    	</div>
+	        <div class="points">
+	            <div class="shopping-cart"></div>
+	            <div class="text">购物车<i class="i1"></i>确认订单<i class="i2"></i>支付<i class="i3"></i>完成</div>
+	        </div>
+    	</div>
+        <div class="consignee">
+            <div class="title">收货人信息<!-- <span class="addconsignee">+新增收货人地址</span> --></div>
+            <div class="consignee-table">
+                <volist name='address' id='v'>
+                <div class="li">
+                    <div class="btn-icon">{$v['name']}</div>
+                        <span class="text"><a>{$v['address']}</a><i></i>{$v['telnum']}</span>
+                        <div class="btn">
+                            <div class="default"></div>
+                            <div class="set"><a href="#" data-id="{$v['id']}">选择地址</a></div>
+                        </div>
+                    </div> 
+                </volist>                           
+                <!--<div class="consignee-toggle"><a href="#">收起地址</a><i class="icon"></i></div>-->             
+            </div>
+        </div>
+        <form action="{:U('Order/orderAdd')}" target="_blank" method='post'>
+        <input type='hidden' name='address_id' value=''>
+        <input type='hidden' name='goods_ids' value="{$goods_ids}">
+        <div class="information">
+            <div class="title">确认订单信息</div>
+            <div class="text">商品<i class="i1"></i>单价(元)<i class="i2"></i>租期/打印数量<i class="i2"></i>数量<i class="i3"></i>优惠方式（元）<i class="i4"></i>小计（元）</div>
+            <volist name='order_list' id='v' key='k'>
+            <div class="information-list">
+                <div class="shops">发布人：<span class="shops-name">橙橙科技</span> 
+                	<div class="coupon_button">优惠券 <img src="../../../../Public/Home/image/arrows down.png"></div>
+                	<div class="coupon_box">
+                		<div></div>
+                		<ul>
+                			<li>
+                				<div>¥200</div>
+                				<div>
+                					<p>满4000减200元</p>
+                				    <p>2016.11.27-2017.05.27</p>
+                				</div>
+                				<div class="receiveCoupon">领取</div>
+                			</li>
+                			<li>
+                				<div>¥200</div>
+                				<div>
+                					<p>满4000减200元</p>
+                				    <p>2016.11.27-2017.05.27</p>
+                				</div>
+                				<div class="receiveCoupon">领取</div>
+                			</li>
+                			<li>
+                				<div>¥200</div>
+                				<div>
+                					<p>满4000减200元</p>
+                				    <p>2016.11.27-2017.05.27</p>
+                				</div>
+                				<div class="receiveCoupon">领取</div>
+                			</li>
+                		</ul>
+                		<div></div>
+                	</div>
+                </div>
+                <ul>
+                    <volist name="v['data']" id='v1'>
+                    <li class="shopping-list" data-uid="23" data-id="220">
+                        <ul>
+                            <li class="icon"><img src="__ROOT__{$v1['goods_thumb']|substr=1}"></li>
+                            <li class="info">
+                                <div class="name">{$v1['goods_name']}</div>
+                                <div class="lease">租期：<span>{$v1['rent_time']}</span> 个月</div>
+                                <ul class="qualification">
+                                    <li class="vip"></li>
+                                    <li class="bx"></li>
+                                </ul>
+                            </li>
+                            <li class="money">{$v1['goods_price']}/月</li>
+                            <li class="quantity">
+                                {$v1['rent_number']}
+                            </li>
+                            <li class="way">
+                                无优惠
+                            </li>
+                            <li class="cozen">{$v1['total_price']}</li>
+                        </ul>
+                    </li>
+                    </volist>                    
+                </ul>
+                <div class="note">
+                    <span class="note-title">添加备注：</span>
+                    <input class="note-value" type="text" name="remark_{$v['seller_id']}" value="" placeholder="限45个字（定制类商品，请将购买需求在备注中做详细说明"><span>提示：请勿填写有关支付、收货、发票方面的信息</span>
+                </div>
+            </div> 
+            </volist>      
+        </div>
+        <div class="altogether">
+            <div class="num-money">共<i>0</i>件商品</div>
+            <!-- <div class="benefit">优惠卷：<span></span>-￥0.00</div> -->
+            <!-- <div class="luggage">运费：<span></span>￥0.00</div> -->
+        </div>
+        <div class="sum">
+            <div class="sum-money">应付总额：￥<span>0</span></div>
+            <div class="text">寄送至： <span>
+                            </span></div>
+        </div>
+        <div class="submit">
+            <button class="btn Settlement">结算</button>
+        </div>
+        </form>
+    </div>    
+    </body>
+<script type="text/javascript">
+var address = {$address_json};
+//判断是否有收货地址
+function getAddress(){
+	if(address.length==undefined){
+		alert("请添加收货地址")
+		window.location.href = "{:U('Member_center/memberAddress')}";
+	}
+}
+window.onload=getAddress
+
+//默认收获地址
+for(var i=0;i<address.length;i++){
+	console.log(address.length)	
+	if(address[i].is_use==1){
+		$(".body .consignee .consignee-table .li:eq(i)").addClass("active");
+		$("input[name='address_id']").val(address[i].id);
+	}else{
+		$("input[name='address_id']").val(address[0].id);
+		$(".body .consignee .consignee-table .li:eq(0)").addClass("active")
+	}
+}
+
+$(".coupon_button").click(function(){
+    if($(".coupon_box").css("display")=="none"){
+       $(".coupon_box").show();
+    }else{
+       $(".coupon_box").hide();
+    }
+});
+$(".coupon_box>div:eq(1)").click(function(){
+	$(".coupon_box").hide();
+})
+
+$(".receiveCoupon").click(function(){
+	$(this).css("border-color","#fff");
+	$(this).text("领取成功")
+})
+
+$(function(){
+    $(".set a").click(function(){
+        $(".consignee-table .active").removeClass("active");
+        $(this).parents(".li").addClass("active");
+        $(".consignee-table .active").insertBefore($(".consignee-table .li:eq(0)"));
+        var text = $(this).parent('.set').parent('.btn').siblings('.text').children('a').text();
+        var id = $(this).attr('data-id');
+        $("input[name='address_id']").val(id);
+        $(".sum .text span").text(text);
+    });
+    $(".consignee-toggle").click(function(){
+        $(".consignee-table .li:gt(0)").slideToggle("slow");
+        $(this).find(".icon").toggleClass("active");
+    });
+    $(".payment-list li").click(function(){
+        $(".payment-list .payment_active").removeClass("payment_active");
+        $(this).addClass("payment_active");
+    });
+    $(".quantity-left,.quantity-right").click(function(){
+        var num;
+        var money = parseInt($(this).parent().prev().text());
+        if($(this).hasClass("quantity-left")){
+            num = parseInt($(this).next().text());
+            if(num>1){
+                num--;
+            }
+            $(this).next().text(num);
+        }else{
+            var num_max = parseInt($(this).data("stock"));
+            num = parseInt($(this).prev().text());
+            if(num_max==num){
+                alert("库存只有"+num_max+"件了"); 
+            }else{
+                num++;
+            }
+            $(this).prev().text(num);
+        }
+        $(".altogether .num-money i").text($(".shopping-list").length);
+        $(this).parent().next().next().text(num*money);
+        sumMoney();
+    });
+    $(".altogether .num-money i").text($(".shopping-list").length);
+    sumMoney();
+    function sumMoney(){
+        var sum = 0;
+        $(".cozen").each(function(){
+            sum += parseInt($(this).text()); 
+        });
+        $(".sum-money span").text(sum);
+    }
+
+});
+
+$(".Settlement").click(function(){
+	window.location.href="{:U('Order/completePayment')}"
+	
+})
+
+</script>
+<!-- /主体 -->
+<include file="Public:footer" />
+</body>
+</html>

@@ -1,0 +1,368 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>收藏夹</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/favorites.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+<style>
+
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->	
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="MemberPublic:MemberLeft" />  
+        <div class="user-right marT20 fRi">
+            <div class="user-box">            
+    
+        <div class="user-box">
+            <div class="cont-padd-1" style="position:relative;padding-bottom:30px;">
+                <div class="user-order-tab marT10 posRel">
+                     <a href="#" class="nav-a" id="favorList">商品收藏</a>
+                     <a href="#" class="nav-a" id="favorShop">店铺收藏</a>
+                </div>
+                <div class="user-table-wrap">
+                	<!-- <ul class="favorNav">
+                		<li class="active">全部</li>
+                		<li>共享商品</li>
+                		<li>商城商品</li>
+                	</ul> -->
+                	<!--收藏商品列表-->
+                	<ul class="favorList">
+                		<volist name='goods' id='vo'>
+                		<li attr_id={$vo.goods_id}>
+                			<div></div>
+                            <for start="0" end="1" name="i">
+                            <a href="http://{$vo['child'][$i]['domain']}.orangesha.com/shangpin-{$vo['goods_id']}.html" title="{$vo.goods_name}">
+                			<img src="{$vo.goods_thumb}"/>
+                             </a>
+                             </for>
+                			<p>{$vo.goods_name}</p>
+                			<p>¥{$vo.goods_price}</p>
+                			<button class="cat" attr_id={$vo.goods_number}>加入购物车</button>
+                		</li>  
+                                    
+                        </volist> 
+                        
+                    <div class="pages">
+                        {$page}
+                    </div> 	
+
+                	</ul>
+                    
+                	<!--收藏店铺列表-->
+                	<ul class="favor_shoplist">
+                    <foreach name="shop" item="v">
+                		<li>
+                			<div attr_id="{$v.seller_id}">
+                				<div>取消收藏</div>
+                                <a href="http://{$v.domain}.orangesha.com">
+                				<img src="{$v.thumb}" alt="" width="286" height="110" />
+                				<p>{$v.shop_name}</p>
+                				<button>进入店铺</button>
+                				<button>联系卖家</button>
+                                </a>
+                			</div>
+                			<ul>
+                            <for start='0' end='4' name='i'>
+                				<li>
+                                <a href="http://{$v['domain']}.orangesha.com/shangpin-{$v['child'][$i]['id']}.html" title="{$v['child'][$i]['goods_name']}">
+                					<img src="{$v['child'][$i]['goods_thumb']}" alt=""/>
+                					<p>{$v['child'][$i]['goods_name']}</p>
+                                    </a>
+                				</li>
+                            </for>
+                                
+                			</ul>
+
+                		</li>
+                        </foreach>
+                	<div class="pages">
+                        {$page1}
+                    </div>  
+                	</ul>
+                	<!-- <ul class="favorBtn">
+                		<li><button class="all_favor">批量管理</button></li>
+                		<li>
+                			<label for="all_favorChoose">
+                			   <input id="all_favorChoose" type="checkbox"> 全选
+                			</label>
+                		</li>
+                		<li><button class="delete_favor">删除</button></li>
+                		<li><button class="add_cart">加入购物车</button></li>
+                	</ul> -->
+                </div>
+                
+                <div class='section-bt' style="width: 53%; margin-top: 15px; float: right;">  
+                
+                </div>      
+            </div>
+        </div>
+    
+           </div>
+        </div>
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+function checkTitle(){
+	if({$title}==1){
+		$("#favorList").addClass("cur")
+		$("#favorShop").removeClass("cur")
+		$(".favorList").css("display","block")
+		$(".favor_shoplist").css("display","none")
+		$(".user-left-wrap .list:eq(2)>ul>li:eq(0) a").css("color","#ff6600")
+	}
+	if({$title}==2){
+		$("#favorList").removeClass("cur")
+		$("#favorShop").addClass("cur")
+		$(".favorList").css("display","none")
+		$(".favor_shoplist").css("display","block")
+		$(".user-left-wrap .list:eq(2)>ul>li:eq(1) a").css("color","#ff6600")
+	}
+}
+checkTitle()
+
+//取消收藏店铺
+$(".favor_shoplist>li>div>div").click(function(){
+    var seller_id = $(this).parent().attr("attr_id");
+    //alert(seller_id);
+    $.get('{:U("MemberCenter/shop_del")}',{'seller_id':seller_id},function(data){
+            if(data!=1){
+                alert('删除失败');
+            }
+
+    });
+    $(this).parent().parent().remove();
+});
+
+//加入购物车
+$(".favorList>li>button").click(function(){
+    var goods_id = $(this).parent().attr("attr_id");
+    var goods_number=$(this).attr("attr_id");
+    var number       = 1
+    /*设置事件*/
+    var data = {'goods_id':goods_id, 'number':number};
+        $.post("{:U('MemberCenter/cartAdd')}",data,function(res){
+            if(res=='[object Object]'){
+                alert('加入购物车成功');
+            }
+
+            if(res.code==10){
+                window.location.href = "http://www.orangesha.com/Home/Member/login";
+            }          
+        });
+  
+
+
+});
+
+$(".favorList>li>div").click(function(){
+	var good_id = $(this).parent().attr("attr_id");
+    $.get('{:U("MemberCenter/goodsDel")}',{'goods_id':good_id},function(data){
+        console.log(data)
+
+    });
+	$(this).parent().remove()
+})
+
+$(".favorList li").hover(function(){
+	$(this).find("div").css("display","block")
+	$(this).find("button").css("display","block")
+	$(this).find("img").css("border-color","#37A4A1")
+},function(){
+	$(this).find("div").css("display","none")
+	$(this).find("button").css("display","none")
+	$(this).find("img").css("border-color","#C6C6C6")
+})
+
+//列表切换
+$("#favorList").click(function(){
+	window.location.href="http://www.orangesha.com/gzsp.html?title=1"
+})
+$("#favorShop").click(function(){
+	window.location.href="http://www.orangesha.com/gzsp.html?title=2"
+})
+
+$(".favor_shoplist>li").hover(function(){
+	$(this).find("div").find("div").css("display","block").css("cursor","pointer");
+},function(){
+	$(this).find("div").find("div").css("display","none").css("cursor","pointer");
+})
+
+$(".favor_shoplist>li>ul>li").hover(function(){
+	$(this).find("img").css("border-color","#FF6600")
+},function(){
+	$(this).find("img").css("border-color","#C6C6C6")
+})
+
+
+$.post("http://www.orangesha.com/index.php/Home/Collect/goodsCollect",function(res){
+	        if(res.status==1){
+	        	/*console.log(res)*/
+	        }
+	});
+
+$.post("http://www.orangesha.com/index.php/Home/Collect/shopCollect",function(res){
+	        /*console.log(res) */ 	        
+	});
+
+
+
+
+var goods;
+getGoodsList();                  
+function getGoodsList(){
+	
+	var wraper = $(".section-bt");
+	var _this  = this;
+	var url    = "http://www.orangesha.com/index.php/Home/Collect/goodsCollect";
+	/*ajax分页*/
+	ajaxPage({
+    	wraper:wraper,	
+		parameter:'',//附加参数
+	    listRows:5,//每页显示条数
+		rollPage:3,//最多显示多少页码
+		url:url,//ajax请求地址
+		//回调函数
+		callback:function(goods,page,page_data){            
+           showHtml(goods);
+           showPage(page_data)           
+		}
+	}); 
+	
+}
+ 
+
+function showHtml(data){
+    var html = [];
+	for(var k in data){
+    	html.push("<li>");
+    	html.push("   <div></div>");
+    	html.push("      <img src='{:C('STATIC_URL')}/Home/image/yaokongfeiji.jpg'>");
+    	html.push("      <p>"+data[k].shop_name+"</p>");
+        html.push("      <p>¥39999.00</p>");
+        html.push("      <button>加入购物车</button>");
+        html.push("</li>");
+	}
+	html = html.join(''); 
+    $(".favorList").html(html);
+	
+
+/*$("#removeGoods").click(function(){
+	var data = {};
+    $('.goods_list input[type=checkbox]').each(function(){
+    	if($(this).prop('checked')){
+    	   var value   = $(this).val();
+    	   data[value] = 0;
+    	   
+        }
+    	
+    })
+    $.post("http://www.orangesha.com/index.php/Home/Member_goods/statusChange",data,function(res){
+	        window.location.reload(); 	        
+	});   
+})
+
+
+$("#addGoods").click(function(){
+	var data = {};
+    $('.goods_list input[type=checkbox]').each(function(){
+    	if($(this).prop('checked')){
+    	   var value   = $(this).val();
+    	   data[value] = 1;
+    	   
+        }  
+        
+    })
+    $.post("http://www.orangesha.com/index.php/Home/Member_goods/statusChange",data,function(res){
+	        window.location.reload(); 	        
+	});
+})*/
+    
+}    
+
+
+    
+/**
+ *显示分页
+ */
+/*function showPage(data){
+    var html = ["<div class='turn-page'>"];
+    if(data['prev']){
+	    html.push("<div class='left-btn change' data-p='"+ data['prev'] +"'></div>");
+    }else{
+    	html.push("<div class='left-btn'></div>");
+    }
+	for(var k in data['page']){
+		if(data['page'][k] == '.'){
+			html.push("<div class='omit'>...</div>");                  
+		}else
+		if(data['page'][k] != data['nowPage']){
+			html.push("<div class='page-btn change' data-p='"+ data['page'][k] +"'>" + data['page'][k] + "</div>");
+		}else{
+			html.push("<div class='page-btn active'>" + data['page'][k] + "</div>");
+		}                          
+	}
+	if(data['next']){
+	    html.push("<div class='right-btn change' data-p='"+ data['next'] +"'></div>");
+	}else{
+        html.push("<div class='right-btn'></div>");
+	}
+	
+	html.push("</div>");
+	html.push("<p class='to-page'>跳至");
+	html.push("   <input class='go_number' type='text' value='1'>页<input type='button' value='跳转' class='go'>");
+	html.push("</p>");
+	html = html.join('');
+	$(".section-bt").html(html);
+}*/
+
+/*$(".goods_list").on('click','.delete',function(){
+	if(confirm('确认删除!')){
+	    var id = $(this).attr('data-id');
+		$.post("{:U('Member_goods/goodsDelete')}",{"id":id},function(res){                
+	        alert(res['msg']);
+	        if(res['status']){
+	        	window.location.reload();
+	        }        
+	    }); 
+	}
+})*/
+    
+//全选
+/*$("#all_cb").click(function(){
+    if($(this).is(':checked')){
+        $(".goods_list input[type=checkbox]").prop("checked",true);
+    }else{
+        $(".goods_list input[type=checkbox]").prop("checked",false);
+    }
+})*/
+
+
+</script>
+</body>
+</html>
+
+    

@@ -1,0 +1,360 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link href="{:C('STATIC_URL')}/Home/css/shop.css" rel="stylesheet">
+<link href="{:C('STATIC_URL')}/Home/css/comment.css" rel="stylesheet">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/css/style.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/Orangesha/css/details.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script src="/Public/js/navshop.js"></script>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery.imagezoom.min.js"></script>
+<style>
+.header_div{ float: left; border-left: 1px solid #E2E2E2; margin-top: 20px; padding-left: 10px; max-width: 125px;}
+.header_div:first-of-type{max-width: 180px; margin-right:17px; margin-left: 164px; }
+.header_div:nth-of-type(2){min-width: 132px;}
+.header_div>p{ color: #000; font-weight: bold; line-height: 6px; margin-bottom: 7px;}
+.header_div>div{padding: 0px 4px; width: 58px; background-color: #FF812D; color: #fff; border-radius: 4px;text-align:center}
+.header_div>ul{ overflow: hidden;line-height: 15px; margin-bottom: 2px;}
+.header_div>ul li{ float: left; text-align: center; width: 28px; color: #999;}
+</style>
+</head>
+<body >
+<include file="Public:header_top" />
+<include file="Public:shop_headSearch" />
+<div class="shop">
+    <div class="header">
+        <div class="header-inner">
+           <img src="/Public/img/image1/orange.png" class="shop-logo">    
+            <div class="shop-title">
+                <h1>e橙优品智能装备分享</h1>
+                国内最大的智能装备分享平台
+            </div>
+        </div>
+        <a href="#" title="{$seller_id}" onclick="collectshop(this)" class="myshop" style="background: url('/Public/Home/image/收藏本店.png') no-repeat 6px 2px;">收藏本店</a>
+        <a href="#" title="{$uinfo.qq}" onclick="relation(this)" class="seller" style="background: url('/Public/Home/image/联系卖家.png') no-repeat 6px 2px;">联系卖家</a>
+    </div>
+   <include file="Public:shopnav" /> 	
+</div>
+<!-- /头部 -->
+<!-- 主体 -->
+    <div class="details">
+        <div class="details-info">
+            <div class="info-left">
+                <div class="left-image">
+                    <!--图片展示区域-->
+                    <div class="box">
+                        <div class="tb-booth tb-pic tb-s310">
+                            <a href="/orange_old/Uploads/Picture/2016-09-01/57c7c555400ef.jpg">
+                            <img src="__ROOT__{$goods_gallery[0]['gallery_img']|substr=1}" alt="" rel="__ROOT__{$goods_gallery[0]['gallery_img']|substr=1}" class="jqzoom" /></a>
+                        </div>
+                        <ul class="tb-thumb" id="thumblist">
+                            <volist name="goods_gallery" id="v" key='k'>
+                            <if condition="$k eq 1">
+                            <li class="tb-selected">
+                            <else/>
+                            <li>
+                            </if>
+                                <div class="tb-pic tb-s40">
+                                    <a href="#">
+                                    <img  src="__ROOT__{$v['gallery_img']|substr=1}" mid="__ROOT__{$v['gallery_img']|substr=1}" big="__ROOT__{$v['gallery_img']|substr=1}" style="max-width:100%">
+                                    </a>
+                                </div>
+                            </li>
+                            </volist>
+                       </ul>
+                    </div>
+                </div>
+                <!--信息展示-->
+                <div class="left-info">
+                    <div class="info-title">{$goods['goods_name']}</div>
+                    <div class="price">价格：    <span><b>￥{$goods['goods_price']/10000}</b> 万元</span></div>
+                    <div class="row">
+	                     <div class="text">运费 :</div> 
+	                     <div style="color: #000;">广东广州 至 广东深圳宝安区</div>
+	                </div>
+                    <div class="good-info">
+                        <span>累计销量<span>{$goods['sale_num']}</span></span><span>累计评价<span>{$goods['number_comment']}</span></span>
+                    </div>
+                    <div class="nums">
+                        数量：    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tool-minus">-</span><span class="nums-num tool-num">1</span><span class="tool-plus">+</span>
+                         件 ( 库存 {$goods['goods_number']} 件 )
+                    </div>
+                    <div class="row">
+	                     <div class="text">服务保障 :</div> 
+	                     <div style="border: 1px solid #C2C2C2; padding: 0px 10px; font-size: 14px;">保修期一年</div>
+	                </div>                    
+                    <div class="row">
+	                     <div class="text">橙橙金融 :</div> 
+	                     <div>
+	                     	<ul class="jinrong">
+	                     		<li>橙橙贷</li>
+	                     		<li>橙橙白条</li>
+	                     		<li>3/7分期</li>
+								<li style="border:0px;">
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style" style="line-height:32px;margin-top:15px;">
+	<a class="jiathis_button_cqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END --></li>
+	                     	</ul>
+	                     </div>
+	                </div>                   
+                    <div class="btn">
+                        <div class="now">立即购买</div>
+                        <div class="cat">加入购物车</div>
+                    </div>
+                </div>
+                <!-- 选项卡 -->
+                <div class="tab">
+                    <div class="tab-nav">
+                        <div class="details-of active">详情介绍</div>
+                        <!-- <div>产品参数</div> -->
+                        <div class="details-rated">评价(<span class="number_comment"></span>)</div>
+                        <div class="hr"></div>
+                    </div>
+                    <div class="goods_info">
+                    	<p>基本参数</p>
+                    	<ul class="goods_info_ul">
+                    		<li>品牌：{$goods['brand_id']}</li>
+                    		<li>型号：{$goods['goods_model']}</li>
+                    		<li>设备厂家：{$goods['sbcj']}</li>
+                    		<li>区域：{$goods['area']}</li>
+                    		<li>重量：{$goods['goods_weight']}</li>
+                    		<li>外形尺寸：{$goods['measurement']}</li>
+                    		<li>功率：{$goods['watts']}</li>
+                    		<li>精度：{$goods['precise']}</li>
+                    		<li>用途：{$goods['uses']}</li>
+                    	</ul>
+                    </div>
+                    <div class="details-of-list">
+                       <div>{$goods_data['goods_content']|html_entity_decode}</div>
+                    </div>
+                    <div class="details-rated-list">
+                        <include file="Goods:comment" />
+                    </div>
+                </div>
+            </div>
+            <!-- 广告栏 -->
+            <div class="info-right">
+                <div class="title">近期热卖商品</div>
+                <div class="li">
+                    <img src="/orange_old/Public/Orangesha/image/details_li.jpg" alt="">
+                    <div class="text">欧泰立式数控铣床OTM-950...</div>
+                    <div class="price">￥7000.00 /月起<div class="sales">销量：260</div></div>
+                </div>
+                <div class="li">
+                    <img src="/orange_old/Public/Orangesha/image/details_li.jpg" alt="">
+                    <div class="text">欧泰立式数控铣床OTM-950...</div>
+                    <div class="price">￥7000.00 /月起<div class="sales">销量：260</div></div>
+                </div>
+                <div class="li">
+                    <img src="/orange_old/Public/Orangesha/image/details_li.jpg" alt="">
+                    <div class="text">欧泰立式数控铣床OTM-950...</div>
+                    <div class="price">￥7000.00 /月起<div class="sales">销量：260</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+<include file="Public:footer" /> 
+</body>
+<script>
+//联系客服
+function relation(obj){
+  var title = parseInt($(obj).attr('title'));
+  if( title >0){     
+    window.location.href="tencent://message/?uin="+title+"&Site=sc.chinaz.com&Menu=yes";
+		
+  }else{
+        alert('卖家还没有填写qq！');
+  }
+
+}
+
+var cart = (function(){
+	var __goods_id     = {$goods['id']},
+	    number       = 1,
+        goods_number = {$goods['goods_number']};
+
+	/*设置事件*/
+	function setEvents(){
+	    $(".cat").click(function(){
+	        cartAdd();
+	    })   
+
+	    /*增加租期*/
+	    $(".tool-plus").click(function(){
+	        number = number  < goods_number ? number + 1 : goods_number;
+	        $(".nums-num").text(number);
+	    })
+	    
+	    /*减少租期*/
+	    $(".tool-minus").click(function(){
+	        number = number > 1 ? number - 1 : 1;
+            $(".nums-num").text(number);
+	    }) 
+	} 
+
+    /*ajax加入购物车*/
+    function cartAdd(){
+        var data = {'goods_id':__goods_id, 'number':number};
+        $.post("{:U('Mall_cart/cartAdd')}",data,function(res){
+        	if(res.code==10){
+        		window.location.href = "{:U('Member/login')}";
+        	}else{
+        		alert("成功加入购物车")
+        	}            
+        })
+    }
+    /*直接购买*/
+    $(".now").click(function(){
+        var data = price_total.getData();
+        if(data.rent_time >= data.min_time && data.rent_time <= data.max_time){
+            window.location.href = "{:U('Mall_order/buy')}"+'?'+'goods_id='+__goods_id+'&number='+number;
+        }else{
+            alert('租期不正确');
+        }
+    }) 
+
+	return {
+		init :function(){
+			setEvents();
+		}
+	}       
+})();
+cart.init();
+
+$(function(){
+    // 图放大镜
+    $(".jqzoom").imagezoom();
+    $("#thumblist li a").click(function(){
+        $(this).parents("li").addClass("tb-selected").siblings().removeClass("tb-selected");
+        $(".jqzoom").attr('src',$(this).find("img").attr("mid"));
+        $(".jqzoom").attr('rel',$(this).find("img").attr("big"));
+    });
+});
+
+//详情、评价切换
+$(".tab-nav>div:eq(0)").click(function(){
+	  $(this).addClass("details-of active");
+	  $(this).siblings().removeClass("details-of active");
+    })
+$(".tab-nav>div:eq(1)").click(function(){
+	  $(this).addClass("details-of active");
+	  $(this).siblings().removeClass("details-of active");
+    })
+    
+$(".tab-nav>div:eq(0)").click(function(){
+	$(".details-of-list").css("display","block");
+	$(".details-rated-list").css("display","none");
+	$(".number_comment").css("color","#000");
+	$(".goods_info").css("display","block");
+})
+$(".tab-nav>div:eq(1)").click(function(){
+	$(".details-rated-list").css("display","block");
+	$(".details-of-list").css("display","none");
+	$(".number_comment").css("color","#FF6600");
+	$(".goods_info").css("display","none");
+})
+
+
+//获取用户评价
+function getdd(){
+	    var __goods_id = {$goods['id']};
+        var data = {'goods_id':__goods_id, 'firstRow':0, 'listRows':1000};
+        $.post("{:U('Goods/getGoodsComment')}",data,function(res){
+        	
+            console.log(res);
+            if(res.code==1){
+        	   $(".comment-list").text("暂无评价");
+        	   //评价数量
+	           $(".number_comment").text(0);
+	           //好评数量
+	           $(".comment_good").text(0);
+	           //中评数量
+	           $(".comment_nomal").text(0);
+	           //差评数量
+	           $(".comment_bad").text(0);
+	           //好评率
+	           $(".comment_goodrate").text("0%")
+	           //中评率
+	           $(".comment_nomalrate").text("0%")
+	           //差评率
+	           $(".comment_badrate").text("0%")
+        	}
+        	if(res.code==2){
+               //评论信息
+               $('.comment-txt').text(res.data.comment_data[0].content);
+               //用户名
+               $('.user-name').text(res.data.member_data[0].nickname); 
+               //用户头像
+               $(".user-img>img").attr("src",str);
+               //评论时间
+               $(".time").text(nDate.getFullYear()+"-"+check(nDate.getMonth()+1)+"-"+check(nDate.getDate())+" "+check(nDate.getHours())+":"+check(nDate.getMinutes())); 
+               //评价数量
+	           $(".number_comment").text(parseInt(res.data[1])+parseInt(res.data[2])+parseInt(res.data[3]));
+	           //好评数量
+	           $(".comment_good").text(res.data[3]);
+	           //中评数量
+	           $(".comment_nomal").text(res.data[2]);
+	           //差评数量
+	           $(".comment_bad").text(res.data[1]);
+	           //好评率
+	           $(".comment_goodrate").text(parseInt(res.data[3])/(parseInt(res.data[1])+parseInt(res.data[2])+parseInt(res.data[3]))*100+"%")
+	           //中评率
+	           $(".comment_nomalrate").text(parseInt(res.data[2])/(parseInt(res.data[1])+parseInt(res.data[2])+parseInt(res.data[3]))*100+"%")
+	           //差评率
+	           $(".comment_badrate").text(parseInt(res.data[1])/(parseInt(res.data[1])+parseInt(res.data[2])+parseInt(res.data[3]))*100+"%")
+            }
+            //用户头像路径去.
+        	/*var str=res.data.member_data[0].headimg*/
+        	str=str.substring(1);
+        	//用户评论时间格式转换      	
+            var iM = res.data.comment_data[0].time*1000;   //得到毫秒数
+            var nDate = new Date(iM);   //直接将毫秒数当参数传进去。            
+            
+            function check(n){
+		    if(n<10){
+			 n="0"+n;
+			 }
+			 return n;
+		    }                     
+        })        
+    }
+getdd();
+/*获取导航颜色*/
+var shop_css = "{$shop_css}";	
+$('.navwrap').css('background','#'+shop_css);
+$('.pros').css('background','#'+shop_css);
+/*获取 店铺信息*/
+var shop_status = "{$shop_status}";
+var shop_name = "{$shop_da.shop_name}";
+var shop_desc = "{$shop_da.desc}";
+var shop_thumb = "{$shop_da.thumb|substr=1}";
+
+if( shop_status==1 ){
+ 
+   $('.header-inner').find('img').attr('src',shop_thumb);
+   $(' .shop-title').html('<h1>'+shop_name+'</h1>'+shop_desc+'');			
+}
+</script>
+</html>

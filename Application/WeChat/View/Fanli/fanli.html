@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>回馈活动</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" /> 
+<style>
+html{font-size:62.5%;height:100%} 
+*{padding:0; margin:0;font-family:"方正黑体简体";font-style:normal;font-size:1.6rem;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0}   
+body{height:100%;} 
+#tishifx{position:absolute;width:100%;height:140px;z-index:9999;right:0;top:0;display:none;background:rgba(0,0,0,0.5);}
+#tishifx img{max-width:100%;max-height:140px;float:right;margin-right:5%}
+
+#zhegai{position:fixed;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;}
+#zhegai p{width:94%;height:60px;float:left;line-height:30px;text-align:center;boder:1px solid black;margin-top:40%;background:#F75455;margin-left:2%;border-radius:4px;color:white;}
+
+#showjihuo{position:fixed;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;display:none;}
+#showjihuo div{width:100%;height:100%;display:table-cell;vertical-align:middle;text-align:center;}
+#showjihuo div .jihuo{width:90%;height:auto;float:left;margin-left:5%;background:#FCCC66;border-radius:5px;padding-bottom:50px;}
+.jihuo h2{width:100%;height:50px;text-align:center;line-height:50px;float:left;color:#C40727;font-size:2rem;font-weight:200;}
+.jihuo ul{width:96%;height:36px;background:url('__PUBLIC__/images/hlq02.png');background-size:100% 100%;float:left;margin-left:2%} 
+.jihuo ul li{height:100%;width:auto;float:left;line-height:36px;margin-left:2%;color:white;font-size:1.3rem}     
+.jihuo ul .headerimg{width:10%;height:36px;margin-left:5%;}
+.jihuo ul .headerimg p{width:100%;height:32px;display:table-cell;vertical-align:middle;text-align:center;}
+.jihuo ul .headerimg p img{max-width:100%;max-height:30px;border:1px solid white}   
+.jihuo input{height:30px;background:white;border-radius:4px;border:1px solid black;width:100%;} 
+.btn1{display:block;width:56%;height:32px;text-align:center;line-height:32px;float:left;margin-left:22%;margin-top:10px;border-radius:3px;background:#F75455;color:white}
+.btn2{display:block;width:56%;height:32px;text-align:center;line-height:32px;float:left;margin-left:22%;margin-top:10px;border-radius:3px;background:#F75455;color:white}      
+#showjihuo .youhuijuan{width:96%;height:auto;float:left;margin-left:2%} 
+.youhuijuan img{max-width:100%;max-height:auto;}
+
+#tishi{position:fixed;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;display:none}
+#tishi div{width:100%;height:100%;display:table-cell;vertical-align:middle;text-align:center;}
+#tishi div ul{width:90%;height:auto;float:left;margin-left:5%;background:#FCCC66;border-radius:5px;padding-top:15px;padding-bottom:15px}
+#tishi div ul .dui{width:100%;height:auto;float:left;text-align:center;}    
+#tishi div ul .dui img{max-width:30%;max-height:160px;} 
+#tishi div ul p{width:100%;height:auto;float:left;text-align:center;}
+
+#wraper{width:100%;float:left;position:relative;background:#f9a81b;background:url(__PUBLIC__/images/bigwheelbackground.jpg) no-repeat;background-size:100%;}
+#header{width:100%;height:auto;float:left;text-align:center}
+#header img{max-width:100%;max-height:488px}   
+#main{width:100%;height:auto;float:left;background:#F7B81B;padding-bottom:20px}
+#main div{width:90%;height:auto;float:left;margin-left:5%;}   
+#main .main_h{width:100%;height:auto;float:left;margin-top:20px}   
+.main_h img{max-width:100%;height:auto;}
+#main div ul{width:100%;height:36px;float:left;background:url('__PUBLIC__/images/hlq02.png');background-size:100% 100%;}
+#main div ul .headerimg{width:10%;height:36px;margin-left:2%;float:left}
+#main div ul .headerimg p{width:100%;height:32px;display:table-cell;vertical-align:middle;text-align:center;}
+#main div ul .headerimg p img{max-width:100%;max-height:30px;border:1px solid white}
+#main div ul li{height:100%;width:auto;float:left;line-height:36px;margin-left:1%;color:white;font-size:1.3rem}
+#main div ul input{float:left;width:38%;height:20px;margin-top:8px;text-indent:4px;border:0;color:white;font-size:1.4rem;background:#E5BA7E;margin-left:2%}
+#main div ul a{color:white;font-size:1.2rem}   
+.jijing{width:80%;height:auto;float:left;text-align:center;margin-top:10px;margin-left:10%;color:white}
+.btn{display:block;width:56%;height:42px;text-align:center;line-height:42px;float:left;margin-left:22%;margin-top:13px;border-radius:3px;background:#F75455;color:white}
+.btn_1{display:block;width:56%;height:42px;text-align:center;line-height:42px;float:left;margin-left:22%;margin-top:13px;border-radius:3px;background:#F75455;color:white}
+.btn3{display:block;width:56%;height:42px;text-align:center;line-height:42px;float:left;margin-left:22%;margin-top:13px;border-radius:3px;background:#F75455;color:white}
+#shuoming{width:100%;height:auto;float:left}
+#shuoming img{max-width:100%;max-height:180px} 
+#footer{width:100%;height:auto;float:left;position:relative}
+#footer .gz{max-width:100%;max-height:1084px;} 
+#footer p{position:absolute;width:20%;height:auto;right:15px;top:5px}   
+#footer p img{max-width:100%;max-height:258px;}  
+</style>
+<!-- www.orangesha.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?54f6f54d47704101dc27b337de5fd6c3";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+ <body>
+<if condition="$isguanzhu neq '1'">
+	<div id="zhegai">
+	    <p>您还未关注!关注后才能操作此页面</p>
+	    <a class="btn" href="http://mp.weixin.qq.com/s?__biz=MjM5NDkzMTU0MQ==&mid=209998164&idx=1&sn=e89208924f8c608e2df0a53b0cd9fbce#rd">点击关注</a>
+	</div>
+<elseif condition="$ispguanzhu neq '1'"/>
+	<div id="zhegai">
+	    <p>领取该优惠券的人未关注，请提醒他关注后才能操作此页面</p>  
+	</div>
+<elseif condition="$iszj eq '1'"/>
+   	<div id="zhegai">
+	    <p>这是你自己的优惠券页面，您只能在该页面进行分享</p>  
+	</div>
+</if>
+
+ <div id="tishifx">
+   <img src="__PUBLIC__/images/tishifx.png"></img>
+ </div>
+ <div id="showjihuo">
+   <div>
+      <ul class='jihuo'>
+         <h2>输入激活码</h2>
+         <p class="youhuijuan"><img src="__PUBLIC__/images/youhuijuan.png"/></p>
+         <ul>
+	          <li class="headerimg"><p><img src="{$fansmesg['headimgurl']}"/></p></li>
+	          <li>{$fansmesg['nickname']}的欢乐共享券</li>	          
+         </ul>                  
+         <p style="margin-top:20px;float:left;width:56%;margin-left:22%;"><input type="text" value="" name='code'></p>
+         <a class="btn1" href="javascript:void(0)">确认兑换</a>
+         <p style="width:100%;height:auto;float:left;text-align:center;margin-top:15px">
+            <a href="javascript:hid()" style="color:black"><< 返回活动页面</a>
+         </p>
+      </ul>
+   </div> 
+</div>
+<div id="tishi">
+   <div>
+      <ul>
+         <p class="dui"><img src="__PUBLIC__/images/dui.png"></p>
+         <p style="margin-top:10px;color:#C60726">恭喜您激活成功</p>
+         <p style="margin-top:10px;color:#C60726">您将获得5元的抵用券</p>
+         <a class="btn" href="{$url}" style="color:white">我也要领取欢乐共享券</a>
+         <p style="margin-top:15px"><a href="javascript:hid()" style="color:black"><< 返回活动页面</a></p>
+      </ul> 
+   </div> 
+</div>
+ <div id="wraper">
+	   <div id="header"><img src="__PUBLIC__/images/bj03.jpg"/></div>
+	   <div id="main">
+	      <div>
+	          <p class="main_h"><img src="__PUBLIC__/images/youhuijuan.png"/></p>
+	           <ul>
+	              <if condition="$ispguanzhu eq '1'">
+		            <li class="headerimg"><p><img src="{$fansmesg['headimgurl']}"/></p></li>
+		            <li>{$fansmesg['nickname']}</li>		           
+	              </if> 
+	           </ul>    	               
+	      </div>
+	      <p class="jijing">50,000元感恩基金 &nbsp; &nbsp;&nbsp;已领取{$zj['ylq']}元</p>
+	      <if condition="$flag_ eq '1'">
+	         <a class="btn" href="javascript:void(0)">领取欢乐共享券</a>
+	      <else/>
+	         <a class="btn_1" href="{$url}" style="color:white">我也要领取欢乐共享券</a>
+	         <a href="javascript:show()" class="btn3">点击输入激活码</a>
+	      </if>
+	   </div>
+	   <div id="shuoming"><img src="__PUBLIC__/images/bj04.jpg"/></div>
+	   <div id='footer'>
+	      <img src="__PUBLIC__/images/bj05.jpg" class='gz'/>
+	      <p><img src="__PUBLIC__/images/erweima.jpg"/></p>
+	   </div>
+  </div>
+</body>
+<script type="text/javascript">
+var w=$(document.body).width();
+$(document).ready(function(){  	                                         
+   w=$(document.body).width();
+   var h=$("#showjihuo").css('height');
+   $("#showjihuo div").css({'height':h,'width':w+'px'});
+   var h=$("#tishi").css('height');
+   $("#tishi div").css({'height':h,'width':w+'px'});
+})  
+
+
+function autoplay(){
+    $('html, body').animate({scrollTop:0}, 'slow');  
+	$("#tishifx").css('display','block');
+	var t=setTimeout(function(){
+		$("#tishifx").css('display','none');
+		clearTimeout(t);
+	},5000);
+}
+
+//监听屏幕尺寸发生变化
+$(window).resize(function(){
+	w=$(document.body).width();
+	var h=$("#showjihuo").css('height');
+	$("#showjihuo div").css({'height':h,'width':w+'px'});
+	var h=$("#tishi").css('height');
+	$("#tishi div").css({'height':h,'width':w+'px'});
+})        
+
+function show(){
+	$("#showjihuo").slideDown('200');
+}
+
+function hid(){
+	$("#showjihuo").slideUp('200');
+}
+
+$(".btn").click(function(){
+	$.post("{:U('getyouhui')}",{},function(res){	
+		alert(res['result']);
+		if(res['result']=='领取欢乐共享券成功,请将此网页分享给朋友'){
+			 autoplay();
+			$("#main div ul").html(res['html']);
+		}else
+		if(res['result']=='请关注后再执行此操作'){
+			window.location.href="http://mp.weixin.qq.com/s?__biz=MjM5NDkzMTU0MQ==&mid=209998164&idx=1&sn=e89208924f8c608e2df0a53b0cd9fbce#rd";
+		}	
+	});
+})
+
+$(".jihuo .btn1").click(function(){
+	var code=$("input[type='text']").val();	
+	$.post("{:U('yanzheng')}",{'code':code},function(res){	
+		if(res==''){
+			$("#tishi").css('display','block');
+		}else{
+			alert(res);	
+			if(res=='您还未关注我们,请关注后再来执行此操作'){
+				window.location.href="http://mp.weixin.qq.com/s?__biz=MjM5NDkzMTU0MQ==&mid=209998164&idx=1&sn=e89208924f8c608e2df0a53b0cd9fbce#rd";
+			}
+		}
+	});
+})
+
+wx.config({
+	debug: true,
+    appId: '<?php echo $jssdk["appId"];?>',
+    timestamp: <?php echo $jssdk["timestamp"];?>,
+    nonceStr: '<?php echo $jssdk["nonceStr"];?>',
+    signature: '<?php echo $jssdk["signature"];?>',
+    jsApiList: [
+       'onMenuShareAppMessage',
+       'onMenuShareTimeline',
+       'onMenuShareQQ'
+      // 所有要调用的 API 都要加到这个列表中
+    ]
+});
+
+wx.checkJsApi({
+    jsApiList: ['onMenuShareAppMessage'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+    success: function(res){
+        // 以键值对的形式返回，可用的api值true，不可用为false
+        // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+    }
+});
+
+wx.ready(function () {
+   //分享给朋友    
+   wx.onMenuShareAppMessage({
+       title: '领券+分享=我买单', // 分享标题
+       desc: "您的好友为你送来50,000元感恩基金,以领取<?php echo $zj['ylq'];?>", // 分享描述
+       link: "<?php echo $jssdk['url'];?>", // 分享链接a
+       imgUrl: "<?php echo $jssdk['imgurl'];?>", // 分享图标
+       type: 'link', // 分享类型,music、video或link，不填默认为link
+       dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+       success: function () { 
+    	   $.post("{:U('panduanislq')}",{},function(res){	
+    		   if(res=='您还未领券,分享的页面无效'){
+    			   alert(res);
+    		   }   			
+    	   });// 用户确认分享后执行的回调函数
+       },
+       cancel: function () { 
+          // 用户取消分享后执行的回调函数
+       }
+   });
+   
+   //分享到朋友圈
+   wx.onMenuShareTimeline({
+       title: '领券+分享=我买单', // 分享标题
+       link: "<?php echo $jssdk['url'];?>", // 分享链接
+       imgUrl: "<?php echo $jssdk['imgurl'];?>", // 分享图标
+       success: function () {
+    	   $.post("{:U('panduanislq')}",{},function(res){	
+    		   if(res=='您还未领券,分享的页面无效'){
+    			   alert(res);
+    		   }  
+   	       });// 用户确认分享后执行的回调函数// 用户确认分享后执行的回调函数
+       },
+       cancel: function () {
+    	  // 用户取消分享后执行的回调函数
+       }
+   });
+   //QQ
+   wx.onMenuShareQQ({
+       title: '领券+分享=我买单', // 分享标题
+       desc: '领券+分享=我买单', // 分享描述
+       link: "<?php echo $jssdk['url'];?>", // 分享链接
+       imgUrl: "<?php echo $jssdk['imgurl'];?>", // 分享图标
+       success: function () { 
+          // 用户确认分享后执行的回调函数
+       },
+       cancel: function () { 
+          // 用户取消分享后执行的回调函数
+       }
+   });
+   //微博
+   wx.onMenuShareWeibo({
+       title: '领券+分享=我买单', // 分享标题
+       desc: '领券+分享=我买单', // 分享描述
+       link: "<?php echo $jssdk['url'];?>", // 分享链接
+       imgUrl: "<?php echo $jssdk['url'];?>", // 分享图标
+       success: function () { 
+          // 用户确认分享后执行的回调函数
+       },
+       cancel: function () { 
+           // 用户取消分享后执行的回调函数
+       }
+   });
+ }); 
+</script>
+</html>

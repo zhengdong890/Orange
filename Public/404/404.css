@@ -1,0 +1,193 @@
+﻿
+@charset "utf-8";
+/* CSS Document */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, p {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-family: inherit
+}
+* {
+	margin: 0px;
+	padding: 0px;
+}
+body, html {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+.w_body {
+	width: 100%;
+	height: 100%;
+	background-image: url('46.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.dr_con {
+	position: relative;
+	top: 0%;
+	width: 541px;
+	height: 100%;
+	margin: 0 auto;
+	text-align: center;
+}
+.dr_con1 {
+	position: absolute;
+	opacity: 0;
+	width: 100%;
+	-moz-animation: slideDown .6s ease-in-out .5s forwards;
+	-webkit-animation: slideDown .6s ease-in-out .5s forwards;
+	-o-animation: slideDown .6s ease-in-out .5s forwards;
+	-ms-animation: slideDown .6s ease-in-out .5s forwards;
+}
+.dr_con2 {
+	position: absolute;
+	opacity: 0;
+	width: 100%;
+	top: 405px;
+	-moz-animation: slideDown 1s ease-in-out 1s forwards;
+	-webkit-animation: slideDown 1s ease-in-out 1s forwards;
+	-o-animation: slideDown 1s ease-in-out 1s forwards;
+	-ms-animation: slideDown 1s ease-in-out 1s forwards;
+}
+.dr_con3 {
+	position: absolute;
+	opacity: 0;
+	width: 100%;
+	left: 142px;
+	bottom: 29%;
+	-moz-animation: slideUp 1s ease-in-out 1.5s forwards;
+	-webkit-animation: slideUp 1s ease-in-out 1.5s forwards;
+	-o-animation: slideUp 1s ease-in-out 1.5s forwards;
+	-ms-animation: slideUp 1s ease-in-out 1.5s forwards;
+}
+.dr_con4 {
+	position: absolute;
+	opacity: 0;
+	width: 100%;
+	bottom: 9%;
+	-moz-animation: slideUp 1s ease-in-out 2s forwards;
+	-webkit-animation: slideUp 1s ease-in-out 2s forwards;
+	-o-animation: slideUp 1s ease-in-out 2s forwards;
+	-ms-animation: slideUp 1s ease-in-out 2s forwards;
+}
+@-webkit-keyframes slideUp {
+ 0% {
+ opacity:0;
+ -webkit-transform:translate(0, 50px);
+}
+ 100% {
+ opacity:1;
+ -webkit-transform:translate(0, 0);
+}
+}
+@-webkit-keyframes slideDown {
+ 0% {
+ opacity:0;
+ -webkit-transform:translate(0, -50px);
+}
+ 100% {
+ opacity:1;
+ -webkit-transform:translate(0, 0);
+}
+}
+/*火狐浏览器*/
+@-moz-keyframes slideUp {
+ 0% {
+ opacity:0;
+ -moz-transform:translate(0, 50px);
+}
+ 100% {
+ opacity:1;
+ -moz-transform:translate(0, 0);
+}
+}
+@-moz-keyframes slideDown {
+ 0% {
+ opacity:0;
+ -moz-transform:translate(0, -50px);
+}
+ 100% {
+ opacity:1;
+ -moz-transform:translate(0, 0);
+}
+}
+/*Opera*/
+@-o-keyframes slideUp {
+ 0% {
+ opacity:0;
+ -o-transform:translate(0, 50px);
+}
+ 100% {
+ opacity:1;
+ -o-transform:translate(0, 0);
+}
+}
+@-o-keyframes slideDown {
+ 0% {
+ opacity:0;
+ -o-transform:translate(0, -50px);
+}
+ 100% {
+ opacity:1;
+ -o-transform:translate(0, 0);
+}
+}
+/*苹果系统*/
+@-ms-keyframes slideUp {
+ 0% {
+ opacity:0;
+ -ms-transform:translate(0, 50px);
+}
+ 100% {
+ opacity:1;
+ -ms-transform:translate(0, 0);
+}
+}
+@-ms-keyframes slideDown {
+ 0% {
+ opacity:0;
+ -ms-transform:translate(0, -50px);
+}
+ 100% {
+ opacity:1;
+ -ms-transform:translate(0, 0);
+}
+}
+.xspt {
+	display: block;
+	width: 84px;
+	height: 17px;
+}
+.dr_con3 img {
+	position: relative;
+	border: none;
+}
+.jrwz {
+	display: block;
+	width: 84px;
+	height: 17px;
+}
+#jt_bor img {
+	top: 3px;
+}
+@media (max-width: 1440px) {
+.dr_con3 {
+	bottom: 25%;
+}
+}
+@media (max-width: 1366px) {
+.dr_con {
+	top: -14%;
+}
+.dr_con3 {
+	bottom: 6%;
+}
+.dr_con4 {
+	bottom: -11%;
+}
+}

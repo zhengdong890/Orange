@@ -1,0 +1,301 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>收银台</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/orders.css" rel="stylesheet">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="__PUBLIC__/Home/images/ee.ico" type="image/x-icon">
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+
+</head>
+<body >
+<include file="Public:header_top" />		
+	<!-- 主体 -->
+    <div class="body">
+        <div class="pay_top">
+    		<div class="e_logo">
+	    		<span>收银台</span>
+	    	</div>
+	        <div class="points">
+	            <div class="shopping-cart"></div>
+	            <div class="text">购物车<i class="i1"></i>确认订单<i class="i2"></i>支付<i class="i3"></i>完成</div>
+	        </div>
+    	</div>
+        <div class="consignee">
+            <div class="title">
+            	<div class="title">收货人信息</div>
+            <div class="consignee-table">
+            	<a href="http://www.orangesha.com/dzgl.html#" target="_blank" class="addconsignee">+新增收货人地址</a>
+            	<div class="default_div"></div>
+                <volist name='address' id='v'>
+                <div class="li" data-id={$v.is_use} adress-id={$v['id']}>
+                    <div class="btn-icon">{$v['name']}</div>
+                    <span class="text"><a>{$v['address']}</a><i style="font-size: 13px;">{$v['telnum']}</i></span>
+                    <div class="btn">
+                        <div class="default" data-id="{$v['id']}">默认地址</div>
+                        <div class="set"><a href="javascript:;" data-id="{$v['id']}">选择地址</a></div>
+                    </div>
+                 </div> 
+                </volist>                            
+                <div class="consignee-toggle"><a href="javascript:;#">更多地址</a><i class="icon"></i></div>              
+            </div>
+        </div>
+        <form action="{:U('Mall_order/orderAdd')}" id="couponForm" method='post' data-coupon={$coupon_json}>
+	        <input type='hidden' name='address_id' value=''>
+	        <input type='hidden' name='goods_ids' value="{$goods_ids}">
+	        <div class="information">
+	            <div class="title">确认订单信息</div>
+	            <div class="text">商品名称<i class="i1"></i>单价(元)<i class="i2"></i>数量 <i class="i3"></i>小计（元）</div>
+	            <volist name='order_list' id='v' key='k'>
+	            <div class="information-list seller_{$v['seller_id']}">
+	                <div class="shops">卖家：<span class="shops-name">{$v['shop_name']}</span></div>
+	                <ul>
+	                    <volist name="v['data']" id='v1'>
+	                    <li class="shopping-list" data-uid="23" data-id="220">
+	                        <ul>
+	                            <li class="icon"><img src="__ROOT__<if condition="substr($v1['goods_thumb'] , 0 , 1) eq '.'">{$v1['goods_thumb']|substr=1}<else/>{$v1['goods_thumb']}</if>" alt="{$v1['goods_name']}""></li>
+	                            <li class="info">
+	                                <div class="name">{$v1['goods_name']}</div>
+	                                <!--<div class="shippingDate">预计出货日：<span></span></div>-->
+	                                <ul class="qualification">
+	                                    <li class="vip"></li>
+	                                    <li class="bx"></li>
+	                                </ul>
+	                            </li>
+	                            <li class="money">{$v1['goods_price']>=10000 ? $v1['goods_price']/10000 : $v1['goods_price']}<if condition="$v1['goods_price'] egt 10000">万</if>元</li>
+	                            <li class="quantity" style='text-align:center'>{$v1['number']}</li>
+	                            <li class="cozen">{$v1['total_price']>=10000 ? $v1['total_price']/10000:$v1['total_price']}<if condition="$v1['total_price'] egt 10000">万</if>元</li>
+	                        </ul>
+	                    </li>
+	                    </volist>                    
+	                </ul>
+	                <div class="note" seller_id="{$v['seller_id']}">
+	                    <div>
+	                    	<span class="note-title">添加备注：</span>
+	                   	 	<input class="note-value" type="text"  name="remark_{$v['seller_id']}" value="" placeholder="限45个字（定制类商品，请将购买需求在备注中做详细说明">                   	 	
+	                   	 	<table class="note-table">
+	                   	 		<tr>
+	                   	 			<td>店铺优惠：</td>
+	                   	 			<td>
+	                   	 				<select name="member_coupon[]" class="selectCoupon" data-id={$v2['seller_id']} >
+				                   	 		<option value="0">不使用优惠</option>
+				                   	 		<volist name="v['coupon']" id='v2'>
+				                   	 			<option value="{$v2['seller_id']}_{$v2['id']}" coupon_id="{$v2['coupon_id']}">{$v2['coupon_name']}</option>
+				                   	 		</volist>
+				                   	 	</select>
+	                   	 			</td>
+	                   	 			<td><span class="benefitPrice">-0.00</span></td>
+	                   	 		</tr>
+	                   	 		<tr>
+	                   	 			<td>运送方式：</td>
+	                   	 			<td>普通配送 快递</td>
+	                   	 			<td><span class="freight_txt s{$v['seller_id']}" data-sellerId={$v['seller_id']}></span></td>
+	                   	 		</tr>
+	                   	 		<tr>
+	                   	 			<td>促销优惠：</td>
+	                   	 			<td>&nbsp;&nbsp;</td>
+	                   	 			<td>-0.00</td>
+	                   	 		</tr>
+	                   	 		<tr>
+	                   	 			<td></td>
+	                   	 			<td></td>
+	                   	 			<td style="min-width: 100px;">总商品金额：¥ <span style="color: #ff6600; font-size: 16px;" class="shop_price" data-price={$v['total_price']}>{$v['total_price']>=10000 ? $v['total_price']/10000:$v['total_price']}</span></td>
+	                   	 		</tr>
+	                   	 	</table>
+	                    </div>
+	                </div>
+	            </div> 
+	            </volist>      
+	        </div>
+	        <div class="sum">
+	            <div class="sum-money">共 <i style="color: #ff6600; font-size: 16px;">{$buy_number}</i> 件商品，应付总额：¥<span data-allprice={$total_price}>{$v1['total_price']>=10000 ? $v1['total_price']/10000:$v1['total_price']}<if condition="$v1['total_price'] egt 10000">万</if>元</div>
+	            <div class="text">寄送至： <span style="font-size: 14px;"></span></div>
+	        </div>
+	        <div class="submit">
+	            <button class="btn" id="settlement">结算</button>
+	            <div>请选择收货地址</div>
+	        </div>
+        </form>
+    </div>
+    </body>   
+    
+<script type="text/javascript">		
+	
+$(".consignee-table .li:gt(0)").css("display","none");
+
+//默认地址
+var e=0
+function defaultAddress(){
+	for(var i = 0;i<$(".consignee-table .li").length;i++){
+		if($(".consignee-table .li").eq(i).attr("data-id")==1){
+			e=1
+			$(".consignee-table .li").eq(i).addClass("active");	
+		}
+	}
+	if(e==1){
+		$("#settlement").attr('disabled',false); 
+		$(".submit>div").css("display","none");
+		$("#settlement").css("background-color","#ff6501")
+	}
+	if(e==0){		
+		$("#settlement").attr('disabled',true);  
+		$("#settlement").css("background-color","#999")
+	}	
+    var id = $(".default").attr('data-id');
+    $("input[name='address_id']").val(id);
+}
+defaultAddress()
+
+//寄送至
+function getAdressinfo(){
+	var a = $(".consignee-table").find(".active>div:eq(0)").text();
+	var b = $(".consignee-table").find(".active>span>a").text();
+	var c = $(".consignee-table").find(".active>span>i").text();
+	$(".sum .text span").text(b+"  收货人："+a+c)
+}
+getAdressinfo()
+
+//判断是否有选择收货地址
+$(".set a").click(function(){
+	e=1;
+	$("#settlement").attr('disabled',false); 
+	$(".submit>div").css("display","none");
+	$("#settlement").css("background-color","#ff6501")
+})
+
+//选择优惠券
+$(document).on('change', '.selectCoupon', function(){
+	var data = $("#couponForm").attr("data-coupon");
+	var priceText = $(this).parent().next().find(".benefitPrice");//店铺优惠价格
+	var thisFreight = $(this).parent().parent().next().find("td .freight_txt").text();//运费
+	var aprice = $(this).parent().parent().next().next().next().find("td .shop_price").attr("data-price")//店铺商品订单价格
+	var allPrice = $(".sum-money span").attr("data-allprice")
+	var all_benefit = 0;//所有优惠券相加的优惠金额
+	var all_Freight = 0;//所有商品运费
+	
+	if($(this).val()==0){
+		priceText.text("-0.00");
+		$(this).parent().parent().next().next().next().find("td .shop_price").text(Number(aprice)+Number(thisFreight));
+	}else{
+		var sellerID = $(this).parents(".note").attr("seller_id");	
+		var couponId = $(this).find('option:selected').attr("coupon_id");	
+	    var jsondata = $.parseJSON(data);
+	    var price = jsondata[sellerID][couponId].benefit_price
+		priceText.text("-"+price);		
+		$(this).parent().parent().next().next().next().find("td .shop_price").text((Number(aprice)+Number(thisFreight)-Number(price)).toFixed(2))
+		if($(this).parent().parent().next().next().next().find("td .shop_price").text()<0){
+			$(this).parent().parent().next().next().next().find("td .shop_price").text("0")
+		}	    	    
+	}
+	for (var j = 0; j < $(".benefitPrice").length; j++) {
+        all_benefit -= parseFloat($(".benefitPrice")[j].innerText);
+    }
+	for (var s = 0; s < $(".freight_txt").length; s++) {
+        all_Freight += parseFloat($(".freight_txt")[s].innerText);
+    }
+    $(".sum-money span").text((Number(allPrice)+Number(all_Freight)-Number(all_benefit)).toFixed(2))
+    if($(".sum-money span").text()<0){
+		$(".sum-money span").text("0")
+	}
+})	
+
+$(function(){
+    $(".set a").click(function(){
+    	$(".li .default").css("display","none")
+        $(".consignee-table .active").removeClass("active");
+        $(this).parents(".li").addClass("active");
+        $(".consignee-table .active").insertBefore($(".consignee-table .li:eq(0)"));
+        var text = $(this).parent('.set').parent('.btn').siblings('.text').children('a').text();
+        var id = $(this).attr('data-id');
+        $("input[name='address_id']").val(id);
+        $(".sum .text span").text(text);
+        getAdressinfo();
+        getFreight();
+    });
+    $(".consignee-toggle").click(function(){    	
+        $(".consignee-table .li:gt(0)").slideToggle("slow");
+        $(this).find(".icon").toggleClass("active");
+        
+    });
+    $(".payment-list li").click(function(){
+        $(".payment-list .payment_active").removeClass("payment_active");
+        $(this).addClass("payment_active");
+    });
+    $(".quantity-left,.quantity-right").click(function(){
+        var num;
+        var money = parseInt($(this).parent().prev().text());
+        if($(this).hasClass("quantity-left")){
+            num = parseInt($(this).next().text());
+            if(num>1){
+                num--;
+            }
+            $(this).next().text(num);
+        }else{
+            var num_max = parseInt($(this).data("stock"));
+            num = parseInt($(this).prev().text());
+            if(num_max==num){
+                alert("库存只有"+num_max+"件了"); 
+            }else{
+                num++;
+            }
+            $(this).prev().text(num);
+        }
+        $(".altogether .num-money i").text($(".shopping-list").length);
+        $(this).parent().next().next().text(num*money);
+        sumMoney();
+    });
+    $(".altogether .num-money i").text($(".shopping-list").length);
+    sumMoney();
+    function sumMoney(){
+        var sum = 0;
+        $(".cozen").each(function(){
+            sum += parseInt($(this).text()); 
+        });
+        //$(".sum-money span").text(sum);
+    }
+
+});
+//获取运费
+function getFreight(){
+	var adressId = $(".consignee-table .active").attr("adress-id") //地址ID
+	var sellerID = [];
+	var allPrice = $(".sum-money span").attr("data-allprice")
+	var all_freight = 0;//所有运费相加
+	
+	$.post('http://www.orangesha.com/index.php/Home/Mall_order/setAddress',{'id' : adressId},function(res){			         
+
+		for(var i = 0;i<$(".note-table tr td .freight_txt").length;i++){
+			sellerID[i] = $(".note-table tr td .freight_txt").eq(i).attr("data-sellerId")		
+			$(".note-table tr td .s"+sellerID[i]+"").text(res.data[sellerID[i]])
+		}
+		//总价格加上运费
+	    for(var j = 0; j<$(".freight_txt").length; j++) {
+	        all_freight += parseFloat($(".freight_txt")[j].innerText);
+	    }
+	    //店铺商品总价加上运费
+	    for(var l = 0;l<$(".shop_price").length;l++){
+	    	$(".shop_price").eq(l).text(Number($(".shop_price").eq(l).attr("data-price"))+Number($(".shop_price").eq(l).parents("tbody").find("tr td .freight_txt").text()))
+	    }
+	    $(".sum-money span").text((Number(allPrice)+Number(all_freight)).toFixed(2))
+	    if($(".sum-money span").text()<0){
+			$(".sum-money span").text("0")
+		}
+   });    
+}
+getFreight()
+
+
+</script>
+<!-- /主体 -->
+<include file="Public:footer" />
+</body>
+</html>

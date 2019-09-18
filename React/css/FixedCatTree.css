@@ -1,0 +1,98 @@
+#cat_tree{
+    width:100%;
+	height:100%;
+	position:fixed;
+	left:0px;
+	top:0px;
+	z-index:9999;
+	background-color:rgba(0,0,0,0.2);
+}
+
+.cat_tree_hide{
+    display : none;	
+}
+
+
+#cat_tree .cat_tree_wraper{
+	position:fixed;
+	left:50%;
+	margin-left:-250px;
+	top:20px;
+	width:300px;
+	height:600px;
+	overflow:scroll;
+	padding-left:10px;
+	background:white;
+	float:left;
+} 
+
+#cat_tree .tree_handle{
+	position:fixed;
+	left:50%;
+	top:20px;
+	width:200px;
+	height:600px;
+	margin-left:60px;
+	background:white
+}
+
+#cat_tree .tree_handle .submit_btn{
+	display:block;
+	float:left;
+	margin-left:50px;
+	border-radius:5px;
+    width:100px;
+	heiht:26px;
+	text-align:center;
+	background:gray;
+	color:white;
+	margin-top:10px;
+	line-height:26px;	
+}
+
+#cat_tree .cat_tree_name{
+	display:block;
+	width:100%;
+	height:auto;
+	float:left;
+}      
+
+#cat_tree .toggel{
+	display:block;
+	width:15px;
+	height:15px;
+	border:1px solid black;
+	text-align:center;
+	font-size:18px;
+	line-height:15px;
+	float:left
+}   
+
+#cat_tree input{
+	display:block;
+	width:auto;
+	height:20px;
+	float:left;
+	margin-left:5px	
+}
+
+#cat_tree .level_name{
+	display:block;
+	width:auto;
+	height:20px;
+	float:left;
+	margin-left:5px;
+	color:black
+}    
+
+#cat_tree .cat_tree_container{
+	width:85%;
+	height:auto;
+	float:left;
+	margin-left:15%;
+	margin-top:4px;
+}
+
+#cat_tree .cat_tree_container_hide{
+	display:none;
+}

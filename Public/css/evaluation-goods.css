@@ -1,0 +1,43 @@
+body{background-color: #f5f5f5;}
+.evaluation-goods{width: 1200px;margin: 0 auto;}
+.evaluation-goods .content{border:1px #e5e5e5 solid;}
+.evaluation-goods .title{border-bottom:2px #37a4a2 solid;background-color: #fff;}
+.evaluation-goods .title p{padding-right: 43px;line-height: 46px;color:#6f6f6f;}
+.evaluation-goods .title h2{font-size: 18px;line-height: 46px;height: 46px;width: 133px;text-align: center;color:#fff;background-color: #37a4a2;}
+.evaluation-goods form{padding:49px 0 0 0;background-color: #fff;}
+.evaluation-goods form .goods-eva{padding:0 0  74px 220px;border-bottom:1px #a5a5a5 dashed;}
+.evaluation-goods form .goods-eva .goods-info{width: 147px;padding:0 38px 0 0;}
+.evaluation-goods form .goods-eva .goods-info .goods-img{width: 145px;height: 145px;border:1px #e7e7e7 solid;}
+.evaluation-goods form .goods-eva .goods-info .goods-img{width: 100%;height: 100%;}
+.evaluation-goods form .goods-eva .goods-info p{font-size: 14px;line-height: 18px;padding-top: 10px;}
+.evaluation-goods form .goods-eva .goods-info .goods-name{color:#7d98da;}
+.evaluation-goods form .goods-eva .goods-info .goods-type{color:#a5a5a5;}
+.evaluation-goods form .goods-eva .lv-eva{padding-bottom: 24px;}
+.evaluation-goods form .goods-eva label{display: inline-block;padding-right: 53px;}
+.evaluation-goods form .goods-eva input{display: inline-block;margin-right: 6px;}
+.evaluation-goods form .goods-eva label span{padding-left: 26px;background: no-repeat left center;}
+.evaluation-goods form .goods-eva label .haoping{background-image: url("../images/haoping_03.png");}
+.evaluation-goods form .goods-eva label .zhongping{background-image: url("../images/zhongping_06.png");}
+.evaluation-goods form .goods-eva label .chaping{background-image: url("../images/chaping_06.png");}
+.evaluation-goods form .goods-eva label .haoping.active{background-image: url("../images/haoping-chose_03.png");}
+.evaluation-goods form .goods-eva label .zhongping.active{background-image: url("../images/zhongping-chose_06.png");}
+.evaluation-goods form .goods-eva label .chaping.active{background-image: url("../images/cha-chose_08.png");}
+.evaluation-goods form .goods-eva label span.active{color:#ffa143;}
+.evaluation-goods form .goods-eva .txt-eva{border:4px #edf7f7 solid;width: 590px;}
+.evaluation-goods form .goods-eva .txt-eva textarea{height: 166px;border:none;padding:5px;width: 100%;box-sizing: border-box;}
+.evaluation-goods form .goods-eva .txt-eva input[type="file"]{display: none;}
+.evaluation-goods form .goods-eva .txt-eva .imgs{background-color: #edf7f7;padding:10px;}
+.evaluation-goods form .goods-eva .txt-eva .imgs span{color:#949494;display: inline-block;padding-left: 14px;}
+.evaluation-goods form .goods-eva .txt-eva .img-btn{padding:0 9px 0 45px;background: #37a4a2 url("../images/img-btn_07.png") no-repeat 13px center;
+color:#fff;line-height: 28px;height: 28px;}
+.evaluation-goods form .goods-eva .txt-eva .sml-pic .goods-pic{display: inline-block;width: 100px;height: 100px;margin-right: 10px;padding-top: 15px;}
+.evaluation-goods form .shop-eva{width: 456px;margin: 57px auto;}
+.evaluation-goods form .shop-eva>p{width: 170px;height: 84px;line-height: 84px;background-color: #e5e5e5;color:#999999;text-align: center;font-size: 20px;
+margin-top: 24px;}
+.evaluation-goods form .shop-eva ul{padding-left: 58px;}
+.evaluation-goods form .shop-eva ul li{line-height: 21px;padding-bottom: 33px;}
+.evaluation-goods form .shop-eva ul li span{line-height: 23px;font-size: 15px;}
+.evaluation-goods form .shop-eva ul li .star{display: inline-block;width: 23px;height: 23px;background: url("../images/star_11.png") no-repeat right top;vertical-align: top;padding-left: 10px;}
+.evaluation-goods form .shop-eva ul li .star:first-child{padding-left: 13px;}
+.evaluation-goods form .shop-eva ul li .star.active{background-image: url("../images/star-chose_11.png");}
+.evaluation-goods .save{width: 122px;line-height: 36px;text-align: center;color:#fff;background-color: #37a4a2;border-radius:5px;margin:54px auto;display: block;cursor: pointer;}

@@ -1,0 +1,290 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>共享商品</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+<style>
+label{ cursor: pointer;}
+.section-bt{width:100%;height:auto;float:left;margin-top:40px;margin-bottom:20px;}
+.section-bt .btns{line-height: 42px;}
+.section-bt .btns p,.section-bt .btns label,.section-bt .btns label input{display: inline-block;}
+.section-bt .btns label p{padding-left: 10px;}
+.section-bt .btns .btn{margin-left: 32px;border:1px #d5d5d5 solid;padding:0 10px;border-radius: 5px;cursor: pointer;}
+.section-bt .turn-page{width:auto;height:auto;float:left;}
+.section-bt .turn-page .omit{border:none;}
+.section-bt .turn-page .omit:hover{border:none;background-color: transparent;color:#d5d5d5;}
+.section-bt .turn-page div,.section-bt .to-page input{width: 32px;height:32px;border:1px #d5d5d5 solid;display: inline-block;margin-left: 12px;
+    cursor: pointer;vertical-align: top;line-height: 32px;text-align: center;}
+.section-bt .turn-page .active{background-color: #ff8448;color:#fff;}
+.section-bt .turn-page>div:hover{border-color: #ff8448;}
+.section-bt .turn-page .right-btn,.section-bt .turn-page .left-btn{width: 80px;}
+.section-bt .to-page{width:auto;float:left; margin-left: 20px;}
+.section-bt .to-page input{margin:0 7px;vertical-align: middle;font-family: "微软雅黑";}
+.section-bt .to-page input[type="button"]{background-color: #fff;width: 54px;}
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->	
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="MemberPublic:MemberLeft" />  
+        <div class="user-right marT20 fRi">
+            <div class="user-box">            
+    
+        <div class="user-box">
+            <div class="cont-padd-1" style="position:relative;padding-bottom:30px;">
+                <div class="user-order-tab marT10 posRel">
+                <a class="user-butt-re disInBlock fRi" href="{:U('Member_goods/selectCategory')}">+ 发布新商品</a>
+                     <a class="nav-a cur">我的发布</a>                  
+                </div>
+                <!-- 订单内容 -->
+                <div class="user-table-wrap">
+                    <div class="t-tl-tab disTable marT20 n-bCol2 f-cCol7">
+                        <div class="disTable-cell th th-goods"><span>商品</span></div>
+                        <div class="disTable-cell th th-price"><span>价格</span></div>
+                        <div class="disTable-cell th th-num"><span>库存</span></div>
+                        <div class="disTable-cell th th-sum"><span>状态</span></div>
+                        <div class="disTable-cell th th-state"><span>发布时间</span></div>
+                        <div class="disTable-cell th th-operation"><span>操作</span></div>
+                    </div>
+                    <div class="user-list-label f-cCol7 marT15">
+                        <input id="all_cb" type="checkbox" class="chk-pub-1 marB5" />
+                        <label for="all_cb" class="marL12" >全选</label>
+                        <!--<a href="javascript:;"  class="user-a-1 marL40" data-cz="pos">商品推荐申请</a>-->
+                        <!--<a href="javascript:;" class="user-a-1" data-cz="dpos">取消推荐</a>-->
+                        <a href="javascript:;" id="removeGoods" class="user-a-1 up" data-cz="up">下架</a>
+                        <a href="javascript:;" id="addGoods" class="user-a-1 down" data-cz="down">上架</a>
+                    </div>
+                    <ul class='goods_list'>
+                    <volist name='goods' id='v'>
+                    <!-- items -->
+
+                    <!-- items End -->
+                    </volist>
+                    </ul>
+                </div>
+                <div class='section-bt'>  
+                
+                </div>            
+            </div>
+        </div>
+    
+           </div>
+        </div>
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+//判断左边导航
+function checkNav(){
+	$(".user-left-wrap .list:eq(5)>ul>li:eq(1) a").css("color","#ff6600")
+}
+checkNav() 
+
+var goods;
+getGoodsList();                  
+function getGoodsList(){
+	
+	var wraper = $(".section-bt");
+	var _this  = this;
+	var url    = "{:U('Member_goods/goodsList')}";
+	/*ajax分页*/
+	ajaxPage({
+    	wraper:wraper,	
+		parameter:'',//附加参数
+	    listRows:5,//每页显示条数
+		rollPage:3,//最多显示多少页码
+		url:url,//ajax请求地址
+		//回调函数
+		callback:function(goods,page,page_data){            
+           showHtml(goods);
+           showPage(page_data)           
+		}
+	}); 
+	
+}
+
+function showHtml(data){
+    var html = [];
+	for(var k in data){
+    	html.push("<div class='t-goods-wrap'>");
+    	html.push("   <div class='t-goods-tls state-1 marT20'>");
+    	html.push("      <input type='checkbox' class='chk-pub-1 chk-pub-2' value='"+data[k].id+"' />");
+    	html.push("      <span class='marL16' id='201'>商品编号："+data[k].id+"</span>");
+        html.push("   </div>");
+        html.push("</div>");
+        html.push("<div class='table-goods-cont'>");
+        html.push("   <div class='disTable'>");
+        html.push("        <div class='disTable-cell th th-chk'>");
+        html.push("           <span class='f-cCol6'></span>");
+        html.push("        </div>");
+        html.push("        <div class='disTable-cell th th-goods'>");
+        html.push("           <div class='th-goods-c posRel'>");
+        html.push("              <div class='th-goods-pic'>");
+        html.push("                 <img src='"+data[k]['goods_thumb'].substring(1)+"' style='width:100%;' />");
+        html.push("              </div>"); 
+        html.push("              <div class='goods_name'>"+data[k].goods_name+"</div>"); 
+        html.push("           </div>");
+        html.push("         </div>");
+        html.push("         <div class='disTable-cell th th-price'>");
+        html.push("            <span class='sign-icon f-cCol6'>￥"+data[k].goods_price+"/件</span>");                           
+        html.push("         </div>");   
+        html.push("         <div class='disTable-cell th th-num' style='width:120px;overflow:hidden;''>"); 
+        html.push("            <span class='sign-icon'>"+data[k].goods_number+" 件/数量 </span>"); 
+        html.push("         </div>"); 
+        var msg = '';
+        var msg2 = '编辑商品';
+        if(data[k].is_check == '0'){
+            msg = '审核中'
+        }else
+        if(data[k].is_check == '1' && data[k].check_status == '0'){
+            msg = '未通过'
+            msg2= '再次编辑'
+        }else
+        if(data[k].status == '1'){
+            msg = '发布中'
+        }else
+        if(data[k].status == '0'){
+            msg = '下架'
+        }
+        html.push("          <div class='disTable-cell th th-sum' style='width:100px;'>"); 
+        html.push("             <span class='f-cCol11 auditStatus'>"+msg+"</span>"); 
+        html.push("         </div>"); 
+        html.push("         <div class='disTable-cell th th-state'>"); 
+        html.push("             <p class='f-cCol10'>"+data[k].update_time.substr(0 ,[10]) +"</p>"); 
+        html.push("         </div>"); 
+        html.push("         <div class='disTable-cell th th-operation'>"); 
+        html.push("             <a href='__CONTROLLER__/goodsUpdate/id/"+data[k].id+"' target='blank' id='editAgain' class='butt03-a butt-style-3 butt-s-1'>"+msg2+"</a>"); 
+        html.push("             <a href='javascript:;' data-id="+data[k].id+" class='delete butt03-a butt-style-3 butt-s-1'>删除</a>"); 
+        html.push("         </div>");                                 
+        html.push("    </div>");
+        html.push("</div>"); 
+        
+	}
+	html = html.join(''); 
+    $(".goods_list").html(html);
+    
+    //审核未通过改变颜色
+    for(var y=0;y<$(".auditStatus").length;y++){
+    	if($(".auditStatus").eq(y).text()=="未通过"){
+    		$(".auditStatus").eq(y).css("color","red")
+    	}
+    	if($(".auditStatus").eq(y).text()=="审核中"){
+    		$(".auditStatus").eq(y).css("color","orange")
+    	}
+    }
+//更改商品上下架状态
+//下架
+$("#removeGoods").click(function(){
+	var data = {};
+    $('.goods_list input[type=checkbox]').each(function(){
+    	if($(this).prop('checked')){
+    	   var value   = $(this).val();
+    	   data[value] = 0;
+    	   
+        }
+    	
+    })
+    $.post("http://www.orangesha.com/index.php/Home/Member_goods/statusChange",data,function(res){
+	        window.location.reload(); 	        
+	});   
+})
+
+//上架
+$("#addGoods").click(function(){
+	var data = {};
+    $('.goods_list input[type=checkbox]').each(function(){
+    	if($(this).prop('checked')){
+    	   var value   = $(this).val();
+    	   data[value] = 1;
+    	   
+        }  
+        
+    })
+    $.post("http://www.orangesha.com/index.php/Home/Member_goods/statusChange",data,function(res){
+	        window.location.reload(); 	        
+	});
+})
+    
+}    
+    
+/**
+ *显示分页
+ */
+function showPage(data){
+    var html = ["<div class='turn-page'>"];
+    if(data['prev']){
+	    html.push("<div class='left-btn change' data-p='"+ data['prev'] +"'><<上一页</div>");
+    }else{
+    	html.push("<div class='left-btn'><<上一页</div>");
+    }
+	for(var k in data['page']){
+		if(data['page'][k] == '.'){
+			html.push("<div class='omit'>...</div>");                  
+		}else
+		if(data['page'][k] != data['nowPage']){
+			html.push("<div class='page-btn change' data-p='"+ data['page'][k] +"'>" + data['page'][k] + "</div>");
+		}else{
+			html.push("<div class='page-btn active'>" + data['page'][k] + "</div>");
+		}                          
+	}
+	if(data['next']){
+	    html.push("<div class='right-btn change' data-p='"+ data['next'] +"'>下一页>></div>");
+	}else{
+        html.push("<div class='right-btn'>下一页>></div>");
+	}
+	
+	html.push("</div>");
+	html.push("<p class='to-page'>到第");
+	html.push("   <input class='go_number' type='text' value='1'>页<input type='button' value='确定' class='go'>");
+	html.push("</p>");
+	html = html.join('');
+	$(".section-bt").html(html);
+}
+
+$(".goods_list").on('click','.delete',function(){
+	if(confirm('确认删除!')){
+	    var id = $(this).attr('data-id');
+		$.post("{:U('Member_goods/goodsDelete')}",{"id":id},function(res){                
+	        alert(res['msg']);
+	        if(res['status']){
+	        	window.location.reload();
+	        }        
+	    }); 
+	}
+})
+    
+//全选
+$("#all_cb").click(function(){
+    if($(this).is(':checked')){
+        $(".goods_list input[type=checkbox]").prop("checked",true);
+    }else{
+        $(".goods_list input[type=checkbox]").prop("checked",false);
+    }
+})
+
+</script>
+</body>
+</html>
+
+    

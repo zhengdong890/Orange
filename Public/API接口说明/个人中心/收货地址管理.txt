@@ -1,0 +1,55 @@
+﻿收货地址列表页面 模板文件位置view/pc/MemberAddress/memberAddress
+页面数据
+{$address_json} 地址列表json数据
+
+ajax添加收货地址
+地址 : http://www.orangesha.com/index.php/Home/MemberAddress/memberAddress
+请求json参数 : {
+    'name'       : 姓名,
+    'telnum'     : 电话,
+    'address'    : 地址,
+    'address_xx' : 地址详情,
+    'telnum_by'  : ,
+    'province'   : 省编码,
+    'city'       : 市编码,
+    'area'       : 区编码
+}
+返回 {status : 0或者1 , msg : ''}
+
+
+收货地址页面 模板文件位置view/pc/MemberAddress/addressUpdate
+地址 : http://www.orangesha.com/index.php/Home/MemberAddress/addressUpdate?id=
+页面数据
+{$address['name']} 姓名
+{$address['telnum']} 电话
+{$address['address']} 地址
+{$address['address_xx']} 地址详情
+
+ajax修改收货地址
+地址 : http://www.orangesha.com/index.php/Home/MemberAddress/addressUpdate
+请求json参数 : {
+    'id'         : 收货地址id
+    'name'       : 姓名,
+    'telnum'     : 电话,
+    'address'    : 地址,
+    'address_xx' : 地址详情,
+    'telnum_by'  : ,
+    'province'   : 省编码,
+    'city'       : 市编码,
+    'area'       : 区编码
+}
+返回 {status : 0或者1 , msg : ''}
+
+ajax删除收货地址
+地址 : http://www.orangesha.com/index.php/Home/MemberAddress/addressDelete
+请求json参数 : {
+    id : 收货地址id
+}
+返回 {status : 0或者1 , msg : ''}
+
+ajax设置默认收货地址
+地址 : http://www.orangesha.com/index.php/Home/MemberAddress/addressUse
+请求json参数 : {
+    id : 收货地址id
+}
+返回 {status : 0或者1 , msg : ''}

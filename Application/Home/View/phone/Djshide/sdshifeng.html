@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>师德师风</title>
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/index.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/rest.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/common.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/liner.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/djshide/partyEthics.css" />
+		<script type="text/javascript" src="__PUBLIC__/phone/js/jquery.js" ></script>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/myscript.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/phone/js/focus.js"></script>
+	</head>
+	<body>
+	<div class="wrp">
+						<!--顶部-->
+			<include file="Public:header" />
+			<!-- 顶部结束 -->
+			<div class="mainWrap relative clearfix" style="margin-bottom: 30px;">
+				<section class="header-main">
+					<ul class="navs clear">
+						<span class="slider"></span>
+						<li><a href="../partyEthics/policy.html" class="navs-item">政策法规</a></li>
+						<li><a href="../partyEthics/dynamic.html">党建动态</a></li>
+						<li><a href="../rainbowResearch/subject.html">课题研究</a></li>
+						<li><a href="../partyEthics/trade.html">牵手发展</a></li>
+						<li><a href="../partyEthics/morality.html">师德师风</a></li>
+						<li><a href="../partyEthics/1eague.html">团支部</a></li>
+					</ul>
+				</section>
+				<div class="detailContent clearfix">
+					<div class="column_R">
+						<div class="mainContent">
+							<div class="introTit clearfix">
+								<div class="introTitImg" style="background-image:url(__PUBLIC__/phone/images/small.jpg)"></div>
+								<h2>师德师风</h2>
+							</div>
+						</div>
+					</div>
+					<div class="content-wrap clearfix">
+						<div class="cont_top">
+							<ul class="lecturer-list clear">
+								<volist name="data" id="v">
+										<li>
+											<a><img src="__PUBLIC__/phone/images/partyEthics/chenyuting.png"></a>
+											<div class="lecturer-detail">
+												<div class="lecturer">
+													<h2>{$v['title']}</h2>
+													<h3>讲师格言:</h3>
+													<p class="text-mb">{$v['description']}</p>
+													<h3>讲师特色:</h3>
+													<p class="text-mb">{$v['content']}</p>
+										<!-- 			<p class="introduce">中国倡导“家文化”第一人；湖南百姓通谱网络科技有限公司董事长</p> -->
+												</div>
+											</div>
+										</li>
+							</volist>
+							</ul>
+							<p id="PageInfo" class="page">
+										{$page}
+							</p>
+						</div>
+				    </div>
+				</div>		
+			</div>
+			<!--低部-->
+			<include file="Public:footer" />
+			<!-- 低部结束 -->
+		</div>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/common.js" ></script>
+	</body>
+</html>

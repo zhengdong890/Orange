@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="description" content="" />
+<style>    
+*{padding:0; margin:0;font-size:16px;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0} 
+#add{position:fixed;width:100%;height:100%;z-index:9999;background:rgba(0,0,0,0.3);display:none} 
+#add ul{width:800px;height:400px;margin:0 auto;margin-top:300px;background:white;}   
+#add table{width:100%;border-top:1px solid #E7E9F3;margin:30px auto;float:left}
+#add table tr td{border-left:1px solid #E7E9F3;border-bottom:1px solid #E7E9F3;font-size:20px;padding:10px;font-size:14px;}   
+
+#main .main_h{width:100%;height:40px;float:left;margin-top:20px;color:black;border-bottom:1px solid #dfdfdf}
+.main_h a{height:20px;float:left;margin-left:20px;padding:5px;border:1px solid #E6E7EC;background:#F4F5F9;border-radius:4px;color:black}
+.main_h span{line-height:40px;}
+#main .table_1{width:100%;height:auto;float:left}
+.table_1 table{float:left;margin-top:20px;}
+.table_1 table input{width:500px;height:24px;border-radius:3px;border:1px solid black;}
+.table_1 table textarea{width:500px;height:160px;border-radius:3px;border:1px solid black;}
+.table_1 table td img{max-width:250px}
+.table_1 table td{padding-right:30px;padding-top:10px}
+.table_1 table button{border:0px;font-size:16px;background:#44B549;color:white;padding:5px;border-radius:2px;float:left}
+.table_1 table td ul{width:300px;height:auto;border:1px solid red;float:left;border-radius:4px;}
+.table_1 table td ul li{width:100%;height:100px;float:left}   
+.table_1 table td ul li img{width:100px;height:80px;float:right;margin-top:10px;margin-right:10px} 
+.table_1 table td ul li p{float:left;width:180px;height:80px;margin-top:10px;margin-left:10px;}     
+.table_1 table td ul .li{height:160px;} 
+.table_1 table td ul .li a{display:block;width:280px;height:140px;float:left;margin-left:10px;margin-top:10px;position:relative} 
+.table_1 table td ul .li a img{width:280px;height:140px}   
+.table_1 table td ul .li a p{position:absolute;bottom:0;width:100%;height:26px;background:rgba(0,0,0,0.3);line-height:26px;}    
+#main .table_2{width:100%;height:auto;float:left;display:none}
+.table_2 table{width:100%;border-top:1px solid #E7E9F3;margin:30px auto;float:left;}
+.table_2 table tr{background:#FCFCFC}
+.table_2 table tr:hover{background:#F1FCEA}   
+.table_2 table tr:first-child{background:#F4F5F9} 
+.table_2 table tr td{border-left:1px solid #E7E9F3;border-bottom:1px solid #E7E9F3;font-size:20px;padding:10px;font-size:14px;}
+.table_2 table tr .td{border-left:0px}
+.table_2 table td img{max-width:150px}
+.table_2 table td a{display:block;margin-left:10px;float:left;padding:5px;background:#44B549;border-radius:4px;color:white;font-size:14px}     
+#page{width:100%;height:auto;float:left}
+#page li{float:right}
+#page li a{display:block;float:left;height:22px;padding:4px;border:1px solid #dfdfdf;margin-left:5px;line-height:22px;}
+#page li span{display:block;float:left;height:22px;padding:4px;border:1px solid #dfdfdf;margin-left:5px;line-height:22px;}
+#page li p{float:left;padding:4px;height:22px;line-height:22px;margin-left:5px;}
+.btn{display:block;float:left;padding:6px;margin-left:10px;background:#D5D5D5;border-radius:2px;}
+</style>
+</head>
+    <body>
+    <div id="add">
+       <ul>
+       <table cellspacing="0">
+              <tr>
+                  <td class='td'>标题</td>
+                  <td>关键词</td>
+                  <td>操作</td>
+              </tr> 
+              <volist name="list" id="v">
+               <tr>
+                   <td class='td'>{$v.title}</td>
+                   <td>{$v.keyword}</td>	                    
+                   <td><a href="javascript:add({$v['id']})">选中</a></td>
+               </tr>
+              </volist>                                 
+        </table>
+        </ul>
+    </div>
+    <div id="wraper">   
+          <div id="main"> 
+             <div class="main_h">
+               <span>多图文回复</span>                                    
+             </div>
+             <div class="main_h">
+               <a href='#'><span style="line-height:20px">添加多图文回复</span></a> 
+               <a href='#'><span style="line-height:20px">多图文回复列表</span></a>                                   
+             </div>
+             <div class="table_1">                     
+	             <table cellspacing="10">                                                            
+	                     <tr>
+	                            <td><span>关键词:</span></td>
+	                            <td><input type="text" name="keyword" value=""></input></td>
+	                     </tr> 
+	                     
+	                     <tr>
+	                            <td><span>图文消息：</span></td>
+	                            <td><a class='btn' href='#' style="margin-left:0;background:#44B549">添加图文消息</a><a class='btn'>清空重选</a></td>
+	                     </tr>  
+	                     <tr>
+	                            <td></td>
+	                            <td>
+	                               <ul>
+	                                  <li class='li'>
+	                                       <a>
+	                                           <img style="margin-top:0;margin-right:0" src="__PUBLIC__/admin_images/oid.jpg"></img>
+	                                           <p style="margin-left:0">简介</p>
+	                                       </a>
+	                                  </li>
+	                               </ul>
+	                            </td>
+	                     </tr>                                                                                                                          		                                            
+	                     <tr><td></td><td><button>保存</button><a href="{:U('image_text')}" class='btn'>取消</a></td></tr>
+	             </table>
+             </div>
+             <div class="table_2">
+	             <table cellspacing="0">  
+	                    <tr>                                                            
+	                      <td class='td'>编号</td>
+	                      <td>关键词</td>
+	                      <td>绑定图文消息标题</td>
+	                      <td>匹配类型</td>
+	                      <td>更新时间</td>
+	                      <td>操作</td>
+	                    </tr>  
+	                    <volist name='info' id='v'>
+	                      <tr>                                                            
+	                      <td class='td'>{$v.id}</td>
+	                      <td>{$v.keyword}</td>
+	                      <td>绑定图文消息标题</td>
+	                      <td><if condition="$v['type'] eq 2">完全匹配<else/>包含匹配</if></td>
+	                      <td>{$v.time|date="Y-m-d H:i:m",###}</td>
+	                      <td><a href="{:U('updateimage_texts',array('id'=>$v['id']))}">编辑</a><a href="javascript:deleteimgtexts({$v['id']})">删除</a></td>
+	                    </tr>
+	                    </volist>   
+	             </table>
+	             <ul id="page"><li>{$page}</li></ul>
+             </div> 
+         </div>
+    </div>	
+    </body>
+    <script type="text/javascript">
+       var allid=Array();
+       var arr=Array();
+       function add(id){
+    	   allid.push(id);
+    	   arr=JSON.stringify(allid); 
+    	   $.post("{:U('selectimage_texts')}",{"arr":arr},function(res){
+    		   $("#add").slideUp(500);
+    		   $(".table_1 td ul").html(res);
+	       })
+       }
+       
+       $(".btn").eq(0).click(function(){
+    	   $("#add").slideDown(500);
+       })
+       
+       $("button").click(function(){
+    	   var keyword=$("input[name='keyword']").val();
+    	   $.post("{:U('addimage_texts')}",{"arr":arr,"keyword":keyword},function(res){
+    		  alert(res);
+    		  window.location.reload();
+	       })
+       })
+       
+       $(".main_h a").eq(1).click(function(){
+    	  $(".table_1").css('display','none');
+    	  $(".table_2").css('display','block');
+       })
+       
+        $(".main_h a").eq(0).click(function(){
+    	  $(".table_1").css('display','block');
+    	  $(".table_2").css('display','none');
+       })
+       
+       function deleteimgtexts(id){
+    	   if(confirm('确认删除?')){ 
+	    	   $.post("{:U('deleteimage_texts')}",{"id":id},function(res){
+	    		   alert(res);
+	    		   window.location.reload();
+		       })
+    	   }
+       }
+    </script>
+</html>

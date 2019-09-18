@@ -1,0 +1,335 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="description" content="" />
+<style>
+html{font-size:62.5%}
+*{font-size:16px;font-family:Arial,Microsoft YaHei,\\9ED1\4F53,\\5B8B\4F53,sans-serif}
+*,li,ul{padding:0;margin:0}
+li,ul{list-style:none}
+a,a:hover{text-decoration:none}
+a:hover{border:0}
+button,input,select,textarea{outline:none}
+textarea{resize:none}
+#container{width:98%;margin-left:1%}
+#container,#container #main{height:auto;float:left;padding-bottom:10px}
+#container #main{width:100%;border:1px solid #d7d7d7;margin-top:5px}
+
+#Crumbs{width:100%;height:40px;border:1px solid #d7d7d7;line-height:40px;margin-top:5px;float:left}
+#Crumbs a{padding-left:10px}
+#Crumbs .btn{width:auto;padding:0 5px;height:30px;float:right;display:block;background:red;line-height:30px;color:#fff;border-radius:5px;font-size:14px;margin-right:20px;margin-top:5px}
+
+.tableList{margin:0 auto;width:100%}
+.tableList tr{background:#fff}
+.tableList tr:hover{background:#f1fcea}
+.tableList tr:first-child{background:#f4f5f9}
+
+.tableList tr td,th{border-left:1px solid #e7e9f3;border-bottom:1px solid #e7e9f3;font-size:20px;padding:10px;font-size:14px;padding-right:30px;padding-top:10px}
+.tableList tr .table_td{text-align:center}
+.tableList tr .table_td span{float:right}
+
+.tableList tr .tree_text.level_2{color:red;}
+.tableList tr .tree_text.level_3{color:blue;}
+.tableList tr .tree_text.level_4{color:#FF34B3;}
+.tableList tr .tree_show_icon{font-size:20px;}
+
+.tableList .table_handle{width:auto;text-align:center}
+.tableList .table_handle div{width:50px;height:21px;margin:0 auto}
+.tableList .table_handle div a{width:21px;height:21px;display:block;margin-left:4px;float:left}
+.tableList .table_handle .table_handle_a{color:#000;text-decoration:none}
+.tableList .table_handle .table_handle_a:hover{color:pink;text-decoration:none}
+.tableList tr .table_td .table_td_text{max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:clip;font-size:14px}
+.tableList input[type=text] {
+    width: 30px;
+    height: 24px;
+    border-radius: 3px;
+    border-bottom: 1px solid #e3e9ef;
+    border-top: 1px solid #abadb3;
+    border-left: 1px solid #e2e3ea;
+    border-right: 1px solid #dbdfe6;
+    text-align: center;
+}
+
+.page{width:96%;height:auto;float:left;margin-top:10px;background:#fff;margin-left:2%}
+.page ul{width:auto;float:left;height:auto;border:1px solid #ddd;border-radius:4px}
+.page ul select{width:auto;height:28px;float:left;margin-left:6px;margin-right:6px;margin-top:2px;border-radius:4px}
+.page ul input{width:40px;height:32px;border:0;float:left;border-left:1px solid #ddd}
+.page ul a{display:block;width:auto;height:32px;float:left;padding:0 7px;line-height:32px;border-left:1px solid #ddd;color:#99999c;font-size:1.4rem}
+.page ul .now,.page ul a:hover{background:pink;color:#fff}
+.page ul p.total{width:auto;height:32px;float:left;line-height:32px;font-size:1.4rem}
+</style>
+</head>
+<body>
+<div id="container">
+    <div id="Crumbs">
+           <a>后台管理中心</a>-><a>分类列表</a>
+    </div>     
+    <div id="main">
+        <table cellspacing="0" class="tableList">
+	          <thead>
+	          <tr class="code_0">
+	              <th class='table_td'>分类名称</th>
+	              <th class='table_td'>是否显示</th>
+	              <th class='table_td'>排序</th>
+	              <th class='table_td'>品牌管理</th>
+	              <th class='table_td'>单位管理</th>
+	              <th class='table_td'>单位-单位管理</th>
+	              <th class='table_td'>分类级数</th>
+	              <th class='table_td'>操作</th>
+	          </tr>
+	          </thead>
+	          <tbody>
+	          </tbody>                        
+	    </table>
+    </div>
+</div>	
+</body>
+<script type="text/javascript">
+/*
+ *表格分类树
+ * */
+(function(w){
+var add_url    = '{:U('categoryAdd')}',
+    update_url = '{:U('categoryUpdate')}',
+    attr_url   = '{:U('Attr/attrList')}',
+    unit_url   = '{:U('Mall_category/unitUpdate')}',
+    unit_unit_url = '{:U('Mall_category/unitUnitUpdate')}',
+    attr_allo_url = '{:U('Mall_category/attrAllocation')}',
+    __is_show  = [],//记录当前层级打开状态
+    __data     = [],//分类树形结构
+    __all_data = [],//所有数据
+    __tag      = {
+    	'1' : '',
+        '2' : '&nbsp;&nbsp;&nbsp;&nbsp;----&nbsp;',
+        '3' : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----&nbsp;',
+        '4' : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----&nbsp;'
+    },
+    __status   = [];//记录每行当前的状态 	    
+
+    function appenChildren(id , data){
+		if(data.length == 0) return;
+		data       = arrayAllCloumn(data , 'id');
+		__all_data = arrayMerge(__all_data , data);
+		var level     = parseInt($('.code_' + id).attr('data-level'));
+		__data[id]    = data,
+		__is_show[id] = true;	
+		data.sort(function(x, y){
+			return (x.sort - y.sort);
+		});
+		var html = createHtml(data , level);
+		$(id ? '.code_' + id : "tbody").after(html);
+		$('.code_' + id).find('.show').text('-');
+    }
+
+    function __sort(){
+
+    }
+
+	/*
+	 * 检测该id下是否已经存在下级数据
+	 * */     
+    function checkId(id){
+        return !!__data[id];
+    }
+
+	/*
+	 * 更改子级状态
+	 * */    
+    function changeChildrenStatus(id){
+    	var child_ids = getChildrenId(id);
+    	//当前为显示 则需要隐藏 当前为隐藏 则需要显示
+    	if(!!__is_show[id]){
+		    //下一级状态设为隐藏
+	    	for(var k in __data[id]){
+	    		__status[__data[id][k]['id']] = false;
+	    	} 
+		    child_ids.map(function(v , k){
+		        $(".code_" + v).css('display','none');
+		    })     
+		    __is_show[id] = false;//当前层次标记为隐藏
+		    __data[id] && $('.code_' + id).find('.show').text('+');    		
+    	}else{
+	    	//下一级状态设为显示
+	    	for(var k in __data[id]){
+	    		__status[__data[id][k]['id']] = true;
+	    	} 
+		    child_ids.map(function(v , k){
+		       $(".code_" + v).css('display' , __status[v] ? '' : 'none');
+		    });
+		    __is_show[id] = true;//当前层次标记为显示
+		    __data[id] && $('.code_' + id).find('.show').text('-');    		
+    	} 
+    }
+    
+	/*
+	 * 获取所有子级id
+	 * */
+	function getChildrenId(id){
+		var arr = [];
+	    for(var k in __data[id]){
+	    	var now_id = __data[id][k]['id'];
+	    	if(__data[now_id]){
+	            var return_arr = getChildrenId(now_id);
+	                arr.push.apply(arr,return_arr);
+	    	}    	
+	        arr.push(__data[id][k]['id']);   
+	    }
+	    return arr;
+	}
+    
+	/*
+	 * 删除一个子类
+	 * */
+    function removeNode(id){ 
+        id && (
+        pid = __all_data[id]['pid'],
+        delete __all_data[id],
+        delete __data[pid][id],
+        $(".code_" + id).remove()
+        )
+    }
+
+	/*
+	 * 创建html
+	 * */
+	function createHtml(res , level){
+		!level && (level = 0);
+		level++;
+		var html = '';
+		res.map(function(v){
+	    	__status[v['id']] = true;//默认当前分类为显示
+	        html = html 
+            + '<tr class="code_' + v['id'] + '" data-id="' + v['id'] + '" data-level="' + level + '">'
+            + '    <td>'+ __tag[level]
+            + '        <a href="javascript:;" class="tree_show_icon show show_' + v['id'] +'">+</a>'
+            + '        <span class="tree_text level_' + level + '">' + v['cat_name'] + '</span>' 
+            + '    </td>' 
+            + '    <td class="table_td"><img src="__PUBLIC__/admin_images/yes.gif"/>' + '</td>'
+            + '    <td class="table_td">' + v['sort'] + '</td>'       
+            + '    <td class="table_td">'
+            + '        <a class="table_td brandSonUpdate" href="javascript:;">同步到子类</a>'
+            + '    </td>' 
+            + '    <td class="table_td">'
+            + '        <a class="table_td synchroUnit" href="javascript:;">' 
+            +           (level == '3' ? '同步到子类' : '') 
+            + '        </a>'
+            + '    </td>'
+            + '    <td class="table_td">'
+            + '        <a class="table_td synchroUnitUnit" href="javascript:;">' 
+            +           (level == '3' ? '同步到子类' : '') 
+            + '        </a>'
+            + '    </td>' 
+            + '    <td class="table_td">'
+            + '        <a class="table_td levelUpdate" href="javascript:;">' 
+            +          '更新'
+            + '        </a>'
+            + '    </td>'                              
+	        + '    <td class="table_handle">' 
+	        + '        <a href="' + add_url + '&id=' + v['id'] + '">添加分类</a> |'
+	        + '        <a href="' + update_url + '&id=' + v['id'] + '">编辑</a> |'  
+	        +          (level == '3' || level == '4' ? ('<a href="' + unit_url + '&id=' + v['id'] + '"' + 'target="_blank">单位管理</a> |') : '')
+	        +          (level == '3' || level == '4' ? ('<a href="' + unit_unit_url + '&id=' + v['id'] + '"' + 'target="_blank">单位值-单位</a> |') : '')
+	        + '        <a href="javascript:;" class="delete">删除</a>'              
+	        + '    </td>'        
+	        + '</tr>';			
+		})	
+	    return html;
+	}
+
+	w.tree = {
+		a   : appenChildren,
+		c   : changeChildrenStatus,
+		r   : removeNode,
+		h   : checkId
+	};
+    
+    function arrayAllCloumn(data_ , field){
+		var data = [];
+		data_.map(function(v){
+			data[v[field]] = v;
+
+		});
+		return data;    	
+    }
+
+    function arrayMerge(data1 , data2){
+        data2.forEach(function(v , k){
+            data1[k] = v;
+        })
+        return data1;
+    }
+})(window);
+
+	
+
+function requestData(id){
+	$.post('{:U('categoryList')}' , {id : id} , function(res){
+		tree.a(id , res)
+	})    
+}
+requestData(0);
+
+$("table").on('click' , '.show' , function(){
+	var id    = $(this).parents('tr').attr('data-id');
+	if(!tree.h(id)){			
+		requestData(id);     
+    }else{
+    	tree.c(id); 
+    }
+})
+
+/*删除分类*/
+$("table").on('click' , '.delete' ,function(){
+	var id = $(this).parents('tr').attr('data-id'),
+	 _this = this;
+    confirm('确认删除?') && ( 
+    $.post("{:U('categoryDelete')}",{"id":id},function(res){                
+        alert(res.msg);
+        res.status != 0 && tree.r(id);//移除删掉的分类
+    })) 
+})
+
+/*品牌同步到子类*/
+$("table").on('click' , '.brandSonUpdate' ,function(){
+	var id = $(this).parents('tr').attr('data-id'),
+	 _this = this;
+    confirm('确认同步?') && ( 
+    $.post("{:U('brandSonUpdate')}",{"id":id},function(res){                
+        alert(res.msg);
+    }))  
+})
+
+/*单位同步到子类*/
+$("table").on('click' , '.synchroUnit' ,function(){
+	var id = $(this).parents('tr').attr('data-id'),
+	 _this = this;
+    confirm('确认同步?') && ( 
+    $.post("{:U('unitSonUpdate')}",{"id":id},function(res){                
+        alert(res.msg);
+    }))  
+})
+
+/*单位-单位同步到子类*/
+$("table").on('click' , '.synchroUnitUnit' ,function(){
+	var id = $(this).parents('tr').attr('data-id'),
+	 _this = this;
+    confirm('确认同步?') && ( 
+    $.post("{:U('unitUnitSonUpdate')}",{"id":id},function(res){                
+        alert(res.msg);
+    }))  
+})
+
+/*当前分类的级数更新*/
+$("table").on('click' , '.levelUpdate' ,function(){
+	var id = $(this).parents('tr').attr('data-id'),
+	 _this = this;
+    confirm('确认更新?') && ( 
+    $.post("{:U('levelUpdate')}",{"id":id},function(res){                
+        alert(res.msg);
+    }))  
+})
+</script>
+</html>

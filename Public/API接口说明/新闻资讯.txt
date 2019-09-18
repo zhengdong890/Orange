@@ -1,0 +1,14 @@
+获取新闻资讯
+地址 : http://www.orangesha.com/index.php/Home/News/getNewsList
+参数 : {
+    firstRow : '开始条数',
+    listRows : '每页显示条数'
+}
+返回 : {
+    data:[
+        {id:id,title:标题,description:描述,update_time:发布时间},
+        {},..........,
+        {}
+    ],
+    total : 新闻总数量
+}

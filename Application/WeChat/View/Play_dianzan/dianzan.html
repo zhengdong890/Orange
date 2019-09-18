@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script> 
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<title>美韵舞蹈助力活动</title>
+<style>
+html{font-size:62.5%;} 
+*{padding:0; margin:0;font-family:"方正黑体简体";font-style:normal;font-size:1.6rem;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0} 
+#tishifx{position:absolute;width:100%;height:140px;z-index:9999;right:0;top:0;display:none;background:rgba(0,0,0,0.5);}
+#tishifx img{max-width:80%;max-height:140px;float:right;margin-right:5%}    
+#wraper{width:100%;height:auto;float:left;}
+#header{width:100%;height:auto;float:left;}
+#header img{max-width:100%}   
+#main{width:60%;height:auto;float:left;padding-left:20%;padding-right:20%;background:#D52B5A;padding-bottom:20px;padding-top:20px}
+#main ul{width:100%;height:auto;float:left;}
+#main ul .zhuli{width:100%;height:auto;float:left;text-align:center;margin-top:10px;color:white}
+#main ul .headimg{width:26%;height:63px;float:left;}
+.headimg p{width:100%;height:63px;display:table-cell;vertical-align:middle;text-align:center;}
+.headimg p img{max-width:auto;max-height:63px;border:1px solid white}
+#main ul .youhui_img{width:36%;height:63px;float:right;}
+.youhui_img p{width:100%;height:50px;display:table-cell;vertical-align:middle;text-align:center;}
+.youhui_img p img{max-width:auto;max-height:63px;border:1px solid white}
+#main ul .data{width:74%;height:50px;float:left;}
+ .data p{width:100%;height:auto;float:left;font-size:1.4rem;}
+#main .btn{width:100%;height:auto;float:left;margin-top:10px}
+.btn a{display:block;width:50px;height:50px;float:left;background:url("__PUBLIC__/images/button1.png");background-size:100% 100%;}
+.btn a:nth-child(2){background:url("__PUBLIC__/images/button.png");background-size:100% 100%;}
+.btn a span{display:block;width:38px;height:26px;font-size:1.3rem;text-align:center;margin-top:10px;margin-left:6px;color:white}
+#footer{width:100%;height:auto;float:left;}  
+#footer img{max-width:100%;max-height:1200px;} 
+.wx{width:100%;height:auto;float:left;text-align:center;margin-top:15px} 
+.wx p{width:100%;height:auto;text-align:center;color:white;margin-top:10px}   
+.wx img{max-width:60%;max-height:auto;}   
+</style>
+<!-- www.orangesha.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?54f6f54d47704101dc27b337de5fd6c3";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+ <div id="tishifx">
+   <img src="__PUBLIC__/images/tishifx.png"></img>
+ </div>
+<div id="wraper">
+        <div id="header">
+          <img src="__PUBLIC__/images/header.png"/>
+        </div>
+		<div id="main">
+		     <ul> 
+		        <if condition="($is_pguanzhu eq 'y') and ($is_showbtn eq 'y')">  		     	  
+		            <li class="headimg"><p><img src="{$fansmesg['headimgurl']}"/></p></li>
+		            <li class="youhui_img"><p><img src="__PUBLIC__/images/Coupon.png"/></p></li>
+			        <if condition="$is_me eq 'y'">
+			          <li class="zhuli">我的助力数:{$number}</li>
+			          <li class="zhuli">拥有免费饮品券数量:{$data['youhui_number']}</li>
+			          <li class="zhuli"><a href="javascript:youhui_add()">点击兑换优惠券
+			          剩余可兑换点数:{$data['sy_number']})</a></li>
+			        <else/>
+			          <li class="zhuli">{$fansmesg['nickname']}的助力数:{$number}</li>
+			        </if>
+		        </if>
+		        <li class="btn">
+		          <a style="margin-left:10px;" href="javascript:dianzan()">
+		          <span style="color:#CD5322"><if condition="($is_showbtn eq 'y') and ($is_me eq 'y')">帮我助力<else/>帮TA助力</if></span></a> 
+		          <a style="float:right" href="javascript:add()"><span>我要参加</span></a>
+		        </li>
+		        <li class="wx">
+		           <img src="__PUBLIC__/images/meiyunwx.jpg"/>
+		           <p>长按二维码关注我们!</p>
+		         </li>
+		     </ul>
+	  </div>
+	  <div id='footer'>
+	      <img src="__PUBLIC__/images/footer.png"/>
+	  </div>
+</div>
+</body>
+<script type="text/javascript">
+var w=$(document.body).width();
+$(document).ready(function(){  	                                         
+	  var a="<?php echo $is_me;?>";
+	  if(a=='y'){
+		  var t1=setTimeout(function(){
+			  autoplay();
+			  clearTimeout(t1);
+			},1000);		  
+	  }
+})  
+
+function autoplay(){
+    $('html, body').animate({scrollTop:0}, 'slow');  
+	$("#tishifx").css('display','block');
+	var t=setTimeout(function(){
+		$("#tishifx").css('display','none');
+		clearTimeout(t);
+	},5000);
+}
+
+/*兑换优惠卷*/
+function youhui_add(){  
+	$.post("{:U('youhui_add')}",{},function(res){	
+           alert(res);
+           if(res=='兑换成功'){
+        	   window.location.reload();
+           }	     
+	});
+ }
+ 
+function add(){   
+	$.post("{:U('dianzan')}",{},function(res){ 
+         alert(res);
+         if(res=="参加成功"){
+                window.location.href="{:U('dianzan')}";	
+         }else
+         if(res=="请您关注后再试"){
+             	window.location.href="http://mp.weixin.qq.com/s?__biz=MzI2NDAzODc5OQ==&mid=209013611&idx=1&sn=f819b8ef9337ccafbe87cbf9e336e50e#rd";		
+         }      
+	});
+}
+
+function dianzan(){   
+	$.post("{:U('dianzan_1')}",{},function(res){	
+        alert(res);
+        if(res=="助力成功"){
+        	 window.location.reload();
+        }else
+        if(res=="您暂未关注,无法参加助力"){
+        	window.location.href="http://mp.weixin.qq.com/s?__biz=MzI2NDAzODc5OQ==&mid=209013611&idx=1&sn=f819b8ef9337ccafbe87cbf9e336e50e#rd";		
+        }
+	});
+}
+     
+     wx.config({
+    		debug: false,
+    	    appId: '<?php echo $jssdk["appId"];?>',
+    	    timestamp: '<?php echo $jssdk["timestamp"];?>',
+    	    nonceStr: '<?php echo $jssdk["nonceStr"];?>',
+    	    signature: '<?php echo $jssdk["signature"];?>',
+    	    jsApiList: [
+    	       'onMenuShareAppMessage',
+    	       'onMenuShareTimeline',
+    	       'onMenuShareQQ'
+    	      // 所有要调用的 API 都要加到这个列表中
+    	    ]
+    });
+
+    	wx.checkJsApi({
+    	    jsApiList: ['onMenuShareAppMessage'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+    	    success: function(res){
+    	        // 以键值对的形式返回，可用的api值true，不可用为false
+    	        // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+    	    }
+    	});
+
+    	wx.ready(function () {
+    	   //分享给朋友    
+    	   wx.onMenuShareAppMessage({
+    	       title: '美韵舞蹈助力活动开始啦！', // 分享标题
+    	       desc: "<?php echo $jssdk['desc'];?>", // 分享描述
+    	       link: "<?php echo $jssdk['url'];?>", // 分享链接
+    	       imgUrl: "<?php echo $jssdk['imgurl'];?>", // 分享图标
+    	       type: 'link', // 分享类型,music、video或link，不填默认为link
+    	       dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+    	       success: function () { 
+    	    
+    	       },
+    	       cancel: function () { 
+    	          // 用户取消分享后执行的回调函数
+    	       }
+    	   });
+    	   //分享到朋友圈
+    	   wx.onMenuShareTimeline({
+    	       title: '美韵舞蹈助力活动开始啦！', // 分享标题
+    	       link: "<?php echo $jssdk['url'];?>", // 分享链接
+    	       imgUrl: "<?php echo $jssdk['imgurl'];?>", // 分享图标
+    	       success: function () {
+    	    	   
+    	       },
+    	       cancel: function () {
+    	    	  // 用户取消分享后执行的回调函数
+    	       }
+    	   });
+    	   //QQ
+    	   wx.onMenuShareQQ({
+    	       title: '美韵舞蹈助力活动开始了', // 分享标题
+    	       desc: "<?php echo $jssdk['desc'];?>", // 分享描述
+    	       link: "<?php echo $jssdk['url'];?>", // 分享链接
+    	       imgUrl: "<?php echo $jssdk['imgurl'];?>", // 分享图标
+    	       success: function () { 
+    	          // 用户确认分享后执行的回调函数
+    	       },
+    	       cancel: function () { 
+    	          // 用户取消分享后执行的回调函数
+    	       }
+    	   });
+    	   //微博
+    	   wx.onMenuShareWeibo({
+    	       title: '美韵舞蹈助力活动开始了', // 分享标题
+    	       desc: "<?php echo $jssdk['desc'];?>", // 分享描述
+    	       link: "<?php echo $jssdk['url'];?>", // 分享链接
+    	       imgUrl: "<?php echo $jssdk['url'];?>", // 分享图标
+    	       success: function () { 
+    	          // 用户确认分享后执行的回调函数
+    	       },
+    	       cancel: function () { 
+    	           // 用户取消分享后执行的回调函数
+    	       }
+    	   });
+    	 }); 
+    </script>
+</html>

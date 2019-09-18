@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:wb="http://open.weibo.com/wb>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script type="text/javascript" src="{:C('STATIC_URL')}/js/jquery.js" ></script>
+  <script type=text/javascript src="{:C('STATIC_URL')}/cnt.php"></script>
+  <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+  <style>
+  *{padding:0; margin:0;font-family:"方正黑体简体";font-style:normal;font-size:16px;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0}
+html{height:100%;}   
+body{height:100%;background:linear-gradient(to top,#023678,#067EB5);}
+    /******遮罩层样式*******/
+#cover{position:fixed;z-index:9999;top:0;left:0;display:none;width:100%;height:100%;opacity:0.5;background:#000 none repeat scroll 0% 0%;}
+/********遮罩层******/
+
+   /****登录样式****/
+   a:hover{text-decoration:none;border: 0}
+   #login{width:288px;display:block;height:500px;padding:0 30px;margin:0 auto;padding-top:20px;background:white;border-radius:0px;margin:0 auto;z-index: 999999;position:absolute;top:10%;left:35%; border-radius : 5px; }
+#login span.login{display:block;text-align: center;margin-top:40px;width:288px;}
+#login span.login strong{margin-left : 52px;}
+#login span.login a{float:right;}
+#login p{width : 100%; height :  32px ; line-height : 32px;margin-top : 20px; float : left ;}
+#login p b{display : inline-block ; width : 70px; font-size :  14px ; font-weight:  normal;  float : left;}
+#login img{max-width:100%;margin:0 auto;text-align:center;}
+#login input.input{width:180px;height: 30px ; background:#fff url("__PUBLIC__ /images/shouji.png") no-repeat -1px 0px;padding-left:10px;border:1px solid #ccc; float : left; text-align: left}
+#login div.wangjimima{width:100%;height:13px;line-height:13px;text-align:left;float:left;font-size: 13px;margin-top:20px;}
+#login div.wangjimima  span{margin-left:10px;display:inline-block;height:13px;vertical-align: top}
+#login input.pass{background:url("../images/lock.png") no-repeat;}
+.btn{width:100%;height:36px;text-align:center;float:left;line-height:36px;border-radius:2px;background:#999999;color:white;margin-top:20px}
+textarea{outline:none;resize:none;}
+.home_btn{margin-top : 20px; background : url({:C('STATIC_URL')}/images/btn_back.png) no-repeat 0 0 scroll; width : 50%; height : 32px;  line-height : 30px; border : none;}
+.home_btn:hover{background-position: 0px -33px;}
+/****登录****/</style>
+<!-- www.orangesha.com Baidu tongji analytics -->
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=1069584452" type="text/javascript" charset="utf-8"></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?54f6f54d47704101dc27b337de5fd6c3";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body  >
+         <!-- 登录框 -->
+           <div id="login">
+                            <form method="post" action="{:U('Index/login')}" style="text-align : center">
+                                   <img src="{:C('STATIC_URL')}/images/logo.gif"/>
+                                   <span class="login"><strong>登录</strong> <a href="{:U('Index/register')}"  style="text-decoration:underline;color:#FF93A1">注册</a> </span> 
+                                  <p><b>用户名：</b> <input type="text" class="input username"  name="username" placeholder="用户名"/></p>
+                                   <p> <b>密码：</b><input type="password" class="input  pass"  name="password" placeholder="密码"/></p>
+                                   <p><b>验证码：</b><input type="text"  name ="code" style="width : 79px; display : inline-block"  class="input" value=""><img src="{:U('code')}"  style="float : left; height : 120%; display : inline-block; width : 100px" onclick="javascript:shuaxin()" id="img"/></p>
+                                  <button class="home_btn" >立即登录1</button>
+								  <div id="wb_connect_btn"></div>
+								  <wb:login-button type="3,2" onlogin="login" onlogout="logout">登录按钮</wb:login-button>
+                                   <!-- <div class="wangjimima"><input type="checkbox" class="remeber"/><span>记住我</span><span ><a href="javascript:forget();"  style="color:#FF98A6;">忘记密码？</a></span></div> -->
+                             </form>
+            </div>
+        <!-- 登录 -->
+        <!-- 遮罩 -->
+        <div  id="cover"></div>
+        <!-- 遮罩 -->
+</body>
+<script>
+
+              function shuaxin(){
+       var verifyimg = $("#img").attr("src");
+       $("#img").attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
+  }
+  
+
+</script>
+</html>

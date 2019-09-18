@@ -1,0 +1,414 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/ueditor/ueditor.all.js"></script>
+<meta name="description" content="" />
+<style>
+*{padding:0; margin:0;font-size:16px;font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0} 
+   textarea{outline:none;resize:none;}
+/****内容样式****/  
+#content{width:98%;height:auto;float:left;margin-left:1%;}
+/****内容头部面包屑样式*****/
+#content #content_h{width:100%;height:40px;border:1px solid #D7D7D7;line-height:40px;margin-top:15px;float:left;}
+#content #content_h a{padding-left:10px}
+/****添加信息列表样式start****/   
+#content #content_m{width:100%;height:auto;border:1px solid #D7D7D7;padding-bottom:100px;margin-top:20px;float:left;}
+/****头部导航样式****/   
+#content_m_h{width:100%;height:40px;float:left;background:#EFEFEF}   
+#content_m_h a{display:block;width:90px;height:40px;float:left;text-align:center;line-height:40px;color:#787878;font-size:14px;} 
+#content_m_h a:nth-child(1){background:white;color:#192E32}   
+/****列表信息样式****/    
+#content_m #content_m_m{width:100%;height:auto;float:left;}
+#content_m_m form{width:100%;height:auto;float:left;}     
+#content_m table{width:100%;margin:0 auto;}    
+#content_m table td .isshow,.checkbox{width:20px;height:20px;float:left;}
+form input[type='text']{width:400px;height:20px;border-radius:3px;border-bottom:1px solid #E3E9EF;border-top:1px solid #ABADB3;border-left:1px solid #E2E3EA;border-right:1px solid #DBDFE6}
+form textarea{width:500px;height:160px;border-radius:3px;border-bottom:1px solid #E3E9EF;border-top:1px solid #ABADB3;border-left:1px solid #E2E3EA;border-right:1px solid #DBDFE6}
+.class{display:none;width:100%;}   
+.label{text-align:right;vertical-align:top;font-weight:bold;width:30%;font-size:14px;padding:4px 8px} 
+form td img{max-width:250px}
+form button{border:0px;background:#C43926;color:white;padding:5px;border-radius:4px;float:left;}
+#goodsattr table{width:100%}
+#attr table{width:100%}
+#extendattr input{margin-right:10px}
+
+.span_label{display:block;width:auto;height:auto;float:left;font-weight:bold;color:blue}
+.goods_attrgallery_del{display:block;height:40px;float:left;line-height:40px;margin-left:6px}
+/****上传按钮样式构造****/
+.btn_addimg{display:block;width:100px;margin-top:5px;color:white;position:relative;height:28px;line-height:28px;text-align:center;float:left;background:#C43926;border-radius:4px;}
+.btn_addimg input{width:100px;position:absolute;left:0;top:0;filter:alpha(opacity=50);-moz-opacity:0;-khtml-opacity:0;opacity:0;}
+/****表单图片****/
+form td .img{width:100px;height:auto;float:left;}
+form td .img img{max-width:100%;max-height:100px;float:left}
+/*相册属性样式*/
+.gallery{width:220px;height:300px;float:left;margin-left:20px;}
+.gallery:nth-child(1){margin-left:0}
+.gallery a{display:block;width:100px;margin-top:10px;margin-left:20px;position:relative;height:28px;line-height:28px;text-align:center;float:left;background:#C43926;border-radius:4px;color:white}
+.gallery a input{width:100px;position:absolute;left:0;top:0;filter:alpha(opacity=50);-moz-opacity:0;-khtml-opacity:0;opacity:0;}
+.gallery a:nth-child(3){margin-left:0}
+.gallery li{width:200px;height:200px;display:table-cell;vertical-align:middle;text-align:center;}
+.gallery li img{max-width:100%;max-height:200px}
+.gallery p{width:100%;height:auto;float:left}
+.gallery p input{width:220px}
+.gallery_add{display:block;width:160px;height:255px;float:left;margin-left:10px;border-radius:4px;text-align:center;line-height:255px}
+.btn{display:block;width:100px;margin-top:10px;color:white;position:relative;height:28px;line-height:28px;text-align:center;float:left;background:#C43926;border-radius:4px;}
+select{height:26px;}
+</style>
+</head>
+<body>          
+<div id="content">
+     <div id="content_h">
+          <a>后台管理中心</a>-><a>商品审核</a>
+     </div>
+     <div id="content_m">
+           <div id="content_m_h">
+               <a href="javascript:void(0)" style="margin-left:20px">通用信息</a>
+               <a href="javascript:void(0)">租期管理</a>
+               <a href="javascript:void(0)">扩展属性</a>
+               <a href="javascript:void(0)">商品相册</a>
+               <a href="javascript:void(0)">详细描述</a>
+               <a href="javascript:void(0)">审核</a>
+           </div>
+           <div id="content_m_m">
+		       <form id='form'>
+                  <input type="hidden" name="id" value="{$goods['id']}"></input>
+                  <!-- 商品通用信息start -->
+		              <div class="class" style="display:block">		                    	   
+ 		                  <table cellspacing="10">
+                                 <tr>
+                                        <td class="label">商品名称:</td>
+                                        <td>{$goods['goods_name']}</input>
+                                        <span class='error'></span>
+                                        </td>
+                                 </tr>
+                                 <tr>
+                                        <td class="label">商品货号:</td>
+                                        <td>{$goods['goods_code']}</td>
+                                 </tr>
+                                 <tr><td class="label">所属分类:</td>
+                                       <td>
+                                           <select name="cat_id">
+                                                <option value="0">请选择...</option>
+                                                <volist name="categorys" id="v">
+                                                   <if condition="$v['id'] eq $goods['cat_id']">
+                                                      <option value="{$v['id']}" style="text-indent:{$v['padding']}" selected='selected'>{$v['html']} {$v['cat_name']}</option>
+                                                   <else/>
+                                                      <option value="{$v['id']}" style="text-indent:{$v['padding']}">{$v['html']} {$v['cat_name']}</option>
+                                                   </if>
+                                                </volist>
+                                           </select>
+                                       </td>
+                                 </tr>
+                                 <tr><td class="label">商品品牌:</td>
+                                       <td>
+                                           {$brand_name}
+                                       </td>
+                                 </tr>
+                                 <tr>
+                                     <td class="label">商品区域:</td>
+                                     <td class='area_select'>
+                                       <volist name="area" id="v">
+                                           {$v['area_name']}&nbsp;
+                                       </volist>
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="label">商品价格:</td>
+                                    <td>{$goods['goods_price']}</td>
+                                 </tr>
+                                 <tr>
+                                        <td class="label">设备成色:</td>
+                                        <td>{$goods['sbcs']}</td>
+                                 </tr>
+                                 <tr>
+                                        <td class="label">设备厂家:</td>
+                                        <td>{$goods['sbcj']}</td>
+                                 </tr>
+                                 <tr>
+                                        <td class="label">运费:</td>
+                                        <td>{$goods['yunfei']}</td>
+                                 </tr>                                 
+                                 <tr >
+                                        <td class="label">押金:</td>
+                                        <td>{$goods['deposit']}</td>
+                                 </tr>
+                                 <tr >
+                                        <td class="label">保险金额:</td>
+                                        <td>{$goods['safest']}</td>
+                                 </tr>
+                                 <tr>
+                                        <td class="label">库存:</td>
+                                        <td>{$goods['goods_number']}</td>
+                                 </tr>
+                                 <tr>
+                                        <td class="label">排序:</td>
+                                        <td>{$goods['sort']}</td>
+                                 </tr>
+                                 <tr>
+                                        <td class="label">是否上架:</td>
+                                        <td>
+                                           <if condition="$goods['status'] eq '1'">是<else/>否</if>
+                                        </td>
+                                 </tr>
+                                 <tr>
+                                        <td class="label">描述:</td>
+                                        <td>
+                                          <textarea name="goods_describe">{$goods['goods_describe']}</textarea>
+                                        </td>
+                                 </tr>
+                                 <tr>
+                                        <td class="label">商品缩略图片:</td>
+                                        <td>
+                                        	<div class="img">
+                                        	   <img src="__ROOT__{$goods['goods_thumb']|substr=1}"/>                                    
+                                            </div> 
+                                        </td>
+                                 </tr>
+                                 <tr>
+                                        <td class="label">商品图片:</td>
+                                        <td>
+                                        	   <div class="img">
+                                        	      <img src="__ROOT__{$goods['goods_img']|substr=1}"/>                                             
+                                            </div> 
+                                        </td>
+                                 </tr>
+		                  </table>
+		              </div>
+		              <!-- 商品通用信息end -->
+                  <!-- 商品租期管理start -->
+                  <div class="class" style="display:none"> 
+                      <table cellspacing="10">
+                           <tr>
+                                  <td class="label">出租单位选择:</td>
+                                  <td>
+                                     <if condition="$goods['rent_dw'] eq '1'">月</if>
+                                     <if condition="$goods['rent_dw'] eq '2'">天</if>
+                                     <if condition="$goods['rent_dw'] eq '3'">时</if>
+                                     <if condition="$goods['rent_dw'] eq '4'">按数量(件)</if>
+                                  </td>
+                           </tr>
+                           <tr >
+                                  <td class="label rent_dw">最小出租月数:</td>
+                                  <td>{$goods['min_rent']}</td>
+                           </tr>
+                           <tr >
+                                  <td class="label rent_dw">最大出租月数:</td>
+                                  <td>{$goods['max_rent']}</td>
+                           </tr>
+                           <tr >
+                                  <td class="label rent_dw">区间优惠设置:</td>
+                                  <td class='on_rent'>
+                                        <volist name="goods_rent" id="v">
+                                        <div>                                               
+                                            {$v['start']} - {$v['end']}
+                                            价格:{$v['goods_rent_price']}
+                                        </div>
+                                        </volist>                   
+                                  </td>
+                           </tr>
+                      </table>
+                  </div>
+                  <!-- 商品租期管理end -->
+		              <!-- 商品扩展属性start -->
+                      <div class="class">
+	                      <table cellspacing="10">
+	                          <tr>
+	                             <td class="label">分类选择:</td>
+	                             <td>
+	                                 <select onchange="extendattr_html(this)" name="cat_filter_id">
+	                                   <option value="0">请选择</option>
+                                       <volist name="categorys" id="v">
+                                           <if condition="$goods['cat_filter_id'] eq $v['id']">
+                                           <option value="{$v['id']}" style="text-indent:{$v['padding']}" selected='selected'>{$v['html']} {$v['cat_name']}</option>
+                                           <else/>
+                                           <option value="{$v['id']}" style="text-indent:{$v['padding']}">{$v['html']} {$v['cat_name']}</option>
+                                           </if>
+                                       </volist>
+	                                 </select>
+	                             </td>
+	                          </tr>
+	                          <tr>
+	                             <td colspan="2" id="extendattr">
+	                               <table>
+	                               	   <volist name="extendattr" id="v">
+	                               	   <if condition="$v['level'] neq '1'">
+	                                   <tr>
+										   <td class='label'>{$v['attr_name']}:</td>
+										   <td>
+										        <if condition="$v['attr_input_type'] neq '2'">
+										           <input type='text' name="extendattr{$v['goods_extendattr_id']}" value="{$v['attr_value']}"></input>
+										        <else/>
+										        <if condition="$v['goods_extendattr_id'] neq ''">
+										            <select name="extendattr{$v['goods_extendattr_id']}">
+										        <else/>
+										            <select name="new_extendattr{$v['attr_id']}">
+										        </if>
+										            <option value='0'>请选择</option>
+										            <volist name="v['all_value']" id="v1">
+										             <if condition="$v1['attr_value'] eq $v['attr_value']">
+										                <option value="{$v1['attr_value']}" selected='selected'>{$v1['attr_value']}</option>
+										             <else/>
+										                <option value="{$v1['attr_value']}">{$v1['attr_value']}</option>
+										             </if>
+										            </volist>
+										        </select>										           
+										        </if>
+										   </td>
+	                                   </tr>
+	                                   <else/>
+										   <tr><td class='label' style='color:pink'>{$v['attr_name']}:</td><td></td></tr>    
+										   <volist name="v['level_1']" id="v1">
+										     <tr>
+										        <td class='label'>{$v1['attr_name']}</td>
+										        <td>
+											        <if condition="$v1['attr_input_type'] neq '2'">
+											           <input type='text' name="extendattr{$v1['goods_extendattr_id']}" value="{$v1['attr_value']}"></input>
+											        <else/>
+											        <if condition="$v1['goods_extendattr_id'] neq ''">
+											            <select name="extendattr{$v1['goods_extendattr_id']}">
+											        <else/>
+											            <select name="new_extendattr{$v1['attr_id']}">
+											        </if>
+											            <option value='0'>请选择</option>
+											            <volist name="v1['all_value']" id="v2">
+											             <if condition="$v2['attr_value'] eq $v1['attr_value']">
+											                <option value="{$v2['attr_value']}" selected='selected'>{$v2['attr_value']}</option>
+											             <else/>
+											                <option value="{$v2['attr_value']}">{$v2['attr_value']}</option>
+											             </if>
+											            </volist>
+											        </select>										           
+											        </if>
+										        </td>
+										     </tr>
+										   </volist> 
+									   </if> 
+	                                   </volist>
+	                               </table>
+	                             </td> 
+	                          </tr>	                              
+	                      </table> 
+                      </div>
+                      <!-- 商品扩展属性end -->
+                      <!-- 商品相册start -->  
+                      <div class="class"> 
+	                      <table cellspacing="10">
+	                             <tr>
+	                                 <td></td>
+	                                 <td style="width:100%;">
+	                                  <div style="width:100%;height:auto;float:left" class='gallery_td'>
+	                                     <volist name="goods_gallery" id="v">
+	                                     <ul class="gallery">
+	                                         <li><img src="__ROOT__{$v['gallery_img']|substr=1}"></img></li>    
+	                                         <p><input type='text' name="oldgallery_remark{$v['id']}" placeholder='图片描述' value="{$v['gallery_remark']}"/></p>                                   
+	                                     </ul>	
+	                                     </volist>                                      
+	                                </div> 
+	                                 </td> 
+	                             </tr>
+	                      </table> 
+                      </div>   
+                      <!-- 商品相册end --> 
+                      <!-- 商品描述start -->
+                      <div class="class"> 
+                             <table cellspacing="10">
+                                    <tr>
+                                          <td></td>
+                                          <td>
+                                          {$goods_data['goods_content']|html_entity_decode}
+                                          </td>
+                                    </tr>
+                             </table> 	
+		              </div> 
+		              <!-- 商品描述end --> 
+		              <div class="class"> 
+                             <table cellspacing="10">
+                                 <tr>
+                                        <td class="label">审核结果:</td>
+                                        <td>
+                                           <input type="radio" name="is_check" value="1" checked='checked' class='isshow'></input><p style="height:20px;float:left;line-height:20px">通过</p>
+                                           <input type="radio" name="is_check" style="margin-left:15px" class='isshow' value="0"></input><p style="height:20px;float:left;line-height:20px;">不通过</p>
+                                        </td>
+                                 </tr>                             
+                                 <tr>
+                                    <td class="label">审核意见:</td>
+                                    <td>
+                                        <textarea name='content'></textarea>
+                                    </td>
+                                 </tr>
+			                    <tr>
+			                        <td></td>
+				                    <td>
+				                        <a class='btn' href='javascript:;'>确认审核</a>
+				                    </td>
+			                    </tr>                                 
+                             </table> 	
+		              </div>      	  		                     
+			   </form>
+			</div>   
+     </div>
+</div>
+</body>
+<script type="text/javascript"> 
+var formSubmit = (function(){ 
+    var data = {};            
+
+	$(".btn").click(function(){
+        request();          
+	})
+
+	/*
+	 * 提交数据
+	 **/
+	function request(){  
+	    var data = new FormData($("#form")[0]);  // 要求使用的html对象
+	    var url  = "{:U('Goods/goodsCheck')}";
+	    var url_ = "{:U('Goods/goodsList')}"
+	    $.ajax({  
+	          url : url ,  
+	          type: 'POST',  
+	          data: data,  
+	          async: true,  
+	          // 下面三个参数要指定，如果不指定，会报一个JQuery的错误 
+	　　　　　cache: false,  
+	          contentType: false,  
+	          processData: false,  
+	          success: function (res) {  
+	          	  alert(res.msg);
+	              if(res.status){
+	                  window.location.href = url_;
+	              } 
+	          },  
+	          error: function (returndata) {  
+	              console.log(returndata); 
+	          }  
+	     });  
+	}    
+})();
+
+window.onload = function(){
+      window.UEDITOR_HOME_URL = "__PUBLIC__/js/ueditor/";
+      UE.getEditor('myEditor', {
+          theme:"default", //皮肤
+          lang:"zh-cn", //语言
+          initialFrameWidth:1000,  //初始化编辑器宽度,默认800
+          initialFrameHeight:400,
+          allHtmlEnabled:false,
+      })
+}	
+    
+$("#content_m_h a").click(function(){
+	 var index=$(this).index();
+	 $(".class").eq(index).show().siblings().hide();
+	 $(this).css({'background':'white','color':'#192E32'}).siblings().css({'background':'#EFEFEF','color':'#787878'});
+})            
+</script>
+</html>

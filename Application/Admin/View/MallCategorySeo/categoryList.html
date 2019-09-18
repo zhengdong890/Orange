@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="description" content="" />
+<style>
+*{padding:0; margin:0;font-size:16px;font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border:0} 
+#content{width:98%;height:auto;float:left;margin-left:1%;}
+#content #content_h{width:100%;height:40px;border:1px solid #D7D7D7;line-height:40px;margin-top:15px}
+#content #content_h a{padding-left:10px}
+#content #content_m{width:100%;height:auto;border:1px solid #D7D7D7;padding-bottom:100px;margin-top:20px}
+#content table{margin:0 auto;width:100%}
+.caozuo{text-align:center}
+.caozuo a{color:black;text-decoration:underline} 
+.caozuo a:hover{color:pink;text-decoration:underline}   
+table tr{background:white;}
+table tr:hover{background:#F1FCEA}  
+table tr:first-child{background:#F4F5F9} 
+table tr td,th{border-left:1px solid #E7E9F3;border-bottom:1px solid #E7E9F3;padding:10px;font-size:14px;}
+table tr .td{border-left:0px} 
+input{width:500px;height:24px;border-radius:3px;border-bottom:1px solid #E3E9EF;border-top:1px solid #ABADB3;border-left:1px solid #E2E3EA;border-right:1px solid #DBDFE6}
+td img{max-width:100px;max-height:100px}
+td{padding-right:30px;padding-top:10px}
+.tableList tr .td_label .table_td_text {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+}
+.level_2{color:red;}
+.level_3{color:blue;}
+.level_4{color:#FF34B3;}
+.td_label{text-align:center;}
+.show{font-size:20px;}
+</style>
+</head>
+<body>
+<div id="content">
+     <div id="content_h">
+           <a>后台管理中心</a>-><a>分类列表</a>
+     </div>     
+     <div id="content_m">
+	     <table cellspacing="0" class='tableList'>
+	          <thead>
+	          <tr class="code_0">
+	              <th class='td_label'>分类名称</th>
+	              <th class='td_label'>标题</th>
+	              <th class='td_label'>关键词</th>
+	              <th class='td_label'>描述</th>
+	              <th class='td_label'>操作</th>
+	          </tr>
+	          </thead>
+	          <tbody>
+	          </tbody>                        
+	    </table>
+    </div>
+</div>	
+</body>
+<script type="text/javascript">
+/*
+ *表格分类树
+ * */
+(function(w){
+var update_url = '{:U('seoUpdate')}',
+    __is_show  = [], //记录当前层级打开状态
+    __data     = [], //分类树形结构
+    __all_data = [], //所有数据
+    __tag      = {
+    	'1' : '',
+        '2' : '&nbsp;&nbsp;&nbsp;&nbsp;----&nbsp;',
+        '3' : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----&nbsp;',
+        '4' : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----&nbsp;'
+    },
+    __status   = [];//记录每行当前的状态 	    
+
+    function appenChildren(id , data){
+		if(data.length == 0) return;
+		data       = data.arrayAllCloumn(data , 'id');
+		__all_data = __all_data.concat(data);
+		var level     = parseInt($('.code_' + id).attr('data-level'));
+		__data[id]    = data,
+		__is_show[id] = true;		
+		data.sort(function(x, y){
+			return (x.sort - y.sort);
+		});
+		var html = createHtml(data , level);
+		$(id ? '.code_' + id : "tbody").after(html);
+		$('.code_' + id).find('.show').text('-');
+    }
+
+    function __sort(){
+
+    }
+
+	/*
+	 * 检测该id下是否已经存在下级数据
+	 * */     
+    function checkId(id){
+        return !!__data[id];
+    }
+
+	/*
+	 * 更改子级状态
+	 * */    
+    function changeChildrenStatus(id){
+    	var child_ids = getChildrenId(id);
+    	//当前为显示 则需要隐藏 当前为隐藏 则需要显示
+    	if(!!__is_show[id]){
+		    //下一级状态设为隐藏
+	    	for(var k in __data[id]){
+	    		__status[__data[id][k]['id']] = false;
+	    	} 
+		    child_ids.map(function(v , k){
+		        $(".code_" + v).css('display','none');
+		    })     
+		    __is_show[id] = false;//当前层次标记为隐藏
+		    __data[id] && $('.code_' + id).find('.show').text('+');    		
+    	}else{
+	    	//下一级状态设为显示
+	    	for(var k in __data[id]){
+	    		__status[__data[id][k]['id']] = true;
+	    	} 
+		    child_ids.map(function(v , k){
+		       $(".code_" + v).css('display' , __status[v] ? '' : 'none');
+		    });
+		    __is_show[id] = true;//当前层次标记为显示
+		    __data[id] && $('.code_' + id).find('.show').text('-');    		
+    	} 
+    }
+    
+	/*
+	 * 获取所有子级id
+	 * */
+	function getChildrenId(id){
+		var arr = [];
+	    for(var k in __data[id]){
+	    	var now_id = __data[id][k]['id'];
+	    	if(__data[now_id]){
+	            var return_arr = getChildrenId(now_id);
+	                arr.push.apply(arr,return_arr);
+	    	}    	
+	        arr.push(__data[id][k]['id']);   
+	    }
+	    return arr;
+	}
+    
+	/*
+	 * 删除一个子类
+	 * */
+    function removeNode(id){ 
+        id && (
+        pid = __all_data[id]['pid'],
+        delete __all_data[id],
+        delete __data[pid][id],
+        $(".code_" + id).remove()
+        )
+    }
+
+	/*
+	 * 创建html
+	 * */
+	function createHtml(res , level){
+		!level && (level = 0);
+		level++;
+		var html = '';
+		res.map(function(v){
+	    	__status[v['id']] = true;//默认当前分类为显示
+	        html += '<tr class="code_' + v['id'] + '" data-id="' + v['id'] + '" data-level="' + level + '">'
+	             + '    <td>'+ __tag[level]
+	             + '         <a href="javascript:;" class="show show_' + v['id'] +'">+</a>';
+	        html += '        <span class="level_' + level + '">' + v['cat_name'] + '</span>';  
+	        html += '    </td>'; 
+	        html += '    <td class="td_label">';
+	        html += '        <div class="table_td_text">' 
+	             +           (v['seo']['title']?v['seo']['title']:'') 
+	             +           '</div>';
+	        html += '    </td>';
+	        html += '    <td class="td_label">';
+	        html += '        <div class="table_td_text">' 
+	             +           (v['seo']['keyword']?v['seo']['keyword']:'') 
+	             +           '</div>';
+	        html += '    </td>';
+	        html += '    <td class="td_label">';
+	        html += '        <div class="table_td_text">' 
+	             +           (v['seo']['description']?v['seo']['description']:'') 
+	             +           '</div>';
+	        html += '    </td>';         
+	        html += '    <td class="caozuo">'; 
+	        if(v['seo']['id']){
+                html += '        <a href="' + update_url + '&id=' + v['seo']['id'] + '">编辑SEO</a>';
+	        }else{
+	        	html += '        <a href="' + update_url + '&cat_id=' + v['id'] + '">编辑SEO</a>';
+	        }
+	        
+	        html += '    </td>';        
+	        html += '</tr>';			
+		})	
+	    return html;
+	}
+
+	w.tree = {
+		a   : appenChildren,
+		c   : changeChildrenStatus,
+		r   : removeNode,
+		h   : checkId
+	};
+
+	Array.prototype.arrayAllCloumn = function(data_ , field){
+		var data = [];
+		data_.map(function(v){
+			data[v[field]] = v;
+
+		});
+		return data;		
+    }
+})(window);
+
+	
+
+function requestData(id){
+	$.post('{:U('categoryList')}' , {id : id} , function(res){
+		tree.a(id , res.data)
+	})    
+}
+requestData(0);
+
+$("table").on('click' , '.show' , function(){
+	var id    = $(this).parents('tr').attr('data-id');
+	if(!tree.h(id)){			
+		requestData(id);     
+    }else{
+    	tree.c(id); 
+    }
+})
+
+/*删除分类*/
+$("table").on('click' , '.delete' ,function(){
+	var id = $(this).parents('tr').attr('data-id'),
+	 _this = this;
+    confirm('确认删除?') && ( 
+    $.post("{:U('categoryDelete')}",{"id":id},function(res){                
+        alert(res.msg);
+        res.status != 0 && tree.r(id);//移除删掉的分类
+    }))  
+})
+
+/*品牌同步到子类*/
+$("table").on('click' , '.brandSonUpdate' ,function(){
+	var id = $(this).parents('tr').attr('data-id'),
+	 _this = this;
+    confirm('确认同步?') && ( 
+    $.post("{:U('brandSonUpdate')}",{"id":id},function(res){                
+        alert(res.msg);
+    }))  
+})
+
+/*属性同步到子类*/
+$("table").on('click' , '.synchroAttr' ,function(){
+	var id = $(this).parents('tr').attr('data-id'),
+	 _this = this;
+    confirm('确认同步?') && ( 
+    $.post("{:U('Attr/synchroAttr')}",{"id":id},function(res){                
+        alert(res.msg);
+    }))  
+})
+</script>
+</html>

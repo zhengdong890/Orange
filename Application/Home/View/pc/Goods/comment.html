@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>评论</title>
+    <link href="cssReset.css" rel="stylesheet">
+    <link href="comment.css" rel="stylesheet">
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/comment.js"></script>
+     <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+</head>
+<body>
+   <div class="comment">
+        <div class="comment-t clearfix">
+            <div class="praise-degree">
+                <p class="praise-percent comment_goodrate"></p>
+                <p>好评度</p>
+            </div>
+            <ul class="comment-bar clearfix">
+               <li class="clearfix praise">
+                   <p>好评（<span class="comment_goodrate"></span>）</p>
+                   <div class="view-bar"><div class="sml-bar"></div></div>
+               </li>
+                <li class="clearfix medium">
+                    <p>中评（<span class="comment_nomalrate"></span>）</p>
+                    <div class="view-bar"><div class="sml-bar"></div></div>
+                </li>
+                <li class="clearfix bad">
+                    <p>差评（<span class="comment_badrate"></span>）</p>
+                    <div class="view-bar"><div class="sml-bar"></div></div>
+                </li>
+            </ul>
+            <!--<div class="impression">
+                 <p>买家印象：</p>
+                <ul class="clearfix">
+                    <li>性价比高<span>（20）</span></li>
+                    <li>功能齐全<span>（55）</span></li>
+                    <li>反应快<span>（15）</span></li>
+                    <li>性价比高<span>（20）</span></li>
+                    <li>性价比高<span>（20）</span></li>
+                    <li>性价比高<span>（20）</span></li>
+                </ul>
+            </div>-->
+        </div>
+       <div class="comment-info">
+           <ul class="comment-tabs">
+              <li class="active">全部评价（<span class="number_comment"></span>）</li>
+              <li>好评（<span class="comment_good"></span>）</li>
+              <li>中评（<span class="comment_nomal"></span>）</li>
+              <li>差评（<span class="comment_bad"></span>）</li>
+              <li>晒单（<span>0</span>）</li>
+           </ul>
+           <ul class="comment-list">
+               <li class="clearfix">
+                   <div class="user-info">
+                       <div class="user-img"><img src="" alt=""></div>
+                       <p class="user-name"></p>
+                       <!--<div class="user-lv"><img src="{:C('STATIC_URL')}/Home/images/index-goods-img_15.jpg" alt></div>-->
+                   </div>
+                   <div class="comment-content">
+                       <p class="comment-txt"></p>
+                       <!--<ul class="goods-img">
+                           <li><img src="{:C('STATIC_URL')}/Home/images/index-goods-img_15.jpg"></li>
+                       </ul>-->
+                       <div class="content-b">
+                           <p class="time"></p>
+                           <p class="reply"><a href="javascript:;">回复</a><span>(0)</span></p>
+                           <p class="like"><a href="javascript:;">点赞</a>(<span>0</span>)</p>
+                       </div>
+                   </div>
+               </li>               
+           </ul>
+       </div>
+   </div>
+<script>
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/My97DatePicker/WdatePicker.js"></script>
+<meta name="description" content="" />
+<style>
+*{padding:0; margin:0;font-size:16px;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border:0}    
+#content{width:98%;height:auto;float:left;padding-left:1%;background:#F4F5F9;padding-bottom:50px}
+/*内容页头部样式*/
+#content #content_h{width:100%;height:40px;border:1px solid #D7D7D7;line-height:40px;margin-top:15px;background:white}
+#content #content_h a{padding-left:10px}
+/*内容页搜索模块样式*/
+#content #search{width:100%;height:auto;float:left;background:#F4F5F9;margin-top:20px;padding:12px 0 12px;border:1px solid #D7D7D7;} 
+#search p{float:left;margin-left:10px;font-size:13px}
+#search input{width:150px}     
+#search p select option{text-indent:5px}   
+#search a{border:0;border-radius:4px;background:#C43926;margin-left:10px;color:white;height:36px;padding:3px 13px 3px 13px;width:100px;font-size:13px;margin-top:-1px}      
+/*内容页订单列表样式*/
+#content #content_m{width:100%;height:auto;float:left;border:1px solid #D7D7D7;margin-top:20px}
+#content table{margin:0 auto;width:100%}
+#content table td span{float:right}
+.caozuo{width:auto;}   
+.caozuo div{width:50px;height:21px;margin:0 auto}   
+.caozuo div a{width:21px;height:21px;display:block;margin-left:4px;float:left;} 
+table tr{background:white}
+table tr:hover{background:#F1FCEA}  
+table tr:first-child{background:#F4F5F9} 
+table tr td{border-left:1px solid #E7E9F3;border-bottom:1px solid #E7E9F3;font-size:20px;padding:10px;font-size:14px;}
+table tr .td{border-left:0px} 
+td img{max-width:100px;max-height:100px}
+td{padding-right:30px;padding-top:10px}
+/*内容页订单列表分页样式*/
+#page{width:100%;height:30px;float:left;margin-top:15px;background:white}
+#page li{float:right}
+#page li a{display:block;float:left;height:22px;padding:4px;border:1px solid #dfdfdf;margin-left:5px;line-height:22px;}
+#page li span{display:block;float:left;height:22px;padding:4px;border:1px solid #dfdfdf;margin-left:5px;line-height:22px;}
+#page li p{float:left;padding:4px;height:22px;line-height:22px;margin-left:5px;}
+/*批量处理样式*/
+.select_checkbox{width:80px;height:16px;margin:0 auto}
+.select_checkbox input{width:16px;height:16px;float:left;}
+.select_checkbox a{height:16px;float:left;text-indent:5px;line-height:15px;}
+#caozuo{width:100%;height:auto;float:left;margin-top:10px}
+#caozuo a{display:block;width:80px;height:30px;line-height:30px;text-align:center;float:left;background:#C43926;margin-left:5px;border-radius:4px;color:white;font-size:14px;}
+#caozuo button{display:block;width:80px;height:30px;line-height:30px;text-align:center;float:left;background:#C43926;margin-left:5px;border-radius:4px;color:white;font-size:14px;border:0}
+</style>
+</head>
+<body>
+<div id="content">
+     <div id="content_h">
+           <a>后台管理中心</a>-><a>订单列表</a>
+     </div>     
+     <div id="search">
+       <form action="{:U('Mall_order/index')}" method="post">
+           <p>订单号: <input type="text" name="out_trade_no"></input></p>
+           <p>收货人: <input type="text" name="name"></input></p>
+           <p>订单状态: 
+               <select name="state" id="slectstate">
+                   <option value="0">请选择...</option>
+                   <option value="nopay">待付款</option>
+                   <option value="pay">待收货</option>
+                   <option value="conment">待评价</option>	
+                   <option value="finished">交易成功</option>					   
+                   <option value="export">已导出</option>
+                   <option value="no_export">未导出(已付款)</option>
+               </select>
+           </p>
+           <p>下单时间:
+           <input type="text" style="width:100px" name="start_time" onfocus="WdatePicker()"/> ～
+           <input type="text" style="width:100px" name="end_time" onfocus="WdatePicker()"/>
+           </p>
+           
+           <p>每页显示条数: <input type="text" name="show_num" style="width:50px"></input></p>
+           <a onclick="searchorder()">搜索</a>
+       </form>
+    </div> 
+    <div id="content_m">
+        <table cellspacing="0" id="dingdanappend">                                                    
+            <tr >
+                <td class='td'>        
+                    <div class="select_checkbox">
+                       <input type="checkbox"/><a>订单号</a>
+                    </div> 
+                </td>                 
+                <td>支付价格</td>
+                <td>购买时间</td>
+                <td>地址</td>
+                <td>订单状态</td>
+                <td>操作</td>
+            </tr>  
+            <volist name="list" id="v">
+                <tr>
+                    <td class='td'>
+                    <input type="checkbox" class='checkbox' value="{$v['id']}"/> {$v.order_sn}
+                    </td>
+                    <td>{$v['total_price']}万</td> 
+                    <td>{$v['time']|date="Y-m-d H:i:s",###}</td>
+                    <td>{$v['address']}</td>
+                    <td><if condition="$v['status'] eq '0'">待付款<elseif condition="$v['send_status'] eq '1'"/>待收货<elseif condition="$v['send_status'] eq '2'"/>待评价<else/>交易成功</if></td>
+                       <td>
+                          <a href="{:U('Mall_order/orderdetial',array('id'=>$v['id']))}">查看详情</a>
+                       <!-- <a href="javascript:del({$v['id']})">删除</a>| -->
+                       </td>
+                </tr> 
+	        </volist>                        
+        </table>
+        <ul id="page"><li>{$page}</li></ul>
+   </div>
+         <div id="caozuo">
+              <a>移除订单</a>
+              <form action="{:U('export_excel')}" method="post">
+                 <input type="hidden" name="allid"></input>
+                 <button>导出订单</button>
+              </form>
+         </div>
+		 
+</div>	
+</body>
+     <script type="text/javascript">
+        $(".select_checkbox input").click(function(){
+        	 if($(this).attr("checked")){
+        		 $(".checkbox").attr("checked",true); 
+       	     }else{
+       		     $(".checkbox").attr("checked",false); 
+       	     }
+        	 var arr='';
+	      	 $('.checkbox').each(function(){
+	      		   if($(this).attr("checked")){
+	      			   arr+=$(this).val();
+	      			   arr+=',';
+	      		   }
+	      	 })
+	      	 arr=arr.substring(0,arr.length-1);
+	      	 $("input[name='allid']").val(arr);
+        })        
+        
+        function finish(id){
+     	   if(confirm('确认设为已经发货?')){    
+    	    	  $.post("{:U('finish')}",{"id":id},function(res){
+    	              alert(res);
+    	    		  window.location.href="{:U('Mall_order/index')}";
+    	     	  })
+           }
+        }
+	                               
+	    function del(id){
+    	   if(confirm('确认删除?')){    
+   	    	  $.post("{:U('deleteorder')}",{"id":id},function(res){
+   	             window.location.reload();
+   	     	  })
+       	   }
+	    }
+		
+
+   function test(id){    //user函数名 一定要和action中的第三个参数一致上面有
+        var id = id;
+       // alert(id);
+        $.get('{:U('Mall_order/test')}', {'p':id}, function(data){  //用get方法发送信息到test方法
+           //var info= eval('('+data+')') ;//将返回的json数据转换成js对象\
+           var data=JSON.parse(data);
+           //console.log(data.result[0].cpname);
+            //console.log(data);
+               var s='';
+               
+                for (var i = 0; i < data['result'].length; i++) {
+				     var status='';
+					 s+='<tr>';
+				     s += '<td class="td">';
+					 s += ' <input type="checkbox" class="checkbox" value="{$v['id']}"/>'+data['result'][i].order_sn;
+					 s += '</td>';
+					 s += '<td>'+data['result'][i].total_price+'元</td>';
+					 s += '<td>'+data['result'][i].time+'</td>';
+					 s += '<td>'+data['result'][i].address+'</td>';
+					 
+					 if( data['result'][i].status==0 ){ 
+					 status='待付款';
+					 }else if(data['result'][i].send_status==1){
+					 status='待收货';
+					 }else if(data['result'][i].send_status==2){
+					 status='待评价';
+					 }else{
+					  status='交易成功';
+					  
+					 }
+					 s += '<td>'+status+'</td>';
+					 s += '<td><a href="<?php echo U('Mall_order/orderdetial'); ?>?id='+data['result'][i].id+'">查看详情</a></td>';					
+	                 s += '</tr>';
+                }
+                 
+               
+                   pg='<li>'+data['pg']+'</li>';
+            
+				   $("#dingdanappend tr:gt(0)").remove();
+				   $('#dingdanappend').append(s); 
+				   $('#page').html(pg);
+			  
+        });
+     
+    }
+
+	
+	function searchorder(){
+		  var out_trade_no = $("input[name='out_trade_no']").val();
+		  var name = $("input[name='name']").val();
+		  var state = $("#slectstate").val();
+		  //alert(state);
+		  var start_time = $("input[name='start_time']").val();
+		
+		  var end_time = $("input[name='end_time']").val();		  
+		  var json_data = {'out_trade_no':out_trade_no,'name':name,'state':state,'start_time':start_time,'end_time':end_time};
+	          $.post('{:U('Mall_order/test')}',json_data,function(data){
+		        var adata=JSON.parse(data);
+			//var totaldata=eval("("+data+")");
+			//$('.all-totals').html(totaldata.goods_total);
+			//alert(totaldata);
+			var sa='';
+			for (var i = 0; i < adata['result'].length; i++) {
+				     var status='';
+					 sa+='<tr>';
+				         sa += '<td class="td">';
+					 sa += ' <input type="checkbox" class="checkbox" value="{$v['id']}"/>'+adata['result'][i].order_sn;
+					 sa += '</td>';
+					 sa += '<td>'+adata['result'][i].total_price+'元</td>';
+					 sa += '<td>'+adata['result'][i].time+'</td>';
+					 sa += '<td>'+adata['result'][i].address+'</td>';
+					 
+					 if( parseInt(adata['result'][i].status)== 0 ){ 
+					 status='待付款';
+					 }else if(adata['result'][i].send_status==1){
+					 status='待收货';
+					 }else if(adata['result'][i].send_status==2){
+					 status='待评价';
+					 }else{
+					  status='交易成功';
+				
+					 }	
+					 sa += '<td>'+status+'</td>';
+					 sa += '<td><a href="<?php echo U('Mall_order/orderdetial'); ?>?id='+adata['result'][i].id+'">查看详情</a></td>';					
+	                                 sa += '</tr>';
+                        }
+                 
+                       pg='<li>'+adata['pg']+'</li>';           
+		       $("#dingdanappend tr:gt(0)").remove();
+		       $('#dingdanappend').append(sa); 
+		       $('#page').html(pg);
+			
+	         });	
+	  
+	
+	}	
+    
+	$(function(){
+	 var value = 2;	
+	 $.post('{:U('Mall_order/delsession')}',{'value':value},function(data){
+		    
+	  })
+	})
+		
+    </script>
+</html>

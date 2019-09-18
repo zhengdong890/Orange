@@ -1,0 +1,13 @@
+品牌申请地址
+地址 : http://www.orangesha.com/index.php/Home/BrandApplication/application
+请求json参数 : {
+    'cat_id'                 : '', //品牌分类id
+    'brand_name'             : '', //品牌名称
+    'brand_en_name'          : '', //品牌英文名称
+    'register_code'          : '', //商标注册号
+    'brand_person'           : '', //品牌所有人
+    'trademark_register_img' : '', //商标注册证
+    'notice_img'             : ''  //受理通知书
+}
+返回
+{status : 0失败 1成功, msg : }

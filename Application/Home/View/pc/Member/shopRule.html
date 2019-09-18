@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>开店规则</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link href="{:C('STATIC_URL')}/Home/css/header.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/home.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/problem.css" type="text/css">
+<script src="/Public/js/jquery-2.0.3.min.js"></script>
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<style>
+.hide{display:none;}
+.section{width:980px;float:left;margin-left:20px;}
+.menu{display:none;}
+#newsTable td{width: 83%;height: 60px; padding-left: 50px;}
+.newsPoint{ color: #999;}
+</style>
+</head>
+<body>
+<include file="Public:header_top" />
+<include file="Public:header_search" />
+<include file="Public:mallNav" />
+<div class="problem clearfix">
+    <div class="problem-nav">        
+        <div class="title">标题一</div>
+        <div class="nav-list">             
+            <ul>
+                <li class="nav-title">小标题一</li>
+                <li class="nav-title">小标题二</li>
+                <li class="nav-title">小标题三</li>
+                <li class="nav-title">小标题四</li>
+            </ul>                
+        </div>
+        <div class="title">标题二</div>
+        <div class="nav-list hide">             
+            <ul>
+                <li class="nav-title">小标题一</li>
+                <li class="nav-title">小标题二</li>
+                <li class="nav-title">小标题三</li>
+                <li class="nav-title">小标题四</li>
+            </ul>                
+        </div>
+        <div class="title">标题三</div>
+        <div class="nav-list hide">             
+            <ul>
+                <li class="nav-title">小标题一</li>
+                <li class="nav-title">小标题二</li>
+                <li class="nav-title">小标题三</li>
+                <li class="nav-title">小标题四</li>
+            </ul>                
+        </div>
+    </div>
+    <div class="section">
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- /底部 -->    
+</body>
+</html>
+<script>
+//头部橙橙首页隐藏
+$(".homePage").css("display","none");
+
+$(".title").click(function(){
+	$(this).next(".nav-list").slideToggle();
+})
+/*$(".problem-nav").on('click','li',function(){
+    var id = $(this).attr('data-id');
+    $("#help" + id).removeClass('hide').siblings('.problem-contain').addClass('hide');  
+})*/
+
+</script>

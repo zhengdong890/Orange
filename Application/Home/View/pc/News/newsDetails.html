@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>{$data['title']}</title>
+<meta name="description" content={$data['description']}">
+<meta name="keywords" content="{$data['keyword']}">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/editorCss.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/newsDetail.css" rel="stylesheet">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/validate.js"></script>
+ <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!-- www.orangesha.com Baidu tongji analytics -->
+
+<style>
+ body{ background-color: #fff;}
+</style>
+</head>
+<body>
+<!-- 头部 -->
+    
+    <include file="Public:header_top" />
+    <div class="register public">
+        <div class="header-logo">
+            <a href="http://www.orangesha.com"><div class="logo"></div></a>
+            <div class="text">新闻资讯</div>
+        </div>
+        <!-- 主体 -->
+        <div class="contain">
+            <div class="contain-box">
+            	<h1>{$data['title']} </h1>
+            	<div class="info-box">
+            		   {$data['content']|html_entity_decode}      		
+            	</div>
+            	<div class="bdsharebuttonbox">
+					<a href="#" class="bds_more" data-cmd="more"></a>
+					<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+					<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+					<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+					<a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+					<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+				</div>
+            </div>
+            <button id="closeThis"  onclick="window.close();">关闭本页</button>
+        </div>
+        
+    </div>
+    <!-- 公共底部 -->
+    <include file="Public:footer" />   
+</body>
+<script>
+window._bd_share_config={"common":{" ":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+</html>

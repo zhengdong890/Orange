@@ -1,0 +1,1435 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>物流工具</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<!--<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/all-use.css" type="text/css">-->
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/side-nav.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/logisticsTool.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/sell-management.css">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+<style>
+.section-bt{width:100%;height:auto;float:left;margin-top:40px;margin-bottom:20px;}
+.section-bt .btns{line-height: 42px;}
+.section-bt .btns p,.section-bt .btns label,.section-bt .btns label input{display: inline-block;}
+.section-bt .btns label p{padding-left: 10px;}
+.section-bt .btns .btn{margin-left: 32px;border:1px #d5d5d5 solid;padding:0 10px;border-radius: 5px;cursor: pointer;}
+.section-bt .turn-page{width:auto;height:auto;float:left;margin-left: 30%;}
+.section-bt .turn-page .omit{border:none;}
+.section-bt .turn-page .omit:hover{border:none;background-color: transparent;color:#d5d5d5;}
+.section-bt .turn-page div,.section-bt .to-page input{width: 32px;height:32px;border:1px #d5d5d5 solid;display: inline-block;margin-left: 12px;
+    cursor: pointer;vertical-align: top;line-height: 32px;text-align: center;}
+.section-bt .turn-page .active{background-color: #ff8448;color:#fff;}
+.section-bt .turn-page>div:hover{border-color: #ff8448;}
+.section-bt .turn-page .right-btn,.section-bt .turn-page .left-btn{width: 38px;}
+.section-bt .to-page{width:auto;float:left; margin-left: 20px;}
+.section-bt .to-page input{margin:0 7px;vertical-align: middle;}
+.section-bt .to-page input[type="button"]{background-color: #fff;width: 54px; font-family: "微软雅黑";}
+.section-bt .turn-page .right-btn{ background: url({:C('STATIC_URL')}/Home/images/page-bg_03.png) no-repeat 50% 50%;}
+.section-bt .turn-page .left-btn{background: url({:C('STATIC_URL')}/Home/images/left-bg_03.png) no-repeat 50% 50%;}
+
+.edit_area{cursor: pointer;}
+.select_area{display: none;width: 100%;z-index: 100; height: 100%; background-color: rgba(0,0,0,0.5);position: fixed;left: 0; top: 0;}
+.select_area .select_area_div{width: 800px; background-color: #fff;margin: 150px auto;}
+.select_area .select_area_div .select_area_div_top{position: relative; background-color: #F9F9F9;height: 50px;line-height: 50px;font-size: 18px;font-weight: bold;padding-left: 20px;}
+.select_area .select_area_div .select_area_div_top img{position: absolute; right: 15px; top: 15px;cursor: pointer;}
+.select_area .select_area_div .select_area_div_body{padding: 30px;box-sizing: border-box;overflow: auto;}
+.select_area .select_area_div .select_area_div_body .area_div{box-sizing: border-box;width: 100%;overflow: auto;margin-bottom: 10px;}
+.select_area .select_area_div .select_area_div_body .area_div .area_div_body{width: 100%;}
+.select_area .select_area_div .select_area_div_body .area_div .area_div_body>div{ float: left;width: 25%;position: relative;margin-bottom: 10px;} 
+.select_area .select_area_div .select_area_div_body .area_div .area_div_body>div label{cursor: pointer;}
+.select_area .select_area_div .select_area_div_body .area_div .area_div_body>div>span{color: red; display: none;}
+.select_area .select_area_div .select_area_div_body .area_div .area_div_body>div img{cursor: pointer;}
+.select_area .select_area_div .select_area_div_body .area_div .area_div_body>div .city_div{display: none; width: 94%;box-sizing: border-box; padding: 10px; background-color: #FFFFC7;border: 1px solid #FBF2BF;overflow: auto;}
+.select_area .select_area_div .select_area_div_body .area_div .area_div_body>div .city_div li{float: left;width: 50%;}
+.select_area_div_body .save_area{cursor: pointer; color: #fff; background-color: #DD2626;width: 100px; height: 30px; font-family: "微软雅黑"; border-radius: 4px;float: right;}
+.select_area_div_body .close_area{cursor: pointer; float: right;width: 100px;border-radius: 4px; height: 30px; margin-left: 10px;border: 1px solid #eee;}
+.edit_address_Library{display: none;}
+
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end --> 
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="Public:sellerLeft" />  
+        <div class="user-right marT20 fRi">
+            <div class="sell-management clearfix" style='width:auto'>
+                <div class="section">
+                    <ul class="nav-top clearfix">
+                        <li><a href="http://www.orangesha.com/wuliu.html?title=1">运费模板设置</a></li>
+                        <!--<li><a href="http://www.orangesha.com/wuliu.html?title=2">服务商设置</a></li>-->
+                        <li><a href="http://www.orangesha.com/wuliu.html?title=3">物流跟踪信息</a></li>
+                        <li><a href="http://www.orangesha.com/wuliu.html?title=4">地址库</a></li>
+                    </ul>
+                    <!--服务商设置-->
+                    <div class="search_box1">
+                        <p>开通指定快递服务后，开通的服务商可被消费者下单时查看并选择，服务说明详见：<a href="#">《指定快递服务介绍》</a></p>
+                        <ul id="serviceProvider">
+                    	  <li>物流公司</li>
+                    	  <li>开通的服务</li>
+                    	  <li>操作</li>
+                        </ul>
+                        <table id="service_list">
+                    	  <tr>
+                    		<td><input type="checkbox"> <img src="{:C('STATIC_URL')}/Home/image/tiandihuayu.jpg"> 天地华宇</td>
+                    		<td>保障速递，指定快递，到货承诺</td>
+                    		<!--<td>已开通服务商 <a href="#">取消</a></td>-->
+                    		<td><button class="openService">开通服务商</button></td>
+                    	  </tr>
+                    	  <tr>
+                    		<td><input type="checkbox"> <img src="{:C('STATIC_URL')}/Home/image/debang.jpg"> 德邦</td>
+                    		<td>指定快递</td>
+                    		<td><button class="openService">开通服务商</button></td>
+                    	  </tr>
+                    	  <tr>
+                    		<td><input type="checkbox"> <img src="{:C('STATIC_URL')}/Home/image/zhongtie.jpg"> 中铁快运</td>
+                    		<td>保障速递，指定快递，到货承诺，保障速递</td>
+                    		<td><button class="openService">开通服务商</button></td>
+                    	  </tr> 
+                    	  <tr>
+                    		<td><input type="checkbox"> <img src="{:C('STATIC_URL')}/Home/image/EMS.jpg"> EMS</td>
+                    		<td>货到付款，保障速递，指定快递</td>
+                    		<td><button class="openService">开通服务商</button></td>
+                    	  </tr>
+                    	  <tr>
+                    		<td><input type="checkbox"> <img src="{:C('STATIC_URL')}/Home/image/yuantong.jpg"> 圆通速递</td>
+                    		<td>保障速递，指定快递，到货承诺，保障速递</td>
+                    		<td><button class="openService">开通服务商</button></td>
+                    	  </tr>
+                    	  <tr>
+                    		<td><input type="checkbox"> <img src="{:C('STATIC_URL')}/Home/image/zhongtong.jpg"> 中通快递</td>
+                    		<td>保障速递，指定快递，到货承诺，保障速递</td>
+                    		<td><button class="openService">开通服务商</button></td>
+                    	  </tr>                   	                   	  
+                        </table>
+                        <p><input type="checkbox"> 全选    <button id="all_opening">批量开通服务商</button></p>
+                    </div>
+                    <!--运费模板设置-->
+                    <div class="search_box2">
+                    	<button class="template_btn">新增运费模板</button>
+                    	<div class="template_div"></div>    
+                    	<div class='section-bt'></div>
+                    </div>
+                    <!--新增运费模板-->
+                    <div class="new_Template">
+                    	<h3>新增运费模板</h3>
+                    	<form id="newTemplate">
+                    		<table class="template_table">
+	                    		<tr>
+	                    			<td>模板名称：</td>
+	                    			<td><input type="text" name="name"></td>
+	                    		</tr>
+	                    		<tr>
+	                    			<td><span class="star">*</span> 发货地址：</td>
+	                    			<td class="area_select">
+	                     			</td>
+	                    		</tr>
+	                    		<tr>
+	                    			<td><span class="star">*</span> 是否包邮：</td>
+	                    			<td><label><input type="radio" name="free_status" value="1" id="freeShipping_radio"> 自定义邮费</label> <label><input type="radio" name="free_status" value="2" id="freeShipping_radio2"> 卖家承担运费</label></td>
+	                    		</tr>
+	                    		<tr>
+	                    			<td><span class="star">*</span> 计价方式：</td>
+	                    			<td><label><input type="radio" name="unit" value="1"> 按件数</label> <label><input type="radio" name="unit" value="2"> 按重量</label> <label><input type="radio" name="unit" value="3"> 按体积</label></td>
+	                    		</tr>
+	                    		<tr>
+	                    			<td>运送方式：</td>
+	                    			<td>
+	                    				<span>除指定地区外，其余地区的运费采用“默认邮费”</span></br>
+	                    				<ul class="defaultPostage">	                    					
+	                    					<li>
+	                    						<div class="designatedCity">
+			                    					<div>
+			                    						<div class="default_appoint">默认运费 <input type="text" name="start_number" /> <span class="measurement_unit"></span>内 <input type="text" name="start_price"/> 元， 每增加 <input type="text" name="add_number"/> <span class="measurement_unit"></span>， 增加运费 <input type="text" name="add_price"/> 元 </div>
+		                    				    		<div class="appoint_div">
+			                    				    		<ul>
+				                    				    		<li>运送到</li>
+				                    				    		<li>首件数（<span class="measurement_unit"></span>）</li>
+				                    				    		<li>首费（元）</li>
+				                    				    		<li>续件数（<span class="measurement_unit"></span>）</li>
+				                    				    		<li>续费（元）</li>
+				                    				    		<li>操作</li>
+				                    				    	</ul>
+			                    				    	</div>
+			                    					</div>			                    					
+			                    				    <a class="appoint">为指定地区城市设置运费</a>
+		                    					</div>
+	                    					</li>
+	                    					<!--<li><input type="checkbox" /> EMS</li>
+	                    					<li><input type="checkbox" /> 平邮</li>-->
+	                    				</ul>
+	                    			</td>
+	                    		</tr>
+	                    	</table>
+                    	<hr />
+                    	<p><label><input type="checkbox" id="specified_input" disabled="disabled"> 指定条件包邮</label></p>
+                    	<div class="specifiedCondition">
+                    		<table class="condition_table">
+                    			<thead>
+                    				<tr>
+                    					<td>选择地区</td>
+                    					<td></td>
+                    					<td>选择运送方式</td>
+                    					<td>设置包邮条件</td>
+                    					<td>操作</td>
+                    				</tr>
+                    			</thead>
+                    			<tbody>
+                    				<tr>
+                    					<td><span class="selectionArea">未添加地区</span></td>
+                    					<td><a class="edit_area">编辑</a></td>
+                    					<td><select name="send_type"><option value="1">快递</option><option value="1">EMS</option><option value="1">平邮</option></select></td>
+                    					<td><select name="free_condition"><option value="1">件数</option><option value="2">金额</option></select> 满 <input type="text" name="free_condition_c" class="num_packages"> <span class="free_condition">件</span>包邮</td>
+                    					<td><button class="add_condition" onclick="return false">添加</button></td>
+                    				</tr>
+                    			</tbody>
+                    		</table>
+                    	</div>
+                    	</form>
+                    	<p class="add_Template_p1"><button class="add_Template">保存并返回</button> <button class="close_Template">取消</button></p>
+                    	<p class="add_Template_p2"><button class="edit_Template">保存修改并返回</button> <button class="close_Template">取消</button></p>
+                    	<!--选择地区-->
+                    	<div class="select_area">
+                    		<div class="select_area_div">
+                    			<div class="select_area_div_top">选择区域 <img class="close_select_area" src="__PUBLIC__/Home/img/add_custom.png"></div>
+                    			<div class="select_area_div_body">
+                    				<div class="area_div">                   				
+	                    				<div class="area_div_body">
+                                        <foreach name="area" item="vo">
+	                    					<div>
+		                    					<label><input type="checkbox" name="province" value="{$vo.area_no}"> {$vo.area_name}</label> <span></span> <img src="__PUBLIC__/Home/img/red.png">
+		                    					<ul class="city_div">
+
+                                                <for start='0' end='count($vo["child"])' name='i'>
+		                    						<li><input type="checkbox" name="area" value="{$vo['child'][$i]['area_no']}"> {$vo['child'][$i]['area_name']}</li>
+		                    						</for>
+		                    					</ul>
+		                    				</div>
+		                    		    </foreach>
+		                    		    </div>
+	                    			</div>
+	                    			<button class="close_area">取消</button> <button class="save_area">保存</button> 
+                    			</div>
+                    		</div>
+                    	</div>
+                    </div>
+                    <!--物流跟踪信息-->
+                    <div class="search_box3">
+                    	<p>订单编号： <input type="text">  <button>搜索</button></p>
+                    </div>
+                    <!--地址库-->
+                    <div class="search_box4">
+                    	<form id="address_depot">
+	                    	<table class="noBorder">
+	                    		<tr>
+	                    			<td>联系人：<span class="star">*</span></td>
+	                    			<td><input type="text" name="name"></td>
+	                    		</tr>
+	                    		<tr>
+	                    			<td>所在地区：<span class="star">*</span></td>
+	                    			<td class="area_select">
+
+	                     			</td>
+	                    		</tr>
+	                    		<tr>
+	                    			<td>街道地址：<span class="star">*</span></td>
+	                    			<td><textarea placeholder="不需要重复填写省/市/区" name="address"></textarea></td>
+	                    		</tr>
+	                    		<tr>
+	                    			<td>邮政编码：<span class="star">*</span></td>
+	                    			<td><input type="text" name="postcode"></td>
+	                    		</tr>
+	                    		<tr>
+	                    			<td>电话号码：<span class="star">*</span></td>
+	                    			<td><input type="text" name="phone"></td>
+	                    		</tr>
+	                    		<tr>
+	                    			<td>手机号码：<span class="star">*</span></td>
+	                    			<td><input type="text" name="mobile_phone"></td>
+	                    		</tr>
+	                    		<tr>
+	                    			<td>公司名称：<span class="star">*</span></td>
+	                    			<td><input type="text" name="company"></td>
+	                    		</tr>
+	                    		<tr>
+	                    			<td></td>
+	                    			<td><button onclick="return false;" class="add_address">添加新地址</button></td>
+	                    		</tr>
+	                    	</table>
+                    	</form>
+                    	<form id="address_depot2">
+	                    	<table class="noBorder">
+	                    		<tr>
+	                    			<td>联系人：<span class="star">*</span></td>
+	                    			<td><input type="text" name="name"></td>
+	                    		</tr>
+	                    		<tr>
+	                    			<td>所在地区：<span class="star">*</span></td>
+	                    			<td class="area_select">
+	                    				
+	                     			</td>
+	                    		</tr>
+	                    		<tr>
+	                    			<td>街道地址：<span class="star">*</span></td>
+	                    			<td><textarea placeholder="不需要重复填写省/市/区" name="address"></textarea></td>
+	                    		</tr>
+	                    		<tr>
+	                    			<td>邮政编码：<span class="star">*</span></td>
+	                    			<td><input type="text" name="postcode"></td>
+	                    		</tr>
+	                    		<tr>
+	                    			<td>电话号码：<span class="star">*</span></td>
+	                    			<td><input type="text" name="phone"></td>
+	                    		</tr>
+	                    		<tr>
+	                    			<td>手机号码：<span class="star">*</span></td>
+	                    			<td><input type="text" name="mobile_phone"></td>
+	                    		</tr>
+	                    		<tr>
+	                    			<td>公司名称：<span class="star">*</span></td>
+	                    			<td><input type="text" name="company"></td>
+	                    		</tr>
+	                    		<tr>
+	                    			<td></td>
+	                    			<td><button onclick="return false;" class="save_address" data-id>保存修改</button> <button onclick="return false;" class="cancel_save">取消</button></td>
+	                    		</tr>
+	                    	</table>
+                    	</form>
+                    	<div>用来保存自己的发货、退货地址、您最多可添加20条地址</div>
+                    	<table class="noBorder adress_list">
+                    		<thead>
+                    			<td>发货地址</td>
+                    			<td>退货地址</td>
+                    			<td>联系人</td>
+                    			<td>所在地区</td>
+                    			<td>街道地址</td>
+                    			<td>邮政编码</td>
+                    			<td>电话号码</td>
+                    			<td>手机号码</td>
+                    			<td>公司名称</td>
+                    			<td>操作</td>
+                    		</thead>
+                    		<tbody>
+                    			
+                    		</tbody>
+                    	</table>
+                    	<div class='section-bt'></div>
+                    </div>
+                </div>
+          </div>           
+        </div>
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+
+var title = {$title};
+//判断nav
+function checkTopnav(){
+	if({$title}==1){
+		$(".search_box2").css("display","block");
+		$(".search_box1").css("display","none");
+		$(".search_box3").css("display","none");
+		$(".search_box4").css("display","none");
+		$(".nav-top li:eq(0)").addClass("active");
+		$(".nav-top li:eq(0)").siblings().removeClass("active");
+		$(".side-nav>ul:eq(1)>li:eq(2) a").css("color","#ff6600")
+		getTemplate()
+	}
+	if({$title}==2){
+		$(".search_box1").css("display","block");
+		$(".search_box2").css("display","none");
+		$(".search_box3").css("display","none");
+		$(".search_box4").css("display","none");
+		$(".nav-top li:eq(1)").addClass("active");
+		$(".nav-top li:eq(1)").siblings().removeClass("active");
+		$(".side-nav>ul:eq(1)>li:eq(2) a").css("color","#ff6600")
+	}
+	if({$title}==3){
+		$(".search_box3").css("display","block");
+		$(".search_box1").css("display","none");
+		$(".search_box2").css("display","none");
+		$(".search_box4").css("display","none");
+		$(".nav-top li:eq(1)").addClass("active");
+		$(".nav-top li:eq(1)").siblings().removeClass("active");
+		$(".side-nav>ul:eq(1)>li:eq(4) a").css("color","#ff6600")
+	}
+	if({$title}==4){
+		$(".search_box4").css("display","block");
+		$(".search_box1").css("display","none");
+		$(".search_box3").css("display","none");
+		$(".search_box2").css("display","none");
+		$(".nav-top li:eq(2)").addClass("active");
+		$(".nav-top li:eq(2)").siblings().removeClass("active");
+		$(".side-nav>ul:eq(1)>li:eq(3) a").css("color","#ff6600")
+		address.init();
+	}
+}
+
+//获取物流模板
+   function getTemplate(){
+		var wraper = $(".template_div .section-bt");
+		var _this  = this;
+		var url    = "http://www.orangesha.com/index.php/Home/ShippingTemplet/getShippingTempletList";
+		/*ajax分页*/
+		//var arr = new Array([1,2,3], [4,5,6]);
+		
+		ajaxPage({
+		    
+	    	wraper:wraper,	
+			parameter:'',//附加参数
+		    listRows:5,//每页显示条数
+			rollPage:3,//最多显示多少页码
+			url:url,//ajax请求地址
+			//回调函数
+			callback:function(data,page,page_data){            
+	           showHtml2(data);
+	           showPage2(page_data);
+			}
+		});
+   }
+   
+   
+   function  showHtml2(data){
+    var html = [];
+	for(var k in data){   
+		if(data[k].unit==1){
+			data[k].unit="件"
+		}
+		if(data[k].unit==2){
+			data[k].unit="千克"
+		}
+		if(data[k].unit==3){
+			data[k].unit="立方"
+		}
+    	html.push("<table class='noBorder'>");
+    	html.push("   <thead>");
+    	html.push("      <td colspan='6' data-id="+data[k].id+"><i class='templetName'>"+data[k].name+"</i>  <span>  <a href='javascript:;' class='edit_temp'>编辑</a> | <a href='javascript:;' class='dele_temp'>删除</a></span></td>");
+    	html.push("   </thead>");
+        html.push("   <tr>");
+        html.push("      <td>运送方式</td>");
+        html.push("      <td>运送到</td>");
+        html.push("      <td>首件（<span class='measurement_unit'>"+data[k].unit+"</span>）</td>");
+        html.push("      <td>运费（元）</td>");
+		html.push("      <td>续件（<span class='measurement_unit'>"+data[k].unit+"</span>）</td>");
+		html.push("      <td>运费（元）</td>");
+		html.push("   </tr>");
+		html.push("   <tr>");
+		html.push("      <td>快递</td>");
+        html.push("      <td>中国</td>");
+        html.push("      <td>"+data[k].start_number+"</td>");
+        html.push("      <td>"+data[k].start_price+"</td>");
+        html.push("      <td>"+data[k].add_number+"</td>");
+        html.push("      <td>"+data[k].add_price+"</td>");
+        html.push("   </tr>");
+        html.push("</table>");        
+	}
+	html = html.join(''); 
+    $(".template_div").html(html);
+}	
+/**
+ *显示分页
+ */
+function showPage2(data){
+    var html = ["<div class='turn-page'>"];
+    if(data['prev']){
+	    html.push("<div class='left-btn change' data-p='"+ data['prev'] +"'></div>");
+    }else{
+    	html.push("<div class='left-btn'></div>");
+    }
+	for(var k in data['page']){
+		if(data['page'][k] == '.'){
+			html.push("<div class='omit'>...</div>");                  
+		}else
+		if(data['page'][k] != data['nowPage']){
+			html.push("<div class='page-btn change' data-p='"+ data['page'][k] +"'>" + data['page'][k] + "</div>");
+		}else{
+			html.push("<div class='page-btn active'>" + data['page'][k] + "</div>");
+		}                          
+	}
+	if(data['next']){
+	    html.push("<div class='right-btn change' data-p='"+ data['next'] +"'></div>");
+	}else{
+        html.push("<div class='right-btn'></div>");
+	}
+	
+	html.push("</div>");
+	html.push("<p class='to-page'>到第");
+	html.push("   <input class='go_number' type='text' value='1'>页<input type='button' value='确定' class='go'>");
+	html.push("</p>");
+	html = html.join('');
+	$(".template_div .section-bt").html(html);
+}
+
+//编辑物流模板
+/*$(document).on('click', '.edit_temp', function(){
+	$(".search_box2").css("display","none");
+	$(".new_Template").css("display","block");
+	$(".add_Template_p1").css("display","none");
+	$(".add_Template_p2").css("display","block");
+	var id = $(this).parent().parent().attr("data-id"),
+	    name = $(this).parent().parent().find(".templetName").text(),
+	    sNum = $(this).parent().parent().parent().parent().next().find("tr:eq(1)").find("td:eq(2)").text(),
+	    sPri = $(this).parent().parent().parent().parent().next().find("tr:eq(1)").find("td:eq(3)").text(),
+	    aNum = $(this).parent().parent().parent().parent().next().find("tr:eq(1)").find("td:eq(4)").text(),
+	    aPri = $(this).parent().parent().parent().parent().next().find("tr:eq(1)").find("td:eq(5)").text();
+	    
+	$.post("http://www.orangesha.com/index.php/Home/ShippingTemplet/getShipping",{'id':id},function(res){ 
+		console.log(res)
+        $(".template_table input[name='name']").val(name)
+        if(res.data.templet_data.length!=0){
+        	$(".template_table #freeShipping_radio").attr("checked","checked");
+        	$(".template_table tbody tr:eq(3)").css("display","table-row")
+			$(".designatedCity").css("display","block") 
+	    	$(".new_Template>form>hr").css("display","block") 
+	    	$(".new_Template>form>p").css("display","block");   	 
+	    	$("#specified_input").attr("disabled",false);
+	    	$(".default_appoint input[name='start_number']").val(sNum);
+	    	$(".default_appoint input[name='start_price']").val(sPri);
+	    	$(".default_appoint input[name='add_number']").val(aNum);
+	    	$(".default_appoint input[name='add_price']").val(aPri);	    	
+	    	showAppointHtml(res.data.templet_data);	    	
+        }
+        if(res.data.templet_data.length==0){
+        	$(".template_table #freeShipping_radio2").attr("checked","checked");
+        	$(".template_table tbody tr:eq(3)").css("display","none")
+			$(".designatedCity").css("display","none") 
+	    	$(".new_Template>form>hr").css("display","none") 
+	    	$(".new_Template>form>p").css("display","none") 
+	    	$(".specifiedCondition").css("display","none")
+	    	$(".specifiedCondition input").val("")
+	    	$("#specified_input").attr("checked",false).attr("disabled",false);
+	    	$(".designatedCity").css("display","none");	    	
+        }
+        if(res.data.free_data.length==1){
+        	$("#specified_input").attr("checked","checked");
+	    	$("#newTemplate .specifiedCondition").css("display","block");	    	
+	    	$(".condition_table .selectionArea").text(res.data.free_data[0].province);
+	    	$(".condition_table select[name='send_type']").val(res.data.free_data[0].send_type);
+	    	$(".condition_table select[name='free_condition']").val(res.data.free_data[0].free_condition);
+	    	$(".condition_table input[name='free_condition_c']").val(res.data.free_data[0].free_condition_c);
+        }
+        if(res.data.free_data.length>=2){
+        	$("#specified_input").attr("checked","checked");
+	    	$("#newTemplate .specifiedCondition").css("display","block");	
+	    	showSpecifiedCondition(res.data.free_data)	    	
+        }
+        if(res.data.free_data.length==0){
+        	$("#specified_input").attr("checked",false);
+	    	$("#newTemplate .specifiedCondition").css("display","none")
+        }
+	});
+});*/
+
+//获取运送方式
+function  showAppointHtml(data){
+    var html = [];    
+    html.push('<ul>');
+	html.push('  <li>运送到</li>');
+	html.push('  <li>首件数（<span class="measurement_unit"></span>）</li>');
+	html.push('  <li>首费（元）</li>');
+	html.push('  <li>续件数（<span class="measurement_unit"></span>）</li>');
+	html.push('  <li>续费（元）</li>');
+	html.push('  <li>操作</li>');
+	html.push('<ul>');
+	for(var k in data){  		
+    	html.push('<ul class="appoint_div_ul">');
+    	html.push('   <li class="area_select">');   
+    	html.push('   </li>');
+        html.push('   <li><input type="text" name="start_number" value="'+data[k].start_number+'"></li>');
+        html.push('   <li><input type="text" name="start_price" value="'+data[k].start_price+'"></li>');
+        html.push('   <li><input type="text" name="add_number" value="'+data[k].add_number+'"></li>');
+        html.push('   <li><input type="text" name="add_price" value="'+data[k].add_price+'"></li>');
+        html.push('   <li><a class="delete-tr">删除</a></li>');
+		html.push('</ul>');
+	}
+	html = html.join(''); 
+    $(".appoint_div").html(html);
+}
+//获取指定条件包邮
+function  showSpecifiedCondition(data){
+    var html = [];
+	for(var k in data){  		
+    	html.push('<tr>');
+    	html.push('   <td><span class="selectionArea">'+data[k].province+'</span></td>');   
+    	html.push('   <td><a class="edit_area">编辑</a></td>');
+        html.push('   <td><select name="send_type" value="'+data[k].send_type+'"><option value="1">快递</option><option value="1">EMS</option><option value="1">平邮</option></select></td>');
+        html.push('   <td><select name="free_condition" value="'+data[k].free_condition+'"><option value="1">件数</option><option value="2">金额</option></select> 满 <input type="text" name="free_condition_c" class="num_packages" value="'+data[k].free_condition_c+'"> <span class="free_condition">件</span>包邮</td>');
+        html.push('   <td><button class="add_condition" onclick="return false">添加</button></td>');
+		html.push('</tr>');
+	}
+	html = html.join(''); 
+    $(".condition_table tbody").html(html);
+}
+
+//删除物流模板
+$(document).on('click', '.dele_temp', function(){
+	var id = $(this).parent().parent().attr("data-id"),
+		b  = $(this).parent().parent().parent().parent().parent();
+	$.post("http://www.orangesha.com/index.php/Home/ShippingTemplet/templetDelete",{'id':id},function(res){                 
+        alert(res.msg);
+        if(res.status==1){
+        	b.remove()
+        }
+       console.log(res.status)
+	});
+});
+
+
+$(".openService").click(function(){
+	alert("尚未开通，敬请期待！")
+})
+
+//新增运费模板
+$(".template_btn").click(function(){
+	$(".search_box2").css("display","none");
+	$(".new_Template").css("display","block");
+	$(".add_Template_p1").css("display","block");
+	$(".add_Template_p2").css("display","none");
+	$("#newTemplate")[0].reset()
+})
+//取消新增运费模板
+$(".new_Template .close_Template").click(function(){
+	$(".search_box2").css("display","block")
+	$(".new_Template").css("display","none")
+	document.getElementById('newTemplate').reset()
+})
+
+//自定义邮费
+$("#freeShipping_radio").click(function(){
+	var a = $(this).prop('checked')
+	if(a==true) {
+		$(".template_table tbody tr:eq(3)").css("display","inline-grid")
+		$(".designatedCity").css("display","block") 
+    	$(".new_Template>form>hr").css("display","block") 
+    	$(".new_Template>form>p").css("display","block");   	 
+    	$("#specified_input").attr("disabled",false)
+    	$(".template_table tbody tr:eq(3)").css("display","table-row")
+    	$(".template_table tbody tr:eq(3) td:eq(1) label:eq(0) input").prop("checked","checked")
+	}
+})
+//卖家承担运费
+$("#freeShipping_radio2").click(function(){
+	var a = $(this).prop('checked')
+	if(a==true) {
+		$(".template_table tbody tr:eq(3)").css("display","none")
+		$(".designatedCity").css("display","none") 
+    	$(".new_Template>form>hr").css("display","none") 
+    	$(".new_Template>form>p").css("display","none") 
+    	$(".specifiedCondition").css("display","none")
+    	$(".specifiedCondition input").val("")
+    	$("#specified_input").attr("checked",false).attr("disabled",false);
+    	$(".designatedCity").css("display","none");
+    	$(".template_table tbody tr:eq(3) td:eq(1) label:eq(0) input").prop("checked","checked")
+	}
+})
+
+//计价方式
+$("input[name='unit']").click(function(){
+	if($(this).val()==1){
+		$(".measurement_unit").text("件");
+	}
+	if($(this).val()==2){
+		$(".measurement_unit").text("千克");
+	}
+	if($(this).val()==3){
+		$(".measurement_unit").text("立方");
+	}
+})
+
+//选择区域
+/*$(".edit_area").click(function(){
+	$(".select_area").css("display","block");
+	select_area_val.splice(0,select_area_val.length);
+	select_city_val.splice(0,select_city_val.length);
+})*/
+
+//关闭区域选择
+$(".select_area .select_area_div_top img").click(function(){
+	$(".select_area").css("display","none");
+	$(".select_area .select_area_div_body input").attr("checked",false);
+	$(".area_div_body>div>span").css("display","none");
+	$(".area_div_body>div>ul").css("display","none");
+})
+$(".close_area").click(function(){
+	$(".select_area").css("display","none");
+	$(".select_area .select_area_div_body input").attr("checked",false);
+	$(".area_div_body>div>span").css("display","none");
+	$(".area_div_body>div>ul").css("display","none");
+})
+//城市二级菜单
+$(".area_div_body>div img").click(function(){
+	$(this).parent().find(".city_div").toggle()
+})
+//包邮条件
+$("select[name='free_condition']").change(function(){
+	if($("select[name='free_condition']").val()==1){
+		$(".free_condition").text("件")
+	}
+	if($("select[name='free_condition']").val()==2){
+		$(".free_condition").text("元")
+	}
+})
+
+$(".area_div_body>div input[name='province']").click(function(){
+	for(var i = 0;i<$(".area_div_body>div>ul li").length;i++){ 
+		if($(".area_div_body>div").eq(i).find("input[name='province']").prop("checked")==true){			
+			/*$(".area_div_body>div").eq(i).find("span").css("display","inline-block").text("("+$(".area_div_body>div").eq(i).find("ul li").length+")")*/
+		    $(".area_div_body>div").eq(i).find("ul li input").prop("checked","checked");
+		}
+		if($(".area_div_body>div").eq(i).find("input[name='province']").prop("checked")==false){			
+			/*$(".area_div_body>div").eq(i).find("span").css("display","none").text("0")*/
+		    $(".area_div_body>div").eq(i).find("ul li input").prop("checked",false);
+		}
+	}	
+})
+$(".area_div_body>div>ul>li>input[name='area']").click(function(){
+	$(this).parent().parent().parent().find("input[name='province']").prop("checked","checked")
+})
+
+/**
+ * 地址库模块
+ */
+var address = (function(flag){
+	if(flag != '4'){
+        return;
+	}
+	
+	function request1(){  	
+	    var data = new FormData($("#address_depot")[0]);  // 要求使用的html对象
+	    var url  = "http://www.orangesha.com/index.php/Home/ShippingAddress/addressAdd";
+	    /*var url_ = "{:U('MemberOrder/orderRefund')}";*/
+	    /*console.log()*/
+
+	    $.ajax({  
+	          url : url ,  
+	          type: 'POST',  
+	          data: data,  
+	          async: true,  
+	          // 下面三个参数要指定，如果不指定，会报一个JQuery的错误 
+	　　　　　       cache: false,  
+	          contentType: false,  
+	          processData: false,  
+	          success: function (res) {  	              
+	              console.log(res.time);
+	              if(res.status){                
+	                location.reload()
+	               alert("添加成功")
+	              } 
+	              if(res.status==0){
+	              	alert(res.msg);
+	              }
+	          },  
+	          error: function (returndata) {  
+	              console.log(returndata); 		              
+	          }  
+	     });  
+	}
+
+	//删除地址库
+	$(document).on('click', '.de_adress', function(){
+		a = $(this).parent().parent().attr("data-id");
+		b = $(this).parent().parent();
+			console.log(1);
+		$.post("http://www.orangesha.com/index.php/Home/ShippingAddress/delArea",{'address_id':a},function(res){                 
+	        alert(res.msg);
+	        if(res.status==1){
+	        	b.remove()
+	        }
+	       console.log(res.status)
+		});
+	});
+	
+	//编辑地址库
+	$(document).on('click', '.edit_Library', function(){
+		$("#address_depot2").css("display","block");
+		$("#address_depot").css("display","none");
+		$("#address_depot2 .save_address").attr("data-id",$(this).parent().parent().attr("data-id"))
+		$("#address_depot2 input[name='name']").val($(this).parent().parent().find("td:eq(2)").text());
+		$("#address_depot2 select[name='province']").val($(this).parent().parent().find("td:eq(3)").find(".pro_val").attr("data-id"));
+		$("#address_depot2 select[name='city']").val($(this).parent().parent().find("td:eq(3)").find(".city_val").attr("data-id"));
+		$("#address_depot2 textarea[name='address']").val($(this).parent().parent().find("td:eq(4)").text());
+		$("#address_depot2 input[name='postcode']").val($(this).parent().parent().find("td:eq(5)").text());
+		$("#address_depot2 input[name='phone']").val($(this).parent().parent().find("td:eq(6)").text());
+		$("#address_depot2 input[name='mobile_phone']").val($(this).parent().parent().find("td:eq(7)").text());
+		$("#address_depot2 input[name='company']").val($(this).parent().parent().find("td:eq(8)").text());
+	})	
+	
+	//保存编辑
+	$(".save_address").click(function(){
+		var data = {
+			'id' : $(".save_address").attr("data-id"),
+			'name' : $("#address_depot2 input[name='name']").val(),
+			'province' : $("#address_depot2 select[name='province']").val(),
+			'city' : $("#address_depot2 select[name='city']").val(),
+			'address' : $("#address_depot2 textarea[name='address']").val(),
+			'postcode' : $("#address_depot2 input[name='postcode']").val(),
+			'phone' : $("#address_depot2 input[name='phone']").val(),
+			'mobile_phone' : $("#address_depot2 input[name='mobile_phone']").val(),
+			'company' : $("#address_depot2 input[name='company']").val(),
+		}
+		$.post("http://www.orangesha.com/index.php/Home/ShippingAddress/addressUpdate",data,function(res){                 
+	        alert(res.msg);
+	        if(res.status==1){
+	        	console.log(res);
+	        	window.location.reload()
+	        }
+		});
+	})
+	//取消编辑
+	$(".cancel_save").click(function(){
+		$("#address_depot2").css("display","none");
+		$("#address_depot").css("display","block");
+	})
+
+	//添加地址库
+	$(".add_address").click(function(){
+		request1();
+	})
+
+	function  showHtml(data){
+	    var html = [];
+		for(var k in data){                    			                    		
+	    	html.push("<tr data-id="+data[k].id+">");
+	    	html.push("   <td><input type='radio'> 默认</td>");
+	    	html.push("   <td><input type='radio'> 默认</td>");
+	    	html.push("   <td>"+data[k].name+"</td>");
+	        html.push("   <td><span class='pro_val' data-id="+data[k].province+">"+data[k].province_name+"</span> <span class='city_val' data-id="+data[k].city+">"+data[k].city_name+"</span></td>");
+	        html.push("   <td>"+data[k].address+"</td>");
+	        html.push("   <td>"+data[k].postcode+"</td>");
+	        html.push("   <td>"+data[k].phone+"</td>");
+	        html.push("   <td>"+data[k].mobile_phone+"</td>");
+			html.push("   <td>"+data[k].company+"</td>");
+			html.push("   <td>");
+			html.push("        <a href='javascript:;' class='edit_Library'>编辑</a>");
+			html.push("        <a href='javascript:;' class='de_adress'>删除</a>");
+	        html.push("   </td>");
+	        html.push("</tr>");
+		}
+		html = html.join(''); 
+	    $(".adress_list tbody").html(html);
+    }
+
+    //获取地址库
+	function getAdress(){
+		var wraper = $(".section-bt");
+		var _this  = this;
+		var url    = "http://www.orangesha.com/index.php/Home/ShippingAddress/getAddressList";
+		/*ajax分页*/
+		//var arr = new Array([1,2,3], [4,5,6]);
+		
+		ajaxPage({	    
+	    	wraper:wraper,	
+			parameter:'',//附加参数
+		    listRows:5,//每页显示条数
+			rollPage:3,//最多显示多少页码
+			url:url,//ajax请求地址
+			//回调函数
+			callback:function(data,page,page_data){            
+	           showHtml(data);
+	           showPage(page_data); 
+	           //get_adressList(data)
+			}
+		});
+	}
+
+    /**
+	 *显示分页
+	 */
+	function showPage(data){
+	    var html = ["<div class='turn-page'>"];
+	    if(data['prev']){
+		    html.push("<div class='left-btn change' data-p='"+ data['prev'] +"'></div>");
+	    }else{
+	    	html.push("<div class='left-btn'></div>");
+	    }
+		for(var k in data['page']){
+			if(data['page'][k] == '.'){
+				html.push("<div class='omit'>...</div>");                  
+			}else
+			if(data['page'][k] != data['nowPage']){
+				html.push("<div class='page-btn change' data-p='"+ data['page'][k] +"'>" + data['page'][k] + "</div>");
+			}else{
+				html.push("<div class='page-btn active'>" + data['page'][k] + "</div>");
+			}                          
+		}
+		if(data['next']){
+		    html.push("<div class='right-btn change' data-p='"+ data['next'] +"'></div>");
+		}else{
+	        html.push("<div class='right-btn'></div>");
+		}
+		
+		html.push("</div>");
+		html.push("<p class='to-page'>到第");
+		html.push("   <input class='go_number' type='text' value='1'>页<input type='button' value='确定' class='go'>");
+		html.push("</p>");
+		html = html.join('');
+		$(".search_box4 .section-bt").html(html);
+	} 
+
+	/**
+     * 所在地区
+     */
+    var area = (function(){
+    	var __AREA = []; //全国区域
+        var __SELECT_AREA = {};//选择的区域
+
+	    /*
+	     * 根据选择的区域编码获取其下一级子集数据 并且缓存
+	     * @param area_no   区域编码
+	     * @param call_func 获取数据后的回调函数
+	     * */
+	    function requestArea(area_no , call_func){
+	        //如果已经获取过数据 则直接使用
+	        if(__AREA[area_no]){
+	            call_func(__AREA[area_no]);
+	        }else{
+	            $.post("{:U('Area/getArea')}",{'area_no':area_no},function(res){
+	                //先保存已经获取的区域
+	                if(!__AREA[area_no]){
+	                    __AREA[area_no] = res;
+	                }
+	                call_func(res);
+	            })
+	        }
+	    }
+
+        /*
+         *点击选择区域
+         * */
+        $(".area_select").on('change','select',function(){
+            //保存当前选择的this对象
+            var _this       = $(this);
+            var area_no     = $(this).val();//选择的区域编号
+            var select_name = $(this).attr('name');//选择的区域类型 省 市 区
+            //最多只能选择到市
+            if(select_name != 'province'){
+                //保存用户选择的区域
+                __SELECT_AREA[select_name] = area_no;   
+                return;
+            }
+            requestArea(area_no , function(data){
+                //选择省的处理
+                if(select_name == 'province'){
+                    //如果选择的是省 则追加市的下拉框
+                    var html = __HTML_OBJECT.createCityHtml(data);
+                    if(typeof(__SELECT_AREA.province) != 'undefined'){
+                        //已经生成过了市的html 则替换
+                        _this.siblings("select[name='city']").next('span').remove();
+                        _this.siblings("select[name='city']").replaceWith(html); 
+                    }else{
+                        //没有则追加
+                        _this.parent(".area_select").append(html);
+                    }           
+                } 
+                //保存用户选择的区域
+                __SELECT_AREA[select_name] = area_no;   
+            }); 
+        })
+
+        /*
+         * 动态生成html
+         * */
+        var __HTML_OBJECT = {
+            /*
+             * 生成 指定地区城市设置运费 的省下拉框
+             * @param data  区域数据
+             * */
+            createProvinceHtml : function(data){
+                var html = '<select name="province" class="template_select">'
+                    + '<option value="0">请选择...</option>';
+                for(var k in data){
+                    html = html 
+                    + "<option value='" + data[k].area_no +"'>" + data[k].area_name + "</option>"
+                }
+                html += '</select><span> 省</span>';
+                return html;       
+            },
+            /*
+             * 生成 指定地区城市设置运费 的市下拉框
+             * @param data  区域数据
+             * */
+            createCityHtml : function(data){
+                var html = '<select name="city" class="template_select">'
+                    + '<option value="0">请选择...</option>';
+                for(var k in data){
+                    html = html 
+                    + "<option value='" + data[k].area_no +"'>" + data[k].area_name + "</option>"
+                }
+                html += '</select><span> 市</span>';
+                return html;       
+            }
+        };    
+        return {
+            init : function(){
+                requestArea(0 , function(data){   
+                    //生成商品地址省  
+                    var html = __HTML_OBJECT.createProvinceHtml(data);
+                    //追加
+                    $(".area_select").append(html); 
+                });  
+            },
+            getData : function(){
+                return __SELECT_AREA;
+            }
+        }
+         
+    })();
+    area.init();
+
+	return {
+        init : function(){
+        	getAdress();
+        }
+	};
+})(title)
+
+checkTopnav();
+
+
+/**
+ * 运费模板设置模块
+ */
+(function(flag){
+	if(flag != '1'){
+        return;
+	}
+    var __AREA = []; //全国区域
+    //检测运费模板 下的地址数据
+    var validate = {
+        checkTempletData : function(data){
+            var rules = {
+                'province'     : 'require',
+                'city'         : 'require',
+                'start_number' : 'isNumber',
+                'start_price'  : 'isNumber',  
+                'add_number'   : 'isNumber',
+                'add_price'    : 'isNumber',  
+            }
+            for(var k in data){
+                for(var k1 in rules){
+                    var r = validate.methods[rules[k1]](data[k][k1]);
+                    console.log(r);
+                    if(!r){
+                        return false;
+                    }
+                }    
+            }
+            return true;
+        },
+        methods:{
+            require:function(val){
+                if(val){
+                    return true;
+                }
+                return false;
+            },
+            isNumber : function(val){
+                if(!isNaN(val)){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        }
+    }
+
+    //提交运费模板
+    $(".add_Template").click(function(){ 
+        /*商品地址数据处理*/
+        var area_select = area.getData();//获取数据
+        //检测数据
+        if(!area_select.province || !area_select.city){
+            alert('请选择商品地址');
+            return;
+        }
+        
+        /*指定地区城市设置*/
+        var new_templet_data   = template_data_area.getData();  
+        //检测数据
+        if(!validate.checkTempletData(new_templet_data)){
+            alert('指定地区城市设置运费数据不完整');
+            return;
+        }   
+        
+        /*运费模板基础数据处理*/            
+        var new_templet = {
+            'name'     : $("#newTemplate .template_table input[name='name']").val(),
+            'province' : area_select.province,
+            'city'     : area_select.city,
+            'unit'     : $("#newTemplate .template_table input[name='unit']:checked").val(),
+            'free_status' : $("#newTemplate .template_table input[name='free_status']:checked").val(),
+            'start_number' : $(".designatedCity>div>div input[name='start_number']").val(),
+            'start_price' : $(".designatedCity>div>div input[name='start_price']").val(), 
+            'add_number' : $(".designatedCity>div>div input[name='add_number']").val(),
+            'add_price' : $(".designatedCity>div>div input[name='add_price']").val()
+        };
+        
+        var data = {
+            'new_templet': new_templet , 
+            'new_templet_data' : new_templet_data
+        };
+
+        /*指定条件包邮处理*/
+        if($("#specified_input").prop("checked") == true){            
+            var new_free_condition  = free_condition.getData();
+            data.new_free_condition = new_free_condition;
+        }
+        console.log(data);       
+        $.post("http://www.orangesha.com/index.php/Home/ShippingTemplet/templetAdd",data,function(res){                     
+            alert(res.msg);
+            if(res.status){
+            	window.location.reload()
+            }
+        });
+    })
+
+    /**
+     * 指定条件包邮
+     */
+    var free_condition = (function(){
+        //删除指定条件包邮
+        $(document).on('click', '.dele_condition', function(e) {
+            $(this).parent().parent().remove(); 
+        });
+        $(document).on('click', '.edit_area', function(){
+            $(".select_area").css("display","block");
+            select_area_val.splice(0,select_area_val.length);
+            select_city_val.splice(0,select_city_val.length);
+        });
+        //指定条件包邮
+        $("#specified_input").click(function(){
+            var b = $("#specified_input").prop('checked')
+            if(b==true) {
+                $(".specifiedCondition").css("display","block")     
+            }
+            if(b==false) {
+                $(".specifiedCondition").css("display","none")      
+            }
+        })
+        //增加指定条件包邮
+        $(document).on('click', '.add_condition', function() { 
+            var html = '<tr>'
+                    + '    <td>未添加地区</td>'
+                    + '    <td><a class="edit_area">编辑</a></td>'
+                    + '    <td><select name="send_type"><option value="1">快递</option><option value="2">EMS</option><option value="3">平邮</option></select></td>'
+                    + '    <td><select name="free_condition"><option value="1">件数</option><option value="2">金额</option></select> 满 <input type="text" name="free_condition_c" class="num_packages"> <span class="free_condition">件</span>包邮</td>'
+                    + '    <td><button class="dele_condition" onclick="return false">删除</button></td>'
+                    + ' </tr>'
+                $(".condition_table tbody").append(html); 
+        })
+
+        var select_val = new Array
+        var select_area_val = new Array
+        var select_area_name = new Array
+        var select_city_val = new Array
+        $(".save_area").click(function(){
+            for(var i = 0;i<$(".area_div_body>div").length;i++){
+                if($(".area_div_body>div").eq(i).find("input[name='province']").prop("checked")==true){
+                    select_area_val.push($(".area_div_body>div").eq(i).find("input[name='province']").val());
+                    select_area_name.push($(".area_div_body>div").eq(i).find("input[name='province']").parent().text());
+                }       
+            }
+            for(var k = 0;k<$(".area_div_body>div>ul li").length;k++){
+                if($(".area_div_body>div>ul li").eq(k).find("input[name='area']").prop("checked")==true){
+                    select_city_val.push($(".area_div_body>div>ul li").eq(k).find("input[name='area']").val());
+                }
+            }   
+            $(".select_area").css("display","none");
+            $(".select_area .select_area_div_body input").attr("checked",false);
+            $(".area_div_body>div>span").css("display","none"); 
+            $(".selectionArea").text(select_area_name)
+            /*console.log(select_val)*/
+        })
+
+        return {
+            getData : function(){
+                var free_condition = [];
+                for(var i = 0;i<$(".condition_table tbody tr").length;i++){
+                    free_condition[i] ={
+                        'province' : select_area_val,
+                        'city' : select_city_val,
+                        'send_type' : $(".condition_table tbody tr").eq(i).find("td").find("select[name='send_type']").val(),
+                        'free_status' : $("#newTemplate .template_table input[name='free_status']").val(),
+                        'free_condition' : $(".condition_table tbody tr").eq(i).find("td").find("select[name='free_condition']").val(),
+                        'free_condition_c' : $(".condition_table tbody tr").eq(i).find("td").find("input[name='free_condition_c']").val()
+                    }
+                }
+                return free_condition
+            }
+        }
+    })();
+
+    /**
+     * 商品地址选择
+     */
+    var area = (function(){
+        var __SELECT_AREA = {};//选择的区域
+        /*
+         *点击选择区域
+         * */
+        $(".area_select").on('change','select',function(){
+            //保存当前选择的this对象
+            var _this       = $(this);
+            var area_no     = $(this).val();//选择的区域编号
+            var select_name = $(this).attr('name');//选择的区域类型 省 市 区
+            //最多只能选择到市
+            if(select_name != 'province'){
+                //保存用户选择的区域
+                __SELECT_AREA[select_name] = area_no;   
+                return;
+            }
+            requestArea(area_no , function(data){
+                //选择省的处理
+                if(select_name == 'province'){
+                    //如果选择的是省 则追加市的下拉框
+                    var html = __HTML_OBJECT.createCityHtml(data);
+                    if(typeof(__SELECT_AREA.province) != 'undefined'){
+                        //已经生成过了市的html 则替换
+                        _this.siblings("select[name='city']").next('span').remove();
+                        _this.siblings("select[name='city']").replaceWith(html); 
+                    }else{
+                        //没有则追加
+                        _this.parent(".area_select").append(html);
+                    }           
+                } 
+                //保存用户选择的区域
+                __SELECT_AREA[select_name] = area_no;   
+            }); 
+        })
+
+        /*
+         * 动态生成html
+         * */
+        var __HTML_OBJECT = {
+            /*
+             * 生成 指定地区城市设置运费 的省下拉框
+             * @param data  区域数据
+             * */
+            createProvinceHtml : function(data){
+                var html = '<select name="province" class="template_select">'
+                    + '<option value="0">请选择...</option>';
+                for(var k in data){
+                    html = html 
+                    + "<option value='" + data[k].area_no +"'>" + data[k].area_name + "</option>"
+                }
+                html += '</select><span> 省</span>';
+                return html;       
+            },
+            /*
+             * 生成 指定地区城市设置运费 的市下拉框
+             * @param data  区域数据
+             * */
+            createCityHtml : function(data){
+                var html = '<select name="city" class="template_select">'
+                    + '<option value="0">请选择...</option>';
+                for(var k in data){
+                    html = html 
+                    + "<option value='" + data[k].area_no +"'>" + data[k].area_name + "</option>"
+                }
+                html += '</select><span> 市</span>';
+                return html;       
+            }
+        };    
+        return {
+            init : function(){
+                requestArea(0 , function(data){   
+                    //生成商品地址省  
+                    var html = __HTML_OBJECT.createProvinceHtml(data);
+                    //追加
+                    $(".area_select").append(html); 
+                });  
+            },
+            getData : function(){
+                return __SELECT_AREA;
+            }
+        }
+         
+    })();
+    area.init();
+
+    /**
+     * 运费模板下的运费设置 区域选择等
+     */
+    var template_data_area = (function(){       
+        var __SELECT_AREA = []; //用户选择的区域数据等
+        var __NUMBER      = 0; //用户设置的区域个数
+        /*
+         * 运费数据设置
+         * */
+        $(".appoint_div").on('blur' , "input" ,function(){
+            var number = $(this).parents('.appoint_div_ul').attr('number');
+            var name   = $(this).attr('name');
+            var value  = $(this).val();
+            __SELECT_AREA[number][name] = value;
+        })
+
+        /*
+         *点击添加一行区域设置
+         * */
+        $(".appoint").click(function(){
+            requestArea(0 , function(data){     
+                //生成区域设置行的html  
+                var html = __HTML_OBJECT.createAppoint(data , __NUMBER);
+                __SELECT_AREA[__NUMBER] = {};
+                //追加
+                $(".appoint_div").append(html); 
+                __NUMBER++;
+            });
+        })
+
+        /*
+         *删除一行区域设置
+         * */
+        $(".appoint_div").on('click' , ".delete-tr" ,function(){
+            var number = $(this).parents('.appoint_div_ul').attr('number');
+            $(this).parents('.appoint_div_ul').remove();
+            delete __SELECT_AREA[number];
+        })
+        
+
+        /*
+         *点击选择区域
+         * */
+        $(".appoint_div").on('change','select',function(){
+            //保存当前选择的this对象
+            var _this       = $(this);
+            var area_no     = $(this).val();//选择的区域编号
+            var select_name = $(this).attr('name');//选择的区域类型 省 市 区
+            //当前选择的 指定地区城市设置运费 个数
+            var number      = $(this).parents('.appoint_div_ul').attr('number');
+            //最多只能选择到市
+            if(select_name != 'province'){
+                //保存用户选择的区域
+                __SELECT_AREA[number][select_name] = area_no;   
+                return;
+            }
+            requestArea(area_no , function(data){
+                //选择省的处理
+                if(select_name == 'province'){
+                    //如果选择的是省 则追加市的下拉框
+                    var html = __HTML_OBJECT.createCityHtml(data);
+                    if(typeof(__SELECT_AREA[number].province) != 'undefined'){
+                        //已经生成过了市的html 则替换
+                        _this.siblings("select[name='city']").next('span').remove();
+                        _this.siblings("select[name='city']").replaceWith(html); 
+                    }else{
+                        //没有则追加
+                        _this.parent(".area_select").append(html);
+                    }           
+                } 
+                //保存用户选择的区域
+                __SELECT_AREA[number][select_name] = area_no;   
+            }); 
+        })
+                
+
+        /*
+         * 动态生成html
+         * */
+        var __HTML_OBJECT = {
+            /*
+             * 生成 指定地区城市设置运费 的html
+             * @param data   区域数据
+             * @param number 指定地区城市设置运费 设置的个数
+             * */
+            createAppoint : function(data , number){
+                var html = '<ul class="appoint_div_ul" number="' + number + '">'
+                    + '        <li class="area_select">'
+                    +    __HTML_OBJECT.createProvinceHtml(data)//生成省select框
+                    + '        </li>'
+                    + '        <li><input type="text" name="start_number"></li>'
+                    + '        <li><input type="text" name="start_price"></li>'
+                    + '        <li><input type="text" name="add_number"></li>'
+                    + '        <li><input type="text" name="add_price"></li>'
+                    + '        <li><a class="delete-tr">删除</a></li>'
+                    + '     </ul>'; 
+                return html;
+            },
+            /*
+             * 生成 指定地区城市设置运费 的省下拉框
+             * @param data  区域数据
+             * */
+            createProvinceHtml : function(data){
+                var html = '<select name="province" class="template_data_select">'
+                    + '<option value="0">请选择...</option>';
+                for(var k in data){
+                    html = html 
+                    + "<option value='" + data[k].area_no +"'>" + data[k].area_name + "</option>"
+                }
+                html += '</select><span> 省</span>';
+                return html;       
+            },
+            /*
+             * 生成 指定地区城市设置运费 的市下拉框
+             * @param data  区域数据
+             * */
+            createCityHtml : function(data){
+                var html = '<select name="city" class="template_data_select">'
+                    + '<option value="0">请选择...</option>';
+                for(var k in data){
+                    html = html 
+                    + "<option value='" + data[k].area_no +"'>" + data[k].area_name + "</option>"
+                }
+                html += '</select><span> 市</span>';
+                return html;       
+            }
+        };
+        return {
+            getData : function(){
+                var data = [];
+                __SELECT_AREA.map(function(v){
+                   data.push(v); 
+                })
+                return data;
+            }
+        }	 
+    })();
+
+    /*
+     * 根据选择的区域编码获取其下一级子集数据 并且缓存
+     * @param area_no   区域编码
+     * @param call_func 获取数据后的回调函数
+     * */
+    function requestArea(area_no , call_func){
+        //如果已经获取过数据 则直接使用
+        if(__AREA[area_no]){
+            call_func(__AREA[area_no]);
+        }else{
+            $.post("{:U('Area/getArea')}",{'area_no':area_no},function(res){
+                //先保存已经获取的区域
+                if(!__AREA[area_no]){
+                    __AREA[area_no] = res;
+                }
+                call_func(res);
+            })
+        }
+    }    
+})(title);
+
+
+//获取快递公司
+$.post("http://www.orangesha.com/index.php/Home/Courier/getCouriersCompany",function(res){
+        	
+})
+</script>
+</body>
+</html>

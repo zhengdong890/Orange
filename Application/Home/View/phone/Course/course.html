@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>虹桥课程{$cat_name}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/myjq.js"></script>
+<meta name="description" content="" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" /> 
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/jquery.mobile-1.2.0.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/master.css" />
+<style>
+html{font-size:62.5%;}   
+*{padding:0; margin:0;font-family:"方正黑体简体";font-style:normal;font-size:1.6rem;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0}
+#wraper{width:100%;height:auto;float:left;}
+#logo{width:100%;height:auto;float:left;text-align:center;}
+#logo img{max-width:100%;max-height:auto}
+
+#nav{width:100%;height:auto;float:left;background:#242424;padding-top:5px;padding-bottom:5px;}
+#nav a{width:auto;display:block;height:auto;padding:2px 9px 2px 9px;float:left;border-radius:3px;color:white;}
+/*****banner样式*****/
+#banner{width:100%;height:100px;float:left;position:relative;overflow:hidden;}
+#banner ul{width:100%;height:100px;float:left;position:absolute;top:0;left:0}
+#banner ul a{display:block;width:100%;height:auto;float:left;}
+#banner ul a img{max-width:100%}
+
+#content{width:97%;height:auto;float:left;padding-top:20px;padding-bottom:50px;padding-left:1.5%;padding-right:1.5%;background:#FDFAEB}
+#content #course_category{width:100%;height:auto;float:left;background:#FDFAEB}
+#course_category p{width:100%;height:21px;float:left;line-height:21px}
+#course_category p span{padding-left:6px}
+#course_category p img{max-height:21px;float:left;}
+#course_category ul{width:100%;height:auto;float:left;margin-top:5px}
+#course_category ul a{display:block;width:32%;height:26px;float:left;background:#299557;border-radius:3px;margin-top:5px;margin-left:2%}
+#course_category ul a:nth-child(1){margin-left:0}
+#course_category ul a:nth-child(4){margin-left:0}   
+#course_category ul a:nth-child(5){width:40%}
+#course_category ul a img{max-width:26px;float:left;}
+#course_category ul a span{display:block;width:auto;height:26px;float:left;line-height:26px;font-size:1.3rem;color:white;padding-left:2px}
+
+#content .category{width:100;height:auto;float:left;margin-top:15px}
+.category .category_h{width:100%;height:auto;float:left;}
+.category_h b{background:#269258;color:white;}
+.category ul{width:100%;height:auto;float:left;padding-bottom:80px;margin-top:8px;border:1px solid #E8E4D8;box-sizing:border-box;}
+.category ul li{width:48%;height:auto;float:left;padding-top:5px;margin-left:1%}
+.category ul li .course_img{width:96%;height:120px;margin-left:2%;float:left;}
+.course_img p{display:block;width:100%;height:120px;text-align:center} 
+.course_img p img{max-width:100%;max-height:100px;} 
+.category ul li h2{width:100%;height:30px;float:left;line-height:15px;text-align:center;font-size:1.3rem}
+.category ul li .guankan{width:100%;height:auto;float:left;text-align:center;font-size:1.2rem}
+.category ul li .guankan span{font-size:1.2rem}   
+.category ul li .comment{float:left;margin-left:10px;font-size:1.2rem;color:black}
+.category ul li .zan{float:right;margin-right:10px}
+
+#footer{width:100%;height:auto;float:left;background:#474747;padding-top:15px;padding-bottom:20px}
+#footer p{width:100%;height:auto;float:left;text-align:center;font-size:1.4rem;margin-top: 2px}
+</style>
+<body>
+<div id="wraper">
+    <!-- logo -->
+            <div id="logo">
+                    <div><img src="__PUBLIC__/images/header.png" alt=""></div>
+            </div>
+    <!-- logo结束 -->
+            <div id="nav">
+                     <a href="{:U('index')}" class="" style="margin-left:15%">首页</a>
+                     <a href="{:U('course')}" style="background:#3B3622;">课程</a>
+             </div>
+            <div id="content">
+                <div class="news">
+	               <div class="title ui-bar-f ui-grid-a"><span class="ui-block-a">课程分类</span><span class="ui-block-b"><a data-role="button" data-inline="true"></a></span></div>
+		           <div class="ClassNava">
+					    <div class="NavTree">
+							  <ul>
+								<volist name="course_category" id="v">
+								  <li><A href='{:U('course',array('cat_id'=>$v['id']))}'>{$v['cat_name']}</A> </li>
+								</volist>  
+							  </ul>
+					          <div class='clearfix'></div>
+					     </div>
+		            </div>
+		            <div class="product">
+			              <div class="title ui-bar-f ui-grid-a"><span class="ui-block-a">{$cat_name}</span><span class="ui-block-b"><a href="{:U('course',array('cat_id'=>$v['id']))}" data-role="button" data-inline="true"></a></span></div>
+				                 <ul class="product_con ui-grid-b">
+									 <volist name="courses" id="v" key="k">    
+									 <li  <if condition="$k eq 1">class="ui-block-a"<else/><if condition="$k eq 2">class="ui-block-b"<else/>class="ui-block-c"</if></if>>
+									     <a href="{:U('course_evaluate',array('course_id'=>$v['course_id']))}">
+									     <div>
+									     <if condition="$v['course_thumb'] neq ''">
+									          <img src="__ROOT__{$v['course_thumb']|substr=1}" alt="{$v1['course_name']}">
+									     <else/>
+									          <img src="__PUBLIC__/images/01.jpg" alt="{$v1['course_name']}">
+									      </if>
+									      </div>
+									      <p>{$v['course_name']}</p>
+									      </a> 
+									  </li>	
+									  </volist> 				          
+								 </ul>
+						  </div>                         
+               </div>
+<!--                      <div id="course_category">
+                            <p><img src="__PUBLIC__/images/zan.png"/><span>彩虹课程</span></p>
+                            <ul>
+                                <volist name="course_category" id="v">
+                                  <a href="{:U('course',array('cat_id'=>$v['id']))}"><img src="__PUBLIC__/images/01.png"/><span>{$v['cat_name']}</span></a>
+                                 </volist> 
+                            </ul>
+                     </div>
+                     <div class="category">
+                            <p  class="category_h"><span>{$cat_name}</span></p>
+                            <ul>
+                                 <volist name="courses" id="v">
+                                    <li style="border-left:0">
+                                          <a class="course_img" href="{:U('course_evaluate',array('course_id'=>$v['course_id']))}">
+                                          <p><if condition="$v['course_thumb'] neq ''">
+                                          <img src="__ROOT__{$v['course_thumb']|substr=1}" alt="">
+                                          <else/>
+                                          <img src="__PUBLIC__/images/01.jpg" alt="">
+                                          </if></p>
+                                          </a>
+                                          <h2>{$v['course_name']}</h2>
+                                          <p class='guankan'><span class="number">766</span>位同学观看</p>
+                                          <a class='comment' href="{:U('course_evaluate',array('course_id'=>$v['course_id']))}">评价</a>
+                                          <a class='zan'><img src="__PUBLIC__/images/lie.png"/></a>
+                                    </li>
+                                   </volist> 
+                            </ul>
+                    </div> -->
+            </div>
+    <!-- 主要内容结束    -->
+    <!-- 底部开始    -->
+    <div id="footer">
+          <p><img src=""/></p>
+          <p style="color:white">0731-85281779</p>
+          <p style="color:#868686">虹桥小学网权版所有 办学许可证：111005555555 hongqiao.com</p>
+    </div>
+    <!-- 底部结束    -->
+</div>
+</body>
+<script type="text/javascript">
+var w;  
+$(window).load(function(){
+	w=($().getOs())['width'];
+    setcss();             
+})
+
+//监听屏幕尺寸发生变化
+$(window).resize(function(){
+    var now_w=($().getOs())['width'];
+    if(now_w!=w){  
+       w=now_w;
+       setcss();       
+    }
+})
+
+function setcss(){
+	$(".course_img p").css('width',w*0.48+'px');	
+}
+</script>
+</html>

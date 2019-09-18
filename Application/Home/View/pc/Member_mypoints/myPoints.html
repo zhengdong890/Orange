@@ -1,0 +1,157 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	
+<title>个人中心-我的积分</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<style>
+.section-bt{width:100%;height:auto;float:left;margin-top:40px;margin-bottom:20px;}
+.section-bt .btns{line-height: 42px;}
+.section-bt .btns p,.section-bt .btns label,.section-bt .btns label input{display: inline-block;}
+.section-bt .btns label p{padding-left: 10px;}
+.section-bt .btns .btn{margin-left: 32px;border:1px #d5d5d5 solid;padding:0 10px;border-radius: 5px;cursor: pointer;}
+.section-bt .turn-page{width:auto;height:auto;float:left;}
+.section-bt .turn-page .omit{border:none;}
+.section-bt .turn-page .omit:hover{border:none;background-color: transparent;color:#d5d5d5;}
+.section-bt .turn-page div,.section-bt .to-page input{width: 32px;height:32px;border:1px #d5d5d5 solid;display: inline-block;margin-left: 12px;
+    cursor: pointer;vertical-align: top;line-height: 32px;text-align: center;}
+.section-bt .turn-page .active{background-color: #ff8448;color:#fff;}
+.section-bt .turn-page>div:hover{border-color: #ff8448;}
+.section-bt .turn-page .right-btn,.section-bt .turn-page .left-btn{width: 80px;}
+.section-bt .to-page{width:auto;float:left; margin-left: 20px;}
+.section-bt .to-page input{margin:0 7px;vertical-align: middle;}
+.section-bt .to-page input[type="button"]{background-color: #fff;width: 54px; font-family: "微软雅黑";}
+
+.btn_addimg{position:relative;}
+.btn_addimg input{width:100px;position:absolute;left:0;top:0;filter:alpha(opacity=50);-moz-opacity:0;-khtml-opacity:0;opacity:0;}
+.mypoints1{color:#000;font-weight: bold; width: 978px; border: 1px solid #D5D5D5; background-color: #fff;height: 80px;float: right;margin-top: 30px;padding: 30px;box-sizing: border-box;}
+.mypoints2{width: 978px; border: 1px solid #D5D5D5; background-color: #fff;min-height: 200px;float: right;margin-top: 30px;padding: 15px 25px;;box-sizing: border-box;}
+.mypoints3{width: 978px; border: 1px solid #D5D5D5; background-color: #fff;height: 256px;float: right;margin-top: 30px;padding: 20px;box-sizing: border-box;}
+.point{color: #FF6603; font-weight: bold;}
+.point_btn{cursor: pointer; width: 200px;background-color: #FF6603;color: #fff;height: 35px;margin-top: -10px; border-radius: 4px;float: right;font-family: "微软雅黑";}
+.mypoints2>span{color: #FF6603;}
+.mypoints2>select{ margin-left: 550px;font-family: "微软雅黑";cursor: pointer;}
+.mypoints2>table{ width: 100%;margin-top: 12px;}
+.mypoints2>table td{ color: #000; text-align: center; padding: 6px 0px; border-color: #EFEFEF;}
+.mypoints2>table thead td{ background-color: #EEEEEE; border: 1px solid #EEEEEE; font-weight: bold;}
+.mypoints2>table tbody td:first-of-type{ color: #999;border-left-color: #fff;}
+.mypoints2>table tbody td:nth-of-type(3){ color: #333; font-weight: bold;border-right-color: #fff;}
+.mypoints3>p{ color: #000;font-weight: bold;}
+.mypoints3> ul li{ margin-top: 20px;}
+.mypoints3> ul li p:first-of-type{ color: #000;font-weight: bold;}
+.addPoint{color: #FF6603;}
+.reducePoint{ color: #37A4A2;}
+.Pagination a:hover,.Pagination .current{background-color: #37A3A3;color: #ffffff; }
+.Pagination{position: relative;z-index: 100; float: right;height: auto;_height: 45px; line-height: 20px;margin-right: 240px;_margin-right: 10px; color:#565656;margin-top: -15px;_margin-top: 20px; clear:both;}
+.Pagination a,.Pagination span{ font-size: 12px;text-decoration: none;display: block;float: left;color: #565656;border: 1px solid #ccc;padding:2px 17px;line-height: 34px;margin: 0 2px;text-align: center;}
+.page_btn{ width: 92%;position: absolute; bottom: 44px;text-align: right;}
+.page_btn>ul{overflow: auto;display: inline-flex;}
+.page_btn>ul li{ float: left; width: 30px; height: 30px; line-height: 30px; text-align: center; border: 1px solid #DFDFDF;margin-right: 8px;}
+.page_btn>ul .active{background-color: #37A3A3; color: #fff;}
+.page_btn>div{display: inline-block;margin-left: 20px;}
+.page_btn>div span{ color: #37A3A3;}
+.page_btn>div input:first-of-type{width: 36px;height: 26px;border-radius: 4px;padding-left: 4px;margin: 0px 4px; border: 1px solid #dfdfdf;}
+.page_btn>div input:nth-of-type(2){font-family: "微软雅黑"; background-color: #37A3A3;border: 1px solid #37A3A3; color: #fff; width: 50px; height: 26px; border-radius: 4px;}
+
+    <script>
+</style>
+<!-- www.orangesha.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?54f6f54d47704101dc27b337de5fd6c3";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->	
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="MemberPublic:MemberLeft" />  
+        <div class="mypoints1">          
+	                  可用积分 <span class="point">{$mem.use_score}</span>&nbsp;&nbsp;&nbsp;&nbsp;去年过期的积分 <span class="point">{$mem.over_score}</span>（已于2017.12.31过期）        <a href="{:U('Integralmall/index')}" target="_blank"><button class="point_btn">积分商城</button></a> 	
+        </div>
+        <div class="mypoints2">
+        	<span>积分明细</span>
+        	<select>
+        	   <option>最近三个月积分记录</option>
+        	</select>
+        	<table>
+        		<thead>
+        			<tr>
+        			   <td>日期</td>
+        			   <td>收入/支出</td>
+        			   <td>详细说明</td>
+        			</tr>
+        		</thead>
+        		<tbody>
+                <foreach name="sco" item="vo">
+        			<tr>
+        				<td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+        				<td><span class="addPoint">+{$vo.score}</span></td>
+        				<td><if condition="$vo.type eq 1">新用户注册送300积分<elseif condition="$vo.type eq 2"/>企业认证送300积分<elseif condition="$vo.type eq 3"/>登入送10积分<elseif condition="$vo.type eq 4"/>采购送10000积分<elseif condition="$vo.type eq 5"/>企业开店送1000积分<elseif condition="$vo.type eq 6"/>推荐企业开店送300积分<elseif condition="$vo.type eq 7"/>分享送10积分</if></td>
+        			</tr>
+        		</foreach>
+        		</tbody>
+                
+        	</table>
+        	<div class='section-bt'></div> 
+            <div class="Pagination">
+                {$page} 
+
+        </div> 
+        <div>共<span> {$num} </span>页</div>
+        </div>
+        <div class="mypoints3">          
+	         <p>e橙优品积分使用常见问题</p>
+	         <ul>
+	         	<li>
+	         		<p>1.积分的有效期</p>
+	         		<p>积分的有效期一年，即从获得积分开始至次年年底，预期自动作废。</p>
+	         	</li>
+	         	<li>
+	         		<p>2.积分是否能兑现</p>
+	         		<p>不能兑现，不可转让。</p>
+	         	</li>
+	         	<li>
+	         		<p>3.积分如何获取</p>
+	         		<p>用户在e橙优品进行注册、购物、商品评价、企业认证等操作都可以获得积分。具体获得积分规则详见e橙优品积分规则。</p>
+	         	</li>
+	         </ul>
+        </div>
+    </div>
+</div>
+<!-- /主体 -->
+<include file="Public:footer" />  
+</body>
+<script type="text/javascript">
+//判断左边导航
+function checkNav(){
+	$(".user-left-wrap .list:eq(3)>ul>li:eq(1) a").css("color","#ff6600")
+}
+checkNav()
+
+
+</script>
+</html>

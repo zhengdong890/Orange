@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="{$seo['keywords']}">
+<meta name="description" content="{$seo['description']}"">
+<meta name="copyright" content="深圳市橙橙网络科技有限公司(www.orangesha.com)版权所有">
+<meta name="author" content="橙橙分享"> 
+<title>{$seo['title']}</title>
+
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+  <link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+  <!--[if (gte IE 9)|!(IE)]><!-->
+  <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-2.0.3.min.js"></script>
+  <!--<![endif]-->
+  <!--[if lte IE 8 ]>
+  <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+  <![endif]-->
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/home.css" type="text/css">
+    <link rel="stylesheet" href="/Public/Orange/script/jquery.kinMaxShow/base.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.css">
+    <link rel="shortcut icon" href="/Public/Home/images/ee.ico" type="image/x-icon">
+    
+    <link href="{:C('STATIC_URL')}/Home/css/caigou.css" rel="stylesheet">
+    <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.js"></script>
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/tool.js"></script>
+</head>
+<body >
+<style>
+.section-bt{width:100%;height:auto;float:left;margin-top:20px}
+.section-bt .btns{line-height: 42px;}
+.section-bt .btns p,.section-bt .btns label,.section-bt .btns label input{display: inline-block;}
+.section-bt .btns label p{padding-left: 10px;}
+.section-bt .btns .btn{margin-left: 32px;border:1px #d5d5d5 solid;padding:0 10px;border-radius: 5px;cursor: pointer;}
+.section-bt .turn-page{width:auto;height:auto;float:left;margin-left:38%;}
+.section-bt .turn-page .omit{border:none;}
+.section-bt .turn-page .omit:hover{border:none;background-color: transparent;color:#d5d5d5;}
+.section-bt .turn-page div,.section-bt .to-page input{width: 32px;height:32px;border:1px #d5d5d5 solid;display: inline-block;margin-left: 12px;
+    cursor: pointer;vertical-align: top;line-height: 32px;text-align: center;}
+.section-bt .turn-page .active{background-color: #ff8448;color:#fff;}
+.section-bt .turn-page>div:hover{border-color: #ff8448;}
+.section-bt .turn-page .right-btn,.section-bt .turn-page .left-btn{ width:70px;}
+
+.section-bt .to-page{width:auto;float:right;}
+.section-bt .to-page input{margin:0 7px;vertical-align: middle;}
+.section-bt .to-page input[type="button"]{background-color: #fff;width: 54px;}
+.firm-right>div{ margin-bottom:4px;width:100%; height:58px; overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;}
+</style>
+<!-- 头部 -->
+<include file="Public:header_top" />
+<div class="n-bCol3 bg">
+    <div class="header mar1200c posRel">
+        <!--<div class="header-right fRi">
+        	<ul style="list-style:none;margin:6px 0px 0px 30px; width: 290px; height: 60px; background: url({:C('STATIC_URL')}/images/images/header-right_03.jpg) no-repeat;" >       
+                <a href="javascript:void(0);" onclick="Openwindow()"><li style="margin-left: -6px; float:left; height: 60px; line-height: 100px;">免费申请</li></a>
+                <li style="float:left;margin-left:71px; height: 60px; line-height: 100px;">填写材料</li> 
+                <li style="float:left;margin-left:75px; height: 60px; line-height: 100px;">提交成功</li>         
+            </ul>
+        </div>-->  
+        <a class="logo" href="{:U('Index/index')}" title="e橙优品 - 工业品超市/MRO采购服务平台"></a>
+        <div class="clear"></div>
+    </div>
+</div>
+    <!-- body -->
+    <div class="tenancy">
+        <div class="tenancy-nav">
+          <ul>
+            <li><a href="http://www.orangesha.com/plcg.html">首页</a></li>
+            <li><a href="{:U('BulkPurchase/projectRules')}">批量采购规则</a></li>
+            <li class="current"><a href="{:U('BulkPurchase/tenancy')}">名企专区</a></li>
+          </ul>
+        </div>
+        <div class="tenancy-content">
+            <div class="places">当前位置：名企专区首页 > 
+                <span class="current">名企专区</span>
+            </div>
+            <div class="option">
+                <ul class="industries type">
+                    <li class="text">行业</li>
+                    <volist name="type" id="cat">
+                    <li><a href="javascript:void(0);" data-id="{$cat.id}" class="acat">{$cat.name}</a></li>
+                    </volist>
+                </ul>
+                <ul class="industries locality">
+                    <li class="text">地区</li>
+					<volist name="area" id="cci">                 
+					<li >
+					<a  href="javascript:void(0);" data-id="{$cci.id}" class="ali"> {$cci.area_name}</a>
+					</li>				 
+                    </volist>     
+                </ul>
+                <ul class="industries brands">
+                    <li class="text">品牌</li>
+	                <volist name="brand" id="brand">     				
+                    <li>
+                    <a href="javascript:;" data-id="{$brand.id}" class="abrand">
+                    <img src="{$brand.thumb|substr=1}" />
+                    </a>
+                    </li>
+	                </volist>  				  
+                </ul>
+                <ul class="firm" id="test">
+                <volist name="list" id="vo">
+                    <a href="{$vo.url}" target="_blank">
+	                    <li>
+	                        <div class="firm-left">	                          
+	                            <img src="__ROOT__{$vo.img|substr=1}" alt="">	                          
+	                        </div>
+	                        <div class="firm-right">
+	                            <span style='font-size:18px'>{$vo.name}</span>
+	                            <span style='color:red; float: right;'>{$vo.area_name}</span>
+	                            <div>
+	                            	<p>{$vo.content|html_entity_decode}</p>  
+	                            </div>                          
+	                            <p>主营： <span style="color: red;">{$vo.keyword}</span></p>
+	                        </div>
+	                    </li>
+                    </a>
+                 </volist>  
+                </ul>
+                <div style="clear:both;"></div>
+                <div class="section-bt" id="pg">
+                       {$page}
+                </div> 
+              
+            </div>
+        </div>
+    </div>
+    <div class="clear" style="clear:both;"></div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- /底部 --> 	
+</body>
+<script type="text/javascript">
+var paramer_arr = {$paramers};
+    paramer_arr['p'] = 1;
+
+/*区域地址*/
+var area = (function(){
+ 	var brand = {};
+    $(".locality").on('click','a',function(){   
+        var id = $(this).attr('data-id');           
+        paramer_arr['area_id'] = id;
+    	window.location.href  = getUrl(paramer_arr);        
+    })	
+})();
+
+/*类型地址*/
+var type = (function(){
+    $(".type").on('click','a',function(){
+        var id = $(this).attr('data-id');
+        paramer_arr['type_id'] = id;
+    	window.location.href  = getUrl(paramer_arr);
+    })    
+})();
+
+/*品牌地址*/
+var brand = (function(){
+	var brand = {};
+    $(".brands").on('click','a',function(){   
+        var id = $(this).attr('data-id');           
+            paramer_arr['brand_id'] = id;
+    	    window.location.href  = getUrl(paramer_arr);        
+    })    
+})();
+
+function getUrl(paramer_arr){
+    var paramer = '';
+    for(var k in paramer_arr){
+
+        paramer+='&'+ k + '=' + paramer_arr[k];
+    }
+    paramer = paramer.substring(1);
+    return "{:U('tenancy')}" + '&' + paramer;
+}	
+</script>
+</html>

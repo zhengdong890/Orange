@@ -1,0 +1,104 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>我的商城</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/sellerMall.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->	
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+	 <div class="mar1200c clearfix">       
+        <include file="MemberPublic:MemberLeft" />     
+     	   <div class="btn-box">
+     	 	   <div class="applyBtn">免费申请商城</div>
+                  <p>申请到通过预计1~7个工作日，了解更多请看<a id="guize" href="{:U('SellerRule/ruleList')}" target="_blank">商城规则必看</a></p> 
+     	       </div> 
+           </div>
+           <div class="btn-box2">
+     	 	   <div class="applyBtn2">正在审核...</div>
+                  <p>请您耐心等待，预计将于7个工作日前完成审核</p> 
+     	       </div> 
+          </div>
+          <div class="btn-box3">
+     	 	   <div class="applyBtn3">恭喜您审核通过</div>
+                  <p><a>立即创建商城</a></p> 
+     	       </div> 
+          </div>
+     </div>     
+</div>
+<!-- /主体 -->
+<include file="Public:footer" />  
+<script>
+    //申请时间
+              
+	/*function time(){
+	  var date=new Date();  
+	  var time=date.getFullYear()+"-"+check(date.getMonth()+1)+"-"+check(date.getDate()+2)+" "+check(date.getHours())+":"+check(date.getMinutes())+":"+check(date.getSeconds())+" ";
+	document.getElementById("leftTime").innerText=time;	 	 
+	}	
+	 
+	 function check(n){
+		 if(n<10){
+			 n="0"+n;
+			 }
+			 return n;
+		 }*/
+
+    
+    
+    //点击申请商城
+	$(".applyBtn").click(function(){
+	   $.post("{:U('MemberCenter/mallApplication')}", function(res){
+           console.log(res) 
+           if(res.status==0){
+           	alert(res.msg);
+           	window.location.href="{:U('MemberCenter/businessQualification')}";
+           }else{
+           	$(".btn-box").css("display","none");
+	        $(".btn-box2").css("display","block");
+	         
+           }
+		})	 
+		time();
+     })
+    
+    //判断卖家是否开通商店
+    	$.post("{:U('MemberCenter/getMallData')}", function(res){
+            console.log(res.code);
+            if(res.code==1){
+            	$(".btn-box").css("display","block");
+            }            
+            if(res.code==2){
+            	$(".btn-box2").css("display","block");
+            	$(".btn-box").css("display","none");
+            	document.getElementById("leftTime").innerText=res.time
+            }
+            if(res.code==3){
+               window.location.href="{:U('Seller_order/sellerIndex')}";	
+            }
+		});
+    
+    
+ 
+
+</script>
+</body>
+</html>

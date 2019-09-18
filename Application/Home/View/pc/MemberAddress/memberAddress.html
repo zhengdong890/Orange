@@ -1,0 +1,447 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	
+<title>个人中心-地址管理</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/validate.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<style>
+#select_area{position:fixed;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9999;display:none}
+#select_area .select_area{width:100%;height:100%;display:table-cell;vertical-align:middle;text-align:center;}
+#select_area .select_area ul{width:100%;height:auto;float:left;background:white;border-radius:5px;padding-bottom:30px;padding-top:30px;}
+#select_area .select_area ul div{width:100%;height:auto;float:left;margin-top:15px;}
+#select_area h2{width:100%;height:auto;float:left;text-align:center}
+#select_area li{width:100%;height:auto;font-size:1.5rem;margin:0 auto} 
+#select_area p{width:110px;height:auto;margin:40px auto;}       
+#select_area p .btn{width:50px;height:30px;border-radius:4px;background:green;text-align:center;line-height:30px;display:block;color:white;float:left;margin-left:5px}      
+#select_area input{height:30px;width:70%;border:1px solid black;border-radius:4px}     
+
+.modal_box{width: 100%;height: 100%; position: fixed;top: 0; left: 0; background-color: rgba(0,0,0,0.5);display: none;}
+.modal_box .edit_delivery_address{ width: 700px; padding: 20px; margin: 200px auto; background-color: #fff;}
+.modal_box .edit_delivery_address table{margin: 20px 40px;}  
+.modal_box .edit_delivery_address table td{line-height: 40px;}
+.modal_box .edit_delivery_address table tr td:first-of-type{text-align: right;}
+.modal_box .edit_delivery_address table td i{color: #ff6600;}
+.modal_box .edit_delivery_address>div:first-of-type{width: 100%; height: 40px;font-size: 16px;}
+#submit_butt2,#submit_reset2{font-family: "微软雅黑";}
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->   
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="MemberPublic:MemberLeft" />  
+        <div class="user-right marT20 box-s-c1 fRi">
+            
+		    <div class="user-box vAlignBottom ">
+		        <div class="user-r-title user-tl-m1 clearfix">
+		            <div class="fRi user-t-fn clearfix">
+		                <span class="paddL15 f-style-1 fRi marT10">您已经创建 <em class="cCol1 adress_num">0</em> 个收货地址   最多可创建 <em class="cCol1">10</em> 个</span>
+		                    <a href="#" id="add_address" class="disInBlock butt03-a bCol1 butt-style-3 f-cCol4" data-val="0">+新增收货地址</a>
+		                    
+		            </div>
+		            <span class="f-cCol3 disInBlock marT8">收货地址管理</span>
+		        </div>
+		        <!-- 新增收货地址 -->
+		        <div id="addr_box" class="table-box table-style-1 marT80 marB50 disNone">
+		        	<form id="addressForm">
+			            <table class="noBorder" cellpadding="0" cellspacing="0">
+			                <tr>
+			                    <td class="name-tab"><i>*</i><span>收货人：</span></td>
+			                    <td class="cont-tab">
+			                        <input type="text" id="name" name='name' class="txt03 txt-style-5" placeholder="请输入收货人姓名" />
+			                    </td>
+			                    <td class="prompt"></td>
+			                </tr>
+			                <tr>
+			                    <td class="name-tab vAlignTop s-1" rowspan="3"><i>*</i><span>地址：</span></td>
+			                    <td class="cont-tab">
+			                        <select class="area_1" data-flag='1'>
+						                
+						            </select>
+						            <select class="area_2" data-flag='2'>
+			
+						            </select>
+						            <select class="area_3" data-flag='3'>
+			
+						            </select>
+			                    </td>
+			                    <td></td>
+			                </tr>
+			                <tr>
+			                    <td class="cont-tab">
+			                        <input type="text" id="addr" disabled name="address" value="" class="txt03 txt-style-6" />
+			                    </td>
+			                    <td class="prompt"></td>
+			                </tr>
+			                <tr>
+			                    <td class="cont-tab">
+			                        <input type="text" id="addr" name="address_xx" class="txt03 txt-style-6" placeholder="请详细输入你的街道地址" />
+			                    </td>
+			                    <td class="prompt"></td>
+			                </tr>
+			                
+			                <tr>
+			                    <td class="name-tab"><i>*</i><span>手机：</span></td>
+			                    <td class="cont-tab">
+			                        <input type="text" id="mobile" name="telnum" class="txt03 txt-style-1" placeholder="手机号" />
+			                    </td>
+			                    <td class="prompt"></td>
+			                </tr>
+			                <tr>
+			                    <td class="name-tab"><span>固定电话：</span></td>
+			                    <td class="cont-tab">
+			                        <input type="text" id="phone" name="telnum_by" class="txt03 txt-style-1" placeholder="区号-固定电话" />
+			                    </td>
+			                    <td class="prompt"></td>
+			                </tr>
+			                <tr>
+			                    <td class="name-tab"></td>
+			                    <td class="cont-tab">
+			                        <input type="button" id="submit_butt" class="butt01 marT20 bCol1 f-cCol4 butt-style-2" value="保存收货地址"   data-aid="-1"><input id="submit_reset" type="button" class="butt01 marL16 bCol3 f-cCol4 butt-style-3" value="取消">
+			                    </td>
+			                    <td></td>
+			                </tr>
+			            </table>
+		            </form>
+		        </div>
+		        <!-- 新增收货地址 End -->
+		        <!-- 地址管理 -->
+		        
+		        <div class="addr-items">
+		            <volist name="address" id="v">
+		            <div class="item disTable2">
+		                <span class="disTable-cell2 cell-name">{$v['name']}</span>
+		                <span class="disTable-cell2 cell-addr">{$v['address']}</span>
+		                <span class="disTable-cell2 cell-addr_xx">{$v['address_xx']}</span>
+		                <span class="disTable-cell2 cell-moblie">{$v['telnum']}</span>		                
+		                <span class="disTable-cell2 cell-fn">
+		                	<a class="cCol3 editAddress" href="javascript:void(0)" data-id={$v["id"]}>编辑</a>&nbsp;&nbsp;
+		                    <a class="cCol3" href="javascript:void(0)" onclick="delAddr({$v['id']})">删除</a>
+		                </span>
+		                <if condition="$v.is_use eq 1"><span style="display: inline-block; height:22px;margin-left: 20px;">默认地址</span>
+		                    <else />
+		                     <span class="disTable-cell2 cell-butt">
+		                    <a class="butt04-a set_default" href="javascript:void(0)"  onclick="maddress({$v['id']},this)" >设置默认地址</a>
+		                </if>
+		               
+		                </span>
+		                
+		            </div>  
+		            </volist>    
+		        </div>
+		
+		    </div>
+
+        </div>
+    </div>
+    <!--编辑收货地址-->
+    <div class="modal_box">
+    	<div class="edit_delivery_address" data-id>
+    		<div>
+    			编辑地址
+    			<hr />
+    		</div>   		
+	    	<table class="noBorder" cellpadding="0" cellspacing="0">
+	            <tr>
+	                <td class="name-tab"><i>*</i> <span>收货人：</span></td>
+	                <td class="cont-tab">
+	                    <input type="text" id="name2" name='name' class="txt03 txt-style-5" placeholder="请输入收货人姓名" />
+	                </td>
+	                <td class="prompt"></td>
+	            </tr>
+	            <tr>
+	                <td class="name-tab vAlignTop s-1" rowspan="3"><i>*</i> <span>地址：</span></td>
+	                <td class="cont-tab">
+	                    <select class="area_1" data-flag='1'>
+			                
+			            </select>
+			            <select class="area_2" data-flag='2'>
+	
+			            </select>
+			            <select class="area_3" data-flag='3'>
+	
+			            </select>
+	                </td>
+	                <td></td>
+	            </tr>
+	            <tr>
+	                <td class="cont-tab">
+	                    <input type="text" id="addr2" disabled name="address" class="txt03 txt-style-6" />
+	                </td>
+	                <td class="prompt"></td>
+	            </tr>
+	            <tr>
+	                <td class="cont-tab">
+	                    <input type="text" id="addr2_1" name="address_xx" class="txt03 txt-style-6" placeholder="请详细输入你的街道地址" />
+	                </td>
+	                <td class="prompt"></td>
+	            </tr>
+	            
+	            <tr>
+	                <td class="name-tab"><i>*</i> <span>手机：</span></td>
+	                <td class="cont-tab">
+	                    <input type="text" id="mobile2" name="telnum" class="txt03 txt-style-1" placeholder="手机号" />
+	                </td>
+	                <td class="prompt"></td>
+	            </tr>
+	            <tr>
+	                <td class="name-tab"><span>固定电话：</span></td>
+	                <td class="cont-tab">
+	                    <input type="text" id="phone2" name="telnum_by" class="txt03 txt-style-1" placeholder="区号-固定电话" />
+	                </td>
+	                <td class="prompt"></td>
+	            </tr>
+	            <tr>
+	                <td class="name-tab"></td>
+	                <td class="cont-tab">
+	                    <button id="submit_butt2" class="butt01 marT20 bCol1 f-cCol4 butt-style-2" data-aid="-1">保存修改</button><button id="submit_reset2" class="butt01 marL16 bCol3 f-cCol4 butt-style-3">取消</button>
+	                </td>
+	                <td></td>
+	            </tr>
+	        </table>
+	    </div>
+    </div>
+</div>
+	<!-- /主体 -->
+<include file="Public:footer" />  
+<script type="text/javascript">
+//判断左边导航
+function checkNav(){
+	$(".user-left-wrap .list:eq(0)>ul>li:eq(3) a").css("color","#ff6600")
+}
+checkNav()
+
+var area = (function(){
+	var address = [];
+	$("#add_address").on("click",function(){
+	    getArea(".area_1",0);
+	    $("#addr_box").show();
+	});
+	$(".editAddress").on("click",function(){
+	    getArea(".area_1",0);
+	})
+    
+    $("select").change(function(){
+        var flag = $(this).attr('data-flag');
+        getArea($(this),parseInt(flag));
+    })
+
+    function getArea(obj,n){ 
+    	if(n == 0){
+	        resquestArea(0,function(data){
+	        	var html = ["<option value='0'>请选择...</option>"];
+	        	for(var k in data){
+	        		html.push("<option value='"+data[k]['area_no']+"'>"+data[k]['area_name']+"</option>");
+	        	}
+	        	html = html.join('');
+	        	n = String(n+1);
+	            $(".area_" + n).html(html);
+		    });    		
+    	}else{
+    		var area_no = obj.val();
+            resquestArea(area_no,function(data){
+	        	var html = ["<option value='0'>请选择...</option>"];
+	        	for(var k in data){
+	        		html.push("<option value='"+data[k]['area_no']+"'>"+data[k]['area_name']+"</option>");
+	        	}
+	        	html = html.join('');
+	        	address[n]   = obj.find("option:selected").text();
+	        	address[n+1] = '';
+	        	address[n+2] = '';
+	        	n++;
+	            $(".area_" + n).html(html);
+	            var address_val = address.join(' ');
+                $("input[name='address']").val(address_val);
+		    });        		
+    	}   	
+    }
+
+	/*获取地区*/
+	function resquestArea(area_no,callback){
+	    $.post("{:U('MemberCenter/getArea')}",{'area_no':area_no},function(res){
+	        callback(res);
+	    });	
+	}
+
+	return{
+		getAddress:function(){
+			return address.join(' ');
+		}
+	}	
+})();
+
+
+
+var address_add = (function(){
+	var data     = {};
+    var validate = new formValidate({
+        rules:{
+                
+        },
+        msg:{
+                     
+        }
+    });
+    
+    /*
+	 * 提交数据
+	 **/
+	function request(){  
+	    var data = new FormData($("#addressForm")[0]);  // 要求使用的html对象
+	    var url  = "http://www.orangesha.com/index.php/Home/MemberAddress/memberAddress";
+	    console.log($("#addr").val())
+	    data.append('address',$("#addr").val());        
+        data.append('province',$(".area_1").val());
+    	data.append('city',$(".area_2").val());
+    	data.append('area',$(".area_3").val());     
+	    $.ajax({  
+	          url : url ,  
+	          type: 'POST',  
+	          data: data,  
+	          async: true,  
+	          // 下面三个参数要指定，如果不指定，会报一个JQuery的错误 
+	　　　　　cache: false,  
+	          contentType: false,  
+	          processData: false,  
+	          success: function (res) {  
+	              alert(res.msg);
+	              if(res.status){
+	                  window.location.reload()
+	              } 
+	          },  
+	          error: function (returndata) {  
+	              console.log(returndata); 
+	          }  
+	     }); 
+	} 
+   
+    $("#submit_butt").on("click",function(){
+        if(!validate.checkSubmitStatus()){
+            alert(validate.getFirstError());
+        }else{        	        	
+        	request()          
+        }    
+    })       
+ 
+   /*$("input").blur(function(){
+        var attr_name = $(this).attr('name');
+        if(attr_name){
+           data[attr_name] = $(this).val();        
+           var val    = $(this).val();
+           var result = validate.checkField(attr_name,val);          
+        }        
+   })*/
+})();
+
+var address_json = {$address_json}
+
+console.log(address_json)
+//编辑收货地址
+$('.addr-items .disTable2').each(function(i){
+    $(this).find("span .editAddress").click(function(){
+    	$(".modal_box").css("display","block");
+   		//获取地址数据
+   		$(".edit_delivery_address").attr("data-id",address_json[i].id);
+   		$(".edit_delivery_address #name2").val(address_json[i].name);
+   		$(".edit_delivery_address #addr2").val(address_json[i].address);
+   		$(".edit_delivery_address #addr2_1").val(address_json[i].address_xx);
+   		$(".edit_delivery_address #mobile2").val(address_json[i].telnum);
+   		$(".edit_delivery_address #phone2").val(address_json[i].telnum_by);   		
+    });
+});
+
+//保存修改
+	$("#submit_butt2").on("click",function(){
+    	data = {
+    		'id' : $(".edit_delivery_address").attr("data-id"),
+    		'name' : $(".edit_delivery_address #name2").val(),
+    		'telnum' : $(".edit_delivery_address #mobile2").val(),
+    		'address' : $(".edit_delivery_address #addr2").val(),
+    		'address_xx' : $(".edit_delivery_address #addr2_1").val(),
+    		'telnum_by' : $(".edit_delivery_address #phone2").val(),
+    		'province' : $(".edit_delivery_address .area_1").val(),
+			'city' : $(".edit_delivery_address .area_2").val(),
+			'area' : $(".edit_delivery_address .area_3").val()
+    	}
+    	console.log(data)
+	    if($(".edit_delivery_address #name2").val()==""){
+	    	alert("请填写收货人")
+	    }else if($(".edit_delivery_address #mobile2").val()==""){
+	    	alert("请填写手机号")
+	    }else if($(".edit_delivery_address #addr2").val()==""){
+	    	alert("请选择区域")
+	    }else if($(".edit_delivery_address #addr2_1").val()==""){
+	    	alert("请填写详细地址")
+	    }else{
+	        $.post("http://www.orangesha.com/index.php/Home/MemberAddress/addressUpdate",data,function(res){
+	            if(res.status){
+	                alert("修改成功");
+	                window.location.reload();
+	            }else{
+	                alert(res.msg);
+	            }
+	        })            
+	    }  
+	})
+
+$("#submit_reset").on("click",function(){
+    $("#addr_box").hide();
+});
+
+$("#submit_reset2").on("click",function(){
+    $(".modal_box").hide();
+    $(".modal_box table td input").val("")
+});
+
+function checkAdress_num(){
+	var a = $(".addr-items .item").length
+	$(".adress_num").text(a)
+}
+checkAdress_num()
+
+/*删除地址*/
+function delAddr(id){
+	if(confirm('确认是否删除?')){
+	    $.post("http://www.orangesha.com/index.php/Home/MemberAddress/addressDelete",{id:id},function(res){
+	        alert(res.msg);
+	        if(res.status){
+	            window.location.reload();
+	        }
+	    });		
+	}
+}
+
+//设置默认地址
+function maddress(id,maddress_this){
+    $.post("http://www.orangesha.com/index.php/Home/MemberAddress/addressUse",{id:id},function(res){        
+        if(res.status){
+            window.location.reload();
+            alert("设置成功");
+        }
+        if(res.status==0){
+            alert(res.msg);
+        }
+    });	
+}
+
+</script>
+</body>
+</html>

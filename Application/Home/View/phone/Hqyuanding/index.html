@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+<title>长沙高新区虹桥小学</title>
+<meta name="keywords" content="" />
+<meta name="description" content=""/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/phone/css/jquery.mobile-1.2.0.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/phone/css/master.css" />
+<link rel="stylesheet" href="__PUBLIC__/phone/css/hqyuanding/hongqiaoGardener.css" />
+<script type="text/javascript" src="__PUBLIC__/phone/js/jquery-1.6.4.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/phone/js/jquery.mobile-1.2.0.js"></script>
+<script type="text/javascript" src="__PUBLIC__/phone/js/banner.js"></script>
+<script type="text/javascript" src="__PUBLIC__/phone/js/my_js.js"></script>
+
+    <!-- <link rel="stylesheet" href="__PUBLIC__/phone/css/Common/index.css" /> -->
+    <!-- <link rel="stylesheet" href="__PUBLIC__/phone/css/Common/rest.css" /> -->
+    <!-- <link rel="stylesheet" href="__PUBLIC__/phone/css/index/same.css" /> -->
+    <script type="text/javascript" src="__PUBLIC__/phone/js/myscript.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/phone/js/focus.js"></script>
+<script type="text/javascript" src="__PUBLIC__/phone/js/jquery.SuperSlide.js"></script>
+
+</head>
+<body>
+<div data-role="page" data-theme="a">
+<!--~~~~~~ header start~~~~~~~ -->
+<include file="Public:header" />
+<!--~~~~~header end~~~~~~~~~~~~~ -->
+<!-- 主体内容开始 -->
+<div data-role="content" class="content">
+          <div class="about">
+                    <div class="title ui-bar-f ui-grid-a"><span class="ui-block-a">教师风采</span><span class="ui-block-b more_i"><a href="about.asp" data-role="button" data-inline="true"></a></span></div>
+                    <div class=" clearfix article_cn1">
+                                    <div class="new_img_teacher">
+                                                <ul class="ull">
+                                                                <volist name="data['26']" id="v">
+                                                                <li>
+                                                                          <a >
+                                                                                  <div>
+                                                                                      <img src="__ROOT__{$v['thumb']|substr=1}" alt=""  />
+                                                                                  </div>
+                                                                                      <p style="text-align: center;font-size: 14px;">{$v['title']}</p>
+                                                                          </a>
+                                                                </li>
+                                                                </volist>                                                                                                                                   
+                                                </ul>
+                                    </div> 
+                      </div>                
+          </div>
+
+
+          <!-- ~~~教研组开始~~~ -->
+          <div class="product  ">
+                  <div class="title ui-bar-f ui-grid-a"><span class="ui-block-a">教研组</span><span class="ui-block-b more_i"><a href="product.asp" data-role="button" data-inline="true"></a></span>
+                  </div>
+    
+                    <div class=" clearfix article_cn1">
+                                    <div class="new_img">
+                                                <ul class="ull">
+                                                                <volist name="data['25']" id="v">
+                                                                <li>
+                                                                          <a >
+                                                                                  <div>
+                                                                                      <img src="__ROOT__{$v['thumb']|substr=1}" alt=""  />
+                                                                                  </div>
+                                                                                      <p style="text-align: center;font-size: 14px;">{$v['title']}</p>
+                                                                          </a>
+                                                                </li>
+                                                                </volist>                                                                                                
+                                                </ul>
+                                    </div> 
+                      </div>  
+
+          </div>
+          <!--~~~ 教研组结束~~~ -->
+
+             <!-- ~~~行政班子开始~~~ -->
+          <div class="news product">
+                  <div class="title ui-bar-f ui-grid-a">
+                        <span class="ui-block-a">行政班子</span>
+                        <span class="ui-block-b more_i">
+                             <a href="news.asp" data-role="button" data-inline="true"></a>
+                        </span>
+                  </div>
+                <div class="cont_top">
+                          <ul class="list2">
+                            <volist name="data['12']"  id="v">
+                                    <li class="cultureNews">
+                                      <a href="{:U('xzbanzi_content',array('id'=>$v['id'],'column_id'=>$v['column_id']))}"><em>{$v['updatetime']|date="Y-m-d",###}</em>{$v['title']}</a>
+                                    </li>                                    
+                             </volist>
+                          </ul>
+                  </div>
+          </div>
+          <!--~~~~~~行政班子结束~~~~~~-->
+</div>          
+<!--主体内容结束                     -->
+              <!-- 尾部开始 -->
+<include file="Public:footer" />
+            <!-- 尾部结束 -->
+</div>
+</body></html>

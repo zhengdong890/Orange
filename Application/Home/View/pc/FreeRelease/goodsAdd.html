@@ -1,0 +1,756 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/all-use.css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/goods-shelves.css">
+<link rel="stylesheet" href="utf8-jsp/themes/default/css/ueditor.css"/>
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script src="{:C('STATIC_URL')}/Home/js/tabs-nav.js"></script>
+<script src="{:C('STATIC_URL')}/Home/js/store-tool.js"></script>
+<script type="text/javascript" charset="utf-8" src="{:C('STATIC_URL')}/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="{:C('STATIC_URL')}/js/ueditor/ueditor.all.js"> </script>
+<style>
+*{ margin: 0; padding: 0;}
+.btn{display:block;width:160px;color:white;height:28px;line-height:28px;text-align:center;background:#37A3A3;border-radius:4px;margin:6px auto;}
+.get-img>div{background-color: rgba(0,0,0,0.4); width: 100%; height: 20px; color: white; text-align: center; font-size: 12px;padding-bottom: 2px; box-sizing: border-box;}
+.goods_rent_add:hover{ text-decoration: underline; }
+.all-width label{ cursor: pointer;}
+.all-width>label input{ cursor: pointer; vertical-align: middle;}
+.star{ color: #FF8362;}
+#login_reg{ width: 115%;}
+#login_reg>ul{ overflow: auto; border-bottom: 1px solid #55B1B1; width: 90%;}
+#login_reg>ul li{ float: left; width: 100px; text-align: center; font-size: 16px; padding: 7px 3px; margin-right: 10px; background-color: #E5E5E5;}
+#login_reg>ul li:hover{ cursor: pointer;}
+#login_reg .active{ background-color: #55B1B1; color: #fff;}
+#login,#reg{ padding: 20px 10px 20px 10px; font-size: 16px; width: 430px;}
+#login p,#reg p{ line-height: 50px;}
+.username,.pass,.row-input{ width: 220px; height: 30px;}
+#reg p i{ color: #37A3A3; font-size: 14px; cursor: pointer;}
+#login p a{ color: #37A3A3;}
+#login p a:hover{ text-decoration: underline;}
+#reg p a{ font-size: 14px;}
+#reg p a:hover{ text-decoration: underline;}
+#reg{ display: none;}
+.home_btn1,.home_btn2{cursor: pointer; transform: translate(50%,20px); background-color: #37A3A3; padding: 10px 40px; font-size: 18px; color: #fff; font-family: "微软雅黑";}
+.star{ color: #FF6600;}
+.addDiscount{ cursor: pointer;}
+.removeDiscount{cursor: pointer;color: #3A69CC;}
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->   
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="goods-shelves" style='margin-top:20px'>
+    <h2>填写商品信息</h2>
+    <ul class="left_top_ul">
+    	<li>类目：</li>
+    	<li>工业机器人 ></li>
+    	<li>{$category['cat_name']}</li>
+    	<li><a href="{:U('FreeRelease/selectCategory')}">切换类目</a></li>
+    </ul>
+    <form class="shelves-section" id='form'>
+        <input type="hidden" name='number'>
+        <input type="hidden" name="cat_id" value="{$category['id']}"></input>
+        <input type="hidden" name="cat_filter_id" value="{$category['id']}"></input>
+        <div class="section-box general-info clearfix" style="width: 110%;">
+        	<h3 class="fLe"><span class="star">*</span>商品标题: </h3>
+        	<input type="text" name='goods_name' id="biaoti" maxlength='60'>
+        	&nbsp;<span class="zishu">0</span>/60
+        </div>
+        <div class="section-box general-info clearfix">
+        	<h3 class="fLe"><span class="star">*</span>商品数量: </h3>
+        	<input type="text" name='goods_number' id="number"/> 台
+        </div>
+        <div class="section-box general-info clearfix">
+            <h3 class="fLe">&nbsp;&nbsp;&nbsp;&nbsp;商品属性: </h3>
+            <p class="ps">错误填写宝贝属性，可能会引起宝贝下架或搜索流量减少，影响您的正常销售，请认真准确填写！</p>
+            <div class="box general-box fRi clearfix">
+                <div><span class="star">*</span> 品牌&nbsp;:&nbsp;
+                   <select name="brand_id">
+                        <option value="0">请选择...</option>
+                        <volist name="brands" id="v">
+                        <option value="{$v['id']}">{$v['html']} {$v['brand_name']}</option>
+                        </volist>
+                   </select>
+                </div>
+                <div>&nbsp;&nbsp;型号&nbsp;:&nbsp; <input type="text" name="goods_model">
+                </div>
+                <div>&nbsp;&nbsp;设备成色&nbsp;:&nbsp; <input type="text" name="sbcs" style="width: 100px;" placeholder="几成新">
+                </div>
+                <div><span class="star">*</span> 设备厂家&nbsp;:&nbsp; <input type="text" name="sbcj">
+                </div>
+                <div><span class="star">*</span> 购置年份&nbsp;:&nbsp; <input type="text" name="buy_time" style="width: 100px;"> 年
+                </div>
+                <div><span class="star">*</span> 联系电话&nbsp;:&nbsp; <input type="text" name="phone">
+                </div>
+                <div style="width: 100%;" class="area_select">
+                	<span class="star">*</span> 地址&nbsp;:&nbsp;
+                	<div class="address">省&nbsp;
+                      <select name="province">
+                        <option value="0">请选择...</option>             
+                      </select>
+                    </div>
+                    <div class="address">市&nbsp;
+                      <select name="city">
+                        <option value="0">请选择...</option>             
+                      </select>
+                    </div>
+                    <div class="address">区&nbsp;
+                      <select name="area">
+                        <option value="0">请选择...</option>             
+                      </select>
+                    </div>
+                </div>
+        
+                <div style="display: none;">
+                                               是否上架&nbsp;:&nbsp;
+                    <label><input type="radio" name="status" value='1' checked/>是</label>
+                    &nbsp;&nbsp;&nbsp;
+                    <label><input type="radio" name="status" value='0' />否</label>
+                </div>            
+            </div>
+        </div>
+        <div class="section-box general-info clearfix">
+        	<h3 class="fLe"><span class="star">*</span>商品主图: </h3>
+        	<p class="ps">商品主图大小不能超过<span>3MB</span>，最多可传<span>5</span>张图，<span>700*700</span>以上的图片上传以后宝贝详情页自动提供放大镜功能</p>	
+        	<div class="box general-box fRi clearfix" style="padding: 16px 0 2px 0px; border: none; background-color: white">
+        		<div class="box images-box fRi clearfix" style="border: none; width: 100%;padding: 16px 0 2px 0px; background-color: white">
+            	<div class="img">
+                    <!--上传商品缩略图片-->
+                    <label class="get-img">
+                       <div>商品主图</div>
+                       <input type="file" class="file-img" name='goods_thumb'>
+                    </label>
+                </div>
+                <div class="img">                	
+                <!--上传商品图片-->               	
+                    <label class="get-img">
+                       <input type="file" class="file-img" name='goods_img'>
+                    </label>
+                </div>
+                <div class="img">
+                    <label class="get-img">
+                       <input type="file" class="file-img" name='goods_img'>
+                    </label>
+                </div>
+                <div class="img">
+                    <label class="get-img">
+                       <input type="file" class="file-img" name='goods_img'>
+                    </label>
+                </div>
+                <div class="img">
+                    <label class="get-img">
+                       <input type="file" class="file-img" name='goods_img'>
+                    </label>
+                </div>
+                <!--<div class="img">
+                    <label class="get-img  get-img2">                      
+                    </label>
+                </div> -->            
+            </div>
+        	</div>
+        </div>
+        <div class="section-box rent-info clearfix">
+            <h3 class="fLe">&nbsp;&nbsp;&nbsp;&nbsp;费用明细: </h3>
+            <p class="ps">请填写您的租金费用，错误填写价格，影响您的正常分享，请认真准确填写！</p>
+            <div class="box rent-box fRi clearfix" style="background-color: #fff; border-bottom: none; padding: 0px;">
+            	<div class="selectActive1">
+            		出租费用
+            	</div>
+            	<div class="selectActive2">
+            		委托项目
+            	</div>
+            </div>
+            <div class="box rent-box fRi clearfix select1" style="background-color: #fff;">
+            	<div><span class="star">*</span> 租赁价格&nbsp;:&nbsp;<input type="text" name="goods_price"> 元/每<span class="unit-class">月</span></div>
+                <div>                	 
+                    <span class="word2"><span class="star">*</span> 库存</span>&nbsp;:&nbsp;
+                    <input type="text" name='goods_number' /> 台
+                </div>
+                <div class="all-width">
+                    <span class="star">*</span> 出租单位选择&nbsp;:&nbsp;
+                    <label><input id="unit1" type="radio" name="rent_dw" value="1" checked> 月</label>&nbsp;&nbsp;&nbsp;
+                    <label><input id="unit2" type="radio" name="rent_dw" value="2"> 天</label>&nbsp;&nbsp;&nbsp;
+                    <label><input id="unit3" type="radio" name="rent_dw" value="3"> 时</label>&nbsp;&nbsp;&nbsp;
+                </div>
+                <div>
+                    <span class='rent_dw'><span class="star">*</span> 最小出租月数&nbsp;:&nbsp;</span>
+                    <input type="text" name="min_rent"> <span class="unit-class">月</span>
+                </div>
+                <div>
+                    <span class='rent_dw'><span class="star">*</span> 最大出租月数&nbsp;:&nbsp;</span>
+                    <input type="text" name="max_rent"> <span class="unit-class">月</span>
+                </div>
+                <div class="on_rent" style="width: 100%;">
+                    <span class='rent_dw'>&nbsp;&nbsp;&nbsp;区间优惠设置&nbsp;:</span>
+                    <div class='all-width rent'>&nbsp;&nbsp;&nbsp;<input class='rent_min' type="text" > - <input class='rent_max' type="text"> 价格：<input class='rent-price' type="text"> &nbsp;&nbsp;&nbsp;<a class="goods_rent_add">点击添加</a></div>
+                </div>	   
+                <div>
+                    <span class='rent_dw'><span class="star">*</span> 保险费&nbsp;:&nbsp;</span>
+                    <label><input type="radio" name="safest" value="" checked="checked"> 建议购买</label>&nbsp;
+                    <label><input type="radio" name="safest" value=""> 不买</label>
+                </div>
+                <div>
+                    <span class='rent_dw'><span class="star">*</span> 押金&nbsp;:&nbsp;</span>
+                    <label><input type="radio" name="deposit" value=""> 无</label>&nbsp;
+                    <label><input type="radio" name="deposit" value="" checked="checked"> 月租金*3</label>&nbsp; 
+                    <label><input type="radio" name="deposit" value=""> 月租金*6</label>
+                </div>
+            </div>
+            <div class="box rent-box fRi clearfix select2">            	                
+                <div>
+                    <span class='rent_dw'>委托加工费&nbsp;:&nbsp;</span>
+                    <input type="text" name="min_rent"> /件起
+                </div>                
+            </div>
+        </div>
+        <div class="section-box general-info clearfix">
+            <h3 class="fLe"><span>*</span>商品描述&nbsp;:&nbsp;</h3>
+            <textarea class="box editor-box fRi clearfix" name="goods_content" id="myEditor"></textarea>
+        </div>
+        
+        <div class="section-box rent-info clearfix">
+        	<div id="login_reg">
+        		<ul>
+        			<li class="active">登录</li>
+        			<li>注册</li>
+        		</ul>
+        		<div>
+        			<div id="login"> 
+                            <form method="post" action="{:U('Index/login')}" style="text-align : center">
+                                  <p><span class="star">*</span> 手 机： <input type="text" class="input username" id="loginAdd_user"  name="username" placeholder="请输入手机号"/></p>
+                                   <p><span class="star">*</span> 密 码： <input type="password" class="input  pass" id="loginAdd_pass"  name="password" placeholder="请输入密码"/>&nbsp;&nbsp;<a href="{:U('Member/forgetPassword')}">忘记密码？</a></p>
+                                  <button class="home_btn1" >登录后发布</button>                                  
+                             </form>
+                    </div>
+                    <div id="reg">
+                            <form  method="post" action="{:U('Index/register')}">                   
+                                   <p><span class="star">*</span> 手机号 &nbsp;&nbsp;&nbsp;： <input class="row-input" id="registerAdd_user" name='telnum' type="text" placeholder="请输入11位手机号码"></p>
+                                   <p><span class="star">*</span> 设置密码 ： <input class="row-input" name='password' id="registerAdd_pass1" placeholder="密码请输入8-16位字母和数字" onfocus="this.type='password'"></p>
+                                   <p><span class="star">*</span> 确认密码 ： <input class="row-input" name='repeat_password' id="registerAdd_pass2" placeholder="请确认密码" onfocus="this.type='password'"></p>
+                                   
+                                   <p><input id="xy" type="checkbox" name='is_read' value='1'><label for="xy"> <i>阅读并同意</i></label><a target="_blank" href="{:U('Member/agreement')}" id="agreement">《e橙优品用户服务协议》</a></p>                                  	
+                                   
+                                   <button class="home_btn2" >注册后发布</button>                                  
+                             </form>
+                    </div>
+        		</div>
+        		<!--<a class='btn' href='javascript:;'>确认发布</a>-->
+        	</div>
+            
+        </div>
+    </form>
+</div>
+<include file="Public:footer" />  
+</body>
+<script type="text/javascript">
+//底部登录注册切换
+$("#login_reg>ul li:eq(0)").click(function(){
+	$("#login").css("display","block")
+	$("#reg").css("display","none")
+	$(this).addClass("active");
+	$(this).siblings().removeClass("active");
+})
+$("#login_reg>ul li:eq(1)").click(function(){
+	$("#login").css("display","none")
+	$("#reg").css("display","block")
+	$(this).addClass("active");
+	$(this).siblings().removeClass("active");
+})
+
+
+/**
+ * 商品区域选择
+ */
+var area = (function(){
+	var select_name = 'province',
+	    change_name = select_name,
+	    area        = {},//保存已经获取的区域
+	    select_area = {'province':0,'city':0,'area':0};
+	$(".area_select").on('change','select',function(){
+	    select_name  = $(this).attr('name'),
+	    value        = $(this).val(); 
+	    change_name  = select_name == 'province'? 'city' : (select_name == 'city'? 'area' : ''); 
+	    select_area[select_name] = value;
+	    if(select_name == 'province'){
+            select_area['city'] = 0;
+            select_area['area'] = 0;
+	    }
+	    if(select_name == 'city'){
+            select_area['area'] = 0;
+	    }
+	    if(change_name){
+	    	getArea(value);
+	    }	    
+	})
+	
+	function getArea(area_no){		
+		if(area[area_no]){			
+            showAreaHtml(area[area_no]);
+		}else{
+		    $.post("{:U('Area/getArea')}",{'area_no':area_no},function(res){
+		    	area[area_no] = res;
+		    	showAreaHtml(res);
+		    })
+		}		
+	}
+
+	function showAreaHtml(data){ 
+	    var html = ["<option value='0'>请选择...</option>"];
+	    for(var k in data){
+	        html.push("<option value='" + data[k].area_no +"'>" + data[k].area_name + "</option>");
+	    }
+	    html = html.join('');
+	    $("select[name='"+ change_name +"']").html(html);  
+	    if(change_name == 'city'){
+            $("select[name='area']").html("<option value='0'>请选择...</option>");  
+	    }
+	} 
+    
+    function checkArea(){
+    	if(select_area['province'] == '100000' || select_area['province'] == '110000' || select_area['province'] == '120000' || select_area['province'] == '130000'){
+	        if(!select_area['province'] || !select_area['city']){
+	            return '请选择区域';
+	        }
+    	}else{
+	        if(!select_area['province'] || !select_area['city'] || !select_area['area']){
+	            return '请选择区域';
+	        }    		
+    	}
+    	return '';
+    }
+
+    return {
+    	init : function(){
+            getArea(0);  
+    	},
+    	checkArea : function(){
+    		return checkArea();
+    	}
+    }
+	 
+})();
+area.init();
+/**
+ 
+ * 商品租期
+ */
+var goods_rent = (function(){
+    var rent_dw           = 1, //租期单位默认为1
+        unit_class        = 1
+        min_rent          = 1, //租期最小值 
+        max_rent          = 200, //租期最大值 
+        goods_rent        = {}, //商品区间价格
+        status            = true,
+        msg               = '',
+        goods_rent_number = 1;
+
+
+    /*设置事件*/
+    function setEvents(){
+        /*租期区间小值*/
+        $(".on_rent").on('blur','.rent_min',function(){
+                msg         = '';
+            var start_value = $(this).val(),            
+                id          = $(this).attr('name');
+                id          = id.substring(6);
+            var end_value   = $("end_"+id).val(); // 获取相邻的值
+            if(goods_rent[id].start){
+                var r = checkRentData(id , start_value ,'start');
+            }else{
+                var r = checkRentData(id , start_value);
+            }   
+            if(r){
+                status            = true,
+                goods_rent[id].start = parseInt(start_value);
+            }else{
+                status            = false,
+                $(this).val(goods_rent[id].start);
+            }   
+        })
+        
+        /*租期区间大值*/
+        $(".on_rent").on('blur','.rent_max',function(){
+                msg         = '';
+            var end_value   = $(this).val(),            
+                id          = $(this).attr('name');
+                id          = id.substring(4);      
+            if(goods_rent[id].end){
+                var r = checkRentData(id , end_value ,'end');               
+            }else{
+                var r = checkRentData(id , end_value);
+            }
+            if(r){
+                goods_rent[id].end = parseInt(end_value);
+            }else{
+                $(this).val(goods_rent[id].end);
+            }
+        })
+         
+        /*租期单位变化*/
+        $("input[name='rent_dw']").click(function(){        	
+            rent_dw = $(this).val();
+            changeRentHtml();
+        });
+        
+        $("#unit1").click(function(){       	
+        	$(".unit-class").text("月")
+        })
+        $("#unit2").click(function(){       	
+        	$(".unit-class").text("天")
+        })
+        $("#unit3").click(function(){       	
+        	$(".unit-class").text("时")
+        })
+        $("#unit4").click(function(){       	
+        	$(".unit-class").text("台/件")
+        })
+        
+        /*增加租期区间段*/
+        $(".goods_rent_add").on('click',function(){       
+            var html = '';
+                html +="<div class='all-width rent'>"; 
+                html +=   "&nbsp;&nbsp;&nbsp;<input style='text-align:right' class='rent_min' placeholder='月' type='text' name='start_"+(-goods_rent_number)+"' >";
+                html +=   "&nbsp;-&nbsp;";
+                html +=   "<input style='text-align:right' class='rent_max' type='text' placeholder='月' name='end_"+(-goods_rent_number)+"'>";
+                html +=   " <span>价格&nbsp;:&nbsp;</span>";   
+                html +=   " <input style='text-align:right' type='text' placeholder='月' name='goods_rent_price_"+(-goods_rent_number)+"' class='rent-price'>";   
+                html +=   " <a href='javascript:;'' class='cancel-row rent_delete'>删除</a>";
+                html+="</div>";
+            $(this).parent('div').before(html);            
+            goods_rent[(-goods_rent_number)] = {
+              'start' : '',
+              'end'   : '',
+              'goods_rent_price' : ''
+            };
+            goods_rent_number++;   
+        })
+        
+        /*删除租期区间段*/
+        $(".on_rent").on('click','.rent_delete',function(){
+            var id = $(this).parent('div').children('input').attr('name');
+                id = id.substring(6);
+            $(this).parent('div').remove();
+            delete goods_rent[id];
+        })
+        
+        //验证价格格式
+        $("input[name='goods_price']").blur(function(){
+        	var reg = /^\d+(\.\d+)?$/;
+	        var b=$("input[name='goods_price']").val();
+	        var a=reg.test(b);
+	        
+	        if(a==false && b!=""){
+                alert("请输入正确的价格")
+			}
+        })
+        //验证库存
+        $("input[name='goods_number']").blur(function(){
+        	var reg = /^[1-9]\d*$|^0$/;
+	        var b=$("input[name='goods_number']").val();
+	        var a=reg.test(b);
+	        
+	        if(a==false && b!=""){
+                alert("请输入正确的库存")
+			}
+        })
+        
+        //验证最小租期
+        $("input[name='min_rent']").blur(function(){  
+        	var reg = /^\d+(\.\d+)?$/;
+	        var b=$("input[name='min_rent']").val();
+	        var a=reg.test(b);
+	  
+	        if(a==false && b!=""){
+                alert("请输入正确的月份")
+			}
+            if($("input[name='min_rent']").val()>200){
+            	alert("最小租期不能超过200")
+            	min_rent = parseInt($(this).val());
+            }
+            if($("input[name='min_rent']").val()<0){
+            	alert("最小租期不能小于0")
+            	min_rent = parseInt($(this).val());
+            }
+        })
+        //验证最大租期
+        $("input[name='max_rent']").blur(function(){
+        	var reg = /^\d+(\.\d+)?$/;
+	        var b=$("input[name='max_rent']").val();
+	        var a=reg.test(b);
+	  
+	        if(a==false && b!=""){
+                alert("请输入正确的月份")
+			}
+            if($("input[name='max_rent']").val()>200){
+            	alert("最大租期不能超过200")
+            	max_rent = parseInt($(this).val());
+            }  
+            if($("input[name='max_rent']").val()<0){
+            	alert("最大租期不能小于0")
+            	max_rent = parseInt($(this).val());
+            }
+        })
+    }
+     
+    /**
+     * 根据出租单位动态改变html
+     */
+    function changeRentHtml(){
+        if(rent_dw == 1){
+            $(".rent_dw").eq(0).text('最小出租月数 :');
+            $(".rent_dw").eq(1).text('最大出租月数 :');
+        }else
+        if(rent_dw == 2){
+            $(".rent_dw").eq(0).text('最小出租天数 :');
+            $(".rent_dw").eq(1).text('最大出租天数 :');
+        }else
+        if(rent_dw == 3){
+            $(".rent_dw").eq(0).text('最小出租小时 :');
+            $(".rent_dw").eq(1).text('最大出租小时 :');
+        }else
+        if(rent_dw == 4){
+            $(".rent_dw").eq(0).text('最小出租件数 :');
+            $(".rent_dw").eq(1).text('最大出租件数 :');
+        }
+    }
+
+    /**
+     * 检查租期是否设置正确
+     */
+    function checkRentData(id , value ,type){
+        if(value < min_rent || value > max_rent){
+            msg = '设置的数据不正确';
+            return false;
+        }
+        if(type == 'start'){
+            if(value > goods_rent[id].end){
+                msg = '设置的数据只能小于第二个';
+                return false;
+            }        
+        }else
+        if(type == 'end'){
+            if(value < goods_rent[id].start){
+                msg = '设置的数据只能大于第一个';
+                return false;
+            }
+          
+        }
+        for(var k in goods_rent){
+            if(value <= goods_rent[k].end && value >= goods_rent[k].start && k != id){
+                msg = '设置的数据区间段不正确';
+                return false
+            }
+        }  
+        return true;
+    }
+
+    return {
+        init : function(){
+            setEvents();
+        },
+        getStatus : function(){
+            return {
+               'status' : status,
+               'msg'    : msg
+            }
+        },
+        checkIsEmpty : function(){
+            for(var k in goods_rent){
+                if(!goods_rent[k]['start'] || !goods_rent[k]['end']){
+                    return false;
+                }
+            }  
+            return true;
+        }
+    }
+})();
+goods_rent.init();
+
+/**
+ * 商品相册和图片
+ */
+var goods_gallery = (function(){
+    $(".get-img").on('change','input',function(){
+        var file   = $(this)[0].files[0];   
+        var reader = new FileReader(); 
+        var _this  = this; 
+        //将文件以Data URL形式读入页面  
+        reader.readAsDataURL(file);  
+        reader.onload=function(e){ 
+            //显示文件      
+            $(_this).parent('.get-img').css("background","url("+this.result+") no-repeat").css("background-size","100% 100%");
+        }  
+    })
+
+    $(".images-box").on('change','input',function(){
+        var file   = $(this)[0].files[0];   
+        var reader = new FileReader(); 
+        var _this  = this; 
+        //将文件以Data URL形式读入页面  
+        reader.readAsDataURL(file);  
+        reader.onload=function(e){ 
+            //显示文件      
+            $(_this).parent('.get-img').css("background","url("+this.result+") no-repeat").css("background-size","100% 100%");
+        }  
+    }) 
+
+    /*添加商品相册*/
+    var num = 0;
+    $(".get-img2").click(function(){
+        num++; 
+        var html  = "<div class='img'>";
+            html += "<label class='get-img'>";
+            html += "<input type='file' class='file-img' name='gallery_img" + num + "' >";
+            html += "<span class='icon-close'></span>";          
+            html += "</label>";                                      
+            html += "</div>";                            
+        $(this).parent('.img').before(html);         
+        $("input[name='number']").val(num);//设置上传图片个数  
+    })         
+
+    $(".images-box").on('click','.icon-close',function(){
+        $(this).prev().prop('disabled','true');
+        $(this).parent("label").parent(".img").remove();
+        num--; 
+        $("input[name='number']").val(num);//设置上传图片个数
+    })   
+})();
+
+
+/*
+ * 提交数据
+ **/
+
+//登录后发布
+    function loginAdd(){  
+    	
+        var data = {'username':$("#loginAdd_user").val(), 'password':$("#loginAdd_pass").val()};
+            $.post("{:U('Member/login')}",data,function(res){           	
+                if(res.status==1){                   
+                    request();
+                }else{
+                	alert(res.msg)
+                }
+            })            
+        }    
+$(".home_btn1").click(function(){
+	loginAdd();
+})
+
+//注册后发布
+    function registerAdd(){   
+        var data = {'telnum':$("#registerAdd_user").val(), 'password':$("#registerAdd_pass1").val(), 'repeat_password':$("#registerAdd_pass2").val()};
+        var data2 = {'username':$("#registerAdd_user").val(), 'password':$("#registerAdd_pass1").val()};    
+            $.post("{:U('Member/register')}",data,function(res){
+                if(res.status==1){ 
+                    $.post("{:U('Member/login')}",data2,function(res){           	                  
+                        request();
+                    }) 
+                }else{
+                	alert(res.msg)
+                }
+            })            
+        }
+$(".home_btn2").click(function(){
+	registerAdd();
+})
+
+function request(){  
+    var data = new FormData($("#form")[0]);  // 要求使用的html对象
+    var url  = "{:U('Member_goods/goodsAdd')}";
+    var url_ = "{:U('Member_goods/goodsList')}"
+    $.ajax({  
+          url : url ,  
+          type: 'POST',  
+          data: data,  
+          async: true,  
+          // 下面三个参数要指定，如果不指定，会报一个JQuery的错误 
+　　　　　cache: false,  
+          contentType: false,  
+          processData: false,  
+          success: function (res) {  
+              console.log(res)
+              if(res.status){
+              	alert("提交成功，等待审核上线");
+                window.location.href = "{:U('Member_center/member')}";
+              } 
+              else{
+              	alert(res.msg)
+              }
+          },  
+          error: function (returndata) {  
+              console.log(returndata); 
+          }  
+     });  
+}
+
+function checkdata(){
+    var msg = goods_rent.getStatus();
+    var r   = goods_rent.checkIsEmpty();
+    if(msg.status && r){
+        return true;
+    }
+    return false;
+}
+
+window.onload = function(){
+     window.UEDITOR_HOME_URL = "{:C('STATIC_URL')}/js/ueditor/";
+     UE.getEditor('myEditor', {
+         theme:"default", //皮肤
+         lang:"zh-cn", //语言
+         initialFrameWidth:800,  //初始化编辑器宽度,默认800
+         initialFrameHeight:400,
+         allHtmlEnabled:false,
+     })
+}  
+
+//费用明细切换
+$(".selectActive1").click(function(){
+	$(this).css("background-color","#D2D2D2");
+	$(".selectActive2").css("background-color","#fff");
+	$(".select1").css("display","block").css("background-color","#fff");
+	$(".select2").css("display","none");
+    is_cz = false;
+})
+
+$(".selectActive2").click(function(){
+	$(this).css("background-color","#D2D2D2");
+	$(".selectActive1").css("background-color","#fff");
+	$(".select2").css("display","block").css("background-color","#fff");
+	$(".select1").css("display","none");
+    is_cz = true;
+})
+
+//标题input获取焦点
+$("input").focus(function(){
+	$(this).css("border","1px solid #37A3A3")
+})
+$("input").blur(function(){
+	$(this).css("border","1px solid #D5D5D5")
+})
+
+//标题字数
+$('#biaoti').bind('input propertychange', function() {  
+    $('.zishu').html($(this).val().length); 
+});  
+  
+ 
+</script>
+</html>

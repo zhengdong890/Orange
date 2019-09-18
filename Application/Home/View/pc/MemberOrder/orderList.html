@@ -1,0 +1,565 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>需方交易-我的订单</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/footer.css" >
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/buy-order.css" >
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+ <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->	
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">       
+        <include file="MemberPublic:MemberLeft" />  
+	    <div class="buy-order">
+	       <ul class="nav-top clearfix">
+	           <!--<li id="share-goods" class="active">共享商品</li>-->	       
+	           <li id="shop-goods" class="active">商城商品</li>
+	       </ul>
+	       <div class="classification clearfix">
+	            <!--<ul class="type-nav clearfix fLe">
+	                <li class="active">所有订单{$order_total['share_number']}</li>
+	                <li>待付款<span>{$order_total['share']['0,0,0,1']}</span></li>
+	                <li>已付款<span>{$order_total['share']['1,0,0,1']}</span></li>
+	                <li>待收货<span>{$order_total['share']['1,1,0,1']}</span></li>
+	                <li>待评价<span>{$order_total['share']['1,2,0,1']}</span></li>
+	                <li>已完成<span>{$order_total['share']['1,2,1,2']}</span></li>
+	            </ul>-->
+	            <ul class="type-nav clearfix fLe">
+	                <li class="active">所有订单{$order_total['mall']['0,0,0,1']+$order_total['mall']['1,0,0,1']+$order_total['mall']['1,1,0,1']+$order_total['mall']['1,2,0,1']+$order_total['mall']['1,2,1,2']}</li>
+	                <li>待付款<span>{$order_total['mall']['0,0,0,1']}</span></li>
+	                <li>已付款<span>{$order_total['mall']['1,0,0,1']}</span></li>
+	                <li>待收货<span>{$order_total['mall']['1,1,0,1']}</span></li>
+	                <li>待评价<span>{$order_total['mall']['1,2,0,1']}</span></li>
+	                <li>已完成<span>{$order_total['mall']['1,2,1,2']}</span></li>
+	            </ul>	            
+	            <div class="fRi search">
+	                <label><input type="text" placeholder="输入标题或订单号进行搜索"><input type="button"></label>
+	                <!--<a href="javascript:;">更多筛选条件</a>-->
+	            </div>
+            </div>
+	        <!--<div class="section share-goods">
+	            <div class="table"></div>
+	            <div class="section-bt"></div>
+	        </div>-->
+	        <div class="section shop-goods">
+	            <div class="table"></div>
+	            <div class="section-bt"></div>
+	       </div>
+	   </div>
+    </div>    
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+//判断左边导航
+function checkNav(){
+	$(".user-left-wrap .list:eq(1)>ul>li:eq(0) a").css("color","#ff6600")
+}
+checkNav()
+
+var type  = {$type} - 1;
+var model = 1;
+var is_get = false;
+var now_number = [-1 , -1];
+$(".type-nav li").click(function(){
+    var num = $(this).index();
+    changeTab(num);
+    $(this).addClass('active').siblings('li').removeClass('active');
+})
+
+function checkType(){
+	if({$type}==2){
+		$(".type-nav li:eq(1)").addClass("active")
+		$(".type-nav li:eq(1)").siblings().removeClass("active")
+	}
+	if({$type}==4){
+		$(".type-nav li:eq(3)").addClass("active")
+		$(".type-nav li:eq(3)").siblings().removeClass("active")
+	}
+	if({$type}==5){
+		$(".type-nav li:eq(4)").addClass("active")
+		$(".type-nav li:eq(4)").siblings().removeClass("active")
+	}
+}
+checkType()
+
+/*$(".nav-top li").click(function(){
+	var i = $(this).index();
+	model = i;
+	var obj = i == 0 ? '.shop-goods' : '.share-goods';
+	$(obj).addClass('box-hide').siblings('.section').removeClass('box-hide');
+    $(".type-nav").eq(i).removeClass('box-hide').siblings('.type-nav').addClass('box-hide');         
+	$(this).addClass('active').siblings('li').removeClass('active');
+    if(!is_get){
+        is_get = true;
+        changeTab(0);
+    }
+})*/
+
+function changeTab(num){
+	if(model == 0){
+		if(now_number[0] != num){
+            order.getInitData(num);
+            now_number[0] = num;
+        }
+        $(".type-nav:nth-child(1) li").eq(num).addClass('active').siblings('li').removeClass('active');
+    }else{
+    	if(now_number[1] != num){
+            mall_order.getInitData(num);
+            now_number[1] = num;
+        }     
+        $(".type-nav:nth-child(2) li").eq(num).addClass('active').siblings('li').removeClass('active');	
+    }
+}
+
+var order = (function(){  
+	var parameter = [
+	     {},//全部
+	     {'pay_status':0,'send_status':0,'comment_status':0,'status':1},//待付款 未发货 未评价 已确认
+	     {'pay_status':1,'send_status':0,'comment_status':0,'status':1},//已付款 未发货 未评价 已确认
+	     {'pay_status':1,'send_status':1,'comment_status':0,'status':1},//已付款 已发货 未评价 已确认
+	     {'pay_status':1,'send_status':2,'comment_status':0,'status':1},//已付款 已收货 未评价 已确认
+	     {'pay_status':1,'send_status':2,'comment_status':1,'status':2} //已付款 已收货 已评价 已完成
+	];
+    var html_header    = [];                             
+    html_header.push("<div class='tr-h clearfix'>");                  
+    html_header.push("   <div class='th table-cell goods'>商品</div>");                     
+    html_header.push("   <div class='th table-cell one-price'>单价</div>");          
+    html_header.push("   <div class='th table-cell goods-num'>数量</div>");    
+    html_header.push("   <div class='th table-cell lease'>租期</div>");
+    html_header.push("   <div class='th table-cell after-sales'>售后</div>");
+    html_header.push("   <div class='th table-cell amount-price'>金额</div>");
+    html_header.push("   <div class='th table-cell trading-state'>交易状态</div>");
+    html_header.push("   <div class='th table-cell trading-operations'>交易操作</div>");
+    html_header.push("</div>");   
+    html_header = html_header.join('');  
+    var html_model_1 = [];
+    html_model_1.push("<div class='goods-order clearfix no-pay'>");
+    html_model_1.push("   <ul class='order-title clearfix'>");
+    html_model_1.push("      <li>%TIME%</li>");
+    html_model_1.push("      <li>订单号: %ORDER_SN%</li>");
+    html_model_1.push("      <li>深圳科技...</li>");
+    html_model_1.push("   </ul>");
+    html_model_1 = html_model_1.join(''); 
+    var obj;
+    function getOrderData(num){  		    		
+        var wraper = $(".share-goods .section-bt"),
+            _this  = this,
+            url    = "{:U('MemberOrder/getOrderData')}";//请求地址
+        /*ajax分页*/
+        obj = ajaxPage({
+            wraper:wraper,  
+            parameter:parameter[num],//附加参数
+            listRows:5,//每页显示条数
+            rollPage:5,//最多显示多少页码
+            url:url,//ajax请求地址
+            cache:true,//是否开启缓存
+            //回调函数
+            callback:function(data,page,page_data){ 
+                showPage(page_data);
+                showHtml(data);          
+            }
+        });    		
+    }
+
+    /**
+     *显示分页
+     */
+    function showPage(data){
+        var html = ["<div class='turn-page'>"];
+        if(data['prev']){
+    	    html.push("<div class='left-btn change' data-p='"+ data['prev'] +"'></div>");
+        }else{
+        	html.push("<div class='left-btn'></div>");
+        }
+    	for(var k in data['page']){
+			if(data['page'][k] == '.'){
+				html.push("<div class='omit'>...</div>");                  
+			}else
+			if(data['page'][k] != data['nowPage']){
+				html.push("<div class='page-btn change' data-p='"+ data['page'][k] +"'>" + data['page'][k] + "</div>");
+			}else{
+				html.push("<div class='page-btn active'>" + data['page'][k] + "</div>");
+			}                          
+    	}
+    	if(data['next']){
+    	    html.push("<div class='right-btn change' data-p='"+ data['next'] +"'></div>");
+    	}else{
+            html.push("<div class='right-btn'></div>");
+    	}
+    	
+    	html.push("</div>");
+    	html.push("<p class='to-page'>跳至");
+    	html.push("   <input class='go_number' type='text' value='1'>页<input type='button' value='跳转' class='go'>");
+    	html.push("</p>");
+    	html = html.join('');
+    	$(".share-goods .section-bt").html(html);
+    } 
+
+    function showHtml(data){
+    	var order_data = data[1],
+    	    order = data[0],
+    	    html =[];
+    	for(var k in order_data){
+    		var html_model_1_ = html_model_1.replace(/%ORDER_SN%/,order[k]['order_sn']).replace(/%TIME%/,order[k]['time']);
+    		html.push(html_model_1_);   
+    		var number = 1; 	
+    		for(var k1 in order_data[k]){
+			    html.push("<div class='tr-d clearfix'>");
+			    html.push("   <div class='td table-cell goods'>");
+			    html.push("       <img src='"+ order_data[k][k1].goods_thumb.substring(1) + "' alt='' class='goods-img'>");
+			    html.push("       <p class='fRi'>"+order_data[k][k1].goods_name+"</p>");
+			    html.push("    </div>");
+			    html.push("    <div class='td table-cell one-price'>");
+			    html.push("       <p class='actual-price'>"+order_data[k][k1].goods_price+"</p>");
+			    html.push("    </div>");
+			    html.push("    <div class='td table-cell goods-num'>x"+order_data[k][k1].rent_number+"</div>");
+			    html.push("    <div class='td table-cell lease'>"+order_data[k][k1].rent_time+"</div>");
+			    html.push("    <div class='td table-cell after-sales'>");
+			    html.push("         <p>");
+			    html.push("            <a href='{:U('MemberRefund/refund')}'>退款/退货</a>");
+			    html.push("         </p>");
+			    html.push("    </div>"); 
+			    html.push("    <div class='td table-cell amount-price'>");
+			    html.push("         <p>" + order_data[k][k1].total_price + "</p>");
+			    html.push("         <p class='postage'>(含运费：0:00)</p>");
+			    html.push("    </div>");
+			    var status = order[k].pay_status == 0 ? '等待买家付款' : 
+			                 order[k].pay_status == 1 && order[k].send_status == 0 ? '等待卖家发货' : 
+			                 order[k].send_status == 1 ? '卖家已发货' : 
+			                 order_data[k][k1].send_status == 2 && order_data[k][k1].comment_status == 0 ? '待评价':
+			                 order_data[k][k1].send_status == 2 && order_data[k][k1].comment_status == 1 ? '已评价':''; 
+			    /*if(order[k].pay_status == 0){
+			    	status = '等待买家付款'
+			    }else if(order[k].pay_status == 1 && order[k].send_status == 0){
+			    	status = '等待卖家发货'
+			    }else if(order[k].send_status == 1){
+			    	status = '卖家已发货'
+			    }else if(order_data[k][k1].send_status == 2 && order_data[k][k1].comment_status == 0){
+			    	status = '待评价'
+			    }else if(order_data[k][k1].send_status == 2 && order_data[k][k1].comment_status == 1){
+			    	status = '已评价'
+			    }*/
+			    html.push("    <div class='td table-cell trading-state'>");
+			    html.push("         <p>" + status + "</p>");
+                html.push("         <p><a href='{:U('MemberOrder/orderDetail')}&type=1&order_id=" + order[k].id + "'>订单详情</a></p>");
+                html.push("         <p><a href='{:U('Logistical/logisticsDetails')}&order_id=" + order[k].id + "'>查看物流</a></p>");
+			    html.push("    </div>");
+			    if(number == 1 && order[k].pay_status == 0){
+				    html.push("    <div class='td table-cell trading-operations'>");
+				    html.push("         <a target='_blank' href='{:U('Order/orderAgainPay')}&order_id=" + order[k].id + "'><p class='pay'>立即付款</p></a>");
+				    html.push("         <a href='javascript:;' class='delete' data-id='"+order[k].id+"'><p>取消订单</p></a>");
+				    html.push("    </div>");			    	
+			    }else
+			    if(number == 1 && order[k].send_status == 1){
+				    html.push("    <div class='td table-cell trading-operations'>");
+				    html.push("         <a href='javascript:;' class='recipient' data-id='"+order[k].id+"'><p class='pay'>确认收货</p></a>");
+				    html.push("    </div>");
+			    }else
+			    if(order[k].send_status == 2 && order_data[k][k1].comment_status == 0){
+				    html.push("    <div class='td table-cell trading-operations'>");
+				    html.push("         <a href='{:U('Member_center/goodsComment')}&id="+order_data[k][k1].id+"'><p class='pay'>评价</p></a>");
+				    html.push("    </div>");
+			    }
+			    html.push("</div>");
+			    number++;
+    		}                     
+            html.push('</div>');
+    	}
+    	html = html.join('');
+        $(".share-goods .table").html(html_header + html);      
+    }
+    
+    /*收货*/
+    $(".share-goods .table").on('click','.recipient',function(){
+    	if(confirm('确认收货?')){
+	    	var id = $(this).attr('data-id');
+	        $.post("{:U('Order/recipient')}",{id:id},function(res){
+	            alert(res.msg);
+	            window.location.reload();
+	        })    		
+    	}
+    });
+
+    /*取消订单*/
+    $(".share-goods .table").on('click','.delete',function(){
+    	if(confirm('确认取消订单?')){
+	    	var id = $(this).attr('data-id');
+	        $.post("{:U('Order/orderDelete')}",{id:id},function(res){
+	            alert(res.msg);
+	            window.location.reload();
+	        })    		
+    	}
+    });
+
+    /*全选*/
+    $(".section-bt").on('click','#all-chose',function(){
+        var tab = $(this).attr('data-tab');
+        var obj = $(".tab_" + tab +" input[type='checkbox']");
+        if($(this).prop('checked')){
+        	obj.prop('checked',true);
+        }else{
+        	obj.prop('checked',false);
+        }      
+    });
+
+    return {
+        getInitData : function(num){
+           getOrderData(num); 
+        }
+    }
+})();
+
+var mall_order = (function(){  
+	var parameter = [
+	     {},//全部
+	     {'pay_status':0,'send_status':0,'is_comment':0,'status':1},//待付款 未发货 未评价 已确认
+	     {'pay_status':1,'send_status':0,'is_comment':0,'status':1},//已付款 未发货 未评价 已确认
+	     {'pay_status':1,'send_status':1,'is_comment':0,'status':1},//已付款 已发货 未评价 已确认
+	     {'pay_status':1,'send_status':2,'is_comment':0,'status':1},//已付款 已收货 未评价 已确认
+	     {'pay_status':1,'send_status':2,'is_comment':1,'status':2}, //已付款 已收货 已评价 已完成
+	     {'pay_status':0,'send_status':0,'is_comment':0,'status':-1} //待付款 未发货 未评价 已取消
+	];
+    var html_header    = [];                             
+    html_header.push("<div class='tr-h clearfix'>");                  
+    html_header.push("   <div class='th table-cell goods'>商品</div>");                     
+    html_header.push("   <div class='th table-cell one-price'>单价</div>");          
+    html_header.push("   <div class='th table-cell goods-num'>数量</div>");    
+    html_header.push("   <div class='th table-cell after-sales'>售后</div>");
+    html_header.push("   <div class='th table-cell amount-price'>金额</div>");
+    html_header.push("   <div class='th table-cell trading-state'>交易状态</div>");
+    html_header.push("   <div class='th table-cell trading-operations'>交易操作</div>");
+    html_header.push("</div>");   
+    html_header = html_header.join('');  
+    var html_model_1 = [];
+    html_model_1.push("<div class='goods-order clearfix no-pay'>");
+    html_model_1.push("   <ul class='order-title clearfix'>");
+    html_model_1.push("      <li>%TIME%</li>");
+    html_model_1.push("      <li>订单号: %ORDER_SN%</li>");
+    html_model_1.push("      <li>%SHOP_NAME%</li>");
+    html_model_1.push("   </ul>");
+    html_model_1 = html_model_1.join(''); 
+    var obj;
+    function getOrderData(num){  		    		
+        var wraper = $(".shop-goods .section-bt"),
+            _this  = this,
+            url    = "{:U('MemberOrder/getMallOrderData')}";//请求地址
+        /*ajax分页*/
+        obj = ajaxPage({
+            wraper:wraper,  
+            parameter:parameter[num],//附加参数
+            listRows:5,//每页显示条数
+            rollPage:5,//最多显示多少页码
+            url:url,//ajax请求地址
+            cache:true,//是否开启缓存
+            //回调函数
+            callback:function(data,page,page_data){ 
+                showPage(page_data);
+                showHtml(data);          
+            }
+        });    		
+    }
+
+    /**
+     *显示分页
+     */
+    function showPage(data){
+        var html = ["<div class='turn-page'>"];
+        if(data['prev']){
+    	    html.push("<div class='left-btn change' data-p='"+ data['prev'] +"'></div>");
+        }else{
+        	html.push("<div class='left-btn'></div>");
+        }
+    	for(var k in data['page']){
+			if(data['page'][k] == '.'){
+				html.push("<div class='omit'>...</div>");                  
+			}else
+			if(data['page'][k] != data['nowPage']){
+				html.push("<div class='page-btn change' data-p='"+ data['page'][k] +"'>" + data['page'][k] + "</div>");
+			}else{
+				html.push("<div class='page-btn active'>" + data['page'][k] + "</div>");
+			}                          
+    	}
+    	if(data['next']){
+    	    html.push("<div class='right-btn change' data-p='"+ data['next'] +"'></div>");
+    	}else{
+            html.push("<div class='right-btn'></div>");
+    	}
+    	
+    	html.push("</div>");
+    	html.push("<p class='to-page'>跳至");
+    	html.push("   <input class='go_number' type='text' value='1'>页<input type='button' value='跳转' class='go'>");
+    	html.push("</p>");
+    	html = html.join('');
+    	$(".shop-goods .section-bt").html(html);
+    } 
+
+    function showHtml(data){
+    	var order_data = data[1],
+    	    order = data[0],
+    	    html =[];
+    	    console.log(order_data);
+    	    
+    	for(var k in order_data){    		
+    		var html_model_1_ = html_model_1.replace(/%SHOP_NAME%/,order[k].shop['shop_name']).replace(/%ORDER_SN%/,order[k]['order_sn']).replace(/%TIME%/,order[k]['create_time']);
+    		html.push(html_model_1_);   
+    		var number = 1; 	
+    		for(var k1 in order_data[k]){
+			    html.push("<div class='tr-d clearfix'>");
+			    html.push("   <div class='td table-cell goods'>");
+			    html.push("       <img src='"+ order_data[k][k1].goods_thumb + "' alt='' class='goods-img'>");
+			    html.push("       <p class='fRi'>"+order_data[k][k1].goods_name+"</p>");
+			    html.push("    </div>");
+			    html.push("    <div class='td table-cell one-price'>");
+			    html.push("       <p class='actual-price'>"+order_data[k][k1].goods_price+"</p>");
+			    html.push("    </div>");
+			    html.push("    <div class='td table-cell goods-num'>"+order_data[k][k1].number+"</div>");
+			    html.push("    <div class='td table-cell after-sales'>");
+			    html.push("         <p>"); 
+			    if(order[k].send_status == 0 && order[k].pay_status == 1 && order_data[k][k1].service_status == 0){
+			        html.push("            <a href='{:U('MemberRefund/refund')}&type=1&id=" +order_data[k][k1].id+ "' target='_blank'>退款</a>");
+			    }
+			    if(order[k].send_status == 2 && order[k].status != 3 && order_data[k][k1].service_status == 0){
+			        html.push("            <a href='{:U('MemberRefund/refund')}&id=" +order_data[k][k1].id+ "' target='_blank'>退款/退货</a>");	
+			    }
+			    if(order[k].pay_status == 1 && order_data[k][k1].service_status == 11){
+			        html.push("            <a href='{:U('MemberRefund/refund_money')}&id=" +order_data[k][k1].id+ "' target='_blank'>退款中</a>");	
+			    }
+			    if(order[k].send_status == 2 && order_data[k][k1].service_status == 31){
+			        html.push("            <a href='{:U('MemberRefund/refund_goods')}&id=" +order_data[k][k1].id+ "' target='_blank'>退款退货中</a>");	
+			    }
+			    if(order[k].pay_status == 1 && order_data[k][k1].service_status == 12){
+			        html.push("            <a href='{:U('MemberRefund/refund_success')}&id=" +order_data[k][k1].id+ "' target='_blank'>已退款</a>");	
+			    }
+			    html.push("         </p>");
+			    html.push("    </div>"); 
+			    html.push("    <div class='td table-cell amount-price'>");
+			    html.push("         <p>"+order_data[k][k1].total_price+"</p>");
+			    html.push("         <p class='postage'>(含运费："+order[k].shipping_price+")</p>");
+			    html.push("    </div>");
+			    var status = order[k].status == -1 ? '订单已取消' :
+			    			 order[k].pay_status == 0 ? '等待买家付款' :
+			    			 order[k].pay_status == 1 && order[k].send_status == 0 ? '等待卖家发货' : 
+			                 order[k].send_status == 1 ? '卖家已发货' : 			                  
+			                 order_data[k][k1].send_status == 2 && order_data[k][k1].comment_status == 1 ? '已评价':'待评价'
+			    html.push("    <div class='td table-cell trading-state'>");
+			    html.push("         <p>" + status + "</p>");
+			    html.push("         <p><a target='_blank' href='{:U('MemberOrder/orderDetail')}&order_id=" + order[k].id + "'>订单详情</a></p>");
+			    if(order[k].send_status == 1){
+			        html.push("         <p><a href='{:U('Logistical/logisticsDetails')}&order_id=" + order[k].id + "'>查看物流</a></p>");
+			    }
+			    html.push("    </div>");
+			    if(order[k].status == -1){
+			    	html.push("    <div class='td table-cell trading-operations'>");
+				    html.push("         <a class='delete-order' href='javascript:;' data-id='"+order[k].id+"'>删除</a>");
+				    html.push("    </div>");
+			    }else if(number == 1 && order[k].pay_status == 0 && order[k].status != -1){
+				    html.push("    <div class='td table-cell trading-operations'>");
+				    html.push("         <a href='{:U('Mall_order/orderAgainPay')}&order_id=" + order[k].id + "'><p class='pay'>立即付款</p></a>");
+				    html.push("         <a href='javascript:;' class='delete' data-id='"+order[k].id+"'><p>取消订单</p></a>");
+				    html.push("    </div>");			    	
+			    }else if(number == 1 && order[k].send_status == 1 && order[k].status != -1){
+				    html.push("    <div class='td table-cell trading-operations'>");
+				    html.push("         <a href='javascript:;' class='recipient' data-id='"+order[k].id+"'><p class='pay'>确认收货</p></a>");
+				    html.push("    </div>");
+			    }else if(order[k].send_status == 2 && order_data[k][k1].comment_status == 0){
+				    html.push("    <div class='td table-cell trading-operations'>");
+				    html.push("         <a target='_blank' href='{:U('MemberCenter/MallgoodsComment')}&id="+order_data[k][k1].id+"'><p class='pay'>评价</p></a>");
+				    html.push("    </div>");
+			    }
+			    html.push("</div>");
+			    number++;
+    		}                     
+            html.push('</div>');
+    	}
+    	html = html.join('');
+        $(".shop-goods .table").html(html_header + html);     
+        for(var i = 0;i<$(".order-title").length;i++){
+    		var da = $(".order-title").eq(i).find("li:eq(0)").text();
+		    da = new Date(da*1000);
+		    var year = da.getFullYear();
+		    var month = da.getMonth()+1;
+		    var date = da.getDate();		    
+		    $(".order-title").eq(i).find("li:eq(0)").text([year,month,date].join('-'))
+    	}   
+    }     
+    
+    /*收货*/
+    $(".shop-goods .table").on('click','.recipient',function(){
+    	if(confirm('确认收货?')){
+	    	var id = $(this).attr('data-id');
+	        $.post("{:U('Mall_order/recipient')}",{id:id},function(res){
+	            alert(res.msg);
+	            window.location.reload()
+	        })    		
+    	}
+    });
+
+    /*取消订单*/
+    $(".shop-goods .table").on('click','.delete',function(){
+    	var THIS = $(this).parent().parent().parent();
+    	if(confirm('确认取消?')){
+	    	var id = $(this).attr('data-id');
+	        $.post("{:U('Mall_order/orderDelete')}",{'id':id},function(res){	            
+	            if(res.status){
+	            	window.location.reload();
+	            }else{
+	            	alert(res.msg);
+	            }
+	        })    		
+    	}
+    });
+    
+    /*删除订单*/
+    $(".shop-goods .table").on('click','.delete-order',function(){
+    	var id = $(this).attr('data-id');
+    	var a = $(this).parents(".goods-order")
+        $.post("http://www.orangesha.com/index.php?m=Home&c=MemberOrder&a=orderDel",{'order_id':id},function(res){            
+            if(res.status){
+            	a.remove()
+            }   
+            if(res.status==0){
+            	alert(res.msg);
+            }
+        })    		    	
+    });
+
+    /*全选*/
+    $(".section-bt").on('click','#all-chose',function(){
+        var tab = $(this).attr('data-tab');
+        var obj = $(".tab_" + tab +" input[type='checkbox']");
+        if($(this).prop('checked')){
+        	obj.prop('checked',true);
+        }else{
+        	obj.prop('checked',false);
+        }      
+    });
+
+    return {
+        getInitData : function(num){
+           getOrderData(num); 
+        }
+    }
+})();
+changeTab(type);
+
+</script>
+</body>
+</html>
+
+
+
+    

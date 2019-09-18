@@ -1,0 +1,79 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>共享商品</title>
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+ <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+
+<style>
+*{
+	padding: 0;
+	margin: 0;
+}
+ul{ }
+input{ outline: none;}
+.container_ul{padding: 20px 10px 20px 10px;}
+.container_ul>li:first-of-type{ margin-top: 10px;}
+ul li{ list-style:none; margin-bottom: 20px; font-family: "微软雅黑";}
+#childul{ padding: 15px 0px 15px 30px;}
+#childul>li{ color: #666; font-family: "微软雅黑";}
+#childul li span{ margin-left:5px;cursor:pointer;float:right; }
+ul li  a{ background:#37A4A2;color:#FFFFFF;padding:4px 10px; border-radius: 5px; font-size: 14px; font-family: "微软雅黑";}
+a { text-decoration:none; }
+#childul li {margin-top:10px;}
+#add{ background:#37A4A2; color:#FFFFFF; padding: 4px 10px; border-radius: 5px; font-size: 14px; font-family: "微软雅黑";}
+</style>
+</head>
+<body >
+
+<div class="bodyer">
+	  <form action="{:U('SellerGoods/showupdate')}" method="post">
+		  <ul class="container_ul">
+			  <li style="margin-left:18px;text-align:center;">
+			  修改分类：<input type="text" name="cat" value="{$data.name}" />  
+			  <input type="hidden" name="catid" value="{$data.cat_id}" /> 
+			  </li>
+			  <li style="margin-left:18px;text-align:center;">               
+			  <a href="javascript:;" onclick="savecat()" id="save_catid"/>保存</a>
+			  </li>
+		   </ul>  
+	 </form>
+</div>
+<!-- 底部 -->
+
+<!-- 底部 -->    
+<script>
+function savecat(){
+    var catname = $('input[name="cat"]').val();
+	 var catid = $('input[name="catid"]').val();
+	if( catid && catname){
+		 $.post("{:U('SellerGoods/showupdate')}",{'catname':catname,'catid':catid},function(data){
+			if( data.msg=='ok'){			
+			  alert('修改成功！');			 
+			 var index = parent.layer.getFrameIndex(window.name);
+			  parent.layer.close(index); //执行关闭
+              window.location.href= U('SellerGoods/show');
+			}
+		 
+		 });
+
+	
+	}else{
+	   alert('分类不存在！');
+	}
+	
+}
+
+
+</script>
+</body>
+</html>
+
+    

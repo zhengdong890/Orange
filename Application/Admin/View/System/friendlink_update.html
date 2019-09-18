@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="description" content="" />
+<style>
+*{padding:0; margin:0;font-size:16px;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0} 
+#content{width:98%;height:auto;float:left;margin-left:1%;}
+#content #content_h{width:100%;height:40px;border:1px solid #D7D7D7;line-height:40px;margin-top:15px}
+#content #content_h a{padding-left:10px}
+#content #content_m{width:100%;height:auto;border:1px solid #D7D7D7;padding-bottom:100px;margin-top:20px}
+#content table{margin:0 auto;margin-top:20px}
+#content table td span{float:right}
+#content table td .isshow{width:20px;height:20px;float:left;}
+input{width:400px;height:24px;border-radius:3px;border-bottom:1px solid #E3E9EF;border-top:1px solid #ABADB3;border-left:1px solid #E2E3EA;border-right:1px solid #DBDFE6}
+textarea{width:500px;height:160px;border-radius:3px;border-bottom:1px solid #E3E9EF;border-top:1px solid #ABADB3;border-left:1px solid #E2E3EA;border-right:1px solid #DBDFE6}
+td img{max-width:250px}
+td{padding-right:30px;padding-top:5px}
+table button{border:0px;background:#C43926;color:white;padding:5px;border-radius:2px;float:left;}
+.btn_addimg{display:block;width:100px;margin-top:10px;color:white;position:relative;height:28px;line-height:28px;text-align:center;float:left;background:#C43926;border-radius:4px;}
+.btn_addimg input{width:100px;position:absolute;left:0;top:0;filter:alpha(opacity=50);-moz-opacity:0;-khtml-opacity:0;opacity:0;}
+textarea{outline:none;resize:none;}
+.img{width:100px;height:auto;float:left;}
+.img img{max-width:100%;max-height:100px;float:left}
+</style>
+</head>
+<body>          
+<div id="content">
+     <div id="content_h">
+       <a>后台管理中心</a>-><a>编辑友情链接</a>
+     </div>
+     <div id="content_m">
+         <form action="{:U('friendlink_update')}" method="post" enctype="multipart/form-data">
+               <input type="hidden" name="id" value="{$friendlink['id']}"></input>
+               <table cellspacing="10">
+                         <tr>
+                               <td><span>网站名称:</span></td>
+                               <td><input type="text" name="name" value="{$friendlink['name']}"></input></td>
+                         </tr>
+                         <tr>
+                               <td><span>网站链接:</span></td>
+                               <td><input type="text" name="url" value="{$friendlink['url']}"></input></td>
+                         </tr>
+                         <tr>
+                               <td><span>排序:</span></td>
+                               <td><input type="text" name="sort" value="{$friendlink['sort']}"></input></td>
+                         </tr>   
+                         <tr>
+                         	   <td><span>是否显示:</span></td>
+		                         <td>
+		                               <input type="radio" name="is_show" value="y" {$friendlink['checked_y']} class='isshow'></input><p style="height:20px;float:left;line-height:20px">是</p>
+		                               <input type="radio" name="is_show" value="n" {$friendlink['checked_n']} class='isshow' style="margin-left:15px" ></input><p style="height:20px;float:left;line-height:20px;">否</p>
+		                         </td>
+		                 </tr>  
+                         <tr>
+                              <td valign="top"><span>上传LOGO:</span></td>
+                              <td>
+                                  <div class="img">	                                           	 
+                                  	     <img src="__ROOT__{$friendlink['thumb']|substr=1}"/>
+                                      <a class="btn_addimg">点击添加图片<input type="file" name="thumb" onchange='show(this);'></input></a>                                             
+                                   </div> 
+                              </td>
+                          </tr> 
+                          <tr><td></td><td><button style="width:100px;">确认保存</button></td></tr>
+                 </table>
+         </form>		            
+    </div>
+</div>
+</body>
+<script type="text/javascript">        
+//上传图片预览
+function show(obj){
+   var file = obj.files[0];   
+   var reader = new FileReader();  
+   //将文件以Data URL形式读入页面  
+   reader.readAsDataURL(file);  
+   reader.onload=function(e){ 
+   	//显示文件  
+   	$(".img img").attr("src",this.result);
+   }
+} 
+</script>
+</html>

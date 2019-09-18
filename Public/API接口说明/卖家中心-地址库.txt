@@ -1,0 +1,41 @@
+ajax添加地址库
+地址 : http://www.orangesha.com/index.php/Home/ShippingAddress/addressAdd
+请求json参数 : {
+    'name'         : ,//联系人
+    'province'     : ,//省
+    'city'         : ,//市
+    'province_name': ,//省
+    'city_name'    : ,//市
+    'address'      : ,//详细地址
+    'postcode'     : ,//邮政编码
+    'phone'        : ,//电话
+    'mobile_phone' : ,//手机
+    'company'      : //公司名称
+}
+返回 {status : 0或者1 , msg : ''}
+
+ajax修改地址库
+地址 : http://www.orangesha.com/index.php/Home/ShippingAddress/addressUpdate
+请求json参数 : {
+    'id'           : ,//地址库id
+    'name'         : ,//联系人
+    'province'     : ,//省
+    'city'         : ,//市
+    'address'      : ,//详细地址
+    'postcode'     : ,//邮政编码
+    'phone'        : ,//电话
+    'mobile_phone' : ,//手机
+    'company'      : //公司名称
+}
+返回 {status : 0或者1 , msg : ''}
+
+ajax获取地址库
+地址 : http://www.orangesha.com/index.php/Home/ShippingAddress/getAddressList
+请求json参数 : {
+    'firstRow' : ,//从第	几条数据开始获取
+    'listRows' : ,// 需要获取的数据条数
+}
+返回 {status : 0或者1 , msg : '' , data{
+	
+
+}}

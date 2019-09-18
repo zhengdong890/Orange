@@ -1,0 +1,324 @@
+<html>
+	<head>
+		<meta charset="utf-8" >
+		<style>
+			*{ font-family: "微软雅黑";}		
+			table{ margin: 0 auto;}
+			table td{ font-family: "微软雅黑";  font-size: 14px; color: #666;line-height: 40px;}
+			table td input{padding: 4px; width:540px;height:30px;margin-bottom: 6px;}
+			table td:first-of-type{vertical-align: top; text-align: right; width: 150px; font-size: 14px; color: #666;}
+			.contacts{ width: 135px;}
+			.contact{width: 190px;}
+			.expect{ width: 100px;}
+			.position{ width: 190px;}
+			.checkbox{ width: 16px; height: 16px; vertical-align: middle; cursor: pointer;}
+			#issub{width:100px;height:45px;cursor:pointer;border-radius:5px;background:#5FAEBF;color:#FFFFFF;margin-top: 10px;border: none;}
+			.star{ color: #FF6600;}
+			textarea{ padding: 2px 5px;width: 540px; height: 150px; vertical-align: top;}
+			select{height: 30px;}
+			#formGroupbuy .title{width: 85%;background-color: #F3F3F3;height: 30px;line-height: 30px;margin: 5px auto;}
+			.images-box{overflow: auto; border: none; width: 100%;padding: 0px 0 2px 0px; background-color: white}
+			.images-box .img{width: 100px;float: left;}
+			.images-box .img .get-img{display: inline-block;width: 82px;height: 82px;position: relative;background: url(__PUBLIC__/Home/images/add-img_03.jpg) no-repeat;background-size: 100%;cursor: pointer;}		
+			.images-box .file-img{display: none;}
+		</style>
+		<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+	<!-- www.orangesha.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?54f6f54d47704101dc27b337de5fd6c3";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+	<body style="overflow-y:auto">
+		<div style="width:100%;height:100%;text-align:center;"> 
+			
+		<form id="formGroupbuy">
+			<div class="title">采购信息</div>
+			<table>
+				<tr>
+				   <td><span class="star">*</span> 项目名称：</td>
+				   <td><input type="text" name="title" value=""></td>
+				</tr>
+				<tr>
+				   <td><span class="star">*</span> 所属类目：</td>
+				   <td>
+				   		<select name="cat_id">
+					   		<foreach name="mall" item="vo">
+					   			<option value="{$vo.id}">{$vo.cat_name}</option>
+							</foreach>
+				   		</select>
+				   </td>
+				</tr>
+				<tr>
+				   <td><span class="star">*</span> 采购数量：</td>
+				   <td>
+				   	<input type="text" class="contacts" name="num"> 
+				   	<select name="unit">
+				   		<option value='卷'>卷</option><option value='筒'>筒</option><option value='盒'>盒</option>
+				   		<option value='个'>个</option><option value='把'>把</option><option value='斤'>斤</option>
+				   		<option value='千克'>千克</option><option value='只'>只</option><option value='支'>支</option>
+				   		<option value='包'>包</option><option value='条'>条</option><option value='副'>副</option>
+				   		<option value='根'>根</option><option value='米'>米</option><option value='台'>台</option>
+				   		<option value='件'>件</option><option value='箱'>箱</option><option value='片'>片</option>
+				   		<option value='套'>套</option><option value='双'>双</option><option value='架'>架</option>
+				   	</select>
+				   </td>
+				</tr>
+				<tr>
+				   <td><span class="star">*</span> 采购地点：</td>
+				   <td class="area_select">
+	               </td>
+				</tr>
+				<tr>
+				   <td><span class="star">*</span> 到期时间：</td>
+				   <td>
+				   		<input type="datetime-local" name="time">
+				   </td>
+				</tr>
+			</table>
+			<div class="title">采购详情</div>
+			<table>
+				<tr>
+				   <td><span class="star">*</span> 价格要求：</td>
+				   <td><input type="checkbox" name="price_type1" value="1" class="checkbox"/>含运费
+				   <input type="checkbox" name="price_type2" value="1" class="checkbox"/>含税</td>
+				</tr>
+				<tr>
+				   <td><span class="star">*</span> 期望总价：</td>
+				   <td><input type="text" name="price_low" class="expect"> — <input type="text" name="price_hei" class="expect"></td>
+				</tr>
+				<tr>
+				   <td><span class="star">*</span> 详细信息：</td>
+				   <td><textarea name="des"></textarea></td>
+				</tr>
+				<tr>
+					<td><span class="star">*</span> 采购附件：</td>
+					<td>
+						<p style="width: 540px;">您可以上传商品详细资料和详细需求说明，以便提高卖家的报价精准度，支持常见格式及压缩包，可以上传3个附件，每个大小不超过<span style="color: #ff6600;">3</span>M</p>
+						<div class="box images-box">
+			            	<div class="img">
+			                    <label class="get-img">
+			                       <input type="file" class="file-img" name='goods_img'>
+			                    </label>
+			                </div>
+			                <div class="img">                	              	
+			                    <label class="get-img">
+			                       <input type="file" class="file-img" name='goods_img1'>
+			                    </label>
+			                </div>
+			                <div class="img">
+			                    <label class="get-img">
+			                       <input type="file" class="file-img" name='goods_img2'>
+			                    </label>
+			                </div>         
+			            </div>
+					</td>
+				</tr>
+			</table>
+			<div class="title">联系方式</div>
+			<table>
+				<tr>
+				   <td><span class="star">*</span> 联系人：</td>
+				   <td><input type="text" name="name" class="contact"></td>
+				</tr>
+				<tr>
+				   <td><span class="star">*</span> 联系方式：</td>
+				   <td><input type="text" name="phone"></td>
+				</tr>
+			    <tr>
+			    	<td></td>
+			    	<td style="text-align: right;"><button id="issub" name="sub" onclick="return false">发布信息</button></td>
+			    </tr>
+			</table>
+			
+		</form>
+		
+		</div>
+	
+		
+		
+		
+		
+		
+	</body>
+	<script>
+	/**
+     * 所在地区
+     */
+    var area = (function(){
+    	var __AREA = []; //全国区域
+        var __SELECT_AREA = {};//选择的区域
+
+	    /*
+	     * 根据选择的区域编码获取其下一级子集数据 并且缓存
+	     * @param area_no   区域编码
+	     * @param call_func 获取数据后的回调函数
+	     * */
+	    function requestArea(area_no , call_func){
+	        //如果已经获取过数据 则直接使用
+	        if(__AREA[area_no]){
+	            call_func(__AREA[area_no]);
+	        }else{
+	            $.post("{:U('Server/getArea')}",{'area_no':area_no},function(res){
+	                //先保存已经获取的区域
+	                if(!__AREA[area_no]){
+	                    __AREA[area_no] = res;
+	                }
+	                call_func(res);
+	            })
+	        }
+	    }
+
+        /*
+         *点击选择区域
+         * */
+        $(".area_select").on('change','select',function(){
+            //保存当前选择的this对象
+            var _this       = $(this);
+            var area_no     = $(this).val();//选择的区域编号
+            var select_name = $(this).attr('name');//选择的区域类型 省 市 区
+            //最多只能选择到市
+            if(select_name != 'province'){
+                //保存用户选择的区域
+                __SELECT_AREA[select_name] = area_no;   
+                return;
+            }
+            requestArea(area_no , function(data){
+                //选择省的处理
+                if(select_name == 'province'){
+                    //如果选择的是省 则追加市的下拉框
+                    var html = __HTML_OBJECT.createCityHtml(data);
+                    if(typeof(__SELECT_AREA.province) != 'undefined'){
+                        //已经生成过了市的html 则替换
+                        _this.siblings("select[name='city']").next('span').remove();
+                        _this.siblings("select[name='city']").replaceWith(html); 
+                    }else{
+                        //没有则追加
+                        _this.parent(".area_select").append(html);
+                    }           
+                } 
+                //保存用户选择的区域
+                __SELECT_AREA[select_name] = area_no;   
+            }); 
+        })
+
+        /*
+         * 动态生成html
+         * */
+        var __HTML_OBJECT = {
+            /*
+             * 生成 指定地区城市设置运费 的省下拉框
+             * @param data  区域数据
+             * */
+            createProvinceHtml : function(data){
+                var html = '<select name="province" class="template_select">'
+                    + '<option value="0">请选择...</option>';
+                for(var k in data){
+                    html = html 
+                    + "<option value='" + data[k].area_no +"'>" + data[k].area_name + "</option>"
+                }
+                html += '</select><span> 省</span>';
+                return html;       
+            },
+            /*
+             * 生成 指定地区城市设置运费 的市下拉框
+             * @param data  区域数据
+             * */
+            createCityHtml : function(data){
+                var html = '<select name="city" class="template_select">'
+                    + '<option value="0">请选择...</option>';
+                for(var k in data){
+                    html = html 
+                    + "<option value='" + data[k].area_no +"'>" + data[k].area_name + "</option>"
+                }
+                html += '</select><span> 市</span>';
+                return html;       
+            }
+        };    
+        return {
+            init : function(){
+                requestArea(0 , function(data){   
+                    //生成商品地址省  
+                    var html = __HTML_OBJECT.createProvinceHtml(data);
+                    //追加
+                    $(".area_select").append(html); 
+                });  
+            },
+            getData : function(){
+                return __SELECT_AREA;
+            }
+        }
+         
+    })();
+    area.init();
+    
+    /*上传附件*/
+var goods_gallery = (function(){
+    var num = 0;
+    $(".get-img").on('change','input',function(){
+        var file   = $(this)[0].files[0];   
+        var file_size  = $(this)[0].files[0].size;
+        var reader = new FileReader(); 
+        var _this  = this;
+        
+        var filepath=$(this).val();
+	  	var extStart=filepath.lastIndexOf(".");
+	  	var ext=filepath.substring(extStart,filepath.length).toUpperCase();
+	  	var size = file_size / 1024;
+	  	if(ext!=".BMP"&&ext!=".PNG"&&ext!=".GIF"&&ext!=".JPG"&&ext!=".JPEG"){
+		  	alert("图片限于bmp,png,gif,jpeg,jpg格式");
+	  	}else if(size > 11000){
+	  		alert("上传的文件大小不能超过10M！");
+	  	}else{
+		    //将文件以Data URL形式读入页面  
+	        reader.readAsDataURL(file);  
+	        reader.onload=function(e){ 
+	            num++; 
+	            //显示文件      
+	            $(_this).parent('.get-img').css("background","url("+this.result+") no-repeat").css("background-size","100%");
+	        }  
+	        $("input[name='number']").val(num);//设置上传图片个数  
+	  	}        
+    })  
+})();
+	
+		function request1(){  		
+		    var data = new FormData($("#formGroupbuy")[0]);  // 要求使用的html对象
+		    var url  = "{:U('BulkPurchase/purchaseAdd')}";
+		
+		    $.ajax({  
+		          url : url ,  
+		          type: 'POST',  
+		          data: data,  
+		          async: true,  
+		          // 下面三个参数要指定，如果不指定，会报一个JQuery的错误 
+		　　　　　       cache: false,  
+		          contentType: false,  
+		          processData: false,  
+		          success: function (res) {  
+		          	console.log(res)
+		              if(res.status){
+		                alert(res.msg);
+		                window.location.reload()
+		              } 
+		              if(res.status==0){
+		              	alert(res.msg);
+		              }
+		          },  
+		          error: function (returndata) {  
+		              console.log(returndata); 		              
+		          }  
+		     });  
+		}
+		$("#issub").click(function(){
+			request1()
+		})
+	</script>
+	
+	
+</html>

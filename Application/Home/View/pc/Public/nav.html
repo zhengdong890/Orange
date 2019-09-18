@@ -1,0 +1,41 @@
+<!-- banner + 导航 -->
+<div class="n-bCol4 min-w1200">
+    <div class="home-nav-wrap mar1200c posRel">
+        <div class="home-menu n-bCol5">
+            <span class="f-16-c1 home-menu-tl all-share">
+                <a style="color:#fff;">所有出租分类</a>
+            </span>
+            <div class="menu n-bCol3">
+                 <ul class="lease_menu">
+                    <volist name="categorys" id="v">
+                    <li>
+                        <a href="http://{$Think.server.HTTP_HOST}/shemall/c-{$v['id']}.html" title="橙橙分享">
+                            <img class="icon-i" src="__ROOT__{$v['index_thumb']|substr=1}">{$v['cat_name']}
+                        </a>
+                        <div class="menu-2">
+                            <ul>
+                                <li class="menu-title">{$v['cat_name']}</li>
+                                <volist name="v['child']" id="v1">
+                                <li>
+                                     <a href="http://{$Think.server.HTTP_HOST}/{$v1['router']}.html" title="橙橙分享">{$v1['cat_name']}</a>
+                                </li>
+                                </volist>
+                             </ul>
+
+                        </div>
+                    </li>
+                    </volist>
+                </ul>
+                <a href="#" title="橙橙分享"></a>   
+            </div>
+        </div>
+        <div class="home-nav-group">
+                <div class="nav f16C1">
+                    <volist name='navs' id='v'>
+                    <a href="{$v['url']}" title="橙橙分享">{$v['name']}</a>
+                    </volist>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    

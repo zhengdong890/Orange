@@ -1,0 +1,85 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>余额</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/favorites.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+<style>
+.balance_top{ overflow: auto;width: 94%;margin: 0 auto;border-bottom: 1px solid #E2E2E2;}
+.balance_top li{ float: left;width: 20%;line-height: 50px;}
+.balance_top li:last-of-type{ text-align: right;}
+.balance_top li span{ color: #FF6600;font-size: 18px;}
+.balance_top li a{color: #547AC5;}
+.balance_top li button{cursor: pointer; border: 1px solid #CDEAD6;margin-right: 5px; background-color: #F5FFF5; padding: 2px 12px;border-radius: 4px; font-family: "微软雅黑";}
+.user-right>div{cursor: pointer; display: inline-block;margin:20px 0px 14px 30px;}
+.user-right>.active{border-bottom: 1px solid #ff6600; color: #ff6600;}
+.user-right>.balance_detail_title{overflow: auto;background-color: #EEEEEE;width: 94%;margin: 0 auto;}
+.user-right>.balance_detail_title li{ float: left;width: 25%;text-align: center; line-height: 30px;}
+.user-right>p{width: 94%; margin: 0 auto;margin-top: 10px;color: #999;}
+    
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->	
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="MemberPublic:MemberLeft" />  
+        <div class="user-right marT20 fRi">
+           <ul class="balance_top">
+           	  <li>可用余额：<span>¥ 0.00</span></li>
+           	  <li>锁定余额：<span>¥ 0.00</span></li>
+           	  <li>账户状态：<span>有效</span></li>
+           	  <li><a>安全中心</a>保护账户资产安全</li>
+           	  <li><button>充值</button> <a href="{:U('MemberCenter/rechargeDetails')}">查看充值明细</a></li>
+           </ul>
+           <div class="active">近三个月收支明细</div>
+           <div>三个月前收支明细</div>
+           <ul class="balance_detail_title">
+              <li>时间</li>
+              <li>存入</li>
+              <li>支出</li>
+              <li>备注</li>
+           </ul>
+           <ul></ul>
+           <p>提示：系统仅显示您两年之内的余额明细，更早的余额明细不再显示。</p>
+        </div>
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+//判断左边导航
+function checkNav(){
+	$(".user-left-wrap .list:eq(3)>ul>li:eq(0) a").css("color","#ff6600")
+}
+checkNav()
+
+$(".user-right>div").click(function(){
+	$(this).addClass("active");
+	$(this).siblings().removeClass("active")
+})
+
+</script>
+</body>
+</html>
+
+    

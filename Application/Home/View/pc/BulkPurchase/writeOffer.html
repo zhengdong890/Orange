@@ -1,0 +1,240 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="keywords" content="{$seo['keywords']}">
+<meta name="description" content="{$seo['description']}"">
+<meta name="copyright" content="深圳市橙橙网络科技有限公司(www.orangesha.com)版权所有">
+<meta name="author" content="橙橙分享"> 
+<title>填写报价</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/Orange/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<link href="{:C('STATIC_URL')}/Home/css/caigou.css" rel="stylesheet" >
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/Orange/css/home.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery.omniwindow.js"></script>
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<script src="{:C('STATIC_URL')}/layer/layer.js"></script>
+
+<!-- www.orangesha.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?54f6f54d47704101dc27b337de5fd6c3";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+ <body >
+ 	
+ <!-- 头部 -->
+<include file="Public:header_top" />
+<div class="n-bCol3 bg">
+    <div class="header mar1200c posRel">
+        <a class="logo" href="{:U('Index/index')}" title="e橙优品 - 工业品超市/MRO采购服务平台"></a>
+        <div class="clear"></div>
+    </div>
+</div>	
+<!-- /头部 -->
+<div class="body">
+    <div class="nav">
+        <ul>
+            <li class="current"><a href="http://www.orangesha.com/plcg.html">首页</a></li>
+            <li><a href="{:U('BulkPurchase/projectRules')}">批量采购规则</a></li>
+            <li><a href="{:U('BulkPurchase/tenancy')}">名企专区</a></li>
+        </ul>
+    </div>         
+    <!--项目信息-->
+    <div class="info_top">
+    	<p>采购信息：项目名称</p>
+    	<table>
+    		<tr>
+    			<td>所属分类：</td>
+    			<td>{$data.cat_name}</td>
+    		</tr>
+    		<tr>
+    			<td>需求数量：</td>
+    			<td>{$data.num} {$data.unit}</td>
+    		</tr>
+    		<tr>
+    			<td>采购地点：</td>
+    			<td>{$data.area}</td>
+    		</tr>
+    		<tr>
+    			<td>发布日期：</td>
+    			<td>{$data.create_time}</td>
+    		</tr>
+    		<tr>
+    			<td>价格要求：</td>
+    			<td>{$data.price_range}</td>
+    		</tr>
+    		<tr>
+    			<td style="vertical-align: text-top;">详细信息：</td>
+    			<td><p style="width: 1000px;">{$data.des}</p></td>
+    		</tr>
+    		<tr>
+    			<td>采购附件：</td>
+    			<td>
+                    <img src="{$data['thumb']}" alt=""/>
+                    <img src="{$data['thumb1']}" alt=""/>
+                    <img src="{$data['thumb2']}" alt=""/>
+
+                </td>
+    		</tr>
+    	</table>
+    	<p>买家信息</p>
+    	<table>
+    		<tr>
+    			<td>联系人：</td>
+    			<td>{$data.kh_name}</td>
+    		</tr>
+    		<tr>
+    			<td>联系电话：</td>
+    			<td>{$data.phone}</td>
+    		</tr>
+    	</table>
+    </div>
+    
+    <div class="info_title">填写报价信息</div>
+    <div class="title_div">填写报价信息</div>
+    <form id="offerForm">
+		<ul class="offer_ul">
+			<li>
+				<div><span class="star">*</span>报价：</div>
+				<input type="radio" name="offer" value="1"> 产品单价 <input type="radio" name="offer" value="2"> 价格范围 <input type="radio" name="offer" value="3"> 价格描述   			
+			</li>
+			<li>
+				<div></div>
+				<input type="text" name="offer_price"> 元/个
+			</li>
+			<li>
+				<div>收否含税：</div>
+				<input type="checkbox" name="price_type1" value="1"> 含税 <input type="checkbox" name="price_type2" value="2"> 含运费
+			</li>
+			<li>
+				<div>详细信息：</div>
+				<p>字数限制为<span>40</span>个</p>    			
+			</li>
+			<li>
+				<div></div>
+				<textarea name="data_des"></textarea>
+			</li>
+			<li>
+				<div>附件上传：</div>
+				<p>您可以上传商品详细资料和详细需求说明，以便提高卖家的报价精准度，支持常见格式及压缩包，可以上传3个附件，每个大小不超过10M</p>
+			</li>   
+			<li>
+				<div></div>
+				<div class="box images-box">
+		        	<div class="img">
+		                <label class="get-img">
+		                   <input type="file" class="file-img" name='img1'>
+		                </label>
+		            </div>
+		            <div class="img">                	              	
+		                <label class="get-img">
+		                   <input type="file" class="file-img" name='img2'>
+		                </label>
+		            </div>
+		            <div class="img">
+		                <label class="get-img">
+		                   <input type="file" class="file-img" name='img3'>
+		                </label>
+		            </div>         
+		        </div>
+			</li>
+		</ul>
+		<div class="title_div">联系信息</div>
+		<ul class="offer_ul">
+			<li>
+				<div>联系人：</div>
+				<input type="text" name="name">
+			</li>
+			<li>
+				<div>联系电话：</div>
+				<input type="text" name="mobile_phone">
+			</li>	
+			<li>
+				<div></div>
+				<button class="sub_btn" onclick="return false" data-id="{$data.id}">确定</button>
+			</li>
+		</ul>
+    </form>
+    <include file="Public:footer" />       
+   <script type="text/javascript">  
+    /*上传附件*/
+var goods_gallery = (function(){
+    var num = 0;
+    $(".get-img").on('change','input',function(){
+        var file   = $(this)[0].files[0];   
+        var file_size  = $(this)[0].files[0].size;
+        var reader = new FileReader(); 
+        var _this  = this;
+        
+        var filepath=$(this).val();
+	  	var extStart=filepath.lastIndexOf(".");
+	  	var ext=filepath.substring(extStart,filepath.length).toUpperCase();
+	  	var size = file_size / 1024;
+	  	if(ext!=".BMP"&&ext!=".PNG"&&ext!=".GIF"&&ext!=".JPG"&&ext!=".JPEG"){
+		  	alert("图片限于bmp,png,gif,jpeg,jpg格式");
+	  	}else if(size > 11000){
+	  		alert("上传的文件大小不能超过10M！");
+	  	}else{
+		    //将文件以Data URL形式读入页面  
+	        reader.readAsDataURL(file);  
+	        reader.onload=function(e){ 
+	            num++; 
+	            //显示文件      
+	            $(_this).parent('.get-img').css("background","url("+this.result+") no-repeat").css("background-size","100%");
+	        }  
+	        $("input[name='number']").val(num);//设置上传图片个数  
+	  	}        
+    })  
+})();
+
+//提交数据
+function request1(){  		
+    var data = new FormData($("#offerForm")[0]);  // 要求使用的html对象
+    var url  = "http://www.orangesha.com/index.php?m=Home&c=BulkPurchase&a=writeOffer";
+	var id = $(".sub_btn").attr("data-id")
+	data.append('id',id)
+	
+    $.ajax({  
+          url : url ,  
+          type: 'POST',  
+          data: data,  
+          async: true,  
+          // 下面三个参数要指定，如果不指定，会报一个JQuery的错误 
+　　　　　       cache: false,  
+          contentType: false,  
+          processData: false,  
+          success: function (res) {            	          	
+              if(res.status){
+                alert("报价成功");
+                window.location.href="http://www.orangesha.com/plcg.html"
+              } 
+              if(res.status==0){
+              	alert(res.msg);
+              	console.log(res)
+              }
+          },  
+          error: function (returndata) {  
+              console.log(returndata); 		              
+          }  
+     });  
+}
+$(".sub_btn").click(function(){
+	request1()
+})
+   	</script>
+</body>
+
+</html>

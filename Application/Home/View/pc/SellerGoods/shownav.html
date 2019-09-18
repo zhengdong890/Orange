@@ -1,0 +1,138 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>共享商品</title>
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<script src="/Public/layer/layer.js"></script>
+ <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+
+<style>
+*{
+	padding: 0;
+	margin: 0;
+}
+ul{ }
+input{ outline: none;}
+.container_ul{padding: 20px 10px 20px 10px;}
+.container_ul>li:first-of-type{ margin-top: 10px;}
+ul li{ list-style:none; margin-bottom: 20px; font-family: "微软雅黑";}
+#childuls{ padding: 15px 0px 15px 30px;}
+#childuls>li{ color: #666; font-family: "微软雅黑";}
+#childuls li span{ margin-left:5px;cursor:pointer;float:right; }
+#childuls li span a{ background:#37A4A2;color:#FFFFFF;padding:4px 10px; border-radius: 5px; font-size: 14px; font-family: "微软雅黑";}
+a { text-decoration:none; }
+#childuls li {margin-top:10px;}
+#add{ background:#37A4A2; color:#FFFFFF; padding: 4px 10px; border-radius: 5px; font-size: 14px; font-family: "微软雅黑";}
+</style>
+</head>
+<body >
+
+<div class="bodyer">
+	  <form action="{:U('SellerGoods/show')}" method="post">
+		  <ul class="container_ul">
+				 <li style="float:left;margin-left:18px;">选择分类：
+			   
+				        <select name="navselect"  width="100" id="cat_shopnav">  				
+							<option value ="0">顶级分类</option> 												
+							<volist name="treeData" id="vv"> 
+							  <option value ="{$vv.id}">{$vv.html}{$vv.name}</option>                     					  
+							</volist>
+						</select> 
+						排序：			  
+			     <input name="sort" type="text" value="" style="width:40px;"/>	
+				</li>
+			  <li style="float:left;margin-left:18px;">  <a href="javascript:;" onclick="sumbform()" id="add"/>添加为导航</a> >></li>
+			  <li style="float:left;margin-left:18px;">               
+			 
+				  <ul id="childuls" style="border-left:1px solid #ccc;">
+                 <volist name="navs" id="vo"> 
+                    <li>{$vo.sort}&nbsp;&nbsp;&nbsp;{$vo.nav_name}<span> <a href="javascript:void(0);" title={$vo.id} onclick="navupdate(this)">修改</a> | <a href="javascript:;" title={$vo.id} onclick="navdel(this)">删除</a></span></li>				
+				 </volist>
+
+				  </ul>
+		
+			  </li>
+		   </ul>  
+	 </form>
+</div>
+<!-- 底部 -->
+
+<!-- 底部 -->    
+<script>
+
+function navupdate(obj){
+   var cat_id = $(obj).attr('title');
+    layer.open({
+      type: 2,
+      title: '修改店铺导航',
+      shadeClose: true,
+      shade: false,
+      maxmin: true, //开启最大化最小化按钮
+      area: ['400px', '200px'],
+	  content: "<?php echo U('SellerGoods/navupdate');?>?catid="+cat_id
+    });
+}
+
+function navdel(obj){
+        if(!confirm('你确定要删除吗？')){
+		 	
+		}else{		
+			var cat_id = $(obj).attr('title');
+			$.post("{:U('SellerGoods/navdel')}",{'catid':cat_id},function(data){
+				if( data.msg=='ok'){
+					  alert('删除成功！');				
+				}else{
+				  alert('删除失败！');
+				}		
+			 });		
+		}
+}
+
+$("input").focus(function(){
+	$(this).css("border","1px solid #37A3A3")
+})
+$("input").blur(function(){
+	$(this).css("border","1px solid #A9A9A9")
+}) 
+
+function sumbform(){
+     var sort = $('input[name="sort"]').val();	
+     var cat = $('#cat_shopnav option:selected').val();	
+	 if(isNaN(sort)){
+	   alert('排序应为整数！');
+	   return  false;
+	 }	
+ 
+	if(cat && sort){
+		 $.post("{:U('SellerGoods/shownav')}",{'catname':cat,'sort':sort},function(data){
+			if( data.msg=='ok'){
+			 var catname = data.catname; 
+			 var catid = data.catid;
+             var sort = data.sort;			 
+			 $('#childuls').append('<li>'+sort+'&nbsp;&nbsp;&nbsp;'+catname+'<span ><a href="javascript:void(0);" title="'+catid+'" onclick="navupdate(this)">修改</a> | <a href="javascript:void(0);"  title="'+catid+'" onclick="navdel(this)">删除</a></span></li>'); 		  
+			}else if(data.msg=='onemore'){
+			 alert('导航名重复！');
+			}else if(data.msg=='none'){
+			 alert('未选择分类！');
+			}else{  
+			  alert('添加导航失败！');
+			}
+		  });
+	
+	}else{
+	   alert('没选择分类或未填写排序！');
+	}
+
+} 
+</script>
+</body>
+</html>
+
+    

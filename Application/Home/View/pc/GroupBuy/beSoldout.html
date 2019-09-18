@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="keywords" content="{$seo['keyword']}">
+<meta name="description" content="{$seo['description']}"">
+<meta name="copyright" content="深圳市橙橙网络科技有限公司(www.orangesha.com)版权所有">
+<meta name="author" content="e橙优品"> 
+<title>品牌闪购</title>
+
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+  <link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+  <!--[if (gte IE 9)|!(IE)]><!-->
+  <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-2.0.3.min.js"></script>
+  <!--<![endif]-->
+  <!--[if lte IE 8 ]>
+  <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+  <![endif]-->
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/home.css" type="text/css">
+    <link rel="stylesheet" href="/Public/Orange/script/jquery.kinMaxShow/base.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.css">
+    <link rel="shortcut icon" href="/Public/Home/images/ee.ico" type="image/x-icon">
+    <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.js"></script>
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/tool.js"></script>
+	  <link href="{:C('STATIC_URL')}/Groupbuy/css/secondBeats.css" rel="stylesheet">    
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Orangesha/js/tool.js"></script>
+</head>
+<body >   
+<include file="Public:header_top" />
+<include file="Public:header_search" />
+  <div class="secondBeats-nav" >
+     <div class="nav-inner mar1200c">
+       <ul>
+           <li><a href="{:U('GroupBuy/index')}">首页</a></li>
+           <li><a href="{:U('GroupBuy/activityTrailer')}">活动预告</a></li>
+           <li><a href="{:U('GroupBuy/beSoldout')}" class="nav-active" >即将售罄</a></li>
+       </ul>
+     </div>
+  </div>
+  <div class="secondBeats-content">
+      <div class="content-inner">
+           
+           
+           <div class="content-bottom" style="margin-top: 40px;">
+               <ul class="clearfix">
+			   <volist name="group_2" id="v" >
+                   <li>
+                       <div class="goods-img" style="width:100%;height:225px">
+                        <a href="http://{$v['domain']}.orangesha.com/shangpin-{$v['goods_id']}.html" >   
+                        <img src="__ROOT__{$v['thumb']|substr=1}" alt></a>
+                           <p class="last-time{$v['goods_id']}">剩余0天</p>
+                       </div>
+					    <a href="http://{$v['domain']}.orangesha.com/shangpin-{$v['goods_id']}.html" > 
+                       <div class="fight-info clearfix">
+                           <div class="fight-txt">
+                               <p>{$v.title}</p>
+                               <div class="totals-strip"><div  class="portion-strip"></div></div>
+                               <!--<p>已抢购{$v.sale_num}件</p>-->
+                           </div>
+						               <a href="http://{$v['domain']}.orangesha.com/shangpin-{$v['goods_id']}.html">
+                           <div class="fight-right">
+                               <p class="goods-price"><if condition="$v.group_price gt 10000">￥{$v.group_price}万<else />￥{$v.group_price}元</if></p>
+                               <p class="fight-btn">马上抢</p>
+                           </div>
+                           </a>
+						  
+                       </div>
+					    </a>
+                   </li>
+				  </volist> 
+                  
+
+                   
+               </ul>
+           </div>
+      </div>
+  </div>
+
+   <div style="margin-top:-150px;"> 
+    <!-- 底部 -->
+    <include file="Public:footer" />
+    <!-- /底部 -->
+</div>
+
+<script type="text/javascript">
+//头部橙橙首页隐藏
+$(".homePage").css("display","none");
+var group_2  = {$group_2_json};
+window.onload=function(){ 
+  showTime();  
+	setInterval(function(){
+     showTime();     
+	},1000);
+
+  var portionList=$('.portion-strip');
+  for(var k in goods_json){
+      portionWidth = (goods_json[k].sale_num/goods_json[k].goods_number)*100+'%';
+      portionList.eq(k).width(portionWidth);
+  } 
+}
+
+function showTime(){ 
+  for(var k in group_2){
+      var text   = getTime(parseInt(group_2[k].end_time));
+      var class_ = '.last-time' + group_2[k].goods_id;
+      $(class_).text(text);
+  }  
+}
+
+function getTime(end_time){
+  var timestamp = Date.parse(new Date()),
+      timestamp = parseInt(timestamp/1000),
+      sy_time   = end_time - timestamp,
+      day       = parseInt(sy_time/(3600 * 24)),
+      day_      = sy_time%(3600 * 24),
+      hour      = parseInt(day_/3600),
+      hour_     = day_%3600,
+      minu      = parseInt(hour_/60), 
+      second    = hour_%60; 
+      return day + "天 " + hour + "时 " + minu + "分 " + second + "秒 ";
+}
+
+</script>	
+</body>
+</html>

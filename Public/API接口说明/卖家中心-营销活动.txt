@@ -1,0 +1,103 @@
+营销活动列表
+地址 : http://www.orangesha.com/ReleaseActivity/activityList
+请求json参数 : {
+    'firstRow' : ,//从第几条数据开始获取
+    'listRows' : ,// 需要获取的数据条数
+}
+返回
+{
+    status : 0失败 1成功, 
+    msg    : 
+    totalRows : 总数据条数,
+    data : [
+        {
+            'title'           ： '',//活动名称
+            'start_time'      ： '',//开始时间
+            'end_time'        ： '',//结束时间
+            'scope'           ： '',//指定范围 1全店 2指定商品
+            'goods_id'        ： '1,2,3'//指定商品id 逗号隔开的字符
+            'min_max'         ： '',//购买至多少才优惠
+            'favourable_type' ： '' //优惠方式(1打折,2减多少)-优惠值
+            'favourable'      ： '' //优惠值        
+        }......
+    ]       
+}
+
+添加营销活动
+地址 : http://www.orangesha.com/ReleaseActivity/activityAdd
+请求参数
+{	
+	'title'           ： '',//活动名称
+	'start_time'      ： '',//开始时间
+	'end_time'        ： '',//结束时间
+	'scope'           ： '',//指定范围 1全店 2指定商品
+	'goods_id'        ： [1,2,3],//指定商品id 数组
+	'min_max'         ： '',//购买至多少才优惠
+	'favourable_type' ： '' //优惠方式(1打折,2减多少)-优惠值
+	'favourable'      ： '' //优惠值
+}
+返回
+{
+    status : 0失败 1成功, 
+    msg    : 
+}
+
+获取商户商品 并且获取商品下的sku 采用分页
+地址 : http://www.orangesha.com/sellerGoods/getGoodsAndSku
+请求json参数 : {
+    'firstRow' : ,//从第几条数据开始获取
+    'listRows' : ,// 需要获取的数据条数
+    //搜索条件
+    'goods_name' : 商品标题,
+    'sku_code'   : sku编码,
+    'cat_id'     : 分类id
+}
+返回 {
+    status    : 0或者1 , 
+    msg       : '' , 
+    totalRows : 总数据条数
+    data      : {
+        //商品信息
+        goods_data : [
+            {
+                id : 商品id,
+                goods_price : 商品价格,
+                goods_thumb : 商品缩略图
+            },....  
+        ],
+        /商品下 添加的所有sku组合信息
+        sku : [
+            {
+                sku_id   : sku_id,
+                goods_id : 商品id,
+                price    : 价格,
+                sku_code : 订货号,
+                term     : 预计出货期
+            },....  
+        ],
+        //商品选择了的sku属性名称
+        attr : [
+            {
+                goods_id  : 商品id,
+                attr_name : sku属性名称
+            },....  
+        ],
+	}
+}
+
+获取店铺商品分类
+地址 : http://www.orangesha.com/ShopCategory/getCategory
+请求参数
+{	
+	id : id顶级为0
+}
+返回
+{
+    status : 0失败 1成功, 
+    msg    : 
+    data   : {
+        id   : 分类id
+        name : 分类名字
+
+    }
+}

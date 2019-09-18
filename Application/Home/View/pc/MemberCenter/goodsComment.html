@@ -1,0 +1,189 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/evaluation-goods.css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->	
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">       
+        <include file="MemberPublic:MemberLeft" />  
+        <div class="user-right marT20 box-s-c1 fRi">          
+            <div class="evaluation-goods">
+                <div class="content">
+                     <div class="title clearfix">
+                         <h2 class="fLe">评价宝贝</h2>
+                         <p class="fRi">卖家： <span class="buyer-name">{$shop_name}</span> </p>
+                     </div>
+                     <form id="eva-form">
+                         <input type='hidden' name='id' value="{$data['id']}"/>
+                         <div class="goods-eva clearfix">
+                             <div class="fLe goods-info">
+                                 <a href="javascript:;">
+                                     <div class="goods-img">
+                                     <img src="__ROOT__{$data['goods_thumb']|substr=1}" alt="">
+                                     </div>
+                                     <p class="goods-name">{$data['goods_name']}</p>
+                                     <p class="goods-type">商品型号：{$data['goods_model']}</p>
+                                 </a>
+                             </div>
+                             <div class="fLe">
+                                 <div class="lv-eva">
+                                     <label><input type="radio" name="level" value='3'><span class="haoping active">好评</span></label>
+                                     <label><input type="radio" name="level" value='2'><span class="zhongping">中评</span></label>
+                                     <label><input type="radio" name="level" value='1'><span class="chaping">差评</span></label>
+                                 </div>
+                                 <div class="txt-eva">
+                                     <textarea name='content' placeholder="亲！快来评价一下宝贝吧~"></textarea>
+                                     <div class="imgs">
+                                         <label class="img-btn"><input type="file" name='thumb' id="show-pic">晒照片</label>
+                                         <span></span>
+                                         <div class="sml-pic"></div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="shop-eva clearfix">
+                             <p class="fLe">店铺评分</p>
+                             <ul class="fLe">
+                                 <li>
+                                     <span>描述相符</span>
+                                     <span class="star" data-data='desc_1'></span>
+                                     <span class="star" data-data='desc_2'></span>
+                                     <span class="star" data-data='desc_3'></span>
+                                     <span class="star" data-data='desc_4'></span>
+                                     <span class="star" data-data='desc_5'></span>
+                                 </li>
+                                 <li>
+                                     <span>物流服务</span>
+                                     <span class="star" data-data='logistical_1'></span>
+                                     <span class="star" data-data='logistical_2'></span>
+                                     <span class="star" data-data='logistical_3'></span>
+                                     <span class="star" data-data='logistical_4'></span>
+                                     <span class="star" data-data='logistical_5'></span>
+                                 </li>
+                                 <li>
+                                     <span>服务态度</span>
+                                     <span class="star" data-data='service_1'></span>
+                                     <span class="star" data-data='service_2'></span>
+                                     <span class="star" data-data='service_3'></span>
+                                     <span class="star" data-data='service_4'></span>
+                                     <span class="star" data-data='service_5'></span>
+                                 </li>
+                             </ul>
+                         </div>
+                     </form>
+                     <button class="save">发表评论</button>
+                </div>
+                
+           </div>                      
+        </div>
+    </div>    
+</div>
+<!-- /主体 -->
+<include file="Public:footer" />  
+</body>
+<script type="text/javascript">
+var comment = (function () {
+    var comment_data = {'desc':'','logistical':'','service':''}; 
+    $(".shop-eva").on('click','.star',function(){
+        var data  = $(this).attr('data-data'),
+            data  = data.split('_'),
+            name  = data[0],
+            score = data[1];
+        comment_data[name] = score;
+		console.log(comment_data);
+        $(this).addClass('active');
+        $(this).prevAll().addClass('active');
+        $(this).nextAll().removeClass('active');  
+    });
+
+    $('.lv-eva label').click(function () {
+       $(this).find('span').addClass('active');
+       $(this).siblings().find('span').removeClass('active');
+    });
+
+    $('.save').click(function (e) {
+        e.preventDefault();
+        request();
+    });
+    showImg('show-pic','goods-pic');
+
+
+    /*
+     * 提交数据
+     **/
+    function request(){  
+        var data = new FormData($("#eva-form")[0]);  // 要求使用的html对象
+        var url  = "{:U('MemberCenter/goodsComment')}";
+        var url_ = "{:U('MemberCenter/member')}"
+        $.ajax({  
+              url : url ,  
+              type: 'POST',  
+              data: data,  
+              async: true,  
+              // 下面三个参数要指定，如果不指定，会报一个JQuery的错误 
+    　　　　　cache: false,  
+              contentType: false,  
+              processData: false,  
+              success: function (res) {  
+                  alert(res.msg);
+                  if(res.status){
+                      window.location.href = url_;
+                  } 
+              },  
+              error: function (returndata) {  
+                  console.log(returndata); 
+              }  
+         });  
+    }     
+})();
+
+function showImg(inputId,imgClass) {
+    $('#'+inputId).change(function () {
+        if(typeof (FileReader)!= 'undefined'){
+           var regex = /(.jpg|.jpeg|.png)$/;
+          $($(this)[0].files).each(function () {
+              var file = $(this);
+              if(regex.test(file[0].name.toLowerCase())) {
+                  var reader = new FileReader();
+                  reader.onload=function (e) {
+                      var img = $("<img class='"+ imgClass +"'>");
+                      img.attr('src',e.target.result);
+                      if($('.sml-pic img').length<5){
+                          $('.sml-pic').append(img);
+                      }else {
+                          console.log('over');
+                          return false;
+                      };
+                  };
+                  reader.readAsDataURL(file[0]);
+              }else{
+                  console.log("Image format 0");
+                  return false;
+              }
+          });
+       }
+    });
+};
+</script>
+</html>

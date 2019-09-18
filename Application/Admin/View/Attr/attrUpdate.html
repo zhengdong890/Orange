@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="description" content="" />
+<style>
+*{padding:0; margin:0;font-size:16px;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0} 
+#wraper{width:98%;height:auto;float:left;margin-left:1%;}
+#wraper #content_h{width:100%;height:40px;border:1px solid #D7D7D7;line-height:40px;margin-top:15px}
+#wraper #content_h a{padding-left:10px}      
+#content #content_m{width:100%;height:auto;border:1px solid #D7D7D7;padding-bottom:100px;margin-top:20px}
+#content table{margin:0 auto;margin-top:20px}
+input[type=text]{width:400px;height:24px;border-radius:3px;border-bottom:1px solid #E3E9EF;border-top:1px solid #ABADB3;border-left:1px solid #E2E3EA;border-right:1px solid #DBDFE6}
+.btn_a{display:block;width:100px;margin-top:10px;color:white;position:relative;height:28px;line-height:28px;text-align:center;float:left;background:#C43926;border-radius:4px;}
+td{padding-right:30px;padding-top:5px}
+textarea{width:400px;height:300px}
+</style>
+</head>
+<body>          
+<div id="wraper">
+    <div id="content_h">
+        <a>后台管理中心</a>-><a>新建商品属性</a>
+        <a class='btn' style="padding-left:0" href="{:U('attrList',array('id'=>$data['cat_id']))}">属性列表</a>
+    </div>
+    <div id="content_m">
+        <form id = 'form'>
+            <input type='hidden' name='attr_id' value='{$data['attr_id']}' />
+	        <table cellspacing="10" class='table'>
+	            <tr>
+	                <td class = 'td_label'>当前分类:</td>
+	                <td>{$cat_name}</td>
+	            </tr>
+	            <tr>
+	                <td class = 'td_label'>属性名称:</td>
+	                <td><input type="text" name="attr_name" value="{$data['attr_name']}"></input></td>
+	            </tr>
+	            <tr>
+	                <td class = 'td_label' valign="top">可选值列表:</td>
+	                <td class = 'attr_value'>
+	                    <volist name='attr_value' id='v'>
+	                    <p style='margin-top:5px' attr_value_id='{$v['attr_value_id']}'>
+	                        <input name='attr_value{$v['attr_value_id']}' type='text' value='{$v['attr_value']}'/>
+	                        <a href='javascript:;' class='delete'>删除</a>
+	                    </p>
+	                    </volist>
+	                    <a href='javascript:;' class='btn_add_attr'>点击添加属性</a>
+	                </td>
+	            </tr>	            
+	            <tr>
+	                <td></td>
+	                <td>
+	                    <a class='btn_a'>确认保存</a>
+	                </td>
+	            </tr>
+	        </table>	 
+        </form>           
+    </div>
+</div>
+</body>
+<script type="text/javascript"> 
+(function(w){
+    var __OLD_ATTR_V     = {},
+        __NEW_ATTR_V     = {},
+        __OLD_ATTR_N     = '{$data['attr_name']}', 
+        __NEW_ATTR_N     = false,
+        __UPDATE_ATTR_V  = {};
+        __OLD_ATTR_V     = getAttrValue();
+     
+function getAttrValue(){
+	var data = {};
+	$(".attr_value input").each(function(){
+        var attr_value_id   = $(this).attr('name');
+            attr_value      = $(this).val(),
+        attr_value_id       = attr_value_id.substring(10);
+        data[attr_value_id] = {
+            attr_value_id : attr_value_id,
+            attr_value    : attr_value 
+        }
+	});
+	return data;
+}
+    
+var number = 0;
+$(".btn_add_attr").click(function(){
+	number++;
+    __NEW_ATTR_V[number] = '';
+	var html = $.html.createHtml(number);
+    $(this).before(html);	   
+})
+
+$("input[name='attr_name']").blur(function(){
+    var name = $(this).val();
+    if(name != __OLD_ATTR_N){
+        __NEW_ATTR_N = name;
+    }else{
+    	__NEW_ATTR_N = false;
+    }
+})
+
+var __DELETE_URL  = "{:U('Attr/attrValueDelete')}";
+$(".table").on('click' , '.delete' , function(){
+	var number = $(this).parent('p').attr('number'),
+	    attr_value_id = $(this).parent('p').attr('attr_value_id');
+        console.log(number);
+	if(number){
+		delete __NEW_ATTR_V[number];
+		$(this).parent('p').remove();
+	}else{
+        if(!confirm('是否删除')){
+            return;
+        }
+        var _this = this;
+        $.post(__DELETE_URL , {id : attr_value_id} , function(res){
+            if(res.status == '1'){
+                alert(res.msg);
+                delete __UPDATE_ATTR_V[attr_value_id];
+                $(_this).parent('p').remove();
+            }
+        });       
+	}		
+})
+
+$(".attr_value").on('blur' , 'input' , function(){
+	var attr_value_id  = $(this).parent('p').attr('attr_value_id'),
+	    number         = $(this).parent('p').attr('number'),
+            attr_value = $(this).val();
+    if(attr_value_id){
+        if(typeof(__OLD_ATTR_V) == 'undefined' && __OLD_ATTR_V[attr_value_id].attr_value == attr_value){
+        	if(typeof(__UPDATE_ATTR_V[attr_value_id]) != 'undefined'){
+        		delete __UPDATE_ATTR_V[attr_value_id];
+        	}
+        }else{
+        	__UPDATE_ATTR_V[attr_value_id] = {
+        		attr_value_id : attr_value_id,
+                attr_value    : attr_value
+        	};
+        }        	
+    }else{
+    	__NEW_ATTR_V[number] = attr_value;
+    }
+})
+
+$.obj = {
+    /*对象是否为空*/
+    isEmpty : function(obj){
+        for(var k in obj){
+        	return false;
+        }
+        return true;
+    },  
+    /*过滤 空的对象*/
+    filterEmpty : function(data){
+        for(var k in data){
+           if(this.isEmpty(data[k])){
+               delete data[k];
+           }
+        }
+        return data;
+    }
+},
+$.html = {
+    createHtml : function(number){
+    	var html = '';
+        html = html
+	    + "<p style='margin-top:5px' number='" + number + "'>"
+	    + "    <input name='attr_value[]' type='text' class='new_attr_value'></input>"
+	    + "    <a href='javascript:;' class='delete'>删除<a/>"
+	    + "</p>";
+	    return html;	 
+    }
+};
+
+w.attrvalue = {
+    getData : function(){
+    	var new_data = $.obj.filterEmpty(__NEW_ATTR_V),
+    	    old_data = $.obj.filterEmpty(__UPDATE_ATTR_V);
+    	var data = {};        
+    	if(!$.obj.isEmpty(__NEW_ATTR_V)){
+            data.new_data = new_data;
+    	}
+    	if(!$.obj.isEmpty(__UPDATE_ATTR_V)){
+    		data.old_data = old_data;
+    	}  
+    	if($.obj.isEmpty(data) && __NEW_ATTR_N === false){
+            return false;
+    	} 
+    	if(__NEW_ATTR_N !== false){
+    		data.attr_name = __NEW_ATTR_N; 
+    	}   	
+    	return data;   
+    }
+}
+})(window , $ || {});
+
+
+$(".btn_a").click(function(){
+    request();
+})  
+
+/*
+ * 提交数据
+ **/
+function request(){   
+    var url  = "{:U('Attr/attrUpdate')}";
+    var url_ = "{:U('attrList',array('id'=>$data['cat_id']))}";
+    var data = attrvalue.getData();
+    if(data === false){
+        alert('保存成功');return;
+    }
+    if(data.attr_name === ''){
+        alert('请输入属性名称');return;
+    }; 
+    data.attr_id = {$data['attr_id']};  
+    $.post(url , data , function(res){
+        if(res.status == '1'){
+        	alert(res.msg);
+        	window.location.href = url_;
+        }
+    }); 
+} 
+</script>
+</html>

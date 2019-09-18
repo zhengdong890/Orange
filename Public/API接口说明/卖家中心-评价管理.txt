@@ -1,0 +1,4 @@
+获取商城商品的评价
+地址 : http://www.orangesha.com/index.php/Home/SellerComment/getCommentList
+请求参数 : {firstRow:获取评价的开始条数,listRows:每页显示多少条数据}
+返回 : {"status": , 'msg':'',data :[{a},{},{}]}

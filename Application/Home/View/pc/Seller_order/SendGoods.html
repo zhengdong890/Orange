@@ -1,0 +1,209 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>发货</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/all-use.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/side-nav.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/sell-management.css">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+<style>
+.hide{display:none}
+.change_member_adress{position: absolute; right: 0; display: none; border: 1px solid #CDCDCD; background-color: #FFF7E5; width: 500px;padding: 10px 20px; box-sizing: border-box;}
+.change_member_adress .close_change_member_adress{position: absolute; right: 10px; top: 7px;color: #999; cursor: pointer;} 
+.change_member_adress table td{ border: none;line-height: 26px;}
+.change_member_adress table td input{padding-left: 4px;height: 18px;}
+.change_member_adress table td .change_btn{width: 60px; height: 24px;font-family: "微软雅黑"; color: #fff; background-color: #0066FF; border-radius: 6px;}
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end --> 
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="Public:sellerLeft" />  
+        <div class="user-right marT20 fRi">
+        	<div class="sell-management clearfix" style='width:auto'>
+        		<div class="section2">
+		             <div class="deliver_top"><a href="{:U('Seller_order/sellerIndex')}">我的商城</a> > <a href="{:U('Seller_order/delivery')}">发货管理</a> > 发货</div>  
+		             <!--第一步-->
+		             <p class="deliver_step"><span>第一步</span> 确认收货信息及交货详情</p>
+		             <div class="deliver_order" order_id="{$order[0]['id']}">
+		             	<div>订单编号：<span class="airCode">{$order[0]['order_sn']}</span> 创建时间：{$order[0]['create_time']|date='Y-m-d H:i:s',###}</div>
+		             	<volist name='order' id='v'>
+		             	<div class="good_div">
+		             		<img src="__ROOT__<if condition="substr($v['goods_thumb'] , 0 , 1) eq '.'">{$v['goods_thumb']|substr=1}<else/>{$v['goods_thumb']}</if>" alt="{$v['goods_name']}" />
+		             		<p>{$v['goods_name']}</p>
+		             	</div>
+		             	</volist>
+		             	<div class="member_select">
+		             		<p>买家选择：快递</p>
+		             		<p>我的备注：<textarea placeholder="您可以在此输入备忘信息（仅卖家自己可见）"></textarea></p>
+		             	</div>
+		             	<div class="member_adress">
+		             		买家收货信息：<input class="address_info" type="text" disabled="disabled" value="{$order[0]['address']}">
+		             		<a class="revise_address memberAddress">更改买家收货信息</a>
+		             	</div>		             	
+		             </div>
+		             <!--修改买家收货信息-->
+		             	<div class="change_member_adress">
+		             		<button class="close_change_member_adress">X</button>
+	             			<table>
+	             				<tr>
+	             					<td>收货地址：</td>
+	             					<td>
+	             						<select><option>广东</option></select>
+	             						<select><option>深圳</option></select>
+	             						<select><option>南山区</option></select>
+	             					</td> 
+	             				</tr>
+	             				<tr>
+	             					<td></td>
+	             					<td><input type="text" value="南山街道"></td>
+	             				</tr>
+	             				<tr>
+	             					<td>联系人：</td>
+	             					<td><input type="text" value="小林"></td>
+	             				</tr>
+	             				<tr>
+	             					<td>电话号码：</td>
+	             					<td><input type="text"></td>
+	             				</tr>
+	             				<tr>
+	             					<td>手机号码：</td>
+	             					<td><input type="text" value="13566223589"></td>
+	             				</tr>
+	             				<tr>
+	             					<td>邮政编码：</td>
+	             					<td><input type="text" value="515000"></td>
+	             				</tr>
+	             				<tr>
+	             					<td></td>
+	             					<td><button class="change_btn">确认</button></td>
+	             				</tr>
+	             			</table>
+	             		</div>
+		             <!--第二布-->
+		             <p class="deliver_step"><span>第二步</span> 确认发货/退货信息</p>
+		             <div class="deliver_address">
+		             	<p>我的发货信息：<input class="address_info" type="text" disabled="disabled" value=""><a class="revise_address sellerAddress">更改我的发货信息</a></p>
+		             	<!--更改发货信息-->
+		             	<div class="edit_adress">
+		             		<p>请选择合适的地址： <a href="http://www.orangesha.com/wuliu.html?title=4">地址库管理</a> <a class="close_edit_adress" href="javascript:;">关闭</a></p>		            		
+		             		<ul>
+		             			<li>
+		             				<span><input type="radio" checked="checked" name="fahuo_adress"> 小林</span>
+		             				<span>广东省深圳市宝安区 粤海街道</span>
+		             				<span>515000</span>
+		             				<span>13522112145</span>
+		             			</li>
+		             			<li>
+		             				<span><input type="radio" name="fahuo_adress"> 小林</span>
+		             				<span>广东省深圳市宝安区 粤海街道</span>
+		             				<span>515000</span>
+		             				<span>13522112145</span>
+		             			</li>
+		             		</ul>
+		             	</div>
+		             	<p>我的退货信息：<input class="address_info" type="text" disabled="disabled" value=""><a class="revise_address sellerAddress">更改我的退货信息</a></p>
+		             	<!--更改退货信息-->
+		             	<div class="edit_adress">
+		             		<p>请选择合适的地址： <a href="http://www.orangesha.com/wuliu.html?title=4" target="_blank">地址库管理</a> <a class="close_edit_adress" href="javascript:;">关闭</a></p>		            		
+		             		<ul>
+		             			<li>
+		             				<span><input type="radio" checked="checked" name="tuihuo_adress"> 小林</span>
+		             				<span>广东省深圳市宝安区 粤海街道</span>
+		             				<span>515000</span>
+		             				<span>13522112145</span>
+		             			</li>
+		             			<li>
+		             				<span><input type="radio" name="tuihuo_adress"> 小林</span>
+		             				<span>广东省深圳市宝安区 粤海街道</span>
+		             				<span>515000</span>
+		             				<span>13522112145</span>
+		             			</li>
+		             		</ul>
+		             	</div>
+		             	<div><span>*</span>请正确填写退货地址。若因地址填写不准确导致的货物无法退回等风险需要您承担。</div>
+		             </div>
+		             <!--第三步-->
+		             <p class="deliver_step"><span>第三步</span> 选择物流服务</p>
+		             <ul>
+		             	<li>公司名称</li>
+		             	<li>运单号码</li>
+		             	<li>操作</li>
+		             </ul>
+		             <ul>
+		             	<li>
+		             		<select name="company_code">
+		             		<foreach name="kd" item="vo">
+		             			<option value="{$vo.code}">{$vo.company}</option>
+		             		</foreach>
+		             		</select>
+		             	</li>
+		             	<li><input type="text" name="air_code"></li>
+		             	<li><button class="send_good_btn">确认</button></li>
+		             </ul>
+	            </div> 
+	        </div>     
+        </div>
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+//更改发货退货地址
+$(".sellerAddress").click(function(){
+	$(this).parent().next(".edit_adress").stop().slideToggle()
+})  
+$(".close_edit_adress").click(function(){
+	$(this).parent().parent().stop().css("display","none")
+})
+
+//更改买家收货信息
+$(".memberAddress").click(function(){
+	$(".change_member_adress").toggle()
+})
+$(".close_change_member_adress").click(function(){
+	$(".change_member_adress").css("display","none")
+})
+
+//确认发货
+$(".send_good_btn").click(function(){
+	var id = $(".deliver_order").attr("order_id")
+	var air_way_code = $("input[name='air_code']").val();
+	var company_code = $("select[name='company_code']").val();
+	var data = [id]
+	var data2 = {'company_code':company_code,'air_way_code':air_way_code}
+	var da = {};
+	for(var k in data){
+		da[data[k]] = data2
+	}	
+	da = JSON.stringify(da)
+	console.log(da)	
+	$.post("http://www.orangesha.com/index.php/Home/Seller_order/sendGoods",{data:da},function(res){                     
+        alert(res.msg);
+       console.log(res)
+        if(res.status){
+        	window.location.href="http://www.orangesha.com/index.php?m=Home&c=Seller_order&a=orderList"
+        }
+    });
+})
+</script>
+</body>
+</html>

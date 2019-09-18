@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>消费者保障</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/all-use.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/side-nav.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/sell-management.css">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+<style>
+.safeguard{ width: 970px; border: 1px solid #E4E4E4; float: left; margin: 30px 0px 0px 6px;}
+.safeguard_top{ width: 100%; background-color: #F2F1F1; padding: 10px 40px; box-sizing: border-box; margin-bottom: 70px;}
+.safeguard_box{ width: 500px; padding: 60px 150px 30px 150px; margin: 0 auto; border: 1px solid #E4E4E4; margin-bottom: 70px; text-align: center;}
+.safeguard_box>p:first-of-type{ font-size: 30px; color: #000; margin-bottom: 15px;}
+.safeguard_box>p:nth-of-type(2){ color: #999; margin-bottom: 45px;}
+.safeguard_box button{ cursor: pointer; color: white; padding: 10px 40px; background-color: #FF6702; border-radius: 5px; font-family: "微软雅黑"; font-size: 16px;}
+.hide{display:none}
+.safeguard_ul{ background-color: #EEEEEE; padding: 30px; margin-top: 40px;}
+.safeguard_ul li{ text-align: left;}
+.safeguard_ul li:hover{ color: #666666; cursor: default;}
+.safeguard_ul>li>a{ color: #4872CE;}
+.safeguard_ul>li>a:hover{ text-decoration: underline;}
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end --> 
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="Public:sellerLeft" />         
+            <div class="sell-management clearfix" style='width:auto;'>
+                <div class="safeguard">
+                	<div class="safeguard_top">消费者保障</div>
+                	<div class="safeguard_box">
+                		<p>订单险</p>
+                		<p>未开通</p>
+                		<button>开通</button>
+                		<ul class="safeguard_ul">
+                			<li>• 保险公司护航，交易全保障，买家更放心！<!--<a href="#">查看详情</a>--></li>
+                			<li>• 订单险开通后1个小时内无法主动退保</li>
+                			<li>• 投保成功后，您店铺内的实物类目交易都将在订单险保障范围内</li>
+                		</ul>
+                	</div>
+                </div> 
+            </div>                   
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+//判断左边导航
+function checkNav(){
+	$(".side-nav>ul:eq(4)>li:eq(1) a").css("color","#ff6600")
+}
+checkNav();
+
+    $("button").click(function(){
+    	alert("尚未开通，敬请期待！")
+    })
+</script>
+</body>
+</html>

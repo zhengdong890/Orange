@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="keywords" content="{$seo['keyword']}">
+<meta name="description" content="{$seo['description']}"">
+<meta name="copyright" content="深圳市橙橙网络科技有限公司(www.orangesha.com)版权所有">
+<meta name="author" content="e橙优品"> 
+<title>品牌闪购</title>
+
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+  <link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+  <!--[if (gte IE 9)|!(IE)]><!-->
+  <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-2.0.3.min.js"></script>
+  <!--<![endif]-->
+  <!--[if lte IE 8 ]>
+  <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+  <![endif]-->
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/home.css" type="text/css">
+    <link rel="stylesheet" href="/Public/Orange/script/jquery.kinMaxShow/base.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.css">
+    <link rel="shortcut icon" href="/Public/Home/images/ee.ico" type="image/x-icon">
+    <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.js"></script>
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/tool.js"></script>
+	  <link href="{:C('STATIC_URL')}/Groupbuy/css/secondBeats.css" rel="stylesheet">    
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Orangesha/js/tool.js"></script>
+    <style>
+    	.flagship_event{ overflow: auto; width: 666px;margin: 40px auto;}
+    	.flagship_event li{ float: left; width: 220px;border: 1px solid #D1D1D1;text-align: center;height: 36px;line-height: 36px;font-size: 16px; cursor: pointer;} 
+    	.flagship_event .active{background-color: #666666;border-color: #666666;color: #fff;}
+    	.event_ul{width: 1200px;overflow: auto;margin: 0 auto;}
+    	.event_ul:nth-of-type(2),.event_ul:nth-of-type(3){display:none;}
+    	.event_ul li{float: left;width: 390px; height: 190px;margin-right: 15px;background-color: #fff;margin-bottom: 20px;}
+    	.event_ul a:nth-of-type(3n) li{margin-right: 0px;}
+    	.event_ul li>img{width: 100%; height: 140px;}
+    	.event_ul li>div{height: 40px;line-height: 40px;}
+    	.event_ul li>div:first-of-type{width: 60%;text-align: center;float: left;font-size: 16px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;padding: 0px 10px;box-sizing: border-box;}
+    	.event_ul li>div:nth-of-type(2){width: 40%;float: right;}
+    	.event_ul li>div:nth-of-type(2) img{width: 80%; height: 100%;}
+    	.secondBeats-content .content-inner2{width: 1200px;margin: 0 auto 150px auto;}
+    </style>
+</head>
+<body >   
+<include file="Public:header_top" />
+<include file="Public:header_search" />
+  <div class="secondBeats-nav" >
+     <div class="nav-inner mar1200c">
+       <ul>
+           <li><a href="{:U('GroupBuy/index')}">首页</a></li>
+           <li><a href="{:U('GroupBuy/activityTrailer')}" class="nav-active">活动预告</a></li>
+           <li><a href="{:U('GroupBuy/beSoldout')}">即将售罄</a></li>
+       </ul>
+     </div>
+  </div>
+  <div class="secondBeats-content">
+      <div class="content-inner2">           
+           <ul class="flagship_event">
+           		<li class="active">今日主打</li>
+           	  <li>明天预告</li>
+           	  <li>后天预告</li>
+           </ul>
+           <div class="content-bottom" style="margin-top: 40px;">
+           	    <!--今日主打-->
+           	    <ul class="event_ul">
+	                 <foreach name="goods" item="vo">
+                  <a target="_blank" href="http://{$vo['domain']}.orangesha.com/shangpin-{$vo['goods_id']}.html">
+                    <li>
+                      <img src="{$vo.img}" alt="{$vo.title}">
+                      <div>{$vo.title}</div>
+                      <div><img src="{$vo.thumb}" alt=""></div>
+                    </li>
+                    </a>
+                  </foreach>
+                </ul>
+           	    <!--明天预告-->
+                <ul class="event_ul">
+
+ 	                <foreach name="goods_m" item="vo">
+	                <a target="_blank" href="http://{$vo['domain']}.orangesha.com/shangpin-{$vo['goods_id']}.html">
+	               		<li>
+	               			<img src="{$vo.img}" alt="{$vo.title}">
+	               			<div>{$vo.title}</div>
+	               			<div><img src="{$vo.thumb}" alt=""></div>
+	               		</li>
+	                  </a>
+	               	</foreach>
+                </ul>
+                <!--后天预告-->
+                <ul class="event_ul">
+	               <foreach name="goods_h" item="vo">
+                  <a target="_blank" href="http://{$vo['domain']}.orangesha.com/shangpin-{$vo['goods_id']}.html">
+                    <li>
+                      <img src="{$vo.img}" alt="{$vo.title}">
+                      <div>{$vo.title}</div>
+                      <div><img src="{$vo.thumb}" alt=""></div>
+                    </li>
+                    </a>
+                  </foreach>
+                </ul>
+           </div>
+      </div>
+  </div>
+
+   <div style="margin-top:-150px;"> 
+    <!-- 底部 -->
+    <include file="Public:footer" />
+    <!-- /底部 -->
+</div>
+
+<script type="text/javascript">
+//头部橙橙首页隐藏
+$(".homePage").css("display","none");
+
+//菜单切换
+$(".flagship_event li:eq(0)").click(function(){
+	$(this).addClass("active");
+	$(this).siblings().removeClass("active");
+	$(".event_ul:eq(0)").css("display","block");
+	$(".event_ul:eq(0)").siblings().css("display","none");
+})
+$(".flagship_event li:eq(1)").click(function(){
+	$(this).addClass("active");
+	$(this).siblings().removeClass("active");
+	$(".event_ul:eq(1)").css("display","block");
+	$(".event_ul:eq(1)").siblings().css("display","none");
+})
+$(".flagship_event li:eq(2)").click(function(){
+	$(this).addClass("active");
+	$(this).siblings().removeClass("active");
+	$(".event_ul:eq(2)").css("display","block");
+	$(".event_ul:eq(2)").siblings().css("display","none");
+})
+
+</script>	
+</body>
+</html>

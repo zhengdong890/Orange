@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="keywords" content="{$seo['keywords']}">
+<meta name="description" content="{$seo['description']}"">
+<meta name="copyright" content="深圳市橙橙网络科技有限公司(www.orangesha.com)版权所有">
+<meta name="author" content="橙橙分享"> 
+<title>兑换礼品</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/Orange/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/Integralmall.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/Orange/css/home.css" type="text/css">
+<style>
+.section-bt{width:100%;height:auto;float:left;margin-top:20px}
+.section-bt .btns{line-height: 42px;}
+.section-bt .btns p,.section-bt .btns label,.section-bt .btns label input{display: inline-block;}
+.section-bt .btns label p{padding-left: 10px;}
+.section-bt .btns .btn{margin-left: 32px;border:1px #d5d5d5 solid;padding:0 10px;border-radius: 5px;cursor: pointer;}
+.section-bt .turn-page{width:auto;height:auto;float:left;margin-left:34%;}
+.section-bt .turn-page .omit{border:none;}
+.section-bt .turn-page .omit:hover{border:none;background-color: transparent;color:#d5d5d5;}
+.section-bt .turn-page div,.section-bt .to-page input{width: 32px;height:32px;border:1px #d5d5d5 solid;display: inline-block;margin-left: 12px;
+    cursor: pointer;vertical-align: top;line-height: 32px;text-align: center;}
+.section-bt .turn-page .active{background-color: #5FAEBF;color:#fff;}
+.section-bt .turn-page>div:hover{border-color: #ff8448;}
+.section-bt .turn-page .right-btn,.section-bt .turn-page .left-btn{ width:70px;}
+
+.section-bt .to-page{width:auto;float:right;}
+.section-bt .to-page input{margin:0 7px;vertical-align: middle;}
+.section-bt .to-page input[type="button"]{background-color: #fff;width: 54px;font-family:"微软雅黑"}
+</style>
+</head>
+ <body >
+ <!-- 头部 -->
+<include file="Public:header_top" />
+<div class="n-bCol3 bg">
+    <div class="header mar1200c posRel">    
+    	<div class="header-right fRi">            
+            <ul class="header_integral_ul">       
+                <a href="{:U('Integralmall/index')}"><li>积分兑换</li></a>
+                <a href="{:U('Integralmall/common_problem')}"><li>常见问题</li></a> 
+                <a href="{:U('Integralmall/exchange_record')}"><li>兑换记录</li></a>         
+            </ul>           
+        </div> 
+        <a class="logo" href="{:U('Index/index')}" title="e橙优品 - 工业品超市/MRO采购服务平台"></a>
+        <div class="clear"></div>
+    </div>
+</div>	
+<!-- /头部 -->
+<!--body-->
+<div class="integral_body">
+	<p class="exchange_top">商品信息</p>
+	<table class="exchange_table">
+		<thead>
+			<tr>
+				<td>商品信息</td>
+				<td>单价</td>
+				<td>数量</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<img src="{$goods.goods_thumb}" alt="{$goods.goods_name}">
+					<p>{$goods.goods_name}</p>
+					<p>市场价：¥ {$goods.goods_market_price}</p>
+				</td>
+				<td class="gold"><span class="unitPrice">{$goods.goods_price}</span> 积分</td>
+				<td><input type="button" class="reduce" value="-"><input class="exchange_number" value="1" type="text"><input class="add" type="button" value="+"></td>
+			</tr>
+		</tbody>
+	</table>
+	<p class="exchange_top">选择地址</p>
+	<div class="select_address">
+		<div>
+			<img src="{:C('STATIC_URL')}/Home/img/noaddress.png"/>
+		</div>
+	</div>
+	<div class="complete_conversion">
+		<p>当前积分：<span class="gold">{$mem.use_score}</span> 积分</p>
+		<p>共<span class="gold total_num">1</span>件商品</p>
+		<p>合计：<span class="gold total_integral">{$goods.goods_price}</span> 积分</p>
+		<p><button>积分不够</button></p>
+	</div>
+</div>
+<!--/body-->
+<!-- 底部 -->
+	<include file="Public:footer" />
+<!-- /底部 -->
+<script type="text/javascript">
+//数量添加
+$(".add").click(function(){
+	var a = parseInt($(".exchange_number").val());
+	var unitPrice = $(".unitPrice").text(); 
+	$(".exchange_number").val(a+1);
+	$(".total_integral").text((a+1)*unitPrice);
+	$(".total_num").text(a+1)
+})
+$(".reduce").click(function(){
+	var a = parseInt($(".exchange_number").val());
+	var unitPrice = $(".unitPrice").text();
+	if(a>=2){
+		$(".exchange_number").val(a-1);
+		$(".total_integral").text((a-1)*unitPrice);
+		$(".total_num").text(a-1)
+	}
+})
+$(".exchange_number").blur(function(){
+	var a = /^[0-9]*[1-9][0-9]*$/;　　//正整数
+	var b = $(".exchange_number").val();
+	var c = a.test(b); 
+	var unitPrice = $(".unitPrice").text(); 
+	if(c==false){
+		$(".exchange_number").val(1)
+	}
+	if(c==true){
+		$(".total_integral").text(parseInt(b)*unitPrice);
+		$(".total_num").text(parseInt(b))
+	}
+})
+</script>
+</body>
+
+</html>

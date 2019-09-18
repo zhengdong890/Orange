@@ -1,0 +1,311 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>商品订单</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/all-use.css" rel="stylesheet">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/side-nav.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/send-goods.css" rel="stylesheet">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+<script src="{:C('STATIC_URL')}/Home/js/tabs-nav.js"></script>
+<script src="{:C('STATIC_URL')}/Home/js/store-tool.js"></script>
+<style>
+	.clearfix:hover p{ color: #000;}
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" />
+<!-- 头部_顶部end -->	
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" />  
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">       
+        <include file="MemberPublic:MemberLeft" />   
+        <div class="user-right marT20 box-s-c1 fRi">          
+			<div class="send-goods">
+			   <ul class="nav-top clearfix">
+			       <li class="active" id="wait-order">等待发货的订单</li>
+			       <li id="sending">发货中的订单</li>
+			       <li id="has-send">已发货的订单</li>
+			   </ul>
+			   <div class="order-section">
+			       <!-- 等待发货的订单 -->
+			       <div class="wait-order">
+			           <!--<div class="wait-btns">
+			               <p class="active">未发货的订单</p>
+			               <p>被取消的订单</p>
+			           </div>-->
+			           <div class="search-order">
+			               <p>收件人名称: <input type="text" class="user-name"></p>
+			               <p>创建时间：<input type="text" class="user-time"> 至 <input type="text" class="user-time"></p>
+			               <p>订单编号: <input type="text" class="user-num"></p>
+			               <p>订单类型：<select class="user-type">
+			                   <option>全部</option>
+			               </select></p>
+			               <button class="search-btn">搜索</button>
+			           </div>   
+			           
+			           <div class="section-bt">
+			               <div class="btns">
+			                   <label><input type="checkbox" id="all-chose"><p>全选</p></label>
+			                   <button class="all_send">批量发货</button>
+			               </div>
+			               <div class="turn-page">
+			                   <div class="left-btn"></div>
+			                   <div class="right-btn"></div>
+			               </div>
+			           </div>
+			       </div>
+			       <!-- /等待发货的订单 -->
+			       <!--  发货中  -->
+			       <div class="sending">
+			           <div class="search-order">
+			               <p>收件人名称: <input type="text" class="user-name"></p>
+			               <p>创建时间：<input type="text" class="user-time"> 至 <input type="text" class="user-time"></p>
+			               <p>订单编号: <input type="text" class="user-num"></p>
+			               <p>订单类型：<select class="user-type">
+			                   <option>全部</option>
+			               </select></p>
+			               <button class="search-btn">搜索</button>
+			           </div>
+			           
+			           <div class="section-bt">
+			           	   <div class="btns">
+			                   <label><input type="checkbox" id="all-chose2"><p>全选</p></label>
+			               </div>
+			               <div class="turn-page">
+			                   <div class="left-btn"></div>
+			                   <div class="right-btn"></div>
+			               </div>
+			           </div>
+			       </div>
+			       <!--  /发货中  -->
+			       <!--  已发货  -->
+			       <div class="has-send">
+			           <div class="search-order">
+			               <p>收件人名称: <input type="text" class="user-name"></p>
+			               <p>创建时间：<input type="text" class="user-time"> 至 <input type="text" class="user-time"></p>
+			               <p>订单编号: <input type="text" class="user-num"></p>
+			               <p>订单类型：<select class="user-type">
+			                   <option>全部</option>
+			               </select></p>
+			               <button class="search-btn">搜索</button>
+			           </div>
+			           
+			           <div class="section-bt">
+			           	   <div class="btns">
+			                   <label><input type="checkbox" id="all-chose3"><p>全选</p></label>
+			               </div>
+			               <div class="turn-page">
+			                   <div class="left-btn"></div>
+			                   <div class="right-btn"></div>
+			               </div>
+			           </div>
+			       </div>
+			       <!--  /已发货  -->
+			   </div>
+			</div>
+        </div>
+    </div>    
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>    
+//判断左边导航
+function checkNav(){
+	$(".user-left-wrap .list:eq(5)>ul>li:eq(2) a").css("color","#ff6600")
+}
+checkNav() 
+
+//导航切换
+$(".nav-top li:eq(0)").click(function(){
+	$(".wait-order").css("display","block");
+	$(".sending").css("display","none");
+	$(".has-send").css("display","none");
+	$(".send-btn").css("display","block");
+})
+$(".nav-top li:eq(1)").click(function(){
+	$(".wait-order").css("display","none");
+	$(".sending").css("display","block");
+	$(".has-send").css("display","none");
+	$(".send-btn").css("display","none");
+})
+$(".nav-top li:eq(2)").click(function(){
+	$(".wait-order").css("display","none");
+	$(".sending").css("display","none");
+	$(".has-send").css("display","block");
+	$(".send-btn").css("display","none");
+})
+
+
+var order = (function(){
+    var  __ORDER       = [],
+         __ORDER_DATA  = [];
+   
+    var order_model      = setOrderModel();
+    var order_data_model = setOrderDataModel();   
+    
+    /*
+     * 设置第一层html模板
+     * */
+    function setOrderModel(){
+        var html = [];    
+	        html.push("<div class='order-details'>");
+			html.push("   <div class='order-title'>");
+			html.push("      <label><input type='checkbox' class='list-input'>订单编号:%ORDER_SN%</label>");
+			html.push("      <p class='start-time'>创建时间:%TIME%</p>");
+		    html.push("   </div>");
+		    html.push("   <ul class='clearfix'>");
+		    html.push("      <li class='clearfix'>");
+		    html.push("         <div class='goods-info fLe'>");
+		    html.push("             <table class='orderList'>"); 
+		    html.push("             %ORDER_DATA_HTML%");
+		    html.push("             </table>");
+		    html.push("         </div>");
+		    html.push("         <div class='buyers-info fLe'>");
+		    html.push("             <p>收货信息：%ADDRESS% %NAME% %TEL_NUM%</p>");
+		    html.push("         </div>")    
+		    html.push("      </li>");
+		    html.push("   </ul>");
+		    html.push("   <div class='order-bt clearfix'>");
+		    html.push("       <button class='fRi send-btn'>发货</button>");
+		    html.push("       <p class='fRi close-order' data-id='%ID%'>关闭订单</p>");
+		    html.push("   </div>");
+		    html.push("</div>");    
+		    return html.join('');
+    }
+
+    /*
+     * 设置第二层html模板
+     * */
+    function setOrderDataModel(){
+        var html = [];
+        html.push("<tr>");
+	    html.push("    <td><img src='%GOODS_THUMB%' alt></td>");
+	    html.push("    <td><p class='fLe'>%GOODS_NAME%</p></td>");
+	    html.push("</tr>");  
+	    return html.join('');
+    } 
+    
+    getOrderList();
+	function getOrderList(){
+		var wraper = $(".goods_list");
+		var _this  = this;
+		var url    = "{:U('MemberSellerOrder/getOrderList')}";
+		/*ajax分页*/
+		ajaxPage({
+	    	wraper:wraper,	
+			parameter:'',//附加参数
+		    listRows:5,//每页显示条数
+			rollPage:3,//最多显示多少页码
+			url:url,//ajax请求地址
+			//回调函数
+			callback:function(data,page){
+			    __ORDER      = data.order; 
+			    __ORDER_DATA = orderDataHandle(data.order_data);           
+	            showHtml();
+			}
+		});
+	}	
+    
+    /*
+     * 订单数据关联订单
+     * */
+    function orderDataHandle(data_){
+    	var data = [];
+        for(var k in data_){
+        	if(!data[data_[k].order_id]){
+                data[data_[k].order_id] = [];
+        	}
+            data[data_[k].order_id].push(data_[k]);
+        }
+        return data;
+    }
+
+    /**
+     * 动态输出html
+     */
+    function showHtml(){
+    	var html       = [],
+    	    order      = __ORDER,
+    	    order_data = __ORDER_DATA,
+    	    html_str   = '',
+    	    order_id;    	    
+    	for(var k in order){
+    		order_id = order[k]['id'];
+            var data = order_data[order_id];
+            var html_2 = [];
+            for(var k1 in data){
+            	html_str = order_data_model.replace(/%GOODS_NAME%/g,data[k1].goods_name).replace(/%GOODS_THUMB%/g,data[k1].goods_thumb.substring(1));       
+            	html_2.push(html_str); 	
+            }
+            var html_str = order_model.replace(/%ID%/g,order[k].id).replace(/%ORDER_SN%/g,order[order_id].order_sn).replace(/%TIME%/g,order[order_id].time).replace(/%ADDRESS%/g,order[order_id].address).replace(/%NAME%/g,order[order_id].name).replace(/%TEL_NUM%/g,order[order_id].tel_num).replace(/%ORDER_DATA_HTML%/g,html_2.join(''));
+            html.push(html_str);
+    	}
+    	html = html.join('');
+    	$(".search-order").after(html);
+ 
+
+        //发货
+		$(".wait-order").on('click','.send-btn',function(){
+			if(confirm('确认发货?')){					
+			    var id = $(this).next('.close-order').attr('data-id');			    
+				$.post("http://www.orangesha.com/index.php/Home/Order/sendGoods",{'id':id},function(res){                
+			          console.log(res); 
+			          window.location.reload();
+			    });	   
+			}		
+	    })
+		
+		//批量发货        
+	    $(".all_send").click(function(){	    	
+			if(confirm('确认发货?')){					
+			    var chk_value = []; 
+				$('input[class="list-input"]:checked').each(function(){ 
+				  chk_value.push($(this).val()); 
+				}); 
+				alert(chk_value.length==0 ?'请选择需要发货的订单！':'发货成功!');    
+				/*console.log(chk_value)*/
+	            
+				var data = {};
+				for(var i=0;i<chk_value.length;i++)
+				{
+				    data[i+1]=chk_value[i];
+				}
+				JSON.stringify(data);
+				$.post("http://www.orangesha.com/index.php/Home/Order/sendGoods",data,function(res){                 
+			          window.location.reload();
+			    });	  
+			}
+	    });
+    }
+})();
+
+//全选
+$("#all-chose").click(function(){
+    if($(this).is(':checked')){
+        $(".order-title input[type=checkbox]").prop("checked",true);
+    }else{
+        $(".order-title input[type=checkbox]").prop("checked",false);
+    }
+})
+                  
+</script>
+</body>
+</html>
+
+    

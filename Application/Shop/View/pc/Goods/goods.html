@@ -1,0 +1,909 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>{$goods['goods_name']}-{$goods['goods_name']}交易-{$goods['goods_name']}租赁-e橙优品</title>
+<meta name="description" content="e橙优品{$goods['goods_name']}频道，出售和租赁各种功能的专业{$goods['goods_name']}，撮合供应方和需求方。你可以在这里买到{$goods['goods_name']}，也可以出租{$goods['goods_name']}获取收益，低成本租到{$goods['goods_name']}">
+<meta name="keywords" content="{$goods['goods_name']},{$goods['goods_name']}价格,{$goods['goods_name']}租赁,{$goods['goods_name']}采购,{$goods['goods_name']}多少钱">
+<meta name="copyright" content="深圳市橙橙网络科技有限公司(www.orangesha.com)版权所有">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/css.css" type="text/css">
+<link href="__PUBLIC__/Home/css/footer.css" rel="stylesheet">
+<link href="__PUBLIC__/Home/css/shop.css" rel="stylesheet">
+<link href="__PUBLIC__/Home/css/shop_headSearch.css" rel="stylesheet">
+<link href="__PUBLIC__/Home/css/comment.css" rel="stylesheet">
+<link rel="stylesheet" href="__PUBLIC__/css/style.css" type="text/css">
+<link href="__PUBLIC__/Home/Orangesha/css/details.css" rel="stylesheet">
+<link rel="shortcut icon" href="__PUBLIC__/Home/images/ee.ico" type="image/x-icon">
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="__PUBLIC__/Home/static/jquery-2.0.3.min.js"></script>
+<script src="__PUBLIC__/Home/js/jquery.fly.min.js"></script> 
+<script src="__PUBLIC__/Home/js/requestAnimationFrame.js"></script>
+<script src="__PUBLIC__/Home/js/header.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="__PUBLIC__/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.imagezoom.min.js"></script>
+
+</head>
+<body >
+<include file="Public:header_top" />
+<include file="Public:shop_headSearch" />
+<div class="shop">
+    <div class="header">
+        <div class="header-inner">
+           <img src="__ROOT__{$shop_data['thumb']|substr=1}" class="shop-logo">    
+            <div class="shop-title">
+                <h1>{$shop_data['shop_name']}</h1>
+                {$shop_data['desc']}
+            </div>
+           <ul class="youhui" style="display: block;">
+            <foreach name="shop_coupons" item="vo">
+              <li data-name={$vo.name} data-sellid={$vo.seller_id} data-id={$vo.id} data-max={$vo.max} data-price={$vo.benefit_price} data-status={$vo.status} data-stime={$vo.start_time} data-etime={$vo.end_time}>
+                <div class="face_value"><span>¥</span>{$vo.benefit_price}</div>
+                <div class="use_condition">
+                  <p>优惠券</p>
+                  <p>满 <span>{$vo.max}</span> 元使用</p>
+                </div>
+              </li>
+            </foreach>
+            </ul>   
+      <a title="{$seller_id}" onclick="collectshop(this)"  class="myshop" style="background: url('/Public/Home/image/收藏本店.png') no-repeat 6px 2px;">收藏本店</a>
+            <a href="http://wpa.qq.com/msgrd?v=3&uin={$shop_data['qq']}&site=qq&menu=yes" class="seller" style="background: url('/Public/Home/image/联系卖家.png') no-repeat 6px 2px;">联系卖家</a>
+        </div>
+        
+    </div>      
+   <include file="Public:shopnav" /> 	
+</div>
+<!-- /头部 -->
+<!-- 主体 -->
+    <div class="details">
+        <div class="details-info">
+            <div class="info-left">
+                <div class="left-image">
+                    <!--图片展示区域-->
+                    <div class="box" goods_id = '{$goods['id']}'>
+                        <div class="tb-booth tb-pic tb-s310">
+                            <a href="/orange_old/Uploads/Picture/2016-09-01/57c7c555400ef.jpg">
+                            <img src="__ROOT__<if condition="substr($goods_gallery[0]['gallery_img'] , 0 , 1) eq '.'">{$goods_gallery[0]['gallery_img']|substr=1}<else/>{$goods_gallery[0]['gallery_img']}</if>" alt="{$goods['goods_name']}" rel="__ROOT__{$goods_gallery[0]['gallery_img']|substr=1}" class="jqzoom" /></a>
+                        </div>
+                        <ul class="tb-thumb" id="thumblist">
+                            <volist name="goods_gallery" id="v" key='k'>
+                            <if condition="$k eq 1">
+                            <li class="tb-selected">
+                            <else/>
+                            <li>
+                            </if>
+                                <div class="tb-pic tb-s40">
+                                    <a style="cursor: pointer;">
+                                    <img  src="__ROOT__<if condition="substr($v['gallery_img'] , 0 , 1) eq '.'">{$v['gallery_img']|substr=1}<else/>{$v['gallery_img']}</if>" mid="__ROOT__{$v['gallery_img']|substr=1}" big="__ROOT__{$v['gallery_img']|substr=1}" style="max-width:100%">
+                                    </a>
+                                </div>
+                            </li>
+                            </volist>
+                       </ul>
+                       <div class="fenxiang-shoucang">
+                        	<a onclick="collectgood()"><img src="__PUBLIC__/Home/image/s.png">收藏宝贝</a><span>|</span><a><img src="__PUBLIC__/Home/image/sh.png">分享</a>
+                        	<div class="jiathis_style" id="fenxiang"> 
+								<a class="jiathis_button_cqq"></a>
+								<a class="jiathis_button_weixin"></a>
+								<a class="jiathis_button_qzone"></a>
+								<a class="jiathis_button_tqq"></a>
+								<a class="jiathis_button_renren"></a>
+								<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">更多</a>
+							</div>
+							<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=" charset="utf-8"></script>
+                        </div>
+                    </div>
+                </div>
+                <!--信息展示-->
+                <div class="left-info">
+                    <div class="info-title">{$goods['goods_name']}</div>
+                    <div class="price">价格：    <span><b>￥{$goods['goods_price']>=10000?$goods['goods_price']/10000:$goods['goods_price']}</b>{$goods['goods_price']>=10000?'万元':'元'}</span></div>
+                    <div class="good-info">
+                        <span>累计销量<span>{$goods['sale_num']}</span></span><span>累计评价<span>{$goods['comment_number']}</span></span>
+                    </div>
+                    <div class="row">
+                    	<div class="text">品牌 :</div> 
+                        <div>{$goods['brand_name']}</div> 
+                    </div>
+                    <div class="nums" style="display: none;">
+                        数量：    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="tool-minus">-</button><input class="nums-num tool-num" value="1"><button class="tool-plus">+</button>
+                         件 ( 库存 {$goods['goods_number']} 件 )
+                    </div>
+                    <div class="row">
+	                     <div class="text">评分 :</div> 
+	                     <div class="scoreStar">
+	                     	<img src="__PUBLIC__/Home/images/score_star.png">
+	                     	<img src="__PUBLIC__/Home/images/score_star.png">
+	                     	<img src="__PUBLIC__/Home/images/score_star.png">
+	                     	<img src="__PUBLIC__/Home/images/score_star.png">
+	                     	<img src="__PUBLIC__/Home/images/score_star.png">
+	                     	 （5.0分） </div>
+	                </div>                    
+                    <div class="row">
+	                     <div class="text">支付 :</div> 
+	                     <div>
+	                     	<ul class="jinrong">
+	                     		<li><img src="__PUBLIC__/Home/images/pay_style1.png"> 支付宝</li>
+	                     		<li><img src="__PUBLIC__/Home/images/pay_style2.png"> 网上支付</li>
+	                     		<li><img src="__PUBLIC__/Home/images/pay_style3.png"> 银行转账</li>
+	                     		<li><img src="__PUBLIC__/Home/images/pay_style4.png"> 微信</li>
+	                     	</ul>
+	                     </div>
+	                </div> 
+	                <div class="row">
+	                     <div class="text">承诺 :</div> 
+	                     <div>
+	                     	<ul class="jinrong">
+	                     		<li><img src="__PUBLIC__/Home/images/Promise2.png"> 7天无理由退换</li>
+	                     		<li><img src="__PUBLIC__/Home/images/Promise1.png"> 国标正品</li>	                     		
+	                     		<li><img src="__PUBLIC__/Home/images/Promise3.png"> 材质保真</li>
+	                     	</ul>
+	                     </div>
+	                </div> 
+	                <div class="btn" style="display: none;">
+	                	<div class="now">立即购买</div>
+	                    <div class="cat2" onclick="nosku_cartAdd()">加入购物车</div>
+	                </div>
+                </div>
+                <!--下单列表-->
+                <div class="sku_list">
+                	<div>
+                		<div>当日出货</div> 购买数量小于库存时，可当日出货，购买数量大于库存时，请以购物车内预计出货日为准。
+                	</div>
+                	<table>
+                		<thead>
+                			<td>订货号</td>
+                			<volist name='attr' id='v'>
+                			<td>{$v['attr_name']}</td>
+                			</volist>
+                			<td>包装数量</td>
+                			<td>面价</td>
+                			<td>预计出货日</td>
+                			<td>现价</td>
+                			<td>数量</td>
+                		</thead>
+                		<tbody>
+                		    <volist name='sku' id='v'>
+                		    <tr sku_id = "{$v['sku_id']}">
+                		        <td>{$v['sku_code']}</td>
+                		        <volist name="v['sku_value']" id='v1'>
+	                			<td>{$v1['attr_value']}</td>
+	                			</volist>
+	                			<td><span class="unit_unit">{$v['unit_value']}{$v['unit_unit']}</span><span class="line" style="display: none;">/</span>{$v['unit']}</td>
+	                			<td>￥{$v['price']}/{$v['unit']}</td>
+	                			<td><span class="term">{$v['term']}</span>天</td>
+	                			<td>￥{$v['price']}/{$v['unit']}</td>
+	                			<td><input type="text" sku-id="{$v['sku_id']}"></td>
+                			</tr>
+                			</volist>
+                		</tbody>
+                	</table>
+                </div>
+                <div class="btn">
+                	<div class="now">立即购买</div>
+                    <div class="cat">加入购物车</div>
+                    <div class="addSuccess"> 
+                    	<div class="addSuccess_img">
+                    		<img  src="__ROOT__<if condition="substr($goods_gallery[0]['gallery_img'] , 0 , 1) eq '.'">{$goods_gallery[0]['gallery_img']|substr=1}<else/>{$goods_gallery[0]['gallery_img']}</if>" mid="__ROOT__{$v['gallery_img']|substr=1}" big="__ROOT__{$v['gallery_img']|substr=1}">
+                    	</div>
+                    	<div class="addSuccess_name">
+                    		<p>{$goods['goods_name']}</p>
+                    		<p>成功加入购物车！</p>
+                    	</div>  
+                    	<p>您还可以： <button>继续逛逛</button> <a href="http://www.orangesha.com/cart.html" target="_blank"><button>去结算</button></a></p>
+                    </div>
+                </div>
+                <!-- 选项卡 -->
+                <div class="tab">
+                    <div class="tab-nav">
+                        <div class="details-of active">详情介绍</div>
+                        <!-- <div>产品参数</div> -->
+                        <div class="details-rated">评价(<span class="number_comment">{$goods_comments}</span>)</div>
+                        <div class="hr"></div>
+                    </div>
+                    <div class="goods_info">
+                    	<div class="goods_info_box box1">
+                    		<p>规格：{$goods_data['spec']}</p>                    	
+                    	</div>
+                    	<div class="goods_info_box box1">
+                    		<p>型号：{$goods['goods_model']}</p>                    	
+                    	</div>
+                    	<div class="goods_info_box box1">
+                    		<p>用途：{$goods_data['uses']}</p>                    	
+                    	</div>
+                    	<div class="goods_info_box box1">
+                    		<p>产品特性：{$goods_data['special']}</p>                   	
+                    	</div>
+                    	<!--<ul class="goods_info_ul">
+                    		<li>品牌：<span>{$goods['brand_name']}</span></li>
+                    		<li>型号：<span>{$goods['goods_model']}</span></li>
+                    		<li>设备厂家：<span>{$goods['sbcj']}</span></li>
+                    		<li>区域：<span>{$area[0]['area_name']} {$area[1]['area_name']}</span></li>
+                    		<li>重量：<span>{$goods_data['goods_weight']}</span></li>
+                    		<li>外形尺寸：<span>{$goods_data['measurement']}</span></li>
+                    		<li>功率：<span>{$goods_data['watts']}</span></li>
+                    		<li>精度：<span>{$goods_data['precise']}</span></li>
+                    		<li>用途：<span>{$goods_data['uses']}</span></li>
+                    	</ul>-->
+                    </div>
+                    <div class="details-of-list">
+                        <div>{$goods_data['goods_content']|html_entity_decode}</div>
+                        <div style='display:none'>
+                            <div class="comment">
+						        <div class="comment-t clearfix"></div>
+						        <div class="comment-info">
+						            <ul class="comment-tabs"></ul>
+						            <ul class="comment-list"></ul>
+	                            </div>
+                            </div>
+                       </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 广告栏 -->
+            <div class="info-right">
+                <div class="title">近期热卖商品</div>
+                <volist name='goods_hot' id='v'>
+                <div class="li">
+                    <a href="http://{$domain}.orangesha.com/shangpin-{$v['id']}.html">
+                    <img src="__ROOT__<if condition="substr($v['goods_thumb'] , 0 , 1) eq '.'">{$v['goods_thumb']|substr=1}<else/>{$v['goods_thumb']}</if>"/>
+
+                    </a>
+                    <div class="text">{$v['goods_name']}</div>
+                    <div class="price">￥<if condition="$v['goods_price'] gt 10000">{$v['goods_price']/10000}万<else/>{$v['goods_price']}元</if><div class="sales">销量：{$v['sale_num']}</div></div>
+                </div>
+                </volist>
+            </div>
+        </div>
+    </div>
+<include file="Public:footer" /> 
+</body>
+<script>
+
+/*获取导航颜色*/
+var shop_css = "{$shop_css}";	
+$('.navwrap').css('background','#'+shop_css);
+$('.pros').css('background','#'+shop_css);
+/*获取 店铺信息*/
+var shop_status = "{$shop_status}";
+var shop_name = "{$shop_da.shop_name}";
+var shop_desc = "{$shop_da.desc}";
+var shop_thumb = "{$shop_da.thumb|substr=1}";
+
+//判断其他属性数量
+    function check_skulength(){
+    	if($(".sku_list>table>thead>tr>td").length>=10){
+    		$(".sku_list>table").css("width","1200px")
+    	}
+    	if($(".sku_list>table>thead>tr>td").length>=12){
+    		$(".sku_list>table").css("width","1400px")
+    	}
+    	if($(".sku_list>table>thead>tr>td").length>=14){
+    		$(".sku_list>table").css("width","1600px")
+    	}
+    }
+    check_skulength()
+
+if( shop_status==1 ){
+   $(".shop_name").text(shop_name)
+   $('.header-inner').find('img').attr('src',shop_thumb);
+   $(' .shop-title').html('<h1>'+shop_name+'</h1>'+shop_desc+'');	
+   $('.conpanyname').find('p').html(shop_name);   
+}
+
+function getTerm(){
+	if($(".unit_unit").text()!=""){
+		$(".line").css("display","inline-block")
+	}
+	var a = $(".term").text()
+	for(var i=0;i<$(".sku_list table tbody tr").length;i++){
+		if($(".sku_list table tbody tr").eq(i).find("td .term").text()==0){
+			$(".sku_list table tbody tr").eq(i).find("td .term").text("当")
+		}
+	}		
+}
+getTerm()
+
+//店铺详情
+$(".header_div").mouseenter(function(){
+	$(".shop_detail").css("display","block")
+})
+$(".shop_detail").mouseleave(function(){
+	$(".shop_detail").css("display","none")
+})
+
+$(".food").hover(function(){
+	if($(this).find(".prosmore span").length==0){
+		$(this).find(".prosmore").css("display","none")
+	}
+})
+
+//点击领取优惠券
+$(".youhui li").click(function(){
+	var name = $(this).attr("data-name"),
+	    id = $(this).attr("data-id"),
+	    sellerId = $(this).attr("data-sellid"),
+	    max = $(this).attr("data-max"),
+	    benefitPrice = $(this).attr("data-price"),
+	    status = $(this).attr("data-status"),
+	    start_time = $(this).attr("data-stime"),
+	    end_time = $(this).attr("data-etime");
+	    
+	var data = {
+		'seller_id' : sellerId,
+		'coupon_id' : id,
+		'coupon_name' : name,
+		'max' : max,
+		'benefit_price' : benefitPrice,
+		'status' : status,
+		'start_time' : start_time,
+		'end_time' : end_time
+	}
+	$.post("{:U('Index/couponAdd')}",data,function(res){
+		console.log(res)
+		if(res.status){
+			alert("领取成功！")
+		}
+		if(res.status==0){
+			alert(res.msg)
+		}
+	});
+})
+
+function check_skuList(){
+	if($(".sku_list>table>tbody tr").length==0){
+		$(".sku_list").css("display","none");
+		$(".nums").css("display","block");
+		$(".details .details-info .info-left .left-info .btn").css("display","block")
+		$(".details .details-info .info-left>.btn").css("display","none")
+	}
+}
+check_skuList()
+
+//加入购物车弹窗
+$(".addSuccess>p>button").click(function(){
+	$(".addSuccess").css("display","none")
+})
+
+/*店铺收藏 */
+function collectshop(obj){
+  var title = $(obj).attr('title');
+  if( title ){
+		$.post("{:U('Shop/shopcllect')}",{'title':title},function(data){
+				if( data.msg=='ok'){
+				  alert('收藏该店铺成功！');
+				}else if(data.msg=='onemore'){
+				  alert('您已经收藏过该店铺了！');
+				}else{  
+				  alert('请先登录账户！');
+				}
+		});  
+  }else{
+        alert('店铺不存在！');
+  }
+}
+
+/*宝贝收藏 */
+function collectgood(obj){
+	
+	var goods_id     = {$goods['id']};
+
+  if(goods_id ){
+		$.get("{:U('Shop/goodcllect')}",{'goods_id':goods_id},function(data){
+            //alert(data);
+				if( data.msg=='ok'){
+				  alert('收藏该商品成功！');
+				}else if(data.msg=='onemore'){
+				  alert('您已经收藏过该商品了！');
+				}else{  
+				  alert('请先登录账户！');
+				}
+				console.log(data)
+		});  
+  }else{
+        alert('商品不存在！');
+  }
+}
+
+//联系客服
+function relation(obj){
+  var title = parseInt($(obj).attr('title'));
+  if( title >0){     
+    window.location.href="tencent://message/?uin="+title+"&Site=sc.chinaz.com&Menu=yes";
+		
+  }else{
+        alert('卖家还没有填写qq！');
+  }
+
+}
+
+//分享
+$(".fenxiang-shoucang>a:eq(1)").mouseenter(function(){
+	$("#fenxiang").css("display","block")
+})
+$("#fenxiang").mouseleave(function(){
+	$("#fenxiang").css("display","none")
+})
+
+var cart = (function(){
+	var __goods_id     = {$goods['id']},
+	    number       = 1;
+
+	/*设置事件*/
+	function setEvents(){
+	    $(".cat").click(function(){
+	        cartAdd();
+	    })   
+	} 
+    
+    /*ajax加入购物车*/  
+    var sku_data = {};   
+    $('.sku_list tbody tr td input').bind('input propertychange', function(){	
+    	var sku_id= $(this).parent().parent().attr("sku_id")
+        var a = /^[0-9]*[1-9][0-9]*$/;　　//正整数
+    	var b = $(this).val();
+    	var c = a.test(b); 
+    	if(number = ''){
+		    if(isset(sku_data[sku_id])){
+		        delete sku_data[sku_id]
+		    }
+		}else{
+		    sku_data[sku_id] = {sku_id:sku_id , number:$(this).val()};
+		}
+    })
+    
+    function cartAdd(){   
+    	var data = {};
+    	var b = $(".sku_list tbody tr td input").val();
+   	
+        data = {'goods_id':__goods_id,'sku_data':JSON.stringify(sku_data)}        	        	        
+		if(Object.keys(sku_data).length == 0){
+			alert("请至少选择一种商品并输入商品数量");
+		}
+		$.post("http://{$Think.SUB_DOMAIN}.orangesha.com/Cart/cartAdd",data,function(res){
+        	if(res.code==10){
+        		window.location.href = "http://www.orangesha.com/Home/Member/login";
+        	}
+        	if(res.status==0){
+        		alert(res.msg);
+        	}
+        	if(res.status==1){
+        		sku_data = {};
+        		$(".sku_list tbody tr td input").val("")
+        		$(".addSuccess").css("display","block")
+        	}
+        })
+    }
+    
+    /*直接购买*/
+    $(".now").click(function(){ 
+    	var goods_id = {$goods['id']};    	
+    	var sku_data = new Array;
+    	for(var i = 0;i<$(".sku_list tbody tr").length;i++){
+			if($(".sku_list tbody tr").eq(i).find("td input").val()!=""){
+				sku_data.push($(".sku_list tbody tr").eq(i).find("input").attr("sku-id")+"_"+$(".sku_list tbody tr").eq(i).find("input").val())
+			}
+		}
+        var _url = "http://www.orangesha.com/index.php?m=Home&c=Mall_order&a=buy&goods_id="+__goods_id;
+        for(var k in sku_data){
+        	_url = _url+'&sku[]='+sku_data[k]        	
+        }
+        if(sku_data.length==0){
+        	alert("请选择商品数量")
+        }
+        if(sku_data.length!=0){
+        	window.location.href = _url
+        }
+    }) 
+
+	return {
+		init :function(){
+			setEvents();
+		}
+	}       
+})();
+cart.init();
+
+//没有sku商品加入购物车
+    function nosku_cartAdd(){
+    	var goods_id = {$goods['id']};
+        var data = {'goods_id':goods_id, 'number': $(".nums-num").val()};
+        $.post("http://{$Think.SUB_DOMAIN}.orangesha.com/Cart/cartOldAdd",data,function(res){
+        	if(res.code==10){
+        		window.location.href = "http://www.orangesha.com/Home/Member/login";
+        	}
+        	if(res.status){
+        		alert("成功加入购物车");
+        		/*window.location.reload()*/
+        	} 
+        	if(res.status==0){
+        		alert(res.msg);
+        	}
+        })
+    }
+//没有sku商品数量加减
+$(".tool-plus").click(function(){
+	var a = $(".nums-num").val();
+	a++;
+	$(".nums-num").val(a)
+})
+$(".tool-minus").click(function(){
+	var a = $(".nums-num").val();
+	a--;
+	$(".nums-num").val(a)
+})
+
+$(function(){
+    // 图放大镜
+    $(".jqzoom").imagezoom();
+    $("#thumblist li a").click(function(){
+        $(this).parents("li").addClass("tb-selected").siblings().removeClass("tb-selected");
+        $(".jqzoom").attr('src',$(this).find("img").attr("mid"));
+        $(".jqzoom").attr('rel',$(this).find("img").attr("big"));
+    });
+});
+
+//空数据以"-"显示
+function detailInfo(){
+	for(var i = 0; i<$(".goods_info_ul li span").length; i++){
+		if($(".goods_info_ul li span").eq(i).text()==""){
+			$(".goods_info_ul li span").eq(i).text("-")
+		}
+	}	
+}
+detailInfo();
+
+/*分页*/
+(function(e){
+var Page = function(config){
+    this.config(config);//配置    
+    this.ajax();//第一次ajax请求
+}
+
+Page.prototype = {
+    config:function(config){   
+    	//请求地址
+        this.url        = config.url;
+        // 分页栏每页显示的页数
+        this.rollPage   = /^[1-9]+[0-9]*]*$/.test(config.rollPage) ? config.rollPage : 3;
+        // 附加请求参数
+        this.parameter  = config.parameter ? config.parameter : '';
+        //总记录数 
+        this.totalRows;
+        //第多少条开始取  
+        this.firstRow;
+        //设置每页显示条数 默认20条
+        this.listRows   = /^[1-9]+[0-9]*]*$/.test(config.listRows) ? config.listRows : 20; 
+        //当前页数默认为1
+        this.nowPage    = /^[1-9]+[0-9]*]*$/.test(config.nowPage) ? config.nowPage : 1;
+        //每页显示的多少条数据 
+        this.callback   = config.callback||'';
+        //分页数据
+        this.page       = {};
+    },
+    /***初始运行***/
+    init:function(){
+    	//获得分页内容
+        this.get_page();
+        //回调函数
+        this.callback(this.data , this.page); 
+    },
+    /***ajax请求***/
+    ajax:function(){
+        var _this     = this;
+        this.firstRow = this.listRows * (this.nowPage - 1);      
+        var d = {firstRow : this.firstRow , listRows : this.listRows};
+        for(i in this.parameter){
+            if(typeof(this.parameter[i]) != 'undefined'){
+         	    d[i] = this.parameter[i];
+            }       
+        }
+        $.post(this.url,d,function(res){
+	        if(res){
+                  
+			      //res= eval('(' +res + ')');
+			    _this.data      = res;
+			    _this.totalRows = res['total'];
+			    _this.init();
+	        }
+        })   
+    }, 
+     /***分页***/
+    get_page:function(){
+    	var __PAGE = {
+    		prev      : false,
+    		first     : false,
+    		page      : [],
+    		next      : false,
+    		end       : false,
+    		now_page  : ''
+    	};
+        /* 计算分页信息 */
+        this.totalPages = Math.ceil(this.totalRows/this.listRows); //总页数
+        //当前页面大于总页面
+        if(!this.totalPages && this.nowPage > this.totalPages){
+           this.nowPage = this.totalPages;//当前页面设置为总页面
+        } 
+        /* 计算分页临时变量 */
+        now_cool_page      = this.rollPage / 2;
+        now_cool_page_ceil = Math.ceil(now_cool_page);
+        //上一页
+        up_row  = this.nowPage - 1;  
+        __PAGE.prev = up_row > 0 ? up_row : false;
+        //下一页
+        down_row  = this.nowPage+1;  
+        __PAGE.next = (down_row <= this.totalPages) > 0 ? down_row : false;    
+        //数字连接
+        for(i = 1; i <= this.rollPage;i++){
+            /*计算出页数*/
+            if((this.nowPage - now_cool_page) <= 0 ){
+                page = i;
+            }else
+            if((this.nowPage + now_cool_page - 1) >= this.totalPages){
+                page = this.totalPages - this.rollPage + i;
+            }else{
+                page = this.nowPage - now_cool_page_ceil + i;
+            }  
+            //页数大于0并且页数不等于当前页面         
+            if(page > 0 && page != this.nowPage){
+                //当前页数小于或者等于总页数才让其显示
+                if(page <= this.totalPages){
+                 	__PAGE.page.push(page);                           
+                }else{
+                    break;
+                }
+            }else         
+            if(this.nowPage==page){
+             	__PAGE.page.push(page);
+             	__PAGE.now_page = page;
+            } 
+        }
+        __PAGE.totalPages = this.totalPages;
+        __PAGE.totalRows  = this.totalRows; 
+        this.page = __PAGE;         
+    }, 
+}
+
+e.ajaxPage = function(config){
+    return new Page(config);
+}
+})(window);
+
+/*评论*/
+(function(e){
+/*
+ * 时间戳转日期
+ * */	
+function formatDate(time){   
+    time = parseInt(time); 
+	if(!/^[0-9]{10}$/.test(time)){
+        return '';
+	}		
+	time = time * 1000;
+	var now    = new Date(time);  
+    var year   = now.getFullYear();  
+    var month  = now.getMonth()+1;     
+    var date   = now.getDate();     
+    var hour   = now.getHours();     
+    var minute = now.getMinutes();
+    var second = now.getSeconds(); 
+    month  = month < 10 ? '0' + month : month;
+    date   = date < 10 ? '0' + date : date;
+    hour   = hour < 10 ? hour + '0' : hour;
+    minute = minute < 10 ? '0' + minute : minute;
+    second = second < 10 ? '0' + second : second;
+    return   year + "-" + month + "-" + date + "   " + hour + ":" + minute + ":" + second;     
+} 
+
+//formatDate(2 * 3600 * 24 + parseInt(data[k].create_time)) 
+var html = {
+	//创建评论列表
+	createHtml : function(data){
+		var html = '';
+	    for(var k in data){
+	    	var member_data = data[k].member_data;
+             member_data.headimg = member_data.headimg ? member_data.headimg : "{:C('STATIC_URL')}/images/1.jpg";
+	        html = html 
+	             + '<li class="clearfix">'
+	             + '    <div class="user-info">'
+	             + '        <div class="user-img">'
+	             + '            <img src="' + member_data.headimg + '" alt="">' 
+	             + '        </div>'
+	             + '        <p class="user-name">'
+	             +  (member_data.nickname ? member_data.nickname : (member_data.telnum.substring(0,7))) +'****'
+	             + '        </p>'	             
+	             // + '        <div class="user-lv">'
+	             // + '            <img src="" alt="">' 
+	             // + '        </div>'
+	             + '    </div>'
+	             + '    <div class="comment-content">'
+	             + '        <p class="comment-txt">' + data[k].content + '</p>';
+	             if(data[k].thumb!=null){
+	             	html = html
+	             		 + '        <ul class="goods-img">'
+			             + '            <li>'	             
+			             + '                <img src="'+data[k].thumb+'">'
+			             + '            </li>' 
+			             + '        </ul>';
+	             }
+	             html = html	          
+	             + ' 		<div class="content-c">'
+	             +       		data[k].time
+	             + '        </div>'
+	             + '        <div class="content-b">'	             
+	             + '            <p class="reply">'
+	             + '                <a href="javascript:;">回复</a><span>(0)</span>'
+	             + '            </p>'         
+	             + '            <p class="like">'
+	             + '                <a href="javascript:;">点赞</a>(<span>0</span>)'
+	             + '            </p>' 
+	             + '        </div>'
+	             + '    </div>'
+	             + '</li>';
+	    }
+        return html;
+	},	
+	//创建评论统计头部
+	createCommentHeader : function(data){
+        var html = '';
+        if(data.goods_percent==0){
+        	$(".comment-info>p").css("display","block")
+        }
+        var good_percent = Number(data.goods)/(Number(data.goods)+Number(data.middle)+Number(data.bad))*100;
+        var middle_percent = Number(data.middle)/(Number(data.goods)+Number(data.middle)+Number(data.bad))*100;
+        var bad_percent = Number(data.bad)/(Number(data.goods)+Number(data.middle)+Number(data.bad))*100;
+		html = html
+		    + '<div class="praise-degree">'
+		    + '    <p class="praise-percent comment_goodrate">' + data.goods_percent +'%</p>'
+		    + '    <p>好评度</p>'
+		    + '</div>'	
+		    + '<ul class="comment-bar clearfix">'
+		    + '    <li class="clearfix praise">'
+		    + '        <p>好评'
+		    + '       （<span class="comment_goodrate">' + data.goods  + '</span>）'
+		    + '        </p>'		            
+			+ '        <div class="view-bar"><div class="sml-bar" style="width:'+good_percent+'%"></div></div>'
+			+ '    </li>'			            
+		    + '    <li class="clearfix medium">'
+		    + '        <p>中评'
+		    + '       （<span class="comment_nomalrate">' + data.middle  + '</span>）'
+		    + '        </p>'		            
+			+ '        <div class="view-bar"><div class="sml-bar" style="width:'+middle_percent+'%"></div></div>'
+			+ '    </li>'						                 
+		    + '    <li class="clearfix bad">'
+		    + '        <p>差评'
+		    + '       （<span class="comment_badrate">' + data.bad  + '</span>）'
+		    + '        </p>'		            
+			+ '        <div class="view-bar"><div class="sml-bar" style="width:'+bad_percent+'%"></div></div>'
+			+ '    </li>'							                 
+            + '</ul>';            
+        return html;  
+	},
+	//创建评论统计tab
+	createCommentTab : function(data){
+        var html = '';        
+		html = html
+		    + '<li class="active">'
+		    + '    全部评价'
+		    + '    <span class="number_comment">' + data.sum  + '</span>'		            
+			+ '</li>'			            
+		    + '<li>'
+		    + '    好评'
+		    + '   （<span class="comment_good">' + data.goods  + '</span>）'		            
+			+ '</li>'						                 
+		    + '<li class="clearfix medium">'
+		    + '    中评'
+		    + '   （<span class="comment_nomal">' + data.middle  + '</span>）'		            
+			+ '</li>'
+		    + '<li class="clearfix medium">'
+		    + '    差评'
+		    + '   （<span class="comment_bad">' + data.bad  + '</span>）'		            
+			+ '</li>';   
+		    + '<li>'
+		    + '    晒单'
+		    + '   （<span>' + 0  + '</span>）'		            
+			+ '</li>'; 			         
+        return html;
+	},
+	//创建分页
+	createPage : function(data){
+	    var page = listRows_option;
+	    page += data.first !== false ? ('<a class="first" href="javascript:;">首页</a>') :
+	        ('<a class="first">首页</a>');
+	    page += data.prev !== false ? ('<a class="prev" href="javascript:;">上一页</a>') :
+	        ('<a class="first">上一页</a>');     
+	    for(var k in data.page){
+	    	page += data.page[k] == data.now_page ? 
+	    	    ('<a class="page_a now" data-p=' + data.page[k] + '>' + data.page[k] +'</a>') :
+	    	    ('<a class="page_a" href="javascript:;" data-p=' + data.page[k] + '>' + data.page[k] +'</a>');   	
+	    } 
+	    page += data.next !== false ? ('<a class="first" href="javascript:;">下一页</a>') :
+	        ('<a class="first">下一页</a>');
+	    page += data.end !== false ? ('<a class="first" href="javascript:;">末页</a>') :
+	        ('<a class="first">末页</a>');             
+	    page += '<p class="total">共' + data.totalPages + '页' + data.totalRows + '条数据</p>'; 
+	    page += '<input name="jump_page" value="1">';   
+	    page += '<a href="javascript:;" class="jump">GO</a>';
+	    return data;         
+	},   
+	createListRowsOption : function(data){
+		var str = '<select class="set_listRows">';
+		data.map(function(v){
+	        str +='<option value="' + v + '">' + v +'</option>';
+		});
+		str +='</select>';
+		return str;    	
+	}		
+};
+   
+
+var __TOTAL  = {},//评论统计
+    __COMMENT_HTML_HEADER_STATUS = false;//评论头部创建状态
+var __STATUS = {
+	'0'  : '申请中',
+	'-1' : '不同意',
+	'-2' : '已撤销',
+	'1'  : '同意',
+	'2'  : '已完成'
+},
+listRows_option = html.createListRowsOption([10 , 20 , 40]);
+var goods_id = $(".box").attr('goods_id');
+var config   = {
+	parameter : {goods_id : goods_id , is_get_total : 1},
+    listRows  : 10, 
+    rollPage  : 3,
+    url       : "http://" + location.host + "/MallGoodsComment/getCommentList",
+    callback:function(data,page){
+            //alert(data.total.level_1);          
+        //显示评论统计头部 和tab           
+        if(!__COMMENT_HTML_HEADER_STATUS){
+        	__TOTAL = {
+                bad    : parseInt(data.total.level_1),
+                middle : parseInt(data.total.level_2),
+                goods  : parseInt(data.total.level_3)
+        	}
+        	//评论总计
+    	    __TOTAL.sum = __TOTAL.bad + __TOTAL. middle + __TOTAL.goods;
+    	    //好评率
+            if(__TOTAL.sum){
+                __TOTAL.goods_percent = parseInt((__TOTAL.goods/__TOTAL.sum) * 100);
+            }else{
+                __TOTAL.goods_percent=0;
+            }
+    	    
+        	__COMMENT_HTML_HEADER_STATUS = true;
+            $(".comment .comment-t").html(html.createCommentHeader(__TOTAL));
+            $(".comment .comment-list").html(html.createCommentTab(__TOTAL));
+        }
+    	//显示评论列表
+        $(".comment-list").html(html.createHtml(data.data));
+        //显示分页
+        //$(".page ul").html(html.createPage(page));        
+	}
+};
+
+//详情、评价切换    
+$(".tab-nav>div:eq(0)").click(function(){
+	$(this).addClass("details-of active");
+	$(this).siblings().removeClass("details-of active");
+	$(".details-of-list>div:eq(0)").css("display","block");
+	$(".details-of-list>div:eq(1)").css("display","none");
+	$(".number_comment").css("color","#000");
+	$(".goods_info").css("display","block");
+})
+
+$(".tab-nav>div:eq(1)").click(function(){
+	$(this).addClass("details-of active");
+	$(this).siblings().removeClass("details-of active");
+	$(".details-of-list>div:eq(0)").css("display","none");
+	$(".details-of-list>div:eq(1)").css("display","block");
+	$(".number_comment").css("color","#FF6600");
+	$(".goods_info").css("display","none");
+	var PageObj = ajaxPage(config);	
+})
+})();
+</script>
+</html>

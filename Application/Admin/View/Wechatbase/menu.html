@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="description" content="" />
+<style>    
+*{padding:0; margin:0;font-size:16px;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0;} 
+#add{position:fixed;width:100%;height:100%;z-index:9999;background:rgba(0,0,0,0.3);display:none;margin-top:-170px;}
+#add ul{width:750px;height:500px;background:#E9F3FD;margin:200px auto}
+#add ul form{width:738px;height:488px;float:left;margin-left:5px;margin-top:5px;border:1px solid #A6C9E1}   
+#add ul li{width:726px;height:60px;float:left;margin-left:6px;line-height:60px;background:#F1F1F1}
+#add ul div li{width:656px;padding-left:50px;font-size:14px} 
+#add ul div li span{font-size:15px}   
+#add ul div li select{font-size:14px}
+#add ul .add_h{width:100%;height:32px;border-bottom:1px solid #A6C9E1;line-height:32px;text-indent:10px;color:#666666;background:#F8FBFE;margin-left:0}
+#add ul div{width:100%;height:auto;float:left;background:white}   
+.add_h a{display:block;width:15px;height:15px;background:url(__PUBLIC__/admin_images/close.gif);float:right;margin-top:8px;margin-right:10px}
+
+#update{position:fixed;width:100%;height:100%;z-index:9999;background:rgba(0,0,0,0.3);display:none;margin-top:-190px;}
+#update ul{width:750px;height:500px;background:#E9F3FD;margin:200px auto}
+#update ul form{width:738px;height:488px;float:left;margin-left:5px;margin-top:5px;border:1px solid #A6C9E1}   
+#update ul li{width:726px;height:60px;float:left;margin-left:6px;line-height:60px;background:#F1F1F1}
+#update ul div li{width:656px;padding-left:50px;font-size:14px} 
+#update ul div li span{font-size:15px}   
+#update ul div li select{font-size:14px}
+#update ul .add_h{width:100%;height:32px;border-bottom:1px solid #A6C9E1;line-height:32px;text-indent:10px;color:#666666;background:#F8FBFE;margin-left:0}
+#update ul div{width:100%;height:auto;float:left;background:white}   
+.update_h a{display:block;width:15px;height:15px;background:url(__PUBLIC__/admin_images/close.gif);float:right;margin-top:8px;margin-right:10px}   
+
+
+#main_h{width:100%;height:40px;line-height:40px;float:left;margin-top:20px;color:black;border-bottom:1px solid #dfdfdf}
+#main_h button{float:right;border:0;background:#44B549;padding:4px;border-radius:4px;color:white}
+#main table{width:100%;border-top:1px solid #E7E9F3;margin:30px auto;float:left}
+#main table tr{background:#FCFCFC}
+#main table tr:hover{background:#F1FCEA}   
+#main table tr:first-child{background:#F4F5F9} 
+#main table tr td{border-left:1px solid #E7E9F3;border-bottom:1px solid #E7E9F3;font-size:20px;padding:10px;font-size:14px;}
+#main table tr .td{border-left:0px}
+#main td img{max-width:150px}
+#main td a{display:block;margin-left:10px;float:left;padding:5px;background:#44B549;border-radius:4px;color:white;font-size:14px}     
+.btn{border:0;border-radius:4px;color:white;padding:5px;background:#44B549;font-size:14px;margin-left:300px}
+</style>
+</head>
+    <body>
+    <div id="add">
+       <ul>
+	       <form action="{:U('addmenu')}" method="post">
+	          <li class="add_h">添加菜单<a></a></li>
+	          <div>
+		          <li style="margin-top:5px">
+		              <span>菜单名称：</span> <input type="text" name="name"></input>
+		          </li>
+		          <li style="background:white">
+			          <span>父级菜单：</span>
+			          <select name="pid">
+			             <option value='0'>请选择父级菜单</option>
+			             <volist name='pmenu' id='v'>
+			               <option value="{$v['id']}">{$v['name']}</option>
+			             </volist>
+			          </select>
+			          <span style="padding-left:5px">二级菜单需要选择父菜单 </span>
+		          </li>
+		          <li>
+			          <span>菜单类型：</span>
+			          <select name="type">
+			             <option value='1'>关键词回复菜单</option>
+			             <option value='2'>url链接菜单</option>
+			             <option value='3'>微信扩展菜单</option>
+			          </select>
+		          </li>
+		          <li style="background:white" class="type">
+		              <span>关联关键词：</span><input type="text" name="keyword"></input>
+		          </li>
+		          <li style="background:white;display:none" class="type">
+		              <p style="float:left;margin-top:3px"><span>外链接url：</span><input type="text" name="url" style="width:250px"></input></p>
+					  <p style="float:left;margin-top:3px;">开启:</p><input type="radio" name="isoauth" value="y" style="width:30px;margin-top:25px;float:left"></input>
+					  <p style="float:left;margin-top:3px;margin-left:10px">不开启:</p><input type="radio" name="isoauth" value="n" checked='checked' style="width:30px;margin-top:25px;float:left"></input>
+					  (是否开启ouath授权模式 )                       
+		          </li>
+		          <li style="background:white;display:none" class="type">
+		              <span>扩展菜单：</span>
+		              <select name="expand">
+		                 <option value='1'>请选择...</option>
+		                 <option value='2'>扫描带提示</option>
+		                 <option value='3'>扫描推事件</option>
+		                 <option value='4'>系统拍照发图</option>
+		                 <option value='5'>拍照或者相册发送</option>
+		                 <option value='6'>微信相册发送</option>
+		                 <option value='7'>发送位置</option>
+		              </select>
+		          </li>
+		          <li>
+			          <span>显示：</span><input type="radio" name="isshow" checked='checked' value='y'></input>是
+			          <input type="radio" name="isshow" style="margin-left:15px;" value='n'></input>否
+		          </li>
+		          <li style="background:white"><span>排序：</span><input type="text" name="sort" value=''></input></li>
+		          <li><button style="margin-left:40px">提交</button></li>  
+		      </div>	         
+	       </form>
+       </ul>
+    </div>
+    <div id="update" {$menudata['show']}>
+       <ul>
+	       <form action="{:U('updatemenu')}" method="post">
+	          <li class="update_h">修改菜单<a href="javascript:hide()"></a></li>
+	          <input type="hidden" name="id" value="{$menudata['id']}"></input>
+	          <div>
+		          <li style="margin-top:5px">
+		              <span>菜单名称：</span> <input type="text" name="name" value="{$menudata['name']}"></input>
+		          </li>
+		          <li style="background:white">
+			          <span>父级菜单：</span>
+			          <select name="pid">
+			             <option value='0'>请选择父级菜单</option>
+			             <volist name='pmenu' id='v'>
+			               <option value="{$v['id']}"  <if condition="$v['id'] eq $menudata['pid']">selected='selected'</if>>{$v['name']}</option>
+			             </volist>
+			          </select>
+			          <span style="padding-left:5px">二级菜单需要选择父菜单 </span>
+		          </li>
+		          <li>
+			          <span>菜单类型：</span>
+			          <select name="type">
+			             <option value='1' {$type_1}>关键词回复菜单</option>
+			             <option value='2' {$type_2}>url链接菜单</option>
+			             <option value='3' {$type_3}>微信扩展菜单</option>
+			          </select>
+		          </li>
+		          <li style="background:white;{$show_1}" class="type">
+		              <span>关联关键词：</span><input type="text" name="keyword" value="{$menudata['keyword']}"></input>
+		          </li>
+		          <li style="background:white;{$show_2}" class="type">
+		              <p style="float:left;margin-top:3px"><span>外链接url：</span><input type="text" name="url" value="{$menudata['url']}" style="width:250px"></input></p>
+					  <p style="float:left;margin-top:3px;">开启:</p><input type="radio" name="isoauth" value="y" style="width:30px;margin-top:25px;float:left" <if condition="$menudata['isoauth'] eq 'y'">checked='checked'</if>></input>
+					  <p style="float:left;margin-top:3px;margin-left:10px">不开启:</p><input type="radio" name="isoauth" value="n" style="width:30px;margin-top:25px;float:left" <if condition="$menudata['isoauth'] eq 'n'">checked='checked'</if>></input>
+					  (是否开启ouath授权模式 )  		              
+		          </li>
+		          <li style="background:white;{$show_3}" class="type">
+		              <span>扩展菜单：</span>
+		              <select name="expand">
+		                 <option value='1'>请选择...</option>
+		                 <option value='2'>扫描带提示</option>
+		                 <option value='3'>扫描推事件</option>
+		                 <option value='4'>系统拍照发图</option>
+		                 <option value='5'>拍照或者相册发送</option>
+		                 <option value='6'>微信相册发送</option>
+		                 <option value='7'>发送位置</option>
+		              </select>
+		          </li>
+		          <li>
+			          <span>显示：</span><input type="radio" name="isshow" value='y' {$check_1}></input>是
+			          <input type="radio" name="isshow" style="margin-left:15px;" value='n' {$check_2}></input>否
+		          </li>
+		          <li style="background:white"><span>排序：</span><input type="text" name="sort" value="{$menudata['sort']}"></input></li>
+		          <li><button style="margin-left:40px">提交</button></li>  
+		      </div>	         
+	       </form>
+       </ul>
+    </div>
+    <div id="wraper">      
+          <div id="main"> 
+             <div id="main_h">
+                                              注意：1级菜单最多只能开启3个，2级子菜单最多开启5个!
+               <button>添加菜单</button>                              
+             </div>         
+             <table cellspacing="0">
+                  <tr>
+                      <td class='td'>显示顺序</td>
+                      <td>主菜单名称</td>
+                      <td>菜单类型</td>
+                      <td>类型数值</td>
+                      <td>操作</td>
+                  </tr> 
+                  <volist name="list" id="v">
+	                  <tr>
+	                      <td class='td'>{$v['sort']}</td>
+	                      <td <if condition="$v['pid'] neq '0'">style="text-indent:35px"</if>>{$v.name}</td>	                    
+	                      <td>{$v.type}</td>
+	                      <td>{$v.url}</td>
+	                      <td><a href="{:U('menu',array('id'=>$v['id']))}">编辑</a><a href="javascript:deletemenu({$v['id']})">删除</a></td>
+	                  </tr>
+                  </volist>                                 
+             </table>
+             <a href="{:U('sendmenu')}"><button class="btn">生成自定义菜单</button></a>
+             <a href="{:U('deletewxmenu')}"><button class="btn"  style="margin-left:10px;background:#878787;color:white">取消自定义菜单</button></a>
+         </div>
+    </div>	
+    </body>
+    <script type="text/javascript">
+       $("#left div ul").eq(0).css('display','block');
+       $("#left div ul li").eq(7).css({'background':'#F4F5F9','border-bottom':'1px solid #D3DBE6','border-top':'1px solid #D3DBE6'});
+       var value=$("select[name='type']").val();
+       if(value==1){
+ 		  $(".type").eq(0).css('display','block');
+ 		  $(".type").eq(1).css('display','none');
+ 		  $(".type").eq(2).css('display','none');
+ 	   }else
+ 	   if(value==2){
+ 		  $(".type").eq(0).css('display','none');
+  		  $(".type").eq(1).css('display','block');
+  		  $(".type").eq(2).css('display','none');
+ 	   }else
+ 	   if(value==3){
+ 		  $(".type").eq(0).css('display','none');
+  		  $(".type").eq(1).css('display','none');
+  		  $(".type").eq(2).css('display','block');
+ 	   }
+       
+       $("#main_h button").click(function(){
+    	   $("#add").slideDown(500);
+       })
+       
+       $(".add_h a").click(function(){
+    	   $("#add").slideUp(500);
+       })
+       
+       $(".update_h a").click(function(){
+    	   $("#update").slideUp(500);
+       })
+       
+       $("select[name='type']").eq(0).change(function(){
+    	   value=$(this).val();
+    	   if(value==1){
+   	 		  $(".type").eq(0).css('display','block');
+   	 		  $(".type").eq(1).css('display','none');
+   	 		  $(".type").eq(2).css('display','none');
+   	 	   }else
+   	 	   if(value==2){
+   	 		  $(".type").eq(0).css('display','none');
+   	  		  $(".type").eq(1).css('display','block');
+   	  		  $(".type").eq(2).css('display','none');
+   	 	   }else
+   	 	   if(value==3){
+   	 		  $(".type").eq(0).css('display','none');
+   	  		  $(".type").eq(1).css('display','none');
+   	  		  $(".type").eq(2).css('display','block');
+   	 	   }
+       })
+       
+       $("select[name='type']").eq(1).change(function(){
+    	   value=$(this).val();
+    	   if(value==1){
+   	 		  $(".type").eq(3).css('display','block');
+   	 		  $(".type").eq(4).css('display','none');
+   	 		  $(".type").eq(5).css('display','none');
+   	 	   }else
+   	 	   if(value==2){
+   	 		  $(".type").eq(3).css('display','none');
+   	  		  $(".type").eq(4).css('display','block');
+   	  		  $(".type").eq(5).css('display','none');
+   	 	   }else
+   	 	   if(value==3){
+   	 		  $(".type").eq(3).css('display','none');
+   	  		  $(".type").eq(4).css('display','none');
+   	  		  $(".type").eq(5).css('display','block');
+   	 	   }
+       })
+       
+       function deletemenu(id){
+    	   if(confirm('确认删除?')){      
+	    	  $.post("{:U('deletemenu')}",{"id":id},function(res){
+	             alert(res);
+	             window.location.reload();
+	     	  })
+    	   }
+       }
+    </script>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>导航管理</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/all-use.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/side-nav.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/css/colpick.css" type="text/css"/>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/sell-management.css">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+<script src="{:C('STATIC_URL')}/js/colpick.js" type="text/javascript"></script>
+<style>
+.btn{ cursor: pointer; font-family: "微软雅黑";}
+.safeguard{ width: 970px; border: 1px solid #E4E4E4; float: left; margin: 30px 0px 0px 6px;}
+.safeguard_top{ width: 100%; background-color: #F2F1F1; padding: 10px 40px; box-sizing: border-box;}
+.safeguard_box{ width: 500px; padding: 0px 150px 30px 150px; margin: 0 auto; border: 1px solid #E4E4E4; margin-bottom: 70px; text-align: center;}
+.safeguard>p{ line-height: 50px; text-indent: 32px; font-size: 20px;}
+.safeguard>p span{ font-size: 16px; color: #FE6F11; margin-left: 10px;}
+.safeguard>button{ color: #fff; background-color: #37A4A2; border-radius: 3px; padding: 4px 8px; margin: 20px 38px;}
+.safeguard>button span{ font-size: 15px; font-weight: bold;}
+.safeguard>table{ border-top: 2px solid #D8D8D8; width: 95%; margin: 0 auto;}
+.safeguard>table tr{ height: 45px; border-bottom: 1px solid #DCDCDC; cursor: pointer;}
+.safeguard>table tr:hover{ background-color: #F1F1F1;}
+.safeguard>table thead tr{color: #333; background-color: #F1F1F1; cursor: default;}
+.safeguard>table tr td:first-of-type{ width: 8%;}
+.safeguard>table tr td:nth-of-type(2){ width: 30%; text-align: left;}
+.safeguard>table tr td:nth-of-type(3){ width: 45%; text-align: left;}
+.safeguard>table tr td:nth-of-type(4){ width: 10%;}
+.safeguard>table tr td:nth-of-type(1) input{ cursor: pointer;}
+.safeguard>table tr td:nth-of-type(2) input{ width: 170px; height: 20px; padding: 2px 10px; background-color: #EEEEEE; }
+.safeguard>table tr td:nth-of-type(3) input{ width: 30px; text-align: center; height: 20px; padding: 2px 10px; }
+.safeguard>table tr td a{ color: #3879DF;}
+.safeguard>table tr td a:hover{ text-decoration: underline;}
+.safeguard>ul{ width: 95%; margin: 0 auto;}
+.safeguard>ul li{ width: 100%; margin: 10px 0px 12px 0px; cursor: default;}
+.safeguard>ul li:first-of-type{ font-size: 20px; color: #000;}
+.safeguard>ul li:nth-of-type(2){ background-color: #F1F1F1; height: 46px; line-height: 46px; padding: 4px; margin-bottom: 25px;}
+.safeguard>ul li:nth-of-type(3){ text-align: center; font-size: 20px; color: #000;}
+#picker{ width: 30px; height: 30px; border: 1px solid #A9A9A9; margin: 5px 10px 0px 15px; display: inline-block;}
+#picker>div{ background:blue;border: 1px solid #A9A9A9; width: 20px; height: 20px; margin: 13%;}
+.save_btn{ color: #fff; background-color: #37A4A2; padding: 6px 10px; border-radius: 3px;}
+.hide{display:none}
+.navList td{ border: none;}
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end --> 
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="Public:sellerLeft" />         
+            <div class="sell-management clearfix" style='width:auto;'>
+                <div class="safeguard">
+                	<div class="safeguard_top">导航管理</div>
+                	<p>内容设置 <span>*店铺导航区最多可设置显示5项一级内容。<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设置导航请先添加分类，勾选分类作为导航。 </span></p>
+					
+                	<table class="navList">
+                		<thead>
+                			<td>是否显示</td>
+                			<td>分类名称</td>
+                			<td>导航排序</td>
+                			<td>操作</td>
+                		</thead>
+						<volist name="categorys" id="vo">
+                		<tr>
+                			<td>
+                			    <input type="checkbox" name='status' value='1' data-id="{$vo.nav_id}" data-cat_id="{$vo.id}" {$vo.check}>
+                			</td>
+                			<td>
+                			    <span class="navList_btn"> ▼ </span> 
+                			    <input type="text" value="{$vo.name}" disabled="disabled">
+                			</td>
+                			<td catid="{$vo.id}">
+                			    <input type="text" name='rsort' data-id="{$vo.nav_id}" data-cat_id="{$vo.id}" value="{$vo.rsort}" class="rootsort">
+                			</td>
+                			<td></td>
+                		</tr>
+							<volist name="vo['child']" id="vv">
+							<tr class="111111">
+								<td><input type="checkbox" name='status' value='1' data-id="{$vv.nav_id}" data-cat_id="{$vv.id}" {$vv.check}></td>
+								<td {$vv.id}>&nbsp;&nbsp;└&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="{$vv.name}" class="goods_name" disabled="disabled"></td>
+								<td catid="{$vv.id}">&nbsp;&nbsp;└&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="text" name='rsort' data-id="{$vv.nav_id}" data-cat_id="{$vv.id}" value="{$vv.rsort}"  class="rootsort">
+								</td>
+								<td></td>
+							</tr>
+							</volist>
+						</volist> 
+						
+                		<tr>
+                			<td><input type="checkbox" name="status" value="1" data-id="{$vo.nav_id}" data-cat_id="{$vo.id}" {$vo.check}></td>
+                			<td><span> ▶ </span> <input type="text" value="公司简介" disabled="disabled">&nbsp;&nbsp;(系统默认)</td>
+                			<td><input type="text" value="-1" disabled="disabled" style='visibility: hidden;'></td>
+                			<td><a href="{:U('ShopEdit/service')}">编辑</a></td>
+                		</tr>
+						<!--
+                		<tr>
+                			<td><input type="checkbox" attrid="-2"></td>
+                			<td><span> ▶ </span> <input type="text" value="服务保障" disabled="disabled">&nbsp;&nbsp;(系统默认)</td>
+                			<td><input type="text" value="-2" disabled="disabled"></td>
+                			<td><a href="{:U('ShopEdit/service')}">编辑</a></td>
+                		</tr>
+					 -->
+                	</table>
+                	<ul>
+                		<li>导航条背景设置</li>
+                		<li><div id="picker"><div></div></div> 请选择导航条颜色,也可手动输入,例如：#000000！</li>
+						<!--<li><div id="picker"><div></div></div> 请获取/输入颜色，例如：#000000 或者 black</li>-->                		
+                	</ul>               	
+                </div> 
+                <button class="save_btn btn" style="float: right; margin: 30px 20px 0px 0px;">保存更改</button>
+            </div>                   
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+//判断左边导航
+function checkNav(){
+	$(".side-nav>ul:eq(3)>li:eq(2) a").css("color","#ff6600")
+}
+checkNav();
+
+var navs = {$nav_json};
+    navs = arrayCloumn(navs , 'id');
+var categorys = {$categorys_json};
+    categorys = arrayCloumn(categorys , 'id');
+
+$(".safeguard").on('blur' , 'input' , function(){
+    var name  = $(this).attr('name');
+    var value = $(this).val();
+    var id    = $(this).attr('data-id');
+    if(id && name != 'status'){ 
+        //修改的数据
+        setUpdateData(id , name ,value);  
+    }else
+    if(name != 'status'){
+    	var cat_id = $(this).attr('data-cat_id');
+    	setAddData(cat_id , name , value);
+    }     
+})
+
+$(".safeguard").on('click' , "input[name='status']" , function(){
+    var id = $(this).attr('data-id');  
+    if($(this).prop('checked')){
+        var value = 1;  
+    }else{
+        var value = 0;  
+    }
+    if(id){
+        setUpdateData(id , 'status' , value); 
+    }else{
+    	var cat_id = $(this).attr('data-cat_id');
+    	setAddData(cat_id , 'status' , 1);
+    }       
+}) 
+var add_data = {};
+function setAddData(cat_id , field , value){
+	if(!add_data[cat_id]){
+	    add_data[cat_id] = {
+	      cat_id   : cat_id,
+	      rsort    : 0,
+	      nav_name : categorys[cat_id].name,
+	      status   : 0 
+	    };
+	}
+    add_data[cat_id][field] = value;
+}
+
+/*保存需要修改的数据*/
+var update_data = {};
+function setUpdateData(id , field ,value){
+    var data = navs[id];
+    if(data[field] != value){
+        if(update_data[id] === undefined){
+            update_data[id] = {
+                id     : data.id,
+                rsort  : data.rsort,
+                status : data.status
+            };
+        }
+        update_data[id][field] = value;                
+    }else{
+        if(update_data[id] !== undefined){
+            update_data[id][field] = value; 
+            var flag = true;
+            for(var k in update_data[id]){
+                if(update_data[id][k] != data[k]){
+                    flag = false;  
+                }
+            }
+            if(flag){
+                delete update_data[id];  
+            }
+        }
+    }
+}
+
+function arrayCloumn(data_ , field){
+    var data = [];
+    for(var k in data_){
+      data[data_[k][field]] = data_[k];
+    }
+    return data;
+}
+
+/* 数据保存提交 */
+$('.save_btn').click(function(){ 
+	console.log()
+	if($("input[name='status']:checked").length<=5){
+		$.post("{:U('ShopNav/navList')}",{add:add_data,update:update_data},function(res){
+			console.log(res)
+		    if(res.status){
+		    	alert("更改成功")
+		    	window.location.reload();
+		    }else{
+		    	alert(res.msg);
+		    }	
+		});
+	}
+	if($("input[name='status']:checked").length>5){
+		alert("店铺导航区最多可设置显示5项一级内容")
+	}
+ })
+
+/*导航条颜色*/
+$('#picker').colpick();
+$('.colpick_submit').click(function(){
+var color = $('.colpick_hex_field').find('input').val();
+  $.post("{:U('ShopNav/navCss')}",{'color':color},function(res){
+		if(res.status){			
+		  alert('保存成功！');
+		}
+	});
+})
+var  getcss = "{$css}";
+$('#picker').find('div').css("background","#"+getcss);
+</script>
+</body>
+</html>

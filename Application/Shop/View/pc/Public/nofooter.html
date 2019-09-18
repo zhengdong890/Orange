@@ -1,0 +1,22 @@
+<!-- 公共底部 -->
+<div class="footer_box">
+	<div class="footer">
+      <div class="footer-nav">
+        <volist name='help' id='v' key='k'>
+        <ul class="footer-nav{$k}" style="background:url('__ROOT__{$v['thumb']|substr=1}'')">
+            <li class="title">{$v['name']}</li>
+            <volist name="v['child']" id='v1'>
+            <li><a href="http://www.orangesha.com/Home/Problem/index.html?id={$v1['id']}">{$v1['name']}</a></li>
+            </volist>
+        </ul>
+        </volist>
+      </div>
+      <div class="footer-bottom">
+        <div class="support"><a target="_blank" href="{:U('Public/sitemap')}">网站地图</a> 客服电话 400-9665770 周一至周日 9:00-21:00</div>
+          <p class="text">所有图片均受著作权保护，未经许可任何单位与个人不得使用、复制、转载、摘编，违者必究法律责任。</p>
+          <p class="text">&copy; 2010-2016 深圳市橙橙网络科技有限公司版权所有 粤ICP备16062724号</p>
+        <div class="ewm"></div>
+      </div>
+    </div>
+</div>
+

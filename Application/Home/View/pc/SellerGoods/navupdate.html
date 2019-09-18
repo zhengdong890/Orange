@@ -1,0 +1,86 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>添加分类</title>
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+
+<style>
+*{
+	padding: 0;
+	margin: 0;
+}
+ul{ }
+input{ outline: none;}
+.container_ul{padding: 20px 10px 20px 10px;}
+.container_ul>li:first-of-type{ margin-top: 10px;}
+ul li{ list-style:none; margin-bottom: 20px; font-family: "微软雅黑";}
+#childul{ padding: 15px 0px 15px 30px;}
+#childul>li{ color: #666; font-family: "微软雅黑";}
+#childul li span{ margin-left:5px;cursor:pointer;float:right; }
+ul li  a{ background:#37A4A2;color:#FFFFFF;padding:4px 10px; border-radius: 5px; font-size: 14px; font-family: "微软雅黑";}
+a { text-decoration:none; }
+#childul li {margin-top:10px;}
+#add{ background:#37A4A2; color:#FFFFFF; padding: 4px 10px; border-radius: 5px; font-size: 14px; font-family: "微软雅黑";}
+</style>
+</head>
+<body >
+
+<div class="bodyer">
+	  <form action="{:U('SellerGoods/showupdate')}" method="post">
+		  <ul class="container_ul">
+			  <li style="margin-left:18px;text-align:center;">
+			  添加分类：<input type="text" name="cat" value="{$data.nav_name}" />  
+			  <input type="hidden" name="catid" value="{$data.id}" /> 
+			  </li>
+			  <li style="margin-left:18px;text-align:center;">
+			  按自然数排序：<input type="text" name="sort" value="{$data.sort}" />   
+			  </li>			  
+			  <li style="margin-left:18px;text-align:center;">               
+			  <a href="javascript:;" onclick="savecat()" id="save_catid"/>添加</a>
+			  </li>
+		   </ul>  
+	 </form>
+</div>
+<!-- 底部 -->
+
+<!-- 底部 -->    
+<script>
+function savecat(){
+     var catname = $.trim($('input[name="cat"]').val());	
+	 var sort = $.trim($('input[name="sort"]').val());
+    if( isNaN(sort) ){
+	  alert('排序应为自然数！');
+	  return false;
+	}	 
+	if( catname && sort){ 	
+		 $.post("{:U('SellerGoods/navupdate')}",{'catname':catname,'sort':sort},function(data){
+			if( data.msg=='ok'){			
+			  alert('添加成功！');	             	  
+			  var index = parent.layer.getFrameIndex(window.name);
+			  parent.layer.close(index); //执行关闭
+              window.location.href= U('SellerGoods/show');	
+			 
+			}
+		 
+		 });
+
+	
+	}else{
+	   alert('添加分类为空或排序未填写！');
+	}
+
+}
+
+
+</script>
+</body>
+</html>
+
+    

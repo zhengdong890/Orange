@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>课程掠影</title>
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/index.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/rest.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/liner.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/chyanxun/class.css" />
+		<script type="text/javascript" src="__PUBLIC__/phone/js/jquery.js" ></script>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/myscript.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/phone/js/focus.js"></script>
+	</head>
+	<body>
+		<div class="wrp">
+			<include file="Public:header"/>
+			<div class="container">
+				<section class="header-main">
+					<ul class="navs clear">
+						<span class="slider"></span>
+						<li><a href="#" class="navs-item">课程介绍</a></li>
+						<li><a href="#" target="_blank">课程设置</a></li>
+						<li><a href="#">课程掠影</a></li>
+						<li><a href="#" target="_blank">课程评价</a></li>
+						<li><a href="#" target="_blank">报名系统</a></li>
+					</ul>
+				</section>	
+				<div id="sidebar">
+					<img src="__PUBLIC__/phone/images/rainbowCourse/ico13.jpg" />
+					<dl>
+						<dt><img src="__PUBLIC__/phone/images/rainbowCourse/tit3.gif"></dt>
+						<dd><a href="../rainbowCourse/Courseintroduction.html" class="curr">A语言与文字类</a></dd>
+                        <dd><a href="../rainbowCourse/Cultureart.html">B文化与艺术类</a></dd>
+                        <dd><a href="../rainbowCourse/Sportshealth.html">C体育与健康类</a></dd>
+                        <dd><a href="../rainbowCourse/Sciencetechnology.html">D科学与技术类</a></dd>
+                        <dd><a href="../rainbowCourse/Comprehensivestudy.html">E综合学习与实践</a></dd>
+                    </dl>
+				</div>
+				<div class="content">
+					<div class="classbox">
+						<ul class="ullbox">
+							<volist name="img" id="v">
+							<li>
+								<div class="info firt">
+									<img src="__ROOT__{$v}" />
+								</div>
+							</volist>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+<include file="Public:footer" />
+		</div>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/jquery-1.11.2.min.js" ></script>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/common.js" ></script>
+	</body>
+</html>

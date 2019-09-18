@@ -1,0 +1,154 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>e橙优品-个人中心</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<style>
+	.disTable-cell>p{ line-height: 32px;}
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->	
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">       
+        <include file="MemberPublic:MemberLeft" />  
+        <div class="user-right marT20 box-s-c1 fRi">          
+            <div class="user-info-wrap" style="width: 710px; margin: 0 auto;">
+                <div class="disTable">
+                    <div class="disTable-cell" style="display: table-cell;">
+                        <div class="person-header fLe">
+                            <div class="person-frame"></div>
+                            <img src="__ROOT__{$member_data['headimg']|substr=1}" width="100%" height="100%">
+                        </div>
+                        <div class="person-info fLe">
+                            <h4>{$member_data['nickname']}</h4>
+                            <a href="{:U('MemberCenter/memberData')}" class="cCol1">完善个人信息 ></a>
+                        </div>
+                    </div>
+                    <div class="disTable-cell" style="display: table-cell;">
+                        <p class="safety">账号安全：<span class="cCol1">较高</span></p>
+                        <p>绑定手机：<span>{$member_data['username']}</span></p>
+                        <!--<p>我的收货地址：<span></span></p>-->
+                    </div>
+                    <div class="disTable-cell" style="display: table-cell;">
+                        <p class="star-wrap">等级：<span><i class="star-s-1"></i><i class="star-s-1"></i><i class="star-s-1"></i><i class="star-s-1"></i></span></p>
+                        <p>累计积分：<span><em class="f-cCol2">{$mem.score}</em> 分</span></p>
+                        <p>可用积分：<span><em class="f-cCol2">{$mem.use_score}</em> 分</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="user-order-wrap">
+                <div class="u-orde-items clearfix" style="margin: 120px 0 10px 175px;">
+                    <ul>
+                        <li class="u-o-item u-pay">
+                        <h4 class="tl">待支付订单：
+                        <em class="col1">{$order_total['mall']['0,0,0,1']}</em>
+                        </h4><a class="col1" href="{:U('MemberOrder/orderList',array('type'=>2))}">查看待支付的订单 ></a>
+                        </li>
+                        <li class="u-o-item u-evaluation">
+                        <h4 class="tl">待收货订单：
+                        <em class="col1">{$order_total['mall']['1,1,0,1']}</em></h4>
+                        <a class="col1" href="{:U('MemberOrder/orderList',array('type'=>4))}">查看待收货订单 ></a>
+                        </li>
+                        <li class="u-o-item u-goods">
+                        <h4 class="tl">待评价订单：
+                        <em class="col1">{$order_total['mall']['1,2,0,1']}</em>
+                        </h4>
+                        <a class="col1" href="{:U('MemberOrder/orderList',array('type'=>5))}">查看待评价订单 ></a>
+                        </li>
+                        <li class="u-o-item u-like">
+                        <h4 class="tl">我喜欢的商品：<em class="col1">{$num}</em></h4>
+                        <a class="col1" href="http://www.orangesha.com/gzsp.html?title=1">查看我喜欢的商品 ></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+<!-- /主体 -->
+<include file="Public:footer" /> 
+
+</body>
+<script type="text/javascript">
+    
+    /*$("#myShop").click(function(){          
+        
+        	$.post("{:U('MemberCenter/getMallData')}",data,function(){
+            	
+                if(status==0){                   
+                    window.location.href="{:U('MemberCenter/sellerMall')}";
+                
+            
+        }else{
+            $.post("{:U('MemberCenter/getMallData')}",data,function(){
+            	
+                if(status==1){                   
+                    window.location.href="{:U('Seller_order/sellerIndex')}";
+                }
+            })            
+        }    
+    }) */
+    
+    /*$("#myShop").click(function(){   
+        if(status==0){
+            window.location.href="{:U('Home/Shop')}";
+        }else{
+            $.post("{:U('MemberCenter/getMallData')}",data,function(){
+            	
+                if(status==1){                   
+                    window.location.href="{:U('Home/Shop')}";
+                }
+            })            
+        }    
+    })*/ 
+    
+    $("#myShop").click(function(){
+    	$.post("{:U('MemberCenter/getMallData')}", function(shop){
+			var myshop = shop.data.status;
+			$.each(myshop, function(index, element) {
+				if(myshop==1){                   
+                    window.location.href="{:U('Home/Shop')}";
+               }
+			});
+		})	
+    })
+
+    
+	/*$.ajax({
+   	    type:"post",
+   	    url:"http://www.orangesha.com/index.php/Home/MemberCenter/getMallData",
+   	    data{
+   	        'statu':'',
+   	    	'msg':'',
+   	    	'result':''
+   	    	}
+   	    async:ture,
+   	    success:function(data){
+   	    	if(data.status==1){
+   	    		location.assign("http://www.orangesha.com/index.php/Home/Shop")
+   	    	}
+   	    	if(data.status==0){
+   	    		location.assign("http://www.orangesha.com/index.php/Home/MemberCenter/sellerMall)
+   	    	}
+   	    }
+   })*/
+</script>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>店铺模版</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/shopIndex.css" type="text/css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/public.css" type="text/css">
+<link href="__PUBLIC__/Home/css/shop.css" rel="stylesheet">
+<link href="__PUBLIC__/Home/css/footer.css" rel="stylesheet">
+<link rel="stylesheet" href="__PUBLIC__/css/style.css" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/Home/static/jquery-2.0.3.min.js"></script>
+<script src="/Public/layer/layer.js"></script>
+<script src="/Public/js/navshop.js"></script> 
+</head>
+<body>
+<include file="Public:header_top" />
+<include file="Public:header_search" />
+<div class="shop">
+    <div class="header">
+        <div class="header-inner">
+        <img src="__ROOT__{$shop_data.thumb|substr=1}" class="shop-logo">    
+            <div class="shop-title">
+                <h1>{$shop_data.shop_name}</h1>
+                {$shop_data.desc}
+            </div>
+			<!--
+            <ul class="youhui">
+            	<li><img src="/Public/Home/image/优惠卷01.png"></li>
+            	<li><img src="/Public/Home/image/优惠卷02.png"></li>
+            	<li><img src="/Public/Home/image/优惠卷03.png"></li>
+            </ul>
+			-->
+        </div>
+        <a href="#" title="{$seller_id}" onclick="collectshop(this)" class="myshop" style="background: url('/Public/Home/image/收藏本店.png') no-repeat 8px 4px;">收藏本店</a>
+        <a href="#" title="{$seller_id}" onclick="relation(this)" class="seller" style="background: url('/Public/Home/image/联系卖家.png') no-repeat 8px 4px;">联系卖家</a>
+    </div>
+<include file="Public:shopnav" />
+	
+    <div class="banner">
+        <img id="banner" src="__ROOT__{$banner|substr=1}" alt="">
+    </div>
+    <div class="shop-list">
+       
+        <ul>
+            <volist name='goods_list' id='v'>
+            <li>
+                <a href="{:U('Mall_goods/goods',array('goods_id'=>$v['id']))}"><img src="__ROOT__{$v['goods_thumb']|substr=1}" alt=""></a>
+                <a href="{:U('Mall_goods/goods',array('goods_id'=>$v['id']))}"><p>{$v['goods_name']}</p></a>
+                <div class="money">
+                    <span class="price">￥{$v['goods_price']} 万元</span>
+                    <span class="sales">销量{$v['sale_num']}</span>
+                </div>
+            </li>
+            </volist>
+        </ul>
+    </div>
+   
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+
+<script>
+//隐藏免费发布按钮
+$("#freeRelease").css("display","none");
+
+function collectshop(obj){
+  var title = $(obj).attr('title');
+  if( title ){
+		$.post("{:U('Shop/shopcllect')}",{'title':title},function(data){
+				if( data.msg=='ok'){
+				  alert('收藏该店铺成功！');
+				}else if(data.msg=='onemore'){
+				  alert('您已经收藏过该店铺了！');
+				}else{  
+				  alert('收藏该店铺失败！');
+				}
+		});  
+  }else{
+        alert('店铺不存在！');
+  }
+
+}
+
+function relation(obj){
+  var title = $(obj).attr('title');
+  if( title ){
+    layer.open({
+      type: 2,
+      title: '联系卖家',
+      shadeClose: true,
+      shade: false,
+      maxmin: true, //开启最大化最小化按钮
+      area: ['400px', '400px'],
+	  content: "<?php echo U('Shop/getseller');?>?title="+title
+    });
+		
+  }else{
+        alert('店铺不存在！');
+  }
+
+var shop_css = "{$shop_css}";		
+$('.navwrap').css('background',shop_css);
+
+
+</script>
+
+<!-- /底部 -->
+</body>
+</html>

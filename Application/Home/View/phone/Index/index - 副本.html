@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>虹桥小学</title>
+    <link rel="stylesheet" href="__PUBLIC__/phone/css/Common/index.css" />
+    <link rel="stylesheet" href="__PUBLIC__/phone/css/Common/rest.css" />
+    <link rel="stylesheet" href="__PUBLIC__/phone/css/index/same.css" />
+    <link rel="stylesheet" href="css/rest.css" />
+    <script type="text/javascript" src="__PUBLIC__/phone/js/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/phone/js/myscript.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/phone/js/focus.js"></script>
+<script type="text/javascript" src="__PUBLIC__/phone/js/jquery.SuperSlide.js"></script>
+  </head>
+  <body>
+    <div class="wrp">
+      <!--顶部-->
+      <div class="header">
+                <div class="top wd_1000">
+                          <div class="logo lf"><a href="#" style="display:inline-block; width: 297px; height: 71px;"></a></div>
+                </div>
+                <!--导航-->
+                <div class="nav">
+                          <ul class="wd_1000">
+                                      <li style="margin-left: 0;"><a href="index.html">首页</a></li>
+                                      <volist name="columns" id="v">
+                                      <li><a href="#">{$v['column_name']} </a>
+                                              <ul>
+                                                     <volist name="v['column']" id="v1">
+                                                      <li><a href="{:U(ucfirst($v1['url']),array('id'=>$v1['id'],'column_id'=>$v['id']))}">{$v1['column_name']}</a></li>
+                                                    </volist>
+                                              </ul>
+                                      </li>
+                                      </volist>
+                          </ul>
+                </div>
+      </div>
+      <!--轮播图-->
+      <div class="banner">
+                <div id="focus">
+                          <ul>
+                                  <volist name="banner" id="v">
+                                  <li>
+                                      <a href="#" target="_blank">
+                                          <img src="__ROOT__{$v['banner_thumb']|substr=1}"  />
+                                      </a>
+                                  </li>
+                                </volist>
+                          </ul>
+                 </div>
+      </div>
+      <!--轮播以下内容-->
+      <div class="con_wap">
+        <div class="notice">
+                          <h2>
+                            <a href="#" style="color: #f2a603;"><img src="__PUBLIC__/phone/images/index/icon.png">&nbsp;&nbsp;学校公告</a>
+                          </h2>
+                          <div class="noticel" id="noticefl">
+                                    <a href="{:U('Xwzhongxin/xxgonggao_content',array('column_id'=>$gonggao_one['column_id'],'id'=>$gonggao_one['id']))}"><img src="__ROOT__{$gonggao_one['thumb']|substr=1}"><h3>{$gonggao_one['title']}</h3></a>
+                                    <p>{$gonggao_one['description']}</p>
+                          </div>
+                          <div class="noticeR" id="noticeCenter">
+                          <volist name="gonggao" id="v">
+                                  <li><a href="{:U('Xwzhongxin/xxgonggao_content',array('column_id'=>$v['column_id'],'id'=>$v['id']))}">{$v['title']}</a></li>
+                          </volist>
+                                   
+                          </div>
+                        <ul id="noticeRight">
+
+                                    <li class="last">
+                                      <a class="lastL" href="#">今天有<i class="notice_num" style="color: #000000;"><b>0</b></i>条新通知</a>
+                                    </li>
+                          </ul>
+        </div>
+
+        <div class="mdsn">
+          <h2>
+            <a href="#" style="color: #F2A603;"><img src="__PUBLIC__/phone/images/index/like.png">&nbsp;&nbsp;美德少年</a>
+          </h2>
+          <div class="slideTxtBox2">
+            <div class="bd_img">
+              <div id="leftMarquee11" class="infoList">
+                <div class="bdr">
+                  <ul>
+                    <volist  name="meide[0]" id="v">
+                        <li class="hceg" id="noborder"><img src="__ROOT__{$v}" width="255" height="166" /></li>
+                   </volist>
+                  </ul>
+                </div>
+                <script type="text/javascript">$("#leftMarquee11").slide({mainCell:".bdr ul",effect:"leftMarquee",vis:5,interTime:40,autoPlay:true });</script>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="conL">
+                      <div class="xbyx">
+                              <h2>
+                                      <a href="#" style="color: #f2a603;"><img src="__PUBLIC__/phone/images/index/icon_01.png">&nbsp;&nbsp;校本研训</a>
+                              </h2>
+                              <dl>
+                                      <dt>
+                                              <a href="{:U('Xwzhongxin/xydongtai_content',array('column_id'=>$xiaobenyanxun_one['column_id'],'id'=>$xiaobenyanxun_one['id']))}"><img src="__ROOT__{$xiaobenyanxun_one['thumb']|substr=1}" /></a>
+                                      </dt>
+                                      <dd style="margin: 10px 0;">
+                                           <volist name="xiaobenyanxun" id="v">
+                                             <p><a href="{:U('Xwzhongxin/xydongtai_content',array('column_id'=>$v['column_id'],'id'=>$v['id']))}">{$v['title']}</a></p>
+                                        </volist>                                      
+                                    </dd>
+
+                              </dl>
+                      </div>
+                  <div class="xydt clearfix">
+                          <h2>
+                                  <a  style="color: #f2a603;"><img src="__PUBLIC__/phone/images/index/icon_03.png" />&nbsp;&nbsp;校园动态</a>
+                          </h2>
+                          <div class="xydtfl" style="padding: 5px 0;">
+                                  <a href="{:U('Xwzhongxin/xydongtai_content',array('column_id'=>$xiaoyuandongtai_one['column_id'],'id'=>$xiaoyuandongtai_one['id']))}"><img src="__ROOT__{$xiaoyuandongtai_one['thumb']|substr=1}"  width=200/></a>
+                          </div>
+
+                          <div class="xydtRihgt">
+                                  <ul>
+                                    <volist name="xiaoyuandongtai" id="v">
+                                          <li>
+                                                <a href="{:U('Xwzhongxin/xydongtai_content',array('column_id'=>$v['column_id'],'id'=>$v['id']))}">{$v['title']}</a>
+                                                <span class="date">{$v['updatetime']|date="Y-m-d",###}</span>
+                                          </li>
+                                    </volist>
+                                       
+                                  </ul>
+                          </div>
+                  </div>                
+
+                  <div class="qsfz clearfix">
+                          <h2>
+                                  <a href="#" style="color: #f2a603;"><img src="__PUBLIC__/phone/images/index/icon_04.png">&nbsp;&nbsp;牵手发展</a>
+                          </h2>
+                          <ul class="pku">
+                                  <volist name="qianshoufazhan" id="v">
+                                  <li><a href="{:U('Chyanxun/qsfazhan_content',array('column_id'=>$v['column_id'],'id'=>$v['id']))}">{$v['title']}.....</a><span>[{$v['updatetime']|date="Y-m-d",###}]</span></li>
+                                  </volist>
+                          </ul>
+                          <div class="button">
+                                  <a href="{:U('Chyanxun/qsfazhan',array('column_id'=>$column_id))}" class="blue_btn btn">更多</a>
+                          </div>
+                  </div>
+        </div>
+
+
+        <div class="conR" id="conR">
+                    <div class="xyj">
+                              <h2>
+                                    <a href="{:U('Xxgaikuang/xyyijing')}" style="color: #f2a603;"><img src="__PUBLIC__/phone/images/index/icon_021.png">&nbsp;&nbsp;校园一景</a>
+                              </h2>
+                              <ul class="conright">
+                                      <volist name="xiaoyuanyijing" id="v">
+                                      <li>
+                                            <img src="__ROOT__{$v['thumb']|substr=1}" width="196"/><p>{$v['title']}</p>
+                                      </li>
+                                      </volist>
+                              </ul>
+                    </div>
+                    <div class="cond clearfix" style="padding-top: 20px;" id="cond">
+                           <a href="{:U('Ygfuwu/xzxinxiang')}"><img src="__PUBLIC__/phone/images/index/mail.png"/></a>
+                           <img src="__PUBLIC__/phone/images/index/maer.png" />
+                    </div>
+        </div>
+
+<!-- 教师风采开始 -->
+        <div class="fw_wap clearfix">
+                  <h2>
+                    <a href="#" style="color: #F2A603;"><img src="__PUBLIC__/phone/images/index/icon_05.png"/>&nbsp;&nbsp;教师风采</a>
+                  </h2>
+                  <div class="slideTxtBox2">
+                          <div class="bd">
+                                  <div id="leftMarquee" class="infoList">
+                                          <div class="bdr">
+                                                    <ul>
+                                                          <volist name="jiaoshifengcai" id="v">
+                                                          <li class="hceg"><img src="__ROOT__{$v['thumb']|substr=1}" width="210" height="156" /><span>{$v['title']}</span></li>
+                                                          
+                                                          </volist>
+                                                    </ul>
+                                          </div>
+                                          <script type="text/javascript">$("#leftMarquee").slide({mainCell:".bdr ul",effect:"leftMarquee",vis:5,interTime:40,autoPlay:true});</script>
+                                  </div>
+                          </div>
+                  </div>
+        </div>
+<!-- 教师风采结束        -->
+
+      </div>
+    <include file="Public:footer">
+    </div>
+    <div id=img1 style="    bottom: 20px;z-index: 100;left: 0px;width: 59px;position: absolute;top: 200px;height: 61px;visibility: visible;display: inline-block;position: fixed;">
+      <a href="{$ftp}" target="_blank"><img src="__PUBLIC__/phone/images/index/ftp.gif" width="109" height="88" border="0"></a>
+    </div>
+    <script type="text/javascript" src="__PUBLIC__/phone/js/js.js"></script>
+    <script type="text/javascript">$(".slideTxtBox2").slide();</script>
+  </body>
+</html>

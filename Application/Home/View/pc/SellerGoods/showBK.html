@@ -1,0 +1,112 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>添加分类</title>
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<script src="/Public/layer/layer.js"></script>
+ <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+
+<style>
+*{
+	padding: 0;
+	margin: 0;
+}
+ul{ }
+input{ outline: none;}
+.container_ul{padding: 20px 10px 20px 10px;}
+.container_ul>li:first-of-type{ margin-top: 10px;}
+ul li{ list-style:none; margin-bottom: 20px; font-family: "微软雅黑";}
+#childul{ padding: 15px 0px 15px 30px;}
+#childul>li{ color: #666; font-family: "微软雅黑";}
+#childul li span{ margin-left:5px;cursor:pointer;float:right; }
+#childul li span a{ background:#37A4A2;color:#FFFFFF;padding:4px 10px; border-radius: 5px; font-size: 14px; font-family: "微软雅黑";}
+a { text-decoration:none; }
+#childul li {margin-top:10px;}
+#add{ background:#37A4A2; color:#FFFFFF; padding: 4px 10px; border-radius: 5px; font-size: 14px; font-family: "微软雅黑";}
+</style>
+</head>
+<body >
+
+<div class="bodyer">
+	  <form action="{:U('Seller_goods/show')}" method="post">
+		  <ul class="container_ul">
+			  <li style="margin-left:18px;">
+			     上级分类：
+				 <select name="navselect"  width="100" id="testSelect">  				
+					<option value ="0">顶级分类</option> 					
+					
+					<volist name="treeData" id="vv"> 
+					  <option value ="{$vv.id}">{$vv.html}{$vv.name}</option>                     					  
+					</volist>
+				</select> 
+			  </li>
+			  <li style="margin-left:18px;">               
+			     <input type="text" name="catname" value="" >				 	
+			  </li>
+			  <li style="margin-left:18px;">
+                排序(按数字递增)：			  
+			     <input name="sort" type="text" value="" style="width:40px;"/>		    				 	
+			  </li>
+			  <li style="float:left;margin-left:18px;">               
+			     <a href="javascript:;" onclick="sumbform()" id="add"/>添加</a> 
+				 
+		
+			  </li>
+		  </ul>  
+	 </form>
+</div>
+<!-- 底部 -->
+
+<!-- 底部 -->    
+<script>
+
+$("input").focus(function(){
+	$(this).css("border","1px solid #37A3A3")
+})
+$("input").blur(function(){
+	$(this).css("border","1px solid #A9A9A9")
+}) 
+
+function sumbform(){
+  var cat = $('#testSelect option:selected').val();	
+ var catname = $('input[name="catname"]').val();
+var sort = $('input[name="sort"]').val(); 
+
+	if(cat && catname){
+		 $.post("{:U('Seller_goods/show')}",{'cat':cat,'catname':catname,'sort':sort},function(data){
+			if( data.msg=='ok'){
+				 alert('添加成功！');	
+				/*
+				   var index = parent.layer.getFrameIndex(window.name);
+				   parent.layer.close(index); //执行关闭                 
+                    window.location.reload();				 
+					
+					*/
+			}else if( data.msg=='notallow' ){
+			    alert('只允许添加二级分类！');
+			
+			}else if( data.msg=='onemore' ){
+			    alert('不能添加重复类名！');
+	
+			}else{  
+			  alert('添加失败！');
+			}
+		  });
+	
+	}else{
+	   alert('添加分类不能为空！');
+	}
+
+} 
+</script>
+</body>
+</html>
+
+    

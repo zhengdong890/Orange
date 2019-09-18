@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>新闻、公告、规则</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link href="{:C('STATIC_URL')}/Home/css/header.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/home.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/problem.css" type="text/css">
+<script src="/Public/js/jquery-2.0.3.min.js"></script>
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<style>
+.hide{display:none;}
+.menu{ display: none;}
+.problem .location{margin-bottom: 12px;}
+.problem .location a{ color: #688BCB;}
+.section,.section2{ position: relative; width:980px;float:left; margin-left:20px;background-color: #F8F8F8; padding: 20px 40px 40px 40px; box-sizing: border-box;}
+.section2{display: none;}
+.section>div:first-of-type{margin-bottom: 20px; border-bottom: 2px solid #A0D9D6;width: 100%;height: 40px;font-size: 22px;font-weight: bold;text-align: center;}
+.section>ul>li{font-weight: bold; height:40px; line-height: 40px;} 
+.section>ul>li a{ color: #666;cursor: pointer;}
+.section>ul>li a:hover{ color: #ff6600;}
+
+.section2>div:first-of-type p{margin-bottom: 20px;padding-bottom: 10px; border-bottom: 2px solid #A0D9D6;width: 100%;height: 40px;font-size: 22px;font-weight: bold;}
+.section2>div:first-of-type p span{ display: block; font-size: 14px;font-weight: normal;margin-top: 6px;}
+.section>ul>li a span:nth-of-type(2){ float: right;}
+.section .page_btn{ width: 92%;position: absolute; bottom: 44px;text-align: right;}
+.section .page_btn>ul{overflow: auto;display: inline-flex;}
+.section .page_btn>ul li{ float: left; width: 30px; height: 30px; line-height: 30px; text-align: center; border: 1px solid #DFDFDF;margin-right: 8px;}
+.section .page_btn>ul .active{background-color: #37A3A3; color: #fff;}
+.section .page_btn>div{display: inline-block;margin-left: 20px;}
+.section .page_btn>div span{ color: #37A3A3;}
+.section .page_btn>div input:first-of-type{width: 36px;height: 26px;border-radius: 4px;padding-left: 4px;margin: 0px 4px; border: 1px solid #dfdfdf;}
+.section .page_btn>div input:nth-of-type(2){font-family: "微软雅黑"; background-color: #37A3A3;border: 1px solid #37A3A3; color: #fff; width: 50px; height: 26px; border-radius: 4px;}
+.news-nav{width: 198px;float: left;}
+.news-nav ul{ background-color: #EBE9EA;}
+.news-nav ul li{text-align: center;font-weight: bold; height: 40px; line-height: 40px; cursor: pointer;} 
+.news-nav ul .active{background-color: #37A3A3; color: #fff;}
+.Pagination a:hover,.Pagination .current{background-color: #37A3A3;color: #ffffff; }
+.Pagination{position: relative;z-index: 100; float: right;height: auto;_height: 45px; line-height: 20px;margin-right: 240px;_margin-right: 10px; color:#565656;margin-top: -15px;_margin-top: 20px; clear:both;}
+.Pagination a,.Pagination span{ font-size: 12px;text-decoration: none;display: block;float: left;color: #565656;border: 1px solid #ccc;padding:2px 17px;line-height: 34px;margin: 0 2px;text-align: center;}
+</style>
+</head>
+<body>
+<include file="Public:header_top" />
+<include file="Public:header_search" />
+<include file="Public:mallNav" />
+<div class="problem clearfix">
+	<div class="location">当前位置：<a href="{:U('Index/index')}">首页</a> > <a href="">新闻</a> </div>
+    <div class="news-nav">   	
+        <ul>
+        	<a href="{:U('News/index')}"><li class="active">新闻</li></a>
+        	<a href="{:U('News/index2')}"><li>公告</li></a>
+        	<a href="{:U('News/index3')}"><li>规则</li></a>
+        </ul>       
+    </div>
+    <!--新闻-->
+    <div class="section">
+        <div>
+        	<p>新闻</p>
+        </div>
+        <ul>
+        <foreach name="news" item="vo">
+        	<li><a href="{:U('News/news_info')}&id={$vo.id}"><span>•</span>{$vo.title}<span>{$vo.update_time|date="Y-m-d H:i:s",###}</span></a></li>
+        </foreach>
+        </ul>
+        <!--分页-->
+        <br/><br/>
+      <div class="Pagination">
+        {$page} 
+        </div> 
+        <div class="page_btn">
+            
+            <div>共<span> {$num} </span>页</div>
+            <div class="skip"><form action="{:U(News/index)}" method="post">到第<input type="text" name="num">页
+            <input type="submit" value="确定" style="cursor: pointer;" /></form></div>
+        </div>
+    </div>
+
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- /底部 -->    
+<script>
+    
+var order = (function(){  
+	
+    var obj;
+    function getOrderData(num){  		    		
+        var wraper = $(".section .section-bt"),
+            _this  = this,
+            url    = "http://www.orangesha.com/index.php/Home/News/getNewsList";//请求地址
+        /*ajax分页*/
+        obj = ajaxPage({
+            wraper:wraper,  
+            parameter:parameter[num],//附加参数
+            listRows:10,//每页显示条数
+            rollPage:5,//最多显示多少页码
+            url:url,//ajax请求地址
+            cache:true,//是否开启缓存
+            //回调函数
+            callback:function(data,page,page_data){ 
+                showPage(page_data);
+                showHtml(data);          
+            }
+        });    		
+    }
+    //只有一页隐藏跳转
+    if({$num}==1){
+    	$(".skip").css("display","none")
+    }
+
+    /**
+     *显示分页
+     */
+    function showPage(data){
+        var html = ["<div class='turn-page'>"];
+        if(data['prev']){
+    	    html.push("<div class='left-btn change' data-p='"+ data['prev'] +"'></div>");
+        }else{
+        	html.push("<div class='left-btn'></div>");
+        }
+    	for(var k in data['page']){
+			if(data['page'][k] == '.'){
+				html.push("<div class='omit'>...</div>");                  
+			}else
+			if(data['page'][k] != data['nowPage']){
+				html.push("<div class='page-btn change' data-p='"+ data['page'][k] +"'>" + data['page'][k] + "</div>");
+			}else{
+				html.push("<div class='page-btn active'>" + data['page'][k] + "</div>");
+			}                          
+    	}
+    	if(data['next']){
+    	    html.push("<div class='right-btn change' data-p='"+ data['next'] +"'></div>");
+    	}else{
+            html.push("<div class='right-btn'></div>");
+    	}
+    	
+    	html.push("</div>");
+    	html.push("<p class='to-page'>跳至");
+    	html.push("   <input class='go_number' type='text' value='1'>页<input type='button' value='跳转' class='go'>");
+    	html.push("</p>");
+    	html = html.join('');
+    	$(".section .section-bt").html(html);
+    } 
+
+    function showHtml(data){
+    	var order_data = data[1],
+    	    order = data[0],
+    	    html =[];
+    	for(var k in order_data){
+    		var html_model_1_ = html_model_1.replace(/%ORDER_SN%/,order[k]['order_sn']).replace(/%TIME%/,order[k]['time']);
+    		html.push(html_model_1_);   
+    		var number = 1; 	
+    		for(var k1 in order_data[k]){
+			    html.push("  <li><a><span>•</span> 1 <span>2017-04-05 16:08</span></a></li>");			    
+			    number++;
+    		}                     
+            html.push('</div>');
+    	}
+    	html = html.join('');
+        $(".section>ul").html(html);      
+    }
+
+    return {
+        getInitData : function(num){
+           getOrderData(num); 
+        }
+    }
+})();
+    
+    /*function getNews(){
+    	var data = {firstRow : '10',listRows : '10'}
+    	$.post("http://www.orangesha.com/index.php/Home/News/getNewsList",data,function(res){
+			console.log(res)
+	    })
+    }
+    getNews()	*/
+    
+</script>
+</body>
+</html>
+

@@ -1,0 +1,417 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>集成项目</title>	
+<meta name="keywords" content="{$seo['keywords']}">
+<meta name="description" content="{$seo['description']}"">
+<meta name="copyright" content="深圳市橙橙网络科技有限公司(www.orangesha.com)版权所有">
+<meta name="author" content="橙橙分享"> 
+<title>{$seo['title']}</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/Orange/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+ <link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery.omniwindow.js"></script> 
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<script src="{:C('STATIC_URL')}/layer/layer.js"></script> 
+<link href="{:C('STATIC_URL')}/Home/Financing/css/tender2.css" rel="stylesheet" >
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/Orange/css/home.css" type="text/css">
+<style>
+.section-bt{width:100%;height:auto;float:left;margin-top:20px}
+.section-bt .btns{line-height: 42px;}
+.section-bt .btns p,.section-bt .btns label,.section-bt .btns label input{display: inline-block;}
+.section-bt .btns label p{padding-left: 10px;}
+.section-bt .btns .btn{margin-left: 32px;border:1px #d5d5d5 solid;padding:0 10px;border-radius: 5px;cursor: pointer;}
+.section-bt .turn-page{width:auto;height:auto;float:left;margin-left:34%;}
+.section-bt .turn-page .omit{border:none;}
+.section-bt .turn-page .omit:hover{border:none;background-color: transparent;color:#d5d5d5;}
+.section-bt .turn-page div,.section-bt .to-page input{width: 32px;height:32px;border:1px #d5d5d5 solid;display: inline-block;margin-left: 12px;
+    cursor: pointer;vertical-align: top;line-height: 32px;text-align: center;}
+.section-bt .turn-page .active{background-color: #5FAEBF;color:#fff;}
+.section-bt .turn-page>div:hover{border-color: #ff8448;}
+.section-bt .turn-page .right-btn,.section-bt .turn-page .left-btn{ width:70px;}
+.section-bt .to-page{width:auto;float:right;}
+.section-bt .to-page input{margin:0 7px;vertical-align: middle;}
+.section-bt .to-page input[type="button"]{background-color: #fff;width: 54px;}
+
+.ow-overlay {position: fixed;z-index: 10;top: 0;left: 0;height: 100%;width: 100%;background: #424242;opacity: 0.8;}
+.ow-closed {display: none;}
+.modal {overflow: auto; position: fixed;z-index: 20;height: 50%;left: 50%;top: 100px;width: 50%;background-color: #fff}
+.ow-overlay {position: fixed;z-index: 10;top: 0;left: 0;height: 100%;width: 100%;background: #424242;opacity: 0.8;}
+.ow-closed {display: none;}
+.modal{overflow: auto; position: fixed;z-index: 20;height: 86%;left: 50%; top: 60px;width: 76%;background-color: #fff;}
+.modal>div{ position: fixed; top:60px; box-sizing: border-box; width: 76%; background-color: #eee; height: 40px; line-height: 40px;padding:0px 20px; font-size: 16px; font-family: "微软雅黑";}
+.modal>div>span{ float: right;color: #666;cursor: pointer;}
+.modal table{ width: 60%; margin: 54px auto;}.modal textarea{ width:100%; outline: none;height:130px; }
+.modal table tr{ height: 40px;} .long_input{ width:100%}
+#test li>a{ cursor:pointer;}
+.td_title{ width: 20%;} .td_input{ width: 80%;}.project_name{ width: 100%;}
+.star{ color: #FF6600;}.checkbox{ cursor: pointer; vertical-align: middle;}
+.get-img{text-align: center; display: inline-block;border:1px solid #999; width: 82px;height: 82px;position: relative;background: url(../images/add-img_03.jpg) no-repeat;background-size: 100%;cursor: pointer;}
+.file-img{display: none;}
+#issub{width:100px;height:45px;font-family:"微软雅黑";font-size: 18px; cursor:pointer;border-radius:5px;background:#7194A8;color:#FFFFFF;margin-top: 25px;}
+#issub:hover{ background: #678494;}
+</style>
+</head>
+<body >
+<!-- 头部 -->
+<include file="Public:header_top" />
+<div class="n-bCol3 bg">
+    <div class="header mar1200c posRel">
+        <div class="header-right fRi">
+        	<ul style="list-style:none;margin:6px 0px 0px 30px; width: 290px; height: 60px; background: url({:C('STATIC_URL')}/images/images/header-right_03.jpg) no-repeat;" >       
+                <a href="javascript:void(0);" onclick="Openwindow()"><li style="margin-left: -6px; float:left; height: 60px; line-height: 100px;">免费申请</li></a>
+                <a><li style="float:left;margin-left:71px; height: 60px; line-height: 100px;">填写材料</li></a>
+                <a><li style="float:left;margin-left:75px; height: 60px; line-height: 100px;">提交成功</li></a>        
+            </ul>
+        </div>     
+        <a class="logo" href="{:U('Index/index')}"></a>
+        <div class="clear"></div>
+    </div>
+</div>
+<!-- /头部 -->
+<div class="body">
+    <div class="nav">
+        <ul>
+            <li class="active"><a href="{:U('Integration/index')}">首页</a></li>
+            <li><a href="{:U('Integration/projectRules')}">集成项目规则</a></li>
+            <li><a href="{:U('Integration/tenancy')}">集成商库</a></li>
+        </ul>
+    </div>    
+    <div class="banner" style="background:url('__ROOT__{$thumb|substr=1}'); background-repeat:no-repeat;"> 
+    </div>
+    <div class="list max-width">
+        <div class="left">
+            <div class="title">
+                <span class="icon"></span>
+                <span class="bold">进行中项目</span>  /  ONGOING PROJECTS
+            </div>     
+            <ul id="test">
+                <volist name="list" id="vo">
+                <li>
+                	<a>
+	                    <div class="list-title">
+	                        <span class="icon"></span>
+	                        {$vo.modelnum} {$vo.title}
+	                    </div>
+	                    <div class="content">项目概况：{$vo.content}</div>
+	                    <div class="releaseSite">{$vo.area}</div>
+	                    <div class="date">{$vo.update_time}</div>
+                    </a>
+                </li>
+                </volist>
+                <div class="clear" style="clear:both;"></div>
+            </ul>
+            <div class="section-bt">{$html}</div>
+        </div>      
+    </div>
+        <div class="max-width h-title">
+            <!-- <div class="h-title-top"><span class="icon"></span><i></i>Process</div> -->
+            <div class="h-title-bottom">合作流程</div>
+        </div>
+        <div class="max-width hzlc">
+            <ul>
+                <li>
+                    <div class="hzlc-icon">1</div>
+                    <div class="hzlc-text">
+                        <div class="hzlc-right-title">制定项目</div>
+                        <div class="hzlc-right-english">DEVELOP PROJECT</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="hzlc-icon">2</div>
+                    <div class="hzlc-text">
+                        <div class="hzlc-right-title">选择机型</div>
+                        <div class="hzlc-right-english">SELECTION MODEL</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="hzlc-icon">3</div>
+                    <div class="hzlc-text">
+                        <div class="hzlc-right-title">提交项目</div>
+                        <div class="hzlc-right-english">SUBMIT PROJECT</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="hzlc-icon">4</div>
+                    <div class="hzlc-text">
+                        <div class="hzlc-right-title">招标签约</div>
+                        <div class="hzlc-right-english">SELECTION SCHEME</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="ow-overlay ow-closed"></div> 
+                                <div class="modal ow-closed">
+                                	<div>项目详情 <span class="csc">X</span></div>
+                                	<form id="formGroupbuy">
+										<table>
+											<tr>
+											   <td class="td_title">项目命名：</td>
+											   <td><input  class="long_input" type="text" name="project_name" readOnly="true" ></td>
+											</tr>
+											<tr>
+											   <td class="td_title">客户名称：</td>
+											   <td><input class="long_input" type="text" name="customer_name" readOnly="true"></td>
+											</tr>
+											<tr>
+											   <td class="td_title">项目地址：</td>
+											   <td><input class="long_input" type="text" name="project_address" readOnly="true"></td>
+											</tr>
+											<tr>
+											   <td class="td_title">联系人：</td>
+											   <td><input type="text" class="contacts" name="contact" readOnly="true">&nbsp;&nbsp;&nbsp;<span class="td_title">联系电话：</span> <input value="{$vo.phone}" type="text" class="contacts_phone" name="phone_number" readOnly="true"></td>
+											</tr>
+											<tr>
+											   <td class="td_title">职位：</td>
+											   <td><input type="text" class="contacts" name="Job" readOnly="true">&nbsp;&nbsp;&nbsp;<span class="td_title">项目时间：</span> <input type="text" value="{$vo.project_time}" class="contacts" name="projectTime" readOnly="true"></td>
+											</tr>
+											<tr>
+											   <td class="td_title">指定品牌：</td>
+											   <td>
+											   	<input type="text" class="contacts" name="brand" readOnly="true">&nbsp;&nbsp;
+											    <span class="td_title">机器人使用经验：</span>
+											    <select name="isUse" disabled="disabled">
+											      <option>有</option>
+											      <option>无</option>
+											    </select>
+											   </td>
+											</tr>
+											<tr>
+												<td class="td_title">企业产值：</td>
+												<td><input type="text" class="project_sum" name="enterpriseValue" readOnly="true"> 万元人民币/年</td>
+											</tr>
+											<tr>
+												<td class="td_title">计划改造投入预算：</td>
+												<td><input type="text" class="project_sum" name="budget" readOnly="true"> 万元人民币</td>
+											</tr>
+											<tr>
+											   <td class="td_title">项目类型：</td>
+											   <td><input type="checkbox" value="1" name="Type" class="checkbox" disabled="disabled"> 弧焊 <input type="checkbox" value="2" name="Type" class="checkbox" disabled="disabled"> 切割分离 <input type="checkbox" value="3" name="Type" class="checkbox" disabled="disabled"> 上下料 <input type="checkbox" value="4" disabled="disabled" name="Type" class="checkbox"> 搬运</td>
+											</tr>
+											<tr>
+											   <td class="td_title"><span style="font-size: 14px;">产品描述：</span></td>
+											   <td><textarea  name="desc" readOnly="true"></textarea></td>
+											</tr>
+											<tr>
+											   <td class="td_title">金融服务：</td>
+											   <td><input type="radio" name="buy_style" id="buy_style1" class="checkbox" disabled="disabled"> 分期付款 <input type="radio" id="buy_style2" name="buy_style" class="checkbox" disabled="disabled"> 融资租赁 <input type="radio" id="buy_style3" name="buy_style" class="checkbox" disabled="disabled"> 直接购买</td>
+											</tr>	    
+										    <tr>
+											   <td class="td_title"><span style="font-size: 14px;">项目描述：</span></td>
+											   <td><textarea name="projectDescription" readOnly="true"></textarea></td>
+											</tr>
+										</table>			
+									</form>
+                                </div>
+        <div class="Company max-width">
+            <div class="max-width h-title">
+                    <!-- <div class="h-title-top"><span class="icon"></span><i></i>Company</div> -->
+                    <div class="h-title-bottom">集成项目公司<a href="{:U('Integration/tenancy')}" class="more"> 了解更多+</a></div>
+
+            </div>
+            <ul class="lease">
+			<volist  name="img" id="vos">
+                <li class="lease-1"><a href="{$vos.url}" target="_blank"><img src="{$vos.tj_thumb}" /></a></li>
+            </volist>    
+            </ul>
+            <div class="winning">
+                <div class="winning-title">中标项目</div>
+               <div class="text-slider">
+                   <ul class="text-slider-wrap">
+				     <volist name="select" id="v">
+                       <li>
+                           <div class="winning-list-title"><span style="display: inline-block; width: 75%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{$v.title}</span> <span style="float: right; margin-right: 12px;display: inline-block; width: 18%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;text-align: right;">{$v.area}</span></div>
+                           <div class="winning-list-unit">项目概况：{$v.desc}</div>
+                           <div class="winning-list-date">{$v.update_time|substr=0,10}</div>
+                       </li>
+                     </volist>  
+                    </ul>
+               </div>
+            </div>
+           <!--  <ul class="icon">
+                <li class="icon-1"></li>
+                <li class="icon-2"></li>
+                <li class="icon-3"></li>
+                <li class="icon-4"></li>
+                <li class="icon-5"></li>
+                <li class="icon-6"></li>
+                <li class="icon-7"></li>
+                <li class="icon-8"></li>
+                <li class="icon-9"></li>
+                <li class="icon-10"></li>
+                <li class="icon-11"></li>
+                <li class="icon-12"></li>
+                <li class="icon-13"></li>
+                <li class="icon-14"></li>
+                <li class="icon-15"></li>
+                <li class="icon-16"></li>
+                <li class="icon-17"></li>
+                <li class="icon-18"></li>
+                <li class="icon-19"></li>
+                <li class="icon-20"></li>
+                <li class="icon-21"></li>
+                <li class="icon-22"></li>
+                <li class="icon-23"></li>
+                <li class="icon-24"></li>
+            </ul> -->
+        </div>
+    </div>
+    <div class="clear" style="clear:both;"></div>
+   <script type="text/javascript">    
+   	
+   	var list = {$list_json};
+   	
+   	//项目详情
+	$("#test li").click(function(){		
+		$(".ow-overlay").css("display","block");
+		$(".modal").css("display","block");
+		$('.modal').omniWindow() // create modal
+	    .trigger('show'); // and show it
+	    var i = $(this).index()
+	    $("#formGroupbuy")[0].reset();
+	    $("input[name='project_name']").val(list[i].title); 
+	    $("input[name='customer_name']").val(list[i].kh_name);
+	    $("input[name='project_address']").val(list[i].area);
+	    $("input[name='contact']").val(list[i].contact_people);
+	    $("input[name='Job']").val(list[i].job);
+	    $("input[name='brand']").val(list[i].brand_name);
+	    $("input[name='enterpriseValue']").val(list[i].chanzhi);
+	    $("input[name='budget']").val(list[i].yusuan);
+	    $("textarea[name='desc']").html(list[i].des);
+	    $("textarea[name='projectDescription']").html(list[i].content);
+    	if(list[i].is_use==0){
+    		$("select[name='isUse']").val("无")
+    	}
+    	if(list[i].is_use==1){
+    		$("select[name='isUse']").val("有")
+    	}
+    	
+	    if(list[i].jinrong==1){
+	    	$("#buy_style1").attr("checked","true")
+	    }
+	    if(list[i].jinrong==2){
+	    	$("#buy_style2").attr("checked","true")
+	    }
+	    if(list[i].jinrong==3){
+	    	$("#buy_style3").attr("checked","true")
+	    }
+		//项目类型
+	    var s = document.getElementsByName("Type");
+		for( var t = 0; t < s.length; t++ ){
+		    var str=list[i].type;		    
+		    strArray=str.split(","); 
+			 for(var j = 0; j < strArray.length; j++ ){
+			  if(s[t].value==strArray[j]){
+			    s[t].checked=true;			   
+			  }
+			}
+		}	
+	  
+	})
+
+	
+	//关闭模态框
+	$(".modal>div>span").click(function(){
+		$(".ow-overlay").css("display","none");
+		$(".modal").css("display","none");	
+		$("input[name='type']").removeAttr("checked");
+		$("input[name='type']").attr("checked",false);
+	})
+
+   	
+    window.onload=function () {
+        /*融资租赁轮播*/
+        function scroll(){
+            $(".text-slider-wrap").animate({"margin-top":"-96px"},800,function(){
+                $(".text-slider-wrap li:eq(0)").appendTo($(".text-slider-wrap"));
+                $(".text-slider-wrap").css({"margin-top":0})
+            })
+        }
+        setInterval(scroll,3000);
+    }
+  
+    	 function test(id){    //user函数名 一定要和action中的第三个参数一致上面有
+        var id = id;
+       // alert(id);
+        $.get('{:U('Integration/test')}', {'p':id}, function(data){  //用get方法发送信息到test方法
+           //var info= eval('('+data+')') ;//将返回的json数据转换成js对象\
+           var data=JSON.parse(data);
+           //console.log(data.result[0].cpname);
+       
+            var s='';
+                s+='<ul id="test">';
+                for (var i = 0; i < data['result'].length; i++) {
+	                 s += '<li><div class="list-title"><span class="icon"></span><a href="{:U('Integration/tenancy')}">'+data['result'][i].modelnum+data['result'][i].title+'</div>';
+	                 s += '<div class="content">项目需求：'+data['result'][i].content+'...</div>';
+	                 s += '<div class="date">'+data['result'][i].create_time;
+	                 s += '</div></li>';
+                }
+                   s += '<div class="clear" style="clear:both;"></div>';         
+                //
+                s+='</ul>';
+                pg=' <div class="pages-btn" id="pg">'+data['pg']+'</div>';
+ 
+                $('#test').html(s);
+                $('#pg').html(pg);
+              
+        });
+     
+    }
+    function Openwindow(){
+	
+		layer.open({
+		  type: 2,
+		  title: '项目需求',
+		  maxmin: true,
+		  shadeClose: true, //点击遮罩关闭层
+		  area : ['76%' , '86%'],
+		  content: '{:U('Server/request2')}'
+		 });
+	}
+var paramer_arr = GetRequest();
+    PATH_NAME   = window.location.pathname;
+paramer_arr['p'] = 1;
+
+function getUrl(paramer_arr){
+    var paramer = '';
+    for(var k in paramer_arr){
+        paramer+='&'+ k + '=' + paramer_arr[k];
+    }
+    paramer = paramer.substring(1);
+    return PATH_NAME + '?' + paramer;
+}
+
+function GetRequest() {   
+   var url = location.search; //获取url中"?"符后的字串   
+   var theRequest = new Object();   
+   if (url.indexOf("?") != -1) {   
+      var str = url.substr(1);   
+      strs = str.split("&");   
+      for(var i = 0; i < strs.length; i ++) {   
+         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);   
+      }   
+   }   
+   return theRequest;   
+}  
+  
+$(".go").click(function(){
+	var val = $(".go_number").val();
+	paramer_arr['p'] = parseInt(val) > 0 ? parseInt(val) : 1;
+	window.location.href = getUrl( paramer_arr);
+})
+    
+</script>
+<!-- 头部 -->
+	<include file="Public:footer" />
+	<!-- /头部 -->
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+首页 地址 http://www.orangesha.com 模板文件位置 orange/Application/Home/View/pc/Index/index.html
+
+--- 登录页面
+        访问地址     http://www.orangesha.com/login.html
+        模板文件位置 orange/Application/Home/View/pc/Member/login.html    
+--- 注册页面
+        访问地址     http://www.orangesha.com/register.html
+        模板文件位置 orange/Application/Home/View/pc/Member/register.html  
+        
+--- 个人中心
+        访问地址     http://www.orangesha.com/member.html
+        模板文件位置 orange/Application/Home/View/pc/Member/member.html           
+    --- 企业认证
+            访问地址     http://www.orangesha.com/qyrz.html
+            模板文件位置 orange/Application/Home/View/pc/MemberCenter/businessQualification.html
+    --- 账号安全
+            访问地址     http://www.orangesha.com/zhaq.html
+            模板文件位置 orange/Application/Home/View/pc/MemberCenter/accountSafety.html           
+--- 我的商城 
+    --- 物流工具
+            访问地址     http://www.orangesha.com/wuliu.html?title=1
+            模板文件位置 orange/Application/Home/View/pc/ShippingTemplet/logisticsTool.html
+    --- 商品中心
+            访问地址     http://www.orangesha.com/wuliu.html?title=1
+            模板文件位置 orange/Application/Home/View/pc/SellerGoods/logisticsTool.html
+

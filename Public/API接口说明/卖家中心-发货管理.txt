@@ -1,0 +1,68 @@
+订单状态值
+status      : 订单状态 0未审核 1已审核 2已完成 -1已取消
+send_status : 发货状态 0未发货 1已经发货
+pay_status  : 付款状态 0未付款 1已经付款
+is_comment  : 是否评价 0未评价 1已经评价
+
+service_status : 订单详情商品 售后状态
+0 暂无售后
+-11 商家不同意退款     11 申请退款     12 商家同意申请退款 13 已退款  
+-21 商家不同意换货     21 申请换货     22 商家同意申请换货 23 商家已重新发货  
+-31 商家不同意退款退货 31 申请退货退款 32 商家同意退款退货 33 已退款    
+
+status 1 pay_status 0 已审核 未付款
+status 1 pay_status 1 send_status 0 已审核 已付款 未发货
+status 1 pay_status 1 send_status 1 已审核 已付款 已发货
+status 1 pay_status 1 send_status 2 is_comment 0 已审核 已付款 已收货 未评价
+status 1 pay_status 1 send_status 2 is_comment 1 已审核 已付款 已收货 已评价  
+
+订单列表
+请求地址 http://www.orangesha.com/SellerOrder/getOrderData?type=
+type的值有
+getThreeMonthOrder //近3个月订单数据        
+getWaitPayOrder //等待付款        
+getWaitSendOrder //等待发货        
+getSendOrder  //已经发货           
+getWaitCommentOrder    //等待评论   
+getSuccessOrder  //交易成功        
+getCloseOrder     //关闭的订单       
+getThreeMonthBeforeOrder //三个月之前的订单的订单
+              
+请求json参数 : {
+    'firstRow'    : ,//从第	几条数据开始获取
+    'listRows'    : ,// 需要获取的数据条数
+}
+
+返回 {
+status : 0或者1 ,
+msg : '' ,
+totalRows : 数据总记录数,
+data{
+	[
+	    {
+            id          : 订单详情id, 
+            goods_id    : 商品id, 
+            number      : 购买数量, 
+            goods_price : 商品价格, 
+            goods_name  : 商品名字,
+            goods_thumb : 商品图片,
+            is_comment  : 是否评价,
+            member_id   : 购买会员id,
+            order_id    : 订单id,
+            pay_status  : 是否付款,
+            seller_id   : 卖家id,
+            send_status : 是否发货,
+            service_status : 售后状态,
+            status      : 订单状态,
+            total_price : 总价,
+	    }	
+	]...........
+}
+
+发货页面数据格式
+地址 : http://www.orangesha.com/SellerOrder/SendGoods
+订单id {$order[0]['id']}
+
+批量发货页面数据格式
+地址 : http://www.orangesha.com/SellerOrder/SendAllGoods
+订单id {$order[0]['id']}

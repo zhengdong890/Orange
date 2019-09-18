@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>收银台</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/orders.css" rel="stylesheet">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<style>
+.pay_success{width: 500px; margin: 0 auto; padding: 120px;background: url("__PUBLIC__/Home/image/error.png") no-repeat 20px 120px;}
+.pay_success>p{font-size: 30px;}
+.pay_success>div{font-size: 14px;margin-top: 10px; border-top: 1px dotted #959595;padding: 10px 0; border-bottom: 1px dotted #959595;width: 100%;}
+.pay_success>div a{font-size: 14px;color: #36A3A3;}
+.check_orderInfo{text-align: center; margin-top: 14px; font-size: 14px;line-height: 30px; display: block; width: 150px; height: 30px; color: #fff; background-color: #ff6600; border-radius: 6px;}
+</style>
+</head>
+<body >
+<include file="Public:header_top" />	
+	<!-- 主体 -->
+    <div class="body">
+    	<div class="pay_top">
+    		<div class="e_logo">
+	    		<span>收银台</span>
+	    	</div>
+	        <div class="points">
+	            <div class="shopping-cart2"></div>
+	            <div class="text">购物车<i class="i1"></i>确认订单<i class="i2"></i>支付<i class="i3"></i>完成</div>
+	        </div>
+    	</div>
+    	<div class="pay_success">
+    		<p>支付错误！</p>
+    		<div>
+    			该商户还在测试开店期，暂未开通在线支付，采购请直接联系店家
+    		</div>
+    		<a href="javascript:;" class="check_orderInfo">查看订单详情</a>
+    	</div>
+    </div>
+    </body>
+<script type="text/javascript">
+
+</script>
+<!-- /主体 -->
+<include file="Public:footer" />
+</body>
+</html>

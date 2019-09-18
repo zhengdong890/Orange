@@ -1,0 +1,283 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* inline-block 兼容 */
+.jCover-top .home-sign, .fn-sign {
+	display:inline-block;
+	zoom:1;
+	*display:inline;
+}
+/* end */
+
+/* 颜色带:hover */
+.mar1200c {
+	margin:0 auto;
+	width:1200px;
+}
+.bCol1 {
+	background:#37a4a2;
+}
+.bCol1:hover {
+	background:#298886;
+}
+.cCol1 {
+	color:#37a4a2;
+}
+.cCol1:hover {
+	color:#298886;
+}
+.cCol2 {
+	color:#666666;
+}
+.cCol2:hover {
+	color:#ff6600;    /*color:#e25d04;*/
+}
+.cCol1-h:hover {
+	color:#ff6600;
+}
+/* 颜色带 不带:hover */
+.n-bCol1 {
+	background:#37a4a2;
+}
+.n-bCol2 {
+	background:#f5f5f5;
+}
+.n-bCol3 {
+	background:#fff;
+}
+.f-cCol1 {
+	color:#404040;
+}
+/* *** */
+em.cCol1,
+.cover-top-f .col1 {
+	color:#ff6600;
+}
+
+/* header-top */
+
+.cover-top {  
+	background:#f0f0f0;
+}
+.jCover-top { 
+	height:36px;   
+}
+.jCover-top .home-sign {
+	padding-left:22px;
+	background:url(../img/home_15x13.png) no-repeat left center;
+}
+.cover-top-body{
+	line-height:36px;
+}
+.cover-top-f span,
+.cover-top-f a {
+	font-size:12px;
+}
+.cover-top-f span,
+.home-sign,
+.cover-top-list li,
+.cover-top-list li a,
+.cover-top-list li span {
+	color:#8b8b8b;
+}
+
+.cover-top .wel-lp {
+	padding-left:20px;
+}
+.cover-top .wel-rp {
+	padding-right:20px;
+}
+.cover-top-list li {
+	float:left;
+	margin-left:9px;
+}
+.cover-top-list .phone-sign {
+	padding-left:18px;
+	background:url("../img/p-sign_13x13.png") no-repeat left center;
+}
+/* header */
+.header {
+	padding:14px 0 15px 0;
+}
+.header .logo {
+	display:block;
+	width:150px;
+	height:53px;
+	background:url(../img/logo.png) no-repeat;
+}
+.header-wrap .logo{
+	width:100px;
+	height:34px;
+	background:url(../img/logo_100x34.png) no-repeat;
+}
+
+/* padding + img */
+.padd-sign-38 {
+	padding-left:38px;
+}
+
+/* sign */
+.padd-sign-person01 {
+	background:url(../img/person-sign_27x29.jpg) no-repeat;
+}
+.login-phone,
+.input-phone {
+	background:url(../img/phone-sign_13x21.jpg) no-repeat;
+}
+.login-lock, 
+.input-lock {
+	background:url(../img/lock_13x17.jpg) no-repeat;
+}
+
+.login-right-r1 {
+	background-position:261px center;
+}
+.input-right-r229 {
+	background-position:229px center;
+}
+/* *** */
+.link a.col1 {
+	color:#37a4a2;
+}
+.link a.col1:hover {
+	color:#ff6501;
+}
+
+/* 输入检测 */
+.check {
+	position:absolute;
+}
+
+/* user-input */
+.user-input .txt01, 
+.user-input .butt01-a {
+	border:1px solid #cccccc;
+	color:#666666;
+	height:33px;
+	line-height:33px;
+	padding:0 33px 0 15px;
+}
+
+.user-input .butt01-a {
+	padding:0;
+}
+.txt01.txt-style-1 {
+	width:202px;
+}
+.txt01.txt-style-2 {
+	width:60px;	
+}
+.txt01.txt-style-3 {
+	width:32px;	
+}
+.txt01.txt-style-4 {
+	width:272px;	
+}
+.txt01.txt-style-5 {
+	width:88px;	
+}
+/* 按钮 */
+.butt01-a.butt-a-1 {
+	border:1px solid #b0dbda;
+	width:124px;
+	height:35px;
+	text-align:center;
+	line-height:28px;
+	color:#36a5a3;
+	background:#fff;
+	cursor:pointer;
+}
+.butt01-a.butt-a-1:hover {
+	border:1px solid #36a5a3;	
+	color:#fff;
+	background:#36a5a3;
+}
+.butt01-a.butt-a-1.wait-butt-verify{
+	background:#d3d3d3;
+	border:1px solid #b5b5b5;
+	color:#8b8b8b;
+}
+.butt01-a.butt-a-1.reset-butt-verify{
+	background:#ff6600;
+	border:1px solid #ff6600;
+	color:#fff;
+}
+.butt01-a.butt-a-1.reset-butt-verify:hover{
+	background:#e75c00;
+	border:1px solid #e75c00;
+	color:#fff;
+}
+.user-input .in-butt {
+	width:100%;
+	height:40px;
+	border:1px solid #2e9694;
+	background:#37a4a2;	
+	cursor:pointer;	
+	color:#fff;
+	font-size:16px;
+	
+}
+.user-input .in-butt:hover {
+	border-color:#298886;
+	background:#298886;	
+}
+
+/*小图标*/
+
+.fn-sign {
+	vertical-align:middle;
+}
+.fn-sign i {
+	display:block;
+}
+.fn-sign .correct-i {
+	height:33px;
+	width:15px;
+	background:url(../img/correct_15x15.png) no-repeat left center;
+}
+.fn-sign.fn-errer {
+	padding:0 12px;
+	height:33px;
+	border:1px solid #ffa79e;
+	background:#f8decc;
+	color:#404040;
+	line-height:33px;
+}
+
+.fn-sign .errer-i {
+	width:16px;
+	height:33px;
+	background:url(../img/errer_16x16.png) no-repeat left center;
+}
+
+/* 文字 */
+.f-16-c1 {
+	font-size:16px;
+	color:#333333;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="description" content="" />
+<style>
+html{font-size:62.5%}
+*{font-size:16px;font-family:Arial,Microsoft YaHei,\\9ED1\4F53,\\5B8B\4F53,sans-serif}
+*,li,ul{padding:0;margin:0}
+li,ul{list-style:none}
+a,a:hover{text-decoration:none}
+a:hover{border:0}
+button,input,select,textarea{outline:none}
+textarea{resize:none}
+
+#container{width:98%;margin-left:1%}
+#container,#container #main{height:auto;float:left;padding-bottom:10px}
+#container #main{width:100%;border:1px solid #d7d7d7;margin-top:5px}
+
+#Crumbs{width:100%;height:40px;border:1px solid #d7d7d7;line-height:40px;margin-top:5px;float:left}
+#Crumbs a{padding-left:10px}
+#Crumbs .btn{width:auto;padding:0 5px;height:30px;float:right;display:block;background:red;line-height:30px;color:#fff;border-radius:5px;font-size:14px;margin-right:20px;margin-top:5px}
+
+.tableList{margin:0 auto;width:100%}
+.tableList td span{float:right}
+.tableList tr{background:#fff}
+.tableList tr:hover{background:#f1fcea}
+.tableList tr:first-child{background:#f4f5f9}
+.tableList tr td,th{border-left:1px solid #e7e9f3;border-bottom:1px solid #e7e9f3;font-size:20px;padding:10px;font-size:14px}
+.tableList tr .td{border-left:0}
+.tableList tr .table_td{text-align:center}
+.tableList tr .table_btn{background:#fff;border:0}
+.tableList input{width:30px;height:24px;border-radius:3px;border-bottom:1px solid #e3e9ef;border-top:1px solid #abadb3;border-left:1px solid #e2e3ea;border-right:1px solid #dbdfe6;text-align:center}
+.tableList td img{max-width:40px;max-height:40px}
+.tableList td,th{padding-right:30px;padding-top:10px}
+.tableList .table_handle{width:auto;text-align:center}
+.tableList .table_handle div{width:50px;height:21px;margin:0 auto}
+.tableList .table_handle div a{width:21px;height:21px;display:block;margin-left:4px;float:left}
+.tableList .table_handle .table_handle_a{color:#000;text-decoration:none}
+.tableList .table_handle .table_handle_a:hover{color:pink;text-decoration:none}
+.tableList tr .table_td .table_td_text{max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:clip;font-size:14px}
+.tableList .select_checkbox{width:80px;height:16px;margin:0 auto}
+.tableList .select_checkbox input{width:16px;height:16px;float:left}
+.tableList .select_checkbox a{height:16px;float:left;text-indent:5px;line-height:15px}
+
+.page{width:96%;height:auto;float:left;margin-top:10px;background:#fff;margin-left:2%}
+.page ul{width:auto;float:left;height:auto;border:1px solid #ddd;border-radius:4px}
+.page ul select{width:auto;height:28px;float:left;margin-left:6px;margin-right:6px;margin-top:2px;border-radius:4px}
+.page ul input{width:40px;height:32px;border:0;float:left;border-left:1px solid #ddd}
+.page ul a{display:block;width:auto;height:32px;float:left;padding:0 7px;line-height:32px;border-left:1px solid #ddd;color:#99999c;font-size:1.4rem}
+.page ul .now,.page ul a:hover{background:pink;color:#fff}
+.page ul p.total{width:auto;height:32px;float:left;line-height:32px;font-size:1.4rem}
+</style>
+</head>
+<body>
+<div>
+<div id="container">
+    <div id="Crumbs">
+        <a>后台管理中心</a><span>&nbsp;&nbsp;-</span><a>公告列表</a>
+    </div>
+    <div id="main">
+        <table cellspacing="0" class="tableList">
+            <thead>
+                <tr class="code_0">
+                    <th class="td">
+                        <div class="select_checkbox">
+                            <input type="checkbox" class="checkbox" value="on"><a>id</a>
+                        </div>
+                    </th>
+                    <th class="table_td">新闻标题</th>
+                    <th class="table_td">关键字</th>
+                    <th class="table_td">更新时间</th>
+                    <th class="table_td">显示状态</th>
+                    <th class="table_td">操作</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="page">
+        <ul>
+
+        </ul>
+    </div>
+</div>
+</body>      
+<script type="text/javascript" src="__PUBLIC__/js/Admin/News/sellerRuleList.js"></script>      
+</body>
+</html>

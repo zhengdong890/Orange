@@ -1,0 +1,88 @@
+.tableList{margin:0 auto;width:100%}
+.tableList td span{float:right}
+.tableList tr{background:white}
+.tableList tr:hover{background:#F1FCEA}  
+.tableList tr:first-child{background:#F4F5F9} 
+.tableList tr td{border-left:1px solid #E7E9F3;border-bottom:1px solid #E7E9F3;font-size:20px;padding:10px;font-size:14px;}
+.tableList tr .td{border-left:0px} 
+.tableList tr .table_td{text-align:center;}
+.tableList tr .table_btn{background:white;border:0}
+
+.tableList input[type='text']{
+	width:30px;
+	height:24px;
+	border-radius:3px;
+	border-bottom:1px solid #E3E9EF;
+	border-top:1px solid #ABADB3;
+	border-left:1px solid #E2E3EA;
+	border-right:1px solid #DBDFE6;
+	text-align:center
+}
+
+.tableList td img{max-width:40px;max-height:40px}
+.tableList td{padding-right:30px;padding-top:10px}
+.tableList .table_handle{width:auto;text-align:center}   
+.tableList .table_handle div{width:50px;height:21px;margin:0 auto}   
+.tableList .table_handle div a{width:21px;height:21px;display:block;margin-left:4px;float:left;} 
+.tableList .table_handle .table_handle_a{
+	color:black;
+	text-decoration:none   
+}
+
+.tableList .table_handle .table_handle_a:hover{
+    color:pink;
+    text-decoration:none   
+}
+
+.tableList tr .table_td .table_td_text{
+   	max-width:200px;
+	white-space:nowrap; 
+	overflow:hidden; 
+	text-overflow:clip;	
+	font-size:14px;
+}
+
+/*批量处理样式*/
+.handdle{
+	width:100%;
+	height:36px;
+	float:left;
+	margin-top:15px;
+}
+
+.handdle .handdle_p{
+	width:auto;
+	height:36px;
+	line-height:36px;
+	float:left;
+	margin-left:10px;	
+}
+
+.handdle .handdle_select{
+	width:auto;
+	height:36px;
+	line-height:36px;
+	float:left	
+}
+
+.handdle .handdle_select select{
+	width:auto;
+	height:28px;
+	margin-top:4px;
+	float:left;
+	margin-left:15px;	
+}
+
+.handdle .btn_a{border-radius:4px;
+	background:#C43926;
+	margin-left:10px;
+	color:white;
+	height:26px;
+	width:40px;
+	float:left;
+	font-size:13px;
+	text-align:center;
+	line-height:26px;
+	margin-top:5px;
+	display:block;
+}

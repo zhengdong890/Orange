@@ -1,0 +1,16 @@
+#Crumbs{width:100%;height:40px;border:1px solid #D7D7D7;line-height:40px;margin-top:5px;float:left}
+#Crumbs a{padding-left:10px}
+#Crumbs .btn{
+	width:auto;
+	padding:0px 5px 0px 5px;
+	height:30px;
+	float:right;
+	display:block;
+	background:red;
+	line-height:30px;
+	color:white;
+	border-radius:5px;
+	font-size:14px;
+	margin-right:20px
+	;margin-top:5px;
+}

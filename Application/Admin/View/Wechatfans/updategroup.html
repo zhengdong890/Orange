@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="description" content="" />
+<style>    
+*{padding:0; margin:0;font-size:16px;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0} 
+#main #main_h{width:100%;height:40px;float:left;margin-top:20px;color:black;border-bottom:1px solid #dfdfdf}
+#main_h a{height:20px;float:right;margin-left:20px;padding:5px;border:1px solid #E6E7EC;background:#F4F5F9;border-radius:4px;color:black}
+#main_h span{line-height:40px;}
+#main table{float:left;margin-top:20px;}
+#main table input{width:500px;height:24px;border-radius:3px;border:1px solid black;}
+#main table textarea{width:500px;height:160px;border-radius:3px;border:1px solid black;}
+#main table button{border:0px;font-size:16px;background:#44B549;color:white;padding:5px;border-radius:2px;float:left}
+</style>
+</head>
+    <body>
+    <div id="wraper">      
+          <div id="main"> 
+             <div id="main_h">
+                 <span>设置粉丝分组 </span>
+                 <a href="{:U('image-text')}">返回</a>                              
+             </div>          
+             <table cellspacing="10"> 
+                 <form action="{:U('updategroup')}" method='post'>
+                     <input type='hidden' name='id' value="{$list['id']}"></input>                                                          
+                     <tr>
+                            <td style="padding-right:50px"><span>名称:</span></td>
+                            <td><input type="text" name="groupname" value="{$list['groupname']}"></input></td>
+                     </tr> 
+                     <tr>
+                            <td valign='top' style="padding-right:50px"><span>简介:</span></td>
+                            <td><textarea name='remark'>{$list['remark']}</textarea></td>
+                     </tr> 
+                    <tr><td></td><td><button>保存</button></td></tr>
+                 </form>    
+             </table>
+         </div>
+    </div>	
+    </body>
+    <script type="text/javascript">       
+       function freshen(){  	     
+  	    	  $.post("{:U('freshen')}",{},function(res){
+  	             window.location.reload();
+  	     	  })
+       }
+    </script>
+</html>

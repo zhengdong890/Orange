@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/ueditor/ueditor.all.js"></script>
+<meta name="description" content="" />
+<style>
+*{padding:0; margin:0;font-size:16px;font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0} 
+   textarea{outline:none;resize:none;}
+/****内容样式****/  
+#content{width:98%;height:auto;float:left;margin-left:1%;}
+/****内容头部面包屑样式*****/
+#content #content_h{width:100%;height:40px;border:1px solid #D7D7D7;line-height:40px;margin-top:15px;float:left;}
+#content #content_h a{padding-left:10px}
+/****添加信息列表样式start****/   
+#content #content_m{width:100%;height:auto;border:1px solid #D7D7D7;padding-bottom:100px;margin-top:20px;float:left;} 
+/****列表信息样式****/    
+#content_m #content_m_m{width:100%;height:auto;float:left;}
+#content_m_m form{width:100%;height:auto;float:left;}     
+#content_m table{width:100%;margin:0 auto;}    
+#content_m table td .radio,.check{width:20px;height:20px;float:left;margin-left:15px;}
+.radio_m{margin-left:0px;}
+.radio_text{height:20px;float:left;line-height:20px}
+.check_m{margin-left:0px;}
+.check_text{height:20px;float:left;line-height:20px}
+form input[type='text']{width:400px;height:20px;border-radius:3px;border-bottom:1px solid #E3E9EF;border-top:1px solid #ABADB3;border-left:1px solid #E2E3EA;border-right:1px solid #DBDFE6}  
+.label{text-align:right;vertical-align:top;font-weight:bold;width:30%;font-size:14px;padding:4px 8px} 
+.img{width:100px;height:auto;float:left;}
+.img img{max-width:100%;max-height:100px;float:left}
+.btn{display:block;width:200px;margin-top:10px;color:white;position:relative;height:28px;line-height:28px;text-align:center;float:left;border-radius:4px;}
+/****上传按钮样式构造****/
+.btn_addimg{display:block;width:200px;margin-top:5px;color:white;position:relative;height:28px;line-height:28px;text-align:center;float:left;border-radius:4px;}
+.btn_addimg input{width:200px;position:absolute;left:0;top:0;filter:alpha(opacity=50);-moz-opacity:0;-khtml-opacity:0;opacity:0;}
+.btn :hover
+{ 
+background-color:red;
+}
+.btn1 :hover
+{ 
+background-color:red;
+}
+</style>
+</head>
+<body>          
+<div id="content">
+    <div id="content_h">
+        <a>后台管理中心</a>-><a>采购详情</a><if condition="$data['status'] eq 1"><span style="color:red;">  您已经审核过了</span></if>
+    </div>
+    <div id="content_m">
+        <div id="content_m_m">
+              
+                <input type="hidden" name="id" value="{$data['id']}"></input>                    
+                <table cellspacing="10">
+                    <tr>
+                        <td class="label">项目名称:</td>
+                        <td>{$data['title']}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">所属分类:</td>
+                        <td>{$data['cat_name']}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">采购数量:</td>
+                        <td>{$data['num']}{$data['unit']}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">联系人:</td>
+                        <td>{$data['kh_name']}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">联系方式:</td>
+                        <td>{$data['phone']}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">最后期限:</td>
+                        <td>{$data['deadline']}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">项目描述:</td>
+                        <td>
+                              {$data['des']}                                   
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                         <if condition="$data['status'] eq 0">
+                           <a class='btn' href='javascript:;'><button style="font-size: 30px; font-family: 楷体; cursor:pointer;">确认审核</button>
+                           </a>
+                          <else />
+                           <a class='btn1' href='javascript:;'><button style="font-size: 30px; font-family: 楷体; cursor:pointer;">取消审核</button>
+                           </a>
+                           </if>
+                      </td>
+                    
+	                    
+                    </tr>
+		     </table>	  		                     
+		</div>   
+     </div>
+</div>
+</body>
+<script type="text/javascript"> 
+$(".btn").click(function(){
+  var id = $("input[name='id']").val() 
+    if(confirm("是否确认审核")){
+      $.post("{:U('Purchase/check_x')}", {'status':1,'id':id}, function(data){
+        if(data.status==1){
+          alert(data.msg)
+          window.location.href="{:U('Purchase/purchaseList')}";
+        }else{
+          alert(data.msg)
+        }
+      }) 
+    }
+})
+$(".btn1").click(function(){
+  var id = $("input[name='id']").val() 
+    if(confirm("是否确认审核")){
+      $.post("{:U('Purchase/check_no')}", {'status':0,'id':id}, function(data){
+        if(data.status==1){
+          alert(data.msg)
+          window.location.href="{:U('Purchase/purchaseList')}";
+        }else{
+          alert(data.msg)
+        }
+      }) 
+    }
+})
+
+	$("input[name='thumb']").change(function(){
+	    var file   = $(this)[0].files[0];   
+	    var reader = new FileReader();  
+	    var _this  = this
+	    //将文件以Data URL形式读入页面  
+	    reader.readAsDataURL(file);  
+	    reader.onload=function(e){ 
+	    	//显示文件  
+	        $(_this).parent('a').siblings('img').attr("src",this.result);
+	    }
+	})
+</script>
+</html>

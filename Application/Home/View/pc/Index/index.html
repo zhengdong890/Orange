@@ -1,0 +1,454 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta property="wb:webmaster" content="2eef69477f0eaa49" />
+<meta name="baidu-site-verification" content="0oSnYtT9Dp" />
+<meta name="keywords" content="{$seo['keyword']}">
+<meta name="description" content="{$seo['description']}">
+<meta name="copyright" content="深圳市橙橙网络科技有限公司(www.orangesha.com)版权所有">
+<meta name="author" content="橙橙分享"> 
+<meta property="wb:webmaster" content="2eef69477f0eaa49" />
+<meta name='360_ssp_verify' content='1a10658d0edc02bf0466f87e0d024088' />
+<title>{$seo['title']}</title>
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/floating-window.css" type="text/css">
+  <link rel="shortcut icon" href="/Public/Home/images/ee.ico" type="image/x-icon">
+  <link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+  <!--[if (gte IE 9)|!(IE)]><!-->
+  <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-2.0.3.min.js"></script>
+  <!--<![endif]-->
+  <!--[if lte IE 8 ]>
+  <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+  <![endif]-->
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/home.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.css">
+    
+    <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.js"></script>
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/tool.js"></script>
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/floating-window.js"></script>
+	<script src="/Public/layer/layer.js"></script>
+
+	<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?21473a8dc2e4da8b15095ef217f14e7a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body >
+  <!-- 头部 -->
+  <!-- 导航条 页面头部
+================================================== -->
+<include file="Public:header_top" />
+<include file="Public:header_search" />
+<include file="Public:mallNav" />
+    <div class="index_top">
+
+	    	<include file="Public:mallBanner" />
+	    <!--e橙精选-->
+	    	<div class="ecjx">
+		    	<div>e橙精选</div>
+		    	<ul>
+            <volist name='ad' id='v'>
+			        <li><img src="__ROOT__{$v['ad_img']|substr=1}" /></li>
+            </volist>
+		    	</ul>
+	      </div>
+	    <!--功能区-->
+	
+			  <div class="gongnengqu">
+				  	<if condition="$member_data neq ''">
+				  	<div>
+				  	    <if condition="$member_data['headimg'] neq ''">
+				  	    <img src="__ROOT__{$member_data['headimg']|substr=1}" />
+					  	<else/>
+					  	<img src="{:C('STATIC_URL')}/Home/img/headPortrait.png" />
+					  	</if>
+					  	<a class="loginbox_a" href="http://www.orangesha.com/member.html">Hi,<if condition="$Think.session.member_data.nickname eq ''">{$Think.session.member_data.username}<else/>{$Think.session.member_data.nickname}</if></a>
+					  	<a class="loginbox_a" href="http://www.orangesha.com/logout.html">>退出</a>
+				  	</div>
+				  	<else/>
+				  	<div>
+					  	<a href="http://www.orangesha.com/login.html" rel="nofollow"><button>> 登录</button></a>
+					  	<a href="http://www.orangesha.com/register.html" rel="nofollow"><button>> 注册</button></a>
+				  	</div>
+				  	</if>
+				  	<div>
+					  		<ul id="gongnengqu_ul">
+					  			<li class="active"><a href="http://www.orangesha.com/gonggao.html" rel="nofollow" target="_blank">公告</a></li>
+					  			<li><a href="http://www.orangesha.com/rules.html" rel="nofollow" target="_blank">规则</a></li>
+					  			<li><a href="http://www.orangesha.com/plcg.html">采购</a></li>
+					  			<li><a href="http://www.orangesha.com/xinwen.html" target="_blank">新闻</a></li>
+					  		</ul>
+					  		<div>
+					  			<ul class="text-slider-wrap">
+						  		<!-- 公告图标 -->
+						  			<volist name='notice' id='v'>
+						  				<li>><img src="__ROOT__{$v['img_url']|substr=1}" alt="" style="height: 20px;"><a rel="nofollow" href="http://www.orangesha.com/gonggao-{$v.id}.html" target="_blank">{$v['title']}</a></li>
+						  			</li>		
+						  			</volist>
+						  		</ul>
+					  		</div>
+					  		<div>
+						  		<ul class="text-slider-wrap2">
+	                 				<volist name='rule' id='v'>
+						  				<li><a rel="nofollow" href="http://www.orangesha.com/rules-{$v.id}.html" target="_blank">> {$v['title']}</a></li>					  			
+						  			</volist>
+						  	    </ul>
+					  	    </div>
+					  	    <div>
+						  		<ul class="text-slider-wrap3">
+						  		    <volist name='purchase' id='v'>
+						  				<li><a href="http://www.orangesha.com/plcg.html" target="_blank">> {$v['title']}</a></li>
+						  			</volist>
+						  		</ul>
+					  		</div>
+					  		<div>
+						  		<ul class="text-slider-wrap4">
+						  		    <volist name='news' id='v'>
+						  				<li><a href="http://www.orangesha.com/xinwen-{$v.id}.html" target="_blank">> {$v['title']}</a></li>
+						  			</volist>
+						  		</ul>
+					  		</div>
+				  	</div>
+				  	<ul>
+					  		<li>申请开店</li>
+					  		<li>我的发票</li>
+					  		<li>申请退货</li>
+					  		<li>快速下单 
+					  			<div>
+					  				 <div>快速报价/下单</div>
+					  				 <p><input type="text" name="quick_sku" placeholder="SKU订货号" /> <input name="quick_num" type="text" placeholder="数量"></p>
+					  				 <p><input type="text" name="quick_sku" placeholder="SKU订货号" /> <input name="quick_num" type="text" placeholder="数量"></p>
+					  				 <p><button class="quick_btn">转报价单</button></p>
+					  			</div>
+					  		</li>
+					  		<li>批量采购</li>
+					  		<li>物流工具</li>
+					  		<li>积分商城</li>
+					  		<li>手机e橙  <div class="ewm"></div></li>					  		
+				  	</ul>				  	
+				  	<div>
+					  		<div>使用指南</div>
+					  		<div>
+					  			<p><a href="http://www.orangesha.com/wenti.html?id=18" rel="nofollow" target="_blank"> > e橙优品常见问题</a></p></br>
+					  		  <p><a href="http://www.orangesha.com/zhinan.html?id=3" rel="nofollow" target="_blank"> > e橙优品新手指南</a></p>
+					  		</div>
+				  	</div>
+			  </div>
+    </div>
+    <!-- body -->
+    <div class="bodyer marB50">
+        <div class="mar1200c marT10 ofwVisible">
+            <include file="Public:IndexMallGoods" />
+        </div>
+    </div>
+    <div class="program">
+        <ul>
+            <li>
+                <div class="program-list">
+                    <div class="program-icon icon1"></div>
+                    <div class="text">
+
+                        <div class="text-top">全球精品</div>
+
+                        <div class="text-bottom">一站式全产业链平台</div>
+
+                    </div>
+
+                </div>
+
+            </li>
+
+            <li>
+
+                <div class="program-list">
+
+                    <div class="program-icon icon2"></div>
+
+                    <div class="text">
+
+                        <div class="text-top">天天底价</div>
+
+                        <div class="text-bottom">优品秒拍优惠购不停</div>
+
+                    </div>
+
+                </div>
+
+            </li>
+
+            <li>
+
+                <div class="program-list">
+
+                    <div class="program-icon icon3"></div>
+
+                    <div class="text">
+
+                        <div class="text-top">增值税专用发票</div>
+
+                        <div class="text-bottom">可提供增值税专用发票</div>
+
+                    </div>
+
+                </div>
+
+            </li>
+
+            <li>
+
+                <div class="program-list">
+
+                    <div class="program-icon icon4"></div>
+
+                    <div class="text">
+
+                        <div class="text-top">7天无理由退换货</div>
+
+                        <div class="text-bottom">安心采购,售后无忧</div>
+
+                    </div>
+
+                </div>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+    
+    
+
+
+
+  <!-- /主体 -->
+
+    <!-- 底部 -->
+    <include file="Public:footer" />
+    <!-- /底部 -->
+    
+<!--客服&回到顶部    -->
+
+<!--广告-->
+<div class="enter_adv" style="display:none">
+  	<div>
+  		<a href="http://www.orangesha.com/register.html"><img src="{:C('STATIC_URL')}/Home/images/注册送积分.png" /></a>
+	  	<button>
+	  		<img src="{:C('STATIC_URL')}/Home/images/dele.png" />
+	  	</button>
+  	</div>
+</div>
+
+<div class="flaot-img" id="floating-window">
+  <img src="{:C('STATIC_URL')}/Home/images/fuchuang_02.jpg" alt>
+  <div class="close" id="close"><img src="{:C('STATIC_URL')}/Home/images/close.png" alt="关闭"></div>
+</div>  
+
+<script>
+    
+//头部橙橙首页隐藏
+$(".homePage").css("display","none");
+
+function abcd(){
+	for(var i = 0;i<$(".home-nav-group .nav a").length;i++){
+		if($(".home-nav-group .nav a").eq(i).text()=="融资招标"){
+			$(".home-nav-group .nav a").eq(i).css("display","none")
+		}	
+		if($(".home-nav-group .nav a").eq(i).text()=="集成项目"){
+			$(".home-nav-group .nav a").eq(i).css("display","none")
+		}
+		if($(".home-nav-group .nav a").eq(i).text()=="设备出租"){
+			$(".home-nav-group .nav a").eq(i).attr("rel","")
+		}
+		if($(".home-nav-group .nav a").eq(i).text()=="批量采购"){
+			$(".home-nav-group .nav a").eq(i).attr("rel","")
+		}
+		if($(".home-nav-group .nav a").eq(i).text()=="品牌闪购"){
+			$(".home-nav-group .nav a").eq(i).attr("rel","")
+		}
+	}
+}
+abcd()
+
+
+    function scroll(){
+        $(".text-slider-wrap").animate({"margin-top":"-30px"},600,function(){
+            $(".text-slider-wrap li:eq(0)").appendTo($(".text-slider-wrap"));
+            $(".text-slider-wrap").css("margin-top","0px")
+        })
+        $(".text-slider-wrap2").animate({"margin-top":"-30px"},600,function(){
+            $(".text-slider-wrap2 li:eq(0)").appendTo($(".text-slider-wrap2"));
+            $(".text-slider-wrap2").css("margin-top","0px")
+        })
+        $(".text-slider-wrap3").animate({"margin-top":"-30px"},600,function(){
+            $(".text-slider-wrap3 li:eq(0)").appendTo($(".text-slider-wrap3"));
+            $(".text-slider-wrap3").css("margin-top","0px")
+        })
+        $(".text-slider-wrap4").animate({"margin-top":"-30px"},600,function(){
+            $(".text-slider-wrap4 li:eq(0)").appendTo($(".text-slider-wrap4"));
+            $(".text-slider-wrap4").css("margin-top","0px")
+        })
+    }
+    setInterval(scroll,5000);
+
+
+window.onload=function(){ 
+    document.getElementById('close').onclick=function () {
+        document.getElementById('floating-window').style.display='none';
+    };
+    
+$(".enter_adv>div>button").click(function(){
+	 $(".enter_adv").css("display","none")
+})
+
+//3秒自动关闭
+var time = 5;
+var timer=setInterval(timeReduce, 1000);
+function closeEnterAdv(){ 	  
+		$(".enter_adv").css("display","none")
+}  
+function timeReduce(){
+	 if(time>0){
+	 	 time--;
+	 	 return time;
+	 }if(time==0){
+	 	 closeEnterAdv();
+	 	 clearInterval(timer);
+	 }
+}
+timer;
+
+$(".nb-icon-wrap").on('mouseover mouseout',function(event){
+	 if(event.type == "mouseover"){
+        console.log(1);
+	 }else 
+	 if(event.type == "mouseout"){
+	  console.log(2);
+	 }	
+})
+
+
+            /*使用swiper控制banner*/
+
+            var mySwiper = new Swiper('.swiper-container',{
+
+            autoplay : 5000,//可选选项，自动滑动
+
+            loop : true,//可选选项，开启循环
+
+            pagination : '.pagination',
+
+            paginationClickable: true,
+
+            autoplayDisableOnInteraction:false
+
+            });
+
+            /*菜单悬浮时，显示子菜单*/
+
+            $(".menu ul li").mouseenter(function(){
+
+                $(this).find(".menu-2").css("display","block");
+
+            });
+
+            $(".menu ul li").mouseleave(function(){
+
+                $(this).find(".menu-2").css("display","none");
+
+            });
+            
+
+        }
+
+
+$("#gongnengqu_ul li").hover(function(){
+	$(this).addClass("active")
+	$(this).siblings().removeClass("active")
+})
+
+$(".gongnengqu>div:nth-of-type(2) ul:first-of-type li:eq(0)").hover(function(){
+	 $(".gongnengqu>div:nth-of-type(2) div:nth-of-type(1)").css("display","block");
+	 $(".gongnengqu>div:nth-of-type(2) div:nth-of-type(2)").css("display","none");
+	 $(".gongnengqu>div:nth-of-type(2) div:nth-of-type(3)").css("display","none");
+	 $(".gongnengqu>div:nth-of-type(2) div:nth-of-type(4)").css("display","none");
+})
+$(".gongnengqu>div:nth-of-type(2) ul:first-of-type li:eq(1)").hover(function(){
+	 $(".gongnengqu>div:nth-of-type(2) div:nth-of-type(2)").css("display","block");
+	 $(".gongnengqu>div:nth-of-type(2) div:nth-of-type(1").css("display","none");
+	 $(".gongnengqu>div:nth-of-type(2) div:nth-of-type(3)").css("display","none");
+	 $(".gongnengqu>div:nth-of-type(2) div:nth-of-type(4)").css("display","none");
+})
+$(".gongnengqu>div:nth-of-type(2) ul:first-of-type li:eq(2)").hover(function(){
+	 $(".gongnengqu>div:nth-of-type(2) div:nth-of-type(3)").css("display","block");
+	 $(".gongnengqu>div:nth-of-type(2) div:nth-of-type(2)").css("display","none");
+	 $(".gongnengqu>div:nth-of-type(2) div:nth-of-type(1)").css("display","none");
+	 $(".gongnengqu>div:nth-of-type(2) div:nth-of-type(4)").css("display","none");
+})
+$(".gongnengqu>div:nth-of-type(2) ul:first-of-type li:eq(3)").hover(function(){
+	 $(".gongnengqu>div:nth-of-type(2) div:nth-of-type(4)").css("display","block");
+	 $(".gongnengqu>div:nth-of-type(2) div:nth-of-type(2)").css("display","none");
+	 $(".gongnengqu>div:nth-of-type(2) div:nth-of-type(3)").css("display","none");
+	 $(".gongnengqu>div:nth-of-type(2) div:nth-of-type(1)").css("display","none");
+})
+
+//快速下单
+$(".quick_btn").click(function(){
+	  var skuId = [];
+	  var num = [];
+		for(var i = 0; i<$("input[name='quick_sku']").length;i++){
+			if($("input[name='quick_sku']").eq(i).val()!=""){
+				skuId.push($("input[name='quick_sku']").eq(i).val())
+			}
+			if($("input[name='quick_num']").eq(i).val()!=""){
+				num.push($("input[name='quick_num']").eq(i).val())
+			}					
+		}
+		var data;
+	  for(var k=0;k<skuId.length;k++){
+	      data += "data[]="+skuId[k]+"_"+num[k]+"&"
+	  }
+	  console.log(data.substring(9,data.length-1))
+	  window.open('http://www.orangesha.com/MallOrder/quickBuy.html?' + data.substring(9,data.length-1)); 
+})
+
+//申请开店
+$(".gongnengqu>ul li:eq(0)").click(function(){
+	  window.open("{:U('MemberCenter/sellerMall')}"); 
+})
+//我的发票
+$(".gongnengqu>ul li:eq(1)").click(function(){
+	  window.open("{:U('MemberCenter/myInvoice')}");
+})
+//申请退款
+$(".gongnengqu>ul li:eq(2)").click(function(){
+	  window.open("http://www.orangesha.com/regoods.html");
+})
+//申请批采
+$(".gongnengqu>ul li:eq(4)").click(function(){
+	  window.open("http://www.orangesha.com/plcg.html");
+})
+//物流工具
+$(".gongnengqu>ul li:eq(5)").click(function(){
+	  window.open("http://www.orangesha.com/index.php?m=Home&c=Seller_order&a=logisticsTool"); 
+})		
+//积分商城
+$(".gongnengqu>ul li:eq(6)").click(function(){
+	  window.open("http://www.orangesha.com/index.php?m=Home&c=Integralmall&a=index");
+})	
+
+
+		
+    </script>
+</body>
+
+<script src="https://s4.cnzz.com/z_stat.php?id=1261920799&web_id=1261920799" language="JavaScript"></script>
+</html>

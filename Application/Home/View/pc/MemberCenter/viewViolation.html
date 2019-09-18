@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>违规记录</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/all-use.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/side-nav.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/foul.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/sell-management.css">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end --> 
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="Public:sellerLeft" />         
+            <div class="sell-management clearfix" style='width:auto;'>
+                <div class="refund">
+                	<div class="refund_top"><a href="{:U('MemberCenter/foul')}">违规记录</a> > 查看事项</div>
+                	<div class="refund_box">
+                		<ul class="foul_top">
+                			<a href="{:U('MemberCenter/viewViolation')}"><li class="active">待您处理的违规</li></a>
+                			<a href="{:U('MemberCenter/viewViolation2')}"><li>审核中的违规</li></a>
+                			<a href="{:U('MemberCenter/viewViolation3')}"><li>违规记录</li></a>
+                		</ul>
+                		<div class="foul_div1">
+                			此处将为您展示可能需要您进行申诉、编辑、下架、删除或者其它操作的记录，请您务必加以重视；对于最近发生，但您无法进行任何处理的记录，或者已经处理完结的记录，请您直接前往违规记录查看。
+                		</div>
+                		<ul class="foul_ul">
+                			<li>违规对象</li>
+                			<li>违规类型</li>
+                			<li>处置方式</li>
+                			<li>操作</li>
+                		</ul>
+                		<div class="foul_div2">
+                			恭喜您，当前没有记录，请继续保持！
+                		</div>
+                	</div>                	
+                </div>
+            </div>                   
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+
+</script>
+</body>
+</html>

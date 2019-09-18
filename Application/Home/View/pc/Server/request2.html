@@ -1,0 +1,138 @@
+<html>
+	<head>
+		<meta charset="utf-8" >
+		<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Homejs/jquery-1.10.2.min.js"></script>
+<![endif]-->
+		<style>
+			*{ font-family: "微软雅黑";}
+			select{  font-size: 14px; color: #999; outline: none;}	
+			table{ margin: 0 auto;}	
+			table td{ font-family: "微软雅黑";  font-size: 14px; color: #666;}
+			table td input{width:540px;height:25px;margin-bottom: 6px; padding-left: 4px;}
+			table td select{ width: 70px; height: 30px; cursor: pointer;}
+			table td select option{ text-align: center; cursor: pointer;}
+			table td:first-of-type{ text-align: right; width: 190px;  position: relative;}
+			.td_title{ font-size: 14px; color: #666;}
+			#describe{ position: absolute; left: 110px; top: 8px;}
+			.contacts,.contacts_phone{ width: 221px;}.project_sum,.project_sum,.position{ width: 90px;}
+			.checkbox{ width: 14px; height: 14px; vertical-align: middle; cursor: pointer;}
+			#issub{width:100px;height:45px;cursor:pointer;border-radius:5px;background:#5FAEBF;color:#FFFFFF;margin-top: 10px;border: none;}
+			.star{ color: #FF6600;}
+			textarea{padding: 2px 5px; width: 540px; height: 130px; vertical-align: top; margin-bottom: 4px;}
+        </style>
+	<!-- www.orangesha.com Baidu tongji analytics -->
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	var hm = document.createElement("script");
+	hm.src = "//hm.baidu.com/hm.js?54f6f54d47704101dc27b337de5fd6c3";
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+</head>
+	<body style="overflow-y:auto">
+		<div style="width:100%;height:100%;text-align:center;"> 
+			
+				<form action="" method="post" >
+			<table>
+				<tr>
+				   <td class="td_title"><span class="star">*</span> 项目命名：</td>
+				   <td><input type="text" name="project_name"></td>
+				</tr>
+				<tr>
+				   <td class="td_title"><span class="star">*</span> 客户名称：</td>
+				   <td><input type="text" name="customer_name"></td>
+				</tr>
+				<tr>
+				   <td class="td_title"><span class="star">*</span> 项目地址：</td>
+				   <td><input type="text" name="project_address"></td>
+				</tr>
+				<tr>
+				   <td class="td_title"><span class="star">*</span> 联系人：</td>
+				   <td><input type="text" class="contacts" name="contact">&nbsp;&nbsp;&nbsp;<span class="star">*</span> <span class="td_title">联系电话：</span> <input type="text" class="contacts_phone" name="phone_number"></td>
+				</tr>
+				<tr>
+				   <td class="td_title"><span class="star">*</span> 职位：</td>
+				   <td><input type="text" class="contacts" name="Job">&nbsp;&nbsp;&nbsp;<span class="star">*</span> <span class="td_title">项目时间：</span> <input type="text" class="contacts" name="projectTime"></td>
+				</tr>
+				<tr>
+				   <td class="td_title"><span class="star">*</span> 指定品牌：</td>
+				   <td>
+				   	<input type="text" class="contacts" name="brand">&nbsp;&nbsp;
+				    <span class="star">*</span> <span class="td_title">机器人使用经验：</span>
+				    <select name="isUse">
+				      <option>有</option>
+				      <option>无</option>
+				    </select>
+				   </td>
+				</tr>
+				<tr>
+					<td class="td_title"><span class="star">*</span> 企业产值：</td>
+					<td><input type="text" class="project_sum" name="enterpriseValue"> 元人民币/年 <span class="star" style="margin-left: 44px;">*</span> <span class="td_title">计划改造投入预算：</span><input type="text" class="project_sum" name="budget"> 元人民币</td>
+				</tr>
+				<tr>
+				   <td class="td_title"><span class="star">*</span> 项目类型：</td>
+				   <td><input type="checkbox" name="Type" class="checkbox"> 弧焊 <input type="checkbox" name="Type" class="checkbox"> 切割分离 <input type="checkbox" name="Type" class="checkbox"> 上下料 <input type="checkbox" name="Type" class="checkbox"> 搬运</td>
+				</tr>
+				<tr>
+				   <td class="td_title"><span id="describe"><span class="star">*</span> 产品描述：</span></td>
+				   <td><textarea name="productDescription"></textarea></td>
+				</tr>
+				<tr>
+				   <td class="td_title"><span class="star">*</span> 金融服务：</td>
+				   <td><input type="radio" name="buy_style" class="checkbox"> 分期付款 <input type="radio" name="buy_style" class="checkbox"> 融资租赁 <input type="radio" name="buy_style" class="checkbox"> 直接购买</td>
+				</tr>	    
+			    <tr>
+				   <td class="td_title"><span id="describe"><span class="star">*</span> 项目描述：</span></td>
+				   <td><textarea name="projectDescription"></textarea></td>
+				</tr>
+				<tr>
+			    	<td></td>
+			    	<td style="text-align: right;"><input type="submit" id="issub" name="sub" value="提交"></td>
+			    </tr>
+			</table>
+			
+		</form>
+		
+		</div>		
+	</body>
+<script>
+
+	$("#issub").click(function(){
+       var data = {
+       	'title':          $("input[name='project_name']").val(),
+       	'kh_name':        $("input[name='customer_name']").val(),
+       	'area':           $("input[name='project_address']").val(),
+       	'contact_people': $("input[name='contact']").val(),
+       	'job':            $("input[name='Job']").val(),
+       	'phone':          $("input[name='phone_number']").val(),
+       	'project_time':   $("input[name='projectTime']").val(),
+       	'is_use':         $("select[name='isUse']").val(),
+       	'chanzhi':        $("input[name='enterpriseValue']").val(),
+       	'yusuan':         $("input[name='budget']").val(),
+       	'type':           $("input[name='Type']").attr("checked",'true').val(),
+       	'desc':           $("textarea[name='productDescription']").val(),
+       	'brand_name':     $("input[name='brand']").val(),
+       	'jinrong':        $("input[name='buy_style']").attr("checked",'true').val(),
+       	'conten':         $("textarea[name='projectDescription']").val()
+       };
+       
+		 $.post("{:U('Integration/integratedAdd')}",data,function(res){
+		 	console.log(res.status)
+		 	if(res.status==1){
+		 		alert("申请成功")
+                parent.location.reload(); // 父页面刷新                  
+		 	}else{
+		 		alert(res.msg)
+		 	}
+		 	
+		 });
+    })
+</script>
+	
+	
+</html>

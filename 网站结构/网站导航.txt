@@ -1,0 +1,27 @@
+--- 首页
+        地址 http://www.orangesha.com 
+        模板文件位置 orange/Application/Home/View/pc/Index/index.html 
+
+--- 批量采购
+        访问地址     http://www.orangesha.com/plcg.html
+        模板文件位置 orange/Application/Home/View/pc/BulkPurchase/index.html  
+        
+--- 金融服务
+        访问地址     http://www.orangesha.com/jinrong.html
+        模板文件位置 orange/Application/Home/View/pc/Server/server.html           
+          
+--- 品牌闪购
+        访问地址     http://www.orangesha.com/tuangou.html
+        模板文件位置 orange/Application/Home/View/pc/GroupBuy/index.html
+
+--- 融资招标
+        访问地址     http://www.orangesha.com/rongzi.html
+        模板文件位置 orange/Application/Home/View/pc/Tender/index.html
+
+--- 集成项目
+        访问地址     http://www.orangesha.com/jcxiangmu.html
+        模板文件位置 orange/Application/Home/View/pc/Integration/index.html
+
+--- 设备出租
+        访问地址     http://www.orangesha.com/sbcz.html
+        模板文件位置 orange/Application/Home/View/pc/EquipmentRent/index.html

@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta property="wb:webmaster" content="2eef69477f0eaa49" />
+<meta name="keywords" content="{$seo['keyword']}">
+<meta name="description" content="{$seo['description']}">
+<meta name="copyright" content="深圳市橙橙网络科技有限公司(www.orangesha.com)版权所有">
+<meta name="author" content="橙橙分享"> 
+<meta property="wb:webmaster" content="2eef69477f0eaa49" />
+<title>{$seo['title']}</title>
+
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+  <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+  <link rel="shortcut icon" href="/Public/Home/images/ee.ico" type="image/x-icon">
+  <link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+  <!--[if (gte IE 9)|!(IE)]><!-->
+  <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-2.0.3.min.js"></script>
+  <!--<![endif]-->
+  <!--[if lte IE 8 ]>
+  <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+  <![endif]-->
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/home.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.css">
+    
+    <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.js"></script>
+    <script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/tool.js"></script>
+	<script src="/Public/layer/layer.js"></script>
+</head>
+<body >
+  <!-- 头部 -->
+  <!-- 导航条 页面头部
+================================================== -->
+<include file="Public:header_top" />
+<include file="Public:header_search" />
+<include file="Public:nav" />
+<include file="Public:banner" />
+    <!-- body -->
+    <div class="bodyer marB50">
+        <div class="mar1200c marT10 ofwVisible">
+            <div class="org-items">
+                <ul>
+                    <volist name="goods" id="v">
+                    <li class="items-box">
+                        <a class="i-pic" href="http://{$Think.server.HTTP_HOST}/fenxiang-{$v['id']}" title="e橙优品"><img src="__ROOT__{$v['goods_thumb']|substr=1}" alt="e橙优品"> </a>
+                            <p><span class="f-cCol6 fRi">￥{$v['goods_price']>=10000?$v['goods_price']/10000:$v['goods_price']} {$v['goods_price']>=10000?'万':'元'}/<if condition="$v['rent_dw'] eq '1'">月</if><if condition="$v['rent_dw'] eq '2'">天</if><if condition="$v['rent_dw'] eq '3'">时</if><if condition="$v['rent_dw'] eq '4'">件</if></span>
+                            <span class="f-nowrap na-1">{$v['goods_name']}</span></p>
+                        </li>
+                    </volist>
+                </ul>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <div class="program">
+        <ul>
+            <li>
+                <div class="program-list">
+                    <div class="program-icon icon1"></div>
+                    <div class="text">
+
+                        <div class="text-top">全球精品</div>
+
+                        <div class="text-bottom">一站式全产业链平台</div>
+
+                    </div>
+
+                </div>
+
+            </li>
+
+            <li>
+
+                <div class="program-list">
+
+                    <div class="program-icon icon2"></div>
+
+                    <div class="text">
+
+                        <div class="text-top">天天底价</div>
+
+                        <div class="text-bottom">优品秒拍优惠购不停</div>
+
+                    </div>
+
+                </div>
+
+            </li>
+
+            <li>
+
+                <div class="program-list">
+
+                    <div class="program-icon icon3"></div>
+
+                    <div class="text">
+
+                        <div class="text-top">融资租赁</div>
+
+                        <div class="text-bottom">特有的招标配套服务</div>
+
+                    </div>
+
+                </div>
+
+            </li>
+
+            <li>
+
+                <div class="program-list">
+
+                    <div class="program-icon icon4"></div>
+
+                    <div class="text">
+
+                        <div class="text-top">共享未来</div>
+
+                        <div class="text-bottom">智能装备的分享社区</div>
+
+                    </div>
+
+                </div>
+
+            </li>
+
+        </ul>
+
+    </div>
+  <!-- /主体 -->
+    <!-- 底部 -->
+    <include file="Public:footer" />
+    <!-- /底部 -->
+    
+<!--客服&回到顶部    -->
+<script>
+//头部橙橙首页隐藏
+$(".homePage").css("display","none");
+
+
+function abcd(){
+	
+	for(var i = 0;i<$(".home-nav-group .nav a").length;i++){
+		console.log($(".home-nav-group .nav a").eq(i).text())
+		if($(".home-nav-group .nav a").eq(i).text()=="金融服务"){
+			$(".home-nav-group .nav a").eq(i).css("display","none")
+		}
+		if($(".home-nav-group .nav a").eq(i).text()=="积分商城"){
+			$(".home-nav-group .nav a").eq(i).css("display","none")
+		}
+		if($(".home-nav-group .nav a").eq(i).text()=="采购信息"){
+			$(".home-nav-group .nav a").eq(i).css("display","none")
+		}
+		if($(".home-nav-group .nav a").eq(i).text()=="品牌闪购"){
+			$(".home-nav-group .nav a").eq(i).css("display","none")
+		}
+		if($(".home-nav-group .nav a").eq(i).text()=="设备出租"){
+			$(".home-nav-group .nav a").eq(i).css("display","none")
+		}
+	}
+}
+abcd()
+
+/*使用swiper控制banner*/
+
+          var mySwiper = new Swiper('.swiper-container',{
+
+            autoplay : 5000,//可选选项，自动滑动
+
+            loop : true,//可选选项，开启循环
+
+            pagination : '.pagination',
+
+            paginationClickable: true,
+
+            autoplayDisableOnInteraction:false
+
+          });
+</script>
+</body>
+</html>

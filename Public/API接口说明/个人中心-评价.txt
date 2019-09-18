@@ -1,0 +1,12 @@
+评价
+地址 : http://www.orangesha.com/index.php/Home/MemberCenter/MallgoodsComment      
+参数 : {
+    goods_id   : 商品id
+    content    : 评论内容,
+    level      : 评分,
+    desc       : 描述相符,
+    logistical : 物流服务,
+    service    : 服务态度，
+    thumb      : 图片	
+}
+返回 : {"status": , 'msg':''}

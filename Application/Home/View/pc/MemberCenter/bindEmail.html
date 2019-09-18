@@ -1,0 +1,237 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>账号安全-邮箱绑定</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/bindEmail.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->   
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="MemberPublic:MemberLeft" />  
+        <div class="user-right marT20 box-s-c1 fRi">
+            <ul class="left_top_ul">
+            	<li>账户安全</li>
+            	<li>>绑定邮箱</li>
+            </ul> 
+            <div class="container">
+            	<ul class="step_ul">
+            		<li class="active">
+            			<div>1</div>验证身份
+            		</li>
+            		<li>
+            			<div>2</div>绑定新邮箱
+            		</li>
+            		<li>
+            			<div>3</div>完成
+            		</li>
+            	</ul>
+<!--第一步-->
+            	<div class="change_box1">
+                  <table class="phone_check">
+            		<tr>
+            			<td>手机号：</td>
+            			<td>{$Think.session.member_data.username}</td>
+            		</tr>
+            		<tr>
+            			<td>短信验证码：</td>
+            			<td><input type="text" id="checkcode"></td>
+            			<td>
+            				<button class="get_code">获取短信验证码</button>            				
+            			</td>
+            		</tr>
+            		<tr>
+            			<td></td>
+            			<td>
+            				<div class="code_error">
+            					<div>x</div>验证码错误
+            				</div>
+            			</td>
+            			<td></td>
+            		</tr>
+            	  </table>
+            	  <button class="nextStep1">下一步</button>
+            	</div>           	
+<!--第二步-->
+            	<div class="change_box2">
+                  <table class="email_change">
+            		<tr>
+            			<td>我的邮箱：</td>
+            			<td><input type="text" id="myEmail" placeholder="请输入您的邮箱地址"></td>
+            			<td>
+            				<div class="email_error">
+            				<div>x</div>邮箱格式错误，请重新输入
+            				</div>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td>验证码：</td>
+            			<td><input type="text" id="code" name="code"><img style="vertical-align: middle;" src="{:U('MemberEmail/getcode')}" onclick="javascript:changeCode(this)" alt="验证码"/></td>
+            			<td>
+            				<!--<a id="change_code" href="#"> 换一张</a>-->
+            				<div class="code_error2">
+            				<div>x</div>验证码错误
+            				</div>
+            			</td>
+            		</tr>
+            	  </table>
+            	  <button class="nextStep2">下一步</button>
+            	</div>
+            	<div class="change_box3">
+            		<p>邮件已经发送</p>
+            		<p>请到<span>********</span> 查阅来自橙橙网的邮件，验证邮件24小时有效，</p>
+            		<p>点击邮件中的链接完成绑定邮箱操作。</p>
+            		<button>去邮箱验证</button> <button>重新发送</button>
+            	</div>
+<!--修改成功   -->         	
+            	<div class="change_success">
+            		<!--<p>恭喜您，邮箱<span></span>已经验证成功，可以在橙橙网开心购物了！</p>-->
+            		<!--<p><span></span>秒后将自动返回个人资料页面！</p>-->
+            		<p>请到您的邮箱查阅来自橙橙网的邮件，验证邮件24小时有效，</p>
+            		<ul>
+            			<li><a href="{:U('Index/index')}">橙橙首页</a></li>
+            			<li><a href="{:U('Member_center/member')}">个人中心</a></li>
+            			<li><a href="{:U('Member_center/accountSafety')}">安全中心</a></li>
+            		</ul>
+            	</div>           	
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /主体 -->
+<include file="Public:footer" />  
+
+<script>
+
+	//获取短信验证码
+	$(".get_code").click(function(){
+		var timer =60;
+        var setTime;
+
+         setTime=setInterval(function(){
+                if(timer==0){
+                	$(".get_code").css("background-color","#fff").css("color","#FF6200").css("border","1px solid #FF6200");
+		            $(".get_code").text("重新获取");
+                    clearInterval(setTime);
+                    return;                   
+                }
+                timer--;
+                $(".get_code").text(timer+" s 后重新获取");
+                $(".get_code").css("background-color","#CCC").css("color","#666").css("border","1px solid #CCC");
+            },1000);  
+        
+        $.post("{:U('MemberEmail/CreateEmailBindingCode')}",function(res){
+        	           
+        })
+        
+	})
+	
+	function checkCode(){
+        var data = {'phone_code': $("#checkcode").val()};
+        $.post("{:U('MemberEmail/checkEmailBindingCode')}",data,function(res){
+            if(res.status==1){
+    		  $(".change_box1").css("display","none");
+    		  $(".change_box2").css("display","block");
+    		  $(".step_ul li:eq(0)").removeClass("active");
+    		  $(".step_ul li:eq(1)").addClass("active");
+    	    }else{
+    		  $(".code_error").css("display","block");
+    	    }
+        })        
+    }
+	 
+	//下一步验证短信验证码
+    $(".nextStep1").click(function(){
+    	checkCode();    	
+    })
+    
+    //验证邮箱
+    function bindEmail(){
+        var data = {
+        	'email': $("#myEmail").val(),
+        	'code' : $("input[name='code']").val(),
+        }; 
+        $.post("{:U('MemberEmail/addEmail')}",data,function(res){
+        	
+    
+            if(res.status==1){
+            	$(".step_ul li:eq(1)").removeClass("active");
+    		    $(".step_ul li:eq(2)").addClass("active");
+    		    $(".change_box2").css("display","none");
+    		    $(".change_success").css("display","block");
+            }
+
+        })        
+    }    
+    
+    //验证邮箱格式
+    $("#myEmail").blur(function(){   	        	     
+                 checkEmail();
+     })
+    function checkEmail(){
+	  var reg= /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	  var b=document.getElementById("myEmail").value;
+	  var a=reg.test(b);
+	  
+	  if(a==true){
+		  $(".email_error").css("display","none");
+			}else{
+				$(".email_error").css("display","block"); 
+				}
+		  }
+
+    
+    //下一步修改密码
+     $(".nextStep2").click(function(){
+     	         bindEmail();     	         
+     })
+    
+    //回车键
+    $(".change_box1").keydown(function() {
+             if (event.keyCode == "13"){
+             	 //keyCode=13是回车键
+                 $('.nextStep1').click();                 
+             }
+        }); 
+    $(".change_box2").keydown(function() {
+             if (event.keyCode == "13"){
+             	 //keyCode=13是回车键
+                 $('.nextStep2').click();                 
+             }
+       });
+    
+    //图片验证码
+    function changeCode(obj){
+       var verifyimg = $(obj).attr("src");
+       $(obj).attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
+    }
+     
+     
+     
+     
+     
+    
+  
+  
+  
+
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!-- banner + 导航 -->
+<div class="n-bCol4 min-w1200">
+    <div class="home-nav-wrap mar1200c posRel">
+        <div class="home-menu n-bCol5">
+            <span class="f-16-c1 home-menu-tl all-share">
+                <a style="color:#fff;">所有产品分类</a>
+            </span>
+            <div class="menu n-bCol3">
+                 <ul class="mall_menu">
+                    <volist name="mall_categorys" id="v" key="k">
+                    <if condition="$k lt 14">
+                    <li>
+                        <a href="http://{$Think.server.HTTP_HOST}/mall/c-{$v['id']}.html" target="_blank" title="e橙优品">
+                            {$v['cat_name']}
+                        </a>
+                        <div class="menu-2">
+                            <ul class="menu2_ul">
+                                <volist name="v['child']" id="v1">
+	                                <li>
+	                                	<div class="menu-title"><a href="http://{$Think.server.HTTP_HOST}/mall/c-{$v1['id']}.html" target="_blank">{$v1['cat_name']}</a> <span>></span></div>
+	                                	<div class="menu-classify">
+	                                		<volist name="v1['child']" id="v2">
+		                                      <a href="http://{$Think.server.HTTP_HOST}/mall/c-{$v2['id']}.html" target="_blank">{$v2['cat_name']}</a>
+		                                    </volist>
+	                                	</div>
+	                                </li>
+                                </volist>
+                             </ul>                            
+                        </div>
+                    </li>
+                    </if>
+                    </volist>
+                </ul>  
+            </div>
+        </div>
+        <div class="home-nav-group">
+                <div class="nav f16C1">
+                    <volist name='navs' id='v'>
+                    <a href="{$v['url']}" title="e橙优品" rel="nofollow" target="_blank">{$v['name']}</a>
+                    </volist>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    

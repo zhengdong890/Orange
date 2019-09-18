@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="description" content="" />
+<style>
+*{padding:0; margin:0;font-size:16px;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0} 
+#content{width:98%;height:auto;float:left;margin-left:1%;}
+#content #content_h{width:100%;height:40px;border:1px solid #D7D7D7;line-height:40px;margin-top:15px}
+#content #content_h a{padding-left:10px}
+#content #content_m{width:100%;height:auto;border:1px solid #D7D7D7;padding-bottom:100px;margin-top:20px}
+#content table{margin:0 auto;margin-top:20px}
+#content table td span{float:right}
+#content table td .isshow{width:20px;height:20px;float:left;}
+td{padding-right:30px;padding-top:5px}
+table button{border:0px;background:#C43926;color:white;padding:5px;border-radius:2px;float:left;}
+</style>
+</head>
+<body>          
+<div id="content">
+     <div id="content_h">
+          <a>后台管理中心</a>-><a>添加分类</a>
+     </div>
+     <div id="content_m">		               
+                 <table cellspacing="10">
+                      <tr><td><span>选择分类:</span></td>
+	                      <td>
+					           <select name="cat_id">
+					               <volist name="categorys" id="v">
+					                  <option value="{$v['id']}" style="text-indent:{$v['padding']}">{$v['html']} {$v['cat_name']}</option>
+					               </volist>
+					           </select> 
+	                       </td>
+                       </tr>
+                       <tr><td></td><td><button style="width:100px;">确认添加</button></td></tr>	                     
+                 </table>
+   </div>
+</div>
+</body>
+<script type="text/javascript"> 
+$('button').click(function(){
+	var cat_id=$("select").val();
+	if(cat_id){		
+		window.location.href="{:U('goodsAdd')}?cat_id="+cat_id;
+	}
+})
+</script>
+</html>

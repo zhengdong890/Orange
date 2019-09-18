@@ -1,0 +1,36 @@
+<div class="top ui-grid-a ui-bar-f"> <a href="" title="" class="ui-block-a"><img src="__PUBLIC__/phone/images/logo.gif" alt="" class="logo" /></a>
+          <div class="topright ui-block-b"> 
+            <!-- <img src="__PUBLIC__/phone/images/tel.png" alt="+86-0000-96877" class="tel" /> -->
+          <form id="search" name="search" method="get" action="search.asp" data-ajax="false">
+                    <div class="search">
+                                  <input type="text" name="SeaStr" id="SeaStr" class="textinput"  value="请输入搜索关键词" style="color:#999" onfocus="this.value=''" onblur="if(!value){value=defaultValue;}" />
+                                  <input type="image" src="__PUBLIC__/phone/images/search_but.png"  class="buttoninput" />
+                    </div>
+          </form>
+          </div>
+</div>
+<div class="nav ">
+          <div class="landr ">
+                       <ul class="ui-grid-d">
+                        <volist name="columns" id="v">
+                                <li class="" style="border-left:0"><a href="{:U(ucfirst($v['url']),array('id'=>$v['id']))}" title="{$v['column_name']}" data-ajax="false">{$v['column_name']}</a></li>
+                       </volist>
+                </ul>
+        </div>
+</div>
+<div class="big-pic big-pic3">
+          <div class="big-pic-in">
+                <div class="pic-list" >
+                     <volist name="banner" id="v">                 
+                          <a href="{$v['url']}">
+                              <p><img src="__ROOT__{$v['banner_thumb']|substr=1}" width="100%" max-height="221px"></p>
+                         </a>
+                    </volist>                  
+                </div>
+                <div class="slide-dot">
+                        <span class="slide-dot-cur"></span>
+                        <span class=""></span>
+                        <span class=""></span>
+             </div>
+          </div>
+</div>

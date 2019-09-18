@@ -1,0 +1,1253 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>编辑商品</title>
+<link rel="stylesheet" href="__PUBLIC__/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/css.css" type="text/css">
+<link href="__PUBLIC__/Home/css/footer.css" rel="stylesheet">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/all-use.css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/goods-shelves.css">
+<link rel="stylesheet" href="utf8-jsp/themes/default/css/ueditor.css"/>
+<link type="text/css" rel="stylesheet" href="__PUBLIC__/Home/css/liandong.css">
+<link rel="shortcut icon" href="__PUBLIC__/Home/images/ee.ico" type="image/x-icon">
+<script src="__PUBLIC__/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="__PUBLIC__/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="__PUBLIC__/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="__PUBLIC__/js/validate.js"></script>
+<script src="__PUBLIC__/Home/js/tabs-nav.js"></script>
+<script src="__PUBLIC__/Home/js/store-tool.js"></script>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/js/ueditor/ueditor.all.js"> </script>
+<style>
+.btn{display:block;width:160px;color:white;height:28px;line-height:28px;text-align:center;background:#37A3A3;border-radius:4px;margin:6px auto;}
+.star{ color: #ff771c;}
+.get-img>div{ width: 100%; height: 20px; background-color: rgba(0,0,0,0.4); color: #fff; text-align: center; font-size: 12px;}
+.sku_custom{ width: 100px;}
+.sku_custom_li{margin-left: 10px; display: none;}
+.add_brand{color: #37A3A3; cursor: pointer;}
+.general-info .general-box div textarea{vertical-align: text-top; width: 70%; height: 35px;padding: 4px;}
+.submiting{display: none; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); position: fixed; left: 0; top: 0; z-index: 1000;}
+.submiting div{margin: 400px auto;width: 300px; text-align: center; color: #fff; font-family: "微软雅黑";font-size: 30px;} 
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->   
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="goods-shelves" style='margin-top:20px'>
+    <h2>填写商品信息</h2>
+    <ul class="left_top_ul">
+        <li>类目：</li>
+      <volist name='crumb' id='v'>
+      <li>
+      {$v['cat_name']}<span>></span> 
+      </volist>
+      </li>
+    </ul>    
+    <form class="shelves-section" id='form'>
+        <input type="hidden" name="number"></input>
+        <input type="hidden" name="id" value="{$goods['id']}"></input>
+        <input type="hidden" name="cat_id" value="{$goods['cat_id']}"></input>
+        <div class="section-box general-info clearfix" style="width: 110%;">
+        	<h3 class="fLe"><span class="star">*</span>商品标题: </h3>
+        	<input type="text" name='goods_name' id="biaoti" maxlength='60'  value="{$goods['goods_name']}">
+			
+        	&nbsp;<span class="zishu2">0</span>/60
+        </div>
+		 <div class="section-box general-info clearfix" style="width: 110%;">
+        	<h3 class="fLe"><span class="star">*</span>店铺分类:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </h3>
+			    <select name="shop_cat"  id="selectcat" width="100">  				
+				  <option value ="0">未选择</option> 
+				 <volist name="shopcat" id="vo"> 
+				 <if condition="$getcat_id eq $vo['id']">
+				 <option value ="{$vo.id}" selected="selected">{$vo.html}{$vo.name}</option>
+				 <else/>
+				 <option value ="{$vo.id}">{$vo.html}{$vo.name}</option>
+				 </if>
+				 </volist>
+				 
+				</select>  
+      	
+       	&nbsp;&nbsp;&nbsp;<span style="color:#37A3A3;cursor:pointer;" onclick="showcat()">添加店铺分类</span> 
+        </div>
+		<!--
+		<div class="section-box general-info clearfix" style="width: 110%;">
+        	<h3 class="fLe"><span class="star">*</span>商品所属导航( 如未添加，请在右边添加！ ):&nbsp;&nbsp;&nbsp;&nbsp; </h3>
+			    <select name="navselect"  id="navselect" width="100">  				
+				  <option value ="0">未选择</option> 
+				 <volist name="nav" id="vv"> 
+				  <option value ="{$vv.id}">{$vv.nav_name}</option>  
+				 </volist>
+				</select>  
+      	
+        	&nbsp;&nbsp;&nbsp;<span class="zishu" style="color:#37A3A3;cursor:pointer;" onclick="shownav()">添加店铺导航</span>
+        </div>
+		-->
+        <!--<div class="section-box general-info clearfix">
+        	<h3 class="fLe"><span class="star">*</span>商品数量: </h3>
+        	<input type="text" name='goods_number' id="number" value="{$goods['goods_number']}"/> 台
+        </div>-->
+        <div class="section-box general-info clearfix">
+            <h3 class="fLe"><span class="star">*</span>商品属性: </h3>
+            <p class="ps">错误填写宝贝属性，可能会引起宝贝下架或搜索流量减少，影响您的正常销售，请认真准确填写！</p>
+            <div class="box general-box fRi clearfix">
+                <div style="width: 100%;"><span class="star">*</span> 品牌&nbsp;:&nbsp;                   
+                   <select name="brand_id">
+                        <option value="0">请选择...</option>
+                        <volist name="brands" id="v">
+                           <if condition="$v['id'] eq $goods['brand_id']">
+                              <option value="{$v['id']}" selected='selected'> {$v['brand_name']}</option>
+                           <else/>
+                              <option value="{$v['id']}">{$v['html']} {$v['brand_name']}</option>
+                           </if>
+                        </volist>
+                   </select>&nbsp;&nbsp;
+                   <a href="{:U('SellerGoods/apply_brand')}" class="add_brand" target="_blank">申请添加品牌</a>
+                </div>
+                <div><span class="star">*</span> 型号&nbsp;:&nbsp; <input type="text" name="goods_model" value="{$goods['goods_model']}">
+                </div>                               
+                <div style="padding-left: 28px; box-sizing: border-box;"><span class="star">*</span> 规格&nbsp;:&nbsp; <input type="text" name="spec" value="{$goods_data['spec']}" class="input_border">
+                </div>
+                <div><span class="star">*</span> 用途&nbsp;:&nbsp; <textarea type="text" name="uses" style="border: 1px #d5d5d5 solid;" class="input_border">{$goods_data['uses']}</textarea>
+                </div>                
+                <div><span class="star">*</span> 产品特性&nbsp;:&nbsp; <textarea type="text" name="special" style="border: 1px #d5d5d5 solid;" class="input_border">{$goods_data['special']}</textarea>
+                </div>
+            </div>
+        </div>
+        <!--<div class="section-box general-info clearfix">
+            <h3 class="fLe"><span>*</span>团购申请&nbsp;:&nbsp;</h3>
+            <div class="box more-box fRi clearfix area_select">
+                <if condition="$group_list['goods_id'] eq ''">
+                <div>当前团购&nbsp;:&nbsp;
+                    {$group['title']}
+                </div>                
+                <div>申请加入&nbsp;:&nbsp;
+                    <label><input type="radio" name="is_group" value='1' />是</label>
+                    &nbsp;&nbsp;&nbsp;
+                    <label><input type="radio" name="is_group" value='0' checked/>否</label>
+                </div>  
+                <div>开始时间&nbsp;:&nbsp;
+                    {$group['start_time']}
+                </div> 
+                <div>结束时间&nbsp;:&nbsp;
+                    {$group['end_time']}
+                </div> 
+                <div class="img"><span>团购图片&nbsp;:&nbsp;</span>
+                    <label class="get-img" style="background:url('{$goods[goods_img]|substr=1}') no-repeat; background-size: 100%;">
+                       <input type="file" class="file-img" name='group_img'>
+                    </label>
+                </div>
+                <div>团购价格&nbsp;:&nbsp;
+                    <input type="text" name='goods_group_price' value="">
+                </div>
+                <else/>
+                <input type="hidden" name='is_group' value="1">
+                <div>当前团购&nbsp;:&nbsp;
+                    {$group['title']}
+                </div> 
+                <div>团购价格&nbsp;:&nbsp;
+                    <input type="text" name='goods_group_price' value="{$group_list['goods_group_price']}">
+                </div>                 
+                <div>开始时间&nbsp;:&nbsp;
+                    {$group['start_time']}
+                </div> 
+                <div>结束时间&nbsp;:&nbsp;
+                    {$group['end_time']}
+                </div> 
+                <div class="img"><span>团购图片&nbsp;:&nbsp;</span>
+                    <label class="get-img" style="background:url('{$group_list['group_img']|substr=1}') no-repeat; background-size: 100%;">
+                       <input type="file" class="file-img" name='group_img'>
+                    </label>
+                </div>               
+                </if>        
+            </div>
+        </div>-->
+        <div class="section-box general-info clearfix">
+        	<h3 class="fLe"><span class="star">*</span>添加订货号: </h3>
+            <div class="box general-box fRi clearfix sku_box">
+            <a class="addSKU">添加订货号</a>
+	        <div id="navtab1" unit="{$category['unit']}" unit-unit="{$category['unit_unit']}">
+			    <div title="扩展信息" tabid="tabItem3">
+			        <div id="Div1">
+			            <div position="center">
+			                <div style="padding: 5px 8px;" class="div_content">
+			                    <div class="div_contentlist">
+                                    <volist name='attr' id='v'>
+			                        <ul class="Father_Title"><li>{$v['attr_name']}</li></ul>
+			                        <ul class="Father_Item{$key} Father_Item" attr_id = {$v['attr_id']}>
+                                        <volist name="v['attr_value']" id="v1">
+			                            <li class="li_width"><label><input id="Checkbox3" type="checkbox" class="chcBox_Width attr_value_id{$v1['attr_value_id']}" value="{$v1['attr_value_id']}" /> {$v1['attr_value']}<span class="li_empty"  contentEditable="true"></span></label></li>
+			                            </volist>
+			                            <li class="li_width"><a href='javascript:;' class="add_custom">添加自定义属性</a></li>
+			                        </ul>
+                                    </volist>
+			                    </div>
+			                    <div class="div_contentlist2">
+			                        <ul>
+			                            <li>
+			                            	<div id="createTable">
+			                            	    
+			                                </div>
+			                            </li>
+			                        </ul>
+			                    </div>
+			                    <table cellspacing="0" class="sku_table">
+							          <thead>								          
+							          </thead>
+							          <tbody>
+							          </tbody>                  
+							    </table>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+			</div>
+		</div>
+        <div class="section-box general-info clearfix">
+        	<h3 class="fLe"><span class="star">*</span>商品主图: </h3>
+        	<p class="ps">商品主图大小不能超过<span class="star">3MB</span>，最多可传<span class="star">5</span>张图，<span class="star">700*700</span>以上的图片上传以后宝贝详情页自动提供放大镜功能</p>	
+        	<div class="box general-box fRi clearfix" style="padding: 16px 0 2px 0px; border: none; background-color: white">
+        		<div class="box images-box fRi clearfix" style="border: none; width: 100%;padding: 16px 0 2px 0px; background-color: white">
+            	<div class="img">
+                    <!--上传商品缩略图片-->
+                    <label class="get-img" style="background:url('{$goods['goods_img']|substr=1}'); background-size: 100%;">
+                       <div>商品主图</div>
+                       <input type="file" class="file-img" name='goods_img'>
+                    </label>
+                </div>
+                <volist name="goods_gallery" id="v">
+		        <div class='img'>
+		           <label class='get-img' style="background:url('__ROOT__{$v['gallery_img']|substr=1}'); background-size: 100%;">
+		             <input type='file' class='file-img' name="oldgallery_img{$v['id']}">
+		             <span class='icon-close' data-galleryid="{$v['id']}"></span>       
+		           </label>                                     
+		        </div>
+                </volist> 
+                <for start="1" end="$gallery_number+1" step="1">
+                    <div class='img'>
+                        <label class='get-img'>
+                            <input type='file' class='file-img' name='gallery_img{$i}'>
+                            <span class='icon-close'></span>      
+                        </label>                                      
+                    </div>
+                </for>
+         
+            </div>
+        	</div>
+        </div>
+        <div class="section-box general-info clearfix">
+            <h3 class="fLe"><span>*</span>商品描述&nbsp;:&nbsp;</h3>
+            <textarea class="box editor-box fRi clearfix" name="goods_content" id="myEditor">{$goods_data['goods_content']}</textarea>
+        </div>
+        <div class="section-box general-info clearfix">
+            <h3 class="fLe">&nbsp;&nbsp;&nbsp;&nbsp;物流服务: </h3>
+            <div class="box box2 general-box fRi clearfix">
+                <div style="width: 100%;"><span style="color: #F4F4F4;">*</span> 物流设置&nbsp;&nbsp; <span style="color: #999;">（为了提升消费者购物体验，e橙优品要求全网商品设置运费模板）</span>
+                </div></br>
+                <div style="width: 100%;"><span class="star">*</span> 运费模板&nbsp;:&nbsp; <select class="temp_select" data-id="{$goods['templet_id']}"><option>请选择</option></select> <a href="http://www.orangesha.com/wuliu.html?title=1" target="_blank" class="newTemplate">新建运费模板</a></br>
+                	 <span class="express">快递</span>
+                	 <div class="freight_info">默认运费：<span class="start_number"></span><span class="measurement_unit"></span>内<span class="start_price"></span>元每增加<span class="add_number"></span><span class="measurement_unit"></span>，加<span class="add_price"></span>元  <a href="http://www.orangesha.com/wuliu.html?title=1" target="_blank">查看详情</a></div>
+                	 <div class="freight_info">发货地：<span class="delivery_address"></span></div>
+                </div>
+                <div class="wuliu_div" style="width: 100%; display: none;"><span class="star">*</span> 货物<span class="wuliu_unit"></span>&nbsp;:&nbsp; <input type="text" class="input_border" name="goods_unit" value="{$goods['goods_unit_value']}"> <span style="color: #999;">（<span class="measurement_unit"></span>）请填写货物<span class="wuliu_unit"></span>，运费模板会自动计费</span>
+                </div>
+            </div>
+        </div>
+        <div class="section-box rent-info clearfix">
+            <a class='btn' href='javascript:;'>确认发布</a>
+        </div>
+    </form>
+</div>
+<!--正在上传中-->
+<div class="submiting"> 
+	<div>正在上传中...</div>
+</div>
+<include file="Public:footer" />  
+</body>
+<script type="text/javascript">
+/*
+ * sku全组合
+ * by 597089187@qq.com
+ * */
+(function(w){
+    var __ROWS_NUMBER = [],//需要合并的行数
+        __MERGE_ROWS  = [];//需要合并的单元格
+        __CALL_FUNC   = '';
+        __LENGTH      = 0;
+   
+    function init(data){
+        __LENGTH      = data.length - 1;
+        __ROWS_NUMBER = getRowsNumber(data);//需要合并的行数
+        var data      = array_combination(data);//全组合排列     
+        __MERGE_ROWS  = mergeRows(data);//
+        __CALL_FUNC(data , __MERGE_ROWS , __ROWS_NUMBER , __LENGTH);
+    }
+
+    /*
+     * 获取单元格需要合并的行数
+     * @param array data 
+     * 格式 [{value : ['桔','浅蓝'] , attr_id : 2}]
+     * */
+    function getRowsNumber(data){
+        var l = data.reduce(function(v1 , v2){
+            return v1 * v2.value.length;
+        } , 1);
+        
+        var arr_l = data.map(function(v){
+            return v.value.length;
+        })
+        var result = [];
+        var i = arr_l.length - 1;
+        var j = i;
+        result[i] = 1;
+        for(i-- ; i >= 0 ; i--){        
+            if(arr_l[i] == 1){
+                result[i] = l;
+            }else{
+                result[i] = 1;
+                for(var k = i + 1 ; k <= j ; k++){
+                    result[i] = result[i] * arr_l[k]; 
+                }              
+            }
+        }       
+        return result;
+    }
+    
+    /*
+     * 获取需要合并的单元格
+     * */
+    function mergeRows(data){
+        var temp = [];
+        var is_merge = [];
+        data.map(function(v , k){
+           v.value.map(function(v1 , k1){
+               if(!temp[k1]){
+                   temp[k1] = [];                  
+               }
+               if(temp[k1].indexOf(v1) != '-1'){
+                   var l = temp[k1].length - 1;
+                   if(v1 != temp[k1][l]){
+                      temp[k1].push(v1);
+                      is_merge.push(k.toString() + k1.toString());
+                   }else{
+                        
+                   }          
+               }else{   
+                   temp[k1].push(v1);
+                   is_merge.push(k.toString() + k1.toString());                                
+               }               
+           }) 
+        })
+        return is_merge;
+    }
+
+    /*
+     * 全组合排列 递归从数组头部向后开始组合 每递归一次只组合一次
+     * @param array data 组合排列的数据 格式 [{value : ['桔','浅蓝'] , attr_id : 2}]
+     * @param i     int  组合排列的数据下标 默认从0开始
+     * @param temp_data array 组合一次后返回的数组
+     * @return result array 组合完成后最后的数据
+     * */
+    function array_combination(data , i, temp_data){
+        i = i? i : 0;
+        if(!temp_data){
+            temp_data = [];
+            for(var k in data[i]['value']){
+                var sku = {};
+                sku[data[i]['attr_id'].toString()] = {
+                    attr_value_id : data[i]['attr_value_id'][k],
+                    attr_value    : data[i]['value'][k]
+                };
+                temp_data.push({
+                    value  : [data[i]['value'][k]],
+                    sku    : sku,
+                    unique : data[i]['attr_value_id'][k]  
+                });
+            }
+        }
+        i++;
+        if(data.length == 1){
+            return temp_data;
+        }
+        var result = [];
+        for(var k in temp_data){            
+            for(var k1 in data[i]['value']){
+                var sku = temp_data[k].sku;         
+                sku[data[i]['attr_id'].toString()] = {
+                    attr_value_id : data[i]['attr_value_id'][k1],
+                    attr_value    : data[i]['value'][k1]
+                };
+                var temp    = {
+                    value : clone(temp_data[k].value),
+                    sku   : clone(sku),
+                    unique : temp_data[k].unique + '-' + data[i]['attr_value_id'][k1]  
+                };
+
+                temp.value.push(data[i]['value'][k1]);
+                result.push(temp);
+            }
+        }        
+        if(data.length > i + 1){
+            result = array_combination(data , i , result); 
+        }   
+        return result;
+    }
+
+    /*
+     * 对象复制
+     * */    
+    function clone(obj){ 
+        if(typeof(obj) != 'object') return obj; 
+        if(obj == null) return obj; 
+        if(obj instanceof Array){
+            var new_obj = []; 
+            for(var i in obj){
+                new_obj.push(clone(obj[i])); 
+            }           
+        }else{
+            var new_obj = {}; 
+            for(var i in obj){
+                new_obj[i] = clone(obj[i]); 
+            }               
+        }
+        return new_obj; 
+    }
+
+    window.combination_sku = {
+        i : init,
+        setCallFunction : function(func){
+            __CALL_FUNC = func; 
+        }
+    }
+})(window);
+
+(function(w){
+    var __ATTR         = {$attr_json},//商品所属分类的所有属性
+        __GOODS_ATTR   = {$goods_attr_json},//商品已经拥有的属性
+        __GOODS_SKU    = {$goods_sku_json},//商品已经拥有的sku  
+        __SELECT_SKU   = {},//用户选择的sku组合 
+        __ATTR_SELECT  = {},//用户已经选择的属性       
+        __ATTR_VALUE   = getAttrValue(__ATTR),//属性值id-属性值
+        __ATTR_L       = __ATTR.length,//属性长度
+        __NOW_L        = __ATTR_L,//当前勾选的属性数量
+        __REQUEST_DATA = {}, //ajax请求数据     
+        __DELETE_SKU   = {}, //需要删除的sku
+        __CUSTOM_ID    = -1, //自定义属性id初始值
+        __DAY_HTML     = '', //预计出货期
+        __unit_html    = '',
+        __unitValue_html = '',
+    	__unitUnit_html  = '';
+
+    var __HTML = {
+        //创建头部
+        createHeader : function (){
+            var header_html = '<tr>';
+            __ATTR.map(function(v){
+                header_html = header_html
+                +" <td>"
+                + v.attr_name; 
+                +"</td>";  
+            }); 
+            header_html = header_html 
+                + '  <td>单价（元）</td>'
+                + '  <td>包装数量</td>'
+                + '  <td>预计出货期</td>'
+                + '  <td>sku</td>'
+                + '  <td>操作</td>';
+                + '</tr>';   
+            return header_html;
+        },
+        createHtml : function(data , merge_rows , rows_number , length){
+            __SELECT_SKU = {};
+            var html = '';
+            data.map(function(v ,k){
+                //用户填写的数据缓存记录
+                if(__REQUEST_DATA[v.unique] === undefined){
+                    if(__GOODS_SKU[v.unique] !== undefined){
+                        __REQUEST_DATA[v.unique] = obj.clone(__GOODS_SKU[v.unique]);
+                    }else{
+                        __REQUEST_DATA[v.unique] = {
+                            sku_value  : v.sku,
+                            price      : '',
+                            term       : 0,
+                            sku_code   : '',
+                            unit       : '',
+                            unit_value : 0
+                        };                    
+                    }                    
+                }
+                __SELECT_SKU[v.unique] = true;
+                var sku_id = !__REQUEST_DATA[v.unique].sku_id ? '' : __REQUEST_DATA[v.unique].sku_id;
+                html = html 
+                + '<tr sku_id="' + sku_id +'" flag="' + v.unique + '">';
+                v.value.map(function(v1 , k1){          
+                    if(merge_rows.indexOf(k.toString() + k1.toString()) != '-1' || k1 == length){
+                        html += "<td rowspan='" + rows_number[k1] + "'>" + v1 + '</td>';    
+                    }           
+                });
+                html = html
+                + "    <td>"
+                + "        <input type='text' name='price' value='" + __REQUEST_DATA[v.unique].price + "'/>"
+                + "    </td>"
+                + "    <td>"
+                +      __unitValue_html.replace("value='" + __REQUEST_DATA[v.unique].unit_value + "'" , "value='" + __REQUEST_DATA[v.unique].unit_value + "' selected")
+                +      __unitUnit_html.replace("value='" + __REQUEST_DATA[v.unique].unit_unit + "'" , "value='" + __REQUEST_DATA[v.unique].unit_unit + "' selected")
+                +      __unit_html.replace("value='" + __REQUEST_DATA[v.unique].unit + "'" , "value='" + __REQUEST_DATA[v.unique].unit + "' selected")                
+                + "    </td>"
+                + '    <td>'
+                +      __DAY_HTML.replace("value='" + __REQUEST_DATA[v.unique].term + "'" , "value='" + __REQUEST_DATA[v.unique].term + "' selected")
+                + '    </td>'
+                + '    <td>'
+                + '        <input type="text" name="sku_code" disabled="disabled" class="sku_input" placeholder="由系统生成" value="' + __REQUEST_DATA[v.unique].sku_code + '">'
+                + '    </td>'
+                + '<td>'
+                + '    <a href="javascript:;" class="dele-tr">删除</a>'
+                + '</td>'                               
+                + "</tr>";
+
+            });
+            return html;
+        },
+        //创建单位
+        createUnit:function (){
+            var unit = $("#navtab1").attr('unit');
+            unit = unit.split(',');
+            html = "<select name='unit'>";
+            html += "<option></option><option value='卷'>卷</option><option value='瓶'>瓶</option><option value='升'>升</option><option value='罐'>罐</option><option value='吨'>吨</option><option value='公斤'>公斤</option><option value='桶'>桶</option><option value='筒'>筒</option><option value='盒'>盒</option><option value='个'>个</option><option value='把'>把</option><option value='打'>打</option><option value='架'>架</option><option value='只'>只</option><option value='支'>支</option><option value='包'>包</option><option value='条'>条</option><option value='副'>副</option><option value='根'>根</option><option value='米'>米</option><option value='台'>台</option><option value='件'>件</option><option value='箱'>箱</option><option value='片'>片</option><option value='套'>套</option><option value='双'>双</option><option value='顶'>顶</option>";
+            html += "</select></div>";   
+            return html;
+        },        
+        //创建二级单位
+        createUnitUnit:function (){
+            var unitUnit = $("#navtab1").attr('unit-unit');
+            unitUnit = unitUnit.split(',');
+            html = " <select name='unit_unit'><option></option><option value='卷'>卷</option><option value='瓶'>瓶</option><option value='升'>升</option><option value='罐'>罐</option><option value='公斤'>公斤</option><option value='吨'>吨</option><option value='桶'>桶</option><option value='筒'>筒</option><option value='盒'>盒</option><option value='个'>个</option><option value='把'>把</option><option value='打'>打</option><option value='架'>架</option><option value='只'>只</option><option value='支'>支</option><option value='包'>包</option><option value='条'>条</option><option value='副'>副</option><option value='根'>根</option><option value='米'>米</option><option value='台'>台</option><option value='件'>件</option><option value='箱'>箱</option><option value='片'>片</option><option value='套'>套</option><option value='双'>双</option><option value='顶'>顶</option>"
+            html += '</select> / <div style="position:relative;display:inline-block;"><span style="color:red;position:absolute;right: 2px;top: -3px;">*</span>';   
+            return html;
+        },
+        //创建单位-数字
+        createUnitValue:function (){
+            var __num_HTML = "<select name='unit_value'><option></option>";
+            for(g = 1;g <= 100; g++){
+               __num_HTML +="<option value='" + g + "'>";
+               __num_HTML += g; 
+               __num_HTML +="</option>";      
+            }
+            __num_HTML += '</select>'; 
+            html = "<div style='position:relative;display:inline-block;'>"+__num_HTML+"<span style='color:red;position:absolute;right: 2px;top: -3px;'>*</span></div>" 
+            return html;
+        },
+        //预计发货期
+        createTermHtml : function (value){
+            var __DAY_HTML = "<select name='term'><option value='0'>当</option>";
+            for(g = 1;g <= 60; g++){
+               __DAY_HTML +="<option value='" + g + "'>";
+               __DAY_HTML += g; 
+               __DAY_HTML +="</option>";      
+            }
+            __DAY_HTML += '</select> 天';   
+            return __DAY_HTML;
+        },
+        //创建自定义属性值html
+        createCustom : function(custom_id){
+            html = '' 
+               + '<li class="li_width add_custom_li" custom_id="' + custom_id + '">'
+               + '    <label>'
+               + '        <input id="Checkbox3" type="checkbox" class="chcBox_Width" value="' + custom_id + '"/>'
+               + '        <input placeholder="自定义" type="text" value="" class="sku_custom">'
+               + '        <span class="li_empty"  contentEditable="true"></span>'
+               + '        <a href="javascript:;" class="dele-tr"></a>'
+               + '    </label>'
+               + '    <img class="add_custom_img" src="__PUBLIC__/Home/img/add_custom.png">'
+               + '</li>';   
+            return html;    
+        }
+    }; 
+    var obj = {
+        /*对象是否为空*/
+        isEmpty : function(obj){
+            for(var k in obj){
+                return false;
+            }
+            return true;
+        },
+        /*提取值为键*/
+        objColumn : function(data_ , field){
+            var data = [];
+            for(var k in data_){
+                data[data_[k][field]] = data_[k];
+            }
+            return data;
+        },
+        /*过滤 空的对象*/
+        filterEmpty : function(data){
+            for(var k in data){
+               if(this.isEmpty(data[k])){
+                   delete data[k];
+               }
+            }
+            return data;
+        },
+        /*
+        * 对象复制
+        * */    
+        clone : function(obj , change_key){ 
+            if(typeof(obj) != 'object' || obj == null) return obj; 
+            if(obj instanceof Array){ 
+                var new_obj = []; 
+                for(var i in obj){
+                    new_obj.push(this.clone(obj[i])); 
+                }           
+            }else{
+                var new_obj = {}; 
+                change_key  = typeof(change_key) != 'boolean'  ? false : change_key;
+                var k = 0; 
+                for(var i in obj){                    
+                    if(change_key){
+                        new_obj[k] = obj[i];
+                        k++;
+                    }else{
+                        new_obj[i] = this.clone(obj[i]);
+                    }                   
+                }               
+            }
+            return new_obj; 
+        }
+    };
+
+    /**
+     *事件处理
+     */
+    var event = function(){
+        $(".Father_Item").on('click' , "input[type=checkbox]" , function(){
+            var attr_id       = $(this).parents('ul').attr('attr_id');//选择的属性id
+            var attr_value_id = $(this).val();//选择的属性值id
+            if(__ATTR_SELECT[attr_id] === undefined){
+                __NOW_L++;
+                __ATTR_SELECT[attr_id] = {};
+            }
+            if(__ATTR_SELECT[attr_id][attr_value_id] === undefined){
+                __ATTR_SELECT[attr_id][attr_value_id] =  __ATTR_VALUE[attr_value_id].attr_value;                    
+            }else{
+                delete __ATTR_SELECT[attr_id][attr_value_id];
+                if(obj.isEmpty(__ATTR_SELECT[attr_id])){
+                    delete __ATTR_SELECT[attr_id];
+                    __NOW_L--;
+                }
+            }
+            //属性全部选择了
+            if(__ATTR_L == __NOW_L){
+                var attr = combinationData(__ATTR_SELECT);
+                combination_sku.i(attr);
+            }else{
+                $(".sku_table tbody").html('');
+            }                                   
+        })
+
+        //获取出货期 获取单位
+        $(".sku_table").on('change' , "select" ,function(){
+            var name  = $(this).attr('name');
+            var flag  = $(this).parents('tr').attr('flag');
+            var val   = $(this).val();
+            __REQUEST_DATA[flag][name] = val;   
+        })
+
+        //获取sku价格
+        $(".sku_table").on('blur' , "input" ,function(){                                
+            var name  = $(this).attr('name');
+            var flag  = $(this).parents('tr').attr('flag');
+            var val   = $(this).val();      
+            __REQUEST_DATA[flag][name] = val;
+        });
+
+        //删除已经有的sku
+        $(".sku_table").on('click' , ".dele-tr" ,function(){
+            var sku_id = $(this).parents('tr').attr('sku_id'); 
+            var flag  = $(this).parents('tr').attr('flag');
+            var _this  = this;
+            __DELETE_SKU[sku_id] = sku_id;
+            delete __GOODS_SKU[flag];
+            delete __REQUEST_DATA[flag];   
+        })             
+    }
+
+    /**
+     * 由于用户已经拥有选择的属性 需要把已经选择的checkbox打勾
+     * @param array old_goods_attr  原来选择的属性 类型为数组
+     */    
+    function attrCheckInit(old_goods_attr){
+        old_goods_attr.forEach(function(v , k){
+            $(".attr_value_id" + v.attr_value_id).prop("checked",true);
+        })       
+    }
+
+    /**
+     * 用户选择的属性初始化
+     * 把用户原来选择的属性先加入   __ATTR_SELECT变量数据集里面 
+     * @param array old_goods_attr  原来选择的属性 类型为数组
+     */
+    function attrSelectInit(old_goods_attr){
+        var data = {};
+        old_goods_attr.forEach(function(v , k){
+            if(data[v.attr_id] === undefined){
+                data[v.attr_id] = {};
+            }
+            data[v.attr_id][v.attr_value_id] = v.attr_value;
+        })
+        return data;
+    }
+
+    /**
+     * 用户拥有的sku格式初始化 
+     * sku属性值id之间 以 - 符合进行分割 作为新格式下标 
+     * @param array goods_sku  原来拥有的 类型为数组
+     */    
+    function goodsSkuInit(goods_sku){
+        var data = {};
+        goods_sku.forEach(function(v , k){
+            var unique = v.sku_value.map(function(v1 , k1){
+                return v1.attr_value_id;
+            });
+            unique = unique.join('-');
+            data[unique] = {
+                term       : v.term,
+                unit       : v.unit,
+                unit_unit  : v.unit_unit,
+                unit_value : v.unit_value,
+                price      : v.price,
+                sku_id     : v.sku_id,
+                sku_code   : v.sku_code        
+            }
+        })
+        return data;
+    }
+
+    /**
+     * 组合数据成sku插件需要的数据格式
+     */
+    function combinationData(data){
+        var new_data = [];
+        for(var k in data){
+            var arr = [];
+            var attr_value_id = [];
+            for(var k1 in data[k]){
+                arr.push(data[k][k1]);
+                attr_value_id.push(k1);
+            }
+            new_data.push({value : arr , attr_id : k , attr_value_id : attr_value_id});
+        }    
+        return new_data; 
+    }
+
+    /**
+     * 新输入的sku值 相对原来的sku 未改变的数据不需要上传到服务器修改 过滤掉 
+     * @param object old_sku 旧的sku
+     * @param object new_sku 新输入的sku
+     */      
+    function noChangeSkuFilter(old_sku , new_sku){
+        var data = {};
+        for(var k in old_sku){
+            var sku_data = old_sku[k];
+            var is_empty = true;
+            if(new_sku[k].sku_id === undefined){
+                continue;
+            }
+            data[k] = {sku_id : new_sku[k].sku_id};
+            for(var k1 in sku_data){
+                if(new_sku[k][k1] !== sku_data[k1]){
+                    data[k][k1] = new_sku[k][k1];
+                    is_empty = false;
+                }
+            }
+            if(is_empty){
+                delete data[k]; 
+            }
+        }
+        return data;
+    }
+
+    /**
+     * 获取属性值 以属性值id为下标的方式 组合
+     * @param object data 该商品所属分类的所有的属性
+     */   
+    function getAttrValue(data){
+    	var attr_value = {};
+        for(var k in data){
+        	var temp = data[k].attr_value;
+            for(var k1 in temp){
+                attr_value[temp[k1].attr_value_id] = {attr_value : temp[k1].attr_value};
+            }
+        }
+        return attr_value;
+    }   
+
+    w.sku = {
+    	init : function(){
+            //创建预计出货期的Html
+    		__DAY_HTML      = __HTML.createTermHtml();
+            //创建单位值html
+    		__unitValue_html = __HTML.createUnitValue();
+            //创建单位单位html
+    		__unitUnit_html  = __HTML.createUnitUnit();
+            //创建单位html
+    		__unit_html   = __HTML.createUnit();
+            //用户选择的属性初始化	
+            __ATTR_SELECT = attrSelectInit(__GOODS_ATTR);	
+            //用户拥有的sku初始化
+            __GOODS_SKU   = goodsSkuInit(__GOODS_SKU);//obj.objColumn({$goods_sku_json} , 'sku_id');
+            //用户拥有的属性 在checkbox那里勾上
+            attrCheckInit(__GOODS_ATTR);
+            //事件处理
+            event();
+            //设置属性组合的回调函数
+            combination_sku.setCallFunction(function(data , merge_rows , rows_number , length){
+                var html = __HTML.createHtml(data , merge_rows , rows_number , length);
+                $(".sku_table tbody").html(html);
+            });
+            //设置头部
+            $(".sku_table thead").append(__HTML.createHeader());
+            //属性组合      
+            var attr = combinationData(__ATTR_SELECT);
+            combination_sku.i(attr);
+    	},
+    	requestSkuData : function(){
+    		var sku = {};
+    		for(var k in __REQUEST_DATA){
+                sku[k] = __REQUEST_DATA[k];
+    		}
+    		return {
+    			attr : __ATTR_SELECT,
+    			sku  : sku
+    		};
+    	},
+        //获取需要删除的sku
+        getDeleteSku : function(){
+            var data = [];
+            for(var k in __DELETE_SKU){
+                data.push(__DELETE_SKU[k]);
+            }
+            return data;
+        },
+        //获取需要修改的数据
+    	getSkuUpdateData : function(){
+            var data = noChangeSkuFilter(__GOODS_SKU , __REQUEST_DATA);
+    		if(obj.isEmpty(data)){
+                return false;
+    		}
+            data = obj.clone(data , true);
+            return data;
+    	},
+        //获取需要增加的数据
+    	getSkuAddData : function(){
+            var data = {};
+            var add_data = {};
+            var attr = {};
+            /*先获取新增加的数据*/
+            for(var k in __REQUEST_DATA){
+                if(__REQUEST_DATA[k].sku_id === undefined){
+                    if(__REQUEST_DATA[k].price == "" || __SELECT_SKU[k] !== true){
+                        continue;
+                    }
+                    add_data[k] = obj.clone(__REQUEST_DATA[k]);
+                }
+            }
+
+            /*获取用户选择的属性*/                   
+    		if(obj.isEmpty(__ATTR_SELECT) && __ATTR_L != 0){
+                attr = false;
+    		}else{
+        		for(var k in __ATTR_SELECT){
+        			var attr_value = __ATTR_SELECT[k];
+        			attr[k] = {};
+        			for(var k1 in attr_value){
+                        attr[k][k1] = {
+                            attr_value    : __ATTR_VALUE[k1].attr_value,
+                            attr_value_id : k1
+        			    }
+        			}   			
+        		}
+    		}           
+            data.attr = attr;
+            if(!obj.isEmpty(add_data)){
+                data.sku = add_data;
+            }
+    		return data;
+    	}
+    }    
+})(window);
+sku.init();
+
+//判断其他属性数量
+    function check_skulength(){
+    	if($(".sku_table>thead>tr>td").length>=8){
+    		$(".sku_table").css("width","1200px")
+    	}
+    	if($(".sku_table>thead>tr>td").length>=10){
+    		$(".sku_table").css("width","1400px")
+    	}
+    	if($(".sku_table>thead>tr>td").length>=12){
+    		$(".sku_table").css("width","1600px")
+    	}
+    	if($(".sku_table>thead>tr>td").length>=14){
+    		$(".sku_table").css("width","2000px")
+    	}
+    	if($(".sku_table>thead>tr>td").length>=16){
+    		$(".sku_table").css("width","2400px")
+    	}
+    }
+    check_skulength()
+
+//标题input获取焦点
+$("input").focus(function(){
+	$(this).css("border","1px solid #37A3A3")
+})
+$("input").blur(function(){
+	$(this).css("border","1px solid #D5D5D5")
+})
+
+//标题字数统计
+$('#biaoti').bind('input propertychange', function() {  
+    $('.zishu2').html($(this).val().length); 
+});  
+
+var goods = {$goods_json};
+/**
+ * 商品相册和图片
+ */
+var goods_gallery = (function(){
+     $(".get-img").on('change','input',function(){
+        var file   = $(this)[0].files[0];   
+        var file_size  = $(this)[0].files[0].size;
+        var reader = new FileReader(); 
+        var _this  = this;
+        
+        var filepath=$(this).val();
+	  	var extStart=filepath.lastIndexOf(".");
+	  	var ext=filepath.substring(extStart,filepath.length).toUpperCase();
+	  	var size = file_size / 1024;
+	  	if(ext!=".BMP"&&ext!=".PNG"&&ext!=".GIF"&&ext!=".JPG"&&ext!=".JPEG"){
+		  	alert("图片限于bmp,png,gif,jpeg,jpg格式");
+	  	}else if(size > 3100){
+	  		alert("上传的文件大小不能超过3M！");
+	  	}else{
+		    //将文件以Data URL形式读入页面  
+	        reader.readAsDataURL(file);  
+	        reader.onload=function(e){ 
+	            num++; 
+	            //显示文件      
+	            $(_this).parent('.get-img').css("background","url("+this.result+") no-repeat").css("background-size","100%");
+	        }  
+	        $("input[name='number']").val(num);//设置上传图片个数  
+	  	}        
+    })
+
+    /*$(".images-box").on('change','input',function(){
+        var file   = $(this)[0].files[0];   
+        var reader = new FileReader(); 
+        var _this  = this; 
+        //将文件以Data URL形式读入页面  
+        reader.readAsDataURL(file);  
+        reader.onload=function(e){ 
+            //显示文件      
+            $(_this).parent('.get-img').css("background","url("+this.result+") no-repeat").css("background-size","100%");
+        }  
+    }) */
+
+    /*添加商品相册*/
+    var num = 0;
+    $(".get-img2").click(function(){
+        num++; 
+        var html  = "<div class='img'>";
+            html += "<label class='get-img'>";
+            html += "<input type='file' class='file-img' name='gallery_img" + num + "' >";
+            html += "<span class='icon-close'></span>";          
+            html += "</label>";                                      
+            html += "</div>";                            
+        $(this).parent('.img').before(html);         
+        $("input[name='number']").val(num);//设置上传图片个数  
+    })         
+
+    $(".images-box").on('click','.icon-close',function(){
+    	$(this).prev().prop('disabled','true');
+    	var gallery_id =$(this).attr('data-galleryid');
+    	if(gallery_id){
+     		if(confirm('确认删除?')){  
+     			var _this = this;
+		     	$.post("{:U('goodsGalleryDelete')}",{"gallery_id":gallery_id},function(res){      
+		            alert(res['msg']);
+		            if(res['status']){
+		                $(_this).parent("label").parent(".img").remove();  
+		            } 
+		        });
+		    }
+    	}else{
+	        num--; 
+	        $("input[name='number']").val(num);//设置上传图片个数 
+	        $(this).parent("label").parent(".img").remove();   		
+    	}                
+    })  
+})();
+
+//获取运费模板
+$.post("http://www.orangesha.com/index.php/Home/ShippingTemplet/getShippingTemplet",function(res){		
+	var html = "<option value='null'>请选择</option>";
+    for(var k in res.data){
+    	 html +="<option value='"+k+"' data-id='"+res.data[k].id+"'>";
+    	 html += res.data[k].name;
+    	 html +="</option>";	    	 
+    }  
+	$(".temp_select").html(html);
+	var c = $(".temp_select").attr("data-id")	
+	for(var i = 0;i<$(".temp_select option").length;i++ ){
+		if(c==$(".temp_select option").eq(i).attr("data-id")){
+			$(".temp_select").val($(".temp_select option").eq(i).val())
+		}
+	}
+	var d = $(".temp_select").val()
+	$(".freight_info").css("display","block");
+	$(".freight_info .delivery_address").text(res.data[d].province +" "+ res.data[d].city);	
+	$(".freight_info .start_number").text(res.data[d].start_number);
+	$(".freight_info .start_price").text(res.data[d].start_price);
+	$(".freight_info .add_number").text(res.data[d].add_number);
+	$(".freight_info .add_price").text(res.data[d].add_price);
+	
+	if(res.data[d].unit==1){
+		$(".wuliu_unit").text("件数");
+		$(".measurement_unit").text("件");
+	}
+	if(res.data[d].unit==2){
+		$(".wuliu_unit").text("重量");
+		$(".measurement_unit").text("千克");
+	}
+	if(res.data[d].unit==3){
+		$(".wuliu_unit").text("体积");
+		$(".measurement_unit").text("立方");
+	}
+});
+
+$(".temp_select").click(function(){	 	
+		$.post("http://www.orangesha.com/index.php/Home/ShippingTemplet/getShippingTemplet",function(res){ 			
+			var html = "<option value='null'>请选择</option>";
+		    for(var k in res.data){
+		    	 html +="<option value='"+k+"'>";
+		    	 html += res.data[k].name;
+		    	 html +="</option>";	    	 
+		    }  
+			$(".temp_select").html(html)
+		});
+})
+
+$(".temp_select").change(function(){	
+	var val = $(this).val()
+	if($(".temp_select").val()=="null"){
+		$(".freight_info").css("display","none")
+	}else{
+		$.post("http://www.orangesha.com/index.php/Home/ShippingTemplet/getShippingTemplet",function(res){ 
+			$(".freight_info").css("display","block");
+			$(".temp_select").attr("data-id",res.data[val].id)
+	    	$(".freight_info .delivery_address").text(res.data[val].province +" "+ res.data[val].city);	
+	    	$(".freight_info .start_number").text(res.data[val].start_number);
+	    	$(".freight_info .start_price").text(res.data[val].start_price);
+	    	$(".freight_info .add_number").text(res.data[val].add_number);
+	    	$(".freight_info .add_price").text(res.data[val].add_price);
+	    	if(res.data[val].free_status==1){
+			    $(".wuliu_div").css("display","block");
+			}
+			if(res.data[val].free_status==2){
+				$(".wuliu_div").css("display","none");
+			}
+	    	if(res.data[val].unit==1){
+	    		$(".wuliu_unit").text("件数");
+	    		$(".measurement_unit").text("件");
+	    	}
+	    	if(res.data[val].unit==2){
+	    		$(".wuliu_unit").text("重量");
+	    		$(".measurement_unit").text("千克");
+	    	}
+	    	if(res.data[val].unit==3){
+	    		$(".wuliu_unit").text("体积");
+	    		$(".measurement_unit").text("立方");
+	    	}
+		});
+	}	
+})
+
+var formSubmit = (function(){
+    var data      = {},
+        is_group  = $("input[name='is_group']:checked").val(),
+        sku_rules = {
+            'price' : {
+                'require' : '价格必须填写'
+            }            
+        },
+        sku_msg  = {
+            'price' : '价格必须填写'
+        },
+        rules    = {
+            'goods_name' : {
+                'require' : '请输入商品名称'
+             },
+             'goods_group_price' : {
+                'require' : '请输入团购价格',
+                'regex'   : [/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/,'请输入正确的团购价格']
+             }, 
+             'goods_model' : {
+                'require' : '请输入商品型号'
+             }       
+        },
+        msg = {
+           'goods_name' : '',           
+           'goods_model': '',
+           'goods_group_price' : '请输入团购价格'
+        };
+
+    if(is_group == 0){      
+        msg.goods_group_price = '';
+    }
+
+    var validate = new formValidate({
+        rules:rules,
+        msg:msg
+    });
+
+    $(".btn").click(function(){
+        if(is_group){
+        	var r = validate.checkSubmitStatus();
+        }else{
+        	var r = validate.checkSubmitStatus(['goods_group_price']);
+        }
+        if(!r){
+            alert(validate.getFirstError());
+        }else{
+            request();     
+            //$(".btn").css("display","none");
+        } 
+    })
+    
+    $("input").blur(function(){
+        var attr_name = $(this).attr('name');
+        if(attr_name && attr_name != 'is_group'){
+           data[attr_name] = $(this).val();        
+           var val    = $(this).val();
+           var result = validate.checkField(attr_name,val);
+           if(result){           
+                //$(this).siblings('.error').text(result);                     
+           }else{
+                //$(this).siblings('.error').text('');
+           }    
+        }      
+    })
+    
+    $("input[name='is_group']").click(function(){
+        is_group =  $(this).val();    
+    })
+
+    /*
+     * 检测新增的sku数据是否合法
+     **/   
+    function checkAddSkuData(data){
+        var validate = new formValidate({
+            rules : sku_rules,
+            msg   : sku_msg
+        });
+        for(var k in data){
+            for(var k1 in data[k]){
+                var result = validate.checkField(k1 , data[k][k1]);
+                if(result){
+                    return result;
+                }
+            }
+        }
+        return true;
+    }
+
+    /*
+     * 提交数据
+     **/
+    function request(){  
+        var data = new FormData($("#form")[0]);  // 要求使用的html对象
+        var url  = "{:U('SellerGoods/goodsUpdate')}";
+        var url_ = "{:U('SellerGoods/goodsList')}";
+        /*需要修改的sku*/
+        var old_sku = sku.getSkuUpdateData();
+        if(old_sku){
+        	data.append("old_sku", JSON.stringify(old_sku));
+        }   
+        /*需要增加的sku*/    
+        var new_sku = sku.getSkuAddData();
+        if(new_sku.attr){
+        	data.append("new_attr", JSON.stringify(new_sku.attr));       	
+        } 
+        if(new_sku.sku !== undefined){
+            var r = checkAddSkuData(new_sku.sku);
+            if(r !== true){
+                alert(r);
+                return r;
+            }else{
+                data.append("new_sku", JSON.stringify(new_sku.sku));
+            }         
+        }
+        /*需要删除的sku*/
+        var delete_sku = sku.getDeleteSku();
+        data.append("delete_sku" , delete_sku);
+        data.append("number", {$gallery_number});
+        data.append('templet_id' , $(".temp_select").attr("data-id"));
+        data.append('goods_unit_value' , $("input[name='goods_unit']").val()); 
+        //$(".submiting").css("display","block")
+        
+        $.ajax({  
+              url : url ,  
+              type: 'POST',  
+              data: data,  
+              async: true,  
+              // 下面三个参数要指定，如果不指定，会报一个JQuery的错误 
+    　　　　　cache: false,  
+              contentType: false,  
+              processData: false,  
+              success: function (res){
+                  alert(res.msg);
+                  console.log(res)
+                  if(res.status){
+                     window.location.href = url_;
+                  } 
+                  if(res.status==0){
+	              	alert(res.msg);
+	              	$(".submiting").css("display","none")
+	              	$(".btn").css("display","block")
+	              }
+              },  
+              error: function (returndata) {  
+                  console.log(returndata); 
+              }  
+         });  
+    }   
+})();
+
+window.onload = function(){
+     window.UEDITOR_HOME_URL = "__PUBLIC__/js/ueditor/";
+     UE.getEditor('myEditor', {
+         theme:"default", //皮肤
+         lang:"zh-cn", //语言
+         initialFrameWidth:845,  //初始化编辑器宽度,默认800
+         initialFrameHeight:400,
+         allHtmlEnabled:false,
+     })
+}  
+
+function showcat(){
+    
+      window.location.href="{:U('ShopCategory/categoryList')}";	
+  
+}
+</script>
+</html>

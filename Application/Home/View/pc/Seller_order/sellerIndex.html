@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>我的商城</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/all-use.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/side-nav.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/sell-management.css">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/shopIndex.css">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end --> 
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="Public:sellerLeft" />  
+        <div class="user-right marT20 fRi">
+            <div class="sell-management clearfix" style='width:auto'>
+                <div class="shop_info">
+				
+                  <div class="info_header">				  
+                 	<ul>
+                 		<li class="info_headerli"><a href="http://{$domain}.orangesha.com"<h3>友佳精密专营店&nbsp;&nbsp;&nbsp;</a><span><img src="../../../../../Public/Home/image/shopIndex_rate.png"></span> <span><img src="../../../../../Public/Home/image/shopIndex_rate.png"></span> <span><img src="../../../../../Public/Home/image/shopIndex_rate.png"></span> <span><img src="../../../../../Public/Home/image/shopIndex_rate.png"></span> <span><img src="../../../../../Public/Home/image/shopIndex_rate.png"></span></h3></li>
+                 		<li><a href="http://{$domain}.orangesha.com" target="_blank">查看e橙店铺</a></li>
+                 		<li>消保服务：<a href="{:U('MemberCenter/safeguard')}" target="_blank" style="color: #2D83FB;">订单险</a>  <span class="notOpen">未开通</span></li>
+                 	</ul>
+                 	<ul>
+                 		<li>店铺动态评分</li>
+                 		<li>描述相符：</br><span class="shop_score">{$shop_data['desc_score']}</span></li>
+                 		<li>服务态度：</br><span class="shop_score">{$shop_data['service']}</span></li>
+                 		<li>物流服务：</br><span class="shop_score">{$shop_data['logistical']}</span></li>
+                 	</ul>
+                  </div>
+                  <div class="notice" style="height: 150px;">
+                 	<div>店铺公告 <a href="{:U('Shop/shop_notice')}" target="_blank">更多</a></div>
+                 	<ul>
+                    <foreach name="goods_check" item="vo">
+                    <li>
+                    <a href="{:U('Shop/shop_notice')}&id={$vo.id}" target="_blank"><span class="news_title">{$key+1}.{$vo.content}</span> <span class="star" style="vertical-align: top;">new</span>     <span class="releaseDate">{$vo.time|date="Y-m-d",###}</span></a>
+                    </li>
+                    </foreach>
+                    <foreach name="news_notice" item="vo">
+                    <li>
+                    <a href="http://www.orangesha.com/gonggao-{$vo.id}.html" target="_blank"><span class="news_title">{$key+$num+1}.{$vo.title}</span> <span class="star" style="vertical-align: top;">new</span>     <span class="releaseDate">{$vo.create_time|date="Y-m-d",###}</span></a>
+                    </li>
+                    </foreach>   	
+                 	</ul>
+                  </div>
+                  <div>
+                 	 <img src="../../../../../Public/Home/image/sellerIndex_banner.jpg" />
+                  </div>
+                  <div class="schedule">
+                 	<div>待办事项</div>
+                 	<ul>
+                 		<li>待发货订单：<span class="schedule_span">0</span></li>
+                 		<li>待审核退货订单：<span class="schedule_span">0</span></li>
+                 		<li>被举报商品：<span class="schedule_span">0</span></li>
+                 		<li>待付款订单：<span class="schedule_span">0</span></li>
+                 		<li>待审核退款订单：<span class="schedule_span">0</span></li>
+                 		<li>待维权订单：<span class="schedule_span">0</span></li>
+                 		<li>审核未通过商品：<span class="schedule_span">0</span></li>
+                 		<li>违规记录：<span class="schedule_span">0</span></li>
+                 	</ul>
+                  </div>
+                  <div class="today_data">
+                 	<div>数据统计  <a class="more_info" href="#">更多</a></div>
+                 	<ul>
+                 		<li>成交订单 <p class="today_data_p">0</p></li>
+                 		<li>成交金额 <p class="today_data_p">0.00</p></li>
+                 		<li>访客数 <p class="today_data_p">0</p></li>
+                 		<li>浏览量 <p class="today_data_p">0</p></li>
+                 		<li>新增收藏 <p class="today_data_p">0</p></li>
+                 	</ul>
+                  </div>
+                </div> 
+            </div>           
+        </div>
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+    
+    
+    function changeColor(){
+    	var list = document.getElementsByClassName('schedule_span');
+    	
+        for(var i = 0; i < list.length; i++) {
+        	
+           if(list[i].innerText!=0){
+    		  list[i].style.color="#FF6906"
+    	   }
+        }
+    }
+    //店铺评分
+    function scoreColor(){
+    	var list = document.getElementsByClassName('shop_score');
+    	for(var i = 0; i < list.length; i++) {
+        	
+           if(list[i].innerText>=4){
+    		  list[i].style.color="#FF6906"
+    	   }
+           if(list[i].innerText<4){
+    		  list[i].style.color="#37A4A2"
+    	   }
+        }
+    }    
+    
+    function changeColor2(){
+    	var list = document.getElementsByClassName('today_data_p');
+    	
+        for(var i = 0; i < list.length; i++) {
+        	
+           if(list[i].innerText!=0 && list[i].innerText!=0+"万"){
+    		  list[i].style.color="#FF6906"
+    	   }
+        }
+    }
+    
+    //判断卖家是否开通商店
+    	function checkSellermall(){
+    		$.post("{:U('MemberCenter/getMallData')}", function(res){
+	            console.log(res.code);
+	            if(res.code==1){
+	            	window.location.href="{:U('MemberCenter/sellerMall')}";	
+	            	$(".btn-box").css("display","block");
+	            }            
+	            if(res.code==2){
+	            	window.location.href="{:U('MemberCenter/sellerMall')}";
+	            	$(".btn-box2").css("display","block");
+	            	$(".btn-box").css("display","none");
+	            	document.getElementById("leftTime").innerText=res.time
+	            }
+			});
+    	}
+    
+    //页面加载完毕后执行
+    $(window).load(function(){
+    	changeColor();
+        changeColor2();
+        scoreColor();
+        checkSellermall();
+    });
+  
+    
+            var member_id = "{$member_id}";
+            var shop_status = "{$shop_status}";
+			var shop_name = "{$shop_data.shop_name}";
+			var shop_desc = "{$shop_data.desc}";
+			var shop_thumb = "{$shop_data.thumb|substr=1}";		
+            var nopay ="{$nopay}";
+            var nosend ="{$nosend}";						
+            var jiaoyiok = "{$jiaoyiok}";
+            var totalprice = "{$totalprice}";
+			var visi_num = "{$visi_num}";
+			var ip_nums = "{$visitor_ip}";
+			var ip_num = parseInt(ip_nums) ? parseInt(ip_nums) : 0;
+			var totalprices = parseFloat(totalprice)/10000 ? parseFloat(totalprice)/10000 : 0;
+			if( shop_status==1 ){	
+			  $('.info_header').css({"background":"url("+shop_thumb+") no-repeat 8px 10px"});
+			  $('.info_header').find('ul:eq(0)').find('li:eq(0)').html('<a href=\"http://'+member_id+'.orangesha.com\"<h3>'+shop_name+'&nbsp;&nbsp;&nbsp;</a><span><img src="../../../../../Public/Home/image/shopIndex_rate.png"></span> <span><img src="../../../../../Public/Home/image/shopIndex_rate.png"></span> <span><img src="../../../../../Public/Home/image/shopIndex_rate.png"></span> <span><img src="../../../../../Public/Home/image/shopIndex_rate.png"></span> <span><img src="../../../../../Public/Home/image/shopIndex_rate.png"></span></h3>');			
+              $('.today_data').find('ul').find('li:eq(0)').find('p').html(jiaoyiok);
+              $('.today_data').find('ul').find('li:eq(1)').find('p').html(totalprices+'万');
+			  $('.today_data').find('ul').find('li:eq(2)').find('p').html(ip_num);
+              $('.today_data').find('ul').find('li:eq(3)').find('p').html(visi_num);						  			  
+			  // $(' .shop-title').html('<h1>'+shop_name+'</h1>'+shop_desc+'');
+              // $('.conpanyname').find('p').html(shop_name); 			   
+			}
+			
+			$('.schedule').find('ul').find('li:eq(0)').find('span').html(nosend);
+			$('.schedule').find('ul').find('li:eq(3)').find('span').html(nopay);
+		
+		$(".more_info").click(function(){
+			alert("暂无更多！")
+		})
+		
+		
+</script>
+</body>
+</html>

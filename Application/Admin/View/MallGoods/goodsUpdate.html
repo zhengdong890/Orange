@@ -1,0 +1,507 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/validate.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/ueditor/ueditor.all.js"></script>
+<meta name="description" content="" />
+<style>
+*{padding:0; margin:0;font-size:16px;font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0} 
+   textarea{outline:none;resize:none;}
+/****内容样式****/  
+#content{width:98%;height:auto;float:left;margin-left:1%;}
+/****内容头部面包屑样式*****/
+#content #content_h{width:100%;height:40px;border:1px solid #D7D7D7;line-height:40px;margin-top:15px;float:left;}
+#content #content_h a{padding-left:10px}
+/****添加信息列表样式start****/   
+#content #content_m{width:100%;height:auto;border:1px solid #D7D7D7;padding-bottom:100px;margin-top:20px;float:left;}
+/****头部导航样式****/   
+#content_m_h{width:100%;height:40px;float:left;background:#EFEFEF}   
+#content_m_h a{display:block;width:90px;height:40px;float:left;text-align:center;line-height:40px;color:#787878;font-size:14px;} 
+#content_m_h a:nth-child(1){background:white;color:#192E32}   
+/****列表信息样式****/    
+#content_m #content_m_m{width:100%;height:auto;float:left;}
+#content_m_m form{width:100%;height:auto;float:left;}     
+#content_m table{width:100%;margin:0 auto;}    
+#content_m table td .isshow,.checkbox{width:20px;height:20px;float:left;}
+form input[type='text']{width:400px;height:20px;border-radius:3px;border-bottom:1px solid #E3E9EF;border-top:1px solid #ABADB3;border-left:1px solid #E2E3EA;border-right:1px solid #DBDFE6}
+form textarea{width:500px;height:160px;border-radius:3px;border-bottom:1px solid #E3E9EF;border-top:1px solid #ABADB3;border-left:1px solid #E2E3EA;border-right:1px solid #DBDFE6}
+.class{display:none;width:100%;}   
+.label{text-align:right;vertical-align:top;font-weight:bold;width:30%;font-size:14px;padding:4px 8px} 
+form td img{max-width:250px}
+form button{border:0px;background:#C43926;color:white;padding:5px;border-radius:4px;float:left;}
+#goodsattr table{width:100%}
+#attr table{width:100%}
+#extendattr input{margin-right:10px}
+.span_label{display:block;width:auto;height:auto;float:left;font-weight:bold;color:blue}
+.goods_attrgallery_del{display:block;height:40px;float:left;line-height:40px;margin-left:6px}
+/****上传按钮样式构造****/
+.btn_addimg{display:block;width:100px;margin-top:5px;color:white;position:relative;height:28px;line-height:28px;text-align:center;float:left;background:#C43926;border-radius:4px;}
+.btn_addimg input{width:100px;position:absolute;left:0;top:0;filter:alpha(opacity=50);-moz-opacity:0;-khtml-opacity:0;opacity:0;}
+/****表单图片****/
+form td .img{width:100px;height:auto;float:left;}
+form td .img img{max-width:100%;max-height:100px;float:left}
+/*相册属性样式*/
+.gallery{width:220px;height:300px;float:left;margin-left:20px;}
+.gallery:nth-child(1){margin-left:0}
+.gallery a{display:block;width:100px;margin-top:10px;margin-left:20px;position:relative;height:28px;line-height:28px;text-align:center;float:left;background:#C43926;border-radius:4px;color:white}
+.gallery a input{width:100px;position:absolute;left:0;top:0;filter:alpha(opacity=50);-moz-opacity:0;-khtml-opacity:0;opacity:0;}
+.gallery a:nth-child(3){margin-left:0}
+.gallery li{width:200px;height:200px;display:table-cell;vertical-align:middle;text-align:center;}
+.gallery li img{max-width:100%;max-height:200px}
+.gallery p{width:100%;height:auto;float:left}
+.gallery p input{width:220px}
+.gallery_add{display:block;width:160px;height:255px;float:left;margin-left:10px;border-radius:4px;text-align:center;line-height:255px}
+.btn{display:block;width:100px;margin-top:10px;color:white;position:relative;height:28px;line-height:28px;text-align:center;float:left;background:#C43926;border-radius:4px;}
+select{height:26px;}
+</style>
+</head>
+<body>          
+<div id="content">
+     <div id="content_h">
+          <a>后台管理中心</a>-><a>商品编辑</a>
+     </div>
+     <div id="content_m">
+           <div id="content_m_h">
+               <a href="javascript:void(0)" style="margin-left:20px">通用信息</a>
+               <a href="javascript:void(0)">商品相册</a>
+               <a href="javascript:void(0)">详细描述</a>
+           </div>
+           <div id="content_m_m">
+		       <form id='form'>
+                  <input type="hidden" name="number"></input>
+                  <input type="hidden" name="id" value="{$goods['id']}"></input>
+                  <input type="hidden" name="cat_id" value="{$goods['cat_id']}"></input>
+                  <!-- 商品通用信息start -->
+		              <div class="class" style="display:block">		                    	   
+ 		                  <table cellspacing="10">
+                                 <tr>
+                                        <td class="label">商品名称:</td>
+                                        <td>
+                                        <input type="text" name="goods_name" value="{$goods['goods_name']}"></input>
+                                        <span class='error'></span>
+                                        </td>
+                                 </tr>
+                                 <tr>
+                                     <td class="label">所属分类:</td>
+                                     <td>
+                                         {$pcategory['cat_name']}   
+                                     </td>
+                                 </tr>
+                                 <tr><td class="label">商品品牌:</td>
+                                       <td>
+                                           <select name="brand_id">
+                                                <option value="0">请选择...</option>
+                                                <volist name="brands" id="v">
+                                                   <if condition="$v['id'] eq $goods['brand_id']">
+                                                      <option value="{$v['id']}" selected='selected'> {$v['brand_name']}</option>
+                                                   <else/>
+                                                      <option value="{$v['id']}">{$v['html']} {$v['brand_name']}</option>
+                                                   </if>
+                                                </volist>
+                                           </select>
+                                       </td>
+                                 </tr>
+                                 <tr>
+		                              <td class="label">设备型号:</td>
+		                              <td>
+		                                 <input type="text" name="goods_model" value="{$goods['goods_model']}"></input>
+		                                 <span class='error'></span>
+		                              </td>
+		                         </tr>
+                                 <tr>
+                                     <td class="label">商品区域:</td>
+                                     <td class='area_select'>
+                                           <select name="province">
+                                                <option value="0">请选择...</option>             
+                                           </select>
+                                           <select name="city">
+                                                <option value="0">请选择...</option>             
+                                           </select>
+                                           <select name="area">
+                                                <option value="0">请选择...</option>             
+                                           </select>
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                        <td class="label">商品价格:</td>
+                                        <td><input type="text" name="goods_price" value="{$goods['goods_price']}"></input>
+                                         <span class='error'></span>
+                                        </td>
+                                 </tr>
+                                 <tr>
+                                        <td class="label">设备厂家:</td>
+                                        <td><input type="text" name="sbcj" value="{$goods['sbcj']}"></input>
+                                        <span class='error'></span>
+                                        </td>
+                                 </tr>
+                                 <tr >
+                                        <td class="label">重量:</td>
+                                        <td><input type="text" name="goods_weight" value="{$goods_data['goods_weight']}"></input></td>
+                                 </tr>
+                                 <tr >
+                                        <td class="label">服务保障:</td>
+                                        <td><input type="text" name="ensure" value="{$goods_data['ensure']}"></input></td>
+                                 </tr>
+                                 <tr >
+                                        <td class="label">功率:</td>
+                                        <td><input type="text" name="watts" value="{$goods_data['watts']}"></input></td>
+                                 </tr> 
+                                 <tr >
+                                        <td class="label">精度:</td>
+                                        <td><input type="text" name="precise" value="{$goods_data['precise']}"></input></td>
+                                 </tr>
+                                 <tr >
+                                        <td class="label">外形尺寸:</td>
+                                        <td><input type="text" name="measurement" value="{$goods_data['measurement']}"></input></td>
+                                 </tr>                                                              
+                                 <tr >
+                                        <td class="label">用途:</td>
+                                        <td><input type="text" name="uses" value="{$goods_data['uses']}"></input></td>
+                                 </tr>         
+                                 <tr>
+                                        <td class="label">库存:</td>
+                                        <td><input type="text" name="goods_number" value="{$goods['goods_number']}"></input></td>
+                                 </tr>
+                                 <tr>
+                                        <td class="label">排序:</td>
+                                        <td><input type="text" name="sort" value="{$goods['sort']}"></input></td>
+                                 </tr>
+                                 <tr >
+                                        <td class="label">销售数量:</td>
+                                        <td><input type="text" name="sale_num" value="{$goods['sale_num']}"></input></td>
+                                 </tr>
+                                 <tr>
+                                        <td class="label">评论数量:</td>
+                                        <td><input type="text" name="comment_number" value="{$goods['comment_number']}"></input>
+                                        <span class='error'></span>
+                                        </td>
+                                 </tr>
+                                 <tr>
+                                        <td class="label">是否上架:</td>
+                                        <td>
+                                           <input type="radio" name="status" value="1" checked='checked' class='isshow'></input><p style="height:20px;float:left;line-height:20px">是</p>
+                                           <input type="radio" name="status" style="margin-left:15px" class='isshow' value="0"></input><p style="height:20px;float:left;line-height:20px;">否</p>
+                                        </td>
+                                 </tr>
+                                 <tr>
+                                        <td class="label">商品图片:</td>
+                                        <td>
+                                        	   <div class="img">
+                                        	      <img src="__ROOT__<if condition="substr($goods['goods_thumb'] , 0 , 1) eq '.'">{$goods['goods_thumb']|substr=1}<else/>{$goods['goods_thumb']}</if>"/>
+                                               <a class="btn_addimg">点击修改<input type="file" name="goods_img"></input></a>                                             
+                                            </div> 
+                                        </td>
+                                 </tr>
+	                     <tr>
+                          <td></td>
+                          <td>
+                            <a class='btn' href='javascript:;'>确认修改</a>
+                          </td>
+                      </tr>
+		                  </table>
+		              </div>
+		              <!-- 商品通用信息end -->
+                      <!-- 商品相册start -->  
+                      <div class="class"> 
+	                      <table cellspacing="10">
+                             <tr>
+                                 <td></td>
+                                 <td style="width:100%;">
+                                  <div style="width:100%;height:auto;float:left" class='gallery_td'>
+                                     <volist name="goods_gallery" id="v">
+                                     <ul class="gallery">
+                                         <li><img src="__ROOT__{$v['gallery_img']|substr=1}"></img></li>      
+                                         <a>修改图片 <input type="file" name="oldgallery_img{$v['id']}" class='gallery_img'></input></a>
+                                         <a href="javascript:void(0)" class='gallery_delete' data-galleryid="{$v['id']}" >删除图片</a>
+                                     </ul>	
+                                     </volist>                                      
+                                     <a class="gallery_add" href="javascript:;">点击添加图片</a>
+                                </div> 
+                                 </td> 
+                             </tr>
+                          <tr>
+                          <td></td>
+                          <td>
+                            <a class='btn' href='javascript:;'>确认修改</a>
+                          </td>
+                      </tr>
+	                      </table> 
+                      </div>   
+                      <!-- 商品相册end --> 
+                      <!-- 商品描述start -->
+                      <div class="class"> 
+                             <table cellspacing="10">
+                                  <tr>
+                                        <td></td>
+                                        <td><textarea name="goods_content" id="myEditor">{$goods_data['goods_content']}</textarea></td>
+                                  </tr>
+                      <tr>
+                          <td></td>
+                          <td>
+                            <a class='btn' href='javascript:;'>确认修改</a>
+                          </td>
+                      </tr>
+                             </table> 	
+		              </div> 
+		              <!-- 商品描述end -->      	  		                     
+			   </form>
+			</div>   
+     </div>
+</div>
+</body>
+<script type="text/javascript"> 
+var goods = {$goods_json};
+/**
+ * 商品区域选择
+ */
+var area = (function(){
+	var select_name = 'province',
+	    change_name = select_name,
+	    area        = {},//保存已经获取的区域
+	    select_area = {'province':goods.province,'city':goods.city,'area':goods.area};
+	$(".area_select").on('change','select',function(){
+	    select_name  = $(this).attr('name'),
+	    value        = $(this).val(); 
+	    change_name  = select_name == 'province'? 'city' : (select_name == 'city'? 'area' : ''); 
+	    select_area[select_name] = value;
+	    if(select_name == 'province'){
+            select_area['city'] = 0;
+            select_area['area'] = 0;
+	    }
+	    if(select_name == 'city'){
+            select_area['area'] = 0;
+	    }
+	    if(change_name){
+	    	getArea(value);
+	    }	    
+	})
+	
+	function getArea(area_no , init_area_name){		
+		if(area[area_no]){			
+            showAreaHtml(area[area_no]);
+		}else{
+		    $.post("{:U('Area/getArea')}",{'area_no':area_no},function(res){
+		    	area[area_no] = res;
+		    	showAreaHtml(res , init_area_name);
+		    })
+		}		
+	}
+
+	function showAreaHtml(data , init_area_name){ 
+	    var html = ["<option value='0'>请选择...</option>"];
+	    for(var k in data){
+	    	if(init_area_name && data[k].area_no == goods[init_area_name]){
+                html.push("<option selected value='" + data[k].area_no +"'>" + data[k].area_name + "</option>");
+	    	}else{
+	    		html.push("<option value='" + data[k].area_no +"'>" + data[k].area_name + "</option>");
+	    	}	        
+	    }
+	    html = html.join('');	    
+        if(init_area_name){
+            $("select[name='"+ init_area_name +"']").html(html);
+        }else{
+        	$("select[name='"+ change_name +"']").html(html);
+        	if(change_name == 'city'){
+                $("select[name='area']").html("<option value='0'>请选择...</option>");  
+	        }
+        }
+	    
+	} 
+           
+    function checkArea(){
+    	if(select_area['province'] == '100000' || select_area['province'] == '110000' || select_area['province'] == '120000' || select_area['province'] == '130000'){
+	        if(!select_area['province'] || !select_area['city']){
+	            return '请选择区域';
+	        }
+    	}else{
+	        if(!select_area['province'] || !select_area['city'] || !select_area['area']){
+	            return '请选择区域';
+	        }    		
+    	}
+    	return '';
+    }
+
+    return {
+    	init : function(){
+            getArea(0 , 'province'); 
+            getArea(goods.province , 'city'); 
+            getArea(goods.city , 'area');
+    	},
+    	checkArea : function(){
+    		return checkArea();
+    	}
+    }
+	 
+})();
+area.init();
+
+/**
+ * 商品相册和图片
+ */
+var goods_gallery = (function(){
+	//商品表上传图片预览
+	$("input[name='goods_thumb']").change(function(){
+	    var file   = $(this)[0].files[0];   
+	    var reader = new FileReader();  
+	    var _this  = this
+	    //将文件以Data URL形式读入页面  
+	    reader.readAsDataURL(file);  
+	    reader.onload=function(e){ 
+	    	//显示文件  
+	        $(_this).parent('a').siblings('img').attr("src",this.result);
+	    }
+	})
+
+	$("input[name='goods_img']").change(function(){
+	    var file   = $(this)[0].files[0];   
+	    var reader = new FileReader();  
+	    var _this  = this
+	    //将文件以Data URL形式读入页面  
+	    reader.readAsDataURL(file);  
+	    reader.onload=function(e){ 
+	    	//显示文件  
+	        $(_this).parent('a').siblings('img').attr("src",this.result);
+	    }
+	})
+
+	/*添加商品相册*/
+	var num = 0;
+	$(".gallery_add").click(function(){
+		num++; 
+		var content="<ul class='gallery'><li><img src=''/></li><a>添加图片<input type='file' name='gallery_img"+num+"' class='gallery_img' /></a><a class='gallery_delete' href='javascript:void(0)'>移除图片</a></ul>";
+		$(".gallery_add").before(content);    	   
+		$("input[name='number']").val(num);//设置上传图片个数           
+	})    
+
+    $(".gallery_td").on('change','.gallery_img',function(){
+	   var file   = $(this)[0].files[0];   
+	   var reader = new FileReader();  
+	   var _this  = this 
+	   //将文件以Data URL形式读入页面  
+	   reader.readAsDataURL(file);  
+	   reader.onload=function(e){ 
+	   	  //显示文件  
+	   	  $(_this).parent('a').siblings('li').children('img').attr("src",this.result);
+	   }    
+    })	
+    
+	/*商城商品相册*/    
+    $(".gallery_td").on('click','.gallery_delete',function(){
+    	var gallery_id =$(this).attr('data-galleryid');
+    	if(gallery_id){
+     		if(confirm('确认删除?')){  
+     			var _this = this;
+		     	$.post("{:U('goodsGalleryDelete')}",{"gallery_id":gallery_id},function(res){      
+		            alert(res['msg']);
+		            if(res['status']){
+		                $(_this).parent('.gallery').remove();
+		            } 
+		        });
+		    }
+    	}else{
+	        num--; 
+	        $("input[name='number']").val(num);//设置上传图片个数 
+	        $(this).parent('.gallery').remove();	
+    	}                
+    })
+})();
+
+var formSubmit = (function(){ 
+    var data = {};            
+    var validate = new formValidate({
+        rules:{
+            'goods_name' : {
+            	'require' : '请输入商品名称'
+             },
+            'goods_price' : {
+            	'require' : '请输入商品价格',
+            	'regex'   : [/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/,'请输入正确的商品价格']
+             },         
+        },
+        msg:{
+           'goods_name' : '',
+           'goods_price': ''              
+        }
+    });
+
+	$(".btn").click(function(){
+		if(area.checkArea()){
+			alert(area.checkArea());
+			return false;
+		}
+        if(!validate.checkSubmitStatus()){
+            alert(validate.getFirstError());
+        }else{
+            request();          
+        } 
+	})
+    
+    $("input").blur(function(){
+        var attr_name = $(this).attr('name');
+        if(attr_name){
+           data[attr_name] = $(this).val();        
+           var val    = $(this).val();
+           var result = validate.checkField(attr_name,val);
+           if(result){           
+                $(this).siblings('.error').text(result);                     
+           }else{
+                $(this).siblings('.error').text('');
+           }    
+        }        
+    })
+
+	/*
+	 * 提交数据
+	 **/
+	function request(){  
+	    var data = new FormData($("#form")[0]);  // 要求使用的html对象
+	    var url  = "{:U('MallGoods/goodsUpdate')}";
+	    var url_ = "{:U('MallGoods/goodsList')}"
+	    $.ajax({  
+	          url : url ,  
+	          type: 'POST',  
+	          data: data,  
+	          async: true,  
+	          // 下面三个参数要指定，如果不指定，会报一个JQuery的错误 
+	　　　　　cache: false,  
+	          contentType: false,  
+	          processData: false,  
+	          success: function (res) {  
+	              alert(res.msg);
+	              if(res.status){
+	                  window.location.href = url_;
+	              }  
+	          },  
+	          error: function (returndata) {  
+	              console.log(returndata); 
+	          }  
+	     });  
+	}     
+})()
+
+window.onload = function(){
+      window.UEDITOR_HOME_URL = "__PUBLIC__/js/ueditor/";
+      UE.getEditor('myEditor', {
+          theme:"default", //皮肤
+          lang:"zh-cn", //语言
+          initialFrameWidth:1000,  //初始化编辑器宽度,默认800
+          initialFrameHeight:400,
+          allHtmlEnabled:false,
+      })
+ }	
+    
+$("#content_m_h a").click(function(){
+	 var index=$(this).index();
+	 $(".class").eq(index).show().siblings().hide();
+	 $(this).css({'background':'white','color':'#192E32'}).siblings().css({'background':'#EFEFEF','color':'#787878'});
+})           
+</script>
+</html>

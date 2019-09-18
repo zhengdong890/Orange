@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>公司简介</title>
+
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/side-nav.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+
+<link href="{:C('STATIC_URL')}/Home/css/all-use.css" rel="stylesheet">
+<link rel="shortcut icon" href="/Public/Home/images/ee.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+<script src="{:C('STATIC_URL')}/Home/js/tabs-nav.js"></script>
+<script src="{:C('STATIC_URL')}/Home/js/store-tool.js"></script>
+<script type="text/javascript" charset="utf-8" src="{:C('STATIC_URL')}/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="{:C('STATIC_URL')}/js/ueditor/ueditor.all.js"> </script>
+ <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+</head>
+<body>
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end --> 
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="Public:sellerLeft" />  
+        <div class="service" style="float: left; width: 80%; margin-top: 20px;">
+             <ul class="nav-top clearfix">
+                <li class="active" id="service-all">公司简介</li>
+
+             </ul>
+             <div class="content">
+                 <div class="service-all">
+                     <form action="{:U('ShopEdit/service')}" method="post" id="ueformsub1">
+					     <input type="hidden" name="imagesName" id="imgsName" value="" />
+					     <textarea id="container" name="editorValue" type="text/plain" style="width:100%;height:568px;">{$shop_des['content']}</textarea>
+                         <button style="color: white; background-color: #37A4A2; width: 100px; height: 30px; float: right; margin-top: 20px; cursor: pointer;">
+                         	提交
+                         </button>
+                     </form>
+                 </div>
+				 <!--
+                 <div class="service-use box-hide">
+                     <form action="" method="get" id="ueformsub2">
+					     <textarea id="editor2" name="editorValue2" type="text/plain"></textarea>               
+                         <button style="color: white; background-color: #37A4A2; width: 100px; height: 30px; float: right; margin-top: 20px; cursor: pointer;">
+                                                  提交
+                         </button>
+                     </form>
+                 </div>
+				 -->
+             </div>
+        </div>
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->      
+<script type="text/javascript">
+//判断左边导航
+function checkNav(){
+	$(".side-nav>ul:eq(3)>li:eq(3) a").css("color","#ff6600")
+}
+checkNav();
+
+     var ue = UE.getEditor('container', { autoHeight: false,maximumWords:10000,autoFloatEnabled : false });
+              
+        var html = '';//定义空字串存放图片名称
+        $("#ueformsub1").submit(function(){
+            getImgName();
+        });
+        
+        //获取商品描述图
+        function getImgName(){
+            $("#imgsName").val('');//清空内容
+            html = ue.getContent();//获取html商品描述内容
+            var imgSrc = /\/[0-9]{16}[.]{1}[a-z]{3,}/gi;//正则匹配src内容
+            var imgName = /[0-9]{16}[.]{1}[a-z]{3,}/gi;//正则过滤出图片地址,
+            if(html.match(imgSrc)){
+                var imgsStr = '';
+                var imgsName = '';
+                imgsStr = html.match(imgSrc).toString();//匹配得到title内容字串,
+                imgsName = imgsStr.match(imgName).toString();//匹配得到图片名称字符串,
+                $("#imgsName").val(imgsName);//图片名称字串赋值
+           }
+        }
+    
+</script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>幸运大转盘</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" /> 
+<meta name="description" content="" />
+<style>
+*{padding:0; margin:0;font-family:"方正黑体简体";font-style:normal;font-size:16px;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0}
+html{height:100%}      
+body{font:normal 62.5% Helvetica,Arial,sans-serif;height:100%;background:#E74143;}  
+#wraper{width:100%;float:left;position:relative;background:#f9a81b;background:url(__PUBLIC__/images/bigwheelbackground.jpg) no-repeat;background-size:100%;}
+#tishi{position:absolute;width:100%;height:100%;background:rgba(0,0,0,0.3);z-index:9999;display:none}
+#tishi ul{width:90%;height:100px;margin-left:5%;background:white;margin-top:170px;border-radius:4px;}
+#tishi ul li{width:100%;height:auto;float:left;color:#FE5400;margin-top:30px;text-align:center;}
+#tishi ul button{margin-left:42%;margin-top:15px;border-radius:4px;padding:3px;border:0;background:pink}
+#wraper #wheel{width:100%;height:auto;float:left;margin-top:38%;position:relative;}
+#wheel .wheel{max-width:80%;max-height:auto;margin-left:10%;}
+#wheel a{display:block;width:15%;height:auto;position:absolute;top:33%;left:42%;z-index:999}
+#wheel a img{max-width:100%;max-height:auto;}
+</style>
+<!-- www.orangesha.com Baidu tongji analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?54f6f54d47704101dc27b337de5fd6c3";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+    <body>
+       <div id="wraper">
+           <div id="tishi">
+              <ul>
+                 <li class="li"></li>  
+                 <button style="">确认</button>            
+              </ul>
+           </div>
+           <div id="wheel">
+              <img src="__PUBLIC__/images/wheel.png" class="wheel"/>
+              <a><img src="__PUBLIC__/images/wheelbtn.png"></img></a>
+           </div>
+       </div>
+    </body>
+    <script type="text/javascript">
+    $(document).ready(function(){
+	    var w=$(document.body).width();
+	    var height=w*1600/650;  
+	    $("#wraper").css('height',height+'px');
+    })
+    requestAnimationFrame = window.requestAnimationFrame
+    || window.mozRequestAnimationFrame
+    || window.webkitRequestAnimationFrame
+    || window.msRequestAnimationFrame
+    || window.oRequestAnimationFrame
+    || function(callback){
+           setTimeout(callback, 1000 / 60);
+       };
+    var flag=1;//转盘状态设为空闲
+	var k=360/6;
+	var fps = 60;//帧(1s内重绘次数 设置为60次)
+	var now;
+	var then;
+	var interval =1000/fps;//转盘转动速度(重绘间隔)
+	var delta;
+	var end;//转盘绘制的最终角度
+	var k1=700,a,b,x=0,y=0;//y=ax^2+bx+c,k1(y最大达到的值对应的x值),a<-end/(k1*k1)
+	function ceshi(){			 
+		 requestAnimationFrame(ceshi);
+		　now = Date.now();
+		　delta = now - then;
+		　if(delta>=interval){
+		　　　　then = now-(delta%interval);		　　　　
+			 if(y<end){
+					deg='rotate('+y+'deg)';//组装css所需角度偏移值				
+					$(".wheel").css('-webkit-transform',deg);//设置css角度偏移值
+					y=a*x*x+b*x;//计算y(角度)大小
+					x=x+1;//x增加
+					//判断下次y的大小,若大于目标大小，则把y设为目标大小
+					if(a*x*x+b*x>end){
+						y=end;//把y设为目标大小
+						//不会进入下次循环，所以先设置css值
+						deg='rotate('+y+'deg)';				
+						$(".wheel").css('-webkit-transform',deg);
+						flag=1;//转盘转动结束,状态设为空闲
+						$.post("{:U('sendresult')}",{},function(res){						
+						});
+						$("#tishi").slideDown(300);
+					}
+			 }
+		　}			 
+	}    
+	
+    $("#wheel a").click(function(){
+    	//转盘状态处于运行中 点击开始无效
+    	if(flag==1){   	
+    		x=0,y=0;//初始化x,y值
+       		then = Date.now();//初始化then值
+    		$.post("{:U('result')}",{},function(res){
+    			if(res['error']){
+    				alert(res['error']);   				
+    			}else
+    			if(res['status']==1){
+    				alert('每个用户最多参加一次该活动');
+    			}else{
+    				flag=2;//转盘状态设为运行中
+    				end=(7-res['k'])*k+360*13;//根据奖项设置转盘绘制的最终角度
+            		a=-end/(k1*k1*1.01);//设置a值,a<-end/(k1*k1)
+            		b=(end-k1*k1*a)/k1;//设置b值
+            		html="恭喜您获得"+res['result'];
+            		$(".li").html(html);
+            		requestAnimationFrame(ceshi);
+    			}       		
+        	})       	
+    	}   	
+    })
+    
+    $("#tishi button").click(function(){
+    	window.location.reload();
+    })
+    
+    function guanzhu(){
+    	WeixinJSBridge.invoke("scanQRCode",{
+        });
+    }
+    </script>
+</html>

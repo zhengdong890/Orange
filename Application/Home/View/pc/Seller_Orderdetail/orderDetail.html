@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>订单详情</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/footer.css" >
+
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+ <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<style>
+	.detail_top{margin: 20px 0;}
+    .detail_status{border: 1px solid #F58B0E; background-color: #FFF7EB; padding: 20px 40px; box-sizing: border-box;}
+    .detail_status>.detail_info_top{font-weight: bold; font-size: 16px;margin-bottom: 20px;}
+    .detail_status>ul{margin-bottom: 20px;}
+    .detail_status>ul>li{line-height: 30px;}
+    .detail_status>button{ font-family: "微软雅黑"; padding: 4px 10px; border: 1px solid #DDDDDD;background-color: #fff;margin-right: 10px;cursor: pointer;border-radius: 4px;}
+	.detail_status .sendGood{color: #fff; background-color: #66B7FF; border: 1px solid #66B7FF;}
+	.detail_info{margin-top: 25px;position: relative;}
+	.detail_info>.detail_info_nav{position: absolute; top: 8px; left: 30px;}
+	.detail_info>.detail_info_nav li{cursor: pointer; border-top-left-radius: 3px;border-top-right-radius: 3px; float: left; margin-right: 3px;border: 1px solid #AFD4FF; background-color: #E9F3FF;padding: 2px 20px;}
+	.detail_info>.detail_info_nav .active{position: relative; top: -4px; background-color: #fff; border-bottom: none;padding: 4px 20px;font-size: 15px;}
+	.detail_info>.detail_info_div{width: 100%; z-index: -1; position: relative; top: 32px;left: 0; border: 1px solid #AFD4FF;background-color: #fff;padding: 20px 25px; box-sizing: border-box;}
+	.detail_info>.detail_info_div .detail_Buyerinfo{border-top: 1px solid #D1D7DD;border-bottom: 1px solid #D1D7DD;padding: 10px 0;margin-bottom: 10px;}
+	.detail_info>.detail_info_div .detail_Buyerinfo p{line-height: 30px;}
+	.detail_info>.detail_info_div .detail_info_body>p:first-of-type{margin-bottom: 10px;}
+	.detail_info>.detail_info_div .detail_info_body>ul{overflow: auto;margin-bottom: 10px;}
+	.detail_info>.detail_info_div .detail_info_body>ul li{float: left; width: 33.3%;text-align: center;}
+	.detail_info>.detail_info_div .detail_info_body>table{width: 100%;margin-top: 20px;}
+	.detail_info>.detail_info_div .detail_info_body>table thead tr{border: 1px solid #DDDDDD;}
+	.detail_info>.detail_info_div .detail_info_body>table thead tr td{background-color: #E9F3FF;text-align: center;border: none;line-height: 32px;}
+	.detail_info>.detail_info_div .detail_info_body>table tbody tr td{border: 1px solid #DDDDDD;text-align: center;line-height: 70px;}
+	.detail_info>.detail_info_div .detail_info_body>table tbody tr td img{width: 50px; height: 50px;vertical-align: middle;margin-left: 14px;}
+	.detail_info>.detail_info_div .detail_info_body>table tbody tr td:first-of-type{width: 15%;text-align: left;}
+	.detail_info>.detail_info_div .detail_info_body>table tbody tr td:nth-of-type(2){width: 6%;}
+	.detail_info>.detail_info_div .detail_info_body>table tbody tr td:nth-of-type(3){width: 6%;}
+	.detail_info>.detail_info_div .detail_info_body>table tbody tr td:nth-of-type(4){width: 6%;}
+	.detail_info>.detail_info_div .detail_info_body>table tbody tr td:nth-of-type(5){width: 6%;}
+	.detail_info>.detail_info_div .detail_info_body>table tbody tr td:nth-of-type(6){width: 6%;}
+	.detail_info>.detail_info_div .detail_info_body>table tbody tr td:last-of-type{width: 10%;}
+	.detail_info>.detail_info_div .detail_info_body>table tbody tr td:first-of-type p{display: inline-block;}
+	.detail_info>.detail_info_div .detail_info_body>p:last-of-type{text-align: right;margin-top: 30px;}
+	.detail_info>.detail_info_div .detail_info_body>p:last-of-type span{ color: #ff6600;font-size: 18px;}
+	.detail_info>.detail_info_div>p:first-of-type{font-weight: bold;margin-bottom: 10px;}
+	.detail_info>.detail_info_div>.wuliu_info li{line-height: 40px;}
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->	
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">       
+        <div class="detail_top">
+        	<p>您的位置：<a href="http://www.orangesha.com/index.php?m=Home&c=Seller_order&a=sellerIndex">我的商城</a> > <a href="http://www.orangesha.com/index.php?m=Home&c=Seller_order&a=orderList">订单管理</a> > <span>订单详情</span></p>            
+        </div>
+        <!--订单状态-->
+        <div class="detail_status">
+        	<div class="detail_info_top">当前订单状态：<span></span></div>
+        	<ul>
+        		<li></li>
+        		<li></li>
+        		<li></li>
+        		<li></li>
+        	</ul>
+        	<button class="sendGood">发货</button> <button>修改收货地址</button>          
+        </div>
+        <!--订单信息-->
+        <div class="detail_info">
+        	<ul class="detail_info_nav">
+        		<li class="active">订单信息</li>
+        		<li>收货和物流信息</li>
+        	</ul>
+        	<!--订单信息-->
+        	<div class="detail_info_div">
+        		<div class="detail_Buyerinfo">
+        			<p>买家信息</p>
+        			<p>昵称：{$goods.name}</p>
+        			<p>所在地区：{$goods.address}</p>
+        			<p>联系电话：{$goods.tel_num}</p>
+        		</div>
+        		<div class="detail_info_body">
+        			<p>订单信息</p>
+        			<ul>
+        				<li>订单编号：{$goods.order_sn}</li>
+        				<li>创建时间：{$goods.create_time|date="Y-m-d H:i:s",###}</li>
+        				<li>付款时间：{$goods.pay_time|date="Y-m-d H:i:s",###}</li>
+        			</ul>
+        			<table>
+        				<thead>
+        					<tr>
+        						<td>宝贝</td>
+        						<td>状态</td>
+        						<td>服务</td>
+        						<td>单价</td>
+        						<td>数量</td>
+        						<td>优惠</td>
+        						<td>商品单价</td>
+        					</tr>
+        				</thead>
+        				<tbody>
+        					<tr>
+        						<td>
+        							<img src="{$goods_data.goods_thumb}" alt="{$goods_data.goods_name}"/>
+        							<p>{$goods_data.goods_name}</p>
+        						</td>
+        						<td><if condition="$goods.send_status eq 1">已发货<else />未发货</if></td>
+        						<td></td>
+        						<td>{$goods_data.goods_price}</td>
+        						<td>{$goods_data.number}</td>
+        						<td>{$goods.shop_coupon_price}</td>
+        						<td>{$goods_data.total_price}（快递：{$goods.shipping_price}）</td>
+        					</tr>
+        				</tbody>
+        			</table>
+        			<p>实收款：<span>{$goods.pay_price}</span> 元</p>
+        		</div>
+        	</div>
+        	<!--收货和物流信息-->
+        	<div class="detail_info_div" style="display: none;">
+        		<p>物流信息</p>
+        		<ul class="wuliu_info">
+        			<li>收货地址：</li>
+        			<li>新收获地址：</li>
+        			<li>运送方式：</li>
+        			<li>物流公司名称：</li>
+        			<li>运单号：</li>
+        		</ul>
+        	</div>
+        </div>
+    </div>    
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+//判断订单状态
+function getOrderStatus(){	
+	//未发货 未付款
+	if({$goods_data.send_status}==0 && {$goods_data.pay_status}==0){
+		$(".detail_status .detail_info_top span").text("商品已拍下，等待买家付款");
+		$(".detail_status>button").css("display","none")
+	}
+	//未发货 已付款
+	if({$goods_data.send_status}==0 && {$goods_data.pay_status}==1){
+		$(".detail_status .detail_info_top span").text("买家已付款，等待商家发货");
+		$(".detail_status>ul>li:eq(0)").text("• 请您尽快发货，如果缺货，可联系买家协商退款。")
+		$(".detail_status>ul>li:eq(1)").text("• 买家已付款，请尽快发货，否则买家有权申请退款。")
+		$(".detail_status>ul>li:eq(2)").text("• 如果无法发货，请及时与买家联系并说明情况。")
+		$(".detail_status>ul>li:eq(3)").text("• 买家申请退款后，须征得买家同意后再操作发货，否则买家有权拒收货物。")
+	}
+	//已发货 已付款
+	if({$goods_data.send_status}==1 && {$goods_data.pay_status}==1){
+		$(".detail_status .detail_info_top span").text("商家已发货，等待买家确认");
+		$(".detail_status>button").css("display","none")
+		$(".detail_status>ul>li:eq(0)").text('• 买家还有9天23小时58分17秒来完成本次交易的"确认到货"。如果期间买家没有"确认到货"，也没有"申请退款"，本交易将自动结束，系统将在月底把货款支付给您。')
+		$(".detail_status>ul>li:eq(1)").text("• 如果买家表示未收到货或者收到的货物有问题，请及时联系买家积极处理，友好协商。")
+		$(".detail_status>ul>li:eq(2)").text("")
+		$(".detail_status>ul>li:eq(3)").text("")
+	}
+}
+getOrderStatus()
+
+  $(".detail_info_nav li:eq(0)").click(function(){
+  	$(this).addClass("active");
+  	$(this).siblings().removeClass("active");
+  	$(".detail_info_div:eq(0)").css("display","block");
+  	$(".detail_info_div:eq(1)").css("display","none");
+  })
+  $(".detail_info_nav li:eq(1)").click(function(){
+  	$(this).addClass("active");
+  	$(this).siblings().removeClass("active")
+  	$(".detail_info_div:eq(1)").css("display","block");
+  	$(".detail_info_div:eq(0)").css("display","none");
+  })
+</script>
+</body>
+</html>
+
+
+
+    

@@ -1,0 +1,652 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>商品中心</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/side-nav.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery.omniwindow.js"></script> 
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/js/ajaxPage.js"></script>
+<style>
+label{ cursor: pointer;}
+.section-bt{width:100%;height:auto;float:left;margin-top:40px;margin-bottom:20px;}
+.section-bt .btns{line-height: 42px;}
+.section-bt .btns p,.section-bt .btns label,.section-bt .btns label input{display: inline-block;}
+.section-bt .btns label p{padding-left: 10px;}
+.section-bt .btns .btn{margin-left: 32px;border:1px #d5d5d5 solid;padding:0 10px;border-radius: 5px;cursor: pointer;}
+.section-bt .turn-page{width:auto;height:auto;float:left;}
+.section-bt .turn-page .omit{border:none;}
+.section-bt .turn-page .omit:hover{border:none;background-color: transparent;color:#d5d5d5;}
+.section-bt .turn-page div,.section-bt .to-page input{width: 32px;height:32px;border:1px #d5d5d5 solid;display: inline-block;margin-left: 12px;
+    cursor: pointer;vertical-align: top;line-height: 32px;text-align: center;}
+.section-bt .turn-page .active{background-color: #ff8448;color:#fff;}
+.section-bt .turn-page>div:hover{border-color: #ff8448;}
+.section-bt .turn-page .right-btn,.section-bt .turn-page .left-btn{width: 80px;}
+.section-bt .to-page{width:auto;float:left; margin-left: 20px;}
+.section-bt .to-page input{margin:0 7px;vertical-align: middle;}
+.section-bt .to-page input[type="button"]{background-color: #fff;width: 54px; font-family: "微软雅黑";}
+#shopwindow{overflow: visible; position: relative; margin-left: 24px;}
+#shopwindow img{ width: 10px; margin-bottom: 1px; margin-left: 2px;}
+#shopwindow>ul{ display: none; background-color: #EEF8F8; width: 102px; position: absolute; left: 0px; top: 24px; z-index: 100; border: 1px solid #A8AAAA;}
+#shopwindow>ul li{ width: 100%; padding-left: 10px; box-sizing: border-box; cursor: pointer;}
+#shopwindow>ul li:hover{ background-color: #DEEEEE;}
+
+.ow-overlay {position: fixed;z-index: 10;top: 0;left: 0;height: 100%;width: 100%;background: #424242;opacity: 0.8;}
+.ow-closed {display: none;}
+.modal {overflow: auto; position: fixed;z-index: 20;height: 72%;left: 50%;top: 110px;width: 50%;background-color: #fff}
+.modal>div{ box-sizing: border-box; width: 100%; background-color: #37A4A2; color: #fff; height: 40px; line-height: 40px;padding:0px 20px; font-size: 16px; font-family: "微软雅黑";}
+.modal>div>span{ float: right;color: #fff;cursor: pointer; }
+.modal table{ width: 60%; margin: 25px auto;}
+.modal table tr{ height: 40px;}
+.td_title{ width: 20%;} .td_input{ width: 80%;}.project_name{ width: 100%;}
+.star{ color: #FF6600;}.checkbox{ cursor: pointer; vertical-align: middle;}
+.get-img{text-align: center; display: inline-block;border:1px solid #999; width: 82px;height: 82px;position: relative;background: url(../images/add-img_03.jpg) no-repeat;background-size: 100%;cursor: pointer;}
+.file-img{display: none;}
+#issub{padding:4px 20px;font-family:"微软雅黑";font-size: 18px; cursor:pointer;border-radius:5px;background:#7194A8;color:#FFFFFF;margin-top: 25px;}
+#issub:hover{ background: #678494;}
+#tuijianTr{display: none;}#shouyeTr{display: none;}
+
+</style>
+</head>
+<body >
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->	
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->
+<div class="bodyer">
+    <div class="mar1200c clearfix">
+        <include file="Public:sellerLeft" />  
+        <div class="user-right marT20 fRi">
+            <div class="user-box">            
+                
+                    <div class="user-box">
+                        <div class="cont-padd-1" style="position:relative;padding-bottom:30px;">
+                            <div class="user-order-tab marT10 posRel">
+                            <a class="user-butt-re disInBlock fRi" href="{:U('SellerGoods/selectCategory')}">+ 发布新商品</a>
+                                 <a class="nav-a cur">我的发布</a>                  
+                            </div>
+                            <!-- 订单内容 -->
+                            <div class="user-table-wrap">
+                                <div class="t-tl-tab disTable marT20 n-bCol2 f-cCol7">
+                                    <div class="disTable-cell th th-goods"><span>商品</span></div>
+                                    <div class="disTable-cell th th-price"><span>价格</span></div>
+                                    <div class="disTable-cell th th-sum"><span>状态</span></div>
+                                    <div class="disTable-cell th th-state"><span>发布时间</span></div>
+                                    <div class="disTable-cell th th-operation"><span>操作</span></div>
+                                </div>
+                                <div class="user-list-label f-cCol7 marT15">
+                                    <input id="all_cb" type="checkbox" class="chk-pub-1 marB5" />
+                                    <label for="all_cb" class="marL12" >全选</label>
+                                    <div id="shopwindow" class="user-a-1 marL40" data-cz="pos">
+                                    	橱窗设置&nbsp;&nbsp;| <img src="../../../../../Public/Home/image/Arrow.png" />
+                                    	<ul>
+                                    		<li>新品推荐</li>
+                                    		<li>畅销商品</li>
+                                    	</ul>
+                                    </div>
+                                    <a href="javascript:;" id="removeRecommend" class="user-a-1" data-cz="dpos">取消推荐</a>
+                                    <a href="javascript:;" id="removeGoods2" class="user-a-1 up" data-cz="up">下架</a>
+                                    <a href="javascript:;" id="addGoods2" class="user-a-1 down" data-cz="down">上架</a>
+                                </div>
+                                <ul class='goods_list'>
+                                <volist name='goods' id='v'>
+                                <!-- items -->
+
+                                <!-- items End -->
+                                </volist>
+                                </ul>
+                                <div class="ow-overlay ow-closed"></div> 
+                                <div class="modal ow-closed">
+                                	<div>团购申请 <span class="csc">X</span></div>
+                                	<form id="formGroupbuy">
+										<table class="noBorder">
+											<tr>
+											   <td class="td_title"><span class="star">*</span> 团购标题：</td>
+											   <td class="td_input"><input type="text" name="title" class="project_name"></td>
+											</tr>
+											<tr>
+											   <td class="td_title"><span class="star">*</span> 团购价格：</td>
+											   <td class="td_input"><input type="text" class="contacts" name="group_price"> 元</td>
+											</tr>
+											<tr>
+											   <td class="td_title"><span class="star">*</span> 开始时间：</td>
+											   <td class="td_input"><input type="datetime-local" class="contacts" name="start_time"></td>
+											</tr>
+											<tr>
+											   <td class="td_title"><span class="star">*</span> 活动时间：</td>
+											   <td class="td_input"><label><input type="radio" value="7" name="time" class="checkbox"> 7天</label>&nbsp;&nbsp;&nbsp;<label><input type="radio" value="15" name="time" class="checkbox"> 15天</label>&nbsp;&nbsp;&nbsp;<label><input type="radio" value="30" name="time" class="checkbox"> 30天</label></td>
+											</tr>
+											<tr>
+											   <td class="td_title" style="padding-left: 10px;">闪购位置：</td>
+											   <td class="td_input"><label><input type="radio" checked="checked" value="0" name="adver" class="checkbox pos"> 普通位置</label>&nbsp;&nbsp;&nbsp;<label><input type="radio" value="1" name="adver" class="checkbox pos"> 上首页</label>&nbsp;&nbsp;&nbsp;<label><input type="radio" value="2" name="adver" class="checkbox pos"> 上推荐</label></td>
+											</tr>
+											<tr id="tuangouTr">
+										    	<td><span class="star">*</span> 团购图片：</td>
+										    	<td>
+										    		<label class="get-img" id="tuangouImg" style="background:url('{$group_list['group_img']|substr=1}') no-repeat; background-size: 100%;">
+							                          <span class="getImg_span" style="line-height: 80px;">添加图片</span><input type="file" class="file-img" name='img'>
+							                        </label>&nbsp;&nbsp;
+							                        <div class="star" style="margin-bottom: 10px;">上传图片分辨率为493*222像素，大小不能超过2MB</div>
+										    	</td>
+										    </tr>	
+										    <tr id="shouyeTr">
+										    	<td style="padding-left: 10px;">首页图片：</td>
+										    	<td>
+										    		<label class="get-img" id="shouyeImg" style="background:url('{$group_list['group_img']|substr=1}') no-repeat; background-size: 100%;">
+							                          <span class="getImg_span" style="line-height: 80px;">添加图片</span><input type="file" class="file-img" name='img_1'>
+							                        </label>&nbsp;&nbsp;
+							                        <div class="star" style="margin-bottom: 10px;">上传图片分辨率为493*222像素，大小不能超过2MB</div>
+										    	</td>
+										    </tr>
+										    <tr id="tuijianTr">
+										    	<td style="padding-left: 10px;">推荐位图片：</td>
+										    	<td>
+										    		<label class="get-img" id="tuijianImg" style="background:url('{$group_list['group_img']|substr=1}') no-repeat; background-size: 100%;">
+							                          <span class="getImg_span" style="line-height: 80px;">添加图片</span><input type="file" class="file-img" name='img_2'>
+							                        </label>&nbsp;&nbsp;
+							                        <div class="star" style="margin-bottom: 10px;">上传图片分辨率为493*222像素，大小不能超过2MB</div>
+										    	</td>
+										    </tr>
+											<tr>
+										    	<td></td>
+										    	<td style="text-align: right;"><a id="issub">提交</a></td>
+										    </tr>
+										</table>			
+									</form>
+                                </div>
+                            </div>
+                            <div class='section-bt'></div>             
+                        </div>
+                    </div>
+                
+           </div>
+        </div>
+    </div>
+</div>
+<!-- 底部 -->
+<include file="Public:footer" />
+<!-- 底部 -->    
+<script>
+//判断左边导航
+function checkNav(){
+	$(".side-nav>ul:eq(2)>li:eq(2) a").css("color","#ff6600")
+}
+checkNav(); 
+
+//橱窗设置
+$("#shopwindow").hover(function(){
+	$("#shopwindow>ul").css("display","block")
+},function(){
+	$("#shopwindow>ul").css("display","none")
+})
+
+var goods;
+var goodsID;
+getGoodsList();    
+
+function getGoodsList(){
+	var wraper = $(".section-bt");
+	var _this  = this;
+	var url    = "{:U('SellerGoods/goodsList')}";
+	/*ajax分页*/
+	//var arr = new Array([1,2,3], [4,5,6]);
+	
+	ajaxPage({
+	    
+    	wraper:wraper,	
+		parameter:'',//附加参数
+	    listRows:5,//每页显示条数
+		rollPage:3,//最多显示多少页码
+		url:url,//ajax请求地址
+		//回调函数
+		callback:function(data,page,page_data){            
+           showHtml(data);
+           showPage(page_data); 
+		}
+	});
+}
+
+
+
+function  showHtml(data){
+    var html = [];
+	for(var k in data){
+    	html.push("<div class='t-goods-wrap'>");
+    	html.push("   <div class='t-goods-tls state-1 marT20'>");
+    	html.push("      <input type='checkbox' class='chk-pub-1 chk-pub-2'  value='"+data[k].id+"' />");
+    	html.push("      <span class='marL16' id='201'>商品编号："+data[k].id+"</span>");
+        html.push("   </div>");
+        html.push("</div>");
+        html.push("<div class='table-goods-cont'>");
+        html.push("   <div class='disTable'>");
+        html.push("        <div class='disTable-cell th th-chk'>");
+	if( data[k].is_new==1 ){
+	    html.push("           <span class='f-cCol6' style='font-size:12px; display:block'>新品推荐</span>");
+	    html.push("           <span class='f-cCol6' style='font-size:12px; display:none'>畅销商品</span>");
+	}else if( data[k].is_new==2 ){
+		html.push("           <span class='f-cCol6' style='font-size:12px; display:none'>新品推荐</span>");
+		html.push("           <span class='f-cCol6' style='font-size:12px; display:block'>畅销商品</span>");
+	}else{
+		html.push("           <span class='f-cCol6' style='font-size:12px; display:none'>新品推荐</span>");
+		html.push("           <span class='f-cCol6' style='font-size:12px; display:none'>畅销商品</span>");
+	}
+        html.push("        </div>");
+        html.push("        <div class='disTable-cell th th-goods'>");
+        html.push("           <div class='th-goods-c posRel'>");
+        html.push("              <div class='th-goods-pic'>");
+        html.push("                 <img src='"+data[k]['goods_thumb']+"' style='width:100%;' />");
+        html.push("              </div>"); 
+        html.push("              <div class='goods_name'>"+data[k].goods_name+"</div>"); 
+        html.push("           </div>");
+        html.push("         </div>");
+        html.push("         <div class='disTable-cell th th-price'>");
+        html.push("            <span class='sign-icon f-cCol6'>￥"+data[k].goods_price+"元/件</span>");                           
+        html.push("         </div>");   
+        html.push("          <div class='disTable-cell th th-sum' style='width:100px;'>"); 
+        html.push("             <span class='f-cCol11'>"+(data[k].status == 1 ? '发布中':'下架')+"</span>"); 
+        html.push("         </div>"); 
+        html.push("         <div class='disTable-cell th th-state'>"); 
+        html.push("             <p class='f-cCol10'>"+ data[k].update_time.substr(0 ,[10]) +"</p>"); 
+        html.push("         </div>"); 
+        html.push("         <div class='disTable-cell th th-operation'>"); 
+        html.push("             <a href='__CONTROLLER__/goodsUpdate/id/"+data[k].id+"' target='_blank' class='butt03-a butt-style-3 butt-s-1'>编辑商品</a>");
+        html.push("             <a href='javascript:;' data-id="+data[k].id+" group-id="+data[k].group_id+" class='butt03-a butt-style-3 butt-s-1 apply'>申请闪购</a>");
+        html.push("             <a href='javascript:;' data-id="+data[k].id+" class='delete butt03-a butt-style-3 butt-s-1'>删除</a>"); 
+        html.push("         </div>");                                 
+        html.push("    </div>");
+        html.push("</div>");
+	}
+	html = html.join(''); 
+    $(".goods_list").html(html);
+}
+
+
+//申请团购
+$(".goods_list").on('click','.apply',function(){
+	var id = $(this).attr('data-id');
+	goodsID = id;
+	var groupId = $(this).attr('group-id');
+		$("#formGroupbuy")[0].reset();
+		$('.get-img').css("background-image","none");
+		$(".getImg_span").css("display","block");
+		$("#tuangouTr").css("display","table-row");
+	    $("#tuijianTr").css("display","none");
+	    $("#shouyeTr").css("display","none");
+	    
+		$(".ow-overlay").css("display","block");
+		$(".modal").css("display","block");
+		$('.modal').omniWindow() // create modal
+	    .trigger('show'); // and show it*/	
+	
+	if(groupId!="null"){		
+		$.post("http://www.orangesha.com/index.php/Home/SellerGroupBuy/getGroupGoods",{'group_id':groupId},function(res){
+	        $(".ow-overlay").css("display","block");
+			$(".modal").css("display","block");
+			$('.modal').omniWindow() // create modal
+		    .trigger('show'); // and show it*/
+		    
+		    //填充用户申请团购信息
+	        $("input[name='title']").val(res.data.title);
+	        $("input[name='group_price']").val(res.data.group_price);
+	        $("input[name='start_time']").val(formatDate(res.data.start_time));
+	        
+	        function getTime(){
+	        	/*console.log(res.data.time)*/
+	        	if(res.data.time==7){
+	        	    $(":radio[name='time']:eq(0)").prop("checked","checked")
+		        }
+		        if(res.data.time==15){
+		        	$(":radio[name='time']:eq(1)").prop("checked","checked");
+		        }
+		        if(res.data.time==30){
+		        	$(":radio[name='time']:eq(2)").prop("checked","checked");
+		        }
+	        }
+	        getTime();
+	        //获取闪购位置图片
+	        function getAdver(){	        	
+	        	if(res.data.ad_1==1){
+		        	URL=res.data.img_1.substring(1);
+		        	URL2=res.data.img_2.substring(1);
+		        	$(":radio[name='adver']:eq(1)").prop("checked","checked");
+		        	$("#shouyeImg").css("background","url('"+URL+"') no-repeat").css("background-size","100% 100%");
+	                $(".getImg_span:eq(1)").css("display","none");
+	                $("#tuijianImg").css("background","url('"+URL2+"') no-repeat").css("background-size","100% 100%")
+	                $(".getImg_span:eq(2)").css("display","none");
+	                $("#shouyeTr").css("display","table-row");
+	                $("#tuangouTr").css("display","none");
+				    $("#tuijianTr").css("display","table-row");				    
+		        }
+		        if(res.data.ad_1==2){
+		        	URL=res.data.img_2.substring(1);
+		        	$(":radio[name='adver']:eq(2)").prop("checked","checked");
+		        	$("#tuijianImg").css("background","url('"+URL+"') no-repeat").css("background-size","100% 100%");
+	                $(".getImg_span:eq(2)").css("display","none");
+	                $("#tuijianTr").css("display","table-row");
+	                $("#tuangouTr").css("display","none");
+			        $("#shouyeTr").css("display","none");			        
+		        }
+		        if(res.data.ad_1==0){
+		        	URL=res.data.img.substring(1);
+		        	$(":radio[name='adver']:eq(0)").prop("checked","checked");
+		        	$("#tuangouImg").css("background","url('"+URL+"') no-repeat").css("background-size","100% 100%");
+	                $(".getImg_span:eq(0)").css("display","none");
+	                $("#tuangouTr").css("display","table-row");
+				    $("#tuijianTr").css("display","none");
+				    $("#shouyeTr").css("display","none");				    
+		        }
+		    }   
+		    getAdver()
+		    //验证活动是否过期
+		    function checkTime(){
+		    	var startTime = formatDate2(res.data.start_time)
+		    	var str = startTime;
+		    	str = str.replace(/-/g,"/");
+				var date = new Date(str);
+				var now = new Date();
+				if(res.data.time==7){
+					date.setDate(date.getDate()+7);
+					if(date < now) {
+				       console.log('活动已结束，请重新申请！');
+				    }
+				}
+				if(res.data.time==15){
+					date.setDate(date.getDate()+15);
+					if(date < now) {
+				       console.log('活动已结束，请重新申请！');
+				    }
+				}
+				if(res.data.time==30){
+					date.setDate(date.getDate()+30);
+					if(date < now) {
+				       console.log('活动已结束，请重新申请！');
+				    }
+				}				
+		    }
+		    checkTime();
+	  });	   
+	}	
+})
+//获取后台时间格式转换
+	function formatDate(time){  
+	    time = parseInt(time) * 1000;   
+	    var now    = new Date(time);  
+	    var year   = now.getFullYear();  
+	    var month  = now.getMonth()+1;     
+	    var date   = now.getDate(); 
+	    var hour   = now.getHours();
+	    var minute = now.getMinutes();
+
+	    month  = month < 10 ? '0' + month : month;
+	    date   = date < 10 ? '0' + date : date;
+	    hour   = hour < 10 ? '0' + hour : hour;
+	    minute = minute < 10 ? '0' + minute : minute;
+
+	    return   year + "-" + month + "-" + date + "T" + hour + ":" + minute;     
+    }
+    function formatDate2(time){  
+	    time = parseInt(time) * 1000;   
+	    var now    = new Date(time);  
+	    var year   = now.getFullYear();  
+	    var month  = now.getMonth()+1;     
+	    var date   = now.getDate(); 
+	    var hour   = now.getHours();
+	    var minute = now.getMinutes();
+
+	    month  = month < 10 ? '0' + month : month;
+	    date   = date < 10 ? '0' + date : date;
+	    hour   = hour < 10 ? '0' + hour : hour;
+	    minute = minute < 10 ? '0' + minute : minute;
+
+	    return   year + "-" + month + "-" + date + " " + hour + ":" + minute;     
+   }
+//闪购位置切换
+	$("input[name='adver']:eq(1)").click(function(){
+		$("#shouyeTr").css("display","table-row");
+		$("#tuijianTr").css("display","table-row");
+		$("#tuangouTr").css("display","none");
+	})
+	$("input[name='adver']:eq(2)").click(function(){
+		$("#tuijianTr").css("display","table-row");
+		$("#shouyeTr").css("display","none");
+		$("#tuangouTr").css("display","none");
+	})
+	$("input[name='adver']:eq(0)").click(function(){
+		$("#tuangouTr").css("display","table-row");
+		$("#tuijianTr").css("display","none");
+		$("#shouyeTr").css("display","none");
+	})
+//提交团购数据
+	$("#issub").click(function(){
+		request();
+	})
+//提交数据
+	function request(){  		
+	    var data = new FormData($("#formGroupbuy")[0]);  // 要求使用的html对象
+	    var url  = "http://www.orangesha.com/index.php/Home/SellerGroupBuy/groupBuyAdd";
+	    var url_ = "{:U('SellerGoods/goodsList')}";
+        data.append("goods_id",goodsID);
+        //开始时间格式转换
+        var str=$("input[name='start_time']").val();
+		var pattern = "T";
+		str = str.replace(new RegExp(pattern), " ");
+        data.append("start_time",str);
+        //持续时间
+        data.append("time",$("input[name='time']:checked").val());
+        //上首页&上推荐
+        data.append("ad_1",$("input[name='adver']:checked").val());
+        /*console.log($("input[name='adver']:checked").val())*/
+	    $.ajax({  
+	          url : url ,  
+	          type: 'POST',  
+	          data: data,  
+	          async: true,  
+	          // 下面三个参数要指定，如果不指定，会报一个JQuery的错误 
+	　　　　　       cache: false,  
+	          contentType: false,  
+	          processData: false,  
+	          success: function (res) {  	              
+	              /*console.log(data);*/
+	              if(res.status){
+	               /* console.log(res.msg);*/
+	                alert(res.msg);
+	                $(".ow-overlay").css("display","none");
+	                $(".modal").css("display","none");
+	              } 
+	              if(res.status==0){
+	              	alert(res.msg);
+	              }
+	          },  
+	          error: function (returndata) {  
+	              console.log(returndata); 
+	              
+	          }  
+	     });  
+	} 	
+	
+//关闭模态框
+$(".modal>div>span").click(function(){
+	$(".ow-overlay").css("display","none");
+	$(".modal").css("display","none");
+})
+//添加图片
+	$(".get-img").on('change','input',function(){
+        var file   = $(this)[0].files[0];   
+        var reader = new FileReader(); 
+        var _this  = this; 
+        //将文件以Data URL形式读入页面  
+        reader.readAsDataURL(file);  
+        reader.onload=function(e){ 
+            //显示文件      
+            $(_this).parent('.get-img').css("background","url("+this.result+") no-repeat").css("background-size","100%");
+            $(_this).prev(".getImg_span").css("display","none")
+        }  
+    })
+
+
+//更改商品上下架状态
+//下架
+$("#removeGoods2").click(function(){
+	var data = {};
+    $('.goods_list input[type=checkbox]').each(function(){
+    	if($(this).prop('checked')){
+    	   var value   = $(this).val();
+    	   data[value] = 0;
+        }    
+    })
+    $.post("http://www.orangesha.com/index.php/Home/SellerGoods/statusChange",data,function(res){
+	        window.location.reload();	        
+	});
+})
+//上架
+$("#addGoods2").click(function(){
+	var data = {};
+    $('.goods_list input[type=checkbox]').each(function(){
+    	if($(this).prop('checked')){
+    	   var value   = $(this).val();
+    	   data[value] = 1;
+        }    
+    })
+    $.post("http://www.orangesha.com/index.php/Home/SellerGoods/statusChange",data,function(res){
+	        window.location.reload(); 	        
+	});
+})
+
+//新品推荐
+$("#shopwindow>ul li:eq(0)").click(function(){
+	var data = {};
+	var newarr = [];
+    $('.goods_list input[type=checkbox]').each(function(){
+    	if($(this).prop('checked')){
+    	    var value   = $(this).val();		   
+            newarr.push(value);     
+    	    $(this).parent().parent().next().find('div:eq(0)').find('div:eq(0)').find("span:eq(1)").css("display","none");             
+    	    $(this).parent().parent().next().find('div:eq(0)').find('div:eq(0)').find("span:eq(0)").css("display","block");   	   
+        }    
+    })
+	var newstr = newarr.join(',');  
+     $.post("{:U('SellerGoods/newgoods')}",{'newarr':newstr},function(data){
+     	console.log(data)
+		if( data.msg=='ok'){			
+		  alert('设置成功！');
+		}
+	});
+})
+
+//畅销商品
+$("#shopwindow>ul li:eq(1)").click(function(){
+	
+	var hotarr = [];
+    $('.goods_list input[type=checkbox]').each(function(){
+    	if($(this).prop('checked')){
+    	   var value   = $(this).val();
+		   	hotarr.push(value);  
+    	   /*data[value] = 0;*/
+		   $(this).parent().parent().next().find('div:eq(0)').find('div:eq(0)').find("span:eq(0)").css("display","none");    	       	   
+    	   $(this).parent().parent().next().find('div:eq(0)').find('div:eq(0)').find("span:eq(1)").css("display","block");
+           
+        }    
+    })
+	var hotstr = hotarr.join(',');	 
+    $.post("{:U('SellerGoods/hotgoods')}",{'hotarr':hotstr},function(dat){
+    	console.log(dat)
+		if( dat.msg=='ok'){			
+		  alert('设置成功！');		
+		}
+	});
+	
+})
+
+
+//取消推荐
+$("#removeRecommend").click(function(){
+	var datas = [];
+    $('.goods_list input[type=checkbox]').each(function(){
+    	if($(this).prop('checked')){
+    	   var valu   = $(this).val();
+		   datas.push(valu);		  		 	      	  
+    	  $(".th-chk span").css("display","none")
+        }    
+    })
+	 var datastr = datas.join(',');	      
+      $.post("{:U('SellerGoods/quxiaogoods')}",{'quxiao':datastr},function(data){
+			if( data.msg=='ok'){			
+			  alert('取消推荐成功！');
+              window.location.reload();			  
+			}
+	  });
+})
+
+//全选
+$("#all_cb").click(function(){
+    if($(this).is(':checked')){
+        $(".goods_list input[type=checkbox]").prop("checked",true);
+    }else{
+        $(".goods_list input[type=checkbox]").prop("checked",false);
+    }
+})
+
+/**
+ *显示分页
+ */
+function showPage(data){
+    var html = ["<div class='turn-page'>"];
+    if(data['prev']){
+	    html.push("<div class='left-btn change' data-p='"+ data['prev'] +"'><<上一页</div>");
+    }else{
+    	html.push("<div class='left-btn'><<上一页</div>");
+    }
+	for(var k in data['page']){
+		if(data['page'][k] == '.'){
+			html.push("<div class='omit'>...</div>");                  
+		}else
+		if(data['page'][k] != data['nowPage']){
+			html.push("<div class='page-btn change' data-p='"+ data['page'][k] +"'>" + data['page'][k] + "</div>");
+		}else{
+			html.push("<div class='page-btn active'>" + data['page'][k] + "</div>");
+		}                          
+	}
+	if(data['next']){
+	    html.push("<div class='right-btn change' data-p='"+ data['next'] +"'>下一页>></div>");
+	}else{
+        html.push("<div class='right-btn'>下一页>></div>");
+	}
+	
+	html.push("</div>");
+	html.push("<p class='to-page'>到第");
+	html.push("   <input class='go_number' type='text' value='1'>页<input type='button' value='确定' class='go'>");
+	html.push("</p>");
+	html = html.join('');
+	$(".section-bt").html(html);
+}
+
+//删除
+$(".goods_list").on('click','.delete',function(){
+	if(confirm('确认删除!')){
+	    var id = $(this).attr('data-id');
+		$.post("{:U('SellerGoods/goodsDelete')}",{"id":id},function(res){                
+	        alert(res['msg']);
+	        if(res['status']){
+	        	window.location.reload();
+	        }        
+	    }); 
+	}
+})
+
+</script>
+</body>
+</html>
+
+    

@@ -1,0 +1,442 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="description" content="" />
+<style>
+html{font-size:62.5%}
+*{font-size:16px;font-family:Arial,Microsoft YaHei,\\9ED1\4F53,\\5B8B\4F53,sans-serif}
+*,li,ul{padding:0;margin:0}
+li,ul{list-style:none}
+a,a:hover{text-decoration:none}
+a:hover{border:0}
+button,input,select,textarea{outline:none}
+textarea{resize:none}
+
+#container{width:98%;margin-left:1%}
+#container,#container #main{height:auto;float:left;padding-bottom:10px}
+#container #main{width:100%;border:1px solid #d7d7d7;margin-top:5px}
+
+#Crumbs{width:100%;height:40px;border:1px solid #d7d7d7;line-height:40px;margin-top:5px;float:left}
+#Crumbs a{padding-left:10px}
+#Crumbs .btn{width:auto;padding:0 5px;height:30px;float:right;display:block;background:red;line-height:30px;color:#fff;border-radius:5px;font-size:14px;margin-right:20px;margin-top:5px}
+
+.tableList{margin:0 auto;width:100%}
+.tableList td span{float:right}
+.tableList tr{background:#fff}
+.tableList tr:hover{background:#f1fcea}
+.tableList tr:first-child{background:#f4f5f9}
+.tableList tr td,th{border-left:1px solid #e7e9f3;border-bottom:1px solid #e7e9f3;font-size:20px;padding:10px;font-size:14px}
+.tableList tr .td{border-left:0}
+.tableList tr .table_td{text-align:center}
+.tableList tr .table_btn{background:#fff;border:0}
+.tableList input{width:30px;height:24px;border-radius:3px;border-bottom:1px solid #e3e9ef;border-top:1px solid #abadb3;border-left:1px solid #e2e3ea;border-right:1px solid #dbdfe6;text-align:center}
+.tableList td img{max-width:40px;max-height:40px}
+.tableList td,th{padding-right:30px;padding-top:10px}
+.tableList .table_handle{width:auto;text-align:center}
+.tableList .table_handle div{width:50px;height:21px;margin:0 auto}
+.tableList .table_handle div a{width:21px;height:21px;display:block;margin-left:4px;float:left}
+.tableList .table_handle .table_handle_a{color:#000;text-decoration:none}
+.tableList .table_handle .table_handle_a:hover{color:pink;text-decoration:none}
+.tableList tr .table_td .table_td_text{max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:clip;font-size:14px}
+.tableList .select_checkbox{width:80px;height:16px;margin:0 auto}
+.tableList .select_checkbox input{width:16px;height:16px;float:left}
+.tableList .select_checkbox a{height:16px;float:left;text-indent:5px;line-height:15px}
+.tableList tr .table_btn {
+    background: #fff;
+    border: 0;
+}
+.tableList input[type=text] {
+    width: 30px;
+    height: 24px;
+    border-radius: 3px;
+    border-bottom: 1px solid #e3e9ef;
+    border-top: 1px solid #abadb3;
+    border-left: 1px solid #e2e3ea;
+    border-right: 1px solid #dbdfe6;
+    text-align: center;
+}
+
+.page{width:96%;height:auto;float:left;margin-top:10px;background:#fff;margin-left:2%}
+.page ul{width:auto;float:left;height:auto;border:1px solid #ddd;border-radius:4px}
+.page ul select{width:auto;height:28px;float:left;margin-left:6px;margin-right:6px;margin-top:2px;border-radius:4px}
+.page ul input{width:40px;height:32px;border:0;float:left;border-left:1px solid #ddd}
+.page ul a{display:block;width:auto;height:32px;float:left;padding:0 7px;line-height:32px;border-left:1px solid #ddd;color:#99999c;font-size:1.4rem}
+.page ul .now,.page ul a:hover{background:pink;color:#fff}
+.page ul p.total{width:auto;height:32px;float:left;line-height:32px;font-size:1.4rem}
+</style>
+</head>
+<body>
+<div id="container">
+    <div id="Crumbs">
+        <a>后台管理中心</a><span>&nbsp;&nbsp;-</span><a>批量采购列表</a>
+    </div>
+    <div id="main">
+        <table cellspacing="0" class="tableList">
+            <thead>
+                <tr class="code_0">
+                    <th class="td">
+                        <div class="select_checkbox">
+                            <input type="checkbox" class="checkbox" value="on"><a>ID</a>
+                        </div>
+                    </th>
+                    <th class="table_td">所属类目</th>
+                    <th class="table_td">采购名称</th>
+                    <th class="table_td">报价价格</th>
+                    <th class="table_td">联系人</th>
+                    <th class="table_td">联系电话</th>
+                    <th class="table_td">是否审核</th>
+                    <th class="table_td">报价时间</th> 
+                    <th class="table_td">操作</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="page">
+        <ul>
+
+        </ul>
+    </div>
+</div>	
+</body>
+<script type="text/javascript"> 
+// +----------------------------------------------------------------------
+// | time:2016-7-10
+// +----------------------------------------------------------------------
+// | email:597089187@qq.com
+// +----------------------------------------------------------------------
+// | Author: yanjin
+// +----------------------------------------------------------------------
+/*分页*/
+(function(e){
+var Page = function(config){
+    this.config(config);//配置    
+    if(this.request_type == 'get'){
+        this.get();
+    }
+    if(this.request_type == 'post'){
+        this.post();
+    }
+}
+
+Page.prototype = {
+    config:function(config){   
+        //请求地址
+        this.url        = config.url;
+        // 分页栏每页显示的页数
+        this.rollPage   = /^[1-9]+[0-9]*]*$/.test(config.rollPage) ? config.rollPage : 3;
+        // 附加请求参数
+        this.paramer    = config.paramer ? config.paramer : '';
+        //总记录数 
+        this.totalRows;
+        //第多少条开始取  
+        this.firstRow;
+        //设置每页显示条数 默认20条
+        this.listRows   = /^[1-9]+[0-9]*]*$/.test(config.listRows) ? config.listRows : 20; 
+        //当前页数默认为1
+        this.nowPage    = /^[1-9]+[0-9]*]*$/.test(config.nowPage) ? config.nowPage : 1;
+        //每页显示的多少条数据 
+        this.callback   = config.callback||'';
+        this.request_type = config.request_type;
+        //分页数据
+        this.page       = {};
+        this.data_cache = [];//得到的数据根据分页缓存
+        this.cache = typeof(config.cache)!=='undefined'?config.cache:false; //是否开启缓存  
+    },
+    /***初始运行***/
+    init:function(){
+      //获得分页内容
+        this.get_page();
+        //回调函数
+        this.callback(this.data , this.page); 
+    },
+    /***ajax请求***/
+    post:function(){
+        var _this     = this;
+        this.firstRow = this.listRows * (this.nowPage - 1);      
+        var d = {firstRow : this.firstRow , listRows : this.listRows};
+        for(i in this.parameter){
+            if(typeof(this.parameter[i]) != 'undefined'){
+              d[i] = this.parameter[i];
+            }       
+        }
+        $.post(this.url , d , function(res){
+            if(res){       
+                _this.data      = res['data'];
+                _this.totalRows = res['total'];
+                _this.init();
+            }
+        })   
+    }, 
+    /***ajax请求***/
+    get : function(){
+       if(this.cache && typeof(this.data_cache[this.nowPage])!=='undefined'){
+           this.data = this.data_cache[this.nowPage];
+           this.init();
+       }else{      
+          var _this     = this;
+          this.firstRow = this.listRows * (this.nowPage - 1);      
+          var d = {firstRow : this.firstRow , listRows : this.listRows};
+          for(i in this.parameter){
+              if(typeof(this.parameter[i]) != 'undefined'){
+                d[i] = this.parameter[i];
+              }       
+          }
+          $.get(this.url , d ,function(res){
+              if(res){       
+                  _this.data_cache[_this.nowPage] = res['data'];
+                  _this.data      = res['data'];
+                  _this.totalRows = res['totalRows'];
+                  _this.init();
+              }
+          })
+      }   
+    }, 
+    /***分页***/
+    get_page:function(){
+        var __PAGE = {
+            prev      : false,
+            first     : false,
+            page      : [],
+            next      : false,
+            end       : false,
+            now_page  : ''
+        };
+        /* 计算分页信息 */
+        this.totalPages = Math.ceil(this.totalRows/this.listRows); //总页数
+        //当前页面大于总页面
+        if(!this.totalPages && this.nowPage > this.totalPages){
+            this.nowPage = this.totalPages;//当前页面设置为总页面
+        } 
+        /* 计算分页临时变量 */
+        now_cool_page      = this.rollPage / 2;
+        now_cool_page_ceil = Math.ceil(now_cool_page);
+        //上一页
+        up_row  = this.nowPage - 1;  
+        __PAGE.prev = up_row > 0 ? up_row : false;
+        //下一页
+        down_row  = this.nowPage+1;  
+        __PAGE.next = (down_row <= this.totalPages) > 0 ? down_row : false;    
+        //数字连接
+        for(i = 1; i <= this.rollPage;i++){
+            /*计算出页数*/
+            if((this.nowPage - now_cool_page) <= 0 ){
+                page = i;
+            }else
+            if((this.nowPage + now_cool_page - 1) >= this.totalPages){
+                page = this.totalPages - this.rollPage + i;
+            }else{
+                page = this.nowPage - now_cool_page_ceil + i;
+            }  
+            //页数大于0并且页数不等于当前页面         
+            if(page > 0 && page != this.nowPage){
+                //当前页数小于或者等于总页数才让其显示
+                if(page <= this.totalPages){
+                  __PAGE.page.push(page);                           
+                }else{
+                    break;
+                }
+            }else         
+            if(this.nowPage==page){
+                __PAGE.page.push(page);
+                __PAGE.now_page = page;
+            } 
+        }
+        __PAGE.totalPages = this.totalPages;
+        __PAGE.totalRows  = this.totalRows; 
+        this.page = __PAGE;         
+    }, 
+}
+
+e.ajaxPage = function(config){
+    return new Page(config);
+}
+})(window);
+
+
+(function(w){
+	var check_url = "http://houtai.orangesha.com/Purchase_offer/details?id=";
+	var __PAGE;
+	var __PAGE_CONFIG = {
+        listRows     : 10, 
+        rollPage     : 3,
+        cache        : true,
+        request_type : "post",
+        url          : "http://houtai.orangesha.com/Purchase_offer/offerList"
+    };
+
+    var edit_url = "http://houtai.orangesha.com/Purchase_offer/offerUpdate?id=";
+    var __PAGE;
+    var __PAGE_CONFIG = {
+        listRows     : 10, 
+        rollPage     : 3,
+        cache        : true,
+        request_type : "post",
+        url          : "http://houtai.orangesha.com/Purchase_offer/offerList"
+    };
+
+    var del_url = "http://houtai.orangesha.com/Purchase_offer/offerList?id=";
+    var __PAGE;
+    var __PAGE_CONFIG = {
+        listRows     : 10, 
+        rollPage     : 3,
+        cache        : true,
+        request_type : "post",
+        url          : "http://houtai.orangesha.com/Purchase_offer/offerList"
+    };
+
+	/*
+	 * 时间戳转日期
+	 * */	
+	function formatDate(time){     
+		var now    = new Date(time);  
+        var year   = now.getFullYear();  
+        var month  = now.getMonth()+1;     
+        var date   = now.getDate();     
+        var hour   = now.getHours();     
+        var minute = now.getMinutes();
+        var second = now.getSeconds(); 
+        month  = month < 10 ? '0' + month : month;
+        date   = date < 10 ? '0' + date : date;
+        hour   = hour < 10 ? hour + '0' : hour;
+        minute = minute < 10 ? '0' + minute : minute;
+        second = second < 10 ? '0' + second : second;
+        return   year + "-" + month + "-" + date + "   " + hour + ":" + minute + ":" + second;     
+    } 
+
+    /*生成html*/
+    var __HTML = {
+        //生成商城申请列表
+        createApplicationList : function(data){
+            var html = '';
+            for(var k in data){
+                html = html 
+                + '<tr data-id="' + data[k].id + '">'
+	            + '    <td class="td">'
+	            + '        <div class="select_checkbox">'
+	            + '            <input type="checkbox" class="checkbox" value="on">'
+	            + '            <a>' + data[k].id + '</a>'
+	            + '        </div>'
+	            + '    </td>'
+                + '    <td class="table_td">' + data[k].cat_name + '</td>'
+                + '    <td class="table_td">' + data[k].title + '</td>'
+                 + '    <td class="table_td">' + data[k].offer_price + '' + data[k].offer + '</td>'
+                + '    <td class="table_td">' + data[k].linkman + '</td>'
+                + '    <td class="table_td">' + data[k].mobile_phone + '</td>'
+
+                  + '    <td class="table_td">' + (data[k].status == 1 ? '审核通过' : '未审核') + '</td>'
+                + '    <td class="table_td">' + data[k].create_time + '</td>'
+
+                + '    <td style="width:130px;">    <a href="' + check_url + data[k].id + '" class="table_handle_a">审核</a>||<a href="' + edit_url + data[k].id + '" class="table_handle_a">编辑</a>||<a href="' + del_url + data[k].id + '" class="table_handle_a">删除</a>'
+
+                + '    </td>'                    
+                + '</tr>'
+            }
+            return html;                
+        },
+        //生成分页
+        createPage : function(data){
+		    var page_html = __HTML.createListRowsOption([10 , 20 , 40]);
+		    //首页处理
+		    var first = data.first !== false ? 
+		        ('<a class="first else_page" data-p=1 href="javascript:;">首页</a>') :
+		        ('<a class="first">首页</a>');
+		    //上一页处理
+		    var prev = data.prev !== false ? 
+		            ('<a class="prev else_page" data-p=' + data.prev + ' href="javascript:;">上一页</a>') :
+		            ('<a class="prev">上一页</a>'); 
+		    //页码处理
+		    var page = '';    
+		    for(var k in data.page){
+		    	page = page + 
+		    	    (data.page[k] == data.now_page ? 
+		    	    ('<a class="page_a now" data-p=' + data.page[k] + '>' + data.page[k] +'</a>') :
+		    	    ('<a class="page_a" href="javascript:;" data-p=' + data.page[k] + '>' + data.page[k] +'</a>'));   
+            } 
+		    //下一页处理
+		    var next = data.next !== false ? 
+		        ('<a class="next else_page" data-p=' + data.next + ' href="javascript:;">下一页</a>') :
+		        ('<a class="first">下一页</a>');
+            //末页处理
+		    var end = data.end !== false ? 
+		        ('<a class="end else_page" data-p=' + data.end + ' href="javascript:;">末页</a>') :
+		        ('<a class="end">末页</a>');   
+		    //统计处理          
+		    var count = '<p class="total">共' + data.totalPages + '页' + data.totalRows + '条数据</p>'; 
+		    //跳转处理
+		    var jump = '<input name="jump_page" value="1">'
+		        + '<a href="javascript:;" class="jump">GO</a>';  
+	        page_html = page_html + first + prev + page + next + end + count + jump;
+            return page_html;         
+        },
+        //生成下拉菜单
+        createListRowsOption(data){
+	    	var str = '<select class="set_listRows">';
+	    	data.map(function(v){
+	            str +='<option value="' + v + '">' + v +'</option>';
+	    	});
+	    	str +='</select>';
+	    	return str;
+        }
+    }
+
+    /*
+     * 分页事件绑定 
+     **/
+    var page_event = (function(){
+    	/*
+         * 其他页码
+         **/
+        $("#container .page ul").on('click' , '.else_page' , function(){
+        	 var p = $(this).attr('data-p');
+		    __PAGE.nowPage = parseInt(p);
+		    __PAGE.post();  
+        })
+
+        /*
+         * 点击分页跳转
+         **/
+        $("#container .page ul").on('click' , '.page_a' , function(){
+        	 var p = $(this).attr('data-p');
+		    __PAGE.nowPage = parseInt(p);
+		    __PAGE.post();  
+        })
+
+        /*
+         * 输入分页跳转
+         **/
+        $("#container .page ul").on('click' , '.jump' , function(){
+            var p = $("input[name='jump_page']").val();
+		    __PAGE.nowPage = parseInt(p);
+		    __PAGE.post();    
+        }) 
+
+        /*
+         * 改变分页每页显示条数
+         **/
+        $("#container .page ul").on('change' , '.set_listRows' , function(){
+            var listRows = $(this).val();
+            __PAGE.nowPage = 1;
+            __PAGE.listRows = listRows;
+            __PAGE.post();      
+        })      
+    })();   
+
+    w.mall_application = {
+        init : function(){
+        	__PAGE_CONFIG.callback = function(data , page){
+                $("table tbody").html(__HTML.createApplicationList(data));
+                //分页
+                $(".page ul").html(__HTML.createPage(page));          		
+        	}
+        	__PAGE = ajaxPage(__PAGE_CONFIG);
+        }
+    } 
+})(window); 
+mall_application.init();  
+</script>
+</html>
+

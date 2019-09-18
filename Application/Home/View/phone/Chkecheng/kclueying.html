@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>课程掠影</title>
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/index.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/rest.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/liner.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/chkecheng/class.css" />
+		<script type="text/javascript" src="__PUBLIC__/phone/js/jquery.js" ></script>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/myscript.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/phone/js/focus.js"></script>
+	</head>
+	<body>
+		<div class="wrp">
+						<!--顶部-->
+			<include file="Public:header" />
+			<!-- 顶部结束 -->
+			<div class="container">
+				<section class="header-main">
+					<ul class="navs clear">
+						<span class="slider"></span>
+						<li><a href="../rainbowCourse/classintroduction.html" class="navs-item">课程介绍</a></li>
+						<li><a href="../rainbowCourse/Courseintroduction.html" target="_blank">课程设置</a></li>
+						<li><a href="../rainbowCourse/classglimpse.html">课程掠影</a></li>
+						<li><a href="../rainbowCourse/evaluation.html" target="_blank">课程评价</a></li>
+						<li><a href="http://www.cshqxx.com/xk" target="_blank">报名系统</a></li>
+					</ul>
+				</section>	
+				<div id="sidebar">
+					<img src="__PUBLIC__/phone/images/rainbowCourse/ico13.jpg" />
+					<dl>
+						<dt><img src="__PUBLIC__/phone/images/rainbowCourse/tit3.gif"></dt>
+						<volist name="course_category" id="v">
+								<dd><a href="" class="curr">{$v['cat_name']}</a></dd>
+						</volist>
+	                   
+                    </dl>
+				</div>
+				<div class="content">
+					<div class="classbox">
+						<ul class="ullbox">
+								<volist name="data" id="v">
+									<li>
+										<div class="info firt">
+											<a href="{$v['content']}">
+													<img src="__ROOT__{$v['thumb']|substr=1}" />
+													<p class="ft">{$v['title']}</p>
+											</a>
+										</div>
+									</li>
+								</volist>	
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- footer start -->
+			<include file="Public:footer" />
+			<!-- footer end -->
+		</div>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/jquery-1.11.2.min.js" ></script>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/common.js" ></script>
+	</body>
+</html>

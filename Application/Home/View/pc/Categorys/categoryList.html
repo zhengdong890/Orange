@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="keywords" content="橙橙，chengcheng,SHA,orange,orangsha,分享，橙橙分享,无人机，数控机床，机床，打印机，3D，3D打印机,深圳市橙橙网络科技有限公司">
+<meta name="description" content="橙橙分享专注服务于国内智能装备过剩产能在供需之间的对接共享合作,我们同时也是国内智能装备的专业电商交易平台,是撮合需求方、供给方、融资租赁公司三方的融资租赁B2B交易平台。">
+<meta name="copyright" content="深圳市橙橙网络科技有限公司(www.orangesha.com)版权所有">
+<meta name="author" content="橙橙分享"> 
+<title>e橙优品智能装备分享平台-所有产品分类</title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/home.css" type="text/css">
+<link rel="stylesheet" href="/Public/Orange/script/jquery.kinMaxShow/base.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.css">
+<link rel="shortcut icon" href="/Public/Home/images/favicon.ico" type="image/x-icon">
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/swiper/swiper.min.js"></script>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/tool.js"></script>
+<link href="{:C('STATIC_URL')}/Home/css/css/cssReset.css" rel="stylesheet">
+<link href="{:C('STATIC_URL')}/Home/css/css/allShare.css" rel="stylesheet">
+<style>
+.menu{display:none;}
+</style> 
+</head>
+<body >
+<include file="Public:header_top" />
+<include file="Public:header_search" />
+<include file="Public:nav" />
+<div class="n-bCol4 min-w1200">
+	<div class="all-share-page" >  
+	    <ul class="share-list clearfix">
+	        <volist name='categorys' id='v'>
+	        <li>
+	            <div class="content">
+	                <h2>
+	                <a href="http://{$Think.server.HTTP_HOST}/{$v['router']}.html">{$v['cat_name']}
+	                   <img src="__ROOT__{$v['cat_thumb']|substr=1}" alt class="icon">
+	                </a>
+	                </h2>
+	                <ul class="clearfix">
+					<volist name="v['child']" id="v1" key="k"> 
+	                    <li>
+	                    <a href="http://{$Think.server.HTTP_HOST}/{$v1['router']}.html" >{$v1.cat_name}</a>
+	                    </li>
+	                </volist> 
+	                </ul>
+	            </div>
+	        </li>
+	        </volist>
+	    </ul>
+	</div>
+</div>
+<div style="margin-top:-180px;">
+
+    <!-- 底部 -->
+    <include file="Public:footer" />
+    <!-- /底部 -->
+
+</div>	
+</body>
+
+</html>

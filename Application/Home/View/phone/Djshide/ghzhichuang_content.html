@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>工会之窗</title>
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/index.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/rest.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/common.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/Common/liner.css" />
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/djshide/partyEthics.css" />
+		<!-- ~~~手机端头部公共~~ -->
+		<link rel="stylesheet" href="__PUBLIC__/phone/css/djshide/partyEthics.css" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=yes" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/phone/css/jquery.mobile-1.2.0.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/phone/css/master.css" />
+		<script type="text/javascript" src="__PUBLIC__/phone/js/jquery-1.6.4.min.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/jquery.mobile-1.2.0.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/banner.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/my_js.js"></script>
+		<!--~~~~~~手机端头部公共结束~~~~  -->				
+		<script type="text/javascript" src="__PUBLIC__/phone/js/jquery.js" ></script>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/myscript.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/phone/js/focus.js"></script>
+	</head>
+	<body>
+	<div class="wrp">
+					<!--顶部-->
+			<include file="Public:header" />
+			<!-- 顶部结束 -->
+			<div class="mainWrap relative clearfix" style="margin-bottom: 30px;">
+<!-- 				<section class="header-main">
+					<ul class="navs clear">
+						<span class="slider"></span>
+						<li><a href="../partyEthics/policy.html" class="nav-item">政策法规</a></li>
+						<li><a href="../partyEthics/dynamic.html">党建动态</a></li>
+						<li><a href="../partyEthics/trade.html">工会之窗</a></li>
+						<li><a href="../partyEthics/morality.html">师德师风</a></li>
+						<li><a href="../partyEthics/1eague.html">团支部</a></li>
+					</ul>
+				</section -->
+				<div class="detailContent clearfix">
+					<div class="column_R">
+						<div class="mainContent">
+							<div class="introTit clearfix">
+								<div class="introTitImg" style="background-image:url(__PUBLIC__/phone/images/small.jpg)"></div>
+								<h2>工会之窗</h2>
+							</div>
+						</div>
+					</div>
+					<div class="content-wrap clearfix">
+						<div class="container">
+							<h3>{$data_content['title']}</h3>
+							<p class="xwtime">
+                                                                 发表于：{$data_content['updatetime']|date="Y-m-d H:i:s",###}　　　浏览次数：  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 作者：{$data_content['author']}
+                            </p>
+                            <div class="Content_Nr">
+                                <p align="center" style="text-align:center;">
+									<br>
+								</p>
+								<p align="left">
+									<span style="font-size:14.0pt;line-height:150%;font-family:宋体;">{$data_content['content']}<span></span></span>
+								</p>
+							
+							</div> 
+							<div class="ull_top">
+								<ul class="ull">
+	                                <li><strong>上一篇：</strong>
+	                                	<if condition="$data_content_up">
+	                                				<a href="{:U('ghzhichuang_content',array('id'=>$data_content_up['id'],'column_id'=>$data_content_up['column_id'],'type'=>"0"))}">{$data_content_up['title']}</a>
+                                		<else />
+	                                				没有上一篇了
+	                                	</if>
+	                                	</li>
+
+							        <li><strong>下一篇：</strong>
+			                      	  <if condition="$data_content_down">
+	                                				<a href="{:U('ghzhichuang_content',array('id'=>$data_content_down['id'],'column_id'=>$data_content_down['column_id'],'type'=>"1"))}">{$data_content_down['title']}</a>
+                                		  <else />
+	                                				没有下一篇了
+                              			</if>
+							        </li>
+							    </ul>
+						    </div>
+						</div>
+				    </div>
+				</div>		
+			</div>
+			<!--低部-->
+			<include file="Public:footer" />
+			<!-- 低部结束 -->
+		</div>
+		<script type="text/javascript" src="__PUBLIC__/phone/js/common.js" ></script>
+	</body>
+</html>

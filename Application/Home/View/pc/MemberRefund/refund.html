@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>选择售后方式</title> 
+		<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+        <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+        <link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+        <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/orderRefund.css" type="text/css">
+        <link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+        <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+        <script type="text/javascript" src="{:C('STATIC_URL')}/Home/static/jquery-2.0.3.min.js"></script>      
+        <style>
+        	.refund_img{width:100px;height:auto;float:left;    position: relative;min-height: 38px;}
+			.refund_img img{width:100%;height:100%;float:left}
+			.refund_img .btn_addimg{ padding: 4px 10px;height: 28px;line-height: 30px;position: absolute;left: 0; cursor: pointer;color: #888;overflow: hidden;display: inline-block;*display: inline;*zoom: 1}
+			.refund_img .btn_addimg input{position: absolute;font-size: 100px;right: 0;top: 0;opacity: 0;filter: alpha(opacity=0);cursor: pointer}
+        </style> 
+	</head>
+	<body>
+		<include file="Public:header_top" />
+		<div class="orderRefund_top" data-type={$refund_goods['type']} data-refundId={$refund_goods['id']} data-time={$refund_goods['create_time']}>
+			<div>
+				<a class="logo2" href="http://{$Think.server.HTTP_HOST}" title="中国工业机器人,数控机床多少钱一台,无人机,3d打印机多少钱,农业无人机"></a>
+				<p>您的位置： <a href="{:U('Index/index')}">首页</a> > <a href="{:U('MemberOrder/orderList')}">我的订单</a> > <a>售后</a> </p>
+			</div>			
+		</div>	
+		<ul class="refund_step2">
+			<li>
+				<div style="background-color: #FF4400;"><span>1</span>买家申请</div>
+			</li>
+			<li>
+				<div><span>2</span>卖家处理申请</div>
+				
+			</li>
+			<li>
+				<div><span>3</span>退款成功</div>
+				
+			</li>
+		</ul>
+		<div class="orderRefund_box">
+			<!--选择服务类型-->
+			<div class="fl refund_style" data-id="{$regoods}">
+				<div>请选择您要申请的服务类型</div>
+				<ul>
+				    <volist name='refund_type' id='v' key="k">
+					<li>{$v}</li>
+					</volist>
+					<div>
+						<img src="{:C('STATIC_URL')}/Home/images/3.jpg">
+						<p>请您确保是在“未收到货”或“与卖家协商同意”的前提下申请，否则e橙优品无法保证您退款成功。</p>
+						<button>我知道了，继续</button>
+					</div>
+				</ul>
+			</div>
+			<!--仅退款-->			
+			<div class="fl refund_style_1 refund_style_box" data-id={$order_data['id']}>						
+				<div>申请服务：<span>仅退款</span></div>
+				<div>温馨提示：您只有一次售后维权的机会哦</div>
+				<form id="refundForm1">
+					<table>					
+						<tr>
+							<td>货物状态：</td>
+							<td><span class="star">*</span></td>
+							<td><input type="radio" name="because" value="1"> 未收到货 <input type="radio" name="because" value="2"> 已收到货</td>
+						</tr>
+						<tr>
+							<td>说明：</td>
+							<td></td>
+							<td><textarea name="content"></textarea></td>
+						</tr>
+						<tr>
+							<td>上传凭证：</td>
+							<td></td>
+							<td>
+								<div class="refund_img">
+	                                 <img />
+	                                 <a class="btn_addimg" href="javascript:;">
+	                                 	<input type="file" name="thumb" onchange='show(this);'>请选凭证图片
+	                                 </a>                                             
+	                            </div> <span>？</span> <a class="help" href="javascript:;">上传帮助</a>
+								<div>最多5张，每张不超过5M，支持GIF，JPEG，JOG，PNG，BMP格式</div>
+							</td>
+						</tr>					
+						<tr>
+							<td></td>
+							<td></td>
+							<td><button class="refund_sub" onclick="return false">提交申请</button> <a class="return">取消并返回</a></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			<!--退货退款-->
+			<div class="fl refund_style_2 refund_style_box" data-id={$order_data['id']}>				
+				<div>申请服务：<span>退货退款</span></div>
+				<div>温馨提示：您只有一次售后维权的机会哦</div>
+				<form id="refundForm2">
+					<table>
+						<tr>
+							<td>退货退款原因：</td>
+							<td><span class="star">*</span></td>
+							<td>
+								<div>
+									<select id="refund_2_select" name="because">
+										<option>请选择退货退款原因</option>
+										<option value="1">尺寸大小不符</option>
+										<option value="2">假冒品牌</option>
+										<option value="3">颜色/款式/图案与描述不符</option>
+										<option value="4">做工问题</option>
+										<option value="5">材质不符/材质造假</option>
+										<option value="6">收到商品少件/破损/污渍等</option>
+										<option value="7">尺寸排错/不喜欢/效果不好</option>
+										<option value="8">其他</option>
+									</select>
+								</div>						
+							</td>
+						</tr>
+						<tr>
+							<td>说明：</td>
+							<td></td>
+							<td><textarea name="content"></textarea></td>
+						</tr>
+						<tr>
+							<td>上传凭证：</td>
+							<td></td>
+							<td>
+								<div class="refund_img">
+	                                 <img />
+	                                 <a class="btn_addimg" href="javascript:;">
+	                                 	<input type="file" name="thumb" onchange='show(this);'>请选凭证图片
+	                                 </a>                                             
+	                            </div> <span>？</span> <a class="help" href="javascript:;">上传帮助</a>
+								<div>最多5张，每张不超过5M，支持GIF，JPEG，JOG，PNG，BMP格式</div>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td><button class="refund_sub" onclick="return false">提交申请</button> <a href="javascript:;" class="return">取消并返回</a></td>
+						</tr>
+					</table>
+				</form>	
+			</div>
+			<!--换货-->
+			<div class="fl refund_style_3 refund_style_box" data-id={$order_data['id']}>				
+				<div>申请服务：<span>换货</span></div>
+				<div>温馨提示：您只有一次售后维权的机会哦</div>
+				<form id="refundForm3">
+					<table>
+						<tr>
+							<td>退货换货原因：</td>
+							<td><span class="star">*</span></td>
+							<td>
+								<div>
+									<select id="refund_3_select" name="because">
+										<option>请选择换货原因</option>
+										<option value="1">尺寸大小不符</option>
+										<option value="2">假冒品牌</option>
+										<option value="3">颜色/款式/图案与描述不符</option>
+										<option value="4">做工问题</option>
+										<option value="5">材质不符/材质造假</option>
+										<option value="6">收到商品少件/破损/污渍等</option>
+										<option value="7">尺寸排错/不喜欢/效果不好</option>
+										<option value="8">其他</option>
+									</select>
+								</div>							
+							</td>
+						</tr>
+						<tr>
+							<td>说明：</td>
+							<td></td>
+							<td><textarea name="content"></textarea></td>
+						</tr>
+						<tr>
+							<td>上传凭证：</td>
+							<td></td>
+							<td>
+								<div class="refund_img">
+	                                 <img />
+	                                 <a class="btn_addimg" href="javascript:;">
+	                                 	<input type="file" name="thumb" onchange='show(this);'>请选凭证图片
+	                                 </a>                                             
+	                            </div> <span>？</span> <a class="help" href="javascript:;">上传帮助</a>
+								<div>最多5张，每张不超过5M，支持GIF，JPEG，JOG，PNG，BMP格式</div>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td><button class="refund_sub" onclick="return false">提交申请</button> <a class="return">取消并返回</a></td>
+						</tr>
+					</table>
+				</form>	
+			</div>
+			
+			<!--订单信息-->
+			<div class="right">
+				<h3>订单信息</h3>
+				<div>
+					<img src="__ROOT__<if condition="substr($order_data.goods_thumb , 0 , 1) eq '.'">{$order_data.goods_thumb|substr=1}<else/>{$order_data.goods_thumb}</if>" alt="" width="100" />
+					<p><a class="order_detail">{$data.goods_name}</a></p>
+				</div>
+				<table>
+					<tr>
+						<td>卖家：</td>
+						<td>{$shop_data.shop_name}</td>
+					</tr>
+					<tr>
+						<td>订单编号：</td>
+						<td><a class="order_detail">{$order.order_sn}</a></td>
+					</tr>
+					<tr>
+						<td>单价：</td>
+						<td><span class="star">{$order_data.goods_price}</span>元*{$order_data.number}（数量）</td>
+					</tr>
+					<tr>
+						<td>快递：</td>
+						<td><span class="star">0.00</span>元</td>
+					</tr>
+				</table>
+			</div>
+			
+		</div>
+		<!--常见问题-->
+		<div class="commonProblem">
+			<h3>常见问题</h3>
+			<ul>
+				<li>
+					<p>1.卖家不发货，怎么办？</p>
+					亲，如果卖家迟迟不发货，您可以根据目前订单的状态选择对应方式。<a>查看更多</a>
+				</li>
+				<li>
+					<p>2.如何申请退款？</p>
+					亲，根据您的订单状态的不同，申请的方式也是不一样的。<a>查看更多</a>
+				</li>
+				<li>
+					<p>申请退款后，交易退款成功，钱退到哪里？</p>
+					亲，要先查看退款状态哦，只有当订单的退款状态显示【退款成功】时，钱款才会退回原先的支付渠道。<a>查看更多</a>
+				</li>
+			</ul>
+		</div>
+		<include file="Public:footer" />  
+	<script>
+// 当前售后状态 0表示未处于申请售后中 
+// -11 商家不同意退款     11 申请退款     12 商家同意申请退款 13 已退款  
+// -21 商家不同意换货     21 申请换货     22 商家同意申请换货 23 商家已重新发货  
+// -31 商家不同意退款退货 31 申请退货退款 32商家同意退款退货  33 已退款 
+var service_status = {$order_data['service_status']};
+var applyTime = $(".orderRefund_top").attr("data-time")
+
+	    	    
+	    //上传图片预览
+		function show(obj){
+		   var file = obj.files[0];   
+		   var reader = new FileReader();  
+		   //将文件以Data URL形式读入页面  
+		   reader.readAsDataURL(file);  
+		   reader.onload=function(e){ 
+		    //显示文件  
+		      $(obj).parent('a').siblings('img').attr("src",this.result);
+		      $(".btn_addimg").css("opacity","0").css("height","100%")
+		   }
+		} 
+		//仅退款
+		function request1(){  		
+		    var data = new FormData($("#refundForm1")[0]);  // 要求使用的html对象
+		    var url  = "http://www.orangesha.com/index.php/Home/MemberRefund/refundApplication";
+			var refund_id = $(".refund_style_1").attr("data-id");
+	        data.append("id",$(".refund_style_1").attr("data-id"));
+	        data.append("type",1);
+
+		    $.ajax({  
+		          url : url ,  
+		          type: 'POST',  
+		          data: data,  
+		          async: true,  
+		          // 下面三个参数要指定，如果不指定，会报一个JQuery的错误 
+		　　　　　       cache: false,  
+		          contentType: false,  
+		          processData: false,  
+		          success: function (res) {  	              
+		              if(res.status){
+		                window.location.href="http://www.orangesha.com/index.php/Home/MemberRefund/refund_money?id="+refund_id
+		              } 
+		              if(res.status==0){
+		              	alert(res.msg);
+		              }
+		          },  
+		          error: function (returndata) {  
+		              console.log(returndata); 		              
+		          }  
+		     });  
+		} 
+		//退款退货
+		function request2(){  		
+		    var data = new FormData($("#refundForm2")[0]);  // 要求使用的html对象
+		    var url  = "http://www.orangesha.com/index.php/Home/MemberRefund/refundApplication";
+
+	        data.append("id",$(".refund_style_2").attr("data-id"));
+	        data.append("type",3);
+	        data.append("because",$('#refund_2_select option:selected') .val());
+
+		    $.ajax({  
+		          url : url ,  
+		          type: 'POST',  
+		          data: data,  
+		          async: true,  
+		          // 下面三个参数要指定，如果不指定，会报一个JQuery的错误 
+		　　　　　       cache: false,  
+		          contentType: false,  
+		          processData: false,  
+		          success: function (res) {  	              
+		              if(res.status){
+		                window.location.href="http://www.orangesha.com/index.php/Home/MemberRefund/refund_goods?id="+refund_id
+		              } 
+		              if(res.status==0){
+		              	alert(res.msg);
+		              }
+		          },  
+		          error: function (returndata) {  
+		              console.log(returndata); 		              
+		          }  
+		     });  
+		} 
+		//换货
+		function request3(){  		
+		    var data = new FormData($("#refundForm3")[0]);  // 要求使用的html对象
+		    var url  = "http://www.orangesha.com/index.php/Home/MemberRefund/refundApplication";
+
+	        data.append("id",$(".refund_style_3").attr("data-id"));
+	        data.append("type",2);
+	        data.append("because",$('#refund_3_select option:selected') .val());
+
+		    $.ajax({  
+		          url : url ,  
+		          type: 'POST',  
+		          data: data,  
+		          async: true,  
+		          // 下面三个参数要指定，如果不指定，会报一个JQuery的错误 
+		　　　　　       cache: false,  
+		          contentType: false,  
+		          processData: false,  
+		          success: function (res) {  	              
+		              if(res.status){
+		                $(".refunding").css("display","block")
+		                $(".right2").css("display","block")
+		                $(".right").css("display","none")
+		                $(".refund_style").css("display","none")
+		                $(".refund_style_3").css("display","none")
+		                applyTime=res.time
+		              } 
+		              if(res.status==0){
+		              	alert(res.msg);
+		              }
+		          },  
+		          error: function (returndata) {  
+		              console.log(returndata); 		              
+		          }  
+		     });  
+		}
+	    $(".refund_style_1").on('click','.refund_sub',function(){
+	    	if($("#refundForm1 input[name=because]").attr("checked")==false){
+				alert("请选择退款原因")
+			}else if($("#refundForm1 textarea[name=refund_content]").val()==""){
+				alert("请填写说明")
+			}else if($("#refundForm1 input[name=thumb]").val()==""){
+				alert("请上传凭证")
+			}else{
+				request1()		
+			}
+	    	
+	   })
+	    $(".refund_style_2").on('click','.refund_sub',function(){
+	    	if($("#refundForm2 input[name=because]").val()=="请选择退货退款原因"){
+				alert("请选择退货退款原因")
+			}else if($("#refundForm2 textarea[name=refund_content]").val()==""){
+				alert("请填写说明")
+			}else if($("#refundForm2 input[name=thumb]").val()==""){
+				alert("请上传凭证")
+			}else{
+				request2()		
+			}	    	
+	   })
+	    $(".refund_style_3").on('click','.refund_sub',function(){
+	    	if($("#refundForm3 input[name=because]").val()=="请选择换货原因"){
+				alert("请选择换货原因")
+			}else if($("#refundForm3 textarea[name=refund_content]").val()==""){
+				alert("请填写说明")
+			}else if($("#refundForm3 input[name=thumb]").val()==""){
+				alert("请上传凭证")
+			}else{
+				request3()		
+			}	    	
+	   })
+		
+	    $(".refund_style>ul li").hover(function(){
+			$(this).toggleClass("active");
+		})
+	    //退货推款
+		$(".refund_style>ul li").click(function(){
+			if($(this).text()=="仅退款"){
+				$(".refund_style_1").css("display","block")
+				$(".refund_style").css("display","none")
+			}
+			if($(this).text()=="退货退款"){
+				$(".refund_style_2").css("display","block")
+				$(".refund_style").css("display","none")
+			}
+			if($(this).text()=="换货"){
+				$(".refund_style_3").css("display","block")
+				$(".refund_style").css("display","none")
+			}
+		})
+		
+		//上传帮助
+		$(".refund_style_box tr td .help").click(function(){
+			var display = $(this).next("div").css('display');
+			if(display=="none"){
+				$(this).next("div").css("display","block")
+			}
+			if(display=="block"){
+				$(this).next("div").css("display","none")
+			}
+		})
+		//取消并返回
+		$(".return").click(function(){
+			$(".refund_style").css("display","block");
+			$(".refund_style_box").css("display","none");
+			$(".refund_step").css("display","none");
+			$(".refund_style>ul>div").css("display","none")
+		})
+		//选择退货退款原因
+		$("#refundForm2 tr:eq(0) td div").hover(function(){
+			$(this).find("ul").toggle()
+		})
+		$("#refundForm2 tr:eq(0) td div ul li").click(function(){
+			var a = $(this).text();
+			$(this).addClass("active");
+			$(this).siblings().removeClass("active")
+			$("#refundForm2 tr:eq(0) td div span").text(a)
+			$(this).find("ul").css("display","none")
+		})
+		//选择换货原因
+		$("#refundForm3 tr:eq(0) td div").hover(function(){
+			$(this).find("ul").toggle()
+		})
+		$("#refundForm3 tr:eq(0) td div ul li").click(function(){
+			var a = $(this).text();
+			$(this).addClass("active");
+			$(this).siblings().removeClass("active")
+			$("#refundForm3 tr:eq(0) td div span").text(a)
+			$(this).find("ul").css("display","none")
+		})
+	</script>	
+	</body>
+</html>

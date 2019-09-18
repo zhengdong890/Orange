@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品发布</title>
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css">
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/all-use.css">
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/seller.css">
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/release-goods.css">
+    <link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+    <link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+    <link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+    <script src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+    <script src="{:C('STATIC_URL')}/Home/js/tabs-nav.js"></script>
+    <script src="{:C('STATIC_URL')}/Home/js/store-tool.js"></script>
+    <script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/js/jQuery.Hz2Py-min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Home/js/globalScripts.js"></script>
+</head>
+<body>
+<!-- 头部_顶部start -->
+<include file="MemberPublic:header_top" /> 
+<!-- 头部_顶部end -->	
+<!-- 头部_搜索栏start -->
+<include file="MemberPublic:header_search" /> 
+<!-- 头部_搜索栏end -->	
+   <div class="release-goods">
+       <div class="box-bder">
+           <div class="category-s-wrap">
+               <!-- items -->
+               <div class="item box-bder fLe search-test-inner">
+                   <div class="caty-seach-wrap seach-sign box-bder">
+                   		<img src="__PUBLIC__/Home/image/glass.png" />
+                        <input type="text" class="txt-s-01 search-value" placeholder="选择一、二级分类"/>
+                        <ul class="search-value-list"></ul>
+                   </div>
+                   <ul class="caty-content-list" id="first-list">
+                        <volist name="categorys" id="v">
+                        <li class="search-li" data-name="{$v['cat_name']}"> 
+                            <a href="javascript:;" data-id="{$v['id']}">{$v['cat_name']} <img class="cur" src="{:C('STATIC_URL')}/Home/img/3_1.png"></a>
+                            <ul class="caty-content-list2 second-list">
+                               <volist name="v['child']" id="v1">
+                               <li>
+                               <a href="javascript:;" data-id="{$v1['id']}">{$v1['cat_name']} </a><span>></span>
+                               </li>
+                               </volist> 
+                            </ul>
+                        </li>
+                        </volist>
+                   </ul>
+               </div>
+               <!-- items End -->
+               <!-- items -->
+               <div class="item box-bder fLe search-test-inner2">
+                   <div class="caty-seach-wrap seach-sign box-bder">
+                   		<img src="__PUBLIC__/Home/image/glass.png" />
+                        <input type="text" class="txt-s-01 search-value2" placeholder="选择三级分类"/>
+                        <ul class="search-value-list2"></ul>
+                   </div>
+                   <ul class="caty-content-list caty-content-list3" id="Third-list">
+                        
+                   </ul>
+               </div>
+               <!-- items End -->
+               <div class="item box-bder fLe search-test-inner3">
+                   <div class="caty-seach-wrap seach-sign box-bder">
+                   		<img src="__PUBLIC__/Home/image/glass.png" />
+                        <input type="text" class="txt-s-01 search-value3" placeholder="选择四级分类"/>
+                        <ul class="search-value-list3"></ul>
+                   </div>
+                   <ul class="caty-content-list caty-content-list3" id="Fourth-list">
+                        
+                   </ul>
+               </div>
+               <!-- items End -->
+               <div class="clear"></div>
+           </div>
+       </div>
+       <div class="disInBlock caty-nav">
+           <span>您当前选择的是：</span>
+           <span id="first-lv"></span>&nbsp;-&nbsp;
+           <span id="second-lv"></span>&nbsp;-&nbsp;
+           <span id="Third-lv"></span>&nbsp;-&nbsp;
+           <span id="Fourth-lv"></span>
+       </div>
+       <div class="txtCenter">
+           <a href="javascript:;" class="release-btn">发布</a>
+       </div>
+   </div>
+<include file="Public:footer" />     
+</body>
+<script type="text/javascript">
+//引用
+	$(function(){
+	    // search-test-inner --->  最外层div
+	    // search-value --->  input 输入框
+	    // search-value-list --->  搜索结果显示div
+	    // search-li --->  搜索条目
+	    new SEARCH_ENGINE("search-test-inner","search-value","search-value-list","search-li");
+	});
+	
+/*
+ * 选择商品分类
+ * */
+var select_category = (function(){
+  var categorys = {},//保存已经获取到的分类
+      cat_id    = '';
+  /*
+   * 点击一级菜单
+   * */
+  $("#first-list>li>a").click(function(){
+      var text   = $(this).text();
+      /*点击样式处理*/
+      var images = ['{:C('STATIC_URL')}/Home/img/3_1.png', '{:C('STATIC_URL')}/Home/img/3.png'] 
+      $('#first-lv').html(text);
+      $('#second-lv').html("");
+      $('#Third-lv').html("");
+      $('#Fourth-lv').html("");
+        if($(this).children("img").attr("src")=="{:C('STATIC_URL')}/Home/img/3_1.png"){ 
+			$(this).children("img").attr("src",images[1]);  
+		}else{ 
+			$(this).children("img").attr("src",images[0]); 
+		} 
+  })
+  
+  $(".caty-content-list>li>a").click(function(){
+  	$(this).next(".caty-content-list2").slideToggle();
+  })
+  
+  //搜索结果点击一级菜单
+  $(".search-value-list").on('click','a',function(){ 
+  	var a = $(this).text();
+  	for(var i= 0; i<$("#first-list>li>a").length; i++){
+  		console.log($("#first-list>li>a").eq(i).text())
+  		if($("#first-list>li>a").eq(i).text() == a){  			
+  			$("#first-list>li").eq(i).find(".caty-content-list2").slideToggle();
+  			$("#first-list>li").eq(i).siblings().find(".caty-content-list2").css("display","none");
+  			$('#first-lv').html(a);
+      		$('#second-lv').html("");
+      		$('#Third-lv').html("");
+      		$('#Fourth-lv').html("");
+  			break;
+  		} 
+  	}  	
+  	$(".search-value").val("");
+  	$(".search-value-list li").remove();
+  })
+  
+  /*
+   * 点击二级菜单
+   * */
+  $(".second-list").on('click','a',function(){    
+      var text   = $(this).html();
+          cat_id = $(this).attr('data-id');
+      $("#Fourth-list li").remove();    
+      getCategory(cat_id);//请求后台获取下一级商品分类
+      /*点击样式处理*/
+      $(this).parent().addClass('cur');
+      $(this).parent().siblings().removeClass('cur');  
+      $('#second-lv').html(text);
+      $('#Third-lv').html("");
+      $('#Fourth-lv').html("");
+  })
+  
+  //搜索结果点击三级菜单
+  $(".search-value-list2").on('click','a',function(){ 
+  	var a = $(this).text();  	
+  	for(var i= 0; i<$("#Third-list>li>a").length; i++){
+  		if($("#Third-list>li>a").eq(i).text() == a){ 
+  			cat_id = $("#Third-list>li>a").eq(i).attr('data-id'); 
+     		getCategory2(cat_id);//请求后台获取下一级商品分类
+			$("#Third-list>li").eq(i).addClass("cur")
+			$("#Third-list>li").eq(i).siblings().removeClass('cur');  
+  			$('#Third-lv').html(a);
+  			$('#Fourth-lv').html("");
+  			break;
+  		} 
+  	}  	
+  	$(".search-value2").val("");
+  	$(".search-value-list2 li").remove();
+  })
+  
+  /*
+   * 请求后台获取下一级商品分类
+   * */
+  function getCategory(cat_id){
+      if(categorys[cat_id]){
+          showCategoryTwo(categorys[cat_id]);
+      }else{
+        $.post("{:U('SellerGoods/getCategory')}",{'cat_id':cat_id},function(res){
+        	console.log(res)
+            if(res['status']){
+               categorys[cat_id] = res['data'];
+               showCategoryTwo(res['data']);
+            }
+        })      
+      }
+  }
+
+  /*
+   * 组装三级分类html显示
+   * */
+  function showCategoryTwo(data){
+      var html = [];
+      for(var k in data){
+          html.push("<li class='search-li2' data-name='"+data[k].cat_name+"'><a href='javascript:;' data-id='"+data[k].id+"'>");
+          html.push(data[k].cat_name);
+          html.push(" </a><span>></span></li>");
+      }
+      html = html.join('');
+      $("#Third-list").html(html);//显示
+      new SEARCH_ENGINE("search-test-inner2","search-value2","search-value-list2","search-li2");
+  }
+  
+  /*
+   * 点击三级菜单
+   * */
+  $("#Third-list").on('click','a',function(){    
+      var text   = $(this).html();
+          cat_id = $(this).attr('data-id'); 
+      getCategory2(cat_id);//请求后台获取下一级商品分类
+      /*点击样式处理*/
+      $(this).parent().addClass('cur');
+      $(this).parent().siblings().removeClass('cur');  
+      $('#Third-lv').html(text);
+      $('#Fourth-lv').html("");
+  })
+  /*
+   * 请求后台获取下一级商品分类
+   * */
+  function getCategory2(cat_id){
+      if(categorys[cat_id]){
+          showCategoryThree(categorys[cat_id]);
+      }else{
+        $.post("{:U('SellerGoods/getCategory')}",{'cat_id':cat_id},function(res){
+        	console.log(res)
+            if(res['status']){
+               categorys[cat_id] = res['data'];
+               showCategoryThree(res['data']);
+            }
+        })      
+      }
+  }
+
+  /*
+   * 组装四级分类html显示
+   * */
+  function showCategoryThree(data){
+      var html = [];
+      for(var k in data){          
+          html.push("<li class='search-li3' data-name='"+data[k].cat_name+"'><a href='javascript:;' data-id='"+data[k].id+"'>");
+          html.push(data[k].cat_name);
+          html.push(" </a></li>");
+      }
+      html = html.join('');
+      $("#Fourth-list").html(html);//显示
+      new SEARCH_ENGINE("search-test-inner3","search-value3","search-value-list3","search-li3");
+  }
+  
+  /*
+   * 点击四级菜单
+   * */
+  $("#Fourth-list").on('click','a',function(){    
+      var text   = $(this).html();
+          cat_id = $(this).attr('data-id'); 
+      /*点击样式处理*/
+      $(this).parent().addClass('cur');
+      $(this).parent().siblings().removeClass('cur');  
+      $('#Fourth-lv').html(text);
+  })
+  
+  //搜索结果点击四级菜单
+  $(".search-value-list3").on('click','a',function(){ 
+  	var a = $(this).text();  	
+  	for(var i= 0; i<$("#Fourth-list>li>a").length; i++){
+  		if($("#Fourth-list>li>a").eq(i).text() == a){ 
+  			cat_id = $("#Fourth-list>li>a").eq(i).attr('data-id'); 
+			$("#Fourth-list>li").eq(i).addClass("cur")
+			$("#Fourth-list>li").eq(i).siblings().removeClass('cur');  
+  			$('#Fourth-lv').html(a);
+  			break;
+  		} 
+  	}  	
+  	$(".search-value3").val("");
+  	$(".search-value-list3 li").remove();
+  })
+
+  /*提交*/
+  $(".release-btn").click(function(){
+  		if($('#first-lv').text()==""){
+  			alert('请选择一级分类');
+  		}else if($('#first-lv').text()!="" && $('#second-lv').text()==""){
+  			alert('请选择二级分类');
+  		}else if($('#first-lv').text()!="" && $('#second-lv').text()!="" && $("#Third-list li").length!=0 && $('#Third-lv').text()==""){
+  			alert('请选择三级分类');
+  		}else if($('#first-lv').text()!="" && $('#second-lv').text()!="" && $('#Third-lv').text()!="" && $("#Fourth-list li").length!=0 && $('#Fourth-lv').text()==""){
+  			alert('请选择四级分类');
+  		}else{
+          	window.location.href = "__MODULE__/SellerGoods/goodsAdd/cat_id/"+cat_id;
+        }
+  })
+
+  
+
+})();
+</script>
+</html>

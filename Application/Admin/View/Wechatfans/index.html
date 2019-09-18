@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="description" content="" />
+<style>    
+*{padding:0; margin:0;font-size:16px;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0} 
+#tishi{position:fixed;width:100%;height:100%;background:rgba(0,0,0,0.5);display:none}
+#tishi ul{width:100%;text-align:center;margin-top:300px;color:red;font-size:32px}
+#main{padding-bottom:50px}   
+#main #main_h{width:100%;height:40px;float:left;margin-top:20px;color:black;}
+#main_h a{height:20px;float:left;margin-left:20px;padding:8px;border:1px solid #E6E7EC;background:#F4F5F9;border-radius:4px;color:black}
+#main_h a span{padding-left:5px}
+#main_h a img{float:left;margin-top:2px}
+#main table{width:100%;border-top:1px solid #E7E9F3;margin:20px auto;float:left}
+#main table tr{background:#FCFCFC}
+#main table tr:hover{background:#F1FCEA}   
+#main table tr:first-child{background:#F4F5F9} 
+#main table tr td{border-left:1px solid #E7E9F3;border-bottom:1px solid #E7E9F3;font-size:20px;padding:10px;font-size:14px;}
+#main table tr .td{border-left:0px}
+.tr td{height:60px;}
+#main td img{max-width:150px}
+.btn{border:0;border-radius:4px;color:white;padding:5px;background:#44B549;font-size:14px;margin-left:300px}
+#page{width:100%;height:auto;float:left}
+#page li{float:right}
+#page li a{display:block;float:left;height:22px;padding:4px;border:1px solid #dfdfdf;margin-left:5px;line-height:22px;}
+#page li span{display:block;float:left;height:22px;padding:4px;border:1px solid #dfdfdf;margin-left:5px;line-height:22px;}
+#page li p{float:left;padding:4px;height:22px;line-height:22px;margin-left:5px;}
+/*批量处理样式*/
+.select_checkbox{width:80px;height:16px;margin:0 auto}
+.select_checkbox input{width:16px;height:16px;float:left;}
+.select_checkbox a{height:16px;float:left;text-indent:5px;line-height:15px;}
+.checkbox{width:16px;height:16px;float:left;}
+#caozuo{width:100%;height:auto;float:left;margin-top:10px;padding-bottom:100px}
+#caozuo a{display:block;width:80px;height:30px;line-height:30px;text-align:center;float:left;background:#C43926;margin-left:5px;border-radius:4px;color:white;font-size:14px;}
+#caozuo button{display:block;width:80px;height:30px;line-height:30px;text-align:center;float:left;background:#C43926;margin-left:5px;border-radius:4px;color:white;font-size:14px;border:0}
+#caozuo p{width:auto;height:30px;line-height:30px;float:left;margin-left:5px;font-size:14px;}
+#caozuo select{margin-top:5px;float:left}   
+</style>
+</head>
+<body>
+<div id="tishi">
+   <ul>
+                           正在更新中..............
+   </ul>                         
+</div>
+<div id="wraper">     
+    <div id="main"> 
+         <div id="main_h">
+           <a href="javascript:freshen_1()"><img src="__PUBLIC__/admin_images/text.png" /><span>更新粉丝列表</span></a>  
+           <a href="javascript:freshen_2()"><img src="__PUBLIC__/admin_images/text.png" /><span>刷新当页粉丝信息</span></a>                              
+         </div>         
+         <table cellspacing="0">
+                  <tr>                   
+                      <td class='td'>                                   
+                           <div class="select_checkbox">
+                                <input type="checkbox"/><a>id</a>
+                           </div> 
+                      </td>
+                      <td>粉丝昵称</td>
+                      <td>性别</td>
+                      <td>分组名</td>
+                      <td>省(直辖市)</td>
+                      <td>城市</td>
+                      <td>头像</td>
+                      <td>关注时间</td>
+                  </tr> 
+                  <volist name="list" id="v">
+	                  <tr class='tr'>
+	                      <td class='td'><input type="checkbox" class='checkbox' value="{$v['id']}"/>{$v['id']}</td>
+	                      <td>{$v.nickname}</td>
+	                      <td>{$v.sex}</td>
+	                      <td>{$v.groupid}</td>
+	                      <td>{$v.province}</td>
+	                      <td>{$v.city}</td>
+	                      <td><if condition="$v['headimgurl'] neq ''"><img src="{$v.headimgurl}" style="max-width:60px;"/></if></td>
+	                      <td>{$v['subscribe_time']|date="Y-m-d",###}</td>
+	                  </tr>
+                  </volist>                                 
+          </table>
+          <ul id="page"><li>{$page}</li></ul>
+    </div>
+    <div id="caozuo">
+          <input type="hidden" name="allid"></input>
+          <p>选中项操作:</p>
+          <p>移动到分组:</p>
+          <select name="group">
+            <option value=''>请选择...</option>
+            <volist name="group" id="v">
+            <option value="{$v['id']}">{$v['groupname']}</option>
+            </volist>
+          </select>
+          <a href="javascript:move_group()">确认</a>
+     </div>
+</div>	
+</body>
+<script type="text/javascript"> 
+/*批量操作全选*/
+$(".select_checkbox input").click(function(){
+	 var arr='';
+	 if($(this).attr("checked")){
+		 $(".checkbox").attr("checked",true); 
+	 }else{
+		     $(".checkbox").attr("checked",false); 
+	 }
+ 	 $('.checkbox').each(function(){
+ 		   if($(this).attr("checked")){
+ 			   arr+=$(this).val();
+ 			   arr+=',';
+ 		   }
+ 	 })
+ 	 arr=arr.substring(0,arr.length-1);
+ 	 $("input[name='allid']").val(arr);
+}) 
+
+/*批量操作单选*/
+$(".checkbox").click(function(){
+	var arr='';
+ 	 $('.checkbox').each(function(){
+ 		   if($(this).attr("checked")){
+ 			   arr+=$(this).val();
+ 			   arr+=',';
+ 		   }
+ 	 })
+ 	 arr=arr.substring(0,arr.length-1);
+ 	 $("input[name='allid']").val(arr);
+})
+
+/*移动到分组*/
+function move_group(){
+	var ids=$("input[name='allid']").val();
+	var groupid=$("select[name='group']").val();
+	if(ids==''){
+		alert("请选择粉丝");
+	}else{
+		if(groupid==''){
+			alert("请选择分组");
+		}else{
+	 	   	$.post("{:U('move_group')}",{"ids":ids,"groupid":groupid},function(res){                
+		   	    alert(res);
+		     	window.location.reload();
+		    }); 
+		}
+	}
+}
+
+/*ajax刷新粉丝列表*/
+function freshen_1(){  
+     auto();
+	 $.post("{:U('freshen_1')}",{},function(res){
+	     $("#tishi").css('display','none');
+	     alert("更新了"+res+"条数据");
+	     window.location.reload();	    		
+	  })
+}
+
+/*ajax更新一页粉丝信息*/
+function freshen_2(){  
+   var arr='';
+	 for(var i=0;i<=6;i++){
+	  if($(".tr .td").eq(i).text()!=''){   			 
+	   arr+=$(".tr .td").eq(i).text();
+	   arr+=',';
+	  } 		   
+   }
+   arr=arr.substring(0,arr.length-1);
+   auto();
+   $.post("{:U('freshen_2')}",{'arr':arr},function(res){   	   
+	     $("#tishi").css('display','none');
+         alert("更新了"+res+"个用户的数据");
+       window.location.reload(); 
+   })
+}
+
+var t,i=1,j=1,dian='';
+clearinterval(t);
+function auto(){
+ $("#tishi").css('display','block');
+ t=setInterval(function(){   		   
+        for(i;i<=j;i++){
+     	   dian=dian+'.';
+        }
+        $("#tishi ul").html('正在更新中'+dian);
+        if(j<=20){
+     	   j++;  
+        }else{
+     	   i=1;
+     	   dian='';
+     	   j=1;
+        }   		  
+ },100);
+}
+</script>
+</html>

@@ -1,0 +1,37 @@
+订单状态值
+status : 订单状态 0未审核 1已审核 2已完成 -1已取消
+pay_model : 支付模式 1支付宝 2微信 3银联 4线下公对公转账
+send_status : 发货状态 0未发货 1已经发货
+pay_status  : 付款状态 0未付款 1已经付款
+is_comment  : 是否评价 0未评价 1已经评价
+
+service_status : 订单详情商品 售后状态
+0 暂无售后
+-11 商家不同意退款     11 申请退款     12 商家同意申请退款 13 已退款  
+-21 商家不同意换货     21 申请换货     22 商家同意申请换货 23 商家已重新发货  
+-31 商家不同意退款退货 31 申请退货退款 32 商家同意退款退货 33 已退款    
+
+status 1 pay_status 0 已审核 未付款
+status 1 pay_status 1 send_status 0 已审核 已付款 未发货
+status 1 pay_status 1 send_status 1 已审核 已付款 已发货
+status 1 pay_status 1 send_status 2 is_comment 0 已审核 已付款 已收货 未评价
+status 1 pay_status 1 send_status 2 is_comment 1 已审核 已付款 已收货 已评价   
+
+获取订单
+地址 : http://www.orangesha.com/index.php/Home/MemberSellerOrder/getOrderList
+参数 : {status:'',send_status:''}
+获取未发货的订单{status:'1',send_status:'0'}
+返回 : {"status": , 'msg':''}
+
+发货
+地址 : http://www.orangesha.com/index.php/Home/Order/sendGoods
+参数 : {
+    id1 : 需要发货的订单id1,
+    id2 : 需要发货的订单id1,
+    ..........................
+    idN : 需要发货的订单idN 
+}
+
+返回 : {"status": , 'msg':''}
+
+

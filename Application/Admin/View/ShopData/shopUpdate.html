@@ -1,0 +1,368 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<meta name="description" content="" />
+<style>
+html{font-size:62.5%}
+*{font-size:16px;font-family:Arial,Microsoft YaHei,\\9ED1\4F53,\\5B8B\4F53,sans-serif}
+*,li,ul{padding:0;margin:0}
+li,ul{list-style:none}
+a,a:hover{text-decoration:none}
+a:hover{border:0}
+button,input,select,textarea{outline:none}
+textarea{resize:none}
+
+#container{width:98%;margin-left:1%}
+#container #main{width:100%;border:1px solid #d7d7d7;margin-top:5px;height:auto;float:left;padding-bottom:10px}
+
+#Crumbs{width:100%;height:40px;border:1px solid #d7d7d7;line-height:40px;margin-top:5px;float:left}
+#Crumbs a{padding-left:10px}
+#Crumbs .btn{width:auto;padding:0 5px;height:30px;float:right;display:block;background:red;line-height:30px;color:#fff;border-radius:5px;font-size:14px;margin-right:20px;margin-top:5px}
+
+.block_edit table td .radio,.check{width:20px;height:20px;float:left;margin-left:15px;}
+.radio_m{margin-left:0px;}
+.radio_text{height:20px;float:left;line-height:20px}
+
+.block_edit{width:100%;height:auto;float:left}
+.block_edit table{width:100%;margin:10px auto}
+.block_edit table td{padding:5px}
+.block_edit table td.td_label{text-align:right;vertical-align:top;font-weight:700;width:20%;font-size:14px;padding:4px 8px}
+.block_edit table td .type_radio{width:auto;height:24px;float:left;margin-left:8px}
+.block_edit table td input[type='text']{width:400px;height:20px;border-radius:3px;border-bottom:1px solid #e3e9ef;border-top:1px solid #abadb3;border-left:1px solid #e2e3ea;border-right:1px solid #dbdfe6}
+.block_edit table td .p_text{width:auto;height:25px;float:left;line-height:24px;margin-left:8px;font-size:13px}
+.block_edit table td .btn{display:block;text-align:center;line-height:26px;float:left;border-radius:4px;background:#c43926;margin-left:10px;color:#fff;height:26px;width:50px}
+
+.img{width:100px;height:auto;float:left;}
+.img .load{display:none;position:relative;width:100px;height:16px;border:1px solid pink;float:left;margin-top:4px;}
+.img .load p{width:0px;height:16px;border:1px solid pink;float:left;color:black;text-align:center;line-height:16px;background:pink;}
+.img .load span{position:absolute;display:block;width:100px;height:16px;left:0;top:0;text-align:center;}
+.img img{max-width:100%;max-height:100px;float:left}
+/****上传按钮样式构造****/
+.btn_addimg{display:block;width:100px;margin-top:5px;color:white;position:relative;height:28px;line-height:28px;text-align:center;float:left;background:#C43926;border-radius:4px;}
+.btn_addimg input{width:100px;position:absolute;left:0;top:0;filter:alpha(opacity=50);-moz-opacity:0;-khtml-opacity:0;opacity:0;}
+</style>
+</head>
+<body>
+<div id="container">
+    <div id="Crumbs">
+        <a>后台管理中心</a><span>&nbsp;&nbsp;-</span><a>店铺信息</a>
+    </div>
+    <div id="main">
+        <div class="block_edit">
+            <form id='form'>
+            <input type='hidden' name='id' value="{$data['id']}">
+            <table>
+                <tr>
+                    <td class="td_label">店铺名称:</td>
+                    <td>
+                        <input type="text" name="shop_name" value="{$data['shop_name']}">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_label">域名设置:</td>
+                    <td>
+                        <input type="text" name="domain" value="{$data['domain']}">
+                        </input>           
+                    </td>
+                </tr>                
+                <tr>
+                    <td class="td_label">店铺描述:</td>
+                    <td>
+                        <input type="text" name="desc" value="{$data['desc']}"></input>           
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_label">店铺qq:</td>
+                    <td>
+                        <input type="text" name="qq" value="{$data['qq']}"></input>           
+                    </td>
+                </tr> 
+                <tr>
+                   <td class="td_label">上传店铺Logo:</td>
+                   <td>
+                       <div class="img">
+                       <img src="__ROOT__{$data['thumb']|substr=1}"/>
+                       <div class='load'>
+                           <span>0%</span>
+                           <p></p>
+                       </div>
+                       <a class="btn_addimg">点击添加<input type="file" name="thumb"></input></a>
+                       </div> 
+                   </td>
+                </tr>                 
+                <tr>
+                    <td class="td_label">物流服务:</td>
+                    <td>
+                        <input type="text" name="logistical" value="{$data['logistical']}"></input>           
+                    </td>
+                </tr>  
+                <tr>
+                    <td class="td_label">服务态度:</td>
+                    <td>
+                        <input type="text" name="service" value="{$data['service']}"></input>           
+                    </td>
+                </tr> 
+                <tr>
+                    <td class="td_label">描述相符:</td>
+                    <td>
+                        <input type="text" name="desc_score" value="{$data['desc_score']}"></input>           
+                    </td>
+                </tr> 
+                <tr>
+                    <td class="td_label">评价数量:</td>
+                    <td>
+                        <input type="text" name="comment_number" value="{$data['comment_number']}"></input>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_label">是否签约:</td>
+                    <td>
+                       <if condition="$data['is_sign'] eq 1">
+                       <input class='radio' type="radio" name="is_sign" value="1" checked='checked' style='margin-left:0px'/>
+                       <else/>
+                       <input class='radio' type="radio" name="is_sign" value="1" style='margin-left:0px'/>
+                       </if>
+                       <p class='radio_text'>已签约</p>
+                       <if condition="$data['is_sign'] eq 0">
+                       <input class='radio' type="radio" name="is_sign" value="0" checked='checked'/>
+                       <else/>
+                       <input class='radio' type="radio" name="is_sign" value="0" />
+                       </if>
+                       <p class='radio_text'>未签约</p>
+                        </td>
+                </tr>                
+                <tr>
+                    <td></td>
+                    <td><a class="btn" href="javascript:;">确认</a></td>
+                </tr>
+            </table>
+            </form>
+        </div>
+    </div>
+</div>
+</body>      
+<script type="text/javascript">
+(function(w){
+    var http = {
+        get : function (url , data , call_back){
+            var data = this.jsonToString(data);
+            http.ajax({
+                url     : url , 
+                type    :'GET' , 
+                data    : data , 
+                success : call_back
+            });
+        },
+        post : function(url , data , call_back){
+            var data = this.jsonToString(data);
+            http.ajax({
+                url     : url , 
+                type    :'POST' , 
+                data    : data , 
+                success : call_back
+            });         
+        },
+        jsonToString : function(data){
+            var str = '';
+            for(var k in data){
+                str = str + encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) + '&';
+            }  
+            str = str.substr(0 , str.length - 1); 
+            return str;
+        },
+        ajax : function(data){
+            var type           = data.type;//请求方式
+            var url            = data.url;//请求地址
+            var request_data   = data.data;//请求数据
+            var success        = data.success;//执行成功回调函数
+            var beforeSend     = data.beforeSend;//执行之前的回调
+            var jsonToString   = data.jsonToString;//是否对数据自动转换成key-val的字符串形式
+            var uploadStart    = data.uploadStart;//上传开始执行方法
+            var uploadProgress = data.uploadProgress;//上传过程执行方法
+            if(jsonToString === true){
+                request_data = this.jsonToString(request_data);
+            } 
+            //1.实例化ajax对象
+            var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+            //上传开始执行方法
+            if(typeof(uploadStart) == 'function'){
+                xmlhttp.upload.onloadstart = function(){
+                    uploadStart(); 
+                }; 
+            }           
+            //上传过程中不停的的执行的方法
+            if(typeof(uploadProgress) == 'function'){
+                xmlhttp.onprogress = function(event){
+                    uploadProgress(event);                   
+                }
+            } 
+            //数据接收完毕
+            xmlhttp.onreadystatechange = function(){
+                if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+                    var data         = xmlhttp.response;//获取返回数据
+                    var content_type = xmlhttp.getResponseHeader('Content-type');
+                    content_type = content_type.split(';');
+                    if(content_type[0] == 'application/json'){
+                        data = JSON.parse(data);
+                    }
+                    success(data);  
+                }
+            } 
+            //2.连接服务器
+            xmlhttp.open(type , url , true);
+            //设置头部为ajax请求             
+            xmlhttp.setRequestHeader("X-Requested-With" , "XMLHttpRequest");
+            //发送之前执行的函数
+            if(typeof(beforeSend) == 'function'){
+                beforeSend(xmlhttp);
+            }  
+            //3.发送数据              
+            xmlhttp.send(request_data);//发送ajax
+        },
+        getCookie : function(name){
+            var arr,reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+            if(arr = document.cookie.match(reg)){
+                return unescape(arr[2]);
+            }           
+            return null;
+        }
+    }
+
+    w.http = http;
+})(window)
+
+var json_data = {$json_data};
+;(function(w){
+    var __OLD_DATA    = json_data; 
+    var __UPDATE_DATA = {};
+    $("#form table").on('blur' , 'input' , function(){
+        var name = $(this).attr('name');
+        var val  = $(this).val(); 
+        __UPDATE_DATA[name] = val;   
+    }) 
+
+    var __object = {
+        /*获取差集 比较下标和值*/
+        diffAssoc : function(obj1 , obj2){
+            var obj = {};
+            for(var k in obj1){
+                if((typeof(obj2[k]) != 'undefined' && obj1[k] != obj2[k]) || typeof(obj2[k]) == 'undefined'){
+                    obj[k] = obj1[k]; 
+                }
+            }
+            return obj;
+        },
+        isEmpty : function(obj){
+            for(var k in obj){
+              return false;
+            }
+            return true;
+        }    
+    }; 
+
+    w.form_data = {
+        getRequestData : function(){
+            var data = __object.diffAssoc(__UPDATE_DATA , __OLD_DATA);
+            if(__object.isEmpty(data) && !img_obj){
+                data = false;
+            }else{
+            	data.id = __OLD_DATA.id;
+            }        
+            return data;
+        }
+    }        
+})(window);
+
+$(".btn").click(function(){
+    request();           
+})
+
+var img_obj = '';
+$("input[name='thumb']").change(function(){
+    var file   = $(this)[0].files[0];   
+    var reader = new FileReader();  
+    var _this  = this
+    //将文件以Data URL形式读入页面  
+    reader.readAsDataURL(file);  
+    reader.onload=function(e){ 
+        img_obj = this.result;
+        //显示文件  
+        $(_this).parent('a').siblings('img').attr("src",this.result);
+    }
+})
+
+
+/*
+ * 提交数据
+ **/
+function request(){ 
+    var url  = "{:U('ShopData/shopUpdate')}";
+    var url_ = "{:U('ShopData/sellerList')}";
+    var data = form_data.getRequestData(); 
+    if(data === false){
+        //window.location.href = url_;
+    }else{   
+        var http_request = {
+            url  : url,  
+            type : 'POST',     
+            jsonToString : true, 
+            success: function (res) { 
+                alert(res.msg);
+                if(res.status == 1){
+                   window.location.href = url_;
+                } 
+            },  
+            error: function (returndata) {  
+                console.log(returndata); 
+            }             
+        }       
+        if(img_obj){
+            var formData = new FormData(); 
+            for(var k in data){
+                formData.append(k , data[k]); 
+            }
+            var blob     = dataURItoBlob(img_obj);
+            var filename = blob.type.substring(6);
+            formData.append('thumb' , blob,'blob.'+filename);
+            http_request.data = formData;
+            http_request.jsonToString = false;
+            contentType  = undefined;
+        }else{
+            http_request.data = data;
+            http_request.beforeSend = function(xmlhttp){
+                xmlhttp.setRequestHeader("Content-type" , 'application/x-www-form-urlencoded; charset=UTF-8');  
+            }
+        }
+        http_request.uploadStart = function(){
+            $('.load').css('display' , 'block');
+        }
+        http_request.uploadProgress = function(){
+            var loaded = parseInt(event.loaded/event.total*100)+"%";
+            $('.load p').width(loaded);
+            $('.load span').text(loaded);
+        }
+        http.ajax(http_request);
+    }
+
+}  
+
+function dataURItoBlob(base64Data) {
+    var byteString;
+    if(base64Data.split(',')[0].indexOf('base64') >= 0){
+        byteString = atob(base64Data.split(',')[1]);
+    }else{
+        byteString = unescape(base64Data.split(',')[1]);
+    }       
+    var mimeString = base64Data.split(',')[0].split(':')[1].split(';')[0];
+    var ia = new Uint8Array(byteString.length);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ia], {type:mimeString});
+}
+</script>      
+</body>
+</html>

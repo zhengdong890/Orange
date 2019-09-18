@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/ueditor/ueditor.all.js"></script>
+<meta name="description" content="" />
+<style>
+*{padding:0; margin:0;font-size:16px;}
+   ul,li{padding:0; margin:0;}
+   ul,li{list-style:none;}
+   a{text-decoration:none;}
+   a:hover{text-decoration:none;border: 0} 
+#content{width:98%;height:auto;float:left;margin-left:1%;}
+#content #content_h{width:100%;height:40px;border:1px solid #D7D7D7;line-height:40px;margin-top:15px}
+#content #content_h a{padding-left:10px}
+#content #content_m{width:100%;height:auto;border:1px solid #D7D7D7;padding-bottom:100px;margin-top:20px}
+#content table{margin:0 auto;margin-top:10px}
+#content table td span{float:right}
+#content table td .isshow{width:20px;height:20px;float:left;}
+input{width:400px;height:20px;border-radius:3px;border-bottom:1px solid #E3E9EF;border-top:1px solid #ABADB3;border-left:1px solid #E2E3EA;border-right:1px solid #DBDFE6}
+td img{max-width:250px}
+td{padding-right:30px;}
+table button{border:0px;background:#C43926;color:white;padding:5px;border-radius:2px;float:left;}
+.btn_addimg{display:block;width:100px;margin-top:5px;color:white;position:relative;height:28px;line-height:28px;text-align:center;float:left;background:#C43926;border-radius:4px;}
+#area{width:100%;height:auto;margin:0 auto;margin-top:30px}
+#area p{width:auto;height:auto;float:left;margin-left:20px}
+</style>
+</head>
+    <body>          
+        <div id="content">
+               <div id="content_h">
+                 <a>后台管理中心</a>-><a>添加地址</a>
+               </div>
+               <div id="content_m">
+	                    <div id="area">
+	                     <form action="{:U('address_add')}" method="post">
+		                        <p>一级地区:
+		                        <select name="province" onchange="select_district(this,0);" class="select_district">
+		                                 <option value="0">请选择...</option>
+		                                 <volist name="province" id="v">
+		                                     <option value="{$v['id']}">{$v['name']}</option>
+		                                 </volist>
+			                    </select>
+			                    </p>
+			                    <p>二级地区:
+			                    <select name="city" onchange="select_district(this,1);" class="select_district">
+		                                 <option value="0">请选择...</option>
+		                                 <volist name="city" id="v">
+		                                     <option value="{$v['id']}">{$v['name']}</option>
+		                                 </volist>
+			                    </select>
+			                    </p>
+			                    <p>三级地区:
+		                        <select name="area" onchange="select_district(this,2);" class="select_district">
+		                             <option value="0">请选择...</option>
+		                             <volist name="area" id="v">
+		                                 <option value="{$v['id']}">{$v['name']}</option>
+		                             </volist>
+		                        </select>
+		                        </p>
+		                        <p>四级地区:
+		                        <select name="town" onchange="select_district(this,3);" class="select_district">
+		                             <option value="0">请选择...</option>
+		                             <volist name="list" id="v">
+		                                 <option value="{$v['id']}">{$v['name']}</option>
+		                             </volist>
+		                        </select>
+		                        </p>
+		                        <button style="margin-left:10px">确认添加</button>
+		                 </form>       
+	                  </div>	                  
+               </div>
+        </div>
+    </body>
+    <script type="text/javascript">        
+	function select_district(obj,k){
+		var id=$(obj).val();
+    	$.post("{:U('district_liandong_1')}",{"id":id},function(res){                
+            $(".select_district").eq(k+1).html(res);
+            $(".select_district").eq(k+2).html("<option value='0'>请选择...</option>");
+            $(".select_district").eq(k+3).html("<option value='0'>请选择...</option>");
+       });  
+	}
+    </script>
+</html>

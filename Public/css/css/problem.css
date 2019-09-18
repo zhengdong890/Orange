@@ -1,0 +1,30 @@
+@charset "UTF-8";
+.problem{width:1200px;margin:0 auto;padding:20px 0 0 0;}
+.problem .problem-nav{width:198px;float:left;}
+.problem .problem-nav .title{height:40px;text-align:center;line-height:40px;background-color:#37a3a3;font-size:18px;color:#fff;}
+.problem .problem-nav ul li{height:38px;line-height:38px;text-align:center;font-size:14px;color:#464646;display:none;
+    cursor:pointer;border-bottom: 1px #ebeaea solid;}
+.problem .problem-nav ul .active{color:#37a3a3;font-weight:bold;}
+.problem .problem-nav ul .nav-title{background-color:#ebeaea;position:relative;display:block;}
+.problem .problem-nav ul .nav-title:before{content:'';display:block;width:6px;height:5px;background:url(../images/problem_nav.png) no-repeat;background-position:0 -5px;position:absolute;right:11px;top:16px;}
+.problem .problem-nav ul .nav-active:before{background-position:0 0;}
+.problem .problem-contain{width:900px;min-height:400px;float:left;margin-left:57px;padding:0 0 50px 0;}
+.problem .problem-contain h1,.problem .problem-contain h2{color:#060606;font-size:25px;font-weight:normal;text-align:center;line-height:86px;
+border-bottom: 1px #ebeaea solid;}
+.problem:after{content:'';height:0;display:block;visibility:hidden;clear:both;}
+.problem .problem-contain p,.problem .problem-contain h3{padding:18px 0 7px 0;font-size:14px;line-height: 26px;}
+.problem .problem-contain p span{color:#5fb1b1;}
+.problem .problem-contain h2{font-size: 25px;}
+.problem .new-user .register .img{width:900px;}
+.problem .new-user .register .img img{width: 100%;}
+.problem .new-user .shopping h3{color:#37a3a3;}
+.problem .new-user .member .img{margin: 20px 0 10px 0;}
+.problem .problem-contain .pay-online p{padding:30px 0;}
+.problem .problem-contain .company p{font-size: 16px;}
+.problem .problem-contain .bill p{padding:0;}
+.problem .service .return-process .img{margin-top: 30px;}
+.problem .about-us  h3{font-weight: bold;font-size: 16px;}
+.problem .about-us  p{padding:0;}
+.problem .about-us  .contact>div{float:left;margin-top: 24px;width: 50%;}
+.problem .about-us  .contact>div>h3{font-size: 24px;font-weight: normal;}
+.problem .about-us  .contact>div>p{line-height: 32px;}

@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="/Public/js/My97DatePicker/WdatePicker.js"></script>
+<meta name="description" content="" />
+<style>
+html{font-size:62.5%}
+*{font-size:16px;font-family:Arial,Microsoft YaHei,\\9ED1\4F53,\\5B8B\4F53,sans-serif}
+*,li,ul{padding:0;margin:0}
+li,ul{list-style:none}
+a,a:hover{text-decoration:none}
+a:hover{border:0}
+button,input,select,textarea{outline:none}
+textarea{resize:none}
+
+#container{width:98%;margin-left:1%}
+#container,#container #main{height:auto;float:left;padding-bottom:10px}
+#container #main{width:100%;border:1px solid #d7d7d7;margin-top:5px}
+
+#Crumbs{width:100%;height:40px;border:1px solid #d7d7d7;line-height:40px;margin-top:5px;float:left}
+#Crumbs a{padding-left:10px}
+#Crumbs .btn{width:auto;padding:0 5px;height:30px;float:right;display:block;background:red;line-height:30px;color:#fff;border-radius:5px;font-size:14px;margin-right:20px;margin-top:5px}
+
+.tableData{margin:0 auto;width:900px}
+.tableData tr td{width:300px;padding:10px;}
+
+#main_container_1{width:100%;float:left;margin-top:10px;}
+#main_container_2{width:100%;float:left;margin-top:10px;}
+
+.tableList{margin:0 auto;width:100%}
+.tableList td span{float:right}
+.tableList tr{background:#fff}
+.tableList tr:hover{background:#f1fcea}
+.tableList tr:first-child{background:#f4f5f9}
+.tableList tr td,th{border-left:1px solid #e7e9f3;border-bottom:1px solid #e7e9f3;font-size:20px;padding:10px;font-size:14px}
+.tableList tr .td{border-left:0}
+.tableList tr .table_td{text-align:center}
+.tableList tr .table_btn{background:#fff;border:0}
+.tableList input{width:30px;height:24px;border-radius:3px;border-bottom:1px solid #e3e9ef;border-top:1px solid #abadb3;border-left:1px solid #e2e3ea;border-right:1px solid #dbdfe6;text-align:center}
+.tableList td img{max-width:40px;max-height:40px}
+.tableList td,th{padding-right:30px;padding-top:10px}
+.tableList .table_handle{width:auto;text-align:center}
+.tableList .table_handle div{width:50px;height:21px;margin:0 auto}
+.tableList .table_handle div a{width:21px;height:21px;display:block;margin-left:4px;float:left}
+.tableList .table_handle .table_handle_a{color:#000;text-decoration:none}
+.tableList .table_handle .table_handle_a:hover{color:pink;text-decoration:none}
+.tableList tr .table_td .table_td_text{max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:clip;font-size:14px}
+.tableList .select_checkbox{width:80px;height:16px;margin:0 auto}
+.tableList .select_checkbox input{width:16px;height:16px;float:left}
+.tableList .select_checkbox a{height:16px;float:left;text-indent:5px;line-height:15px}
+.tableList tr .table_btn {
+    background: #fff;
+    border: 0;
+}
+.tableList input[type=text] {
+    width: 30px;
+    height: 24px;
+    border-radius: 3px;
+    border-bottom: 1px solid #e3e9ef;
+    border-top: 1px solid #abadb3;
+    border-left: 1px solid #e2e3ea;
+    border-right: 1px solid #dbdfe6;
+    text-align: center;
+}
+
+.block_edit table td .radio,.check{width:20px;height:20px;float:left;margin-left:15px;}
+.radio_m{margin-left:0px;}
+.radio_text{height:20px;float:left;line-height:20px}
+
+.block_edit{width:100%;height:auto;float:left}
+.block_edit table{width:100%;margin:10px auto}
+.block_edit table td{padding:5px}
+.block_edit table td.td_label{text-align:right;vertical-align:top;font-weight:700;width:20%;font-size:14px;padding:4px 8px}
+.block_edit table td .type_radio{width:auto;height:24px;float:left;margin-left:8px}
+.block_edit table td input[type='text']{width:400px;height:20px;border-radius:3px;border-bottom:1px solid #e3e9ef;border-top:1px solid #abadb3;border-left:1px solid #e2e3ea;border-right:1px solid #dbdfe6}
+.block_edit table td .p_text{width:auto;height:25px;float:left;line-height:24px;margin-left:8px;font-size:13px}
+.block_edit table td .btn{display:block;text-align:center;line-height:26px;float:left;border-radius:4px;background:#c43926;margin-left:10px;color:#fff;height:26px;width:50px}
+</style>
+</head>
+<body>
+<div id="container">
+    <div id="Crumbs">
+        <a>后台管理中心</a><span>&nbsp;&nbsp;-</span><a>订单详情</a>
+    </div>  
+    <div id="main">
+        <div id="main_container_2">
+	        <table cellspacing="0" class="tableList">
+	            <thead>
+	                <tr>
+	                    <th class="table_td">sku编号</th>
+	                    <th class="table_td">商品名称</th>
+	                    <th class="table_td">商品单价</th>
+	                    <th class="table_td">购买数量</th>
+	                    <th class="table_td">商品属性</th>
+	                    <th class="table_td">售后状态</th>
+	                    <th class="table_td">合计总价</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+	                <volist name="data['order_data']" id='v'>
+	                <tr>
+	                    <td class="table_td">{$v['sku_code']}</td>
+	                    <td class="table_td">{$v['goods_name']}</td>
+	                    <td class="table_td">{$v['goods_price']}</td>
+	                    <td class="table_td">{$v['number']}</td>
+	                    <td class="table_td"></td>
+	                    <th class="table_td">{$v['service_type']} {$v['service_status_msg']}</th>
+                        <td class="table_td">{$v['total_price']}</td>
+	                </tr>
+	                </volist>
+	            </tbody>
+	        </table>        
+        </div>
+        <div id="main_container_1">
+	        <table cellspacing="0" class="tableData">
+	            <tbody>	            
+	                <tr>
+	                    <td>订单号 : {$data['order']['order_sn']}</td>
+	                    <td>订单状态 : {$data['order']['status_msg']}</td>
+	                    <td>下单时间 : 
+	                        <if condition="$data['order']['create_time']">{$data['order']['create_time']|substr='Y-m-d H:i:s',###}<else/></if>
+	                    </td>		                    	                    
+	                </tr>
+	                <tr>
+	                    <td>是否付款 : 
+	                        <if condition="$data['order']['pay_status'] eq 1">已付款<else/>未付款</if>
+	                    </td>                    
+	                    <td>付款时间 : 
+	                        <if condition="$data['order']['pay_time']">{$data['order']['pay_time']|substr='Y-m-d H:i:s',###}<else/></if>
+	                    </td>	
+	                    <td>运费 : {$data['order']['shipping_price']}</td>                   
+	                </tr>
+	                <tr>
+	                    <td>订单总价 : {$data['order']['total_price']}</td>
+	                    <td>实际支付 : {$data['order']['pay_price']}</td>
+	                    <td>店铺优惠 : -{$data['order']['coupon_price']}</td>
+	                </tr>
+	                <tr>
+	                    <td>平台优惠 : -{$data['order']['shop_coupon_price']}</td>	                
+	                    <td>物流状态 : 
+	                        <if>{$data['order']['send_status_msg']}</if>
+	                    </td>
+	                    <td>发货时间 : 
+	                        <if condition="$data['order']['send_time']">{$data['order']['send_time']|substr='Y-m-d H:i:s',###}<else/></if>
+	                    </td>			                    
+	                </tr>
+	                <tr>
+	                	<td>运单号 : {$data['order']['air_way_code']}</td>	                                        
+	                    <td>收货时间 : 
+	                        <if condition="$data['order']['receipt_time']">{$data['order']['receipt_time']|substr='Y-m-d H:i:s',###}<else/></if>
+	                    </td>
+	                    <td>收货人 : {$data['order']['name']}</td>                    
+	                </tr>
+	                <tr>
+	                    <td>收货地址 : {$data['order']['address']}</td>
+	                    <td>联系电话 : {$data['order']['tel_num']}</td>
+	                    <td>卖家店铺名 : {$shop_data['shop_name']}</td> 
+	                </tr>		                	                	                
+	            </tbody>
+	        </table>             
+        </div>
+        <if condition="($data['order']['pay_model'] eq 4) AND ($data['order']['pay_status'] eq 0)">
+        <div class="block_edit">
+            <input type='hidden' name='order_id' value="{$data['order']['id']}">
+            <table>
+                <tr>
+                    <td class="td_label">支付状态设置:</td>
+                    <td>
+                       <input class='radio' type="radio" name="pay_status" value="1"/>
+                       <p class='radio_text'>&nbsp;已支付</p>
+                    </td>
+                </tr>                
+                <tr>
+                    <td></td>
+                    <td><a class="btn" href="javascript:;">确认</a></td>
+                </tr>
+            </table>
+        </div> 
+        </if>       
+    </div>
+</div>	
+</body>
+<script type="text/javascript"> 
+(function(w){
+    w.http = {
+    	get : function (url , data , call_back){
+			var request_data = '';
+	        for(var k in data){
+	            request_data = request_data + k + '=' + data[k] + '&';
+	        }    
+	        request_data = request_data.substr(0 , -1);
+	        url = url + '?' + request_data;
+	        http.ajax(url , 'GET' , '' , call_back);
+        },
+        post : function(url , data , call_back){
+			var request_data = '';
+	        for(var k in data){
+	            request_data = request_data + encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) + '&';
+	        }    
+	        request_data = request_data.substr(0 , request_data.length - 1);
+	        http.ajax(url , 'POST' , request_data , call_back);        	
+        },
+        ajax : function(url , type , data , call_back){
+	    	var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+	    	xmlhttp.onreadystatechange = function(){
+				if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+					var data         = xmlhttp.response;//获取返回数据
+					var content_type = xmlhttp.getResponseHeader('Content-type');
+					content_type = content_type.split(';');
+					if(content_type[0] == 'application/json'){
+                        data = JSON.parse(data);
+					}
+				    call_back(data);  
+				}
+	    	} 
+	        xmlhttp.open(type , url , true);  
+	        xmlhttp.setRequestHeader("X-Requested-With" , "XMLHttpRequest");
+	        if(type == 'POST'){
+                xmlhttp.setRequestHeader("Content-type" , "application/x-www-form-urlencoded; charset=UTF-8");
+            }      
+	        xmlhttp.send(data);//发送ajax
+	    }
+    }        
+})(window);
+
+$(".block_edit").on('click' , '.btn' , function(){
+	var order_id   = $("input[name='order_id']").val();
+	var pay_status = $("input[name='pay_status']:checked").val();
+	if(typeof(pay_status) == 'undefined'){
+        alert('请选择支付状态');
+        return;
+	}
+    http.post("http://houtai.orangesha.com/MallOrder/setOrderPayStatus" , {order_id : order_id , pay_status : pay_status} , function(res){
+        alert(res.msg);
+        if(res.status){
+            window.location.href = "http://houtai.orangesha.com/MallOrder/publicOrderList";
+        }       
+    })   
+}) 
+</script>
+</html>
+

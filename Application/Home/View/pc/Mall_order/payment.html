@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/cssReset.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/public.css" type="text/css">
+<link rel="stylesheet" href="{:C('STATIC_URL')}/Home/css/css.css" type="text/css">
+<link href="{:C('STATIC_URL')}/Home/css/footer.css" rel="stylesheet">
+<link rel="shortcut icon" href="{:C('STATIC_URL')}/Home/images/ee.ico" type="image/x-icon">
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script type="text/javascript" src="{:C('STATIC_URL')}/Home/js/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script src="{:C('STATIC_URL')}/Home/js/header.js"></script>
+<link href="{:C('STATIC_URL')}/Home/css/orders.css" rel="stylesheet">
+</head>
+<body >
+<include file="Public:header_top" />	
+	<!-- 主体 -->
+    <div class="body">
+    	<div class="pay_top">
+    		<div class="e_logo">
+	    		<span>收银台</span>
+	    	</div>
+	        <div class="points">
+	            <div class="shopping-cart2"></div>
+	            <div class="text">购物车<i class="i1"></i>确认订单<i class="i2"></i>支付<i class="i3"></i>完成</div>
+	        </div>
+    	</div>
+    	<div class="order_info">
+    		<p>订单提交成功,请您尽快付款！</p>
+    	<volist name="order_data" id='v'>       
+        	<p>订单号:{$v['order_sn']} 
+        	<span class="pay_price">应付金额 : <span class="pay_num">{$v['total_price']>=10000?$v['total_price']/10000:$v['total_price']}</span>{$v['total_price']>=10000?'万元':'元'}</span></p>
+        	<p>收货地址 : {$address['address']} 收货人 : {$address['name']} {$address['telnum']}</p>
+        	<volist name="v['data']" id='v1'>
+        	<p>商品名称 : {$v1['goods_name']}</p>
+        	</volist>    
+        	<a>订单详情</a>
+        	<hr />
+        </volist>  
+        </div> 
+        <div class="pay_style">
+        	<p>平台支付</p>
+        	<p><img src="{:C('STATIC_URL')}/Home/image/payment2.png" /> 平台支付无法同时与其它方式一起支付</p>
+        	<ul>
+        		<li><img src="{:C('STATIC_URL')}/Home/image/payment3.png" /> 微信支付</li>
+        		<li><img src="{:C('STATIC_URL')}/Home/image/payment4.png" /> 支付宝支付</li>
+        		<li><img src="{:C('STATIC_URL')}/Home/image/payment5.png" /> 网银支付</li>
+        		<li><img src="{:C('STATIC_URL')}/Home/image/payment.png" /> 公对公转账</li>
+        	</ul>
+        </div>
+        <div class="pay_style2">
+        	<p>平台支付</p>
+        	<p><img src="{:C('STATIC_URL')}/Home/image/payment2.png" /> 平台支付无法同时与其它方式一起支付</p>
+        	<div>
+        		<img src="{:C('STATIC_URL')}/Home/image/payment.png" /> 公对公转账
+        		<span class="pay_price">支付<span class="pay_num">{$total_price}</span>元</span>
+        	</div>
+        	<p style="padding-left: 20px;">
+        		开户行 : <span>民生银行深圳海岸城支行</span>&nbsp;&nbsp;&nbsp;
+        		账号 : <span>15236523265</span>
+        		<span>公对公付款不支持线上支付,转账时请标注订单号</span>
+        	</p>
+        </div>
+    </div>
+    </body>
+<script type="text/javascript">
+  $(".pay_style ul li").click(function(){
+  	$(this).addClass("active");
+  	$(this).siblings().removeClass("active");
+  })
+  $(".pay_style ul li:eq(3)").click(function(){
+  	$(".pay_style2").css("display","block")
+  })
+</script>
+<!-- /主体 -->
+<include file="Public:footer" />
+</body>
+</html>
